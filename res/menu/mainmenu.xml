@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item
+		android:id="@+id/configure_server"
+		android:title="Configure Server"
+		android:showAsAction="ifRoom|withText" />
+	
+	<item
+		android:id="@+id/sync_database"
+		android:title="Sync Database"
+		android:showAsAction="ifRoom|withText" />
+</menu>
+

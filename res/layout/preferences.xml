@@ -1,0 +1,32 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    
+     <EditTextPreference 
+         	android:key="interopServer" 
+	 		android:title="Interop Server URL" 
+	   	 	android:defaultValue="@string/default_server_url" />
+
+     <EditTextPreference
+    		android:id="@+id/openhdsserver"
+            android:key="openhdsserver"
+            android:defaultValue="@string/default_openhdsserver"
+            android:title="@string/openhdswebservice"
+            android:dialogTitle="@string/changeServer" />
+            
+      <EditTextPreference
+        	android:id="@+id/openhdsusername"
+            android:key="openhdsusername"
+            android:defaultValue=""
+            android:title="@string/username"
+            android:dialogTitle="@string/changeUsername" />
+            
+      <EditTextPreference
+       		android:id="@+id/openhdspassword"
+            android:key="openhdspassword"
+            android:defaultValue=""
+            android:title="@string/password"
+            android:dialogTitle="@string/changePassword" 
+            android:inputType="textPassword" />
+
+</PreferenceScreen>

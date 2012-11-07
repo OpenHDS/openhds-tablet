@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:configChanges="orientation"
+    android:screenOrientation="portrait" >
+
+    <fragment
+        android:id="@+id/selectionFragment"
+        android:name="org.openhds.mobile.fragment.SelectionFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:id="@+id/middle_col"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+    </FrameLayout>
+
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="org.openhds.mobile.fragment.EventFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</LinearLayout>

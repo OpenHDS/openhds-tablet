@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/findLocationGeoPointBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="45dp"
+            android:enabled="false"
+            android:text="Find Location with GeoPoint" />
+
+        <Button
+            android:id="@+id/createLocationBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="Create Location" />
+
+        <Button
+            android:id="@+id/createVisitBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="Create Visit" />
+
+        <Button
+            android:id="@+id/clearIndividualBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="Clear Individual" />
+
+        <Button
+            android:id="@+id/householdBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:enabled="false"
+            android:text="Household" />
+
+        <Button
+            android:id="@+id/membershipBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="Membership" />
+
+        <Button
+            android:id="@+id/relationshipBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="Relationship" />
+
+        <Button
+            android:id="@+id/inMigrationBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="In Migration" />
+
+        <Button
+            android:id="@+id/outMigrationBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="Out Migration" />
+
+        <Button
+            android:id="@+id/pregRegBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="Pregnancy Registration" />
+
+        <Button
+            android:id="@+id/birthRegBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="Birth Registration" />
+
+        <Button
+            android:id="@+id/deathBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="Death" />
+
+        <Button
+            android:id="@+id/finishVisitBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:enabled="false"
+            android:text="Finish Visit" />
+    </LinearLayout>
+
+</ScrollView>
