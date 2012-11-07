@@ -172,12 +172,12 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                         sbuilder.append(filledForm.getChildFatherLastName() == null ? "<childFatherLastName />"
                                 + "\r\n" : "<childFatherLastName>" + filledForm.getChildFatherLastName()
                                 + "</childFatherLastName>" + "\r\n");
-                    } else if (name.equals(FilledParams.manId)) {
-                        sbuilder.append(filledForm.getManId() == null ? "<manId />" + "\r\n" : "<manId>"
-                                + filledForm.getManId() + "</manId>" + "\r\n");
-                    } else if (name.equals(FilledParams.womanId)) {
-                        sbuilder.append(filledForm.getWomanId() == null ? "<womanId />" + "\r\n" : "<womanId>"
-                                + filledForm.getWomanId() + "</womanId>" + "\r\n");
+                    } else if (name.equals(FilledParams.individualA)) {
+                        sbuilder.append(filledForm.getIndividualA() == null ? "<individualA />" + "\r\n" : "<individualA>"
+                                + filledForm.getIndividualA() + "</individualA>" + "\r\n");
+                    } else if (name.equals(FilledParams.individualB)) {
+                        sbuilder.append(filledForm.getIndividualB() == null ? "<individualB />" + "\r\n" : "<individualB>"
+                                + filledForm.getIndividualB() + "</individualB>" + "\r\n");
                     }
 
                 } else {

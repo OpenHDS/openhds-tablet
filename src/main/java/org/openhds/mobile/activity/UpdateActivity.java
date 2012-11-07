@@ -5,7 +5,10 @@ import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.Queries;
 import org.openhds.mobile.R;
+import org.openhds.mobile.database.DeathUpdate;
+import org.openhds.mobile.database.HouseholdUpdate;
 import org.openhds.mobile.database.LocationUpdate;
+import org.openhds.mobile.database.OutMigrationUpdate;
 import org.openhds.mobile.database.Updatable;
 import org.openhds.mobile.database.VisitUpdate;
 import org.openhds.mobile.fragment.EventFragment;
@@ -20,6 +23,7 @@ import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
 import org.openhds.mobile.model.LocationVisit;
+import org.openhds.mobile.model.PregnancyObservationUpdate;
 import org.openhds.mobile.model.PregnancyOutcome;
 import org.openhds.mobile.model.Round;
 import org.openhds.mobile.model.SocialGroup;
@@ -219,12 +223,19 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         @Override
         protected Boolean doInBackground(Void... arg0) {
-            Cursor cursor = resolver.query(contentUri, null, InstanceProviderAPI.InstanceColumns.STATUS + "=?",
+            Cursor cursor = resolver.query(contentUri, new String[] { InstanceProviderAPI.InstanceColumns.STATUS,
+                    InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH },
+                    InstanceProviderAPI.InstanceColumns.STATUS + "=?",
                     new String[] { InstanceProviderAPI.STATUS_COMPLETE }, null);
             if (cursor.moveToNext()) {
-                updatable.updateDatabase(resolver);
+                String filepath = cursor.getString(cursor
+                        .getColumnIndex(InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH));
+                LocationUpdate update = new LocationUpdate();
+                update.updateDatabase(resolver, filepath);
+                cursor.close();
                 return true;
             } else {
+                cursor.close();
                 return false;
             }
         }
@@ -264,12 +275,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
 
         Individual individual = (Individual) data.getExtras().getSerializable("individual");
-
-        if (filledForm.getWomanId() == null) {
-            filledForm.setWomanId(individual.getExtId());
-        } else {
-            filledForm.setManId(individual.getExtId());
-        }
+        filledForm.setIndividualB(individual.getExtId());
 
         loadForm(SELECTED_XFORM);
     }
@@ -331,12 +337,18 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         @Override
         protected Boolean doInBackground(Void... arg0) {
-            Cursor cursor = resolver.query(contentUri, null, InstanceProviderAPI.InstanceColumns.STATUS + "=?",
+            Cursor cursor = resolver.query(contentUri, new String[] { InstanceProviderAPI.InstanceColumns.STATUS,
+                    InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH },
+                    InstanceProviderAPI.InstanceColumns.STATUS + "=?",
                     new String[] { InstanceProviderAPI.STATUS_COMPLETE }, null);
             if (cursor.moveToNext()) {
-                updatable.updateDatabase(getContentResolver());
+                String filepath = cursor.getString(cursor
+                        .getColumnIndex(InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH));
+                updatable.updateDatabase(getContentResolver(), filepath);
+                cursor.close();
                 return true;
             } else {
+                cursor.close();
                 return false;
             }
         }
@@ -612,7 +624,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         protected Void doInBackground(Void... params) {
             locationVisit.createLocation(getContentResolver());
             filledForm = formFiller.fillLocationForm(locationVisit);
-            updatable = new LocationUpdate(locationVisit.getLocation());
+            updatable = new LocationUpdate();
             return null;
         }
 
@@ -635,7 +647,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         protected Void doInBackground(Void... params) {
             locationVisit.createVisit(getContentResolver());
             filledForm = formFiller.fillVisitForm(locationVisit);
-            updatable = new VisitUpdate(locationVisit);
+            updatable = new VisitUpdate();
             return null;
         }
 
@@ -655,9 +667,25 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onHousehold() {
-        SocialGroup sg = locationVisit.createSocialGroup(getContentResolver());
-        filledForm = formFiller.fillSocialGroupForm(locationVisit, sg);
-        loadForm(SELECTED_XFORM);
+        showProgressFragment();
+        new CreateSocialGroupTask().execute();
+    }
+
+    private class CreateSocialGroupTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            SocialGroup sg = locationVisit.createSocialGroup(getContentResolver());
+            filledForm = formFiller.fillSocialGroupForm(locationVisit, sg);
+            updatable = new HouseholdUpdate();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            hideProgressFragment();
+            loadForm(SELECTED_XFORM);
+        }
     }
 
     public void onMembership() {
@@ -676,13 +704,45 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onOutMigration() {
-        filledForm = formFiller.fillOutMigrationForm(locationVisit);
-        loadSocialGroupsForIndividual();
+        showProgressFragment();
+        new CreateOutMigrationTask().execute();
+    }
+    
+    private class CreateOutMigrationTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            filledForm = formFiller.fillOutMigrationForm(locationVisit);
+            updatable = new OutMigrationUpdate();
+            return null;
+        }
+        
+        @Override
+        protected void onPostExecute(Void result) {
+            hideProgressFragment();
+            loadForm(SELECTED_XFORM);
+        }
     }
 
     public void onPregnancyRegistration() {
-        filledForm = formFiller.fillPregnancyRegistrationForm(locationVisit);
-        loadSocialGroupsForIndividual();
+        showProgressFragment();
+        new CreatePregnancyObservationTask().execute();
+    }
+    
+    private class CreatePregnancyObservationTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            filledForm = formFiller.fillPregnancyRegistrationForm(locationVisit);
+            updatable = new PregnancyObservationUpdate();
+            return null;
+        }
+        
+        @Override
+        protected void onPostExecute(Void result) {
+            hideProgressFragment();
+            loadForm(SELECTED_XFORM);
+        }
     }
 
     public void onPregnancyOutcome() {
@@ -691,8 +751,25 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onDeath() {
-        filledForm = formFiller.fillDeathForm(locationVisit);
-        loadSocialGroupsForIndividual();
+        showProgressFragment();
+        new CreateDeathTask().execute();
+    }
+    
+    private class CreateDeathTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            filledForm = formFiller.fillDeathForm(locationVisit);
+            updatable = new DeathUpdate();
+            
+            return null;
+        }
+        
+        @Override
+        protected void onPostExecute(Void result) {
+            hideProgressFragment();
+            loadForm(SELECTED_XFORM);
+        }
     }
 
     private void loadSocialGroupsForIndividual() {

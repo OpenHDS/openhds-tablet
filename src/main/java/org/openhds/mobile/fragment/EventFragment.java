@@ -198,7 +198,7 @@ public class EventFragment extends Fragment implements OnClickListener {
                 clearIndividualBtn.setEnabled(true);
 
                 Individual indiv = locationVisit.getSelectedIndividual();
-                if ("female".equalsIgnoreCase(indiv.getGender()) && individualMeetsMinimumAge(indiv)) {
+                if ("f".equalsIgnoreCase(indiv.getGender()) && individualMeetsMinimumAge(indiv)) {
                     pregRegBtn.setEnabled(true);
                     birthRegBtn.setEnabled(true);
                 }

@@ -6,7 +6,7 @@ package org.openhds.mobile.model;
  */
 public class FilledForm {
     private String formName;
-    
+
     private String visitExtId;
     private String visitDate;
     private String roundNumber;
@@ -31,9 +31,10 @@ public class FilledForm {
     private String childFatherId;
     private String childFatherFirstName;
     private String childFatherLastName;
-    private String manId;
-    private String womanId;
-    
+
+    private String individualA;
+    private String individualB;
+
     public FilledForm(String formName) {
         this.formName = formName;
     }
@@ -69,7 +70,7 @@ public class FilledForm {
     public String getLocationId() {
         return locationId;
     }
-    
+
     public void setLocationId(String locationId) {
         this.locationId = locationId;
     }
@@ -218,20 +219,20 @@ public class FilledForm {
         this.childFatherLastName = childFatherLastName;
     }
 
-    public String getManId() {
-        return manId;
+    public void setIndividualA(String extId) {
+        this.individualA = extId;
     }
 
-    public void setManId(String manId) {
-        this.manId = manId;
+    public String getIndividualB() {
+        return individualB;
     }
 
-    public String getWomanId() {
-        return womanId;
+    public void setIndividualB(String individualB) {
+        this.individualB = individualB;
     }
 
-    public void setWomanId(String womanId) {
-        this.womanId = womanId;
+    public String getIndividualA() {
+        return individualA;
     }
 
 }

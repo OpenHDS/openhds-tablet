@@ -78,11 +78,7 @@ public class FormFiller {
 
         addFieldWorker(locationVisit, form);
         Individual indiv = locationVisit.getSelectedIndividual();
-        if ("male".equalsIgnoreCase(indiv.getGender())) {
-            form.setManId(indiv.getExtId());
-        } else {
-            form.setWomanId(indiv.getExtId());
-        }
+        form.setIndividualA(indiv.getExtId());
 
         return form;
     }
@@ -107,7 +103,6 @@ public class FormFiller {
         addFieldWorker(locationVisit, form);
         addVisit(locationVisit, form);
         addIndividual(locationVisit.getSelectedIndividual(), form);
-        form.setLocationId(locationVisit.getLocation().getExtId());
 
         return form;
     }
@@ -118,7 +113,6 @@ public class FormFiller {
         addFieldWorker(locationVisit, form);
         addVisit(locationVisit, form);
         addIndividual(locationVisit.getSelectedIndividual(), form);
-        form.setLocationId(locationVisit.getLocation().getExtId());
 
         return form;
     }
@@ -129,7 +123,6 @@ public class FormFiller {
         addFieldWorker(locationVisit, form);
         addVisit(locationVisit, form);
         addIndividual(locationVisit.getSelectedIndividual(), form);
-        form.setLocationId(locationVisit.getLocation().getExtId());
 
         return form;
     }
