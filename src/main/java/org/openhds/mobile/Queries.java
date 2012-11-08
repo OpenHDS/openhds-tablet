@@ -118,8 +118,13 @@ public class Queries {
         return contentResolver.query(OpenHDS.Locations.CONTENT_ID_URI_BASE, null, null, null, null);
     }
 
-    public static Cursor getRelationshipByFemale(ContentResolver resolver, String extId) {
+    public static Cursor getRelationshipByIndividualA(ContentResolver resolver, String extId) {
         return getCursor(resolver, OpenHDS.Relationships.CONTENT_ID_URI_BASE,
-                OpenHDS.Relationships.COLUMN_RELATIONSHIP_FEMALEINDIVIDUAL, extId);
+                OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_A, extId);
+    }
+
+    public static Cursor getRelationshipByIndividualB(ContentResolver resolver, String extId) {
+        return getCursor(resolver, OpenHDS.Relationships.CONTENT_ID_URI_BASE,
+                OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_B, extId);
     }
 }

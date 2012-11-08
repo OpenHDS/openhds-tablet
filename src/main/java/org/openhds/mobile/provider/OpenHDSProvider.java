@@ -29,7 +29,7 @@ public class OpenHDSProvider extends ContentProvider {
     private static final String TAG = "OpenHDSProvider";
 
     private static final String DATABASE_NAME = "openhds.db";
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 12;
 
     private static HashMap<String, String> individualsProjectionMap;
     private static HashMap<String, String> locationsProjectionMap;
@@ -154,10 +154,10 @@ public class OpenHDSProvider extends ContentProvider {
 
         relationshipsProjectionMap = new HashMap<String, String>();
         relationshipsProjectionMap.put(OpenHDS.Relationships._ID, OpenHDS.Relationships._ID);
-        relationshipsProjectionMap.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_FEMALEINDIVIDUAL,
-                OpenHDS.Relationships.COLUMN_RELATIONSHIP_FEMALEINDIVIDUAL);
-        relationshipsProjectionMap.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_MALEINDIVIDUAL,
-                OpenHDS.Relationships.COLUMN_RELATIONSHIP_MALEINDIVIDUAL);
+        relationshipsProjectionMap.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_A,
+                OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_A);
+        relationshipsProjectionMap.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_B,
+                OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_B);
         relationshipsProjectionMap.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_STARTDATE,
                 OpenHDS.Relationships.COLUMN_RELATIONSHIP_STARTDATE);
 
@@ -245,8 +245,8 @@ public class OpenHDSProvider extends ContentProvider {
                     + " TEXT NOT NULL," + OpenHDS.Visits.COLUMN_VISIT_ROUND + " TEXT NOT NULL);");
 
             db.execSQL("CREATE TABLE " + OpenHDS.Relationships.TABLE_NAME + " (" + OpenHDS.Relationships._ID
-                    + " INTEGER PRIMARY KEY," + OpenHDS.Relationships.COLUMN_RELATIONSHIP_FEMALEINDIVIDUAL
-                    + " TEXT NOT NULL," + OpenHDS.Relationships.COLUMN_RELATIONSHIP_MALEINDIVIDUAL + " TEXT NOT NULL,"
+                    + " INTEGER PRIMARY KEY," + OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_A
+                    + " TEXT NOT NULL," + OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_B + " TEXT NOT NULL,"
                     + OpenHDS.Relationships.COLUMN_RELATIONSHIP_STARTDATE + " TEXT NOT NULL);");
 
             db.execSQL("CREATE TABLE " + OpenHDS.FieldWorkers.TABLE_NAME + " (" + OpenHDS.FieldWorkers._ID

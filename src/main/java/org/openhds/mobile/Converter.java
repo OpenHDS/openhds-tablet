@@ -1,6 +1,7 @@
 package org.openhds.mobile;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.openhds.mobile.model.FieldWorker;
@@ -76,7 +77,7 @@ public class Converter {
 
         return hierarchy;
     }
-    
+
     public static LocationHierarchy convertToHierarchy(Cursor cursor) {
         LocationHierarchy hierarchy = new LocationHierarchy();
         populateHierarchy(cursor, hierarchy);
@@ -200,10 +201,30 @@ public class Converter {
 
         while (cursor.moveToNext()) {
             Relationship rel = new Relationship();
-            rel.setFemaleIndividual(cursor.getString(cursor
-                    .getColumnIndex(OpenHDS.Relationships.COLUMN_RELATIONSHIP_FEMALEINDIVIDUAL)));
-            rel.setMaleIndividual(cursor.getString(cursor
-                    .getColumnIndex(OpenHDS.Relationships.COLUMN_RELATIONSHIP_MALEINDIVIDUAL)));
+            rel.setIndividualA(cursor.getString(cursor
+                    .getColumnIndex(OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_A)));
+            rel.setIndividualB(cursor.getString(cursor
+                    .getColumnIndex(OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_B)));
+            rel.setStartDate(cursor.getString(cursor
+                    .getColumnIndex(OpenHDS.Relationships.COLUMN_RELATIONSHIP_STARTDATE)));
+
+            relationships.add(rel);
+        }
+
+        cursor.close();
+
+        return relationships;
+    }
+
+    public static List<Relationship> toRelationshipListSwapped(Cursor cursor) {
+        List<Relationship> relationships = new ArrayList<Relationship>();
+
+        while (cursor.moveToNext()) {
+            Relationship rel = new Relationship();
+            rel.setIndividualA(cursor.getString(cursor
+                    .getColumnIndex(OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_B)));
+            rel.setIndividualB(cursor.getString(cursor
+                    .getColumnIndex(OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_A)));
             rel.setStartDate(cursor.getString(cursor
                     .getColumnIndex(OpenHDS.Relationships.COLUMN_RELATIONSHIP_STARTDATE)));
 
@@ -220,7 +241,7 @@ public class Converter {
         round.setEndDate(cursor.getString(cursor.getColumnIndex(OpenHDS.Rounds.COLUMN_ROUND_ENDDATE)));
         round.setRoundNumber(cursor.getString(cursor.getColumnIndex(OpenHDS.Rounds.COLUMN_ROUND_NUMBER)));
         round.setStartDate(cursor.getString(cursor.getColumnIndex(OpenHDS.Rounds.COLUMN_ROUND_STARTDATE)));
-        
+
         return round;
     }
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -286,32 +287,38 @@ public class LocationVisit implements Serializable {
     }
 
     public Individual determinePregnancyOutcomeFather(ContentResolver resolver) {
-        Cursor cursor = Queries.getRelationshipByFemale(resolver, selectedIndividual.getExtId());
+        Cursor cursor = Queries.getRelationshipByIndividualA(resolver, selectedIndividual.getExtId());
         List<Relationship> rels = Converter.toRelationshipList(cursor);
+        // the selected individual will always be the 'individualA' in the
+        // relationship
+        cursor = Queries.getRelationshipByIndividualB(resolver, selectedIndividual.getExtId());
+        rels.addAll(Converter.toRelationshipListSwapped(cursor));
+
         DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
-        Relationship current = null;
+        Relationship currentHusband = null;
         // must find the most current relationship
         for (Relationship rel : rels) {
-            if (current == null)
-                current = rel;
 
-            else {
+            if (currentHusband == null) {
+                currentHusband = rel;
+            } else {
                 try {
-                    Date currentDate = formatter.parse(current.getStartDate());
+                    Date currentDate = formatter.parse(currentHusband.getStartDate());
                     Date relDate = formatter.parse(rel.getStartDate());
                     if (currentDate.before(relDate))
-                        current = rel;
+                        currentHusband = rel;
 
                 } catch (ParseException e) {
                     return null;
                 }
             }
         }
-        if (current == null)
+        
+        if (currentHusband == null) {
             return null;
-        else {
-            String fatherId = current.getMaleIndividual();
+        } else {
+            String fatherId = currentHusband.getIndividualB();
             cursor = Queries.getIndividualByExtId(resolver, fatherId);
             return Converter.toIndividual(cursor);
         }

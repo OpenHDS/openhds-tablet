@@ -148,17 +148,6 @@ public class FormFiller {
         form.setLocationId(locationVisit.getLocation().getExtId());
         addIndividual(locationVisit.getSelectedIndividual(), form);
 
-        if (po.getFather() != null) {
-            form.setChildFatherFirstName(po.getFather().getFirstName());
-            form.setChildFatherLastName(po.getFather().getLastName());
-            form.setChildFatherId(po.getFather().getExtId());
-        } else {
-            form.setChildFatherId("UNK");
-        }
-
-        form.setChild1Id(po.getChild1ExtId());
-        form.setChild2Id(po.getChild2ExtId());
-
         return form;
     }
 

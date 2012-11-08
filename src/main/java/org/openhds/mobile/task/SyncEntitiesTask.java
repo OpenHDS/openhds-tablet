@@ -560,12 +560,12 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
 
             parser.nextTag(); // <individualA>
             parser.nextTag(); // <extId>
-            cv.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_FEMALEINDIVIDUAL, parser.nextText());
+            cv.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_A, parser.nextText());
             parser.nextTag(); // </individualA>
 
             parser.nextTag(); // <individualB>
             parser.nextTag();
-            cv.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_MALEINDIVIDUAL, parser.nextText());
+            cv.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_B, parser.nextText());
             parser.nextTag(); // </individualB>
 
             parser.nextTag();

@@ -17,6 +17,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.listener.OdkFormLoadListener;
+import org.openhds.mobile.model.Child;
 import org.openhds.mobile.model.FilledForm;
 import org.openhds.mobile.model.FilledParams;
 import org.w3c.dom.Document;
@@ -155,23 +156,6 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                     } else if (name.equals(FilledParams.fieldWorkerId)) {
                         sbuilder.append(filledForm.getFieldWorkerId() == null ? "<fieldWorkerId />" + "\r\n"
                                 : "<fieldWorkerId>" + filledForm.getFieldWorkerId() + "</fieldWorkerId>" + "\r\n");
-                    } else if (name.equals(FilledParams.child1Id)) {
-                        sbuilder.append(filledForm.getChild1Id() == null ? "<child1Id />" + "\r\n" : "<child1Id>"
-                                + filledForm.getChild1Id() + "</child1Id>" + "\r\n");
-                    } else if (name.equals(FilledParams.child2Id)) {
-                        sbuilder.append(filledForm.getChild2Id() == null ? "<child2Id />" + "\r\n" : "<child2Id>"
-                                + filledForm.getChild2Id() + "</child2Id>" + "\r\n");
-                    } else if (name.equals(FilledParams.childFatherId)) {
-                        sbuilder.append(filledForm.getChildFatherId() == null ? "<childFatherId />" + "\r\n"
-                                : "<childFatherId>" + filledForm.getChildFatherId() + "</childFatherId>" + "\r\n");
-                    } else if (name.equals(FilledParams.childFatherFirstName)) {
-                        sbuilder.append(filledForm.getChildFatherFirstName() == null ? "<childFatherFirstName />"
-                                + "\r\n" : "<childFatherFirstName>" + filledForm.getChildFatherFirstName()
-                                + "</childFatherFirstName>" + "\r\n");
-                    } else if (name.equals(FilledParams.childFatherLastName)) {
-                        sbuilder.append(filledForm.getChildFatherLastName() == null ? "<childFatherLastName />"
-                                + "\r\n" : "<childFatherLastName>" + filledForm.getChildFatherLastName()
-                                + "</childFatherLastName>" + "\r\n");
                     } else if (name.equals(FilledParams.individualA)) {
                         sbuilder.append(filledForm.getIndividualA() == null ? "<individualA />" + "\r\n" : "<individualA>"
                                 + filledForm.getIndividualA() + "</individualA>" + "\r\n");
@@ -182,7 +166,19 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                         sbuilder.append(filledForm.getMigrationType() == null ? "<migrationType />" + "\r\n" : "<migrationType>"
                                 + filledForm.getMigrationType() + "</migrationType>" + "\r\n");
                     }
-
+                } else if (name.equalsIgnoreCase("outcomes")) {
+                    // special case handling for pregnancy outcomes
+                    for(Child child : filledForm.getPregOutcomeChildren()) {
+                        sbuilder.append("<outcomeType>LBR</outcomeType>\r\n");
+                        sbuilder.append("<childId>" + child.getId() + "</childId>\r\n");
+                        sbuilder.append("<firstName />\r\n");
+                        sbuilder.append("<lastName />\r\n");
+                        sbuilder.append("<gender />\r\n");
+                        sbuilder.append("<dateOfBirth />\r\n");
+                        sbuilder.append("<partialDate />\r\n");
+                        sbuilder.append("<socialGroupId>" + child.getSocialGroupId() + "</socialGroupId>\r\n");
+                        sbuilder.append("<relationshipToGroupHead />\r\n");
+                    }
                 } else {
                     if (!n.hasChildNodes())
                         sbuilder.append("<" + name + " />" + "\r\n");

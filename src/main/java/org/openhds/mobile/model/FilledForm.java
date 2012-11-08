@@ -1,5 +1,8 @@
 package org.openhds.mobile.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A filled form represents an ODK form that has been prefilled with values from
  * the OpenHDS application.
@@ -26,16 +29,13 @@ public class FilledForm {
     private String individualDob;
     private String hierarchyId;
     private String latlong;
-    private String child1Id;
-    private String child2Id;
-    private String childFatherId;
-    private String childFatherFirstName;
-    private String childFatherLastName;
 
     private String individualA;
     private String individualB;
 
     private String migrationType;
+    
+    private List<Child> children = new ArrayList<Child>();
 
     public FilledForm(String formName) {
         this.formName = formName;
@@ -181,46 +181,6 @@ public class FilledForm {
         this.latlong = latlong;
     }
 
-    public String getChild1Id() {
-        return child1Id;
-    }
-
-    public void setChild1Id(String child1Id) {
-        this.child1Id = child1Id;
-    }
-
-    public String getChild2Id() {
-        return child2Id;
-    }
-
-    public void setChild2Id(String child2Id) {
-        this.child2Id = child2Id;
-    }
-
-    public String getChildFatherId() {
-        return childFatherId;
-    }
-
-    public void setChildFatherId(String childFatherId) {
-        this.childFatherId = childFatherId;
-    }
-
-    public String getChildFatherFirstName() {
-        return childFatherFirstName;
-    }
-
-    public void setChildFatherFirstName(String childFatherFirstName) {
-        this.childFatherFirstName = childFatherFirstName;
-    }
-
-    public String getChildFatherLastName() {
-        return childFatherLastName;
-    }
-
-    public void setChildFatherLastName(String childFatherLastName) {
-        this.childFatherLastName = childFatherLastName;
-    }
-
     public void setIndividualA(String extId) {
         this.individualA = extId;
     }
@@ -243,5 +203,13 @@ public class FilledForm {
 
     public String getMigrationType() {
         return this.migrationType;
+    }
+
+    public List<Child> getPregOutcomeChildren() {
+        return children;
+    }
+    
+    public void addChild(Child child) {
+        children.add(child);
     }
 }

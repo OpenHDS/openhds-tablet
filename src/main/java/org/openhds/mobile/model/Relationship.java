@@ -6,24 +6,24 @@ public class Relationship implements Serializable {
 
 	private static final long serialVersionUID = -761650887262715820L;
 	
-	private String maleIndividual;
-	private String femaleIndividual;
+	private String individualA;
+	private String individualB;
 	private String startDate;
 	
-	public String getMaleIndividual() {
-		return maleIndividual;
+	public String getIndividualA() {
+		return individualA;
 	}
 	
-	public void setMaleIndividual(String maleIndividual) {
-		this.maleIndividual = maleIndividual;
+	public void setIndividualA(String individualA) {
+		this.individualA = individualA;
 	}
 	
-	public String getFemaleIndividual() {
-		return femaleIndividual;
+	public String getIndividualB() {
+		return individualB;
 	}
 	
-	public void setFemaleIndividual(String femaleIndividual) {
-		this.femaleIndividual = femaleIndividual;
+	public void setIndividualB(String individualB) {
+		this.individualB = individualB;
 	}
 	
 	// dates come in from the web service in dd-MM-yyyy format

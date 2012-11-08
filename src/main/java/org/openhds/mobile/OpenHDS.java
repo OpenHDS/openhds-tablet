@@ -148,8 +148,8 @@ public class OpenHDS {
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.openhds.relationship";
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.openhds.relationship";
 
-        public static final String COLUMN_RELATIONSHIP_MALEINDIVIDUAL = "maleIndividual";
-        public static final String COLUMN_RELATIONSHIP_FEMALEINDIVIDUAL = "femaleIndividual";
+        public static final String COLUMN_RELATIONSHIP_INDIVIDUAL_A = "individualA";
+        public static final String COLUMN_RELATIONSHIP_INDIVIDUAL_B = "individualB";
         public static final String COLUMN_RELATIONSHIP_STARTDATE = "startDate";
     }
 

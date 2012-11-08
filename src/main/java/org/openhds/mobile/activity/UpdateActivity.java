@@ -319,12 +319,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             Toast.makeText(this, "There was a problem with ODK", Toast.LENGTH_LONG).show();
         }
     }
-    
+
     private void handleFilterFather(int resultCode, Intent data) {
         if (resultCode != RESULT_OK) {
             return;
         }
-        
+
         Individual individual = (Individual) data.getExtras().getSerializable("individual");
         filledForm.setFatherExtId(individual.getExtId());
 
@@ -335,7 +335,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         if (resultCode != RESULT_OK) {
             return;
         }
-        
+
         Individual individual = (Individual) data.getExtras().getSerializable("individual");
         filledForm.setMotherExtId(individual.getExtId());
 
@@ -573,78 +573,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialog.show();
     }
 
-    private class PregnancyOutcomeTask extends AsyncTask<Void, Void, Individual> {
-
-        @Override
-        protected Individual doInBackground(Void... params) {
-            final Individual father = locationVisit.determinePregnancyOutcomeFather(getContentResolver());
-            return father;
-        }
-
-        @Override
-        protected void onPostExecute(final Individual father) {
-            hideProgressFragment();
-
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(UpdateActivity.this);
-            alertDialogBuilder.setTitle("Choose Father");
-            alertDialogBuilder.setCancelable(true);
-
-            if (father != null) {
-                String fatherName = father.getFullName() + " (" + father.getExtId() + ")";
-                String items[] = { fatherName, "Search HDSS", "Father not within HDSS" };
-                alertDialogBuilder.setItems(items, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int choice) {
-                        if (choice == 0) {
-                            new CreatePregnancyOutcomeTask(father).execute();
-                        } else if (choice == 1) {
-                            // choose father
-                            startFilterActivity(FILTER_BIRTH_FATHER);
-                        } else if (choice == 2) {
-                            new CreatePregnancyOutcomeTask(null).execute();
-                        }
-                    }
-                });
-            } else {
-                Toast.makeText(getApplicationContext(), getString(R.string.fatherNotFound), Toast.LENGTH_LONG).show();
-                String items[] = { "Search HDSS", "Not within HDSS" };
-                alertDialogBuilder.setItems(items, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int choice) {
-                        if (choice == 0) {
-                            startFilterActivity(FILTER_BIRTH_FATHER);
-                        } else if (choice == 1) {
-                            new CreatePregnancyOutcomeTask(null).execute();
-                        }
-                    }
-                });
-            }
-
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-        }
-    }
-
-    private class CreatePregnancyOutcomeTask extends AsyncTask<Void, Void, Void> {
-
-        private Individual father;
-
-        public CreatePregnancyOutcomeTask(Individual father) {
-            this.father = father;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            PregnancyOutcome po = locationVisit.createPregnancyOutcome(getContentResolver(), father);
-            filledForm = formFiller.fillPregnancyOutcome(locationVisit, po);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            hideProgressFragment();
-            loadSocialGroupsForIndividual();
-        }
-    }
-
     public void onLocationGeoPoint() {
         Intent intent = new Intent(getApplicationContext(), ShowMapActivity.class);
         startActivityForResult(intent, LOCATION_GEOPOINT);
@@ -739,7 +667,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onInMigration() {
         createInMigrationFormDialog();
     }
-    
+
     private class CreateExternalInmigrationTask extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -749,7 +677,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             updatable = new ExternalInMigrationUpdate();
             return null;
         }
-        
+
         @Override
         protected void onPostExecute(Void result) {
             hideProgressFragment();
@@ -861,7 +789,79 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     public void onPregnancyOutcome() {
         showProgressFragment();
-        new PregnancyOutcomeTask().execute();
+        new PregnancyOutcomeFatherSelectionTask().execute();
+    }
+
+    private class PregnancyOutcomeFatherSelectionTask extends AsyncTask<Void, Void, Individual> {
+
+        @Override
+        protected Individual doInBackground(Void... params) {
+            final Individual father = locationVisit.determinePregnancyOutcomeFather(getContentResolver());
+            return father;
+        }
+
+        @Override
+        protected void onPostExecute(final Individual father) {
+            hideProgressFragment();
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(UpdateActivity.this);
+            alertDialogBuilder.setTitle("Choose Father");
+            alertDialogBuilder.setCancelable(true);
+
+            if (father != null) {
+                String fatherName = father.getFullName() + " (" + father.getExtId() + ")";
+                String items[] = { fatherName, "Search HDSS", "Father not within HDSS" };
+                alertDialogBuilder.setItems(items, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int choice) {
+                        if (choice == 0) {
+                            new CreatePregnancyOutcomeTask(father).execute();
+                        } else if (choice == 1) {
+                            // choose father
+                            startFilterActivity(FILTER_BIRTH_FATHER);
+                        } else if (choice == 2) {
+                            new CreatePregnancyOutcomeTask(null).execute();
+                        }
+                    }
+                });
+            } else {
+                Toast.makeText(getApplicationContext(), getString(R.string.fatherNotFound), Toast.LENGTH_LONG).show();
+                String items[] = { "Search HDSS", "Not within HDSS" };
+                alertDialogBuilder.setItems(items, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int choice) {
+                        if (choice == 0) {
+                            startFilterActivity(FILTER_BIRTH_FATHER);
+                        } else if (choice == 1) {
+                            new CreatePregnancyOutcomeTask(null).execute();
+                        }
+                    }
+                });
+            }
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+    }
+
+    private class CreatePregnancyOutcomeTask extends AsyncTask<Void, Void, Void> {
+
+        private Individual father;
+
+        public CreatePregnancyOutcomeTask(Individual father) {
+            this.father = father;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            PregnancyOutcome po = locationVisit.createPregnancyOutcome(getContentResolver(), father);
+            filledForm = formFiller.fillPregnancyOutcome(locationVisit, po);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            hideProgressFragment();
+            loadSocialGroupsForIndividual();
+        }
     }
 
     public void onDeath() {
@@ -997,82 +997,29 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        if (loader.getId() == SOCIAL_GROUP_FOR_EXT_INMIGRATION) {
-            if (cursor.getCount() == 1) {
-                cursor.moveToFirst();
-                SocialGroup sg = Converter.convertToSocialGroup(cursor);
-                new GenerateIndividualIdTask(sg).execute();
-                return;
-            }
+        hideProgressFragment();
+        if (cursor.getCount() == 1 && loader.getId() == SOCIAL_GROUP_FOR_INDIVIDUAL) {
+            cursor.moveToFirst();
+            appendSocialGroupFromCursor(cursor);
+            return;
+        }
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Select a Household for the Individual");
-            SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
-                    new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
-                            OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
-                            android.R.id.text2 }, 0);
-            builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select a Household for the Individual");
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
+                new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
+                        OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
+                        android.R.id.text2 }, 0);
+        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
 
-                public void onClick(DialogInterface dialog, int which) {
-                    Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
-                    new GenerateIndividualIdTask(Converter.convertToSocialGroup(cursor)).execute();
-                }
-            });
-
-            builder.setNegativeButton("Cancel", null);
-            householdDialog = builder.create();
-            householdDialog.show();
-        } else {
-            hideProgressFragment();
-            if (cursor.getCount() == 1 && loader.getId() == SOCIAL_GROUP_FOR_INDIVIDUAL) {
-                cursor.moveToFirst();
+            public void onClick(DialogInterface dialog, int which) {
+                Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
                 appendSocialGroupFromCursor(cursor);
-                return;
             }
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Select a Household for the Individual");
-            SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
-                    new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
-                            OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
-                            android.R.id.text2 }, 0);
-            builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialog, int which) {
-                    Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
-                    appendSocialGroupFromCursor(cursor);
-                }
-            });
-            builder.setNegativeButton("Cancel", null);
-            householdDialog = builder.create();
-            householdDialog.show();
-        }
-    }
-
-    private class GenerateIndividualIdTask extends AsyncTask<Void, Void, Void> {
-
-        private SocialGroup sg;
-
-        public GenerateIndividualIdTask(SocialGroup sg) {
-            this.sg = sg;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            String id = locationVisit.generateIndividualId(getContentResolver(), 1, sg.getExtId());
-            Individual indiv = new Individual();
-            indiv.setExtId(id);
-            filledForm = formFiller.fillInMigrationForm(locationVisit, indiv);
-            formFiller.appendSocialGroup(sg, filledForm);
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            hideProgressFragment();
-            loadForm(SELECTED_XFORM);
-        }
+        });
+        builder.setNegativeButton("Cancel", null);
+        householdDialog = builder.create();
+        householdDialog.show();
     }
 
     private void appendSocialGroupFromCursor(Cursor cursor) {
