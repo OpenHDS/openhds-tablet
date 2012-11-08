@@ -160,7 +160,8 @@ public class LocationVisit implements Serializable {
     private String generateLocationId(ContentResolver resolver) {
         Cursor cursor = resolver.query(OpenHDS.Locations.CONTENT_ID_URI_BASE,
                 new String[] { OpenHDS.Locations.COLUMN_LOCATION_EXTID }, OpenHDS.Locations.COLUMN_LOCATION_EXTID
-                        + " LIKE ?", new String[] { village.getExtId() + "%" }, OpenHDS.Locations.COLUMN_LOCATION_EXTID + " DESC");
+                        + " LIKE ?", new String[] { village.getExtId() + "%" }, OpenHDS.Locations.COLUMN_LOCATION_EXTID
+                        + " DESC");
 
         String generatedId = null;
         if (cursor.moveToFirst()) {
@@ -201,23 +202,22 @@ public class LocationVisit implements Serializable {
 
     // this logic is specific for Cross River
     public void createVisit(ContentResolver resolver) {
-        String visitSuffix = location.getExtId();
+        String visitPrefix = "V" + location.getExtId() + round.getRoundNumber();
+
         Cursor cursor = resolver.query(OpenHDS.Visits.CONTENT_ID_URI_BASE,
                 new String[] { OpenHDS.Visits.COLUMN_VISIT_EXTID }, OpenHDS.Visits.COLUMN_VISIT_EXTID + " LIKE ?",
-                new String[] { "%" + visitSuffix }, OpenHDS.Visits.COLUMN_VISIT_EXTID + " DESC");
-        String visitPrefix = "";
+                new String[] { visitPrefix + "%" }, OpenHDS.Visits.COLUMN_VISIT_EXTID + " DESC");
+        String visitGeneratedId;
         if (cursor.moveToFirst()) {
-            String lastVisitPrefix = cursor.getString(0).substring(0, 2);
-
             try {
-                int lastVisitCount = Integer.parseInt(cursor.getString(0).substring(2, 3));
+                int lastVisitCount = Integer.parseInt(cursor.getString(0).substring(7, 8));
                 int nextVisitCount = lastVisitCount + 1;
-                visitPrefix = lastVisitPrefix + nextVisitCount;
+                visitGeneratedId = visitPrefix + nextVisitCount;
             } catch (NumberFormatException e) {
-                visitPrefix = "V" + round.getRoundNumber() + "1";
+                visitGeneratedId = visitPrefix + "1";
             }
         } else {
-            visitPrefix = "V" + round.getRoundNumber() + "1";
+            visitGeneratedId = visitPrefix + "1";
         }
 
         cursor.close();
@@ -226,7 +226,7 @@ public class LocationVisit implements Serializable {
         String date = df.format(new Date());
 
         visit = new Visit();
-        visit.setExtId(visitPrefix + visitSuffix);
+        visit.setExtId(visitGeneratedId);
         visit.setDate(date);
     }
 
@@ -264,31 +264,23 @@ public class LocationVisit implements Serializable {
     // existing one
     public SocialGroup createSocialGroup(ContentResolver resolver) {
         SocialGroup sg = new SocialGroup();
-        String headId = selectedIndividual.getExtId();
-        String baseString = headId.substring(0, 12);
-        Integer partToIncrement = Integer.parseInt(headId.substring(12, 14));
 
-        String socialgroupId = generateSocialGroupId(resolver, partToIncrement, baseString);
+        String socialGroupPrefix = location.getExtId();
 
-        sg.setExtId(socialgroupId);
+        Cursor cursor = resolver.query(OpenHDS.SocialGroups.CONTENT_ID_URI_BASE,
+                new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID },
+                OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " LIKE ?", new String[] { socialGroupPrefix + "%" },
+                OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " DESC");
+
+        if (cursor.moveToNext()) {
+            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(5, 7));
+            int nextIncrement = lastIncrement + 1;
+            sg.setExtId(socialGroupPrefix + String.format("%02d", nextIncrement));
+        } else {
+            sg.setExtId(socialGroupPrefix + "01");      
+        }
 
         return sg;
-    }
-
-    public String generateSocialGroupId(ContentResolver resolver, Integer partToIncrement, String baseString) {
-        String temp = "";
-        do {
-            StringBuilder builder = new StringBuilder();
-            partToIncrement++;
-            if (partToIncrement.toString().length() == 1)
-                builder.append("0").append(partToIncrement.toString());
-            else if (partToIncrement.toString().length() == 2)
-                builder.append(partToIncrement.toString());
-            temp = baseString.concat(builder.toString());
-        } while (Queries.hasSocialGroupByExtId(resolver, temp));
-
-        baseString = temp;
-        return baseString;
     }
 
     public Individual determinePregnancyOutcomeFather(ContentResolver resolver) {

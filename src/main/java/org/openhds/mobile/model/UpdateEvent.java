@@ -16,6 +16,6 @@ public class UpdateEvent {
 	public static final String PREGNANCYOBSERVATION = "PREGNANCY_OBSERVATION";
 	public static final String RELATIONSHIP = "RELATIONSHIP";
 	public static final String MEMBERSHIP = "MEMBERSHIP";
-	public static final String SOCIALGROUP = "SOCIALGROUP";
+	public static final String SOCIALGROUP = "SOCIAL_GROUP";
 	public static final String XFORMS = "XFORMS";
 }
