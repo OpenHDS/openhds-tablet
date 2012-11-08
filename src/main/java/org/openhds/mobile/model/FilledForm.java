@@ -35,6 +35,8 @@ public class FilledForm {
     private String individualA;
     private String individualB;
 
+    private String migrationType;
+
     public FilledForm(String formName) {
         this.formName = formName;
     }
@@ -235,4 +237,11 @@ public class FilledForm {
         return individualA;
     }
 
+    public void setMigrationType(String string) {
+        this.migrationType = string;
+    }
+
+    public String getMigrationType() {
+        return this.migrationType;
+    }
 }

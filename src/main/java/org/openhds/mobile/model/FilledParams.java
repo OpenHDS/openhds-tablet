@@ -39,6 +39,8 @@ public class FilledParams {
 	
 	public static final String individualA = "individualA";
 	public static final String individualB = "individualB";
+	
+	public static final String migrationType = "migrationType";
 			
 	public static List<String> getParamsArray() {
 		return Arrays.asList(visitId, roundNumber, visitDate, 
@@ -47,6 +49,6 @@ public class FilledParams {
 				latlong, householdId, householdName, hierarchyId, 
 				fieldWorkerId, child1Id, child2Id, childFatherId,
 				childFatherFirstName, childFatherLastName,
-				individualA, individualB);
+				individualA, individualB, migrationType);
 	}
 }

@@ -1,5 +1,6 @@
 package org.openhds.mobile.model;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -69,6 +70,29 @@ public class FormXmlReader {
             sg.setGroupName(xpath.evaluate("/data/householdName/text()", doc));
             
             return sg;
+        } catch (ParserConfigurationException e) {
+        } catch (SAXException e) {
+        } catch (IOException e) {
+        } catch (XPathExpressionException e) {
+        }
+        return null;
+    }
+
+    public Individual readInMigration(FileInputStream fileInputStream) {
+        try {
+            Document doc = buildDocument(fileInputStream);
+            
+            Individual individual = new Individual();
+            individual.setCurrentResidence(xpath.evaluate("/data/locationId/text()", doc));
+            individual.setDob(xpath.evaluate("/data/individualInfo/dateOfBirth/text()", doc));
+            individual.setExtId(xpath.evaluate("/data/individualInfo/individualId/text()", doc));
+            individual.setFather(xpath.evaluate("/data/individualInfo/fatherId/text()", doc));
+            individual.setFirstName(xpath.evaluate("/data/individualInfo/firstName/text()", doc));
+            individual.setGender(xpath.evaluate("/data/individualInfo/gender/text()", doc));
+            individual.setLastName(xpath.evaluate("/data/individualInfo/lastName/text()", doc));
+            individual.setMother(xpath.evaluate("/data/individualInfo/motherId/text()", doc));
+            
+            return individual;
         } catch (ParserConfigurationException e) {
         } catch (SAXException e) {
         } catch (IOException e) {

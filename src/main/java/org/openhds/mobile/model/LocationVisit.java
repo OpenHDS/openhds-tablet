@@ -277,8 +277,10 @@ public class LocationVisit implements Serializable {
             int nextIncrement = lastIncrement + 1;
             sg.setExtId(socialGroupPrefix + String.format("%02d", nextIncrement));
         } else {
-            sg.setExtId(socialGroupPrefix + "01");      
+            sg.setExtId(socialGroupPrefix + "01");
         }
+
+        cursor.close();
 
         return sg;
     }
@@ -321,5 +323,25 @@ public class LocationVisit implements Serializable {
 
     public boolean isVisitStarted() {
         return visit != null;
+    }
+
+    public String generateIndividualId(ContentResolver resolver) {
+        Cursor cursor = resolver.query(OpenHDS.Individuals.CONTENT_ID_URI_BASE,
+                new String[] { OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID },
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ?", new String[] { location.getExtId() },
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " DESC");
+
+        String id = null;
+        if (cursor.moveToNext()) {
+            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(5, 8));
+            int nextIncrement = lastIncrement + 1;
+            id =location.getExtId() + String.format("%03d", nextIncrement);
+        } else {
+            id = location.getExtId() + "001";      
+        }
+        
+        cursor.close();
+
+        return id;
     }
 }

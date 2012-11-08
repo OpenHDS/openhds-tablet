@@ -20,7 +20,7 @@ public class FilterActivity extends Activity implements ValueListener, Selection
 
     private SelectionFilterFragment selectionFilterFragment;
     private ValueFragment valueFragment;
-    private boolean isBirth = false;
+    private String requireGender;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class FilterActivity extends Activity implements ValueListener, Selection
         LocationHierarchy subRegion = (LocationHierarchy) getIntent().getExtras().getSerializable("subRegion");
         LocationHierarchy village = (LocationHierarchy) getIntent().getExtras().getSerializable("village");
         Location location = (Location) getIntent().getExtras().getSerializable("location");
-        isBirth = getIntent().getExtras().getBoolean("isBirth");
+        requireGender = getIntent().getExtras().getString("requireGender");
 
         selectionFilterFragment.setRegion(region.getExtId());
         selectionFilterFragment.setSubregion(subRegion.getExtId());
@@ -48,8 +48,8 @@ public class FilterActivity extends Activity implements ValueListener, Selection
     }
 
     public void onIndividualSelected(Individual individual) {
-        if (isBirth && individual.getGender().equals("Female")) {
-            Toast.makeText(getApplicationContext(), "Please choose Male", Toast.LENGTH_LONG).show();
+        if (requireGender != null && !requireGender.equals(individual.getGender())) {
+            Toast.makeText(getApplicationContext(), "Please choose " + requireGender, Toast.LENGTH_LONG).show();
             return;
         }
 

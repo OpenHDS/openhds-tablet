@@ -178,6 +178,9 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                     } else if (name.equals(FilledParams.individualB)) {
                         sbuilder.append(filledForm.getIndividualB() == null ? "<individualB />" + "\r\n" : "<individualB>"
                                 + filledForm.getIndividualB() + "</individualB>" + "\r\n");
+                    } else if (name.equals(FilledParams.migrationType)) {
+                        sbuilder.append(filledForm.getMigrationType() == null ? "<migrationType />" + "\r\n" : "<migrationType>"
+                                + filledForm.getMigrationType() + "</migrationType>" + "\r\n");
                     }
 
                 } else {

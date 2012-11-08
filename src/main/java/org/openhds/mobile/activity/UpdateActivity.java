@@ -6,7 +6,9 @@ import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.Queries;
 import org.openhds.mobile.R;
 import org.openhds.mobile.database.DeathUpdate;
+import org.openhds.mobile.database.ExternalInMigrationUpdate;
 import org.openhds.mobile.database.HouseholdUpdate;
+import org.openhds.mobile.database.InternalInMigrationUpdate;
 import org.openhds.mobile.database.LocationUpdate;
 import org.openhds.mobile.database.OutMigrationUpdate;
 import org.openhds.mobile.database.Updatable;
@@ -77,6 +79,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private static final int FILTER_INMIGRATION = 40;
     private static final int FILTER_BIRTH_FATHER = 45;
     private static final int LOCATION_GEOPOINT = 50;
+    protected static final int FILTER_INMIGRATION_MOTHER = 60;
+    protected static final int FILTER_INMIGRATION_FATHER = 70;
 
     // the uri of the last viewed xform
     private Uri contentUri;
@@ -165,6 +169,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             break;
         case FILTER_INMIGRATION:
             handleFilterInMigrationResult(resultCode, data);
+            break;
+        case FILTER_INMIGRATION_MOTHER:
+            handleFilterMother(resultCode, data);
+            break;
+        case FILTER_INMIGRATION_FATHER:
+            handleFilterFather(resultCode, data);
             break;
         case LOCATION_GEOPOINT:
             if (resultCode == RESULT_OK) {
@@ -259,8 +269,29 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showProgressFragment();
         Individual individual = (Individual) data.getExtras().getSerializable("individual");
-        filledForm = formFiller.fillInMigrationForm(locationVisit, individual);
-        getLoaderManager().restartLoader(SOCIAL_GROUP_AT_LOCATION, null, this);
+        new CreateInternalInMigrationTask(individual).execute();
+    }
+
+    private class CreateInternalInMigrationTask extends AsyncTask<Void, Void, Void> {
+
+        private Individual individual;
+
+        public CreateInternalInMigrationTask(Individual individual) {
+            this.individual = individual;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            filledForm = formFiller.fillInternalInMigrationForm(locationVisit, individual);
+            updatable = new InternalInMigrationUpdate();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            hideProgressFragment();
+            loadForm(SELECTED_XFORM);
+        }
     }
 
     private void handleFilterLocationResult(int requestCode, Intent data) {
@@ -287,6 +318,28 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         } else {
             Toast.makeText(this, "There was a problem with ODK", Toast.LENGTH_LONG).show();
         }
+    }
+    
+    private void handleFilterFather(int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        
+        Individual individual = (Individual) data.getExtras().getSerializable("individual");
+        filledForm.setFatherExtId(individual.getExtId());
+
+        loadForm(SELECTED_XFORM);
+    }
+
+    private void handleFilterMother(int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        
+        Individual individual = (Individual) data.getExtras().getSerializable("individual");
+        filledForm.setMotherExtId(individual.getExtId());
+
+        buildFatherDialog();
     }
 
     private void showProgressFragment() {
@@ -441,8 +494,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
         i.putExtra("location", loc);
 
-        if (requestCode == FILTER_BIRTH_FATHER) {
-            i.putExtra("isBirth", true);
+        switch (requestCode) {
+        case FILTER_INMIGRATION_MOTHER:
+            i.putExtra("requireGender", "F");
+            break;
+        case FILTER_BIRTH_FATHER:
+            i.putExtra("requireGender", "M");
         }
 
         startActivityForResult(i, requestCode);
@@ -499,26 +556,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
 
         xformUnfinishedDialog.show();
-    }
-
-    private void createInMigrationFormDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("In Migration");
-        alertDialogBuilder.setMessage("Is this an Internal or External In Migration event?");
-        alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setPositiveButton("Internal", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                startFilterActivity(FILTER_INMIGRATION);
-            }
-        });
-        alertDialogBuilder.setNegativeButton("External", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                showProgressFragment();
-                getLoaderManager().restartLoader(SOCIAL_GROUP_FOR_EXT_INMIGRATION, null, UpdateActivity.this);
-            }
-        });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
     }
 
     private void createXFormNotFoundDialog() {
@@ -702,12 +739,89 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onInMigration() {
         createInMigrationFormDialog();
     }
+    
+    private class CreateExternalInmigrationTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            String id = locationVisit.generateIndividualId(getContentResolver());
+            filledForm = formFiller.fillExternalInmigration(locationVisit, id);
+            updatable = new ExternalInMigrationUpdate();
+            return null;
+        }
+        
+        @Override
+        protected void onPostExecute(Void result) {
+            hideProgressFragment();
+            buildMotherDialog();
+        }
+    }
+
+    private void createInMigrationFormDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("In Migration");
+        alertDialogBuilder.setMessage("Is this an Internal or External In Migration event?");
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setPositiveButton("Internal", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                startFilterActivity(FILTER_INMIGRATION);
+            }
+        });
+        alertDialogBuilder.setNegativeButton("External", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                showProgressFragment();
+                new CreateExternalInmigrationTask().execute();
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void buildMotherDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Mother");
+        alertDialogBuilder.setMessage("Is the mother known and registered in the system?");
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                startFilterActivity(FILTER_INMIGRATION_MOTHER);
+            }
+        });
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                filledForm.setMotherExtId("UNK");
+                buildFatherDialog();
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void buildFatherDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("father");
+        alertDialogBuilder.setMessage("Is the father known and registered in the system?");
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                startFilterActivity(FILTER_INMIGRATION_FATHER);
+            }
+        });
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                filledForm.setFatherExtId("UNK");
+                loadForm(SELECTED_XFORM);
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 
     public void onOutMigration() {
         showProgressFragment();
         new CreateOutMigrationTask().execute();
     }
-    
+
     private class CreateOutMigrationTask extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -716,7 +830,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             updatable = new OutMigrationUpdate();
             return null;
         }
-        
+
         @Override
         protected void onPostExecute(Void result) {
             hideProgressFragment();
@@ -728,7 +842,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         showProgressFragment();
         new CreatePregnancyObservationTask().execute();
     }
-    
+
     private class CreatePregnancyObservationTask extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -737,7 +851,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             updatable = new PregnancyObservationUpdate();
             return null;
         }
-        
+
         @Override
         protected void onPostExecute(Void result) {
             hideProgressFragment();
@@ -754,17 +868,17 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         showProgressFragment();
         new CreateDeathTask().execute();
     }
-    
+
     private class CreateDeathTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
             filledForm = formFiller.fillDeathForm(locationVisit);
             updatable = new DeathUpdate();
-            
+
             return null;
         }
-        
+
         @Override
         protected void onPostExecute(Void result) {
             hideProgressFragment();
