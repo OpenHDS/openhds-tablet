@@ -9,7 +9,7 @@ public class UpdateEvent {
 	public static final String LOCATION = "LOCATION";
 	public static final String INDIVIDUAL = "INDIVIDUAL";
 	public static final String VISIT = "VISIT";
-	public static final String BIRTH = "BIRTH";
+	public static final String PREGNANCYOUTCOME = "PREGNANCY_OUTCOME";
 	public static final String DEATH = "DEATH";
 	public static final String INMIGRATION = "IN_MIGRATION";
 	public static final String OUTMIGRATION = "OUT_MIGRATION";

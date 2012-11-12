@@ -169,6 +169,7 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                 } else if (name.equalsIgnoreCase("outcomes")) {
                     // special case handling for pregnancy outcomes
                     for(Child child : filledForm.getPregOutcomeChildren()) {
+                        sbuilder.append("<outcomes>\r\n");
                         sbuilder.append("<outcomeType>LBR</outcomeType>\r\n");
                         sbuilder.append("<childId>" + child.getId() + "</childId>\r\n");
                         sbuilder.append("<firstName />\r\n");
@@ -176,8 +177,9 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                         sbuilder.append("<gender />\r\n");
                         sbuilder.append("<dateOfBirth />\r\n");
                         sbuilder.append("<partialDate />\r\n");
-                        sbuilder.append("<socialGroupId>" + child.getSocialGroupId() + "</socialGroupId>\r\n");
+                        sbuilder.append("<socialGroupId>" + filledForm.getHouseholdId() + "</socialGroupId>\r\n");
                         sbuilder.append("<relationshipToGroupHead />\r\n");
+                        sbuilder.append("</outcomes>\r\n");
                     }
                 } else {
                     if (!n.hasChildNodes())

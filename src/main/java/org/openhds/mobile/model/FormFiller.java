@@ -55,7 +55,7 @@ public class FormFiller {
         form.setHouseholdName(sg.getGroupName());
     }
 
-    public FilledForm filMembershipForm(LocationVisit locationVisit) {
+    public FilledForm fillMembershipForm(LocationVisit locationVisit) {
         FilledForm form = new FilledForm(UpdateEvent.MEMBERSHIP);
 
         addFieldWorker(locationVisit, form);
@@ -141,12 +141,18 @@ public class FormFiller {
     }
 
     public FilledForm fillPregnancyOutcome(LocationVisit locationVisit, PregnancyOutcome po) {
-        FilledForm form = new FilledForm(UpdateEvent.BIRTH);
+        FilledForm form = new FilledForm(UpdateEvent.PREGNANCYOUTCOME);
 
         addFieldWorker(locationVisit, form);
         addVisit(locationVisit, form);
         form.setLocationId(locationVisit.getLocation().getExtId());
-        addIndividual(locationVisit.getSelectedIndividual(), form);
+        form.setMotherExtId(locationVisit.getSelectedIndividual().getExtId());
+        
+        for(String childId : po.getChildIds()) {
+            Child child = new Child();
+            child.setId(childId);
+            form.addChild(child);
+        }
 
         return form;
     }
@@ -179,5 +185,9 @@ public class FormFiller {
         form.setMigrationType("EXTERNAL_INMIGRATION");
         
         return form;
+    }
+
+    public void appendFatherId(FilledForm filledForm, String fatherId) {
+        filledForm.setFatherExtId(fatherId);
     }
 }

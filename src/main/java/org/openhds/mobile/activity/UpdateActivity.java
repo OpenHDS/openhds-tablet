@@ -10,7 +10,10 @@ import org.openhds.mobile.database.ExternalInMigrationUpdate;
 import org.openhds.mobile.database.HouseholdUpdate;
 import org.openhds.mobile.database.InternalInMigrationUpdate;
 import org.openhds.mobile.database.LocationUpdate;
+import org.openhds.mobile.database.MembershipUpdate;
 import org.openhds.mobile.database.OutMigrationUpdate;
+import org.openhds.mobile.database.PregnancyOutcomeUpdate;
+import org.openhds.mobile.database.RelationshipUpdate;
 import org.openhds.mobile.database.Updatable;
 import org.openhds.mobile.database.VisitUpdate;
 import org.openhds.mobile.fragment.EventFragment;
@@ -654,35 +657,20 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onMembership() {
-        filledForm = formFiller.filMembershipForm(locationVisit);
+        filledForm = formFiller.fillMembershipForm(locationVisit);
+        updatable = new MembershipUpdate();
         showProgressFragment();
         getLoaderManager().restartLoader(SOCIAL_GROUP_AT_LOCATION, null, this);
     }
 
     public void onRelationship() {
         filledForm = formFiller.fillRelationships(locationVisit);
+        updatable = new RelationshipUpdate();
         startFilterActivity(FILTER_RELATIONSHIP);
     }
 
     public void onInMigration() {
         createInMigrationFormDialog();
-    }
-
-    private class CreateExternalInmigrationTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            String id = locationVisit.generateIndividualId(getContentResolver());
-            filledForm = formFiller.fillExternalInmigration(locationVisit, id);
-            updatable = new ExternalInMigrationUpdate();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            hideProgressFragment();
-            buildMotherDialog();
-        }
     }
 
     private void createInMigrationFormDialog() {
@@ -703,6 +691,23 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    private class CreateExternalInmigrationTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            String id = locationVisit.generateIndividualId(getContentResolver());
+            filledForm = formFiller.fillExternalInmigration(locationVisit, id);
+            updatable = new ExternalInMigrationUpdate();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            hideProgressFragment();
+            buildMotherDialog();
+        }
     }
 
     private void buildMotherDialog() {
@@ -787,15 +792,45 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
     }
 
+    /**
+     * The pregnancy outcome flow is as follows: <br />
+     * 1. Prompt user for the number of live births. This indicates how many
+     * child ids will be generated. <br />
+     * 2. Prompt user for the father. We attempt to determine the father by
+     * looking at any relationships the mother has. The user also has the option
+     * of searching for the father as well. <br />
+     * 3. Prompt for the social group to use. In this scenario, a search is made
+     * for all memberships present at a location.
+     */
     public void onPregnancyOutcome() {
-        showProgressFragment();
-        new PregnancyOutcomeFatherSelectionTask().execute();
+        buildPregnancyLiveBirthCountDialog();
+    }
+
+    private void buildPregnancyLiveBirthCountDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Number of Live Births").setCancelable(true)
+                .setItems(new String[] { "None", "1", "2", "3", "4" }, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        showProgressFragment();
+                        new PregnancyOutcomeFatherSelectionTask(which).execute();
+                    }
+                });
+        builder.show();
     }
 
     private class PregnancyOutcomeFatherSelectionTask extends AsyncTask<Void, Void, Individual> {
 
+        private int liveBirthCount;
+
+        public PregnancyOutcomeFatherSelectionTask(int liveBirthCount) {
+            this.liveBirthCount = liveBirthCount;
+        }
+
         @Override
         protected Individual doInBackground(Void... params) {
+            PregnancyOutcome pregOut = locationVisit.createPregnancyOutcome(getContentResolver(), liveBirthCount);
+            filledForm = formFiller.fillPregnancyOutcome(locationVisit, pregOut);
+            updatable = new PregnancyOutcomeUpdate();
             final Individual father = locationVisit.determinePregnancyOutcomeFather(getContentResolver());
             return father;
         }
@@ -852,8 +887,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         @Override
         protected Void doInBackground(Void... params) {
-            PregnancyOutcome po = locationVisit.createPregnancyOutcome(getContentResolver(), father);
-            filledForm = formFiller.fillPregnancyOutcome(locationVisit, po);
+            String fatherId = father == null ? "UNK" : father.getExtId();
+            formFiller.appendFatherId(filledForm, fatherId);
             return null;
         }
 

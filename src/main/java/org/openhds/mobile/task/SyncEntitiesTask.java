@@ -559,11 +559,19 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
             ContentValues cv = new ContentValues();
 
             parser.nextTag(); // <individualA>
+            parser.nextTag(); // <memberships>
+            parser.nextTag(); // </memberships>
+            parser.nextTag(); // <residencies>
+            parser.nextTag(); // <residencies>
             parser.nextTag(); // <extId>
             cv.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_A, parser.nextText());
             parser.nextTag(); // </individualA>
 
             parser.nextTag(); // <individualB>
+            parser.nextTag(); // <memberships>
+            parser.nextTag(); // </memberships>
+            parser.nextTag(); // <residencies>
+            parser.nextTag(); // <residencies>
             parser.nextTag();
             cv.put(OpenHDS.Relationships.COLUMN_RELATIONSHIP_INDIVIDUAL_B, parser.nextText());
             parser.nextTag(); // </individualB>

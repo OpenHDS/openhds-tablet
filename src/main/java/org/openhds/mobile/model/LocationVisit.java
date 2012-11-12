@@ -185,22 +185,6 @@ public class LocationVisit implements Serializable {
         }
     }
 
-    public String generateIndividualId(ContentResolver resolver, Integer partToIncrement, String baseString) {
-        String temp = "";
-        do {
-            StringBuilder builder = new StringBuilder();
-            partToIncrement++;
-            if (partToIncrement.toString().length() < 2)
-                builder.append("0").append(partToIncrement.toString());
-            if (partToIncrement.toString().length() == 2)
-                builder.append(partToIncrement.toString());
-            temp = baseString.concat(builder.toString());
-        } while (Queries.individualByExtId(resolver, temp));
-
-        baseString = temp;
-        return baseString;
-    }
-
     // this logic is specific for Cross River
     public void createVisit(ContentResolver resolver) {
         String visitPrefix = "V" + location.getExtId() + round.getRoundNumber();
@@ -231,34 +215,44 @@ public class LocationVisit implements Serializable {
         visit.setDate(date);
     }
 
-    public PregnancyOutcome createPregnancyOutcome(ContentResolver resolver, Individual father) {
+    public PregnancyOutcome createPregnancyOutcome(ContentResolver resolver, int liveBirthCount) {
         PregnancyOutcome outcome = new PregnancyOutcome();
         outcome.setMother(selectedIndividual);
-        outcome.setFather(father);
 
-        // generation of child ids
-        String motherId;
-        String childId;
-        try {
-            motherId = selectedIndividual.getExtId();
-            String householdSectionId = motherId.substring(12, 14);
-            String locationId = selectedIndividual.getCurrentResidence();
-            childId = locationId + householdSectionId;
-        } catch (Exception e) {
-            return null;
+        if (liveBirthCount > 0) {
+            String[] ids = generateIndividualIds(resolver, liveBirthCount);
+            for (String id : ids) {
+                outcome.addChildId(id);
+            }
         }
 
-        String baseString = childId;
-        Integer partToIncrement = Integer.parseInt(motherId.substring(14, 16));
-
-        String child1Id = generateIndividualId(resolver, partToIncrement, baseString);
-        partToIncrement = Integer.parseInt(child1Id.substring(14, 16));
-        String child2Id = generateIndividualId(resolver, partToIncrement, baseString);
-
-        outcome.setChild1ExtId(child1Id);
-        outcome.setChild2ExtId(child2Id);
-
         return outcome;
+    }
+
+    private String[] generateIndividualIds(ContentResolver resolver, int liveBirthCount) {
+        Cursor cursor = resolver.query(OpenHDS.Individuals.CONTENT_ID_URI_BASE,
+                new String[] { OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID },
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " LIKE ?", new String[] { location.getExtId() + "%" },
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " DESC");
+
+        int lastIndividualCount = 0;
+        if (cursor.moveToFirst()) {
+            try {
+                lastIndividualCount = Integer.parseInt(cursor.getString(0).substring(5, 8));
+            } catch (NumberFormatException e) {
+            }
+        }
+
+        int nextIndividualCount = lastIndividualCount + 1;
+        String[] ids = new String[liveBirthCount];
+        for (int i = 0; i < liveBirthCount; i++) {
+            ids[i] = location.getExtId() + String.format("%03d", nextIndividualCount);
+            nextIndividualCount += 1;
+        }
+
+        cursor.close();
+
+        return ids;
     }
 
     // an option to create a new social group rather than to reference an
@@ -314,7 +308,7 @@ public class LocationVisit implements Serializable {
                 }
             }
         }
-        
+
         if (currentHusband == null) {
             return null;
         } else {
@@ -342,11 +336,11 @@ public class LocationVisit implements Serializable {
         if (cursor.moveToNext()) {
             int lastIncrement = Integer.parseInt(cursor.getString(0).substring(5, 8));
             int nextIncrement = lastIncrement + 1;
-            id =location.getExtId() + String.format("%03d", nextIncrement);
+            id = location.getExtId() + String.format("%03d", nextIncrement);
         } else {
-            id = location.getExtId() + "001";      
+            id = location.getExtId() + "001";
         }
-        
+
         cursor.close();
 
         return id;
