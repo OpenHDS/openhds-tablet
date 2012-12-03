@@ -157,7 +157,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         switch (arg0) {
         case HIERARCHY_LOADER:
             return new CursorLoader(getActivity(), OpenHDS.HierarchyItems.CONTENT_ID_URI_BASE, null,
-                    OpenHDS.HierarchyItems.COLUMN_HIERARCHY_LEVEL + " = ?", new String[] { "LGA" }, null);
+                    OpenHDS.HierarchyItems.COLUMN_HIERARCHY_LEVEL + " = ?", new String[] { "Village" }, null);
         case REGION_LOADER:
             adapter.changeCursorAndColumns(null, REGION_COLUMNS, VIEW_BINDINGS);
             return buildRegionCursorLoader(arg1);
