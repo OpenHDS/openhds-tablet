@@ -21,15 +21,16 @@ import java.util.Map;
 public class StateMachine {
 
     public enum State {
-        SELECT_REGION, SELECT_SUBREGION, SELECT_VILLAGE, SELECT_ROUND, SELECT_LOCATION, CREATE_VISIT, SELECT_INDIVIDUAL, SELECT_EVENT, FINISH_VISIT
+        SELECT_HIERARCHY_1, SELECT_HIERARCHY_2, SELECT_HIERARCHY_3, SELECT_HIERARCHY_4, SELECT_ROUND, SELECT_LOCATION, CREATE_VISIT, SELECT_INDIVIDUAL, SELECT_EVENT, FINISH_VISIT
     }
 
     private static final List<State> STATE_SEQUENCE = new ArrayList<State>();
 
     static {
-        STATE_SEQUENCE.add(State.SELECT_REGION);
-        STATE_SEQUENCE.add(State.SELECT_SUBREGION);
-        STATE_SEQUENCE.add(State.SELECT_VILLAGE);
+        STATE_SEQUENCE.add(State.SELECT_HIERARCHY_1);
+        STATE_SEQUENCE.add(State.SELECT_HIERARCHY_2);
+        STATE_SEQUENCE.add(State.SELECT_HIERARCHY_3);
+        STATE_SEQUENCE.add(State.SELECT_HIERARCHY_4);
         STATE_SEQUENCE.add(State.SELECT_ROUND);
         STATE_SEQUENCE.add(State.SELECT_LOCATION);
         STATE_SEQUENCE.add(State.CREATE_VISIT);
@@ -48,7 +49,7 @@ public class StateMachine {
     private Map<State, List<StateListener>> listeners = new HashMap<State, List<StateListener>>();
 
     public StateMachine() {
-        currentState = State.SELECT_REGION;
+        currentState = State.SELECT_HIERARCHY_1;
     }
 
     public void transitionTo(State state) {

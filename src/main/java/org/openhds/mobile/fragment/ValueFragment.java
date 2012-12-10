@@ -31,6 +31,7 @@ import android.widget.SimpleCursorAdapter;
  */
 public class ValueFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
+    private static final String START_HIERARCHY_LEVEL_NAME = "Ward";
     // loader identifiers
     private static final int HIERARCHY_LOADER = 0;
     private static final int REGION_LOADER = 1;
@@ -41,7 +42,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 
     // create the column mappings so they don't need to be recreated on every
     // load
-    private static final String[] REGION_COLUMNS = new String[] { OpenHDS.HierarchyItems.COLUMN_HIERARCHY_NAME,
+    private static final String[] HIERARCHY_COLUMNS = new String[] { OpenHDS.HierarchyItems.COLUMN_HIERARCHY_NAME,
             OpenHDS.HierarchyItems.COLUMN_HIERARCHY_EXTID };
     private static final String[] ROUNDS_COLUMNS = new String[] { OpenHDS.Rounds.COLUMN_ROUND_NUMBER,
             OpenHDS.Rounds.COLUMN_ROUND_STARTDATE };
@@ -60,15 +61,17 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private ValueListener listener;
 
     private enum Displayed {
-        HIERARCHY, SUBREGION, VILLAGE, ROUND, LOCATION, INDIVIDUAL;
+        HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, ROUND, LOCATION, INDIVIDUAL;
     }
 
     public interface ValueListener {
-        void onHierarchySelected(LocationHierarchy hierarchy);
+        void onHierarchy1Selected(LocationHierarchy hierarchy);
 
-        void onSubRegionSelected(LocationHierarchy subregion);
+        void onHierarchy2Selected(LocationHierarchy subregion);
 
-        void onVillageSelected(LocationHierarchy village);
+        void onHierarchy3Selected(LocationHierarchy hierarchy);
+        
+        void onHierarchy4Selected(LocationHierarchy village);
 
         void onRoundSelected(Round round);
 
@@ -87,7 +90,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
         }
 
-        adapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_2, null, REGION_COLUMNS,
+        adapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_2, null, HIERARCHY_COLUMNS,
                 VIEW_BINDINGS, 0);
         setListAdapter(adapter);
     }
@@ -97,17 +100,21 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         Cursor cursor = (Cursor) adapter.getItem(position);
 
         switch (listCurrentlyDisplayed) {
-        case HIERARCHY:
+        case HIERARCHY_1:
             LocationHierarchy region = Converter.convertToHierarchy(cursor);
-            listener.onHierarchySelected(region);
+            listener.onHierarchy1Selected(region);
             break;
-        case SUBREGION:
+        case HIERARCHY_2:
             LocationHierarchy subregion = Converter.convertToHierarchy(cursor);
-            listener.onSubRegionSelected(subregion);
+            listener.onHierarchy2Selected(subregion);
             break;
-        case VILLAGE:
+        case HIERARCHY_3:
+            LocationHierarchy hierarchy = Converter.convertToHierarchy(cursor);
+            listener.onHierarchy3Selected(hierarchy);
+            break;
+        case HIERARCHY_4:
             LocationHierarchy village = Converter.convertToHierarchy(cursor);
-            listener.onVillageSelected(village);
+            listener.onHierarchy4Selected(village);
             break;
         case ROUND:
             Round round = Converter.convertToRound(cursor);
@@ -127,13 +134,18 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     }
 
     public void loadLocationHierarchy() {
-        listCurrentlyDisplayed = Displayed.HIERARCHY;
+        listCurrentlyDisplayed = Displayed.HIERARCHY_1;
         getLoaderManager().restartLoader(HIERARCHY_LOADER, null, this);
     }
 
-    public void loadSubRegion(String parentExtId) {
-        listCurrentlyDisplayed = Displayed.SUBREGION;
+    public void loadHierarchy2(String parentExtId) {
+        listCurrentlyDisplayed = Displayed.HIERARCHY_2;
         loadHierarchyItemsFromParent(parentExtId);
+    }
+    
+    public void loadHierarchy3(String extId) {
+        listCurrentlyDisplayed = Displayed.HIERARCHY_3;
+        loadHierarchyItemsFromParent(extId);
     }
 
     private void loadHierarchyItemsFromParent(String parentExtId) {
@@ -148,18 +160,20 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
      * @param parentExtId
      *            the parent ext it to filter on, or null to list all villages
      */
-    public void loadVillage(String parentExtId) {
-        listCurrentlyDisplayed = Displayed.VILLAGE;
+    public void loadHierarchy4(String parentExtId) {
+        listCurrentlyDisplayed = Displayed.HIERARCHY_4;
         loadHierarchyItemsFromParent(parentExtId);
     }
 
     public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
         switch (arg0) {
         case HIERARCHY_LOADER:
+            adapter.changeCursorAndColumns(null, HIERARCHY_COLUMNS, VIEW_BINDINGS);
             return new CursorLoader(getActivity(), OpenHDS.HierarchyItems.CONTENT_ID_URI_BASE, null,
-                    OpenHDS.HierarchyItems.COLUMN_HIERARCHY_LEVEL + " = ?", new String[] { "Village" }, null);
+                    OpenHDS.HierarchyItems.COLUMN_HIERARCHY_LEVEL + " = ?",
+                    new String[] { START_HIERARCHY_LEVEL_NAME }, null);
         case REGION_LOADER:
-            adapter.changeCursorAndColumns(null, REGION_COLUMNS, VIEW_BINDINGS);
+            adapter.changeCursorAndColumns(null, HIERARCHY_COLUMNS, VIEW_BINDINGS);
             return buildRegionCursorLoader(arg1);
         case ROUND_LOADER:
             adapter.changeCursorAndColumns(null, ROUNDS_COLUMNS, VIEW_BINDINGS);
@@ -335,4 +349,5 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         bundle.putString("gender", gender);
         getLoaderManager().restartLoader(INDIVIDUAL_FILTER_LOADER, bundle, this);
     }
+
 }

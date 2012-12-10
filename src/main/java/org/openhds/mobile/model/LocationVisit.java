@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -32,9 +31,10 @@ public class LocationVisit implements Serializable {
     private static final long serialVersionUID = -36602612353821830L;
 
     private FieldWorker fieldWorker;
-    private LocationHierarchy region;
-    private LocationHierarchy subRegion;
-    private LocationHierarchy village;
+    private LocationHierarchy hierarchy1;
+    private LocationHierarchy hierarchy2;
+    private LocationHierarchy hierarchy3;
+    private LocationHierarchy hierarchy4;
     private Round round;
 
     private Location location;
@@ -45,9 +45,9 @@ public class LocationVisit implements Serializable {
     public LocationVisit completeVisit() {
         LocationVisit visit = new LocationVisit();
         visit.fieldWorker = fieldWorker;
-        visit.region = region;
-        visit.subRegion = subRegion;
-        visit.village = village;
+        visit.hierarchy1 = hierarchy1;
+        visit.hierarchy2 = hierarchy2;
+        visit.hierarchy4 = hierarchy4;
         visit.round = round;
 
         return visit;
@@ -61,16 +61,20 @@ public class LocationVisit implements Serializable {
         this.fieldWorker = fieldWorker;
     }
 
-    public LocationHierarchy getRegion() {
-        return region;
+    public LocationHierarchy getHierarchy1() {
+        return hierarchy1;
     }
 
-    public LocationHierarchy getSubRegion() {
-        return subRegion;
+    public LocationHierarchy getHierarchy2() {
+        return hierarchy2;
+    }
+    
+    public LocationHierarchy getHierarchy3() {
+        return hierarchy3;
     }
 
-    public LocationHierarchy getVillage() {
-        return village;
+    public LocationHierarchy getHierarchy4() {
+        return hierarchy4;
     }
 
     public Round getRound() {
@@ -85,41 +89,48 @@ public class LocationVisit implements Serializable {
         this.selectedIndividual = selectedIndividual;
     }
 
-    public void setRegion(LocationHierarchy region) {
-        this.region = region;
+    public void setHierarchy1(LocationHierarchy region) {
+        this.hierarchy1 = region;
         clearLevelsBelow(1);
     }
 
     public void clearLevelsBelow(int i) {
         switch (i) {
         case 0:
-            region = null;
+            hierarchy1 = null;
         case 1:
-            subRegion = null;
+            hierarchy2 = null;
         case 2:
-            village = null;
+            hierarchy3 = null;
         case 3:
-            round = null;
+            hierarchy4 = null;
         case 4:
-            location = null;
+            round = null;
         case 5:
+            location = null;
+        case 6:
             selectedIndividual = null;
         }
     }
 
-    public void setSubRegion(LocationHierarchy subRegion) {
-        this.subRegion = subRegion;
+    public void setHierarchy2(LocationHierarchy subRegion) {
+        this.hierarchy2 = subRegion;
         clearLevelsBelow(2);
     }
-
-    public void setVillage(LocationHierarchy village) {
-        this.village = village;
+    
+    public void setHierarchy3(LocationHierarchy hierarchy3) {
+        this.hierarchy3 = hierarchy3;
         clearLevelsBelow(3);
+    }
+
+    public void setHierarchy4(LocationHierarchy village) {
+        this.hierarchy4 = village;
+        clearLevelsBelow(4);
     }
 
     public void setRound(Round round) {
         this.round = round;
-        clearLevelsBelow(4);
+        clearLevelsBelow(5);
     }
 
     public Location getLocation() {
@@ -127,23 +138,27 @@ public class LocationVisit implements Serializable {
     }
 
     public int getLevelOfHierarchySelected() {
-        if (region == null) {
+        if (hierarchy1 == null) {
             return 0;
         }
 
-        if (subRegion == null) {
+        if (hierarchy2 == null) {
             return 1;
         }
-
-        if (village == null) {
+        
+        if (hierarchy3 == null) {
             return 2;
         }
 
-        if (round == null) {
+        if (hierarchy4 == null) {
             return 3;
         }
 
-        return 4;
+        if (round == null) {
+            return 4;
+        }
+
+        return 5;
     }
 
     public void setLocation(Location location) {
@@ -155,20 +170,20 @@ public class LocationVisit implements Serializable {
 
         location = new Location();
         location.setExtId(locationId);
-        location.setHierarchy(village.getExtId());
+        location.setHierarchy(hierarchy4.getExtId());
     }
 
     private String generateLocationId(ContentResolver resolver) {
         Cursor cursor = resolver.query(OpenHDS.Locations.CONTENT_ID_URI_BASE,
                 new String[] { OpenHDS.Locations.COLUMN_LOCATION_EXTID }, OpenHDS.Locations.COLUMN_LOCATION_EXTID
-                        + " LIKE ?", new String[] { village.getExtId() + "%" }, OpenHDS.Locations.COLUMN_LOCATION_EXTID
+                        + " LIKE ?", new String[] { hierarchy4.getExtId() + "%" }, OpenHDS.Locations.COLUMN_LOCATION_EXTID
                         + " DESC");
 
         String generatedId = null;
         if (cursor.moveToFirst()) {
             generatedId = generateLocationIdFrom(cursor.getString(0));
         } else {
-            generatedId = village.getExtId() + "01";
+            generatedId = hierarchy4.getExtId() + "01";
         }
 
         cursor.close();
@@ -179,9 +194,9 @@ public class LocationVisit implements Serializable {
         try {
             int increment = Integer.parseInt(lastGeneratedId.substring(3, 5));
             int nextIncrement = increment + 1;
-            return String.format(village.getExtId() + "%02d", nextIncrement);
+            return String.format(hierarchy4.getExtId() + "%02d", nextIncrement);
         } catch (NumberFormatException e) {
-            return village.getExtId() + "01";
+            return hierarchy4.getExtId() + "01";
         }
     }
 

@@ -12,7 +12,7 @@ public class FormFiller {
         addFieldWorker(locationVisit, form);
 
         form.setLocationId(locationVisit.getLocation().getExtId());
-        form.setHierarchyId(locationVisit.getVillage().getExtId());
+        form.setHierarchyId(locationVisit.getHierarchy4().getExtId());
 
         return form;
     }

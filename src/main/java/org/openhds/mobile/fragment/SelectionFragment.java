@@ -23,11 +23,13 @@ import android.widget.TextView;
 public class SelectionFragment extends Fragment implements OnClickListener {
 
     public static interface Listener {
-        void onRegion();
+        void onHierarchy1();
 
-        void onSubRegion();
+        void onHierarchy2();
 
-        void onVillage();
+        void onHierarchy3();
+
+        void onHierarchy4();
 
         void onLocation();
 
@@ -39,12 +41,13 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     private Listener listener;
     private LocationVisit locationVisit;
 
-    private Button regionBtn, subRegionBtn, villageBtn, locationBtn, roundBtn, individualBtn;
+    private Button hierarchy1Btn, hierarchy2Btn, hierarchy3Btn, hierarchy4Btn, locationBtn, roundBtn, individualBtn;
 
-    private TextView loginGreetingText, regionNameText, regionExtIdText, subRegionNameText, subRegionExtIdText,
-            villageNameText, villageExtIdText, roundNumberText, roundStartDateText, roundEndDateText, locationNameText,
-            locationExtIdText, locationLatitudeText, locationLongitudeText, individualFirstNameText,
-            individualLastNameText, individualExtIdText, individualDobText;
+    private TextView loginGreetingText, hierarchy1NameText, hierarchy1ExtIdText, hierarchy2NameText,
+            hierarchy2ExtIdText, hierarchy3NameText, hierarchy3ExtIdText, hierarchy4NameText, hierarchy4ExtIdText,
+            roundNumberText, roundStartDateText, roundEndDateText, locationNameText, locationExtIdText,
+            locationLatitudeText, locationLongitudeText, individualFirstNameText, individualLastNameText,
+            individualExtIdText, individualDobText;
 
     @Override
     public void onAttach(Activity activity) {
@@ -62,20 +65,25 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     private void bindViews(View view) {
         loginGreetingText = (TextView) view.findViewById(R.id.loginGreetingText);
 
-        regionBtn = (Button) view.findViewById(R.id.regionBtn);
-        regionBtn.setOnClickListener(this);
-        regionNameText = (TextView) view.findViewById(R.id.regionNameText);
-        regionExtIdText = (TextView) view.findViewById(R.id.regionExtIdText);
+        hierarchy1Btn = (Button) view.findViewById(R.id.hierarchy1Btn);
+        hierarchy1Btn.setOnClickListener(this);
+        hierarchy1NameText = (TextView) view.findViewById(R.id.hierarchy1Name);
+        hierarchy1ExtIdText = (TextView) view.findViewById(R.id.hierarchy1ExtId);
 
-        subRegionBtn = (Button) view.findViewById(R.id.subRegionBtn);
-        subRegionBtn.setOnClickListener(this);
-        subRegionNameText = (TextView) view.findViewById(R.id.subRegionNameText);
-        subRegionExtIdText = (TextView) view.findViewById(R.id.subRegionExtIdText);
+        hierarchy2Btn = (Button) view.findViewById(R.id.hierarchy2Btn);
+        hierarchy2Btn.setOnClickListener(this);
+        hierarchy2NameText = (TextView) view.findViewById(R.id.hierarchy2Name);
+        hierarchy2ExtIdText = (TextView) view.findViewById(R.id.hierarchy2ExtId);
 
-        villageBtn = (Button) view.findViewById(R.id.villageBtn);
-        villageBtn.setOnClickListener(this);
-        villageNameText = (TextView) view.findViewById(R.id.villageNameText);
-        villageExtIdText = (TextView) view.findViewById(R.id.villageExtIdText);
+        hierarchy3Btn = (Button) view.findViewById(R.id.hierarchy3Btn);
+        hierarchy3Btn.setOnClickListener(this);
+        hierarchy3NameText = (TextView) view.findViewById(R.id.hierarchy3Name);
+        hierarchy3ExtIdText = (TextView) view.findViewById(R.id.hierarchy3ExtId);
+
+        hierarchy4Btn = (Button) view.findViewById(R.id.hierarchy4Btn);
+        hierarchy4Btn.setOnClickListener(this);
+        hierarchy4NameText = (TextView) view.findViewById(R.id.hierarchy4Name);
+        hierarchy4ExtIdText = (TextView) view.findViewById(R.id.hierarchy4ExtId);
 
         locationBtn = (Button) view.findViewById(R.id.locationBtn);
         locationBtn.setOnClickListener(this);
@@ -98,34 +106,44 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         individualDobText = (TextView) view.findViewById(R.id.individualDobText);
     }
 
-    private void setRegion() {
-        LocationHierarchy region = locationVisit.getRegion();
+    private void setHierarchy1() {
+        LocationHierarchy region = locationVisit.getHierarchy1();
         if (region == null) {
             region = LocationHierarchy.emptyHierarchy();
         }
 
-        regionNameText.setText(region.getName());
-        regionExtIdText.setText(region.getExtId());
+        hierarchy1NameText.setText(region.getName());
+        hierarchy1ExtIdText.setText(region.getExtId());
     }
 
-    private void setSubRegion() {
-        LocationHierarchy subRegion = locationVisit.getSubRegion();
+    private void setHierarchy2() {
+        LocationHierarchy subRegion = locationVisit.getHierarchy2();
         if (subRegion == null) {
             subRegion = LocationHierarchy.emptyHierarchy();
         }
 
-        subRegionNameText.setText(subRegion.getName());
-        subRegionExtIdText.setText(subRegion.getExtId());
+        hierarchy2NameText.setText(subRegion.getName());
+        hierarchy2ExtIdText.setText(subRegion.getExtId());
     }
 
-    private void setVillage() {
-        LocationHierarchy village = locationVisit.getVillage();
+    private void setHierarchy3() {
+        LocationHierarchy hierarchy3 = locationVisit.getHierarchy3();
+        if (hierarchy3 == null) {
+            hierarchy3 = LocationHierarchy.emptyHierarchy();
+        }
+
+        hierarchy3NameText.setText(hierarchy3.getName());
+        hierarchy3ExtIdText.setText(hierarchy3.getExtId());
+    }
+
+    private void setHierarchy4() {
+        LocationHierarchy village = locationVisit.getHierarchy4();
         if (village == null) {
             village = LocationHierarchy.emptyHierarchy();
         }
 
-        villageNameText.setText(village.getName());
-        villageExtIdText.setText(village.getExtId());
+        hierarchy4NameText.setText(village.getName());
+        hierarchy4ExtIdText.setText(village.getExtId());
     }
 
     private void setRound() {
@@ -141,14 +159,17 @@ public class SelectionFragment extends Fragment implements OnClickListener {
 
     public void onClick(View view) {
         switch (view.getId()) {
-        case R.id.regionBtn:
-            listener.onRegion();
+        case R.id.hierarchy1Btn:
+            listener.onHierarchy1();
             break;
-        case R.id.subRegionBtn:
-            listener.onSubRegion();
+        case R.id.hierarchy2Btn:
+            listener.onHierarchy2();
             break;
-        case R.id.villageBtn:
-            listener.onVillage();
+        case R.id.hierarchy3Btn:
+            listener.onHierarchy3();
+            break;
+        case R.id.hierarchy4Btn:
+            listener.onHierarchy4();
             break;
         case R.id.locationBtn:
             listener.onLocation();
@@ -169,9 +190,10 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     }
 
     public void registerTransitions(StateMachine stateMachine) {
-        registerRegionListener(stateMachine);
-        registerSubregionListener(stateMachine);
-        registerVillageListener(stateMachine);
+        registerHierarchy1Listener(stateMachine);
+        registerHierarchy2Listener(stateMachine);
+        registerHierarchy3Listener(stateMachine);
+        registerHierarchy4Listener(stateMachine);
         registerRoundListener(stateMachine);
         registerLocationListener(stateMachine);
         registerVisitListener(stateMachine);
@@ -186,9 +208,10 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             }
 
             public void onLeaveState() {
-                regionBtn.setEnabled(true);
-                subRegionBtn.setEnabled(true);
-                villageBtn.setEnabled(true);
+                hierarchy1Btn.setEnabled(true);
+                hierarchy2Btn.setEnabled(true);
+                hierarchy3Btn.setEnabled(true);
+                hierarchy4Btn.setEnabled(true);
                 roundBtn.setEnabled(true);
             }
         });
@@ -211,9 +234,10 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             }
 
             public void onLeaveState() {
-                regionBtn.setEnabled(false);
-                subRegionBtn.setEnabled(false);
-                villageBtn.setEnabled(false);
+                hierarchy1Btn.setEnabled(false);
+                hierarchy2Btn.setEnabled(false);
+                hierarchy3Btn.setEnabled(false);
+                hierarchy4Btn.setEnabled(false);
                 roundBtn.setEnabled(false);
                 locationBtn.setEnabled(false);
             }
@@ -236,7 +260,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     private void registerLocationListener(StateMachine stateMachine) {
         stateMachine.registerListener(State.SELECT_LOCATION, new StateListener() {
             public void onEnterState() {
-                resetToDefaultState(4, false);
+                resetToDefaultState(5, false);
                 locationBtn.setEnabled(true);
             }
 
@@ -249,7 +273,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     private void registerRoundListener(StateMachine stateMachine) {
         stateMachine.registerListener(State.SELECT_ROUND, new StateListener() {
             public void onEnterState() {
-                resetToDefaultState(3, false);
+                resetToDefaultState(4, false);
                 roundBtn.setEnabled(true);
 
             }
@@ -260,41 +284,54 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         });
     }
 
-    private void registerVillageListener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_VILLAGE, new StateListener() {
+    private void registerHierarchy3Listener(StateMachine stateMachine) {
+        stateMachine.registerListener(State.SELECT_HIERARCHY_3, new StateListener() {
             public void onEnterState() {
                 resetToDefaultState(2, false);
-                villageBtn.setEnabled(true);
+                hierarchy3Btn.setEnabled(true);
             }
 
             public void onLeaveState() {
-                setVillage();
+                setHierarchy3();
             }
         });
     }
 
-    private void registerSubregionListener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_SUBREGION, new StateListener() {
+    private void registerHierarchy4Listener(StateMachine stateMachine) {
+        stateMachine.registerListener(State.SELECT_HIERARCHY_4, new StateListener() {
+            public void onEnterState() {
+                resetToDefaultState(3, false);
+                hierarchy4Btn.setEnabled(true);
+            }
+
+            public void onLeaveState() {
+                setHierarchy4();
+            }
+        });
+    }
+
+    private void registerHierarchy2Listener(StateMachine stateMachine) {
+        stateMachine.registerListener(State.SELECT_HIERARCHY_2, new StateListener() {
             public void onEnterState() {
                 resetToDefaultState(1, false);
-                subRegionBtn.setEnabled(true);
+                hierarchy2Btn.setEnabled(true);
             }
 
             public void onLeaveState() {
-                setSubRegion();
+                setHierarchy2();
             }
         });
     }
 
-    private void registerRegionListener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_REGION, new StateListener() {
+    private void registerHierarchy1Listener(StateMachine stateMachine) {
+        stateMachine.registerListener(State.SELECT_HIERARCHY_1, new StateListener() {
             public void onEnterState() {
                 resetToDefaultState(0, false);
-                regionBtn.setEnabled(true);
+                hierarchy1Btn.setEnabled(true);
             }
 
             public void onLeaveState() {
-                setRegion();
+                setHierarchy1();
             }
         });
     }
@@ -302,21 +339,24 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     private void resetToDefaultState(int level, boolean enabled) {
         switch (level) {
         case 0:
-            regionBtn.setEnabled(enabled);
-            setRegion();
+            hierarchy1Btn.setEnabled(enabled);
+            setHierarchy1();
         case 1:
-            subRegionBtn.setEnabled(enabled);
-            setSubRegion();
+            hierarchy2Btn.setEnabled(enabled);
+            setHierarchy2();
         case 2:
-            villageBtn.setEnabled(enabled);
-            setVillage();
+            hierarchy3Btn.setEnabled(enabled);
+            setHierarchy3();
         case 3:
+            hierarchy4Btn.setEnabled(enabled);
+            setHierarchy4();
+        case 4:
             roundBtn.setEnabled(enabled);
             setRound();
-        case 4:
+        case 5:
             locationBtn.setEnabled(enabled);
             setLocation();
-        case 5:
+        case 6:
             individualBtn.setEnabled(enabled);
             setIndividual();
         }

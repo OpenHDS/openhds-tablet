@@ -442,7 +442,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
      * This method is responsible for restoring the screen state.
      */
     private void restoreState(Bundle savedState) {
-        State state = State.SELECT_REGION;
+        State state = State.SELECT_HIERARCHY_1;
         if (savedState != null) {
             locationVisit = (LocationVisit) savedState.getSerializable("locationvisit");
 
@@ -487,9 +487,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
      */
     private void startFilterActivity(int requestCode) {
         Intent i = new Intent(this, FilterActivity.class);
-        i.putExtra("region", locationVisit.getRegion());
-        i.putExtra("subRegion", locationVisit.getSubRegion());
-        i.putExtra("village", locationVisit.getVillage());
+        i.putExtra("hierarchy1", locationVisit.getHierarchy1());
+        i.putExtra("hierarchy2", locationVisit.getHierarchy2());
+        i.putExtra("hierarchy3", locationVisit.getHierarchy3());
+        i.putExtra("hierarchy4", locationVisit.getHierarchy4());
 
         Location loc = locationVisit.getLocation();
         if (loc == null) {
@@ -508,20 +509,24 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         startActivityForResult(i, requestCode);
     }
 
-    private void loadRegionValueData() {
+    private void loadHierarchy1ValueData() {
         vf.loadLocationHierarchy();
     }
 
-    private void loadSubRegionValueData() {
-        vf.loadSubRegion(locationVisit.getRegion().getExtId());
+    private void loadHierarchy2ValueData() {
+        vf.loadHierarchy2(locationVisit.getHierarchy1().getExtId());
+    }
+    
+    private void loadHierarchy3ValueData() {
+        vf.loadHierarchy3(locationVisit.getHierarchy2().getExtId());
     }
 
-    private void loadVillageValueData() {
-        vf.loadVillage(locationVisit.getSubRegion().getExtId());
+    private void loadHierarchy4ValueData() {
+        vf.loadHierarchy4(locationVisit.getHierarchy3().getExtId());
     }
 
     private void loadLocationValueData() {
-        vf.loadLocations(locationVisit.getVillage().getExtId());
+        vf.loadLocations(locationVisit.getHierarchy4().getExtId());
     }
 
     private void loadRoundValueData() {
@@ -944,44 +949,50 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }).execute();
     }
 
-    public void onRegion() {
+    public void onHierarchy1() {
         locationVisit.clearLevelsBelow(0);
-        stateMachine.transitionTo(State.SELECT_REGION);
-        loadRegionValueData();
+        stateMachine.transitionTo(State.SELECT_HIERARCHY_1);
+        loadHierarchy1ValueData();
     }
 
-    public void onSubRegion() {
+    public void onHierarchy2() {
         locationVisit.clearLevelsBelow(1);
-        stateMachine.transitionTo(State.SELECT_SUBREGION);
-        loadSubRegionValueData();
+        stateMachine.transitionTo(State.SELECT_HIERARCHY_2);
+        loadHierarchy2ValueData();
+    }
+    
+    public void onHierarchy3() {
+        locationVisit.clearLevelsBelow(2);
+        stateMachine.transitionTo(State.SELECT_HIERARCHY_3);
+        loadHierarchy3ValueData();
     }
 
-    public void onVillage() {
-        locationVisit.clearLevelsBelow(2);
-        stateMachine.transitionTo(State.SELECT_VILLAGE);
-        loadVillageValueData();
+    public void onHierarchy4() {
+        locationVisit.clearLevelsBelow(3);
+        stateMachine.transitionTo(State.SELECT_HIERARCHY_4);
+        loadHierarchy4ValueData();
     }
 
     public void onLocation() {
-        locationVisit.clearLevelsBelow(4);
+        locationVisit.clearLevelsBelow(5);
         stateMachine.transitionTo(State.SELECT_LOCATION);
         loadLocationValueData();
     }
 
     public void onRound() {
-        locationVisit.clearLevelsBelow(3);
+        locationVisit.clearLevelsBelow(4);
         stateMachine.transitionTo(State.SELECT_ROUND);
         loadRoundValueData();
     }
 
     public void onIndividual() {
-        locationVisit.clearLevelsBelow(5);
+        locationVisit.clearLevelsBelow(6);
         loadIndividualValueData();
     }
 
-    public void onHierarchySelected(LocationHierarchy hierarchy) {
-        locationVisit.setRegion(hierarchy);
-        stateMachine.transitionTo(State.SELECT_SUBREGION);
+    public void onHierarchy1Selected(LocationHierarchy hierarchy) {
+        locationVisit.setHierarchy1(hierarchy);
+        stateMachine.transitionTo(State.SELECT_HIERARCHY_2);
     }
 
     private void registerTransitions() {
@@ -989,13 +1000,19 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         ef.registerTransitions(stateMachine);
     }
 
-    public void onSubRegionSelected(LocationHierarchy subregion) {
-        locationVisit.setSubRegion(subregion);
-        stateMachine.transitionTo(State.SELECT_VILLAGE);
+    public void onHierarchy2Selected(LocationHierarchy subregion) {
+        locationVisit.setHierarchy2(subregion);
+        stateMachine.transitionTo(State.SELECT_HIERARCHY_3);
+    }
+    
+
+    public void onHierarchy3Selected(LocationHierarchy hierarchy) {
+        locationVisit.setHierarchy3(hierarchy);
+        stateMachine.transitionTo(State.SELECT_HIERARCHY_4);
     }
 
-    public void onVillageSelected(LocationHierarchy village) {
-        locationVisit.setVillage(village);
+    public void onHierarchy4Selected(LocationHierarchy village) {
+        locationVisit.setHierarchy4(village);
         stateMachine.transitionTo(State.SELECT_ROUND);
     }
 
@@ -1067,4 +1084,5 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         householdDialog.dismiss();
         householdDialog = null;
     }
+
 }

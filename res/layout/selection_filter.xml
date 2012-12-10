@@ -18,12 +18,12 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/regionLbl"
+            android:id="@+id/hierarchy1Lbl"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="@string/region_lbl"
+            android:text="@string/hierarchy1_lbl"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <LinearLayout
@@ -31,17 +31,17 @@
             android:layout_height="wrap_content" >
 
             <EditText
-                android:id="@+id/regionTxt"
+                android:id="@+id/hierarchy1Txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/region_hint_lbl" />
+                android:hint="@string/hierarchy1_hint_lbl" />
 
             <Button
-                android:id="@+id/region_see_list"
+                android:id="@+id/hierarchy1_see_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="50dp"
@@ -50,12 +50,12 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/subRegionLbl"
+            android:id="@+id/hierarchy2Lbl"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="@string/subregion_lbl"
+            android:text="@string/hierarchy2_lbl"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <LinearLayout
@@ -63,17 +63,48 @@
             android:layout_height="wrap_content" >
 
             <EditText
-                android:id="@+id/subRegionTxt"
+                android:id="@+id/hierarchy2Txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/subregion_hint_lbl" />
+                android:hint="@string/hierarchy2_hint_lbl" />
 
             <Button
-                android:id="@+id/subregion_see_list"
+                android:id="@+id/hierarchy2_see_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:text="@string/see_list" />
+        </LinearLayout>
+        
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/hierarchy3_lbl"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/hierarchy3Txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/hierarchy3_hint_lbl" />
+
+            <Button
+                android:id="@+id/hierarchy3_see_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="50dp"
@@ -82,12 +113,12 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/villageLbl"
+            android:id="@+id/hierarchy4Lbl"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="@string/village_lbl"
+            android:text="@string/hierarchy4_lbl"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <LinearLayout
@@ -95,17 +126,17 @@
             android:layout_height="wrap_content" >
 
             <EditText
-                android:id="@+id/villageTxt"
+                android:id="@+id/hierarchy4Txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/village_hint_lbl" />
+                android:hint="@string/hierarchy4_hint_lbl" />
 
             <Button
-                android:id="@+id/village_see_list"
+                android:id="@+id/hierarchy4_see_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="50dp"

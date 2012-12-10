@@ -35,15 +35,18 @@ public class FilterActivity extends Activity implements ValueListener, Selection
     }
 
     private void processExtras() {
-        LocationHierarchy region = (LocationHierarchy) getIntent().getExtras().getSerializable("region");
-        LocationHierarchy subRegion = (LocationHierarchy) getIntent().getExtras().getSerializable("subRegion");
-        LocationHierarchy village = (LocationHierarchy) getIntent().getExtras().getSerializable("village");
+        LocationHierarchy hierarchy1 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy1");
+        LocationHierarchy hierarchy2 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy2");
+        LocationHierarchy hierarchy3 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy3");
+        LocationHierarchy hierarchy4 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy4");
+        
         Location location = (Location) getIntent().getExtras().getSerializable("location");
         requireGender = getIntent().getExtras().getString("requireGender");
 
-        selectionFilterFragment.setRegion(region.getExtId());
-        selectionFilterFragment.setSubregion(subRegion.getExtId());
-        selectionFilterFragment.setVillage(village.getExtId());
+        selectionFilterFragment.setHierarchy1(hierarchy1.getExtId());
+        selectionFilterFragment.setHierarchy2(hierarchy2.getExtId());
+        selectionFilterFragment.setHierarchy3(hierarchy3.getExtId());
+        selectionFilterFragment.setHierarchy4(hierarchy4.getExtId());
         selectionFilterFragment.setLocation(location.getExtId());
     }
 
@@ -59,16 +62,20 @@ public class FilterActivity extends Activity implements ValueListener, Selection
         finish();
     }
 
-    public void onHierarchySelected(LocationHierarchy hierarchy) {
-        selectionFilterFragment.updateRegionText(hierarchy.getExtId());
+    public void onHierarchy1Selected(LocationHierarchy hierarchy) {
+        selectionFilterFragment.updateHierarchy1Text(hierarchy.getExtId());
     }
 
-    public void onSubRegionSelected(LocationHierarchy subregion) {
-        selectionFilterFragment.updateSubregionText(subregion.getExtId());
+    public void onHierarchy2Selected(LocationHierarchy hierarchy) {
+        selectionFilterFragment.updateHierarchy2Text(hierarchy.getExtId());
+    }
+    
+    public void onHierarchy3Selected(LocationHierarchy hierarchy) {
+        selectionFilterFragment.updateHierarchy3Text(hierarchy.getExtId());
     }
 
-    public void onVillageSelected(LocationHierarchy village) {
-        selectionFilterFragment.updateVillageText(village.getExtId());
+    public void onHierarchy4Selected(LocationHierarchy hierarchy) {
+        selectionFilterFragment.updateHierarchy4Text(hierarchy.getExtId());
     }
 
     public void onRoundSelected(Round round) {
@@ -79,16 +86,20 @@ public class FilterActivity extends Activity implements ValueListener, Selection
         selectionFilterFragment.updateLocationText(location.getExtId());
     }
 
-    public void onSeeListRegion() {
+    public void onSeeListHierarchy1() {
         valueFragment.loadLocationHierarchy();
     }
 
-    public void onSeeListSubRegion(String region) {
-        valueFragment.loadSubRegion(region);
+    public void onSeeListHierarchy2(String region) {
+        valueFragment.loadHierarchy2(region);
+    }
+    
+    public void onSeeListHierarchy3(String hierarchyExtId) {
+        valueFragment.loadHierarchy3(hierarchyExtId);
     }
 
-    public void onSeeListVillage(String subregion) {
-        valueFragment.loadVillage(subregion);
+    public void onSeeListHierarchy4(String subregion) {
+        valueFragment.loadHierarchy4(subregion);
     }
 
     public void onSeeListLocation(String village) {
@@ -98,4 +109,5 @@ public class FilterActivity extends Activity implements ValueListener, Selection
     public void onSearch(String location, String firstName, String lastName, String gender) {
         valueFragment.loadFilteredIndividuals(location, firstName, lastName, gender);
     }
+
 }

@@ -11,17 +11,17 @@ public class StateMachineTest extends TestCase {
 
     public void testShouldMoveToNextState() {
         StateMachine machine = new StateMachine();
-        machine.transitionTo(State.SELECT_SUBREGION);
+        machine.transitionTo(State.SELECT_HIERARCHY_2);
 
-        assertEquals(State.SELECT_SUBREGION, machine.getState());
+        assertEquals(State.SELECT_HIERARCHY_2, machine.getState());
     }
 
     public void testShouldFireListenerOnEnterState() {
         StateMachine sm = new StateMachine();
         EnterStateListener listener = new EnterStateListener();
-        sm.registerListener(State.SELECT_SUBREGION, listener);
+        sm.registerListener(State.SELECT_HIERARCHY_2, listener);
 
-        sm.transitionTo(State.SELECT_SUBREGION);
+        sm.transitionTo(State.SELECT_HIERARCHY_2);
 
         assertTrue(listener.fired);
     }
@@ -41,9 +41,9 @@ public class StateMachineTest extends TestCase {
     public void testShouldFireListenerOnExitState() {
         StateMachine sm = new StateMachine();
         ExitStateListener listener = new ExitStateListener();
-        sm.registerListener(State.SELECT_REGION, listener);
+        sm.registerListener(State.SELECT_HIERARCHY_1, listener);
 
-        sm.transitionTo(State.SELECT_SUBREGION);
+        sm.transitionTo(State.SELECT_HIERARCHY_2);
 
         assertTrue(listener.fired);
     }
@@ -68,9 +68,9 @@ public class StateMachineTest extends TestCase {
         for (int i = 0; i < 7; i++)
             listeners.add(new OrderedStateListener());
 
-        sm.registerListener(State.SELECT_REGION, listeners.get(0));
-        sm.registerListener(State.SELECT_SUBREGION, listeners.get(1));
-        sm.registerListener(State.SELECT_VILLAGE, listeners.get(2));
+        sm.registerListener(State.SELECT_HIERARCHY_1, listeners.get(0));
+        sm.registerListener(State.SELECT_HIERARCHY_2, listeners.get(1));
+        sm.registerListener(State.SELECT_HIERARCHY_4, listeners.get(2));
         sm.registerListener(State.SELECT_ROUND, listeners.get(3));
         sm.registerListener(State.SELECT_LOCATION, listeners.get(4));
         sm.registerListener(State.CREATE_VISIT, listeners.get(5));
@@ -105,15 +105,15 @@ public class StateMachineTest extends TestCase {
         for (int i = 0; i < 7; i++)
             listeners.add(new OrderedStateListener());
 
-        sm.registerListener(State.SELECT_REGION, listeners.get(0));
-        sm.registerListener(State.SELECT_SUBREGION, listeners.get(1));
-        sm.registerListener(State.SELECT_VILLAGE, listeners.get(2));
+        sm.registerListener(State.SELECT_HIERARCHY_1, listeners.get(0));
+        sm.registerListener(State.SELECT_HIERARCHY_2, listeners.get(1));
+        sm.registerListener(State.SELECT_HIERARCHY_4, listeners.get(2));
         sm.registerListener(State.SELECT_ROUND, listeners.get(3));
         sm.registerListener(State.SELECT_LOCATION, listeners.get(4));
         sm.registerListener(State.CREATE_VISIT, listeners.get(5));
         sm.registerListener(State.SELECT_INDIVIDUAL, listeners.get(6));
 
-        sm.transitionInSequence(State.SELECT_REGION);
+        sm.transitionInSequence(State.SELECT_HIERARCHY_1);
 
         assertEquals(0, listeners.get(0).calledOrder);
 

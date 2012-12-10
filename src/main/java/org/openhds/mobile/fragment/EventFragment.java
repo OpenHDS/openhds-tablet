@@ -274,7 +274,7 @@ public class EventFragment extends Fragment implements OnClickListener {
     }
 
     private void registerRegionListener(StateMachine machine) {
-        machine.registerListener(State.SELECT_REGION, new StateListener() {
+        machine.registerListener(State.SELECT_HIERARCHY_1, new StateListener() {
             public void onEnterState() {
                 findLocationGeoPointBtn.setEnabled(true);
             }
