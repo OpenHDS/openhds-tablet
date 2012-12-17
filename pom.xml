@@ -22,7 +22,9 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
-            <scope>test</scope>
+            <!-- This should be test scoped, but is on hold pending: -->
+            <!-- https://github.com/rgladwell/m2e-android/issues/67 -->
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>android</groupId>
