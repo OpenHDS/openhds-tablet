@@ -3,6 +3,12 @@ package org.openhds.mobile.provider;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
+
+import net.sqlcipher.SQLException;
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteOpenHelper;
+import net.sqlcipher.database.SQLiteQueryBuilder;
 
 import org.openhds.mobile.OpenHDS;
 
@@ -10,12 +16,9 @@ import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.UriMatcher;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
@@ -66,6 +69,8 @@ public class OpenHDSProvider extends ContentProvider {
 
     private static final UriMatcher sUriMatcher;
     private DatabaseHelper mOpenHelper;
+
+    private String password;
 
     static {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -296,6 +301,12 @@ public class OpenHDSProvider extends ContentProvider {
         // something tries to access it, and it's only created if it doesn't
         // already exist.
         mOpenHelper = new DatabaseHelper(getContext());
+        SQLiteDatabase.loadLibs(getContext());
+        SharedPreferences sp = getContext().getSharedPreferences("openhds-provider", Context.MODE_PRIVATE);
+        password = sp.getString("database-password", "");
+        if (password.isEmpty()) {
+            password = UUID.randomUUID().toString();
+        }
 
         // Assumes that any failures will be reported by a thrown exception.
         return true;
@@ -304,12 +315,13 @@ public class OpenHDSProvider extends ContentProvider {
     @Override
     public int bulkInsert(Uri uri, ContentValues[] values) {
         int inserted = -1;
-        mOpenHelper.getWritableDatabase().beginTransaction();
+        SQLiteDatabase db = mOpenHelper.getWritableDatabase(password);
+        db.beginTransaction();
         try {
             inserted = super.bulkInsert(uri, values);
-            mOpenHelper.getWritableDatabase().setTransactionSuccessful();
+            db.setTransactionSuccessful();
         } finally {
-            mOpenHelper.getWritableDatabase().endTransaction();
+            db.endTransaction();
         }
 
         return inserted;
@@ -441,7 +453,7 @@ public class OpenHDSProvider extends ContentProvider {
             orderBy = sortOrder;
         }
 
-        SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = mOpenHelper.getReadableDatabase(password);
 
         Cursor c = qb.query(db, // The database to query
                 projection, // The columns to return from the query
@@ -457,7 +469,7 @@ public class OpenHDSProvider extends ContentProvider {
     }
 
     private String[] addSocialGroupExtIds(SQLiteQueryBuilder qb, String string) {
-        SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = mOpenHelper.getReadableDatabase(password);
         // get all individuals at location
         Cursor c = db.query(OpenHDS.Individuals.TABLE_NAME,
                 new String[] { OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID },
@@ -592,7 +604,7 @@ public class OpenHDSProvider extends ContentProvider {
             values = new ContentValues();
         }
 
-        SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        SQLiteDatabase db = mOpenHelper.getWritableDatabase(password);
 
         long rowId = db.insert(table, null, values);
 
@@ -607,7 +619,7 @@ public class OpenHDSProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String where, String[] whereArgs) {
-        SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        SQLiteDatabase db = mOpenHelper.getWritableDatabase(password);
         String finalWhere;
 
         int count;
@@ -697,7 +709,7 @@ public class OpenHDSProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String where, String[] whereArgs) {
-        SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        SQLiteDatabase db = mOpenHelper.getWritableDatabase(password);
         int count;
         String finalWhere;
 
