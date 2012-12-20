@@ -17,6 +17,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
@@ -31,6 +32,9 @@ import android.util.Log;
 public class OpenHDSProvider extends ContentProvider {
     private static final String TAG = "OpenHDSProvider";
 
+    private static final String DATABASE_PASSWORD_KEY = "database-password";
+    private static final String DATABASE_SHARED_PREF = "openhds-provider";
+    
     private static final String DATABASE_NAME = "openhds.db";
     private static final int DATABASE_VERSION = 12;
 
@@ -302,10 +306,13 @@ public class OpenHDSProvider extends ContentProvider {
         // already exist.
         mOpenHelper = new DatabaseHelper(getContext());
         SQLiteDatabase.loadLibs(getContext());
-        SharedPreferences sp = getContext().getSharedPreferences("openhds-provider", Context.MODE_PRIVATE);
-        password = sp.getString("database-password", "");
+        SharedPreferences sp = getContext().getSharedPreferences(DATABASE_SHARED_PREF, Context.MODE_PRIVATE);
+        password = sp.getString(DATABASE_PASSWORD_KEY, "");
         if (password.isEmpty()) {
             password = UUID.randomUUID().toString();
+            Editor editor = sp.edit();
+            editor.putString(DATABASE_PASSWORD_KEY, password);
+            editor.commit();
         }
 
         // Assumes that any failures will be reported by a thrown exception.
