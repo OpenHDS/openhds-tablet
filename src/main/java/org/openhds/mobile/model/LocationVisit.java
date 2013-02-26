@@ -47,6 +47,7 @@ public class LocationVisit implements Serializable {
         visit.fieldWorker = fieldWorker;
         visit.hierarchy1 = hierarchy1;
         visit.hierarchy2 = hierarchy2;
+        visit.hierarchy3 = hierarchy3;
         visit.hierarchy4 = hierarchy4;
         visit.round = round;
 

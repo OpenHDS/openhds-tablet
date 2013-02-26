@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="30dp"
             android:enabled="false"
             android:text="Find Location with GeoPoint" />
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:enabled="false"
             android:text="Household" />
 
@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:enabled="false"
             android:text="Finish Visit" />
     </LinearLayout>

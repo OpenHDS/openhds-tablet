@@ -11,8 +11,8 @@
     <string name="configuration">Configuration</string>
     <string name="configureDatabase">Configure Database</string>
     <string name="databaseSync">Sync with OpenHDS Database</string>
-    <string name="default_server_url">http://openhds.rcg.usm.maine.edu/mobile-interop</string>
-    <string name="default_openhdsserver">http://openhds.rcg.usm.maine.edu/openhds</string>
+    <string name="default_server_url">http://41.59.7.160/openhdsIHI/mobile-interop</string>
+    <string name="default_openhdsserver">http://41.59.7.160/openhdsIHI/openhdsIHI</string>
     <string name="delete_form_btn">Delete Form</string>
     <string name="download_form_button">Download Forms</string>
     <string name="failure_reasons_txt">Failure messages:</string>
@@ -47,12 +47,12 @@
     <string name="username">OpenHDS Username</string>
     <string name="view_forms_btn">View My Forms</string>
 	<string name="see_list">See List</string>
-    <string name="hierarchy1_lbl">District:</string>
-    <string name="hierarchy1_hint_lbl">District External Id</string>
-    <string name="hierarchy2_lbl">Village:</string>
-    <string name="hierarchy2_hint_lbl">Village External Id</string>
-    <string name="hierarchy4_lbl">Parent Location:</string>
-    <string name="hierarchy4_hint_lbl">Parent Location External Id</string>
+    <string name="hierarchy2_lbl">District:</string>
+    <string name="hierarchy2_hint_lbl">District External Id</string>
+    <string name="hierarchy3_lbl">Village:</string>
+    <string name="hierarchy3_hint_lbl">Village External Id</string>
+    <string name="hierarchy1_lbl">Region:</string>
+    <string name="hierarchy1_hint_lbl">Region External Id</string>
     <string name="location_hint_lbl">Location External Id</string>
     <string name="firstname_lbl">First Name:</string>
     <string name="firstname_hint_lbl">First Name</string>
@@ -64,6 +64,6 @@
     <string name="clear_lbl">Clear</string>
     <string name="search_lbl">Search</string>
     <string name="search_individual_lbl">Search for an Individual</string>
-    <string name="hierarchy3_lbl">Subvillage:</string>
-    <string name="hierarchy3_hint_lbl">Subvillage External Id</string>
+    <string name="hierarchy4_lbl">Subvillage:</string>
+    <string name="hierarchy4_hint_lbl">Subvillage External Id</string>
 </resources>

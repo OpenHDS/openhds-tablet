@@ -120,7 +120,7 @@ public class Individual implements Serializable {
     public static Individual emptyIndividual() {
         if (individual == null) {
             individual = new Individual();
-            individual.setDob("");
+          //  individual.setDob("1900-01-01");
             individual.setExtId("");
             individual.setFirstName("");
             individual.setLastName("");

@@ -31,7 +31,7 @@ import android.widget.SimpleCursorAdapter;
  */
 public class ValueFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
-    private static final String START_HIERARCHY_LEVEL_NAME = "Ward";
+    private static final String START_HIERARCHY_LEVEL_NAME = "Region";
     // loader identifiers
     private static final int HIERARCHY_LOADER = 0;
     private static final int REGION_LOADER = 1;

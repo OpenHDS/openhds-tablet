@@ -12,17 +12,63 @@
 	        android:id="@+id/loginGreetingText"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="20dp"
+	        android:layout_marginLeft="10dp"
 	        android:paddingTop="10dp"
 	        android:paddingBottom="10dp"
 	        android:textAppearance="?android:attr/textAppearanceSmall"  />
-	    	
+	   
 	    <Button
 	        android:id="@+id/hierarchy1Btn"
-	        android:layout_width="150dp"
+	        android:layout_width="182dp"
 	        android:layout_height="wrap_content"
-	        android:layout_marginTop="10dp"
-	        android:layout_marginLeft="20dp"
+	        android:layout_marginLeft="10dp"
+	        android:text="Select Region" />
+	    
+	     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content">  
+	        <TableRow> 
+	            <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="5dp"
+			        android:text="Region:"
+			        android:textAppearance="?android:attr/textAppearanceSmall"  />
+	
+		    	<TextView
+			        android:id="@+id/hierarchy1Name"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="5dp"
+			        android:inputType="text"
+			        android:textAppearance="?android:attr/textAppearanceSmall"  />
+	        </TableRow>
+	        <TableRow>
+	            <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="5dp"
+			        android:text="ExtId:"
+			        android:textAppearance="?android:attr/textAppearanceSmall"  />
+		    
+		     	<TextView
+			        android:id="@+id/hierarchy1ExtId"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="5dp"
+			        android:paddingBottom="5dp"
+			        android:inputType="text"
+			        android:textAppearance="?android:attr/textAppearanceSmall"  />
+	        </TableRow> 
+		</TableLayout>
+	   
+	    	
+	    <Button
+	        android:id="@+id/hierarchy2Btn"
+	        android:layout_width="182dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="5dp"
+	        android:layout_marginLeft="10dp"
 	        android:text="Select District" /> 
 	    
 	    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,15 +78,15 @@
 	            <TextView
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:text="District:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	
 		    	<TextView
-			        android:id="@+id/hierarchy1Name"
+			        android:id="@+id/hierarchy2Name"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	        </TableRow>
@@ -48,26 +94,26 @@
 	            <TextView
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:text="ExtId:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 		    
 		     	<TextView
-			        android:id="@+id/hierarchy1ExtId"
+			        android:id="@+id/hierarchy2ExtId"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
-			        android:paddingBottom="10dp"
+			        android:layout_marginLeft="5dp"
+			        android:paddingBottom="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	        </TableRow> 
 		</TableLayout>
 		    
 	    <Button
-	        android:id="@+id/hierarchy2Btn"
-	        android:layout_width="150dp"
+	        android:id="@+id/hierarchy3Btn"
+	        android:layout_width="182dp"
 	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="20dp"
+	        android:layout_marginLeft="10dp"
 	        android:text="Select Village" />
 	    
 	     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -77,15 +123,15 @@
 	            <TextView
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="1dp"
 			        android:text="Village:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	
 		    	<TextView
-			        android:id="@+id/hierarchy2Name"
+			        android:id="@+id/hierarchy3Name"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="1dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	        </TableRow>
@@ -93,26 +139,26 @@
 	            <TextView
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="1dp"
 			        android:text="ExtId:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 		    
 		     	<TextView
-			        android:id="@+id/hierarchy2ExtId"
+			        android:id="@+id/hierarchy3ExtId"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
-			        android:paddingBottom="10dp"
+			        android:layout_marginLeft="1dp"
+			        android:paddingBottom="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	        </TableRow> 
 		</TableLayout>
 
         <Button
-            android:id="@+id/hierarchy3Btn"
-            android:layout_width="150dp"
+            android:id="@+id/hierarchy4Btn"
+            android:layout_width="182dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:text="Select Subvillage" />
         
          <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -122,15 +168,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="5dp"
                     android:text="Subvillage:"
                     android:textAppearance="?android:attr/textAppearanceSmall"  />
     
                 <TextView
-                    android:id="@+id/hierarchy3Name"
+                    android:id="@+id/hierarchy4Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="5dp"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall"  />
             </TableRow>
@@ -138,71 +184,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="5dp"
                     android:text="ExtId:"
                     android:textAppearance="?android:attr/textAppearanceSmall"  />
             
                 <TextView
-                    android:id="@+id/hierarchy3ExtId"
+                    android:id="@+id/hierarchy4ExtId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:paddingBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:paddingBottom="5dp"
                     android:inputType="text"
                     android:textAppearance="?android:attr/textAppearanceSmall"  />
             </TableRow> 
         </TableLayout>         
          	    
-	    <Button
-	        android:id="@+id/hierarchy4Btn"
-	        android:layout_width="150dp"
-	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="20dp"
-	        android:text="Select Parent Location" />
-	    
-	     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	            android:layout_width="fill_parent"
-	            android:layout_height="wrap_content">  
-	        <TableRow> 
-	            <TextView
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
-			        android:text="Parent Location:"
-			        android:textAppearance="?android:attr/textAppearanceSmall"  />
-	
-		    	<TextView
-			        android:id="@+id/hierarchy4Name"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
-			        android:inputType="text"
-			        android:textAppearance="?android:attr/textAppearanceSmall"  />
-	        </TableRow>
-	        <TableRow>
-	            <TextView
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
-			        android:text="ExtId:"
-			        android:textAppearance="?android:attr/textAppearanceSmall"  />
-		    
-		     	<TextView
-			        android:id="@+id/hierarchy4ExtId"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
-			        android:paddingBottom="10dp"
-			        android:inputType="text"
-			        android:textAppearance="?android:attr/textAppearanceSmall"  />
-	        </TableRow> 
-		</TableLayout>
+	   
 
       <Button
           android:id="@+id/roundBtn"
-          android:layout_width="150dp"
+          android:layout_width="182dp"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="20dp"
+          android:layout_marginLeft="10dp"
           android:text="Select Round" />
       
          <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -213,7 +216,7 @@
               android:id="@+id/roundNumber"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="20dp"
+              android:layout_marginLeft="5dp"
               android:text="Round Number:"
               android:textAppearance="?android:attr/textAppearanceSmall"  />
   
@@ -221,7 +224,7 @@
               android:id="@+id/roundNumberText"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="20dp"
+              android:layout_marginLeft="5dp"
               android:inputType="text"
               android:textAppearance="?android:attr/textAppearanceSmall"  />
           </TableRow>
@@ -230,7 +233,7 @@
               android:id="@+id/roundStartDate"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="20dp"
+              android:layout_marginLeft="5dp"
               android:text="Start Date:"
               android:textAppearance="?android:attr/textAppearanceSmall"  />
         
@@ -238,7 +241,7 @@
               android:id="@+id/roundStartDateText"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="20dp"
+              android:layout_marginLeft="10dp"
               android:inputType="text"
               android:textAppearance="?android:attr/textAppearanceSmall"  />
         </TableRow> 
@@ -247,7 +250,7 @@
               android:id="@+id/roundEndDate"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="20dp"
+              android:layout_marginLeft="5dp"
               android:text="End Date:"
               android:textAppearance="?android:attr/textAppearanceSmall"  />
         
@@ -255,8 +258,8 @@
               android:id="@+id/roundEndDateText"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="20dp"
-              android:paddingBottom="10dp"
+              android:layout_marginLeft="5dp"
+              android:paddingBottom="5dp"
               android:inputType="text"
               android:textAppearance="?android:attr/textAppearanceSmall"  />
         </TableRow> 
@@ -264,9 +267,9 @@
        	    	        
 	    <Button
 	        android:id="@+id/locationBtn"
-	        android:layout_width="150dp"
+	        android:layout_width="182dp"
 	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="20dp"
+	        android:layout_marginLeft="10dp"
 	        android:text="Select Location" />
 	     
 	      <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -277,7 +280,7 @@
 			        android:id="@+id/locationExtId"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:text="ExtId:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	
@@ -285,7 +288,7 @@
 			        android:id="@+id/locationExtIdText"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	       	</TableRow>
@@ -294,7 +297,7 @@
 			        android:id="@+id/locationName"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:text="Name:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 		    
@@ -302,7 +305,7 @@
 			        android:id="@+id/locationNameText"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
@@ -311,7 +314,7 @@
 			        android:id="@+id/locationLatitude"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:text="Latitude:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 		    
@@ -319,7 +322,7 @@
 			        android:id="@+id/locationLatitudeText"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
@@ -328,7 +331,7 @@
 			        android:id="@+id/locationLongitude"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:text="Longitude:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 		    
@@ -336,8 +339,8 @@
 			        android:id="@+id/locationLongitudeText"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
-			        android:paddingBottom="10dp"
+			        android:layout_marginLeft="5dp"
+			        android:paddingBottom="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
@@ -345,9 +348,9 @@
 		
 	    <Button
 	        android:id="@+id/individualBtn"
-	        android:layout_width="150dp"
+	        android:layout_width="182dp"
 	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="20dp"
+	        android:layout_marginLeft="10dp"
 	        android:text="Select Individual" />
 	    
 		      <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -358,7 +361,7 @@
 			        android:id="@+id/individualExtId"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:text="ExtId:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	
@@ -366,7 +369,7 @@
 			        android:id="@+id/individualExtIdText"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	       	</TableRow>
@@ -375,7 +378,7 @@
 			        android:id="@+id/individualFirstName"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:text="First Name:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 		    
@@ -383,7 +386,7 @@
 			        android:id="@+id/individualFirstNameText"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
@@ -392,7 +395,7 @@
 			        android:id="@+id/individualLastName"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:text="Last Name:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 		    
@@ -400,7 +403,7 @@
 			        android:id="@+id/individualLastNameText"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
@@ -409,7 +412,7 @@
 			        android:id="@+id/individualDob"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
+			        android:layout_marginLeft="5dp"
 			        android:text="Dob:"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 		    
@@ -417,8 +420,8 @@
 			        android:id="@+id/individualDobText"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="20dp"
-			        android:paddingBottom="10dp"
+			        android:layout_marginLeft="5dp"
+			        android:paddingBottom="5dp"
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 

@@ -5,14 +5,14 @@
 	xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<LinearLayout android:layout_width="match_parent"
-	    android:layout_height="match_parent"
+	    android:layout_height="fill_parent"
 	    android:orientation="vertical" >
 	    
 	     <Button
 	        android:id="@+id/findLocationGeoPointBtn"
 	        android:layout_width="150dp"
 	        android:layout_height="wrap_content"
-	        android:layout_marginTop="45dp"
+	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
 	        android:text="Find Location with GeoPoint"
@@ -42,7 +42,7 @@
 	        android:id="@+id/householdBtn"
 	        android:layout_width="150dp"
 	        android:layout_height="wrap_content"
-	        android:layout_marginTop="30dp"
+	        android:layout_marginTop="22dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
 	        android:text="Household"
@@ -122,7 +122,7 @@
 	        android:id="@+id/finishVisitBtn"
 	        android:layout_width="150dp"
 	        android:layout_height="wrap_content"
-	        android:layout_marginTop="30dp"
+	        android:layout_marginTop="22dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
 	        android:text="Finish Visit"

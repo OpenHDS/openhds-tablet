@@ -306,7 +306,7 @@ public class OpenHDSProvider extends ContentProvider {
         // already exist.
         mOpenHelper = new DatabaseHelper(getContext());
         SQLiteDatabase.loadLibs(getContext());
-        SharedPreferences sp = getContext().getSharedPreferences(DATABASE_SHARED_PREF, Context.MODE_PRIVATE);
+        SharedPreferences sp = getContext().getSharedPreferences(DATABASE_SHARED_PREF, Context.MODE_WORLD_READABLE);
         password = sp.getString(DATABASE_PASSWORD_KEY, "");
         if (password.isEmpty()) {
             password = UUID.randomUUID().toString();
