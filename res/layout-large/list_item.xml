@@ -18,11 +18,17 @@
             android:id="@android:id/text1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@android:id/text2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/text3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp" />

@@ -36,12 +36,14 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         void onRound();
 
         void onIndividual();
+        
+        void onFilterLocation();
     }
 
     private Listener listener;
     private LocationVisit locationVisit;
 
-    private Button hierarchy1Btn, hierarchy2Btn, hierarchy3Btn, hierarchy4Btn, locationBtn, roundBtn, individualBtn;
+    private Button hierarchy1Btn, hierarchy2Btn, hierarchy3Btn, hierarchy4Btn, locationBtn, roundBtn, individualBtn, searchlBtn;
 
     private TextView loginGreetingText, hierarchy1NameText, hierarchy1ExtIdText, hierarchy2NameText,
             hierarchy2ExtIdText, hierarchy3NameText, hierarchy3ExtIdText, hierarchy4NameText, hierarchy4ExtIdText,
@@ -87,6 +89,10 @@ public class SelectionFragment extends Fragment implements OnClickListener {
 
         locationBtn = (Button) view.findViewById(R.id.locationBtn);
         locationBtn.setOnClickListener(this);
+        
+        searchlBtn = (Button) view.findViewById(R.id.searchlBtn);
+        searchlBtn.setOnClickListener(this);
+        
         locationNameText = (TextView) view.findViewById(R.id.locationNameText);
         locationExtIdText = (TextView) view.findViewById(R.id.locationExtIdText);
         locationLatitudeText = (TextView) view.findViewById(R.id.locationLatitudeText);
@@ -180,6 +186,9 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         case R.id.individualBtn:
             listener.onIndividual();
             break;
+        case R.id.searchlBtn:
+            listener.onFilterLocation();
+            break;
         }
     }
 
@@ -213,6 +222,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
                 hierarchy3Btn.setEnabled(true);
                 hierarchy4Btn.setEnabled(true);
                 roundBtn.setEnabled(true);
+                searchlBtn.setVisibility(8);
             }
         });
     }
@@ -240,6 +250,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
                 hierarchy4Btn.setEnabled(false);
                 roundBtn.setEnabled(false);
                 locationBtn.setEnabled(false);
+                searchlBtn.setVisibility(8);
             }
         });
     }
@@ -262,10 +273,12 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             public void onEnterState() {
                 resetToDefaultState(5, false);
                 locationBtn.setEnabled(true);
+                searchlBtn.setVisibility(1);
             }
 
             public void onLeaveState() {
                 setLocation();
+                searchlBtn.setVisibility(8);
             }
         });
     }
@@ -340,6 +353,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         switch (level) {
         case 0:
             hierarchy1Btn.setEnabled(enabled);
+            searchlBtn.setVisibility(8);
             setHierarchy1();
         case 1:
             hierarchy2Btn.setEnabled(enabled);
@@ -355,9 +369,11 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             setRound();
         case 5:
             locationBtn.setEnabled(enabled);
+            searchlBtn.setVisibility(1);
             setLocation();
         case 6:
             individualBtn.setEnabled(enabled);
+            searchlBtn.setVisibility(8);
             setIndividual();
         }
     }

@@ -32,6 +32,7 @@
         <activity android:name=".activity.ShowMapActivity" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar" />
         <activity android:name=".activity.SyncDatabaseActivity" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar" />
         <activity android:name=".activity.FilterActivity" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar" />
+       <activity android:name=".activity.FilterLocationActivity" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar" />
         <activity android:name=".activity.FormListActivity" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar" />
         <activity android:name=".activity.FormViewActivity" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar" />
         <activity android:name=".activity.ServerPreferencesActivity" android:label="@string/app_name" />        

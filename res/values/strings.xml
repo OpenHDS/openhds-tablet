@@ -63,6 +63,7 @@
     <string name="female_lbl">Female</string>
     <string name="clear_lbl">Clear</string>
     <string name="search_lbl">Search</string>
+    <string name="search_loc_lbl">Search Location</string>
     <string name="search_individual_lbl">Search for an Individual</string>
     <string name="hierarchy4_lbl">Subvillage:</string>
     <string name="hierarchy4_hint_lbl">Subvillage External Id</string>

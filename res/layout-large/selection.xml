@@ -431,7 +431,6 @@
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
 		</TableLayout>
-			 
-	    
+		
 	</LinearLayout>
 </ScrollView>

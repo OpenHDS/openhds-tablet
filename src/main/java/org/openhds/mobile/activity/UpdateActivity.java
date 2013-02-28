@@ -73,7 +73,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private static final int SOCIAL_GROUP_AT_LOCATION = 0;
     private static final int SOCIAL_GROUP_FOR_INDIVIDUAL = 10;
     private static final int SOCIAL_GROUP_FOR_EXT_INMIGRATION = 20;
-
+    
     // activity request codes for onActivityResult
     private static final int SELECTED_XFORM = 1;
     private static final int CREATE_LOCATION = 10;
@@ -84,7 +84,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private static final int LOCATION_GEOPOINT = 50;
     protected static final int FILTER_INMIGRATION_MOTHER = 60;
     protected static final int FILTER_INMIGRATION_FATHER = 70;
-
     // the uri of the last viewed xform
     private Uri contentUri;
 
@@ -133,6 +132,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mainmenu, menu);
+        super.onCreateOptionsMenu(menu);
+//        menu.add(0, MENU_PREFERENCES, 0, getString(R.string.search_loc_lbl)).setIcon(
+//                android.R.drawable.ic_menu_preferences);
         return true;
     }
 
@@ -168,7 +170,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             handleFilterRelationshipResult(resultCode, data);
             break;
         case FILTER_LOCATION:
-            handleFilterLocationResult(resultCode, data);
+        	Location location1 = (Location) data.getExtras().getSerializable("location");
+        	locationVisit.setLocation(location1);
+            stateMachine.transitionTo(State.CREATE_VISIT);
             break;
         case FILTER_INMIGRATION:
             handleFilterInMigrationResult(resultCode, data);
@@ -297,12 +301,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
     }
 
-    private void handleFilterLocationResult(int requestCode, Intent data) {
-        if (RESULT_OK != requestCode) {
-            return;
-        }
-    }
-
+    
     private void handleFilterRelationshipResult(int resultCode, Intent data) {
         if (resultCode != RESULT_OK) {
             return;
@@ -508,6 +507,31 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         startActivityForResult(i, requestCode);
     }
+    
+    
+    /**
+     * Method used for starting the activity for filtering for Locations
+     */
+    private void startFilterLocActivity(int requestCode) {
+        Intent i = new Intent(this, FilterLocationActivity.class);
+        i.putExtra("hierarchy1", locationVisit.getHierarchy1());
+        i.putExtra("hierarchy2", locationVisit.getHierarchy2());
+        i.putExtra("hierarchy3", locationVisit.getHierarchy3());
+        i.putExtra("hierarchy4", locationVisit.getHierarchy4());
+
+        Location loc = locationVisit.getLocation();
+        if (loc == null) {
+            loc = Location.emptyLocation();
+        }
+        i.putExtra("location", loc);
+
+
+        startActivityForResult(i, requestCode);
+    }    
+    
+    
+    
+    
 
     private void loadHierarchy1ValueData() {
         vf.loadLocationHierarchy();
@@ -1084,5 +1108,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         householdDialog.dismiss();
         householdDialog = null;
     }
+
+	public void onFilterLocation() {
+		startFilterLocActivity(FILTER_LOCATION);		
+	}
 
 }

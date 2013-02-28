@@ -6,7 +6,6 @@ import java.util.List;
 import org.openhds.mobile.Converter;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.R;
-import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
 import org.openhds.mobile.model.Round;
@@ -27,10 +26,9 @@ import android.widget.SimpleCursorAdapter;
 /**
  * ValueFragment is responsible for showing a list of entities, and then
  * notifying the activity using this fragment which entity has been selected. An
- * entity can be defined as: Region, Sub Region, Village, Round, Location and
- * Individual
+ * entity can be defined as: Region, Sub Region, Village, Round, Location
  */
-public class ValueFragment extends ListFragment implements LoaderCallbacks<Cursor> {
+public class ValueLocFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
     private static final String START_HIERARCHY_LEVEL_NAME = "Region";
     // loader identifiers
@@ -38,8 +36,8 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private static final int REGION_LOADER = 1;
     private static final int ROUND_LOADER = 2;
     private static final int LOCATION_LOADER = 3;
-    private static final int INDIVIDUAL_LOADER = 4;
-    private static final int INDIVIDUAL_FILTER_LOADER = 5;
+    private static final int LOCATION_FILTER_LOADER = 5;
+
 
     // create the column mappings so they don't need to be recreated on every
     // load
@@ -49,11 +47,8 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             OpenHDS.Rounds.COLUMN_ROUND_STARTDATE};
     private static final String[] LOCATION_COLUMNS = new String[] { OpenHDS.Locations.COLUMN_LOCATION_NAME,
             OpenHDS.Locations.COLUMN_LOCATION_EXTID};
-    private static final String[] INDIVIDUAL_COLUMNS = new String[] { OpenHDS.Individuals.COLUMN_INDIVIDUAL_FULLNAME,
-            OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID, OpenHDS.Individuals.COLUMN_INDIVIDUAL_DOB };
 
     private static final int[] VIEW_BINDINGS = new int[] { android.R.id.text1, android.R.id.text2 };
-    private static final int[] VIEW_BINDINGSI = new int[] { android.R.id.text1, android.R.id.text2,R.id.text3 };
 
     private SimpleCursorAdapter adapter;
 
@@ -63,7 +58,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private ValueListener listener;
 
     private enum Displayed {
-        HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, ROUND, LOCATION, INDIVIDUAL;
+        HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, ROUND, LOCATION;
     }
 
     public interface ValueListener {
@@ -78,8 +73,6 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         void onRoundSelected(Round round);
 
         void onLocationSelected(Location location);
-
-        void onIndividualSelected(Individual individual);
     }
 
     @Override
@@ -125,10 +118,6 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         case LOCATION:
             Location location = Converter.convertToLocation(cursor);
             listener.onLocationSelected(location);
-            break;
-        case INDIVIDUAL:
-            Individual individual = Converter.convertToIndividual(cursor);
-            listener.onIndividualSelected(individual);
             break;
         }
 
@@ -183,30 +172,26 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         case LOCATION_LOADER:
             adapter.changeCursorAndColumns(null, LOCATION_COLUMNS, VIEW_BINDINGS);
             return buildLocationCursorLoader(arg1);
-        case INDIVIDUAL_LOADER:
-            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
-            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null,
-                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ?",
-                    new String[] { arg1.getString("locationExtId") }, null);
-        case INDIVIDUAL_FILTER_LOADER:
-            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGS);
+    
+        case LOCATION_FILTER_LOADER:
+            adapter.changeCursorAndColumns(null, LOCATION_COLUMNS, VIEW_BINDINGS);
 
             String filter = buildFitler(arg1);
             String[] args = buildArguments(arg1);
 
-            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter, args,
-                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " ASC");
+            return new CursorLoader(getActivity(), OpenHDS.Locations.CONTENT_ID_URI_BASE, null, filter, args,
+                    OpenHDS.Locations.COLUMN_LOCATION_EXTID + " ASC");
         }
 
         return null;
     }
 
     private Loader<Cursor> buildLocationCursorLoader(Bundle arg1) {
-        if (TextUtils.isEmpty(arg1.getString("hierarchyExtId"))) {
+        if (TextUtils.isEmpty(arg1.getString("extId"))) {
             return buildCursorLoader(OpenHDS.Locations.CONTENT_ID_URI_BASE, null, null);
-        }else {
-            return buildCursorLoader(OpenHDS.Locations.CONTENT_ID_URI_BASE, OpenHDS.Locations.COLUMN_LOCATION_HIERARCHY
-                    + " = ?", new String[] { arg1.getString("hierarchyExtId") });
+        } else {
+            return buildCursorLoader(OpenHDS.Locations.CONTENT_ID_URI_BASE, OpenHDS.Locations.COLUMN_LOCATION_EXTID
+                    + " = ?", new String[] { arg1.getString("extId") });
         }
     }
 
@@ -236,15 +221,6 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 
         if (!TextUtils.isEmpty(arg1.getString("location"))) {
             args.add(arg1.getString("location"));
-        }
-        if (!TextUtils.isEmpty(arg1.getString("firstName"))) {
-            args.add("%" + arg1.getString("firstName") + "%");
-        }
-        if (!TextUtils.isEmpty(arg1.getString("lastName"))) {
-            args.add("%" + arg1.getString("lastName") + "%");
-        }
-        if (!TextUtils.isEmpty(arg1.getString("gender"))) {
-            args.add(arg1.getString("gender"));
         }
 
         return args.toArray(new String[] {});
@@ -313,50 +289,22 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         getLoaderManager().restartLoader(LOCATION_LOADER, bundle, this);
     }
     
-    public void loadLocation(String ExtId) {
-        listCurrentlyDisplayed = Displayed.LOCATION;
-        Bundle bundle = new Bundle();
-        bundle.putString("extId", ExtId);
-        getLoaderManager().restartLoader(LOCATION_LOADER, bundle, this);
-    }
+
+
+   
 
     /**
-     * Load a list of individuals based on their current residency
-     * 
-     * @param extId
-     *            filter by the location ext id (current residency) of the
-     *            individual
-     */
-    public void loadIndividuals(String extId) {
-        listCurrentlyDisplayed = Displayed.INDIVIDUAL;
-        Bundle bundle = new Bundle();
-        bundle.putString("locationExtId", extId);
-        getLoaderManager().restartLoader(INDIVIDUAL_LOADER, bundle, this);
-    }
-
-    /**
-     * Loads a list of individuals that are filtered by the arguments
+     * Loads a list of Locations that are filtered by the arguments
      * 
      * @param location
      *            the location id to filter, or null to ignore filtering on
      *            location
-     * @param firstName
-     *            matches on first name of individual (using SQL LIKE), null to
-     *            ignore first name matching
-     * @param lastName
-     *            matches on last name of individual (using SQL LIKE), null to
-     *            ignore last name matching
-     * @param gender
-     *            filters by individual gender, null to ignore gender filtering
      */
-    public void loadFilteredIndividuals(String location, String firstName, String lastName, String gender) {
-        listCurrentlyDisplayed = Displayed.INDIVIDUAL;
+    public void loadFilteredLocations(String location) {
+        listCurrentlyDisplayed = Displayed.LOCATION;
         Bundle bundle = new Bundle();
-        bundle.putString("location", location);
-        bundle.putString("firstName", firstName);
-        bundle.putString("lastName", lastName);
-        bundle.putString("gender", gender);
-        getLoaderManager().restartLoader(INDIVIDUAL_FILTER_LOADER, bundle, this);
+        bundle.putString("extId", location);
+        getLoaderManager().restartLoader(LOCATION_LOADER, bundle, this);
     }
 
 }

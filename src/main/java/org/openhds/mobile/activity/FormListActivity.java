@@ -25,7 +25,7 @@ public class FormListActivity extends ListActivity {
 
 		String[] columns = new String[] { DatabaseAdapter.KEY_FORM_TYPE,
 				DatabaseAdapter.KEY_FORMOWNER_ID };
-		int[] bindTo = new int[] { android.R.id.text1, android.R.id.text2 };
+		int[] bindTo = new int[] { android.R.id.text1, android.R.id.text2, R.id.text3};
 		Cursor formInstanceCursor = store.getFormsForUsername(user);
 
 		CustomAdapter adapter = new CustomAdapter(this, R.layout.list_item,

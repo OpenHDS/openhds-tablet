@@ -62,6 +62,7 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
 
         locationBtn = (Button) view.findViewById(R.id.location_see_list);
         locationBtn.setOnClickListener(this);
+        
 
         clearBtn = (Button) view.findViewById(R.id.clearFilterBtn);
         clearBtn.setOnClickListener(this);
