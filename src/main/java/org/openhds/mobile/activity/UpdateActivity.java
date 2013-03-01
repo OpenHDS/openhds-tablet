@@ -276,7 +276,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showProgressFragment();
         Individual individual = (Individual) data.getExtras().getSerializable("individual");
+
         new CreateInternalInMigrationTask(individual).execute();
+        locationVisit.setSelectedIndividual(individual);
+        stateMachine.transitionTo(State.INMIGRATION);
     }
 
     private class CreateInternalInMigrationTask extends AsyncTask<Void, Void, Void> {
@@ -413,7 +416,11 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             hideProgressFragment();
 
             if (result) {
-                stateMachine.transitionTo(State.SELECT_INDIVIDUAL);
+            	if (stateMachine.getState()==State.INMIGRATION) {
+            		stateMachine.transitionTo(State.SELECT_EVENT);
+            	} else {
+            		stateMachine.transitionTo(State.SELECT_INDIVIDUAL);
+            	}
             } else {
                 createUnfinishedFormDialog();
             }
