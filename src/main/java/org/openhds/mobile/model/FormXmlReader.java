@@ -92,7 +92,7 @@ public class FormXmlReader {
             
             Individual individual = new Individual();
             individual.setCurrentResidence(xpath.evaluate("/data/locationId/text()", doc));
-            individual.setDob(xpath.evaluate("/data/individualInfo/dateOfBirth/text()", doc));
+            individual.setDobFromCollect(xpath.evaluate("/data/individualInfo/dateOfBirth/text()", doc));
             individual.setExtId(xpath.evaluate("/data/individualInfo/individualId/text()", doc));
             individual.setFather(xpath.evaluate("/data/individualInfo/fatherId/text()", doc));
             individual.setFirstName(xpath.evaluate("/data/individualInfo/firstName/text()", doc));
