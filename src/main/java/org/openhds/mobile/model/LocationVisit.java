@@ -13,6 +13,7 @@ import org.openhds.mobile.Queries;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.net.Uri;
 
 /**
  * A LocationVisit represents a single visit to a specific location. This class
@@ -343,14 +344,15 @@ public class LocationVisit implements Serializable {
     }
 
     public String generateIndividualId(ContentResolver resolver) {
-        Cursor cursor = resolver.query(OpenHDS.Individuals.CONTENT_ID_URI_BASE,
+    	Cursor cursor = resolver.query(OpenHDS.Individuals.CONTENT_ID_URI_BASE,
                 new String[] { OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID },
                 OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ?", new String[] { location.getExtId() },
                 OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " DESC");
 
         String id = null;
         if (cursor.moveToNext()) {
-            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(5, 8));
+        	
+            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(7, 10));
             int nextIncrement = lastIncrement + 1;
             id = location.getExtId() + String.format("%03d", nextIncrement);
         } else {
