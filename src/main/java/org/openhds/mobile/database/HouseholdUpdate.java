@@ -3,7 +3,6 @@ package org.openhds.mobile.database;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.UUID;
 
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.model.FormXmlReader;

@@ -189,7 +189,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
                     OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ?",
                     new String[] { arg1.getString("locationExtId") }, null);
         case INDIVIDUAL_FILTER_LOADER:
-            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGS);
+            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
 
             String filter = buildFitler(arg1);
             String[] args = buildArguments(arg1);

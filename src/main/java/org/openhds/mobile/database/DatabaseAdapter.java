@@ -1,19 +1,11 @@
 package org.openhds.mobile.database;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import org.openhds.mobile.model.FieldWorker;
+
 import org.openhds.mobile.model.FormSubmissionRecord;
-import org.openhds.mobile.model.Individual;
-import org.openhds.mobile.model.Location;
-import org.openhds.mobile.model.LocationHierarchy;
-import org.openhds.mobile.model.Relationship;
-import org.openhds.mobile.model.Round;
-import org.openhds.mobile.model.SocialGroup;
 import org.openhds.mobile.model.Supervisor;
-import org.openhds.mobile.model.Visit;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
