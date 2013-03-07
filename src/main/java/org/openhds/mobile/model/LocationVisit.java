@@ -13,7 +13,6 @@ import org.openhds.mobile.Queries;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
-import android.net.Uri;
 
 /**
  * A LocationVisit represents a single visit to a specific location. This class
@@ -255,7 +254,7 @@ public class LocationVisit implements Serializable {
         int lastIndividualCount = 0;
         if (cursor.moveToFirst()) {
             try {
-                lastIndividualCount = Integer.parseInt(cursor.getString(0).substring(5, 8));
+                lastIndividualCount = Integer.parseInt(cursor.getString(0).substring(7, 10));
             } catch (NumberFormatException e) {
             }
         }
