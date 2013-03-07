@@ -81,7 +81,9 @@ public class SelectionFilterLocFragment extends Fragment implements OnClickListe
 
     public void setLocation(String location) {
         this.location = location;
+        if (location.length()>0) {
         updateLocationText(location);
+        }
     }
 
 
