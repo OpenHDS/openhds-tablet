@@ -281,11 +281,11 @@ public class LocationVisit implements Serializable {
                 OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " DESC");
 
         if (cursor.moveToNext()) {
-            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(5, 7));
+            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(9, 11));
             int nextIncrement = lastIncrement + 1;
             sg.setExtId(socialGroupPrefix + String.format("%02d", nextIncrement));
         } else {
-            sg.setExtId(socialGroupPrefix + "01");
+            sg.setExtId(socialGroupPrefix + "00");
         }
 
         cursor.close();
