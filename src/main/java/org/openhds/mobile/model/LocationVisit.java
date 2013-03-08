@@ -193,11 +193,11 @@ public class LocationVisit implements Serializable {
 
     private String generateLocationIdFrom(String lastGeneratedId) {
         try {
-            int increment = Integer.parseInt(lastGeneratedId.substring(3, 5));
+            int increment = Integer.parseInt(lastGeneratedId.substring(3, 7));
             int nextIncrement = increment + 1;
-            return String.format(hierarchy4.getExtId() + "%02d", nextIncrement);
+            return String.format(hierarchy4.getExtId() + "%06d", nextIncrement);
         } catch (NumberFormatException e) {
-            return hierarchy4.getExtId() + "01";
+            return hierarchy4.getExtId() + "000001";
         }
     }
 
@@ -246,11 +246,8 @@ public class LocationVisit implements Serializable {
     }
 
     private String[] generateIndividualIds(ContentResolver resolver, int liveBirthCount) {
-        Cursor cursor = resolver.query(OpenHDS.Individuals.CONTENT_ID_URI_BASE,
-                new String[] { OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID },
-                OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " LIKE ?", new String[] { location.getExtId() + "%" },
-                OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " DESC");
-
+    	
+        Cursor cursor = getCursor(resolver);
         int lastIndividualCount = 0;
         if (cursor.moveToFirst()) {
             try {
@@ -341,13 +338,19 @@ public class LocationVisit implements Serializable {
     public boolean isVisitStarted() {
         return visit != null;
     }
-
-    public String generateIndividualId(ContentResolver resolver) {
+    
+    private Cursor getCursor(ContentResolver resolver){
     	Cursor cursor = resolver.query(OpenHDS.Individuals.CONTENT_ID_URI_BASE,
                 new String[] { OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID },
-                OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ?", new String[] { location.getExtId() },
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " LIKE ?", new String[] { location.getExtId() + "%" },
                 OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " DESC");
+    	return cursor;
+    }
 
+    public String generateIndividualId(ContentResolver resolver) {   	
+    	
+    	Cursor cursor=getCursor(resolver);
+    	
         String id = null;
         if (cursor.moveToNext()) {
         	
