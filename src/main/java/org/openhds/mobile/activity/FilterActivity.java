@@ -58,6 +58,7 @@ public class FilterActivity extends Activity implements ValueListener, Selection
 
         Intent i = new Intent();
         i.putExtra("individual", individual);
+        i.putExtra("origin", individual.getCurrentResidence());
         setResult(Activity.RESULT_OK, i);
         finish();
     }

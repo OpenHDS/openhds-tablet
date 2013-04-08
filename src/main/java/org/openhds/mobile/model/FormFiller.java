@@ -13,7 +13,6 @@ public class FormFiller {
 
         form.setLocationId(locationVisit.getLocation().getExtId());
         form.setHierarchyId(locationVisit.getHierarchy4().getExtId());
-
         return form;
     }
 
@@ -29,7 +28,6 @@ public class FormFiller {
 
         form.setLocationId(locationVisit.getLocation().getExtId());
         form.setRoundNumber(locationVisit.getRound().getRoundNumber());
-
         return form;
     }
 
@@ -142,7 +140,7 @@ public class FormFiller {
 
     public FilledForm fillPregnancyOutcome(LocationVisit locationVisit, PregnancyOutcome po) {
         FilledForm form = new FilledForm(UpdateEvent.PREGNANCYOUTCOME);
-
+        int nb=0;
         addFieldWorker(locationVisit, form);
         addVisit(locationVisit, form);
         form.setLocationId(locationVisit.getLocation().getExtId());
@@ -152,8 +150,10 @@ public class FormFiller {
             Child child = new Child();
             child.setId(childId);
             form.addChild(child);
+            nb++;
         }
-
+        form.setNboutcomes(nb);
+        
         return form;
     }
 
@@ -165,10 +165,12 @@ public class FormFiller {
 
         if (individual != null) {
             addIndividual(individual, form);
+            form.setOrigin(individual.getCurrentResidence());
         }
 
         form.setMigrationType("INTERNAL_INMIGRATION");
         form.setLocationId(locationVisit.getLocation().getExtId());
+        
 
         return form;
     }

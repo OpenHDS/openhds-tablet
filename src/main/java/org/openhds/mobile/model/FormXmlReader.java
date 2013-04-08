@@ -97,6 +97,7 @@ public class FormXmlReader {
             individual.setExtId(xpath.evaluate("/data/individualInfo/individualId/text()", doc));
             individual.setFather(xpath.evaluate("/data/individualInfo/fatherId/text()", doc));
             individual.setFirstName(xpath.evaluate("/data/individualInfo/firstName/text()", doc));
+            individual.setMiddleName(xpath.evaluate("/data/individualInfo/middletName/text()", doc));
             individual.setGender(xpath.evaluate("/data/individualInfo/gender/text()", doc));
             individual.setLastName(xpath.evaluate("/data/individualInfo/lastName/text()", doc));
             individual.setMother(xpath.evaluate("/data/individualInfo/motherId/text()", doc));
@@ -133,7 +134,7 @@ public class FormXmlReader {
                 String outcomeType = xpath.evaluate("./outcomeType/text()", node);
                 if (!"LBR".equalsIgnoreCase(outcomeType)) {
                     continue;
-                }
+                } 
                 
                 Individual individual = new Individual();
                 individual.setDob(pregOutcome.getRecordedDate());

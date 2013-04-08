@@ -14,6 +14,8 @@ public class FilledParams {
 	public static final String visitDate = "visitDate";
 	public static final String locationId = "locationId";
 	public static final String interviewee = "intervieweeId";
+	public static final String farmhouse = "farmhouse";
+
 
 	
 	public static final String individualId = "individualId";
@@ -45,10 +47,14 @@ public class FilledParams {
 	public static final String individualB = "individualB";
 	
 	public static final String migrationType = "migrationType";
+	
+	public static final String origin = "origin";
+
 			
 	public static List<String> getParamsArray() {
-		return Arrays.asList(visitId, roundNumber, visitDate,interviewee, 
-				individualId, motherId, fatherId, firstName, middleName,
+
+		return Arrays.asList(visitId, roundNumber, visitDate,interviewee,farmhouse, 
+				individualId, motherId, fatherId, firstName, middleName,origin,
 				lastName, gender, dob, locationId, houseName, 
 				latlong, householdId, householdName, hierarchyId, 
 				fieldWorkerId, child1Id, child2Id, childFatherId,

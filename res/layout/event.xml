@@ -95,7 +95,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Pregnancy Registration"
+	        android:text="Pregnancy Observation"
 	        android:enabled="false"  />
 	      
 	       <Button
@@ -105,7 +105,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Birth Registration"
+	        android:text="Pregnancy Outcome"
 	        android:enabled="false"  />
 	       
 	     <Button

@@ -864,11 +864,11 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     private void buildPregnancyLiveBirthCountDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Number of Live Births").setCancelable(true)
-                .setItems(new String[] { "None", "1", "2", "3", "4" }, new DialogInterface.OnClickListener() {
+        builder.setTitle("Number of Outcomes").setCancelable(true)
+                .setItems(new String[] {"1", "2", "3", "4" }, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         showProgressFragment();
-                        new PregnancyOutcomeFatherSelectionTask(which).execute();
+                        new PregnancyOutcomeFatherSelectionTask(which+1).execute();
                     }
                 });
         builder.show();

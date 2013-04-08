@@ -73,6 +73,17 @@ public class Individual implements Serializable {
         }
     }
 
+    public void setDobIn(String dob) {
+        try {
+            DateFormat outFormat = new SimpleDateFormat("dd-MM-yyyy");
+            DateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            String date = outFormat.format(inFormat.parse(dob));
+            this.dob = date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
     public void setDobFromCollect(String dob) {
         try {
             DateFormat outFormat = new SimpleDateFormat("yyyy-MM-dd");

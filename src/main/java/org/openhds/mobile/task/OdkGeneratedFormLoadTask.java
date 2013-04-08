@@ -123,15 +123,22 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                     } else if (name.equals(FilledParams.individualId)) {
                         sbuilder.append(filledForm.getIndividualExtId() == null ? "<individualId />" + "\r\n"
                                 : "<individualId>" + filledForm.getIndividualExtId() + "</individualId>" + "\r\n");
+                    } else if (name.equals(FilledParams.origin)) {
+                        sbuilder.append(filledForm.getOrigin() == null ? "<origin />" + "\r\n"
+                                : "<origin>" + filledForm.getOrigin() + "</origin>" + "\r\n");
                     } else if (name.equals(FilledParams.motherId)) {
                         sbuilder.append(filledForm.getMotherExtId() == null ? "<motherId />" + "\r\n" : "<motherId>"
                                 + filledForm.getMotherExtId() + "</motherId>" + "\r\n");
                     } else if (name.equals(FilledParams.fatherId)) {
                         sbuilder.append(filledForm.getFatherExtId() == null ? "<fatherId />" + "\r\n" : "<fatherId>"
                                 + filledForm.getFatherExtId() + "</fatherId>" + "\r\n");
-                    } else if (name.equals(FilledParams.firstName)) {
-                        sbuilder.append(filledForm.getIndividualFirstName() == null ? "<firstName />" + "\r\n"
-                                : "<firstName>" + filledForm.getIndividualFirstName() + "</firstName>" + "\r\n");
+                    } else if (name.equals(FilledParams.middleName)) {
+                        sbuilder.append(filledForm.getIndividualMiddleName() == null ? "<middleName />" + "\r\n"
+                                : "<middleName>" + filledForm.getIndividualMiddleName()+ "</middleName>" + "\r\n");
+                     
+                    }   else if (name.equals(FilledParams.firstName)) {
+                            sbuilder.append(filledForm.getIndividualFirstName() == null ? "<firstName />" + "\r\n"
+                                    : "<firstName>" + filledForm.getIndividualFirstName() + "</firstName>" + "\r\n");
                     } else if (name.equals(FilledParams.lastName)) {
                         sbuilder.append(filledForm.getIndividualLastName() == null ? "<lastName />" + "\r\n"
                                 : "<lastName>" + filledForm.getIndividualLastName() + "</lastName>" + "\r\n");
@@ -176,13 +183,13 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                     // special case handling for pregnancy outcomes
                     for(Child child : filledForm.getPregOutcomeChildren()) {
                         sbuilder.append("<outcomes>\r\n");
-                        sbuilder.append("<outcomeType>LBR</outcomeType>\r\n");
+                        sbuilder.append("<outcomeType></outcomeType>\r\n");
                         sbuilder.append("<childId>" + child.getId() + "</childId>\r\n");
                         sbuilder.append("<firstName />\r\n");
                         sbuilder.append("<lastName />\r\n");
                         sbuilder.append("<gender />\r\n");
-                        sbuilder.append("<dateOfBirth />\r\n");
-                        sbuilder.append("<partialDate />\r\n");
+                        /*sbuilder.append("<dateOfBirth />\r\n");
+                        sbuilder.append("<partialDate />\r\n");*/
                         sbuilder.append("<socialGroupId>" + filledForm.getHouseholdId() + "</socialGroupId>\r\n");
                         sbuilder.append("<relationshipToGroupHead />\r\n");
                         sbuilder.append("</outcomes>\r\n");

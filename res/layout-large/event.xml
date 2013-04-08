@@ -106,7 +106,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:enabled="false"
-            android:text="Pregnancy Registration" />
+            android:text="Pregnancy Observation" />
 
         <Button
             android:id="@+id/birthRegBtn"
@@ -116,7 +116,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:enabled="false"
-            android:text="Birth Registration" />
+            android:text="Pregnancy Outcome" />
 
         <Button
             android:id="@+id/deathBtn"

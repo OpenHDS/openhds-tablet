@@ -35,7 +35,9 @@ public class FilledForm {
     private String individualA;
     private String individualB;
     private String intervieweeId;
+    private String origin;
     private String migrationType;
+    private int nboutcomes;
     
     private List<Child> children = new ArrayList<Child>();
 
@@ -230,4 +232,22 @@ public class FilledForm {
 	public void setIndividualMiddleName(String individualMiddleName) {
 		this.individualMiddleName = individualMiddleName;
 	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public int getNboutcomes() {
+		return nboutcomes;
+	}
+
+	public void setNboutcomes(int nboutcomes) {
+		this.nboutcomes = nboutcomes;
+	}
+
+	
 }
