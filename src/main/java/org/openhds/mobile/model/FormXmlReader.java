@@ -137,7 +137,7 @@ public class FormXmlReader {
                 } 
                 
                 Individual individual = new Individual();
-                individual.setDob(pregOutcome.getRecordedDate());
+                individual.setDobIn(pregOutcome.getRecordedDate());
                 individual.setExtId(xpath.evaluate("./childId/text()", node));
                 individual.setFather(father.getExtId());
                 individual.setMother(mother.getExtId());
