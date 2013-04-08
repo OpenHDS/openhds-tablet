@@ -114,10 +114,12 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
             break;
         case R.id.searchFilterBtn:
             String gender = "";
+            String loc = "";
+            loc = locationTxt.getText().toString();
             if (maleBtn.isChecked() || femaleBtn.isChecked()) {
                 gender = maleBtn.isChecked() ? "M" : "F";
             }
-            listener.onSearch(locationTxt.getText().toString(), firstNameTxt.getText().toString(), lastNameTxt
+            listener.onSearch(loc, firstNameTxt.getText().toString(), lastNameTxt
                     .getText().toString(), gender);
             break;
         case R.id.clearFilterBtn:

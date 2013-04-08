@@ -11,8 +11,8 @@
     <string name="configuration">Configuration</string>
     <string name="configureDatabase">Configure Database</string>
     <string name="databaseSync">Sync with OpenHDS Database</string>
-    <string name="default_server_url">http://openhds.ihi.or.tz/openhdsIHI/mobile-interop</string>
-    <string name="default_openhdsserver">http://openhds.ihi.or.tz/openhdsIHI/</string>
+    <string name="default_server_url">https://openhds.ihi.or.tz/openhdsIHI/mobile-interop</string>
+    <string name="default_openhdsserver">https://openhds.ihi.or.tz/openhdsIHI/</string>
     <string name="delete_form_btn">Delete Form</string>
     <string name="download_form_button">Download Forms</string>
     <string name="failure_reasons_txt">Failure messages:</string>

@@ -18,7 +18,6 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -67,8 +66,8 @@ public class FieldWorkerLoginActivity extends Activity implements OnClickListene
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {	
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.loginmenu, menu);
+    	//MenuInflater inflater = getMenuInflater();
+    	//inflater.inflate(R.menu.loginmenu, menu);
         return true;
     }
     
@@ -216,6 +215,8 @@ public class FieldWorkerLoginActivity extends Activity implements OnClickListene
 				break;
 			case UNABLE_TO_CONNECT:
 				Toast.makeText(getApplicationContext(),	getString(R.string.unable_to_connect), Toast.LENGTH_SHORT).show();
+		default:
+			break;
 		}
 		dialog.dismiss();
 		loginTask = null;

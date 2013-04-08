@@ -17,6 +17,7 @@ public class FilledForm {
     private String houseName;
     private String fieldWorkerId;
 
+
     private String householdId;
     private String householdName;
 
@@ -25,6 +26,7 @@ public class FilledForm {
     private String fatherExtId;
     private String individualFirstName;
     private String individualLastName;
+    private String individualMiddleName;
     private String individualGender;
     private String individualDob;
     private String hierarchyId;
@@ -32,7 +34,7 @@ public class FilledForm {
 
     private String individualA;
     private String individualB;
-
+    private String intervieweeId;
     private String migrationType;
     
     private List<Child> children = new ArrayList<Child>();
@@ -117,7 +119,15 @@ public class FilledForm {
         this.individualExtId = individualExtId;
     }
 
-    public String getMotherExtId() {
+    public String getIntervieweeId() {
+		return intervieweeId;
+	}
+
+	public void setIntervieweeId(String intervieweeId) {
+		this.intervieweeId = intervieweeId;
+	}
+
+	public String getMotherExtId() {
         return motherExtId;
     }
 
@@ -212,4 +222,12 @@ public class FilledForm {
     public void addChild(Child child) {
         children.add(child);
     }
+
+	public String getIndividualMiddleName() {
+		return individualMiddleName;
+	}
+
+	public void setIndividualMiddleName(String individualMiddleName) {
+		this.individualMiddleName = individualMiddleName;
+	}
 }

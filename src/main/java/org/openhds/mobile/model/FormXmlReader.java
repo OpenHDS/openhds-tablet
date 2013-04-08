@@ -59,6 +59,7 @@ public class FormXmlReader {
             visit.setExtId(xpath.evaluate("/data/visitId/text()", doc));
             visit.setLocation(xpath.evaluate("/data/locationId/text()", doc));
             visit.setRound(xpath.evaluate("/data/roundNumber/text()", doc));
+            visit.setIntervieweeId(xpath.evaluate("/data/intervieweeId/text()", doc));
             return visit;
         } catch (ParserConfigurationException e) {
         } catch (SAXException e) {

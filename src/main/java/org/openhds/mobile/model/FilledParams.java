@@ -13,11 +13,15 @@ public class FilledParams {
 	public static final String roundNumber = "roundNumber";
 	public static final String visitDate = "visitDate";
 	public static final String locationId = "locationId";
+	public static final String interviewee = "intervieweeId";
+
 	
 	public static final String individualId = "individualId";
 	public static final String motherId = "motherId";
 	public static final String fatherId = "fatherId";
 	public static final String firstName = "firstName";
+	public static final String middleName = "middleName";
+
 	public static final String lastName = "lastName";
 	public static final String gender = "gender";
 	public static final String dob = "dob";
@@ -43,8 +47,8 @@ public class FilledParams {
 	public static final String migrationType = "migrationType";
 			
 	public static List<String> getParamsArray() {
-		return Arrays.asList(visitId, roundNumber, visitDate, 
-				individualId, motherId, fatherId, firstName, 
+		return Arrays.asList(visitId, roundNumber, visitDate,interviewee, 
+				individualId, motherId, fatherId, firstName, middleName,
 				lastName, gender, dob, locationId, houseName, 
 				latlong, householdId, householdName, hierarchyId, 
 				fieldWorkerId, child1Id, child2Id, childFatherId,

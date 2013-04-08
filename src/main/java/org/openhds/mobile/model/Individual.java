@@ -12,6 +12,7 @@ public class Individual implements Serializable {
 
     private String extId;
     private String firstName;
+    private String middleName;
     private String lastName;
     private String gender;
     private String dob;
@@ -140,4 +141,12 @@ public class Individual implements Serializable {
 
         return individual;
     }
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
 }

@@ -51,7 +51,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -84,6 +83,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private static final int LOCATION_GEOPOINT = 50;
     protected static final int FILTER_INMIGRATION_MOTHER = 60;
     protected static final int FILTER_INMIGRATION_FATHER = 70;
+    protected static final int FILTER_INDIV_VISIT = 75;
     // the uri of the last viewed xform
     private Uri contentUri;
 
@@ -130,8 +130,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.mainmenu, menu);
+     //   MenuInflater inflater = getMenuInflater();
+     //   inflater.inflate(R.menu.mainmenu, menu);
         super.onCreateOptionsMenu(menu);
 //        menu.add(0, MENU_PREFERENCES, 0, getString(R.string.search_loc_lbl)).setIcon(
 //                android.R.drawable.ic_menu_preferences);
@@ -180,6 +180,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         case FILTER_INMIGRATION_MOTHER:
             handleFilterMother(resultCode, data);
             break;
+        case FILTER_INDIV_VISIT:
+            handleFilterIndivVisit(resultCode, data);
+            break;
         case FILTER_INMIGRATION_FATHER:
             handleFilterFather(resultCode, data);
             break;
@@ -204,7 +207,18 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
     }
 
-    private void handleFatherBirthResult(int resultCode, Intent data) {
+    private void handleFilterIndivVisit(int resultCode, Intent data) {
+            if (resultCode != RESULT_OK) {
+                return;
+            }
+
+            Individual individual = (Individual) data.getExtras().getSerializable("individual");
+            filledForm.setIntervieweeId(individual.getExtId());	
+            loadForm(SELECTED_XFORM);
+
+	}
+
+	private void handleFatherBirthResult(int resultCode, Intent data) {
         if (resultCode != RESULT_OK) {
             return;
         }
@@ -332,7 +346,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         Individual individual = (Individual) data.getExtras().getSerializable("individual");
         filledForm.setFatherExtId(individual.getExtId());
-
+        filledForm.setIndividualLastName(individual.getLastName());
+        filledForm.setIndividualMiddleName(individual.getFirstName());
         loadForm(SELECTED_XFORM);
     }
 
@@ -492,7 +507,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
      * Method used for starting the activity for filtering for individuals
      */
     private void startFilterActivity(int requestCode) {
-        Intent i = new Intent(this, FilterActivity.class);
+    	Intent i =null;
+    	if (requestCode==75) {
+            i = new Intent(this, FilterVisitActivity.class);
+    	} else {
+    		i = new Intent(this, FilterActivity.class);
+    	}
         i.putExtra("hierarchy1", locationVisit.getHierarchy1());
         i.putExtra("hierarchy2", locationVisit.getHierarchy2());
         i.putExtra("hierarchy3", locationVisit.getHierarchy3());
@@ -652,13 +672,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             locationVisit.createVisit(getContentResolver());
             filledForm = formFiller.fillVisitForm(locationVisit);
             updatable = new VisitUpdate();
+        	startFilterActivity(FILTER_INDIV_VISIT);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
             hideProgressFragment();
-            loadForm(SELECTED_XFORM);
         }
     }
 

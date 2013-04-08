@@ -10,6 +10,9 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -43,6 +46,47 @@ public class SupervisorMainActivity extends AbstractActivity {
 			}
 		});
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainmenu, menu);
+        super.onCreateOptionsMenu(menu);
+        return true;
+	}
+
+    /**
+     * Defining what happens when a main menu item is selected
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.configure_server:
+            createPreferencesMenu();
+            return true;
+        case R.id.sync_database:
+            createSyncDatabaseMenu();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    
+    
+    /**
+     * Creates the 'Configure Server' option in the action menu.
+     */
+    private void createPreferencesMenu() {
+        Intent i = new Intent(this, ServerPreferencesActivity.class);
+        startActivity(i);
+    }
+
+    /**
+     * Creates the 'Sync Database' option in the action menu.
+     */
+    private void createSyncDatabaseMenu() {
+        Intent i = new Intent(this, SyncDatabaseActivity.class);
+        startActivity(i);
+    }
 
 	private class DownloadButtonListener implements OnClickListener {
 		public void onClick(View arg0) {

@@ -9,7 +9,16 @@ public class Visit implements Serializable {
 	private String location;
 	private String date;
 	private String round;
+	private String intervieweeId;
 	
+	public String getIntervieweeId() {
+		return intervieweeId;
+	}
+
+	public void setIntervieweeId(String intervieweeId) {
+		this.intervieweeId = intervieweeId;
+	}
+
 	public String getExtId() {
 		return extId;
 	}
