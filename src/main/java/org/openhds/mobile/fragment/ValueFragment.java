@@ -206,7 +206,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             if (filter2.length()>0) {
             	filter2 = filter2 + " AND ";
             }   
-            filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>17";
+            filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13";
             return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter2, args2,
                     OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " ASC");
         case INDVISIT_FILTER_LOADER:
