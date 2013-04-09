@@ -193,7 +193,7 @@ public class LocationVisit implements Serializable {
 
     private String generateLocationIdFrom(String lastGeneratedId) {
         try {
-            int increment = Integer.parseInt(lastGeneratedId.substring(3, 7));
+            int increment = Integer.parseInt(lastGeneratedId.substring(3, 9));
             int nextIncrement = increment + 1;
             return String.format(hierarchy4.getExtId() + "%06d", nextIncrement);
         } catch (NumberFormatException e) {
@@ -203,15 +203,21 @@ public class LocationVisit implements Serializable {
 
     // this logic is specific for Cross River
     public void createVisit(ContentResolver resolver) {
-        String visitPrefix = "V" + location.getExtId() + round.getRoundNumber();
+        //String visitPrefix = location.getExtId() + round.getRoundNumber();
+        
+        String suffix= round.getRoundNumber();
+    	if(suffix.length() < 3)
+    		suffix="0"+suffix;
+    	    		
+        String generatedId = location.getExtId() + suffix ;
 
-        Cursor cursor = resolver.query(OpenHDS.Visits.CONTENT_ID_URI_BASE,
+        /*Cursor cursor = resolver.query(OpenHDS.Visits.CONTENT_ID_URI_BASE,
                 new String[] { OpenHDS.Visits.COLUMN_VISIT_EXTID }, OpenHDS.Visits.COLUMN_VISIT_EXTID + " LIKE ?",
                 new String[] { visitPrefix + "%" }, OpenHDS.Visits.COLUMN_VISIT_EXTID + " DESC");
         String visitGeneratedId;
         if (cursor.moveToFirst()) {
             try {
-                int lastVisitCount = Integer.parseInt(cursor.getString(0).substring(7, 8));
+                int lastVisitCount = Integer.parseInt(cursor.getString(0).substring(10, 12));
                 int nextVisitCount = lastVisitCount + 1;
                 visitGeneratedId = visitPrefix + nextVisitCount;
             } catch (NumberFormatException e) {
@@ -221,13 +227,13 @@ public class LocationVisit implements Serializable {
             visitGeneratedId = visitPrefix + "1";
         }
 
-        cursor.close();
+        cursor.close();*/
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String date = df.format(new Date());
 
         visit = new Visit();
-        visit.setExtId(visitGeneratedId);
+        visit.setExtId(generatedId);
         visit.setDate(date);
     }
 
@@ -251,7 +257,7 @@ public class LocationVisit implements Serializable {
         int lastIndividualCount = 0;
         if (cursor.moveToFirst()) {
             try {
-                lastIndividualCount = Integer.parseInt(cursor.getString(0).substring(7, 10));
+                lastIndividualCount = Integer.parseInt(cursor.getString(0).substring(11, 12));
             } catch (NumberFormatException e) {
             }
         }
@@ -354,7 +360,7 @@ public class LocationVisit implements Serializable {
         String id = null;
         if (cursor.moveToNext()) {
         	
-            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(7, 10));
+            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(11, 12));
             int nextIncrement = lastIncrement + 1;
             id = location.getExtId() + String.format("%03d", nextIncrement);
         } else {
