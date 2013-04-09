@@ -20,6 +20,7 @@ public class FilledForm {
 
     private String householdId;
     private String householdName;
+    private String socialGroupType;
 
     private String individualExtId;
     private String motherExtId;
@@ -247,6 +248,14 @@ public class FilledForm {
 
 	public void setNboutcomes(int nboutcomes) {
 		this.nboutcomes = nboutcomes;
+	}
+
+	public String getSocialGroupType() {
+		return socialGroupType;
+	}
+
+	public void setSocialGroupType(String socialGroupType) {
+		this.socialGroupType = socialGroupType;
 	}
 
 	

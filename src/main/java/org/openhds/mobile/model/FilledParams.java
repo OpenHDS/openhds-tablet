@@ -34,7 +34,8 @@ public class FilledParams {
 	
 	public static final String householdId = "householdId";
 	public static final String householdName = "householdName";
-	
+	public static final String socialGroupType = "socialGroupType";
+
 	public static final String fieldWorkerId = "fieldWorkerId";
 	
 	public static final String child1Id = "child1Id";
@@ -55,7 +56,7 @@ public class FilledParams {
 
 		return Arrays.asList(visitId, roundNumber, visitDate,interviewee,farmhouse, 
 				individualId, motherId, fatherId, firstName, middleName,origin,
-				lastName, gender, dob, locationId, houseName, 
+				lastName, gender, dob, locationId, houseName,socialGroupType, 
 				latlong, householdId, householdName, hierarchyId, 
 				fieldWorkerId, child1Id, child2Id, childFatherId,
 				childFatherFirstName, childFatherLastName,
