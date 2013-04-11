@@ -177,5 +177,33 @@ public class FormXmlReader {
         }
         return null;
     }
+    
+    public Individual readOutMigration(FileInputStream fileInputStream) {
+        try {
+            Document doc = buildDocument(fileInputStream);
+            Individual individual = new Individual();
+            individual.setExtId(xpath.evaluate("/data/individualId/text()", doc));
+            return individual;
+        } catch (ParserConfigurationException e) {
+        } catch (SAXException e) {
+        } catch (IOException e) {
+        } catch (XPathExpressionException e) {
+        }
+        return null;
+    }
+
+    public Individual readDeath(FileInputStream fileInputStream) {
+        try {
+            Document doc = buildDocument(fileInputStream);
+            Individual individual = new Individual();
+            individual.setExtId(xpath.evaluate("/data/individualId/text()", doc));
+            return individual;
+        } catch (ParserConfigurationException e) {
+        } catch (SAXException e) {
+        } catch (IOException e) {
+        } catch (XPathExpressionException e) {
+        }
+        return null;
+    }
 
 }

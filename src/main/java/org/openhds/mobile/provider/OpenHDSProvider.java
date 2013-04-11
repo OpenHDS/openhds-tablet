@@ -228,7 +228,8 @@ public class OpenHDSProvider extends ContentProvider {
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_GENDER + " TEXT,"
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_LASTNAME + " TEXT,"
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_MOTHER + " TEXT,"
-                    + OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " TEXT);");
+                    + OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " TEXT,"
+                    + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE + " TEXT);");
 
             db.execSQL("CREATE TABLE " + OpenHDS.Locations.TABLE_NAME + " (" + OpenHDS.Locations._ID
                     + " INTEGER PRIMARY KEY," + OpenHDS.Locations.COLUMN_LOCATION_EXTID + " TEXT NOT NULL,"

@@ -19,6 +19,8 @@ public class Individual implements Serializable {
     private String mother;
     private String father;
     private String currentResidence;
+    private String endType;
+
     private List<SocialGroup> socialGroups;
 
     private static Individual individual;
@@ -159,5 +161,13 @@ public class Individual implements Serializable {
 
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
+	}
+
+	public String getEndType() {
+		return endType;
+	}
+
+	public void setEndType(String endType) {
+		this.endType = endType;
 	}
 }

@@ -376,7 +376,10 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
                 parser.nextTag();
                 parser.nextTag();
                 if (parser.getEventType() != XmlPullParser.END_TAG) {
-                    parser.nextTag(); // <location>
+                	parser.nextTag(); // <endType>
+                	//parser.nextTag(); // </endType>
+                    cv.put(OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE, parser.nextText());
+                	parser.nextTag(); // <location>
                     parser.nextTag(); // <extId>
                     cv.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE, parser.nextText());
                     parser.nextTag(); // </location>

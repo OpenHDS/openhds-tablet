@@ -40,7 +40,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private static final int LOCATION_LOADER = 3;
     private static final int INDIVIDUAL_LOADER = 4;
     private static final int INDIVIDUAL_FILTER_LOADER = 5;
-    private static final int INDVISIT_FILTER_LOADER = 6;
+    private static final int INDIMG_FILTER_LOADER = 6;
     private static final int INDIVIDUAL18_FILTER_LOADER = 7;
 
     // create the column mappings so they don't need to be recreated on every
@@ -188,7 +188,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         case INDIVIDUAL_LOADER:
             adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
             return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null,
-                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ?",
+                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ? AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"='NA'",
                     new String[] { arg1.getString("locationExtId") }, null);
         case INDIVIDUAL_FILTER_LOADER:
             adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
@@ -206,10 +206,11 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             if (filter2.length()>0) {
             	filter2 = filter2 + " AND ";
             }   
-            filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13";
+            //filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13";
+            filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13 AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"!='OMG'";
             return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter2, args2,
                     OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " ASC");
-        case INDVISIT_FILTER_LOADER:
+        case INDIMG_FILTER_LOADER:
             adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
 
             String filter1 = buildFilter(arg1);
@@ -299,7 +300,11 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
                 builder.append(" AND ");
             builder.append(OpenHDS.Individuals.COLUMN_INDIVIDUAL_GENDER + " = ?");
         }
-
+        if (builder.length() > 0)
+            builder.append(" AND ");
+            
+            builder.append(OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE).append("!='DTH'");
+        
         return builder.toString();
     }
 
@@ -389,4 +394,15 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         bundle.putString("gender", gender);
         getLoaderManager().restartLoader(INDIVIDUAL18_FILTER_LOADER, bundle, this);
     }
+
+	public void loadAllFilteredIndividuals(String location, String firstName,
+			String lastName, String gender) {
+		  listCurrentlyDisplayed = Displayed.INDIVIDUAL;
+	        Bundle bundle = new Bundle();
+	        bundle.putString("location", location);
+	        bundle.putString("firstName", firstName);
+	        bundle.putString("lastName", lastName);
+	        bundle.putString("gender", gender);
+	        getLoaderManager().restartLoader(INDIMG_FILTER_LOADER, bundle, this);	
+	}
 }

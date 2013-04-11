@@ -172,6 +172,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         case FILTER_LOCATION:
         	Location location1 = (Location) data.getExtras().getSerializable("location");
         	locationVisit.setLocation(location1);
+        	vf.onLoaderReset(null);
             stateMachine.transitionTo(State.CREATE_VISIT);
             break;
         case FILTER_INMIGRATION:
@@ -513,10 +514,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     	} else {
     		i = new Intent(this, FilterActivity.class);
     	}
+    	
+
         i.putExtra("hierarchy1", locationVisit.getHierarchy1());
         i.putExtra("hierarchy2", locationVisit.getHierarchy2());
         i.putExtra("hierarchy3", locationVisit.getHierarchy3());
         i.putExtra("hierarchy4", locationVisit.getHierarchy4());
+        
 
         Location loc = locationVisit.getLocation();
         if (loc == null) {
@@ -530,6 +534,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             break;
         case FILTER_BIRTH_FATHER:
             i.putExtra("requireGender", "M");
+        case FILTER_INMIGRATION:
+            i.putExtra("img", "IMG");
         }
 
         startActivityForResult(i, requestCode);
@@ -683,11 +689,23 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onFinishVisit() {
-        locationVisit = locationVisit.completeVisit();
-        sf.setLocationVisit(locationVisit);
-        ef.setLocationVisit(locationVisit);
-        stateMachine.transitionTo(State.FINISH_VISIT);
-        stateMachine.transitionTo(State.SELECT_LOCATION);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Visit");
+        alertDialogBuilder.setMessage("Did you capture all events and want to finish the visit?");
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            	locationVisit = locationVisit.completeVisit();
+                sf.setLocationVisit(locationVisit);
+                ef.setLocationVisit(locationVisit);
+                stateMachine.transitionTo(State.FINISH_VISIT);
+                stateMachine.transitionTo(State.SELECT_LOCATION);
+                vf.onLoaderReset(null);
+                }
+        });
+        alertDialogBuilder.setNegativeButton("Cancel", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     public void onHousehold() {

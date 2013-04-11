@@ -21,6 +21,8 @@ public class FilterActivity extends Activity implements ValueListener, Selection
     private SelectionFilterFragment selectionFilterFragment;
     private ValueFragment valueFragment;
     private String requireGender;
+    private String img;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class FilterActivity extends Activity implements ValueListener, Selection
         
         Location location = (Location) getIntent().getExtras().getSerializable("location");
         requireGender = getIntent().getExtras().getString("requireGender");
+        img = getIntent().getExtras().getString("img");
 
         selectionFilterFragment.setHierarchy1(hierarchy1.getExtId());
         selectionFilterFragment.setHierarchy2(hierarchy2.getExtId());
@@ -108,7 +111,11 @@ public class FilterActivity extends Activity implements ValueListener, Selection
     }
 
     public void onSearch(String location, String firstName, String lastName, String gender) {
-        valueFragment.loadFilteredIndividuals(location, firstName, lastName, gender);
+    	if (img !=null) {
+            valueFragment.loadAllFilteredIndividuals(location, firstName, lastName, gender);
+    	} else {
+            valueFragment.loadFilteredIndividuals(location, firstName, lastName, gender);
+    	}
     }
 
 }

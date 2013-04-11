@@ -31,8 +31,7 @@ public class Converter {
     }
 
     private static void populateIndividual(Cursor cursor, Individual individual) {
-        individual.setCurrentResidence(cursor.getString(cursor
-                .getColumnIndex(OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE)));
+        individual.setCurrentResidence(cursor.getString(cursor.getColumnIndex(OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE)));
         individual.setDob(cursor.getString(cursor.getColumnIndex(OpenHDS.Individuals.COLUMN_INDIVIDUAL_DOB)));
         individual.setExtId(cursor.getString(cursor.getColumnIndex(OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID)));
         individual.setFather(cursor.getString(cursor.getColumnIndex(OpenHDS.Individuals.COLUMN_INDIVIDUAL_FATHER)));
