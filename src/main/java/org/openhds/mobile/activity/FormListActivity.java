@@ -15,6 +15,7 @@ import android.widget.SimpleCursorAdapter;
 
 public class FormListActivity extends ListActivity {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ public class FormListActivity extends ListActivity {
 			}
 		}
 
+		@SuppressWarnings("deprecation")
 		public CustomAdapter(Context context, int layout, Cursor c,
 				String[] from, int[] to) {
 			super(context, layout, c, from, to);
