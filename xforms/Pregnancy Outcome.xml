@@ -1,0 +1,444 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+    <h:head>
+        <h:title>Pregnancy Outcome</h:title>
+        <model>
+            <instance>
+			
+                <data id="pregnancy_outcome">
+				<meta>
+				<instanceID/>
+			</meta>
+                    <processedByMirth>0</processedByMirth>
+                    <motherId />
+                    <fatherId />
+                    <visitId />
+                    <fieldWorkerId />
+                    <nboutcomes />
+										<partialDate />
+
+                    <outcomes jr:template="">
+                        <outcomeType />
+                        <childId />
+                        <socialGroupId />
+                        <firstName />
+                        <middleName />
+                        <lastName />
+                        <gender />
+                        <relationshipToGroupHead />
+                    </outcomes>
+                    <recordedDate />
+                </data>
+            </instance>
+            <itext>
+			<translation lang="Swahili">
+                    <text id="/data/motherId:label">
+                        <value>Namba ya Mama</value>
+                    </text>
+                    <text id="/data/motherId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/fatherId:label">
+                        <value>Namba ya Baba</value>
+                    </text>
+                    <text id="/data/fatherId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/visitId:label">
+                        <value>Nambari ya Uhudhurio</value>
+                    </text>
+                    <text id="/data/visitId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/fieldWorkerId:label">
+                        <value>Namba ya Mhojaji</value>
+                    </text>
+                    <text id="/data/fieldWorkerId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/recordedDate:label">
+                        <value>Tarehe ya Tukio</value>
+                    </text>
+                    <text id="/data/recordedDate:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes:label">
+                        <value>Matukio ya Mimba</value>
+                    </text>
+                    <text id="/data/outcomes/outcomeType:label">
+                        <value>Aina ya Tukio</value>
+                    </text>
+                    <text id="/data/outcomes/outcomeType:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/outcomeType:option0">
+                        <value>Zaliwa Hai</value>
+                    </text>
+                    <text id="/data/outcomes/outcomeType:option1">
+                        <value>Zaliwa Mfu</value>
+                    </text>
+                    <text id="/data/outcomes/outcomeType:option2">
+                        <value>Mimba Kuharibika</value>
+                    </text>
+                    <text id="/data/outcomes/outcomeType:option3">
+                        <value>Toa Mimba</value>
+                    </text>
+                    <text id="/data/outcomes/childId:label">
+                        <value>Nambari ya Mtoto</value>
+                    </text>
+                    <text id="/data/outcomes/childId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/firstName:label">
+                        <value>Jina la Kwanza</value>
+                    </text>
+                    <text id="/data/outcomes/firstName:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/middleName:label">
+                        <value>Jina la Kati</value>
+                    </text>
+                    <text id="/data/outcomes/middleName:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/lastName:label">
+                        <value>Jina la Ukoo</value>
+                    </text>
+                    <text id="/data/outcomes/lastName:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/gender:label">
+                        <value>Jinsia</value>
+                    </text>
+                    <text id="/data/outcomes/gender:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/gender:option0">
+                        <value>Mwanaume</value>
+                    </text>
+                    <text id="/data/outcomes/gender:option1">
+                        <value>Mwanamke</value>
+                    </text>
+                    <text id="/data/partialDate:label">
+                        <value>Partial Date</value>
+                    </text>
+                    <text id="/data/partialDate:hint">
+                        <value />
+                    </text>
+                    <text id="/data/partialDate:option0">
+                        <value>Kamili</value>
+                    </text>
+                    <text id="/data/partialDate:option1">
+                        <value>Kadiliwa</value>
+                    </text>
+                    <text id="/data/outcomes/socialGroupId:label">
+                        <value>Nambari ya Kikundi</value>
+                    </text>
+                    <text id="/data/outcomes/socialGroupId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:label">
+                        <value>Uhusiano na Mkuu wa Kikundi</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option0">
+                        <value>Mtoto wa Kike/Kiume</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option1">
+                        <value>Kaka/Dada</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option2">
+                        <value>Mjukuu</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option3">
+                        <value>Hakuna Uhusiano</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option4">
+                        <value>Uhusiano Mwingine</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option5">
+                        <value>Sijui</value>
+                    </text>
+                </translation>
+                <translation lang="English">
+                    <text id="/data/motherId:label">
+                        <value>Mother Id</value>
+                    </text>
+                    <text id="/data/motherId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/fatherId:label">
+                        <value>Father Id</value>
+                    </text>
+                    <text id="/data/fatherId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/visitId:label">
+                        <value>Visit Id</value>
+                    </text>
+                    <text id="/data/visitId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/fieldWorkerId:label">
+                        <value>Field Worker Id</value>
+                    </text>
+                    <text id="/data/fieldWorkerId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/recordedDate:label">
+                        <value>Outcome Date</value>
+                    </text>
+                    <text id="/data/recordedDate:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes:label">
+                        <value>Outcomes</value>
+                    </text>
+                    <text id="/data/outcomes/outcomeType:label">
+                        <value>Outcome Type</value>
+                    </text>
+                    <text id="/data/outcomes/outcomeType:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/outcomeType:option0">
+                        <value>Live Birth</value>
+                    </text>
+                    <text id="/data/outcomes/outcomeType:option1">
+                        <value>Still Birth</value>
+                    </text>
+                    <text id="/data/outcomes/outcomeType:option2">
+                        <value>Miscarriage</value>
+                    </text>
+                    <text id="/data/outcomes/outcomeType:option3">
+                        <value>Abortion</value>
+                    </text>
+                    <text id="/data/outcomes/childId:label">
+                        <value>Child Id</value>
+                    </text>
+                    <text id="/data/outcomes/childId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/firstName:label">
+                        <value>First Name</value>
+                    </text>
+                    <text id="/data/outcomes/firstName:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/middleName:label">
+                        <value>Middle Name</value>
+                    </text>
+                    <text id="/data/outcomes/middleName:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/lastName:label">
+                        <value>Last Name</value>
+                    </text>
+                    <text id="/data/outcomes/lastName:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/gender:label">
+                        <value>Gender</value>
+                    </text>
+                    <text id="/data/outcomes/gender:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/gender:option0">
+                        <value>Male</value>
+                    </text>
+                    <text id="/data/outcomes/gender:option1">
+                        <value>Female</value>
+                    </text>
+                    <text id="/data/partialDate:label">
+                        <value>Partial Date</value>
+                    </text>
+                    <text id="/data/partialDate:hint">
+                        <value />
+                    </text>
+                    <text id="/data/partialDate:option0">
+                        <value>Exact</value>
+                    </text>
+                    <text id="/data/partialDate:option1">
+                        <value>Approximate</value>
+                    </text>
+                    <text id="/data/outcomes/socialGroupId:label">
+                        <value>Social Group Id</value>
+                    </text>
+                    <text id="/data/outcomes/socialGroupId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:label">
+                        <value>Relationship to Group Head</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:hint">
+                        <value />
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option0">
+                        <value>Son/Daughter</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option1">
+                        <value>Brother/Sister</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option2">
+                        <value>Grandchild</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option3">
+                        <value>Not Related</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option4">
+                        <value>Other Relative</value>
+                    </text>
+                    <text id="/data/outcomes/relationshipToGroupHead:option5">
+                        <value>Don't Know</value>
+                    </text>
+                </translation>
+				
+            </itext>
+			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+            <bind nodeset="/data/processedByMirth" type="boolean" required="true()" />
+            <bind nodeset="/data/nboutcomes" type="int" required="true()" />
+            <bind nodeset="/data/motherId" readonly="true()" type="string" required="true()" />
+            <bind nodeset="/data/fatherId" readonly="true()" type="string" required="true()" />
+            <bind nodeset="/data/visitId" readonly="true()" type="string" required="true()" />
+            <bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" />
+            <bind nodeset="/data/recordedDate" constraint=". &lt;= today()" type="date" required="true()" />
+            <bind nodeset="/data/outcomes/outcomeType" type="select1" required="true()" />
+            <bind nodeset="/data/outcomes/childId" readonly="true()" relevant="/data/outcomes/outcomeType = 'LBR'" type="string"
+                required="true()" />
+            <bind nodeset="/data/outcomes/firstName" relevant="/data/outcomes/outcomeType = 'LBR'" type="string"
+                required="true()" />
+            <bind nodeset="/data/outcomes/middleName" relevant="/data/outcomes/outcomeType = 'LBR'" type="string"
+                required="true()" />
+            <bind nodeset="/data/outcomes/lastName" relevant="/data/outcomes/outcomeType = 'LBR'" type="string"
+                required="true()" />
+            <bind nodeset="/data/outcomes/gender" relevant="/data/outcomes/outcomeType = 'LBR'" type="select1"
+                required="true()" />
+            <bind nodeset="/data/partialDate" type="select1"
+                required="true()" />
+            <bind nodeset="/data/outcomes/socialGroupId" readonly="true()" relevant="/data/outcomes/outcomeType = 'LBR'" type="string"
+                required="true()" />
+            <bind nodeset="/data/outcomes/relationshipToGroupHead" relevant="/data/outcomes/outcomeType = 'LBR'"
+                type="select1" />
+        </model>
+    </h:head>
+    <h:body>
+        <input ref="/data/motherId">
+            <label ref="jr:itext('/data/motherId:label')" />
+            <hint ref="jr:itext('/data/motherId:hint')" />
+        </input>
+        <input ref="/data/fatherId">
+            <label ref="jr:itext('/data/fatherId:label')" />
+            <hint ref="jr:itext('/data/fatherId:hint')" />
+        </input>
+        <input ref="/data/visitId">
+            <label ref="jr:itext('/data/visitId:label')" />
+            <hint ref="jr:itext('/data/visitId:hint')" />
+        </input>
+        <input ref="/data/fieldWorkerId">
+            <label ref="jr:itext('/data/fieldWorkerId:label')" />
+            <hint ref="jr:itext('/data/fieldWorkerId:hint')" />
+        </input>
+        <input ref="/data/recordedDate">
+            <label ref="jr:itext('/data/recordedDate:label')" />
+            <hint ref="jr:itext('/data/recordedDate:hint')" />
+        </input>
+         <select1 ref="/data/partialDate">
+                    <label ref="jr:itext('/data/partialDate:label')" />
+                    <hint ref="jr:itext('/data/partialDate:hint')" />
+                    <item>
+                        <label ref="jr:itext('/data/partialDate:option0')" />
+                        <value>1</value>
+                    </item>
+                    <item>
+                        <label ref="jr:itext('/data/partialDate:option1')" />
+                        <value>2</value>
+                    </item>
+                </select1>
+        <group>
+            <label ref="jr:itext('/data/outcomes:label')" />
+            <repeat nodeset="/data/outcomes" jr:count="/data/nboutcomes">
+                <select1 ref="/data/outcomes/outcomeType">
+                    <label ref="jr:itext('/data/outcomes/outcomeType:label')" />
+                    <hint ref="jr:itext('/data/outcomes/outcomeType:hint')" />
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/outcomeType:option0')" />
+                        <value>LBR</value>
+                    </item>
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/outcomeType:option1')" />
+                        <value>SBR</value>
+                    </item>
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/outcomeType:option2')" />
+                        <value>MIS</value>
+                    </item>
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/outcomeType:option3')" />
+                        <value>ABT</value>
+                    </item>
+                </select1>
+                <input ref="/data/outcomes/childId">
+                    <label ref="jr:itext('/data/outcomes/childId:label')" />
+                    <hint ref="jr:itext('/data/outcomes/childId:hint')" />
+                </input>
+                <input ref="/data/outcomes/firstName">
+                    <label ref="jr:itext('/data/outcomes/firstName:label')" />
+                    <hint ref="jr:itext('/data/outcomes/firstName:hint')" />
+                </input>
+                <input ref="/data/outcomes/middleName">
+                    <label ref="jr:itext('/data/outcomes/middleName:label')" />
+                    <hint ref="jr:itext('/data/outcomes/middleName:hint')" />
+                </input>
+                <input ref="/data/outcomes/lastName">
+                    <label ref="jr:itext('/data/outcomes/lastName:label')" />
+                    <hint ref="jr:itext('/data/outcomes/lastName:hint')" />
+                </input>
+                <select1 ref="/data/outcomes/gender">
+                    <label ref="jr:itext('/data/outcomes/gender:label')" />
+                    <hint ref="jr:itext('/data/outcomes/gender:hint')" />
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/gender:option0')" />
+                        <value>M</value>
+                    </item>
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/gender:option1')" />
+                        <value>F</value>
+                    </item>
+                </select1>
+                <input ref="/data/outcomes/socialGroupId">
+                    <label ref="jr:itext('/data/outcomes/socialGroupId:label')" />
+                    <hint ref="jr:itext('/data/outcomes/socialGroupId:hint')" />
+                </input>
+                <select1 ref="/data/outcomes/relationshipToGroupHead">
+                    <label ref="jr:itext('/data/outcomes/relationshipToGroupHead:label')" />
+                    <hint ref="jr:itext('/data/outcomes/relationshipToGroupHead:hint')" />
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option0')" />
+                        <value>2</value>
+                    </item>
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option1')" />
+                        <value>3</value>
+                    </item>
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option2')" />
+                        <value>5</value>
+                    </item>
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option3')" />
+                        <value>6</value>
+                    </item>
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option4')" />
+                        <value>7</value>
+                    </item>
+                    <item>
+                        <label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option5')" />
+                        <value>8</value>
+                    </item>
+                </select1>
+            </repeat>
+        </group>
+    </h:body>
+</h:html>
