@@ -20,7 +20,45 @@
 				</data>
 			</instance>
 			<itext>
-				<translation lang="eng">
+			<translation lang="Swahili">
+					<text id="/data/individualId:label">
+						<value>Nambari ya Mwanakaya</value>
+					</text>
+					<text id="/data/individualId:hint">
+						<value />
+					</text>
+					<text id="/data/fieldWorkerId:label">
+						<value>Nambari ya Mhojaji</value>
+					</text>
+					<text id="/data/fieldWorkerId:hint">
+						<value />
+					</text>
+					<text id="/data/visitId:label">
+						<value>Nambari ya Hudhurio</value>
+					</text>
+					<text id="/data/visitId:hint">
+						<value />
+					</text>
+					<text id="/data/dateOfDeath:label">
+						<value>Tarehe ya Kifo</value>
+					</text>
+					<text id="/data/dateOfDeath:hint">
+						<value />
+					</text>
+					<text id="/data/placeOfDeath:label">
+						<value>Eneo la Kifo</value>
+					</text>
+					<text id="/data/placeOfDeath:hint">
+						<value />
+					</text>
+					<text id="/data/causeOfDeath:label">
+						<value>Sababu ya Kifo</value>
+					</text>
+					<text id="/data/causeOfDeath:hint">
+						<value />
+					</text>
+				</translation>
+				<translation lang="English">
 					<text id="/data/individualId:label">
 						<value>Individual Id</value>
 					</text>
