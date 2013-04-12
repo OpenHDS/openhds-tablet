@@ -18,7 +18,51 @@
                 </data>
             </instance>
             <itext>
-                <translation lang="eng">
+			<translation lang="Swahili">
+                    <text id="/data/hierarchyId:label">
+                        <value>Kijiji</value>
+                    </text>
+                    <text id="/data/hierarchyId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/fieldWorkerId:label">
+                        <value>Nambari ya Mhojaji</value>
+                    </text>
+                    <text id="/data/fieldWorkerId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/locationId:label">
+                        <value>Nambari ya Kaya</value>
+                    </text>
+                    <text id="/data/locationId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/locationName:label">
+                        <value>Jina la Kaya</value>
+                    </text>
+                    <text id="/data/locationName:hint">
+                        <value />
+                    </text>
+                    <text id="/data/locationType:label">
+                        <value>Aina ya Kaya</value>
+                    </text>
+                    <text id="/data/locationType:hint">
+                        <value />
+                    </text>
+                    <text id="/data/locationType:option0">
+                        <value>Kijijini</value>
+                    </text>
+                    <text id="/data/locationType:option1">
+                        <value>Mjini</value>
+                    </text>
+                    <text id="/data/geopoint:label">
+                        <value>Geopoint</value>
+                    </text>
+                    <text id="/data/geopoint:hint">
+                        <value />
+                    </text>
+                </translation>
+                <translation lang="English">
                     <text id="/data/hierarchyId:label">
                         <value>Village</value>
                     </text>
