@@ -53,6 +53,8 @@ public class PregnancyOutcomeUpdate implements Updatable {
                 cv.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_LASTNAME, child.getLastName());
                 cv.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_MOTHER, child.getMother());
                 cv.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE, residency);
+                cv.put(OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE, "NA");
+
                 
                 resolver.insert(OpenHDS.Individuals.CONTENT_ID_URI_BASE, cv);
                 

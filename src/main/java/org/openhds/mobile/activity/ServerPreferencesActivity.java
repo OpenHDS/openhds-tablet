@@ -17,7 +17,8 @@ public class ServerPreferencesActivity extends PreferenceActivity implements OnS
     public static String OPENHDS_KEY_USERNAME = "openhdsusername";
     public static String OPENHDS_KEY_PASSWORD = "openhdspassword";
     
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.layout.preferences);
@@ -30,6 +31,23 @@ public class ServerPreferencesActivity extends PreferenceActivity implements OnS
     }
     
     private void updateInterop(String server) {
+        @SuppressWarnings("deprecation")
+		EditTextPreference etp = (EditTextPreference) this.getPreferenceScreen().findPreference(server);
+        
+        String s = etp.getText().trim();
+
+        if (UrlUtils.isValidUrl(s)) {
+            etp.setText(s);
+            etp.setSummary(s);
+        } 
+        else {
+            etp.setText((String) etp.getSummary());
+            Toast.makeText(getApplicationContext(), getString(R.string.url_error), Toast.LENGTH_SHORT).show();
+        }
+    }
+    
+    @SuppressWarnings("deprecation")
+	private void updateServer(String server) {
         EditTextPreference etp = (EditTextPreference) this.getPreferenceScreen().findPreference(server);
         
         String s = etp.getText().trim();
@@ -44,27 +62,14 @@ public class ServerPreferencesActivity extends PreferenceActivity implements OnS
         }
     }
     
-    private void updateServer(String server) {
-        EditTextPreference etp = (EditTextPreference) this.getPreferenceScreen().findPreference(server);
-        
-        String s = etp.getText().trim();
-
-        if (UrlUtils.isValidUrl(s)) {
-            etp.setText(s);
-            etp.setSummary(s);
-        } 
-        else {
-            etp.setText((String) etp.getSummary());
-            Toast.makeText(getApplicationContext(), getString(R.string.url_error), Toast.LENGTH_SHORT).show();
-        }
-    }
-    
-    private void updateUsername(String username) {
+    @SuppressWarnings("deprecation")
+	private void updateUsername(String username) {
         EditTextPreference etp = (EditTextPreference) this.getPreferenceScreen().findPreference(username);
         etp.setSummary(etp.getText());
     }
     
-    private void updatePassword(String password) {
+    @SuppressWarnings("deprecation")
+	private void updatePassword(String password) {
         EditTextPreference etp = (EditTextPreference) this.getPreferenceScreen().findPreference(password);
         etp.setText(etp.getText());
     }

@@ -28,6 +28,8 @@ public class InternalInMigrationUpdate implements Updatable {
 
             ContentValues cv = new ContentValues();
             cv.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE, individual.getCurrentResidence());
+            cv.put(OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE, "NA");
+
             Cursor cursor = resolver.query(OpenHDS.Individuals.CONTENT_ID_URI_BASE,
                     new String[] { OpenHDS.Individuals._ID }, OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " = ?",
                     new String[] { individual.getExtId() }, null);
@@ -38,7 +40,7 @@ public class InternalInMigrationUpdate implements Updatable {
             
             cursor.close();
         } catch (FileNotFoundException e) {
-            Log.e(ExternalInMigrationUpdate.class.getName(), "Could not read In Migration XML file");
+            Log.e(InternalInMigrationUpdate.class.getName(), "Could not read In Migration XML file");
         }
     }
 
