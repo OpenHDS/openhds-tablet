@@ -101,6 +101,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private AlertDialog xformUnfinishedDialog;
     private boolean showingProgress;
     private Updatable updatable;
+    private boolean extInm;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -291,6 +292,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showProgressFragment();
         Individual individual = (Individual) data.getExtras().getSerializable("individual");
+        extInm= false;
+
 
         new CreateInternalInMigrationTask(individual).execute();
         locationVisit.setSelectedIndividual(individual);
@@ -300,7 +303,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private class CreateInternalInMigrationTask extends AsyncTask<Void, Void, Void> {
 
         private Individual individual;
-
+        
         public CreateInternalInMigrationTask(Individual individual) {
             this.individual = individual;
         }
@@ -434,7 +437,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             if (result) {
             	if (stateMachine.getState()==State.INMIGRATION) {
             		stateMachine.transitionTo(State.SELECT_EVENT);
-            	} else {
+            	} else if (stateMachine.getState()==State.SELECT_INDIVIDUAL) {
+            		if (extInm)
+                		onFinishExternalInmigration();
+            	}else {
             		stateMachine.transitionTo(State.SELECT_INDIVIDUAL);
             	}
             } else {
@@ -760,7 +766,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialogBuilder.setNegativeButton("External", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 showProgressFragment();
+                extInm= true;
                 new CreateExternalInmigrationTask().execute();
+
             }
         });
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -773,7 +781,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         protected Void doInBackground(Void... params) {
             String id = locationVisit.generateIndividualId(getContentResolver());
             filledForm = formFiller.fillExternalInmigration(locationVisit, id);
-            updatable = new ExternalInMigrationUpdate();
+            updatable = new ExternalInMigrationUpdate();            
             return null;
         }
 
@@ -781,8 +789,20 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         protected void onPostExecute(Void result) {
             hideProgressFragment();
             buildMotherDialog();
-        }
+         }
+
+
     }
+    
+	private void onFinishExternalInmigration() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("External Inmigration");
+        alertDialogBuilder.setMessage("Please, now create a Membership for the individual");
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setPositiveButton("Ok", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();			
+	}
 
     private void buildMotherDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
