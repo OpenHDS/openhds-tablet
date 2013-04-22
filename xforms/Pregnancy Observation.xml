@@ -518,8 +518,9 @@
 			<bind nodeset="/data/individualId" readonly="true()" type="string" required="true()" />
 			<bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
 			<bind nodeset="/data/visitId" type="string" readonly="true()" required="true()" />
-			<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()" constraint=". &gt;= today()" 
-					jr:constraintMsg="Expected delivery date cannot be before today."  />
+					<!--<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()" constraint=". &gt;= today()" 
+					jr:constraintMsg="Expected delivery date cannot be before today."  />-->
+				<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()"	calculate="if(../pregNotes = 3,/data/lastPeriodInterviewee,/data/lastPeriodFromPregNotes)"/>
 			<bind nodeset="/data/estimatedAgeOfPreg" type="int" required="true()" />
 			<bind nodeset="/data/pregNotes" type="select1" required="true()" />
 			<bind nodeset="/data/ageOfPregFromPregNotes" type="int" constraint=". &lt;=9" jr:constraintMsg="Miezi haiwezi kuzidi 9" relevant="../pregNotes = 1 or ../pregNotes = 2" required="true()" />
@@ -559,10 +560,7 @@
 			<label ref="jr:itext('/data/estimatedAgeOfPreg:label')" />
 			<hint ref="jr:itext('/data/estimatedAgeOfPreg:hint')" />
 		</input>
-		<!--<input ref="/data/expectedDeliveryDate">
-            <label ref="jr:itext('/data/expectedDeliveryDate:label')" />
-            <hint ref="jr:itext('/data/expectedDeliveryDate:hint')" />
-        </input>-->
+
 
 		<select1 ref="/data/pregNotes">
 			<label ref="jr:itext('/data/havePregNotes:label')" />
@@ -583,6 +581,10 @@
 			<label ref="jr:itext('/data/lastPeriodFromPregNotes:label')" />
 			<hint ref="jr:itext('/data/lastPeriodFromPregNotes:hint')" />
 		</input>
+			<!--	<input ref="/data/expectedDeliveryDate">
+            <label ref="jr:itext('/data/expectedDeliveryDate:label')" />
+            <hint ref="jr:itext('/data/expectedDeliveryDate:hint')" />
+        </input>-->
 		<select1 ref="/data/hasANCClinicVisit">
 			<label ref="jr:itext('/data/hasANCClinicVisit:label')" />
 			<hint ref="jr:itext('/data/hasANCClinicVisit:hint')" />
