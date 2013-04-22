@@ -210,6 +210,12 @@
 					<text id="/data/male:hint">
 						<value></value>
 					</text>
+					<text id="/data/female:label">
+						<value>Female</value>
+					</text>
+					<text id="/data/female:hint">
+						<value></value>
+					</text>
 					<text id="/data/home:label">
 						<value>Home</value>
 					</text>
@@ -315,7 +321,7 @@
 			<bind nodeset="/data/deathVillage" required="true()" relevant="../deathWithinDSS = 1" type="string"/>
 			<bind nodeset="/data/placeOfDeathOutOfDSS" required="true()" relevant="../deathWithinDSS = 2" type="string"/>
 			<bind nodeset="/data/haveDeathCertificate" required="true()" type="select1"/>			
-			<bind nodeset="/data/dateOfDeath" type="date" required="true()" />
+			<bind nodeset="/data/dateOfDeath" constraint=". &lt;= today()" type="date" required="true()" />
 			<bind nodeset="/data/placeOfDeath" type="select1" required="true()" />
 			<bind nodeset="/data/placeOfDeathOther" relevant="../placeOfDeath = 'OTHER'" type="string" required="true()" />			
 		</model>
