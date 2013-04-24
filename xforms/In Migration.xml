@@ -309,7 +309,7 @@
                 type="date" required="true()" />
             <bind nodeset="/data/individualInfo/partialDate" relevant="/data/migrationType = 'EXTERNAL_INMIGRATION'"
                 type="select1" required="true()" />
-            <bind nodeset="/data/dateOfMigration" constraint=". &lt;= today() and . &gt;= /data/individualInfo/dateOfBirth" type="date" required="true()" />
+            <bind nodeset="/data/dateOfMigration" constraint="if(/data/migrationType = 'EXTERNAL_INMIGRATION',. &lt;= today() and . &gt;= /data/individualInfo/dateOfBirth, . &lt;= today())" type="date" required="true()" />
             <bind nodeset="/data/origin" type="string" required="true()" />
             <bind nodeset="/data/reason" type="select1" required="true()" />
             			<bind nodeset="/data/reasonOther" relevant="../reason = 'OTHER'" type="string" required="true()" />
