@@ -197,7 +197,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             String[] args = buildArguments(arg1);
 
             return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter, args,
-                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " ASC");
+                    OpenHDS.Individuals._ID + " ASC");
         case INDIVIDUAL18_FILTER_LOADER:
             adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
 
@@ -209,7 +209,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             //filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13";
             filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13 AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"!='OMG'";
             return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter2, args2,
-                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " ASC");
+                    OpenHDS.Individuals._ID + " ASC");
         case INDIMG_FILTER_LOADER:
             adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
 
@@ -217,7 +217,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             String[] args1 = buildArguments(arg1);
 
             return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter1, args1,
-                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " ASC");
+                    OpenHDS.Individuals._ID + " ASC");
         }
 
         return null;
