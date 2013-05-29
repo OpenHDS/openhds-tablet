@@ -17,7 +17,54 @@
                 </data>
             </instance>
             <itext>
-                <translation lang="eng">
+			<translation lang="Swahili">
+                    <text id="/data/individualA:label">
+                        <value>Mwanakaya A</value>
+                    </text>
+                    <text id="/data/individualA:hint">
+                        <value />
+                    </text>
+                    <text id="/data/individualB:label">
+                        <value>Mwanakaya B</value>
+                    </text>
+                    <text id="/data/individualB:hint">
+                        <value />
+                    </text>
+                    <text id="/data/fieldWorkerId:label">
+                        <value>Nambari ya Mhojaji</value>
+                    </text>
+                    <text id="/data/fieldWorkerId:hint">
+                        <value />
+                    </text>
+                    <text id="/data/relationshipType:label">
+                        <value>Aina ya Uhusiano</value>
+                    </text>
+                    <text id="/data/relationshipType:hint">
+                        <value />
+                    </text>
+                    <text id="/data/relationshipType:option0">
+                        <value>Hawajawahi Oana</value>
+                    </text>
+                    <text id="/data/relationshipType:option1">
+                        <value>Wameoana</value>
+                    </text>
+                    <text id="/data/relationshipType:option2">
+                        <value>Wametengana/Talakiana</value>
+                    </text>
+                    <text id="/data/relationshipType:option3">
+                        <value>Mjane</value>
+                    </text>
+                    <text id="/data/relationshipType:option4">
+                        <value>Ishi Pamoja</value>
+                    </text>
+                    <text id="/data/startDate:label">
+                        <value>Tarehe ya kuanza</value>
+                    </text>
+                    <text id="/data/startDate:hint">
+                        <value />
+                    </text>
+                </translation>
+                <translation lang="English">
                     <text id="/data/individualA:label">
                         <value>Individual A</value>
                     </text>
