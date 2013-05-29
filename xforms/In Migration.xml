@@ -8,7 +8,7 @@
 				<meta>
 					<instanceID/>
 				</meta>
-				
+				                    <start />
                     <processedByMirth />
                     <migrationType />
                     <locationId />
@@ -29,6 +29,7 @@
                     <origin />
                     <reason />
                     <reasonOther/>
+                    <end />
                 </data>
             </instance>
             <itext>
@@ -288,6 +289,7 @@
             </itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
             <bind nodeset="/data/processedByMirth" type="boolean" required="true()" />
+						<bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>            
             <bind nodeset="/data/migrationType" type="string" required="true()" />
             <bind nodeset="/data/locationId" type="string" readonly="true()" required="true()" />
             <bind nodeset="/data/visitId" type="string" readonly="true()" required="true()" />
@@ -309,10 +311,11 @@
                 type="date" required="true()" />
             <bind nodeset="/data/individualInfo/partialDate" relevant="/data/migrationType = 'EXTERNAL_INMIGRATION'"
                 type="select1" required="true()" />
-            <bind nodeset="/data/dateOfMigration" constraint=". &lt;= today()" type="date" required="true()" />
+            <bind nodeset="/data/dateOfMigration" constraint="if(/data/migrationType = 'EXTERNAL_INMIGRATION',. &lt;= today() and . &gt;= /data/individualInfo/dateOfBirth, . &lt;= today())" type="date" required="true()" />
             <bind nodeset="/data/origin" type="string" required="true()" />
             <bind nodeset="/data/reason" type="select1" required="true()" />
             			<bind nodeset="/data/reasonOther" relevant="../reason = 'OTHER'" type="string" required="true()" />
+						<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>           			
 
         </model>
     </h:head>

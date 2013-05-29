@@ -130,9 +130,9 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
         creds = new UsernamePasswordCredentials(username, password);
 
         HttpParams httpParameters = new BasicHttpParams();
-        HttpConnectionParams.setConnectionTimeout(httpParameters, 100000);
-        HttpConnectionParams.setSoTimeout(httpParameters, 100000);
-        HttpConnectionParams.setSocketBufferSize(httpParameters, 240);
+        HttpConnectionParams.setConnectionTimeout(httpParameters, 60000);
+        HttpConnectionParams.setSoTimeout(httpParameters, 90000);
+        HttpConnectionParams.setSocketBufferSize(httpParameters, 8192);
         client = new DefaultHttpClient(httpParameters);
 
         // at this point, we don't care to be smart about which data to

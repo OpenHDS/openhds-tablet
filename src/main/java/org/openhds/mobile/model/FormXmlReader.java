@@ -69,6 +69,24 @@ public class FormXmlReader {
         return null;
     }
 
+    
+    public Membership readMembership(InputStream input) {
+        try {
+            Membership membership = new Membership();
+            Document doc = buildDocument(input);
+            membership.setIndExtId(xpath.evaluate("/data/individualId/text()", doc));
+            membership.setGroupextId(xpath.evaluate("/data/householdId/text()", doc));
+           
+            return membership;
+        } catch (ParserConfigurationException e) {
+        } catch (SAXException e) {
+        } catch (IOException e) {
+        } catch (XPathExpressionException e) {
+        }
+        return null;
+    }
+    
+    
     public SocialGroup readSocialGroup(InputStream input) {
         try {
             Document doc = buildDocument(input);

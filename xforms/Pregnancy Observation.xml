@@ -8,6 +8,7 @@
 					<meta>
 						<instanceID/>
 					</meta>
+					<start />
 					<estimatedAgeOfPreg/>
 					<pregNotes/>
 					<ageOfPregFromPregNotes/>
@@ -30,6 +31,7 @@
 					<visitId />
 					<expectedDeliveryDate />
 					<recordedDate />
+					<end />
 				</data>
 			</instance>
 			<itext>
@@ -182,7 +184,7 @@
 						<value />
 					</text>
 					<text id="/data/individualId:label">
-						<value>Perm ID</value>
+						<value>PERM Id</value>
 					</text>
 					<text id="/data/individualId:hint">
 						<value />
@@ -273,16 +275,34 @@
 					</text>
 				</translation>
 				<translation lang="English">
-					<text id="/data/cousin:label">
-						<value>Cousin</value>
-					</text>
-					<text id="/data/cousin:hint">
-						<value />
-					</text>
 					<text id="/data/hasANCClinicVisit:label">
 						<value>Have you been to an ANC clinic?</value>
 					</text>
 					<text id="/data/hasANCClinicVisit:hint">
+						<value />
+					</text>
+					<text id="/data/haveMosquitoNet:label">
+						<value>Do you have a mosquito net?</value>
+					</text>
+					<text id="/data/haveMosquitoNet:hint">
+						<value />
+					</text>
+					<text id="/data/years:label">
+						<value>Years</value>
+					</text>
+					<text id="/data/years:hint">
+						<value />
+					</text>
+					<text id="/data/months:label">
+						<value>Months</value>
+					</text>
+					<text id="/data/months:hint">
+						<value />
+					</text>
+					<text id="/data/cousin:label">
+						<value>Cousin</value>
+					</text>
+					<text id="/data/cousin:hint">
 						<value />
 					</text>
 					<text id="/data/self:label">
@@ -303,20 +323,8 @@
 					<text id="/data/fellowWife:hint">
 						<value>In the case of a polygamous marriage</value>
 					</text>
-					<text id="/data/parentsInLaw:label">
-						<value>Mother/Father in law</value>
-					</text>
-					<text id="/data/parentsInLaw:hint">
-						<value />
-					</text>
-					<text id="/data/inlaws:label">
-						<value>Brother/Sister in law</value>
-					</text>
-					<text id="/data/inlaws:hint">
-						<value />
-					</text>
 					<text id="/data/grandparent:label">
-						<value>Parent</value>
+						<value>Grand parent</value>
 					</text>
 					<text id="/data/grandparent:hint">
 						<value />
@@ -339,10 +347,16 @@
 					<text id="/data/grandchild:hint">
 						<value />
 					</text>
-					<text id="/data/inlaw:label">
+					<text id="/data/parentsInLaw:label">
+						<value>Mother/Father in law</value>
+					</text>
+					<text id="/data/parentsInLaw:hint">
+						<value />
+					</text>
+					<text id="/data/inlaws:label">
 						<value>Inlaw</value>
 					</text>
-					<text id="/data/inlaw:hint">
+					<text id="/data/inlaws:hint">
 						<value />
 					</text>
 					<text id="/data/sibling:label">
@@ -364,18 +378,6 @@
 						<value>Is the net from PLAN?</value>
 					</text>
 					<text id="/data/sourceOfNet:hint">
-						<value />
-					</text>
-					<text id="/data/years:label">
-						<value>Years</value>
-					</text>
-					<text id="/data/years:hint">
-						<value />
-					</text>
-					<text id="/data/months:label">
-						<value>Months</value>
-					</text>
-					<text id="/data/months:hint">
 						<value />
 					</text>
 					<text id="/data/monthsOrYears:label">
@@ -421,7 +423,7 @@
 						<value />
 					</text>
 					<text id="/data/individualId:label">
-						<value>Mother Id</value>
+						<value>PERM Id</value>
 					</text>
 					<text id="/data/individualId:hint">
 						<value />
@@ -460,7 +462,7 @@
 						<value>Age of pregnancy from pregnancy notes</value>
 					</text>
 					<text id="/data/ageOfPregFromPregNotes:hint">
-						<value>Miezi</value>
+						<value>Months</value>
 					</text>
 					<text id="/data/lastPeriodInterviewee:label">
 						<value>Last period date</value>
@@ -510,22 +512,18 @@
 					<text id="/data/recordedDate:hint">
 						<value />
 					</text>
-					<text id="/data/haveMosquitoNet:label">
-						<value>Do you have a mosquito net?</value>
-					</text>
-					<text id="/data/haveMosquitoNet:hint">
-						<value />
-					</text>
 				</translation>
 				
 			</itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/> 
-			<bind nodeset="/data/processedByMirth" type="boolean" />
-			<bind nodeset="/data/individualId" readonly="true()" type="string" required="true()" />
+            <bind nodeset="/data/processedByMirth" type="boolean" required="true()" />
+						<bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>    
+					<bind nodeset="/data/individualId" readonly="true()" type="string" required="true()" />
 			<bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
 			<bind nodeset="/data/visitId" type="string" readonly="true()" required="true()" />
-			<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()" constraint=". &gt;= today()" 
-					jr:constraintMsg="Expected delivery date cannot be before today."  />
+					<!--<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()" constraint=". &gt;= today()" 
+					jr:constraintMsg="Expected delivery date cannot be before today."  />-->
+				<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()"	calculate="if(../pregNotes = 3,/data/lastPeriodInterviewee,/data/lastPeriodFromPregNotes)"/>
 			<bind nodeset="/data/estimatedAgeOfPreg" type="int" required="true()" />
 			<bind nodeset="/data/pregNotes" type="select1" required="true()" />
 			<bind nodeset="/data/ageOfPregFromPregNotes" type="int" constraint=". &lt;=9" jr:constraintMsg="Miezi haiwezi kuzidi 9" relevant="../pregNotes = 1 or ../pregNotes = 2" required="true()" />
@@ -546,6 +544,8 @@
 			
 			<!--<bind nodeset="/data/recordedDate" type="date" readonly="true()" required="true()" />-->
 			<bind nodeset="/data/recordedDate" type="date" jr:preload="date"  jr:preloadParams="today"/>
+	    <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>    
+
 		</model>
 	</h:head>
 	<h:body>
@@ -565,10 +565,7 @@
 			<label ref="jr:itext('/data/estimatedAgeOfPreg:label')" />
 			<hint ref="jr:itext('/data/estimatedAgeOfPreg:hint')" />
 		</input>
-		<!--<input ref="/data/expectedDeliveryDate">
-            <label ref="jr:itext('/data/expectedDeliveryDate:label')" />
-            <hint ref="jr:itext('/data/expectedDeliveryDate:hint')" />
-        </input>-->
+
 
 		<select1 ref="/data/pregNotes">
 			<label ref="jr:itext('/data/havePregNotes:label')" />
@@ -589,6 +586,10 @@
 			<label ref="jr:itext('/data/lastPeriodFromPregNotes:label')" />
 			<hint ref="jr:itext('/data/lastPeriodFromPregNotes:hint')" />
 		</input>
+			<!--	<input ref="/data/expectedDeliveryDate">
+            <label ref="jr:itext('/data/expectedDeliveryDate:label')" />
+            <hint ref="jr:itext('/data/expectedDeliveryDate:hint')" />
+        </input>-->
 		<select1 ref="/data/hasANCClinicVisit">
 			<label ref="jr:itext('/data/hasANCClinicVisit:label')" />
 			<hint ref="jr:itext('/data/hasANCClinicVisit:hint')" />

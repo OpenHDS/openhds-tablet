@@ -9,6 +9,7 @@
 					<meta>
 						<instanceID/>
 					</meta>
+					          <start />
                     <individualId />
                     <fieldWorkerId />
                     <visitId />
@@ -16,6 +17,7 @@
                     <nameOfDestination />
                     <reasonForOutMigration />
 					<reasonForOutMigrationOther/>
+					<end />
                 </data>
             </instance>
             <itext>
@@ -135,6 +137,7 @@
             </itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
             <bind nodeset="/data/processedByMirth" type="boolean" />
+            <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>    
             <bind nodeset="/data/individualId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/visitId" readonly="true()" type="string" required="true()" />
@@ -142,7 +145,8 @@
             <bind nodeset="/data/nameOfDestination"  type="string" required="true()" />
             <bind nodeset="/data/reasonForOutMigration" type="select1" required="true()" />
 			<bind nodeset="/data/reasonForOutMigrationOther" relevant="../reasonForOutMigration = 'OTHER'" type="string" required="true()" />
-        </model>
+        		<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>    
+       </model>
     </h:head>
     <h:body>
         <input ref="/data/individualId">
