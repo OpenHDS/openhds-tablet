@@ -10,6 +10,7 @@
 				<instanceID/>
 			</meta>
                     <processedByMirth>0</processedByMirth>
+                    <start />
                     <motherId />
                     <fatherId />
                     <visitId />
@@ -28,6 +29,7 @@
                         <relationshipToGroupHead />
                     </outcomes>
                     <recordedDate />
+                    <end />
                 </data>
             </instance>
             <itext>
@@ -297,6 +299,7 @@
             </itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
             <bind nodeset="/data/processedByMirth" type="boolean" required="true()" />
+						<bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>        				
             <bind nodeset="/data/nboutcomes" type="int" required="true()" />
             <bind nodeset="/data/motherId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/fatherId" readonly="true()" type="string" required="true()" />
@@ -320,6 +323,7 @@
                 required="true()" />
             <bind nodeset="/data/outcomes/relationshipToGroupHead" relevant="/data/outcomes/outcomeType = 'LBR'"
                 type="select1" />
+						<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>        				
         </model>
     </h:head>
     <h:body>

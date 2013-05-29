@@ -9,6 +9,7 @@
 					<meta>
 						<instanceID/>
 					</meta>
+					          <start />
                     <visitId />
                     <fieldWorkerId />
                     <locationId />
@@ -17,7 +18,7 @@
                      <intervieweeId/>
 								    <farmhouse>1</farmhouse> 
                     <coordinates/>
-
+                    <end />
                 </data>
             </instance>
             <itext>
@@ -124,6 +125,7 @@
 
             </itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+            <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>        				
             <bind nodeset="/data/processedByMirth" readonly="true()" type="boolean" />
             <bind nodeset="/data/visitId" type="string" readonly="true()" required="true()" />
             <bind nodeset="/data/fieldWorkerId" type="string" readonly="true()" required="true()" />
@@ -133,6 +135,8 @@
             <bind nodeset="/data/intervieweeId" readonly="true()" required="true()" type="string"/>
             <bind nodeset="/data/farmhouse" required="true()" type="select1"/>
             <bind nodeset="/data/coordinates" relevant="selected(/data/farmhouse, '1')" required="true()" type="geopoint"/>
+            <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>        				
+
         </model>
     </h:head>
     <h:body>

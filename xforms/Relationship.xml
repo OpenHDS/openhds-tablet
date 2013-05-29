@@ -8,12 +8,14 @@
 				<meta>
 					<instanceID/>
 				</meta>
+				            <start />
                     <processedByMirth />
                     <individualA />
                     <individualB />
                     <fieldWorkerId />
                     <relationshipType />
                     <startDate />
+                    <end />
                 </data>
             </instance>
             <itext>
@@ -67,11 +69,13 @@
             </itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
             <bind nodeset="/data/processedByMirth" type="boolean" />
+						<bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>        				
             <bind nodeset="/data/individualA" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/individualB" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/relationshipType" type="select1" required="true()" />
             <bind nodeset="/data/startDate" type="date" constraint=". &lt;= today()" />
+						<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>        				
         </model>
     </h:head>
     <h:body>

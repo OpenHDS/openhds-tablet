@@ -9,12 +9,14 @@
 					<meta>
 						<instanceID/>
 					</meta>
+                    <start />
                     <hierarchyId />
                     <fieldWorkerId />
                     <locationId />
                     <locationName />
                     <locationType />
                     <geopoint />
+                    <end />
                 </data>
             </instance>
             <itext>
@@ -109,12 +111,14 @@
             </itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
             <bind nodeset="/data/processedByMirth" type="boolean" />
+						<bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>        
             <bind nodeset="/data/hierarchyId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/locationId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/locationName" type="string" required="true()" />
             <bind nodeset="/data/locationType" type="select1" required="true()" />
             <bind nodeset="/data/geopoint" type="geopoint" />
+						<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>            
         </model>
     </h:head>
     <h:body>

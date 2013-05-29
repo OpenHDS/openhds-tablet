@@ -8,6 +8,7 @@
 					<meta>
 						<instanceID/>
 					</meta>
+					<start />
 					<estimatedAgeOfPreg/>
 					<pregNotes/>
 					<ageOfPregFromPregNotes/>
@@ -30,6 +31,7 @@
 					<visitId />
 					<expectedDeliveryDate />
 					<recordedDate />
+					<end />
 				</data>
 			</instance>
 			<itext>
@@ -514,8 +516,9 @@
 				
 			</itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/> 
-			<bind nodeset="/data/processedByMirth" type="boolean" />
-			<bind nodeset="/data/individualId" readonly="true()" type="string" required="true()" />
+            <bind nodeset="/data/processedByMirth" type="boolean" required="true()" />
+						<bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>    
+					<bind nodeset="/data/individualId" readonly="true()" type="string" required="true()" />
 			<bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
 			<bind nodeset="/data/visitId" type="string" readonly="true()" required="true()" />
 					<!--<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()" constraint=". &gt;= today()" 
@@ -541,6 +544,8 @@
 			
 			<!--<bind nodeset="/data/recordedDate" type="date" readonly="true()" required="true()" />-->
 			<bind nodeset="/data/recordedDate" type="date" jr:preload="date"  jr:preloadParams="today"/>
+	    <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>    
+
 		</model>
 	</h:head>
 	<h:body>
