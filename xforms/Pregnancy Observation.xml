@@ -37,13 +37,13 @@
 			<itext>
 			<translation lang="Swahili">
 					<text id="/data/hasANCClinicVisit:label">
-						<value>Je, usha hudhuria kliniki ya mama wajawazito?</value>
+						<value>Uliwahi hudhuria kliniki ya ANC?</value>
 					</text>
 					<text id="/data/hasANCClinicVisit:hint">
 						<value />
 					</text>
 					<text id="/data/haveMosquitoNet:label">
-						<value>Je, una chandarua?</value>
+						<value>Una chandarua ya mbu?</value>
 					</text>
 					<text id="/data/haveMosquitoNet:hint">
 						<value />
@@ -61,13 +61,13 @@
 						<value />
 					</text>
 					<text id="/data/cousin:label">
-						<value>Binam</value>
+						<value>Binamu</value>
 					</text>
 					<text id="/data/cousin:hint">
 						<value />
 					</text>
 					<text id="/data/self:label">
-						<value>Mimi mwenyewe</value>
+						<value>Mwenyewe</value>
 					</text>
 					<text id="/data/self:hint">
 						<value />
@@ -82,22 +82,22 @@
 						<value>Mke mwenza</value>
 					</text>
 					<text id="/data/fellowWife:hint">
-						<value>Kwa ndoa yenye zaidi ya mke moja</value>
+						<value>Kama ni katika ndoa ya mitala</value>
 					</text>
 					<text id="/data/grandparent:label">
-						<value>Babu/Bibi</value>
+						<value>Babu/Nyanya</value>
 					</text>
 					<text id="/data/grandparent:hint">
 						<value />
 					</text>
 					<text id="/data/other:label">
-						<value>Mwingine</value>
+						<value>Nyingine</value>
 					</text>
 					<text id="/data/other:hint">
 						<value />
 					</text>
 					<text id="/data/uncleOrAunt:label">
-						<value>Shangazi/Mama mdogo au Mjomba/Baba mdogo</value>
+						<value>Mjomba/Baba mdogo au Shangazi/Mama mdogo</value>
 					</text>
 					<text id="/data/uncleOrAunt:hint">
 						<value />
@@ -120,8 +120,14 @@
 					<text id="/data/inlaws:hint">
 						<value />
 					</text>
+					<text id="/data/husband:label">
+						<value>Mume</value>
+					</text>
+					<text id="/data/husband:hint">
+						<value />
+					</text>
 					<text id="/data/sibling:label">
-						<value>Kaka au dada</value>
+						<value>Kaka/Dada</value>
 					</text>
 					<text id="/data/child:label">
 						<value>Mtoto</value>
@@ -130,37 +136,37 @@
 						<value></value>
 					</text>
 					<text id="/data/relationshipOfRespondentToExpectantMother:label">
-						<value>Uhusiano wa muhojiwa na mjamzito?</value>
+						<value>Una uhusiano gani na mama mjamzito?</value>
 					</text>
 					<text id="/data/relationshipOfRespondentToExpectantMother:hint">
-						<value>Kama mhojiwa ndio mwenye ujauzito, chagua 'Mimi mwenyewe'</value>
+						<value>Kama mhojiwa ni mwenyewe mama mjamzito, usimuulize hili swali changua 'Mimi Mwenyewe'</value>
 					</text>
 					<text id="/data/sourceOfNet:label">
-						<value>Je, chandarua ni cha PLAN?</value>
+						<value>Je, chandarua inatoka PLAN?</value>
 					</text>
 					<text id="/data/sourceOfNet:hint">
 						<value />
 					</text>
 					<text id="/data/monthsOrYears:label">
-						<value>Tangu mara ya mwisho uchovye chandarua kwenye dawa, imepita miezi au miaka?</value>
+						<value>Ni miezi au miaka tokea chandarua yako ilipotiwa dawa?</value>
 					</text>
 					<text id="/data/monthsOrYears:hint">
 						<value />
 					</text>
 					<text id="/data/yearsSinceLastNetTreatment:label">
-						<value>Miaka tangu uchovye chandarua kwenye dawa</value>
+						<value>Idadi ya miaka tokea chandarua ilipotiwa dawa</value>
 					</text>
 					<text id="/data/yearsSinceLastNetTreatment:hint">
 						<value />
 					</text>
 					<text id="/data/monthsSinceLastNetTreatment:label">
-						<value>Miezi tangu uchovye chandarua kwenye dawa</value>
+						<value>Idadi ya miezi tokea chandarua ilipotiwa dawa</value>
 					</text>
 					<text id="/data/monthsSinceLastNetTreatment:hint">
 						<value />
 					</text>
 					<text id="/data/treatedNet:label">
-						<value>Chandarua kimewahi kutiwa dawa?</value>
+						<value>Je, chandarua ya mbu imetiwa dawa?</value>
 					</text>
 					<text id="/data/treatedNet:hint">
 						<value />
@@ -172,13 +178,13 @@
 						<value />
 					</text>
 					<text id="/data/yes:label">
-						<value>Ndio</value>
+						<value>Ndiyo</value>
 					</text>
 					<text id="/data/yes:hint">
 						<value />
 					</text>
 					<text id="/data/sleptUnderMosquitoNet:label">
-						<value>Je, ulilala ndani ya chandarua usiku wa kuamkia leo?</value>
+						<value>Je, ulilala ndani ya chandarua ya kuzuia mbu usiku wa jana?</value>
 					</text>
 					<text id="/data/sleptUnderMosquitoNet:hint">
 						<value />
@@ -190,85 +196,85 @@
 						<value />
 					</text>
 					<text id="/data/estimatedAgeOfPreg:label">
-						<value>Miezi ya mimba</value>
+						<value>Idadi ya miezi ya ujauzito</value>
 					</text>
 					<text id="/data/estimatedAgeOfPreg:hint">
-						<value>Makadirio ya miezi</value>
+						<value>Kadiria katika miezi</value>
 					</text>
 					<text id="/data/havePregNotes:label">
-						<value>Je, una:</value>
+						<value>Je, Mama mjamzito ana:</value>
 					</text>
 					<text id="/data/havePregNotes:hint">
 						<value />
 					</text>
 					<text id="/data/pregNotesClinicCard:label">
-						<value>Kadi ya ujauzito wa mama </value>
+						<value>Kadi ya Kliniki</value>
 					</text>
 					<text id="/data/pregNotesClinicCard:hint">
 						<value />
 					</text>
 					<text id="/data/pregRegister:label">
-						<value>Daftari la mama mjamzito</value>
+						<value>Daftari la uandikishaji ujauzito</value>
 					</text>
 					<text id="/data/pregRegister:hint">
 						<value />
 					</text>
 					<text id="/data/none:label">
-						<value>Sijahudhuria clinic/haikuonekana</value>
+						<value>Hana chochote</value>
 					</text>
 					<text id="/data/none:hint">
 						<value />
 					</text>
 					<text id="/data/ageOfPregFromPregNotes:label">
-						<value>Umri wa mimba kutoka kwenye kadi ya mama mjamzito</value>
+						<value>Umri wa mimba kutoka kwenye karatasi</value>
 					</text>
 					<text id="/data/ageOfPregFromPregNotes:hint">
 						<value>Miezi</value>
 					</text>
 					<text id="/data/lastPeriodInterviewee:label">
-						<value>Je, uliingia siku zako kwa mara ya mwisho lini?</value>
+						<value>Tarehe ya mara ya mwisho</value>
 					</text>
 					<text id="/data/lastPeriodInterviewee:hint">
-						<value>Tarehe toka kwa mhojiwa</value>
+						<value>Toka kwa mhojaji</value>
 					</text>
 					<text id="/data/lastPeriodFromPregNotes:label">
-						<value>Je, uliingia siku zako kwa mara ya mwisho lini?</value>
+						<value>Tarehe ya mara ya mwisho</value>
 					</text>
 					<text id="/data/lastPeriodFromPregNotes:hint">
-						<value>Tarehe toka kwenye kadi</value>
+						<value>Toka kwenye karatasi ya ujauzito</value>
 					</text>
 					<text id="/data/lastClinicVisitDate:label">
-						<value>Tarehe ya mwisho ya mahudhurio clinic</value>
+						<value>Tarehe ya mwisho kuhuduria kliniki</value>
 					</text>
 					<text id="/data/lastClinicVisitDate:hint">
 						<value/>
 					</text>
 					<text id="/data/pregnancyNumber:label">
-						<value>Ujauzito wa ngapi?</value>
+						<value>Jumla ya idadi ya ujauzito mpaka leo</value>
 					</text>
 					<text id="/data/pregnancyNumber:hint">
 						<value />
 					</text>
 					<text id="/data/fieldWorkerId:label">
-						<value>Mhojaji</value>
+						<value>Nambari ya Mhojaji</value>
 					</text>
 					<text id="/data/fieldWorkerId:hint">
 						<value />
 					</text>
 					<text id="/data/visitId:label">
-						<value>Nambari ya Uhudhurio</value>
+						<value>Nambari ya hudhurio</value>
 					</text>
 					<text id="/data/visitId:hint">
 						<value />
 					</text>
 					<text id="/data/expectedDeliveryDate:label">
-						<value>Tarehe unatarajia kujifungua?</value>
+						<value>Tarehe inayotegemewa kujifungua</value>
 					</text>
 					<text id="/data/expectedDeliveryDate:hint">
 						<value />
 					</text>
 					<text id="/data/recordedDate:label">
-						<value>Tarehe ya uhojaji</value>
+						<value>Tarehe iliyo andikishwa</value>
 					</text>
 					<text id="/data/recordedDate:hint">
 						<value />
@@ -357,6 +363,12 @@
 						<value>Inlaw</value>
 					</text>
 					<text id="/data/inlaws:hint">
+						<value />
+					</text>
+					<text id="/data/husband:label">
+						<value>Husband</value>
+					</text>
+					<text id="/data/husband:hint">
 						<value />
 					</text>
 					<text id="/data/sibling:label">
@@ -524,7 +536,7 @@
 					<!--<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()" constraint=". &gt;= today()" 
 					jr:constraintMsg="Expected delivery date cannot be before today."  />-->
 				<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()"	calculate="if(../pregNotes = 3,/data/lastPeriodInterviewee,/data/lastPeriodFromPregNotes)"/>
-			<bind nodeset="/data/estimatedAgeOfPreg" type="int" required="true()" />
+			<bind nodeset="/data/estimatedAgeOfPreg" constraint=". &lt;=9" jr:constraintMsg="Miezi haiwezi kuzidi 9" type="int" required="true()" />
 			<bind nodeset="/data/pregNotes" type="select1" required="true()" />
 			<bind nodeset="/data/ageOfPregFromPregNotes" type="int" constraint=". &lt;=9" jr:constraintMsg="Miezi haiwezi kuzidi 9" relevant="../pregNotes = 1 or ../pregNotes = 2" required="true()" />
 			<bind nodeset="/data/lastPeriodInterviewee" relevant="../pregNotes = 3" type="date" required="true()" />
@@ -657,6 +669,7 @@
 			<item><label ref="jr:itext('/data/fellowWife:label')" /><value>9</value></item>
 			<item><label ref="jr:itext('/data/self:label')" /><value>7</value></item>
 			<item><label ref="jr:itext('/data/grandchild:label')" /><value>5</value></item>
+			<item><label ref="jr:itext('/data/husband:label')" /><value>13</value></item>
 			<item><label ref="jr:itext('/data/other:label')" /><value>8</value></item>
 		</select1>
 
