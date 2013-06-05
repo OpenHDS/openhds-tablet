@@ -171,6 +171,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             handleFilterRelationshipResult(resultCode, data);
             break;
         case FILTER_LOCATION:
+            if (resultCode != RESULT_OK) {
+                return;
+            }
         	Location location1 = (Location) data.getExtras().getSerializable("location");
         	locationVisit.setLocation(location1);
         	vf.onLoaderReset(null);

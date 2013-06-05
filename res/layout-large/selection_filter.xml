@@ -252,9 +252,10 @@
 
         <RadioGroup
             android:id="@+id/genderGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp" >
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal" >
 
             <RadioButton
                 android:id="@+id/maleBtn"
@@ -266,7 +267,9 @@
                 android:id="@+id/femaleBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:text="@string/female_lbl" />
+
         </RadioGroup>
 
         <LinearLayout
