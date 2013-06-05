@@ -229,16 +229,16 @@
 						<value>Umri wa mimba kutoka kwenye karatasi</value>
 					</text>
 					<text id="/data/ageOfPregFromPregNotes:hint">
-						<value>Miezi</value>
+						<value>Wiki</value>
 					</text>
 					<text id="/data/lastPeriodInterviewee:label">
-						<value>Tarehe ya mara ya mwisho</value>
+						<value>Je, uliingia siku zako kwa mara ya mwisho lini</value>
 					</text>
 					<text id="/data/lastPeriodInterviewee:hint">
-						<value>Toka kwa mhojaji</value>
+						<value>Tarehe toka kwa mhojiwa</value>
 					</text>
 					<text id="/data/lastPeriodFromPregNotes:label">
-						<value>Tarehe ya mara ya mwisho</value>
+						<value>Je, uliingia siku zako kwa mara ya mwisho lini</value>
 					</text>
 					<text id="/data/lastPeriodFromPregNotes:hint">
 						<value>Toka kwenye karatasi ya ujauzito</value>
@@ -474,7 +474,7 @@
 						<value>Age of pregnancy from pregnancy notes</value>
 					</text>
 					<text id="/data/ageOfPregFromPregNotes:hint">
-						<value>Months</value>
+						<value>Weeks</value>
 					</text>
 					<text id="/data/lastPeriodInterviewee:label">
 						<value>Last period date</value>
@@ -535,14 +535,14 @@
 			<bind nodeset="/data/visitId" type="string" readonly="true()" required="true()" />
 					<!--<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()" constraint=". &gt;= today()" 
 					jr:constraintMsg="Expected delivery date cannot be before today."  />-->
-				<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()"	calculate="if(../pregNotes = 3,/data/lastPeriodInterviewee,/data/lastPeriodFromPregNotes)"/>
+				<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()" constraint=". &gt;= today()"	calculate="if(../pregNotes = 3,/data/lastPeriodInterviewee,/data/lastPeriodFromPregNotes)"/>
 			<bind nodeset="/data/estimatedAgeOfPreg" constraint=". &lt;=9" jr:constraintMsg="Miezi haiwezi kuzidi 9" type="int" required="true()" />
 			<bind nodeset="/data/pregNotes" type="select1" required="true()" />
 			<bind nodeset="/data/ageOfPregFromPregNotes" type="int" constraint=". &lt;=9" jr:constraintMsg="Miezi haiwezi kuzidi 9" relevant="../pregNotes = 1 or ../pregNotes = 2" required="true()" />
-			<bind nodeset="/data/lastPeriodInterviewee" relevant="../pregNotes = 3" type="date" required="true()" />
-			<bind nodeset="/data/lastPeriodFromPregNotes" relevant="../pregNotes = 1 or ../pregNotes = 2" type="date" required="true()" />
+			<bind nodeset="/data/lastPeriodInterviewee" relevant="../pregNotes = 3" type="date" constraint=". &lt;= today()" required="true()" />
+			<bind nodeset="/data/lastPeriodFromPregNotes" relevant="../pregNotes = 1 or ../pregNotes = 2" type="date" constraint=". &lt;= today()" required="true()" />
 			<bind nodeset="/data/hasANCClinicVisit" type="select1" required="true()" />
-			<bind nodeset="/data/lastClinicVisitDate" relevant ="../hasANCClinicVisit=1" type="date" required="true()" />
+			<bind nodeset="/data/lastClinicVisitDate" relevant ="../hasANCClinicVisit=1" type="date" constraint=". &lt;= today()" required="true()" />
 			<bind nodeset="/data/pregnancyNumber" type="int" required="true()" />
 			<bind nodeset="/data/haveMosquitoNet" type="select1" required="true()" />
 
