@@ -139,9 +139,9 @@ public class SyncDatabaseActivity extends Activity implements CollectEntitiesLis
 
 	public void collectionComplete(Boolean result) {
 		if (result) 
-			Toast.makeText(getApplicationContext(),	getString(R.string.sync_entities_successful), Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(),	getString(R.string.sync_entities_successful), Toast.LENGTH_LONG).show();
 		else 
-			Toast.makeText(getApplicationContext(), getString(R.string.sync_entities_failure), Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.sync_entities_failure), Toast.LENGTH_LONG).show();
 		entitiesTask = null;
 		dialog.dismiss();
 	}
