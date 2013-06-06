@@ -226,7 +226,7 @@
 						<value />
 					</text>
 					<text id="/data/ageOfPregFromPregNotes:label">
-						<value>Umri wa mimba kutoka kwenye karatasi</value>
+						<value>Umri wa mimba kutoka kwenye kadi</value>
 					</text>
 					<text id="/data/ageOfPregFromPregNotes:hint">
 						<value>Wiki</value>
@@ -241,7 +241,7 @@
 						<value>Je, uliingia siku zako kwa mara ya mwisho lini</value>
 					</text>
 					<text id="/data/lastPeriodFromPregNotes:hint">
-						<value>Toka kwenye karatasi ya ujauzito</value>
+						<value>Toka kwenye kadi ya ujauzito</value>
 					</text>
 					<text id="/data/lastClinicVisitDate:label">
 						<value>Tarehe ya mwisho kuhuduria kliniki</value>
