@@ -184,7 +184,7 @@ public class LocationVisit implements Serializable {
         if (cursor.moveToFirst()) {
             generatedId = generateLocationIdFrom(cursor.getString(0));
         } else {
-            generatedId = hierarchy4.getExtId() + "01";
+            generatedId = hierarchy4.getExtId() + "000001";
         }
 
         cursor.close();

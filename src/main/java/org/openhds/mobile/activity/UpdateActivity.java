@@ -295,12 +295,14 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showProgressFragment();
         Individual individual = (Individual) data.getExtras().getSerializable("individual");
-        extInm= false;
+        //extInm= false;
 
 
         new CreateInternalInMigrationTask(individual).execute();
         locationVisit.setSelectedIndividual(individual);
+
         stateMachine.transitionTo(State.INMIGRATION);
+        
     }
 
     private class CreateInternalInMigrationTask extends AsyncTask<Void, Void, Void> {
@@ -440,6 +442,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             if (result) {
             	if (stateMachine.getState()==State.INMIGRATION) {
             		stateMachine.transitionTo(State.SELECT_EVENT);
+            		if (extInm)
+                		onFinishExternalInmigration();
             	} else if (stateMachine.getState()==State.SELECT_INDIVIDUAL) {
             		if (extInm)
                 		onFinishExternalInmigration();
@@ -763,7 +767,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton("Internal", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                startFilterActivity(FILTER_INMIGRATION);
+            	extInm= true;
+            	startFilterActivity(FILTER_INMIGRATION);
+                
             }
         });
         alertDialogBuilder.setNegativeButton("External", new DialogInterface.OnClickListener() {
@@ -799,7 +805,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     
 	private void onFinishExternalInmigration() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("External Inmigration");
+        alertDialogBuilder.setTitle("Inmigration");
         alertDialogBuilder.setMessage("Please, now create a Membership for the individual");
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton("Ok", null);
