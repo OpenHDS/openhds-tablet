@@ -289,7 +289,8 @@
             </itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
             <bind nodeset="/data/processedByMirth" type="boolean" required="true()" />
-						<bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>            
+						<bind nodeset="/data/start" type="string"/>  
+            
             <bind nodeset="/data/migrationType" type="string" required="true()" />
             <bind nodeset="/data/locationId" type="string" readonly="true()" required="true()" />
             <bind nodeset="/data/visitId" type="string" readonly="true()" required="true()" />

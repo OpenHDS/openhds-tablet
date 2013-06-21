@@ -99,7 +99,8 @@
             </itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
             <bind nodeset="/data/processedByMirth" type="boolean" />
-						<bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>        				
+						<bind nodeset="/data/start" type="string"/>  
+        				
             <bind nodeset="/data/householdId" type="string" readonly="true()" required="true()" />
             <bind nodeset="/data/individualId" type="string" readonly="true()" required="true()" />
             <bind nodeset="/data/fieldWorkerId" type="string" readonly="true()" required="true()" />

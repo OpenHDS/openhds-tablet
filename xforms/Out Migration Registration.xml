@@ -137,7 +137,8 @@
             </itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
             <bind nodeset="/data/processedByMirth" type="boolean" />
-            <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>    
+            <bind nodeset="/data/start" type="string"/>  
+    
             <bind nodeset="/data/individualId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/visitId" readonly="true()" type="string" required="true()" />

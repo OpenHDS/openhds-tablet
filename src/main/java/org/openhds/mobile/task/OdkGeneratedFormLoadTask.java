@@ -134,7 +134,11 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                     } else if (name.equals(FilledParams.middleName)) {
                         sbuilder.append(filledForm.getIndividualMiddleName() == null ? "<middleName />" + "\r\n"
                                 : "<middleName>" + filledForm.getIndividualMiddleName()+ "</middleName>" + "\r\n");
-                     
+                    } else if (name.equals(FilledParams.start)) {
+                    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        df.setTimeZone(TimeZone.getDefault());
+                        String date = df.format(new Date());
+                        sbuilder.append("<start>" + date+ "</start>" + "\r\n"); 
                     }   else if (name.equals(FilledParams.firstName)) {
                             sbuilder.append(filledForm.getIndividualFirstName() == null ? "<firstName />" + "\r\n"
                                     : "<firstName>" + filledForm.getIndividualFirstName() + "</firstName>" + "\r\n");

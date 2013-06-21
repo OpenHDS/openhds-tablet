@@ -166,7 +166,8 @@
 
             </itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
-            <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>        				
+         		<bind nodeset="/data/start" type="string"/>  
+  				
             <bind nodeset="/data/processedByMirth" readonly="true()" type="boolean" />
             <bind nodeset="/data/visitId" type="string" readonly="true()" required="true()" />
             <bind nodeset="/data/fieldWorkerId" type="string" readonly="true()" required="true()" />
@@ -208,22 +209,7 @@
             <label ref="jr:itext('/data/intervieweeId:label')" />
             <hint ref="jr:itext('/data/intervieweeId:hint')" />
         </input>
-		 <select1 ref="/data/farmhouse">
-           <label ref="jr:itext('/data/farmhouse:label')" />
-          <item>
-          <label>Farm</label>
-          <value>0</value>
-          </item>
-        <item>
-        <label>House</label>
-        <value>1</value>
-      </item>
-    </select1>
-        <input ref="/data/coordinates">
-            <label ref="jr:itext('/data/coordinates:label')" />
-            <hint ref="jr:itext('/data/coordinates:hint')" />
-        </input>
-	    <select1 ref="/data/correctInterviewee">
+        <select1 ref="/data/correctInterviewee">
            <label ref="jr:itext('/data/correctInterviewee:label')" />
              <item>
             <label>Yes</label>
@@ -243,5 +229,21 @@
             <hint ref="jr:itext('/data/reason:hint')" />
         </input>
     
+		 <select1 ref="/data/farmhouse">
+           <label ref="jr:itext('/data/farmhouse:label')" />
+          <item>
+          <label>Farm</label>
+          <value>0</value>
+          </item>
+        <item>
+        <label>House</label>
+        <value>1</value>
+      </item>
+    </select1>
+        <input ref="/data/coordinates">
+            <label ref="jr:itext('/data/coordinates:label')" />
+            <hint ref="jr:itext('/data/coordinates:hint')" />
+        </input>
+	    
     </h:body>
 </h:html>

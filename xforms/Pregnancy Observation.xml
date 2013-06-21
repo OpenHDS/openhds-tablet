@@ -529,7 +529,7 @@
 			</itext>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/> 
             <bind nodeset="/data/processedByMirth" type="boolean" required="true()" />
-						<bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/start" type="dateTime"/>    
+         		<bind nodeset="/data/start" type="string"/>  
 					<bind nodeset="/data/individualId" readonly="true()" type="string" required="true()" />
 			<bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
 			<bind nodeset="/data/visitId" type="string" readonly="true()" required="true()" />
@@ -554,8 +554,8 @@
 			<bind nodeset="/data/sourceOfNet" relevant ="../haveMosquitoNet=1" type="select1" required="true()" />	
 			<bind nodeset="/data/relationshipOfRespondentToExpectantMother" type="select1" required="true()" />			
 			
-			<!--<bind nodeset="/data/recordedDate" type="date" readonly="true()" required="true()" />-->
-			<bind nodeset="/data/recordedDate" type="date" jr:preload="date"  jr:preloadParams="today"/>
+			<bind nodeset="/data/recordedDate" type="date" readonly="true()" required="true()" />
+			<!--<bind nodeset="/data/recordedDate" type="date" jr:preload="date"  jr:preloadParams="today"/>-->
 	    <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>    
 
 		</model>
@@ -672,6 +672,10 @@
 			<item><label ref="jr:itext('/data/husband:label')" /><value>13</value></item>
 			<item><label ref="jr:itext('/data/other:label')" /><value>8</value></item>
 		</select1>
+<input ref="/data/recordedDate">
+            <label ref="jr:itext('/data/recordedDate:label')" />
+            <hint ref="jr:itext('/data/recordedDate:hint')" />
+            		</input>
 
 	</h:body>
 </h:html>
