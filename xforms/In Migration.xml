@@ -1,6 +1,6 @@
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
-    <h:head>
+    <h:head><!-- ODK Aggregate upload time: 2013-07-16T12:22:55.731+0000 on http://localhost:8181/ODKAggregate -->
         <h:title>In Migration</h:title>
         <model>
             <instance>
@@ -8,7 +8,7 @@
 				<meta>
 					<instanceID/>
 				</meta>
-				                    <start />
+				    <start />
                     <processedByMirth />
                     <migrationType />
                     <locationId />
@@ -28,6 +28,7 @@
                     <dateOfMigration />
                     <origin />
                     <reason />
+					<maritalChange />
                     <reasonOther/>
                     <end />
                 </data>
@@ -41,7 +42,7 @@
                         <value>UFUGAJI</value>
                     </text>
                     <text id="/data/reason:option2">
-                        <value>BADILIKO LA NDOA</value>
+                        <value>KUBADILIKA KWA HALI YA NDOA</value>
                     </text>
                     <text id="/data/reason:option3">
                         <value>ELIMU/SHULE</value>
@@ -51,6 +52,30 @@
                     </text>
 					<text id="/data/reason:option5">
                         <value>NYINGINE</value>
+                    </text>
+					<text id="/data/maritalChange:label">
+                        <value>Mabadiliko ya ndoa ya aina gani?</value>
+                    </text>
+                    <text id="/data/maritalChange:hint">
+                        <value />
+                    </text>
+					<text id="/data/maritalChange:option0">
+                        <value>Ndoa</value>
+                    </text>
+                    <text id="/data/maritalChange:option1">
+                        <value>Talaka</value>
+                    </text>
+                    <text id="/data/maritalChange:option2">
+                        <value>Kutengana</value>
+                    </text>
+                    <text id="/data/maritalChange:option3">
+                        <value>Kufiwa</value>
+                    </text>
+					<text id="/data/maritalChange:option4">
+                        <value>Kupatana</value>
+                    </text>
+                    <text id="/data/maritalChange:option5">
+                        <value>Haihusiki (888)</value>
                     </text>
                 	
                     <text id="/data/locationId:label">
@@ -98,7 +123,7 @@
 					<text id="/data/individualInfo/firstName:hint">
                         <value />
                     </text>
-										<text id="/data/individualInfo/middleName:label">
+					<text id="/data/individualInfo/middleName:label">
                         <value>Jina la Kati</value>
                     </text>
                     <text id="/data/individualInfo/middleName:hint">
@@ -177,6 +202,31 @@
                     </text>
 					<text id="/data/reason:option5">
                         <value>OTHER</value>
+                    </text>
+					<text id="/data/maritalChange:label">
+                        <value>Change in marital status</value>
+                    </text>
+                    <text id="/data/maritalChange:hint">
+                        <value />
+                    </text>
+                    
+					<text id="/data/maritalChange:option0">
+                        <value>Marriage</value>
+                    </text>
+                    <text id="/data/maritalChange:option1">
+                        <value>Divorce</value>
+                    </text>
+                    <text id="/data/maritalChange:option2">
+                        <value>Separation</value>
+                    </text>
+                    <text id="/data/maritalChange:option3">
+                        <value>Widowed</value>
+                    </text>
+					<text id="/data/maritalChange:option4">
+                        <value>Reconciliation</value>
+                    </text>
+                    <text id="/data/maritalChange:option5">
+                        <value>None of the above (888)</value>
                     </text>
                 	
                     <text id="/data/locationId:label">
@@ -316,7 +366,8 @@
             <bind nodeset="/data/origin" type="string" required="true()" />
             <bind nodeset="/data/reason" type="select1" required="true()" />
             			<bind nodeset="/data/reasonOther" relevant="../reason = 'OTHER'" type="string" required="true()" />
-						<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>           			
+						<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>   
+			<bind nodeset="/data/maritalChange" type="select1" relevant="../reason = 'MARITAL_CHANGE'" required = "true()" />
 
         </model>
     </h:head>
@@ -422,6 +473,34 @@
 			<item>
                 <label ref="jr:itext('/data/reason:option5')" />
                 <value>OTHER</value>
+            </item>
+        </select1>
+		<select1 ref="/data/maritalChange">
+            <label ref="jr:itext('/data/maritalChange:label')" />
+            <hint ref="jr:itext('/data/maritalChange:hint')" />
+            <item>
+                <label ref="jr:itext('/data/maritalChange:option0')" />
+                <value>MAR</value>
+            </item>
+            <item>
+                <label ref="jr:itext('/data/maritalChange:option1')" />
+                <value>DIV</value>
+            </item>
+            <item>
+                <label ref="jr:itext('/data/maritalChange:option2')" />
+                <value>SEP</value>
+            </item>
+            <item>
+                <label ref="jr:itext('/data/maritalChange:option3')" />
+                <value>WID</value>
+            </item>
+            <item>
+                <label ref="jr:itext('/data/maritalChange:option4')" />
+                <value>REC</value>
+            </item>
+			<item>
+                <label ref="jr:itext('/data/maritalChange:option5')" />
+                <value>888</value>
             </item>
         </select1>
         <input ref="/data/reasonOther">

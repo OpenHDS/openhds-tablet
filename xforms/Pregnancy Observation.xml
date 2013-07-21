@@ -1,6 +1,6 @@
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events"
 		xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
-	<h:head>
+	<h:head><!-- ODK Aggregate upload time: 2013-07-16T12:25:04.511+0000 on http://localhost:8181/ODKAggregate -->
 		<h:title>Pregnancy Observation</h:title>
 		<model>
 			<instance>
@@ -220,7 +220,7 @@
 						<value />
 					</text>
 					<text id="/data/none:label">
-						<value>Hana chochote</value>
+						<value>Sijahudhuria clinic/haikuonekana</value>
 					</text>
 					<text id="/data/none:hint">
 						<value />
@@ -250,7 +250,7 @@
 						<value/>
 					</text>
 					<text id="/data/pregnancyNumber:label">
-						<value>Jumla ya idadi ya ujauzito mpaka leo</value>
+						<value>Ujauzito wa ngapi?</value>
 					</text>
 					<text id="/data/pregnancyNumber:hint">
 						<value />
@@ -465,7 +465,7 @@
 						<value />
 					</text>
 					<text id="/data/none:label">
-						<value>None</value>
+						<value>I have not attended ANC/Cannot find my card</value>
 					</text>
 					<text id="/data/none:hint">
 						<value />

@@ -1,6 +1,6 @@
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
-    <h:head>
+    <h:head><!-- ODK Aggregate upload time: 2013-07-16T12:23:36.050+0000 on http://localhost:8181/ODKAggregate -->
         <h:title>Membership</h:title>
         <model>
             <instance>
@@ -10,8 +10,7 @@
 						<instanceID/>
 					</meta>
                     <start />
-                    <individualId />
-                    
+                    <individualId />                    
                     <householdId />
                     <fieldWorkerId />
                     <relationshipToGroupHead />
@@ -55,7 +54,7 @@
                         <value>Mtoto Kiume/Kike</value>
                     </text>
                     <text id="/data/relationshipToGroupHead:option3">
-                        <value>Kaka/Data</value>
+                        <value>Kaka/Dada</value>
                     </text>
                     <text id="/data/relationshipToGroupHead:option4">
                         <value>Mzazi</value>

@@ -1,7 +1,7 @@
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml"
 		xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 		xmlns:jr="http://openrosa.org/javarosa">
-	<h:head>
+	<h:head><!-- ODK Aggregate upload time: 2013-07-16T12:22:41.393+0000 on http://localhost:8181/ODKAggregate -->
 		<h:title>Death Registration</h:title>
 		<model>
 			<instance>
@@ -24,14 +24,13 @@
 					<dateOfDeath />
 					<placeOfDeath />
 					<placeOfDeathOther/>
-					<causeOfDeath />
 					<end />
 				</data>
 			</instance>
 			<itext>
 				<translation lang="Swahili">
 					<text id="/data/haveDeathCertificate:label">
-						<value>Mmepata cheti cha kifo?</value>
+						<value>Je, Mmepata cheti cha kifo?</value>
 					</text>
 					<text id="/data/haveDeathCertificate:hint">
 						<value></value>
@@ -390,10 +389,6 @@
 		<input ref="/data/placeOfDeathOutOfDSS">
 			<label ref="jr:itext('/data/placeOfDeathOutOfDSS:label')" />
 			<hint ref="jr:itext('/data/placeOfDeathOutOfDSS:hint')" />
-		</input>
-		<input ref="/data/causeOfDeath">
-			<label ref="jr:itext('/data/causeOfDeath:label')" />
-			<hint ref="jr:itext('/data/causeOfDeath:hint')" />
 		</input>
 		<select1 ref='/data/haveDeathCertificate'>
 			<label ref="jr:itext('/data/haveDeathCertificate:label')" />
