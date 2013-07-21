@@ -5,6 +5,7 @@
         <model>
             <instance>
                 <data id="in_migration">
+				<deviceId/>
 				<meta>
 					<instanceID/>
 				</meta>
@@ -337,6 +338,7 @@
                 </translation>
 				
             </itext>
+			<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
             <bind nodeset="/data/processedByMirth" type="boolean" required="true()" />
 						<bind nodeset="/data/start" type="string"/>  
