@@ -832,6 +832,19 @@
 				<label ref="jr:itext('/data/birthingPlaceOther:label')" />
 				<hint ref="jr:itext('/data/birthingPlaceOther:hint')" />
 			</input>
+			<select1 ref="/data/caesarianOrNatural">
+				<label ref="jr:itext('/data/caesarianOrNatural:label')" />
+				<hint ref="jr:itext('/data/caesarianOrNatural:hint')" />
+				<item>
+					<label ref="jr:itext('/data/caesarianOrNatural:option0')" />
+					<value>CAESARIAN</value>
+				</item>
+				<item>
+					<label ref="jr:itext('/data/caesarianOrNatural:option1')" />
+					<value>NATURAL</value>
+				</item>	
+			</select1>
+			
 			<select1 ref="/data/hoursOrDaysInHospital">
 				<label ref="jr:itext('/data/hoursOrDaysInHospital:label')" />
 				<hint ref="jr:itext('/data/hoursOrDaysInHospital:hint')" />
