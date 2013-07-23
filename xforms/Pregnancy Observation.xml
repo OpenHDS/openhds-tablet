@@ -26,7 +26,7 @@
 					<yearsSinceLastNetTreatment/>
 					<sourceOfNet/>
 					<relationshipOfRespondentToExpectantMother/>
-					<processedByMirth />
+					<processedByMirth>0</processedByMirth>
 					<individualId />
 					<fieldWorkerId />
 					<visitId />

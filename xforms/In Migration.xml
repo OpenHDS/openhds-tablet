@@ -10,7 +10,7 @@
 					<instanceID/>
 				</meta>
 				    <start />
-                    <processedByMirth />
+                    <processedByMirth>0</processedByMirth>
                     <migrationType />
                     <locationId />
                     <visitId />

@@ -9,8 +9,8 @@
 				<meta>
 					<instanceID/>
 				</meta>
-				            <start />
-                    <processedByMirth />
+				     <start />
+                    <processedByMirth>0</processedByMirth>
                     <individualA />
                     <individualB />
                     <fieldWorkerId />
@@ -125,7 +125,7 @@
             <bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/relationshipType" type="select1" required="true()" />
             <bind nodeset="/data/startDate" type="date" constraint=". &lt;= today()" />
-						<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>        				
+			<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>        				
         </model>
     </h:head>
     <h:body>

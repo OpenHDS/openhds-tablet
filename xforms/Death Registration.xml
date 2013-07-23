@@ -6,12 +6,12 @@
 		<model>
 			<instance>
 				<data id="death_registration">
-				   <DeviceId/>
+				   <deviceId/>
 					<meta>
 						<instanceID/>
 					</meta>
 					<start />
-					<processedByMirth />
+					<processedByMirth>0</processedByMirth>
 					<individualId />
 					<fieldWorkerId />
 					<gender/>
@@ -310,7 +310,7 @@
 					</text>
 				</translation>
 			</itext>
-			<bind nodeset="/data/DeviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+			<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
 			<bind nodeset="/data/processedByMirth" type="boolean" />
 									<bind nodeset="/data/start" type="string"/>  

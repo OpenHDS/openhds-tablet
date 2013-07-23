@@ -6,7 +6,7 @@
             <instance>
                 <data id="membership">
 				    <deviceId/>
-                    <processedByMirth />
+                    <processedByMirth>0</processedByMirth>
 					<meta>
 						<instanceID/>
 					</meta>

@@ -5,7 +5,7 @@
         <model>
             <instance>
                 <data id="out_migration_registration">
-                    <processedByMirth />
+                    <processedByMirth>0</processedByMirth>
 					<deviceId/>
 					<meta>
 						<instanceID/>

@@ -9,7 +9,7 @@
 				<meta>
 					<instanceID/>
 				</meta>
-                    <processedByMirth />
+                    <processedByMirth>0</processedByMirth>
                     <start />
                     <householdId />
                     <individualId />
