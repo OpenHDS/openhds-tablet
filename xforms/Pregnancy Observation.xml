@@ -5,7 +5,7 @@
 		<model>
 			<instance>
 				<data id="pregnancy_observation">
-				   <deviceId/>
+				   <!--<deviceId/>-->
 					<meta>
 						<instanceID/>
 					</meta>
@@ -26,7 +26,7 @@
 					<yearsSinceLastNetTreatment/>
 					<sourceOfNet/>
 					<relationshipOfRespondentToExpectantMother/>
-					<processedByMirth>0</processedByMirth>
+					<processedByMirth/>
 					<individualId />
 					<fieldWorkerId />
 					<visitId />
@@ -528,7 +528,7 @@
 				</translation>
 				
 			</itext>
-			<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+			<!--<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>-->
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/> 
             <bind nodeset="/data/processedByMirth" type="boolean" required="true()" />
          		<bind nodeset="/data/start" type="string"/>  

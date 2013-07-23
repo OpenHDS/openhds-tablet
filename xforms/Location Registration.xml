@@ -5,8 +5,8 @@
         <model>
             <instance>
                 <data id="location_registration">
-                    <processedByMirth>0</processedByMirth>
-					<deviceId/>
+                    <processedByMirth/>
+					<!--<deviceId/>-->
 					<meta>
 						<instanceID/>
 					</meta>
@@ -123,7 +123,7 @@
                     </text>
                 </translation>
             </itext>
-			<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+			<!--<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>-->
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
             <bind nodeset="/data/processedByMirth" type="boolean" />
 						<bind nodeset="/data/start" type="string"/>  

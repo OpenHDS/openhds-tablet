@@ -6,7 +6,6 @@
 			<instance>
 
 				<data id="pregnancy_outcome">
-				    <deviceId/>
 					<meta>
 						<instanceID/>
 					</meta>
@@ -26,7 +25,7 @@
 						<middleName />
 						<lastName />
 						<gender />
-						<relationshipToGroupHead />						
+						<relationshipToGroupHead />                                             
 						<ordinalPosition />
 					</outcomes>
 					<birthingPlace />
@@ -39,7 +38,7 @@
 					<hoursOrDaysBefore1stPostnatalVisit/>
 					<hoursBefore1stPostnatalVisit />
 					<daysBefore1stPostnatalVisit />
-					<caesarianOrNatural />					
+					<caesarianOrNatural />                                  
 					<totalNumberChildrenStillLiving />
 					<attendedANC />
 					<numberOfANCAttendances />
@@ -245,28 +244,31 @@
 						<value>Siku/Masiku</value>
 					</text>
 					<text id="/data/hoursInHospital:label">
-						<value>Ilipita masaa mangapi tangu ujifungue ukaruhusiwa kurudi nyumbani?</value>
+						<value>Ilipita masaa mangapi tangu tukio la mimba (kujifungua, mimba kuharibika n.k) ukaruhusiwa kurudi nyumbani?</value>
 					</text>
 					<text id="/data/hoursInHospital:hint">
-						<value></value>
+						<value>Tukio la mimba linaweza kuwa kujifungua, mimba kuharibika n.k</value>
 					</text>
 					<text id="/data/daysInHospital:label">
-						<value>Ilipita siku ngapi tangu ujifungue ukaruhusiwa kurudi nyumbani?</value>
+						<value>Ilipita siku ngapi tangu tukio la mimba ukaruhusiwa kurudi nyumbani?</value>
 					</text>
 					<text id="/data/daysInHospital:hint">
-						<value></value>
+						<value>Tukio la mimba linaweza kuwa kujifungua, mimba kuharibika n.k</value>
 					</text>
 					<text id="/data/hoursOrDaysBefore1stPostnatalVisit:label">
 						<value>Ilichukua siku/masiku au masaa kabla ya kumpeleka mtoto kituo cha huduma za afya kwa mara ya kwanza?</value>
 					</text>
 					<text id="/data/hoursOrDaysBefore1stPostnatalVisit:hint">
-						<value></value>
+						<value>Kama mtoto ni moja tu alafu ni mfu, chagua "ZALIWA MFU" alafu endelea bila kuuliza hili swali</value>
 					</text>
 					<text id="/data/hoursOrDaysBefore1stPostnatalVisit:option0">
 						<value>Masaa</value>
 					</text>
 					<text id="/data/hoursOrDaysBefore1stPostnatalVisit:option1">
 						<value>Siku/Masiku</value>
+					</text>
+					<text id="/data/hoursOrDaysBefore1stPostnatalVisit:option2">
+						<value>Zaliwa Mfu</value>
 					</text>
 					<text id="/data/hoursBefore1stPostnatalVisit:label">
 						<value>Ilichukua masaa mangapi kabla ya kumpeleka mtoto kituo cha huduma za afya kwa mara ya kwanza?</value>
@@ -529,13 +531,16 @@
 						<value>Did it take hours or a day/days before taking your child/children for the first clinic visit?</value>
 					</text>
 					<text id="/data/hoursOrDaysBefore1stPostnatalVisit:hint">
-						<value></value>
+						<value>If there is only one outcome and it is not a live birth, select the "NOT A LIVE BIRTH" option below and proceed without asking the question</value>
 					</text>
 					<text id="/data/hoursOrDaysBefore1stPostnatalVisit:option0">
 						<value>Hours</value>
 					</text>
 					<text id="/data/hoursOrDaysBefore1stPostnatalVisit:option1">
 						<value>Day/s</value>
+					</text>
+					<text id="/data/hoursOrDaysBefore1stPostnatalVisit:option2">
+						<value>Not a live birth</value>
 					</text>
 					<text id="/data/hoursBefore1stPostnatalVisit:label">
 						<value>How many hours did it take before taking your child/children for their first clinic visit?</value>
@@ -589,7 +594,6 @@
 				</translation>
 
 			</itext>
-			<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
 			<bind nodeset="/data/processedByMirth" type="boolean" required="true()" />
 			<bind nodeset="/data/start" type="string"/>  
@@ -635,7 +639,7 @@
 			<bind nodeset="/data/numberOfANCAttendances" relevant="../attendedANC = 'YES'" type="int" />
 
 
-			<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>        				
+			<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>                                       
 		</model>
 	</h:head>
 	<h:body>
@@ -761,129 +765,120 @@
 
 
 			</repeat>
-			
-			
+
+
 		</group>
 		<select1 ref="/data/birthingAssistant">
-				<label ref="jr:itext('/data/birthingAssistant:label')" />
-				<hint ref="jr:itext('/data/birthingAssistant:hint')" />
-				<item>
-					<label ref="jr:itext('/data/birthingAssistant:option0')" />
-					<value>NURSE/DOCTOR</value>
-				</item>
-				<item>
-					<label ref="jr:itext('/data/birthingAssistant:option1')" />
-					<value>TRADITIONAL_MIDWIFE</value>
-				</item>
-				<item>
-					<label ref="jr:itext('/data/birthingAssistant:option2')" />
-					<value>NEIGHBOUR</value>
-				</item>
-				<item>
-					<label ref="jr:itext('/data/birthingAssistant:option3')" />
-					<value>NONE</value>
-				</item>
-				<item>
-					<label ref="jr:itext('/data/birthingAssistant:option4')" />
-					<value>OTHER</value>
-				</item>
-			</select1>
-			<input ref="/data/birthingAssistantOther">
-				<label ref="jr:itext('/data/birthingAssistantOther:label')" />
-				<hint ref="jr:itext('/data/birthingAssistantOther:hint')" />
-			</input>
-			<input ref="/data/totalNumberChildrenStillLiving">
-				<label ref="jr:itext('/data/totalNumberChildrenStillLiving:label')" />
-				<hint ref="jr:itext('/data/totalNumberChildrenStillLiving:hint')" />
-			</input>
-			<select1 ref="/data/attendedANC">
-				<label ref="jr:itext('/data/attendedANC:label')" />
-				<hint ref="jr:itext('/data/attendedANC:hint')" />
-				<item>
-					<label ref="jr:itext('yes:label')" />
-					<value>YES</value>
-				</item>
-				<item>
-					<label ref="jr:itext('no:label')" />
-					<value>NO</value>
-				</item>
-			</select1>
-			<input ref="/data/numberOfANCAttendances">
-				<label ref="jr:itext('/data/numberOfANCAttendances:label')" />
-				<hint ref="jr:itext('/data/numberOfANCAttendances:hint')" />
-			</input>
-			<select1 ref="/data/birthingPlace">
-				<label ref="jr:itext('/data/birthingPlace:label')" />
-				<hint ref="jr:itext('/data/birthingPlace:hint')" />
-				<item>
-					<label ref="jr:itext('/data/birthingPlace:option0')" />
-					<value>HOME</value>
-				</item>
-				<item>
-					<label ref="jr:itext('/data/birthingPlace:option1')" />
-					<value>HOSPITAL</value>
-				</item>
-				<item>
-					<label ref="jr:itext('/data/birthingPlace:option2')" />
-					<value>OTHER</value>
-				</item>
-			</select1>
-			<input ref="/data/birthingPlaceOther">
-				<label ref="jr:itext('/data/birthingPlaceOther:label')" />
-				<hint ref="jr:itext('/data/birthingPlaceOther:hint')" />
-			</input>
-			<select1 ref="/data/caesarianOrNatural">
-				<label ref="jr:itext('/data/caesarianOrNatural:label')" />
-				<hint ref="jr:itext('/data/caesarianOrNatural:hint')" />
-				<item>
-					<label ref="jr:itext('/data/caesarianOrNatural:option0')" />
-					<value>CAESARIAN</value>
-				</item>
-				<item>
-					<label ref="jr:itext('/data/caesarianOrNatural:option1')" />
-					<value>NATURAL</value>
-				</item>	
-			</select1>
-			
-			<select1 ref="/data/hoursOrDaysInHospital">
-				<label ref="jr:itext('/data/hoursOrDaysInHospital:label')" />
-				<hint ref="jr:itext('/data/hoursOrDaysInHospital:hint')" />
-				<item>
-					<label ref="jr:itext('/data/hoursOrDaysInHospital:option0')" />
-					<value>HOURS</value>
-				</item>
-				<item>
-					<label ref="jr:itext('/data/hoursOrDaysInHospital:option1')" />
-					<value>DAYS</value>
-				</item>				
-			</select1>
-			<input ref="/data/hoursInHospital">
-				<label ref="jr:itext('/data/hoursInHospital:label')" />
-				<hint ref="jr:itext('/data/hoursInHospital:hint')" />
-			</input>
-			<input ref="/data/daysInHospital">
-				<label ref="jr:itext('/data/daysInHospital:label')" />
-				<hint ref="jr:itext('/data/daysInHospital:hint')" />
-			</input>
-			<select1 ref="/data/hoursOrDaysBefore1stPostnatalVisit">
-				<label ref="jr:itext('/data/hoursOrDaysBefore1stPostnatalVisit:label')" />
-				<hint ref="jr:itext('/data/hoursOrDaysBefore1stPostnatalVisit:hint')" />
-				<item>
-					<label ref="jr:itext('/data/hoursOrDaysBefore1stPostnatalVisit:option0')" />
-					<value>HOURS</value>
-				</item>
-				<item>
-					<label ref="jr:itext('/data/hoursOrDaysBefore1stPostnatalVisit:option1')" />
-					<value>DAYS</value>
-				</item>
-			</select1>				
-				<input ref="/data/hoursBefore1stPostnatalVisit">
-					<label ref="jr:itext('/data/hoursBefore1stPostnatalVisit:label')" />
-					<hint ref="jr:itext('/data/hoursBefore1stPostnatalVisit:hint')" />
-				</input>
-				<input ref="/data/daysBefore1stPostnatalVisit">
-					<label ref="jr:itext('/data/daysBefore1stPostnatalVisit:label')" />
-					<hint ref="jr:itext('/data/daysBefore1stPostnatalVisit:hint')" />
-				</input>
+			<label ref="jr:itext('/data/birthingAssistant:label')" />
+			<hint ref="jr:itext('/data/birthingAssistant:hint')" />
+			<item>
+				<label ref="jr:itext('/data/birthingAssistant:option0')" />
+				<value>NURSE/DOCTOR</value>
+			</item>
+			<item>
+				<label ref="jr:itext('/data/birthingAssistant:option1')" />
+				<value>TRADITIONAL_MIDWIFE</value>
+			</item>
+			<item>
+				<label ref="jr:itext('/data/birthingAssistant:option2')" />
+				<value>NEIGHBOUR</value>
+			</item>
+			<item>
+				<label ref="jr:itext('/data/birthingAssistant:option3')" />
+				<value>NONE</value>
+			</item>
+			<item>
+				<label ref="jr:itext('/data/birthingAssistant:option4')" />
+				<value>OTHER</value>
+			</item>
+		</select1>
+		<input ref="/data/birthingAssistantOther">
+			<label ref="jr:itext('/data/birthingAssistantOther:label')" />
+			<hint ref="jr:itext('/data/birthingAssistantOther:hint')" />
+		</input>
+		<input ref="/data/totalNumberChildrenStillLiving">
+			<label ref="jr:itext('/data/totalNumberChildrenStillLiving:label')" />
+			<hint ref="jr:itext('/data/totalNumberChildrenStillLiving:hint')" />
+		</input>
+		<select1 ref="/data/attendedANC">
+			<label ref="jr:itext('/data/attendedANC:label')" />
+			<hint ref="jr:itext('/data/attendedANC:hint')" />
+			<item>
+				<label ref="jr:itext('yes:label')" />
+				<value>YES</value>
+			</item>
+			<item>
+				<label ref="jr:itext('no:label')" />
+				<value>NO</value>
+			</item>
+		</select1>
+		<input ref="/data/numberOfANCAttendances">
+			<label ref="jr:itext('/data/numberOfANCAttendances:label')" />
+			<hint ref="jr:itext('/data/numberOfANCAttendances:hint')" />
+		</input>
+		<select1 ref="/data/birthingPlace">
+			<label ref="jr:itext('/data/birthingPlace:label')" />
+			<hint ref="jr:itext('/data/birthingPlace:hint')" />
+			<item>
+				<label ref="jr:itext('/data/birthingPlace:option0')" />
+				<value>HOME</value>
+			</item>
+			<item>
+				<label ref="jr:itext('/data/birthingPlace:option1')" />
+				<value>HOSPITAL</value>
+			</item>
+			<item>
+				<label ref="jr:itext('/data/birthingPlace:option2')" />
+				<value>OTHER</value>
+			</item>
+		</select1>
+		<input ref="/data/birthingPlaceOther">
+			<label ref="jr:itext('/data/birthingPlaceOther:label')" />
+			<hint ref="jr:itext('/data/birthingPlaceOther:hint')" />
+		</input>
+		<select1 ref="/data/hoursOrDaysInHospital">
+			<label ref="jr:itext('/data/hoursOrDaysInHospital:label')" />
+			<hint ref="jr:itext('/data/hoursOrDaysInHospital:hint')" />
+			<item>
+				<label ref="jr:itext('/data/hoursOrDaysInHospital:option0')" />
+				<value>HOURS</value>
+			</item>
+			<item>
+				<label ref="jr:itext('/data/hoursOrDaysInHospital:option1')" />
+				<value>DAYS</value>
+			</item>                         
+		</select1>
+		<input ref="/data/hoursInHospital">
+			<label ref="jr:itext('/data/hoursInHospital:label')" />
+			<hint ref="jr:itext('/data/hoursInHospital:hint')" />
+		</input>
+		<input ref="/data/daysInHospital">
+			<label ref="jr:itext('/data/daysInHospital:label')" />
+			<hint ref="jr:itext('/data/daysInHospital:hint')" />
+		</input>
+		<select1 ref="/data/hoursOrDaysBefore1stPostnatalVisit">
+			<label ref="jr:itext('/data/hoursOrDaysBefore1stPostnatalVisit:label')" />
+			<hint ref="jr:itext('/data/hoursOrDaysBefore1stPostnatalVisit:hint')" />
+			<item>
+				<label ref="jr:itext('/data/hoursOrDaysBefore1stPostnatalVisit:option0')" />
+				<value>HOURS</value>
+			</item>
+			<item>
+				<label ref="jr:itext('/data/hoursOrDaysBefore1stPostnatalVisit:option1')" />
+				<value>DAYS</value>
+			</item>
+			<item>
+				<label ref="jr:itext('/data/hoursOrDaysBefore1stPostnatalVisit:option2')" />
+				<value>NOT_LBR</value>
+			</item>
+		</select1>                              
+		<input ref="/data/hoursBefore1stPostnatalVisit">
+			<label ref="jr:itext('/data/hoursBefore1stPostnatalVisit:label')" />
+			<hint ref="jr:itext('/data/hoursBefore1stPostnatalVisit:hint')" />
+		</input>
+		<input ref="/data/daysBefore1stPostnatalVisit">
+			<label ref="jr:itext('/data/daysBefore1stPostnatalVisit:label')" />
+			<hint ref="jr:itext('/data/daysBefore1stPostnatalVisit:hint')" />
+		</input>
 	</h:body>
 </h:html>
