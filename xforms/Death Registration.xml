@@ -6,12 +6,12 @@
 		<model>
 			<instance>
 				<data id="death_registration">
-				   <DeviceId/>
+				   <!--<deviceId/>-->
 					<meta>
 						<instanceID/>
 					</meta>
 					<start />
-					<processedByMirth />
+					<processedByMirth/>
 					<individualId />
 					<fieldWorkerId />
 					<gender/>
@@ -22,6 +22,8 @@
 					<placeOfDeathOutOfDSS/>
 					<haveDeathCertificate/>
 					<visitId />
+					<causeOfDeath>UNK</causeOfDeath><!--defaults like this do not work via openHDS unless ODKGeneratedFormTask.java and FilledForm.java 
+					are modified? Works if directly opened via ODK Collect! -->
 					<dateOfDeath />
 					<placeOfDeath />
 					<placeOfDeathOther/>
@@ -112,7 +114,7 @@
 						<value>Sababu ya Kifo</value>
 					</text>
 					<text id="/data/causeOfDeath:hint">
-						<value />
+						<value>Andika UNK, hili linajibiwa na VA</value>
 					</text>
 					<text id="/data/male:label">
 						<value>Mwanaume</value>
@@ -306,11 +308,12 @@
 						<value>Cause of Death</value>
 					</text>
 					<text id="/data/causeOfDeath:hint">
-						<value />
+						<value>Write UNK as this value is obtained in Verbal Autopsy</value>
 					</text>
 				</translation>
 			</itext>
-			<bind nodeset="/data/DeviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+			<bind nodeset="/data/causeOfDeath" required="true()" type="string" />
+			<!--<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>-->
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
 			<bind nodeset="/data/processedByMirth" type="boolean" />
 									<bind nodeset="/data/start" type="string"/>  
@@ -392,6 +395,11 @@
 			<label ref="jr:itext('/data/placeOfDeathOutOfDSS:label')" />
 			<hint ref="jr:itext('/data/placeOfDeathOutOfDSS:hint')" />
 		</input>
+		<input ref="/data/causeOfDeath">
+			<label ref="jr:itext('/data/causeOfDeath:label')" />
+			<hint ref="jr:itext('/data/causeOfDeath:hint')" />
+		</input>
+		
 		<select1 ref='/data/haveDeathCertificate'>
 			<label ref="jr:itext('/data/haveDeathCertificate:label')" />
 			<hint ref="jr:itext('/data/haveDeathCertificate:hint')" />
