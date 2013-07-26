@@ -6,10 +6,11 @@
 			<instance>
 
 				<data id="pregnancy_outcome">
+					<deviceId/>
 					<meta>
 						<instanceID/>
 					</meta>
-					<processedByMirth>0</processedByMirth>
+					<processedByMirth/>
 					<start />
 					<motherId />
 					<fatherId />
@@ -628,7 +629,7 @@
 			<bind nodeset="/data/hoursOrDaysInHospital" relevant="../birthingPlace='HOSPITAL'" type="select1" />
 			<bind nodeset="/data/hoursInHospital" relevant="../hoursOrDaysInHospital='HOURS'" type="int" />
 			<bind nodeset="/data/daysInHospital" relevant="../hoursOrDaysInHospital='DAYS'" type="int" />
-			<bind nodeset="/data/hoursOrDaysBefore1stPostnatalVisit" relevant="../birthingPlace='HOME'" type="select1" />
+			<bind nodeset="/data/hoursOrDaysBefore1stPostnatalVisit" relevant="../birthingPlace='HOME' or ../birthingPlace='OTHER'" type="select1" />
 			<bind nodeset="/data/hoursBefore1stPostnatalVisit" relevant="../hoursOrDaysBefore1stPostnatalVisit='HOURS'"  type="int" />
 			<bind nodeset="/data/daysBefore1stPostnatalVisit" relevant="../hoursOrDaysBefore1stPostnatalVisit='DAYS'" type="int" />
 			<bind nodeset="/data/birthingAssistant" type="select1" />
@@ -639,7 +640,8 @@
 			<bind nodeset="/data/numberOfANCAttendances" relevant="../attendedANC = 'YES'" type="int" />
 
 
-			<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>                                       
+			<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/> 
+			<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
 		</model>
 	</h:head>
 	<h:body>
@@ -836,6 +838,20 @@
 			<label ref="jr:itext('/data/birthingPlaceOther:label')" />
 			<hint ref="jr:itext('/data/birthingPlaceOther:hint')" />
 		</input>
+		<select1 ref="/data/caesarianOrNatural">
+			<label ref="jr:itext('/data/caesarianOrNatural:label')" />
+			<hint ref="jr:itext('/data/caesarianOrNatural:hint')" />
+			<item>
+				<label ref="jr:itext('/data/caesarianOrNatural:option0')" />
+				<value>CAESARIAN</value>
+			</item>
+			<item>
+				<label ref="jr:itext('/data/caesarianOrNatural:option1')" />
+				<value>NATURAL</value>
+			</item>			
+		</select1>
+
+
 		<select1 ref="/data/hoursOrDaysInHospital">
 			<label ref="jr:itext('/data/hoursOrDaysInHospital:label')" />
 			<hint ref="jr:itext('/data/hoursOrDaysInHospital:hint')" />

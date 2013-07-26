@@ -6,7 +6,7 @@
 		<model>
 			<instance>
 				<data id="death_registration">
-				   <!--<deviceId/>-->
+				   <deviceId/>
 					<meta>
 						<instanceID/>
 					</meta>
@@ -22,8 +22,7 @@
 					<placeOfDeathOutOfDSS/>
 					<haveDeathCertificate/>
 					<visitId />
-					<causeOfDeath>UNK</causeOfDeath><!--defaults like this do not work via openHDS unless ODKGeneratedFormTask.java and FilledForm.java 
-					are modified? Works if directly opened via ODK Collect! -->
+					<causeOfDeath />
 					<dateOfDeath />
 					<placeOfDeath />
 					<placeOfDeathOther/>
@@ -110,12 +109,12 @@
 					<text id="/data/dateOfDeath:hint">
 						<value />
 					</text>					
-					<text id="/data/causeOfDeath:label">
+					<!--<text id="/data/causeOfDeath:label">
 						<value>Sababu ya Kifo</value>
 					</text>
 					<text id="/data/causeOfDeath:hint">
 						<value>Andika UNK, hili linajibiwa na VA</value>
-					</text>
+					</text>-->
 					<text id="/data/male:label">
 						<value>Mwanaume</value>
 					</text>
@@ -304,16 +303,16 @@
 					<text id="/data/possiblyPregnant:hint">
 						<value />
 					</text>
-					<text id="/data/causeOfDeath:label">
+					<!--<text id="/data/causeOfDeath:label">
 						<value>Cause of Death</value>
 					</text>
 					<text id="/data/causeOfDeath:hint">
 						<value>Write UNK as this value is obtained in Verbal Autopsy</value>
-					</text>
+					</text>-->
 				</translation>
 			</itext>
-			<bind nodeset="/data/causeOfDeath" required="true()" type="string" />
-			<!--<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>-->
+			<bind nodeset="/data/causeOfDeath" readonly="true()" type="string" />
+			<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
 			<bind nodeset="/data/processedByMirth" type="boolean" />
 									<bind nodeset="/data/start" type="string"/>  
@@ -332,7 +331,7 @@
 			<bind nodeset="/data/dateOfDeath" constraint=". &lt;= today()" type="date" required="true()" />
 			<bind nodeset="/data/placeOfDeath" type="select1" required="true()" />
 			<bind nodeset="/data/placeOfDeathOther" relevant="../placeOfDeath = 'OTHER'" type="string" required="true()" />		
-						<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>        				
+			<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>        				
 		</model>
 	</h:head>
 	<h:body>
@@ -395,10 +394,12 @@
 			<label ref="jr:itext('/data/placeOfDeathOutOfDSS:label')" />
 			<hint ref="jr:itext('/data/placeOfDeathOutOfDSS:hint')" />
 		</input>
-		<input ref="/data/causeOfDeath">
+		
+		<!--<select1 ref="/data/causeOfDeath">
 			<label ref="jr:itext('/data/causeOfDeath:label')" />
 			<hint ref="jr:itext('/data/causeOfDeath:hint')" />
-		</input>
+			<item><label ref="jr:itext('/data/leaveUNK:label')"/><value>1</value></item>
+		</select1>-->
 		
 		<select1 ref='/data/haveDeathCertificate'>
 			<label ref="jr:itext('/data/haveDeathCertificate:label')" />
