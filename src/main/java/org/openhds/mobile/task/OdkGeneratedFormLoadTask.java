@@ -116,6 +116,8 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                                 : "<intervieweeId>" + filledForm.getIntervieweeId() + "</intervieweeId>" + "\r\n");
                     } else if (name.equals(FilledParams.farmhouse)) {
                         sbuilder.append("<farmhouse>1</farmhouse>" + "\r\n");
+                    } else if (name.equals(FilledParams.causeOfDeath)) {
+                        sbuilder.append("<causeOfDeath>UNK</causeOfDeath>" + "\r\n");
                     } else if (name.equals(FilledParams.visitDate)) {
                         sbuilder.append(filledForm.getVisitDate() == null ? "<visitDate />" + "\r\n" : "<visitDate>"
                                 + filledForm.getVisitDate() + "</visitDate>" + "\r\n");
