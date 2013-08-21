@@ -18,6 +18,7 @@ public class PregnancyOutcome implements Serializable {
         return mother;
     }
 
+   
     public void setMother(Individual mother) {
         this.mother = mother;
     }
@@ -30,6 +31,10 @@ public class PregnancyOutcome implements Serializable {
         return childIds;
     }
 
+    
+    public Individual getFather() {
+        return father;
+    }
     public void setFather(Individual father) {
         this.father = father;
     }

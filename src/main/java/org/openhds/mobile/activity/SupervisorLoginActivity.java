@@ -199,6 +199,7 @@ public class SupervisorLoginActivity extends AbstractActivity {
 			removeAndShow(DIALOG_NEW_USER);
 		}
 
+		@SuppressWarnings("deprecation")
 		public void onAuthenticated() {
 			removeDialog(PROGRESS_DIALOG);
 			startMainFormActivity();
