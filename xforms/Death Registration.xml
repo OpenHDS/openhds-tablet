@@ -6,7 +6,7 @@
 		<model>
 			<instance>
 				<data id="death_registration">
-				   <deviceId/>
+					<deviceId/>
 					<meta>
 						<instanceID/>
 					</meta>
@@ -171,7 +171,7 @@
 					</text>
 				</translation>
 				<translation lang="English">
-				<text id="/data/withinDSS:label">
+					<text id="/data/withinDSS:label">
 						<value>Within the DSS</value>
 					</text>
 					<text id="/data/withinDSS:hint">
@@ -315,8 +315,8 @@
 			<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
 			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
 			<bind nodeset="/data/processedByMirth" type="boolean" />
-									<bind nodeset="/data/start" type="string"/>  
-        
+			<bind nodeset="/data/start" type="string"/>  
+
 			<bind nodeset="/data/individualId" readonly="true()" type="string" /><!--required="true()" />-->
 			<bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" /><!--required="true()" />-->
 			<bind nodeset="/data/visitId" readonly="true()" type="string" /><!--required="true()" />-->
@@ -325,7 +325,7 @@
 			<bind nodeset="/data/wasPregnant" required="true()" type="select1" relevant="../gender ='F'"/>
 			<bind nodeset="/data/possiblyPregnant" required="true()" type="select1" relevant="../wasPregnant =2"/>
 			<bind nodeset="/data/deathWithinDSS" required="true()" type="select1"/>
-			<bind nodeset="/data/deathVillage" required="true()" relevant="../deathWithinDSS = 1" type="string"/>
+			<bind nodeset="/data/deathVillage" required="true()" relevant="../deathWithinDSS = 1" type="select1"/>
 			<bind nodeset="/data/placeOfDeathOutOfDSS" required="true()" relevant="../deathWithinDSS = 2" type="string"/>
 			<bind nodeset="/data/haveDeathCertificate" required="true()" type="select1"/>			
 			<bind nodeset="/data/dateOfDeath" constraint=". &lt;= today()" type="date" required="true()" />
@@ -386,21 +386,134 @@
 			<item><label ref="jr:itext('/data/withinDSS:label')"/><value>1</value></item>
 			<item><label ref="jr:itext('/data/outOfDSS:label')"/><value>2</value></item>
 		</select1>
-		<input ref="/data/deathVillage">
-			<label ref="jr:itext('/data/deathVillage:label')" />
-			<hint ref="jr:itext('/data/deathVillage:hint')" />
-		</input>
+		<select1 appearance="minimal" ref="/data/deathVillage">		
+			<label ref="jr:itext('/data/deathVillage:label')"/>
+			<hint ref="jr:itext('/data/deathVillage:hint')"/>
+			<item>
+				<label>MLA</label>
+				<value>MLA</value>
+			</item>
+			<item>
+				<label>VIS</label>
+				<value>VIS</value>
+			</item>
+			<item>
+				<label>KAT</label>
+				<value>KAT</value>
+			</item>
+			<item>
+				<label>IFA</label>
+				<value>IFA</value>
+			</item>
+			<item>
+				<label>VIS</label>
+				<value>VIS</value>
+			</item>
+			<item>
+				<label>IDE</label>
+				<value>IDE</value>
+			</item>
+			<item>
+				<label>MIW</label>
+				<value>MIW</value>
+			</item>
+			<item>
+				<label>NAM</label>
+				<value>NAM</value>
+			</item>
+			<item>
+				<label>KIS</label>
+				<value>KIS</value>
+			</item>
+			<item>
+				<label>MBI</label>
+				<value>MBI</value>
+			</item>
+			<item>
+				<label>MPO</label>
+				<value>MPO</value>
+			</item>
+			<item>
+				<label>IGI</label>
+				<value>IGI</value>
+			</item>
+			<item>
+				<label>NJA</label>
+				<value>NJA</value>
+			</item>
+			<item>
+				<label>LUK</label>
+				<value>LUK</value>
+			</item>
+			<item>
+				<label>MCH</label>
+				<value>MCH</value>
+			</item>
+			<item>
+				<label>MNG</label>
+				<value>MNG</value>
+			</item>
+			<item>
+				<label>MKA</label>
+				<value>MKA</value>
+			</item>
+			<item>
+				<label>IKU</label>
+				<value>IKU</value>
+			</item>
+			<item>
+				<label>KIV</label>
+				<value>KIV</value>
+			</item>
+			<item>
+				<label>MIN</label>
+				<value>MIN</value>
+			</item>
+			<item>
+				<label>MAV</label>
+				<value>MAV</value>
+			</item>
+			<item>
+				<label>MIL</label>
+				<value>MIL</value>
+			</item>
+			<item>
+				<label>IGU</label>
+				<value>IGU</value>
+			</item>
+			<item>
+				<label>LUP</label>
+				<value>LUP</value>
+			</item>
+			<item>
+				<label>NAK</label>
+				<value>NAK</value>
+			</item>
+			<item>
+				<label>KID</label>
+				<value>KID</value>
+			</item>
+			<item>
+				<label>IRA</label>
+				<value>IRA</value>
+			</item>
+			<item>
+				<label>IGO</label>
+				<value>IGO</value>
+			</item>
+			<item>
+				<label>KIC</label>
+				<value>KIC</value>
+			</item>
+			<item>
+				<label>IDU</label>
+				<value>IDU</value>
+			</item>
+		</select1>
 		<input ref="/data/placeOfDeathOutOfDSS">
 			<label ref="jr:itext('/data/placeOfDeathOutOfDSS:label')" />
 			<hint ref="jr:itext('/data/placeOfDeathOutOfDSS:hint')" />
 		</input>
-		
-		<!--<select1 ref="/data/causeOfDeath">
-			<label ref="jr:itext('/data/causeOfDeath:label')" />
-			<hint ref="jr:itext('/data/causeOfDeath:hint')" />
-			<item><label ref="jr:itext('/data/leaveUNK:label')"/><value>1</value></item>
-		</select1>-->
-		
 		<select1 ref='/data/haveDeathCertificate'>
 			<label ref="jr:itext('/data/haveDeathCertificate:label')" />
 			<hint ref="jr:itext('/data/haveDeathCertificate:hint')" />
