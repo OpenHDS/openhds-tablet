@@ -49,7 +49,7 @@ public class ShowMapActivity extends MapActivity implements OnItemClickListener 
 		super.onCreate(bundle);
 		setContentView(R.layout.map_view);
 		
-	    databaseAdapter = new DatabaseAdapter(getBaseContext());
+	    setDatabaseAdapter(new DatabaseAdapter(getBaseContext()));
 		handler = new GeoUpdateHandler();
 
 		mapView = (MapView) findViewById(R.id.mapview);
@@ -184,6 +184,14 @@ public class ShowMapActivity extends MapActivity implements OnItemClickListener 
 		finish();	
 	}
 	
+	public DatabaseAdapter getDatabaseAdapter() {
+		return databaseAdapter;
+	}
+
+	public void setDatabaseAdapter(DatabaseAdapter databaseAdapter) {
+		this.databaseAdapter = databaseAdapter;
+	}
+
 	public class GeoUpdateHandler implements LocationListener {
 
 		public void onLocationChanged(Location location) {

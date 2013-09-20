@@ -27,10 +27,15 @@ import org.xml.sax.SAXException;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
 public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -38,11 +43,14 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
     private ContentResolver resolver;
     private Uri odkUri;
     private FilledForm filledForm;
+    private TelephonyManager mTelephonyManager;
+    private Context mContext;
 
-    public OdkGeneratedFormLoadTask(ContentResolver resolver, FilledForm filledForm, OdkFormLoadListener listener) {
+    public OdkGeneratedFormLoadTask(Context context, FilledForm filledForm, OdkFormLoadListener listener) {
         this.listener = listener;
-        this.resolver = resolver;
+        this.resolver = context.getContentResolver();;
         this.filledForm = filledForm;
+        this.mContext = context;
     }
 
     @Override
@@ -54,7 +62,7 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
             String formFilePath = cursor.getString(1);
             String xml = processXml(jrFormId, formFilePath);
 
-            File targetFile = saveFile(xml);
+            File targetFile = saveFile(xml,jrFormId);
             if (targetFile != null) {
                 return writeContent(targetFile, filledForm.getFormName(), jrFormId);
             }
@@ -185,7 +193,45 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                                 + filledForm.getMigrationType() + "</migrationType>" + "\r\n");
                     } else if (name.equals(FilledParams.socialGroupType)) {
                         sbuilder.append("<socialGroupType>FAM</socialGroupType>" + "\r\n");
-                    }
+                    } else if (name.equals(FilledParams.deviceId)) {
+                     mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+                     
+                     String deviceId = mTelephonyManager.getDeviceId();
+                     String orDeviceId = null;
+                     if (deviceId != null ) {
+                             if ((deviceId.contains("*") || deviceId.contains("000000000000000"))) {
+                                     deviceId =
+                                                     Settings.Secure
+                                             .getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+                                     orDeviceId = Settings.Secure.ANDROID_ID + ":" + deviceId;
+                             } else {
+                                     orDeviceId = "imei:" + deviceId;
+                             }
+                     }
+
+                     if ( deviceId == null ) {
+                             // no SIM -- WiFi only
+                             // Retrieve WiFiManager
+                             WifiManager wifi = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+
+                             // Get WiFi status
+                             WifiInfo info = wifi.getConnectionInfo();
+                             if ( info != null ) {
+                                     deviceId = info.getMacAddress();
+                                     orDeviceId = "mac:" + deviceId;
+                             }
+                     }
+
+                     // if it is still null, use ANDROID_ID
+                     if ( deviceId == null ) {
+                         deviceId =
+                                 Settings.Secure
+                                         .getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+                             orDeviceId = Settings.Secure.ANDROID_ID + ":" + deviceId;
+                     }
+                     sbuilder.append("<deviceId>"+ deviceId +"</deviceId>" + "\r\n");
+                    } 
+                    
                 } else if (name.equalsIgnoreCase("outcomes")) {
                     // special case handling for pregnancy outcomes
                     for(Child child : filledForm.getPregOutcomeChildren()) {
@@ -214,10 +260,14 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
         sbuilder.append("</" + node.getNodeName() + ">" + "\r\n");
     }
 
-    private File saveFile(String xml) {
+    private File saveFile(String xml, String jrFormId) {
+    	 DateFormat df = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss");
+         df.setTimeZone(TimeZone.getDefault());
+         String date = df.format(new Date());
+
         File root = Environment.getExternalStorageDirectory();
         String destinationPath = root.getAbsolutePath() + File.separator + "Android" + File.separator + "data"
-                + File.separator + "org.openhds.mobile" + File.separator + "files";
+                + File.separator + "org.openhds.mobile" + File.separator + "files"+ File.separator + jrFormId + date;
 
         File baseDir = new File(destinationPath);
         if (!baseDir.exists()) {
@@ -227,10 +277,7 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
             }
         }
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss");
-        df.setTimeZone(TimeZone.getDefault());
-        String date = df.format(new Date());
-
+       
         destinationPath += File.separator + date + ".xml";
         File targetFile = new File(destinationPath);
         if (!targetFile.exists()) {

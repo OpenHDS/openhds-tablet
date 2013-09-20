@@ -35,6 +35,7 @@ public class SyncDatabaseActivity extends Activity implements CollectEntitiesLis
     private String username;
     private String password;
 		
+	@SuppressWarnings("deprecation")
 	public void onCreate(Bundle savedInstanceState) {
 		 super.onCreate(savedInstanceState);
 		 setTitle(getString(R.string.app_name) + " > " + getString(R.string.syncDatabase));

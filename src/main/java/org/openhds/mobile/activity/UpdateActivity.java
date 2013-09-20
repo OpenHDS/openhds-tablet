@@ -1035,7 +1035,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void loadForm(final int requestCode) {
-        new OdkGeneratedFormLoadTask(getContentResolver(), filledForm, new OdkFormLoadListener() {
+        new OdkGeneratedFormLoadTask(getBaseContext(), filledForm, new OdkFormLoadListener() {
             public void onOdkFormLoadSuccess(Uri contentUri) {
                 UpdateActivity.this.contentUri = contentUri;
                 startActivityForResult(new Intent(Intent.ACTION_EDIT, contentUri), requestCode);

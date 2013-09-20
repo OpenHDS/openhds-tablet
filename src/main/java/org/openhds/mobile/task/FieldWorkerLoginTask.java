@@ -164,22 +164,17 @@ public class FieldWorkerLoginTask extends AsyncTask<Boolean, Void, Result> {
 	};
 	
 	private void processFieldWorkerParams(XmlPullParser parser) throws XmlPullParserException, IOException {
-		String name = "";
 		Map<String, String> paramMap = new HashMap<String, String>();
         parser.nextTag(); // <uuid>
-        name = parser.getName();
         paramMap.put("uuid", parser.nextText());
         
         parser.nextTag();
-        name = parser.getName();
         paramMap.put("extId", parser.nextText());
         
         parser.nextTag();
-        name = parser.getName();
         paramMap.put("firstName", parser.nextText());
         
         parser.nextTag();
-        name = parser.getName();
         paramMap.put("lastName", parser.nextText());
         
         parser.nextTag();

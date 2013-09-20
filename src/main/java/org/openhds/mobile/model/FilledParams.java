@@ -53,13 +53,15 @@ public class FilledParams {
 
 	public static final String start = "start";
 	
+	public static final String deviceId = "deviceId";
+			
 	public static final String causeOfDeath = "causeOfDeath";
 
 			
 	public static List<String> getParamsArray() {
 
 		return Arrays.asList(visitId, roundNumber, visitDate,interviewee,farmhouse, 
-				individualId, motherId, fatherId, firstName, middleName,origin,start,causeOfDeath,
+				individualId, motherId, fatherId, firstName, middleName,origin,start,deviceId, causeOfDeath,
 				lastName, gender, dob, locationId, houseName,socialGroupType, 
 				latlong, householdId, householdName, hierarchyId, 
 				fieldWorkerId, child1Id, child2Id, childFatherId,
