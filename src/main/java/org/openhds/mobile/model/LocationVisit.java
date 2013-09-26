@@ -257,7 +257,7 @@ public class LocationVisit implements Serializable {
         int lastIndividualCount = 0;
         if (cursor.moveToFirst()) {
             try {
-                lastIndividualCount = Integer.parseInt(cursor.getString(0).substring(11, 12));
+                lastIndividualCount = Integer.parseInt(cursor.getString(0).substring(9, 12));
             } catch (NumberFormatException e) {
             }
         }
@@ -279,7 +279,7 @@ public class LocationVisit implements Serializable {
     public SocialGroup createSocialGroup(ContentResolver resolver) {
         SocialGroup sg = new SocialGroup();
 
-        String socialGroupPrefix = location.getExtId();
+        String socialGroupPrefix = hierarchy4.getExtId() + location.getExtId().substring(3, 9);
 
         Cursor cursor = resolver.query(OpenHDS.SocialGroups.CONTENT_ID_URI_BASE,
                 new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID },
@@ -360,7 +360,7 @@ public class LocationVisit implements Serializable {
         String id = null;
         if (cursor.moveToNext()) {
         	
-            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(11, 12));
+            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(9, 12));
             int nextIncrement = lastIncrement + 1;
             id = location.getExtId() + String.format("%03d", nextIncrement);
         } else {
