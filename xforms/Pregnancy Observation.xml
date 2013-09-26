@@ -540,7 +540,7 @@
 				<bind nodeset="/data/expectedDeliveryDate" type="date" required="true()" constraint=". &gt;= today()"	calculate="if(../pregNotes = 3,/data/lastPeriodInterviewee,/data/lastPeriodFromPregNotes)"/>
 			<bind nodeset="/data/estimatedAgeOfPreg" constraint=". &lt;=9" jr:constraintMsg="Miezi haiwezi kuzidi 9" type="int" required="true()" />
 			<bind nodeset="/data/pregNotes" type="select1" required="true()" />
-			<bind nodeset="/data/ageOfPregFromPregNotes" type="int" constraint=". &lt;=9" jr:constraintMsg="Miezi haiwezi kuzidi 9" relevant="../pregNotes = 1 or ../pregNotes = 2" required="true()" />
+			<bind nodeset="/data/ageOfPregFromPregNotes" type="int" constraint=". &lt;=52" jr:constraintMsg="Wiki haziwezi zidi 52" relevant="../pregNotes = 1 or ../pregNotes = 2" required="true()" />
 			<bind nodeset="/data/lastPeriodInterviewee" relevant="../pregNotes = 3" type="date" constraint=". &lt;= today()" required="true()" />
 			<bind nodeset="/data/lastPeriodFromPregNotes" relevant="../pregNotes = 1 or ../pregNotes = 2" type="date" constraint=". &lt;= today()" required="true()" />
 			<bind nodeset="/data/hasANCClinicVisit" type="select1" required="true()" />
