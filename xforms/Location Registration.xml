@@ -1,6 +1,6 @@
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
-    <h:head><!-- ODK Aggregate upload time: 2013-07-16T12:23:13.157+0000 on http://localhost:8181/ODKAggregate -->
+    <h:head><!-- ODK Aggregate upload time: 2013-07-25T10:40:28.616+0000 on https://openhds.ihi.or.tz/ODKAggregateUrban -->
         <h:title>Location Registration</h:title>
         <model>
             <instance>
@@ -134,7 +134,7 @@
             <bind nodeset="/data/locationName" type="string" required="true()" />
 			<bind nodeset="/data/tenCellLeader" type="string" required="true()" />
             <bind nodeset="/data/locationType" type="select1" required="true()" />
-            <bind nodeset="/data/geopoint" type="geopoint" />
+            <bind nodeset="/data/geopoint" type="geopoint" required="true()"/>
 						<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>            
         </model>
     </h:head>
