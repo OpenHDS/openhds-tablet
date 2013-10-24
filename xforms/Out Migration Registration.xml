@@ -1,6 +1,6 @@
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
-    <h:head><!-- ODK Aggregate upload time: 2013-07-16T12:25:21.070+0000 on http://localhost:8181/ODKAggregate -->
+    <h:head><!-- ODK Aggregate upload time: 2013-07-25T12:06:01.527+0000 on https://openhds.ihi.or.tz/ODKAggregateRural -->
         <h:title>Out Migration Registration</h:title>
         <model>
             <instance>
@@ -195,7 +195,8 @@
             <bind nodeset="/data/individualId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
             <bind nodeset="/data/visitId" readonly="true()" type="string" required="true()" />
-            <bind nodeset="/data/dateOfMigration" constraint=". &lt;= today()" type="date" />
+			<!--<bind nodeset="/data/dateOfMigration" constraint="(. &lt;= today() and . &gt; date-time(decimal-date-time(today())-365)" type="date" />-->
+            <bind nodeset="/data/dateOfMigration" required="true()" constraint="(. &lt;= today() and . &gt; date(date('1997-06-01')))" type="date" />
             <bind nodeset="/data/nameOfDestination"  type="string" required="true()" />
             <bind nodeset="/data/reasonForOutMigration" type="select1" required="true()" />
 			<bind nodeset="/data/reasonForOutMigrationOther" relevant="../reasonForOutMigration = 'OTHER'" type="string" required="true()" />

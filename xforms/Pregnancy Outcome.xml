@@ -1,16 +1,15 @@
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events"
 		xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
-	<h:head><!-- ODK Aggregate upload time: 2013-07-16T12:25:34.605+0000 on http://localhost:8181/ODKAggregate -->
+	<h:head><!-- ODK Aggregate upload time: 2013-07-25T10:39:13.111+0000 on https://openhds.ihi.or.tz/ODKAggregateUrban -->
 		<h:title>Pregnancy Outcome</h:title>
 		<model>
 			<instance>
 
 				<data id="pregnancy_outcome">
-					<deviceId/>
 					<meta>
 						<instanceID/>
 					</meta>
-					<processedByMirth/>
+					<processedByMirth>0</processedByMirth>
 					<start />
 					<motherId />
 					<fatherId />
@@ -620,28 +619,27 @@
 					required="true()" />
 			<bind nodeset="/data/outcomes/socialGroupId" readonly="true()" relevant="/data/outcomes/outcomeType = 'LBR'" type="string"
 					required="true()" />
-			<bind nodeset="/data/outcomes/relationshipToGroupHead" relevant="/data/outcomes/outcomeType = 'LBR'"
+			<bind nodeset="/data/outcomes/relationshipToGroupHead" required="true()" relevant="/data/outcomes/outcomeType = 'LBR'"
 					type="select1" />
-			<bind nodeset="/data/outcomes/ordinalPosition" relevant="/data/outcomes/outcomeType = 'LBR'"
+			<bind nodeset="/data/outcomes/ordinalPosition" required="true()" relevant="/data/outcomes/outcomeType = 'LBR'"
 					type="int" />
-			<bind nodeset="/data/birthingPlace" type="select1" />
-			<bind nodeset="/data/birthingPlaceOther" relevant="../birthingPlace='OTHER'" type="string" />
-			<bind nodeset="/data/hoursOrDaysInHospital" relevant="../birthingPlace='HOSPITAL'" type="select1" />
-			<bind nodeset="/data/hoursInHospital" relevant="../hoursOrDaysInHospital='HOURS'" type="int" />
-			<bind nodeset="/data/daysInHospital" relevant="../hoursOrDaysInHospital='DAYS'" type="int" />
-			<bind nodeset="/data/hoursOrDaysBefore1stPostnatalVisit" relevant="../birthingPlace='HOME' or ../birthingPlace='OTHER'" type="select1" />
-			<bind nodeset="/data/hoursBefore1stPostnatalVisit" relevant="../hoursOrDaysBefore1stPostnatalVisit='HOURS'"  type="int" />
-			<bind nodeset="/data/daysBefore1stPostnatalVisit" relevant="../hoursOrDaysBefore1stPostnatalVisit='DAYS'" type="int" />
-			<bind nodeset="/data/birthingAssistant" type="select1" />
-			<bind nodeset="/data/birthingAssistantOther" relevant="../birthingAssistant='OTHER'" type="string" />
-			<bind nodeset="/data/caesarianOrNatural" type="select1" />
-			<bind nodeset="/data/totalNumberChildrenStillLiving" type="int" />
-			<bind nodeset="/data/attendedANC" type="select1" />
-			<bind nodeset="/data/numberOfANCAttendances" relevant="../attendedANC = 'YES'" type="int" />
+			<bind nodeset="/data/birthingPlace" required="true()" type="select1" />
+			<bind nodeset="/data/birthingPlaceOther" required="true()" relevant="../birthingPlace='OTHER'" type="string" />
+			<bind nodeset="/data/hoursOrDaysInHospital" required="true()" relevant="../birthingPlace='HOSPITAL'" type="select1" />
+			<bind nodeset="/data/hoursInHospital" required="true()" relevant="../hoursOrDaysInHospital='HOURS'" type="int" />
+			<bind nodeset="/data/daysInHospital" required="true()" relevant="../hoursOrDaysInHospital='DAYS'" type="int" />
+			<bind nodeset="/data/hoursOrDaysBefore1stPostnatalVisit" required="true()" relevant="../birthingPlace='HOME' or ../birthingPlace='OTHER'" type="select1" />
+			<bind nodeset="/data/hoursBefore1stPostnatalVisit" required="true()" relevant="../hoursOrDaysBefore1stPostnatalVisit='HOURS'"  type="int" />
+			<bind nodeset="/data/daysBefore1stPostnatalVisit" required="true()" relevant="../hoursOrDaysBefore1stPostnatalVisit='DAYS'" type="int" />
+			<bind nodeset="/data/birthingAssistant" required="true()" type="select1" />
+			<bind nodeset="/data/birthingAssistantOther" required="true()" relevant="../birthingAssistant='OTHER'" type="string" />
+			<bind nodeset="/data/caesarianOrNatural" required="true()" type="select1" />
+			<bind nodeset="/data/totalNumberChildrenStillLiving" required="true()" type="int" />
+			<bind nodeset="/data/attendedANC" required="true()" type="select1" />
+			<bind nodeset="/data/numberOfANCAttendances" required="true()" relevant="../attendedANC = 'YES'" type="int" />
 
 
-			<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/> 
-			<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+			<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>                                       
 		</model>
 	</h:head>
 	<h:body>
@@ -737,27 +735,27 @@
 					<hint ref="jr:itext('/data/outcomes/relationshipToGroupHead:hint')" />
 					<item>
 						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option0')" />
-						<value>2</value>
-					</item>
-					<item>
-						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option1')" />
 						<value>3</value>
 					</item>
 					<item>
-						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option2')" />
-						<value>5</value>
+						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option1')" />
+						<value>4</value>
 					</item>
 					<item>
-						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option3')" />
+						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option2')" />
 						<value>6</value>
 					</item>
 					<item>
-						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option4')" />
+						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option3')" />
 						<value>7</value>
 					</item>
 					<item>
-						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option5')" />
+						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option4')" />
 						<value>8</value>
+					</item>
+					<item>
+						<label ref="jr:itext('/data/outcomes/relationshipToGroupHead:option5')" />
+						<value>9</value>
 					</item>
 				</select1>
 				<input ref="/data/outcomes/ordinalPosition">
@@ -850,8 +848,8 @@
 				<value>NATURAL</value>
 			</item>			
 		</select1>
-
-
+		
+		
 		<select1 ref="/data/hoursOrDaysInHospital">
 			<label ref="jr:itext('/data/hoursOrDaysInHospital:label')" />
 			<hint ref="jr:itext('/data/hoursOrDaysInHospital:hint')" />
