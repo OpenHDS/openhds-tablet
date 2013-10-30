@@ -732,8 +732,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         @Override
         protected Void doInBackground(Void... params) {
             SocialGroup sg = locationVisit.createSocialGroup(getContentResolver());
-            filledForm = formFiller.fillSocialGroupForm(locationVisit, sg);
-            updatable = new HouseholdUpdate();
+            if (sg==null){
+            	onSGexists();
+            	this.cancel(true);
+            } else {
+            	filledForm = formFiller.fillSocialGroupForm(locationVisit, sg);
+            	updatable = new HouseholdUpdate();
+            }
             return null;
         }
 
@@ -742,6 +747,16 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             hideProgressFragment();
             loadForm(SELECTED_XFORM);
         }
+    }
+    
+    public void onSGexists() {
+    	 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+         alertDialogBuilder.setTitle("Socialgroup");
+         alertDialogBuilder.setMessage("The Socialgroup for the location selected is already existing.");
+         alertDialogBuilder.setCancelable(true);
+         alertDialogBuilder.setPositiveButton("Ok", null);
+         AlertDialog alertDialog = alertDialogBuilder.create();
+         alertDialog.show();
     }
 
     public void onMembership() {

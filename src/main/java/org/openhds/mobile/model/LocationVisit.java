@@ -11,6 +11,7 @@ import org.openhds.mobile.Converter;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.Queries;
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.database.Cursor;
 
@@ -287,9 +288,10 @@ public class LocationVisit implements Serializable {
                 OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " DESC");
 
         if (cursor.moveToNext()) {
-            int lastIncrement = Integer.parseInt(cursor.getString(0).substring(9, 11));
-            int nextIncrement = lastIncrement + 1;
-            sg.setExtId(socialGroupPrefix + String.format("%02d", nextIncrement));
+ //           int lastIncrement = Integer.parseInt(cursor.getString(0).substring(9, 11));
+  //          int nextIncrement = lastIncrement + 1;
+    //        sg.setExtId(socialGroupPrefix + String.format("%02d", nextIncrement));
+        	return null;
         } else {
             sg.setExtId(socialGroupPrefix + "00");
         }
