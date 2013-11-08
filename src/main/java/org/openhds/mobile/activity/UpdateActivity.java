@@ -733,19 +733,29 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         protected Void doInBackground(Void... params) {
             SocialGroup sg = locationVisit.createSocialGroup(getContentResolver());
             if (sg==null){
-            	onSGexists();
-            	this.cancel(true);
+            	//this.cancel(true);
+            	//hideProgressFragment();
+            	//onSGexists();
             } else {
             	filledForm = formFiller.fillSocialGroupForm(locationVisit, sg);
             	updatable = new HouseholdUpdate();
             }
+            
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
-            hideProgressFragment();
-            loadForm(SELECTED_XFORM);
+        	 SocialGroup sg = locationVisit.createSocialGroup(getContentResolver());
+             if (sg==null){
+            	onSGexists();
+            	this.cancel(true);
+             	hideProgressFragment();
+             	
+             } else {
+            	hideProgressFragment();
+            	loadForm(SELECTED_XFORM);
+             }
         }
     }
     
@@ -756,7 +766,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
          alertDialogBuilder.setCancelable(true);
          alertDialogBuilder.setPositiveButton("Ok", null);
          AlertDialog alertDialog = alertDialogBuilder.create();
-         alertDialog.show();
+         alertDialog.show();         
     }
 
     public void onMembership() {
@@ -1023,11 +1033,21 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         new CreateDeathTask().execute();
     }
 
+    
+  
+    
     private class CreateDeathTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
-            filledForm = formFiller.fillDeathForm(locationVisit);
+        	SocialGroup sg = null;
+        	ContentResolver resolver = getContentResolver();
+        	Cursor cursor = Queries.getSocialGroupsByIndividualExtId(resolver,locationVisit.getSelectedIndividual().getExtId());
+        	if (cursor.moveToFirst()) {
+        	sg = Converter.convertToSocialGroup(cursor);
+        	locationVisit.getLocation().setHead(sg.getGroupHead());
+        	}
+            filledForm = formFiller.fillDeathForm(locationVisit, sg);
             updatable = new DeathUpdate();
 
             return null;

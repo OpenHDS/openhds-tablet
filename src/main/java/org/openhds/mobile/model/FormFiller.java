@@ -115,9 +115,15 @@ public class FormFiller {
         return form;
     }
 
-    public FilledForm fillDeathForm(LocationVisit locationVisit) {
-        FilledForm form = new FilledForm(UpdateEvent.DEATH);
-
+    public FilledForm fillDeathForm(LocationVisit locationVisit, SocialGroup sg) {
+    	FilledForm form = null;
+    	if (locationVisit.getSelectedIndividual().getExtId().equalsIgnoreCase(locationVisit.getLocation().getHead())) {
+    		form = new FilledForm(UpdateEvent.DEATHTOHOH);
+    		if (sg !=null)
+    			addHousehold(sg, form);
+        } else {
+        	form = new FilledForm(UpdateEvent.DEATH);
+        }
         addFieldWorker(locationVisit, form);
         addVisit(locationVisit, form);
         addIndividual(locationVisit.getSelectedIndividual(), form);
@@ -127,7 +133,6 @@ public class FormFiller {
 
     public FilledForm fillInMigrationForm(LocationVisit locationVisit, Individual individual) {
         FilledForm form = new FilledForm(UpdateEvent.INMIGRATION);
-
         addFieldWorker(locationVisit, form);
         addVisit(locationVisit, form);
         form.setLocationId(locationVisit.getLocation().getExtId());
