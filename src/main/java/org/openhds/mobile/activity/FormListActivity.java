@@ -36,6 +36,7 @@ public class FormListActivity extends ListActivity {
 		setListAdapter(adapter);
 	}
 
+	
 	static class CustomAdapter extends SimpleCursorAdapter {
 
 		@Override

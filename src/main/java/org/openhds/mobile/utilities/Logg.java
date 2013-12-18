@@ -60,11 +60,10 @@ public class Logg {
               callLogger("v", tag, message);
        }
   
-       @SuppressWarnings("rawtypes")
        public static void callLogger(String methodName, String tag, String message) {
               final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
               try {
-                     Class cls = Class.forName("android.util.Log");
+                     Class<?> cls = Class.forName("android.util.Log");
                      Method method = cls.getMethod(methodName, String.class, String.class);
                      method.invoke(null, tag, getTrace(ste) + message);
               } catch (ClassNotFoundException e) {

@@ -24,17 +24,11 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 /**
- * ValueFragment is responsible for showing a list of entities, and then
- * notifying the activity using this fragment which entity has been selected. An
- * entity can be defined as: Region, Sub Region, Village, Round, Location
+ * ValueLocFragment is responsible for showing a list of locations, and then
+ * notifying the activity using this fragment which entity has been selected.
  */
 public class ValueLocFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
-    private static final String START_HIERARCHY_LEVEL_NAME = "Region";
-    // loader identifiers
-    private static final int HIERARCHY_LOADER = 0;
-    private static final int REGION_LOADER = 1;
-    private static final int ROUND_LOADER = 2;
     private static final int LOCATION_LOADER = 3;
     private static final int LOCATION_FILTER_LOADER = 5;
 
@@ -42,9 +36,7 @@ public class ValueLocFragment extends ListFragment implements LoaderCallbacks<Cu
     // create the column mappings so they don't need to be recreated on every
     // load
     private static final String[] HIERARCHY_COLUMNS = new String[] { OpenHDS.HierarchyItems.COLUMN_HIERARCHY_NAME,
-            OpenHDS.HierarchyItems.COLUMN_HIERARCHY_EXTID};
-    private static final String[] ROUNDS_COLUMNS = new String[] { OpenHDS.Rounds.COLUMN_ROUND_NUMBER,
-            OpenHDS.Rounds.COLUMN_ROUND_STARTDATE};
+           OpenHDS.HierarchyItems.COLUMN_HIERARCHY_EXTID};
     private static final String[] LOCATION_COLUMNS = new String[] { OpenHDS.Locations.COLUMN_LOCATION_NAME,
             OpenHDS.Locations.COLUMN_LOCATION_EXTID};
 
@@ -58,7 +50,7 @@ public class ValueLocFragment extends ListFragment implements LoaderCallbacks<Cu
     private ValueListener listener;
 
     private enum Displayed {
-        HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, ROUND, LOCATION;
+        LOCATION;
     }
 
     public interface ValueListener {
@@ -95,26 +87,6 @@ public class ValueLocFragment extends ListFragment implements LoaderCallbacks<Cu
         Cursor cursor = (Cursor) adapter.getItem(position);
 
         switch (listCurrentlyDisplayed) {
-        case HIERARCHY_1:
-            LocationHierarchy region = Converter.convertToHierarchy(cursor);
-            listener.onHierarchy1Selected(region);
-            break;
-        case HIERARCHY_2:
-            LocationHierarchy subregion = Converter.convertToHierarchy(cursor);
-            listener.onHierarchy2Selected(subregion);
-            break;
-        case HIERARCHY_3:
-            LocationHierarchy hierarchy = Converter.convertToHierarchy(cursor);
-            listener.onHierarchy3Selected(hierarchy);
-            break;
-        case HIERARCHY_4:
-            LocationHierarchy village = Converter.convertToHierarchy(cursor);
-            listener.onHierarchy4Selected(village);
-            break;
-        case ROUND:
-            Round round = Converter.convertToRound(cursor);
-            listener.onRoundSelected(round);
-            break;
         case LOCATION:
             Location location = Converter.convertToLocation(cursor);
             listener.onLocationSelected(location);
@@ -124,51 +96,8 @@ public class ValueLocFragment extends ListFragment implements LoaderCallbacks<Cu
         adapter.swapCursor(null);
     }
 
-    public void loadLocationHierarchy() {
-        listCurrentlyDisplayed = Displayed.HIERARCHY_1;
-        getLoaderManager().restartLoader(HIERARCHY_LOADER, null, this);
-    }
-
-    public void loadHierarchy2(String parentExtId) {
-        listCurrentlyDisplayed = Displayed.HIERARCHY_2;
-        loadHierarchyItemsFromParent(parentExtId);
-    }
-    
-    public void loadHierarchy3(String extId) {
-        listCurrentlyDisplayed = Displayed.HIERARCHY_3;
-        loadHierarchyItemsFromParent(extId);
-    }
-
-    private void loadHierarchyItemsFromParent(String parentExtId) {
-        Bundle bundle = new Bundle();
-        bundle.putString("parentExtId", parentExtId);
-        getLoaderManager().restartLoader(REGION_LOADER, bundle, this);
-    }
-
-    /**
-     * Load a village optionally filtered by a parent external id
-     * 
-     * @param parentExtId
-     *            the parent ext it to filter on, or null to list all villages
-     */
-    public void loadHierarchy4(String parentExtId) {
-        listCurrentlyDisplayed = Displayed.HIERARCHY_4;
-        loadHierarchyItemsFromParent(parentExtId);
-    }
-
-    public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+     public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
         switch (arg0) {
-        case HIERARCHY_LOADER:
-            adapter.changeCursorAndColumns(null, HIERARCHY_COLUMNS, VIEW_BINDINGS);
-            return new CursorLoader(getActivity(), OpenHDS.HierarchyItems.CONTENT_ID_URI_BASE, null,
-                    OpenHDS.HierarchyItems.COLUMN_HIERARCHY_LEVEL + " = ?",
-                    new String[] { START_HIERARCHY_LEVEL_NAME }, null);
-        case REGION_LOADER:
-            adapter.changeCursorAndColumns(null, HIERARCHY_COLUMNS, VIEW_BINDINGS);
-            return buildRegionCursorLoader(arg1);
-        case ROUND_LOADER:
-            adapter.changeCursorAndColumns(null, ROUNDS_COLUMNS, VIEW_BINDINGS);
-            return new CursorLoader(getActivity(), OpenHDS.Rounds.CONTENT_ID_URI_BASE, null, null, null, null);
         case LOCATION_LOADER:
             adapter.changeCursorAndColumns(null, LOCATION_COLUMNS, VIEW_BINDINGS);
             return buildLocationCursorLoader(arg1);
@@ -195,16 +124,7 @@ public class ValueLocFragment extends ListFragment implements LoaderCallbacks<Cu
         }
     }
 
-    private Loader<Cursor> buildRegionCursorLoader(Bundle arg1) {
-        if (TextUtils.isEmpty(arg1.getString("parentExtId"))) {
-            return buildCursorLoader(OpenHDS.HierarchyItems.CONTENT_ID_URI_BASE, null, null);
-        } else {
-            return buildCursorLoader(OpenHDS.HierarchyItems.CONTENT_ID_URI_BASE,
-                    OpenHDS.HierarchyItems.COLUMN_HIERARCHY_PARENT + " = ?",
-                    new String[] { arg1.getString("parentExtId") });
-        }
-    }
-
+    
     private Loader<Cursor> buildCursorLoader(Uri uri, String where, String[] args) {
         return new CursorLoader(getActivity(), uri, null, where, args, null);
     }
@@ -266,13 +186,6 @@ public class ValueLocFragment extends ListFragment implements LoaderCallbacks<Cu
         adapter.swapCursor(null);
     }
 
-    /**
-     * Loads all rounds
-     */
-    public void loadRounds() {
-        listCurrentlyDisplayed = Displayed.ROUND;
-        getLoaderManager().restartLoader(ROUND_LOADER, null, this);
-    }
 
     /**
      * Loads a list of locations that can optionally be filtered by a hierarchy

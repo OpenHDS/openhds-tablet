@@ -128,6 +128,8 @@ public class EventFragment extends Fragment implements OnClickListener {
 
         clearIndividualBtn = (Button) view.findViewById(R.id.clearIndividualBtn);
         clearIndividualBtn.setOnClickListener(this);
+        
+        
     }
 
     public void onClick(View view) {
@@ -202,6 +204,8 @@ public class EventFragment extends Fragment implements OnClickListener {
                     pregRegBtn.setEnabled(true);
                     birthRegBtn.setEnabled(true);
                 }
+                
+                
             }
 
             public void onLeaveState() {
@@ -284,4 +288,5 @@ public class EventFragment extends Fragment implements OnClickListener {
             }
         });
     }
+    
 }

@@ -13,10 +13,17 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/download_btn"
+        android:id="@+id/downloadextra_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:text="@string/download_extraform_button" />
+
+    <Button
+        android:id="@+id/download_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="@string/download_form_button" />
 
     <Button

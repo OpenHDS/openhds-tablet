@@ -3,6 +3,7 @@ package org.openhds.mobile;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openhds.mobile.model.Form;
 import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
@@ -17,6 +18,24 @@ import android.database.Cursor;
  * Converts a cursor into a corresponding model class or a list of model class
  */
 public class Converter {
+	
+    public static Form toForms(Cursor cursor) {
+    	Form form = new Form();
+
+        if (cursor!=null) {
+        	populateForm(cursor, form);
+        }
+
+        cursor.close();
+
+        return form;
+    }
+
+    private static void populateForm(Cursor cursor, Form form) {
+        form.setName(cursor.getString(cursor.getColumnIndex(OpenHDS.Forms.COLUMN_FORM_NAME)));
+        form.setGender(cursor.getString(cursor.getColumnIndex(OpenHDS.Forms.COLUMN_FORM_GENDER)));
+        
+    }
 
     public static Individual toIndividual(Cursor cursor) {
         Individual individual = new Individual();

@@ -10,6 +10,7 @@ public class OpenHDS {
     }
 
     public static final String DEFAULT_SORT_ORDER = "_id ASC";
+	
 
     public static final class Individuals implements BaseColumns {
 
@@ -227,4 +228,29 @@ public class OpenHDS {
     	public static final String COLUMN_INDIVIDUALUUID = "individual_extId";
     	public static final String COLUMN_SOCIALGROUPUUID = "socialgroup_extId";  
     }
+    
+    
+    
+    public static final class Forms implements BaseColumns {
+        public static final String TABLE_NAME = "forms";
+        private static final String SCHEME = "content://";
+
+        private static final String PATH_NOTES = "/forms";
+        private static final String PATH_NOTE_ID = "/forms/";
+
+        public static final int ID_PATH_POSITION = 1;
+
+        public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_NOTES);
+        public static final Uri CONTENT_ID_URI_BASE = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID);
+        public static final Uri CONTENT_ID_URI_PATTERN = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID + "/#");
+
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.openhds.forms";
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.openhds.forms";
+
+        public static final String COLUMN_FORM_NAME = "name";
+        
+        public static final String COLUMN_FORM_GENDER = "gender";
+    }
+    
+    
 }

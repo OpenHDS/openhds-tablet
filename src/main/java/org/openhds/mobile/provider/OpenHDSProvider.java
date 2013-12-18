@@ -48,6 +48,7 @@ public class OpenHDSProvider extends ContentProvider {
     private static HashMap<String, String> socialgroupsProjectionMap;
     private static HashMap<String, String> socialgroupsJoinProjectionMap;
     private static HashMap<String, String> individualgroupsProjectionMap;
+    private static HashMap<String, String> formsProjectionMap;
 
     private static final int INDIVIDUALS = 1;
     private static final int INDIVIDUAL_ID = 2;
@@ -70,6 +71,7 @@ public class OpenHDSProvider extends ContentProvider {
     private static final int SOCIALGROUP_ID = 16;
     private static final int INDIVIDUALGROUPS = 17;
     private static final int INDIVIDUALGROUP_ID = 18;
+    private static final int FORMS = 22;
 
     private static final UriMatcher sUriMatcher;
     private DatabaseHelper mOpenHelper;
@@ -100,6 +102,9 @@ public class OpenHDSProvider extends ContentProvider {
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "socialgroups/#", SOCIALGROUP_ID);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "individualgroups", INDIVIDUALGROUPS);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "individualgroups/#", INDIVIDUALGROUP_ID);
+        sUriMatcher.addURI(OpenHDS.AUTHORITY, "forms/", FORMS);
+
+
 
         individualsProjectionMap = new HashMap<String, String>();
         individualsProjectionMap.put(OpenHDS.Individuals._ID, OpenHDS.Individuals._ID);
@@ -181,6 +186,15 @@ public class OpenHDSProvider extends ContentProvider {
         fieldworkersProjectionMap.put(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_PASSWORD,
                 OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_PASSWORD);
 
+        
+        formsProjectionMap = new HashMap<String, String>();
+        formsProjectionMap.put(OpenHDS.Forms._ID, OpenHDS.Forms._ID);
+        formsProjectionMap.put(OpenHDS.Forms.COLUMN_FORM_NAME,
+        		OpenHDS.Forms.COLUMN_FORM_NAME);
+        formsProjectionMap.put(OpenHDS.Forms.COLUMN_FORM_GENDER,
+        		OpenHDS.Forms.COLUMN_FORM_GENDER);
+
+        
         socialgroupsProjectionMap = new HashMap<String, String>();
         socialgroupsProjectionMap.put(OpenHDS.SocialGroups._ID, OpenHDS.SocialGroups._ID);
         socialgroupsProjectionMap.put(OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID,
@@ -275,6 +289,9 @@ public class OpenHDSProvider extends ContentProvider {
             db.execSQL("CREATE TABLE " + OpenHDS.IndividualGroups.TABLE_NAME + " (" + OpenHDS.IndividualGroups._ID
                     + " INTEGER PRIMARY KEY," + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID + " TEXT NOT NULL,"
                     + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID + " TEXT NOT NULL);");
+            db.execSQL("CREATE TABLE " + OpenHDS.Forms.TABLE_NAME + " (" + OpenHDS.Forms._ID
+                    + " INTEGER PRIMARY KEY," + OpenHDS.Forms.COLUMN_FORM_NAME + " TEXT NOT NULL,"
+                    + OpenHDS.Forms.COLUMN_FORM_GENDER + " TEXT NOT NULL);");
         }
 
         @Override
@@ -290,6 +307,7 @@ public class OpenHDSProvider extends ContentProvider {
             db.execSQL("DROP TABLE IF EXISTS " + OpenHDS.Visits.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + OpenHDS.HierarchyItems.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + OpenHDS.Locations.TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + OpenHDS.Forms.TABLE_NAME);
             onCreate(db);
         }
     }
@@ -452,6 +470,10 @@ public class OpenHDSProvider extends ContentProvider {
             qb.appendWhere(OpenHDS.IndividualGroups._ID + "="
                     + uri.getPathSegments().get(OpenHDS.IndividualGroups.ID_PATH_POSITION));
             break;
+        case FORMS:
+            qb.setTables(OpenHDS.Forms.TABLE_NAME);
+            qb.setProjectionMap(formsProjectionMap);
+            break;
         default:
             throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -555,6 +577,8 @@ public class OpenHDSProvider extends ContentProvider {
             return OpenHDS.IndividualGroups.CONTENT_TYPE;
         case INDIVIDUALGROUP_ID:
             return OpenHDS.IndividualGroups.CONTENT_ITEM_TYPE;
+        case FORMS:
+            return OpenHDS.Forms.CONTENT_ITEM_TYPE;
         default:
             throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -601,6 +625,10 @@ public class OpenHDSProvider extends ContentProvider {
         case INDIVIDUALGROUPS:
             table = OpenHDS.IndividualGroups.TABLE_NAME;
             contentUriBase = OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE;
+            break;
+        case FORMS:
+            table = OpenHDS.Forms.TABLE_NAME;
+            contentUriBase = OpenHDS.Forms.CONTENT_ID_URI_BASE;
             break;
         default:
             throw new IllegalArgumentException("Unknown URI " + uri);
@@ -694,6 +722,9 @@ public class OpenHDSProvider extends ContentProvider {
         case INDIVIDUALGROUPS:
             count = db.delete(OpenHDS.IndividualGroups.TABLE_NAME, where, whereArgs);
             break;
+        case FORMS:
+            count = db.delete(OpenHDS.Forms.TABLE_NAME, where, whereArgs);
+            break;
         case INDIVIDUALGROUP_ID:
             finalWhere = buildFinalWhere(uri, OpenHDS.IndividualGroups.ID_PATH_POSITION, where);
             count = db.delete(OpenHDS.IndividualGroups.TABLE_NAME, finalWhere, whereArgs);
@@ -786,6 +817,10 @@ public class OpenHDSProvider extends ContentProvider {
         case INDIVIDUALGROUP_ID:
             finalWhere = buildFinalWhere(uri, OpenHDS.IndividualGroups.ID_PATH_POSITION, where);
             count = db.update(OpenHDS.IndividualGroups.TABLE_NAME, values, finalWhere, whereArgs);
+            break;
+        case FORMS:
+            finalWhere = buildFinalWhere(uri, OpenHDS.Forms.ID_PATH_POSITION, where);
+            count = db.update(OpenHDS.Forms.TABLE_NAME, values, finalWhere, whereArgs);
             break;
         default:
             throw new IllegalArgumentException("Unknown URI " + uri);

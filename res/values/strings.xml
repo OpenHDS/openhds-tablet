@@ -11,10 +11,11 @@
     <string name="configuration">Configuration</string>
     <string name="configureDatabase">Configure Database</string>
     <string name="databaseSync">Sync with OpenHDS Database</string>
-    <string name="default_server_url">https://openhds.ihi.or.tz/openhdsIHI/mobile-interop</string>
-    <string name="default_openhdsserver">https://openhds.ihi.or.tz/openhdsIHI</string>
+    <string name="default_server_url">https://openhds.ihi.or.tz/openhdsRUR/mobile-interop</string>
+    <string name="default_openhdsserver">https://openhds.ihi.or.tz/openhdsRUR</string>
     <string name="delete_form_btn">Delete Form</string>
     <string name="download_form_button">Download Forms</string>
+    <string name="download_extraform_button">Download Extra Forms</string>
     <string name="failure_reasons_txt">Failure messages:</string>
     <string name="fatherNotFound">A father could not be found</string>
     <string name="field_worker_already_exists">Field Worker already exists</string>
@@ -25,6 +26,7 @@
     <string name="household_not_found">A household was not found for this Individual</string>
     <string name="idGenerationFailure">An error occurred while generating an id</string>
     <string name="location_lbl">Location:</string>
+    <string name="form_lbl">Form:</string>
     <string name="login_btn">Login</string>
     <string name="logout_btn">Logout</string>
     <string name="main_txt">Form Management</string>
@@ -38,6 +40,8 @@
 	<string name="syncDatabase">Sync Database</string>
 	<string name="syncDatabaseMessage">This procedure will attempt to download OpenHDS entities onto the device. Please be patient while the download is in progress.</string>
 	<string name="sync_entities_failure">Failed to Collect OpenHDS Entities</string>
+	<string name="sync_forms_successful">Forms Collected Successfully</string>
+	<string name="sync_forms_failure">Failed to Collect the forms</string>
 	<string name="sync_entities_successful">OpenHDS Entities Collected Successfully</string>
     <string name="sync_interrupted">Collecting OpenHDS Entities has been interrupted</string>
     <string name="sync_restarting">Sync restarting</string>
@@ -54,6 +58,7 @@
     <string name="hierarchy1_lbl">Region:</string>
     <string name="hierarchy1_hint_lbl">Region External Id</string>
     <string name="location_hint_lbl">Location External Id</string>
+    <string name="form_hint_lbl">Form Name</string>
     <string name="firstname_lbl">First Name:</string>
     <string name="firstname_hint_lbl">First Name</string>
     <string name="lastname_lbl">Last Name:</string>
@@ -64,6 +69,7 @@
     <string name="clear_lbl">Clear</string>
     <string name="search_lbl">Search</string>
     <string name="search_loc_lbl">Search Location</string>
+    <string name="search_form_lbl">Search Form</string>
     <string name="search_individual_lbl">Search for an Individual</string>
     <string name="hierarchy4_lbl">Subvillage:</string>
     <string name="hierarchy4_hint_lbl">Subvillage External Id</string>

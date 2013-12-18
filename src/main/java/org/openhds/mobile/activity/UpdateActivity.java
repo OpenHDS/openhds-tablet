@@ -23,6 +23,7 @@ import org.openhds.mobile.fragment.ValueFragment;
 import org.openhds.mobile.listener.OdkFormLoadListener;
 import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.FilledForm;
+import org.openhds.mobile.model.Form;
 import org.openhds.mobile.model.FormFiller;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
@@ -51,6 +52,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -67,6 +69,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private ValueFragment vf;
     private EventFragment ef;
     private ProgressFragment progressFragment;
+    private MenuItem  menuItemForm;
 
     // loader ids
     private static final int SOCIAL_GROUP_AT_LOCATION = 0;
@@ -78,6 +81,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private static final int CREATE_LOCATION = 10;
     private static final int FILTER_RELATIONSHIP = 20;
     private static final int FILTER_LOCATION = 30;
+    private static final int FILTER_FORM = 35;
     private static final int FILTER_INMIGRATION = 40;
     private static final int FILTER_BIRTH_FATHER = 45;
     private static final int LOCATION_GEOPOINT = 50;
@@ -129,15 +133,16 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     /**
      * The main menu, showing multiple options
      */
+    
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-     //   MenuInflater inflater = getMenuInflater();
-     //   inflater.inflate(R.menu.mainmenu, menu);
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.formmenu, menu);
+        this.menuItemForm = menu.getItem(0);
+        menu.getItem(0).setVisible(false);
         super.onCreateOptionsMenu(menu);
-//        menu.add(0, MENU_PREFERENCES, 0, getString(R.string.search_loc_lbl)).setIcon(
-//                android.R.drawable.ic_menu_preferences);
         return true;
-    }
+	}
 
     /**
      * Defining what happens when a main menu item is selected
@@ -145,8 +150,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.configure_server:
-            createPreferencesMenu();
+        case R.id.extra_forms:
+        	createFormMenu();
             return true;
         case R.id.sync_database:
             createSyncDatabaseMenu();
@@ -159,8 +164,16 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
         case SELECTED_XFORM:
-            handleXformResult(resultCode, data);
+        	handleXformResult(resultCode, data);
             break;
+        case FILTER_FORM:
+        	 if (resultCode != RESULT_OK) {
+                 return;
+             }
+        	Form form =(Form) data.getExtras().getSerializable("form");
+        	filledForm = formFiller.fillExtraForm(locationVisit, form.getName());
+        	loadForm(SELECTED_XFORM);
+        	break;
         case FILTER_BIRTH_FATHER:
             handleFatherBirthResult(resultCode, data);
             break;
@@ -505,9 +518,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     /**
      * Creates the 'Configure Server' option in the action menu.
      */
-    private void createPreferencesMenu() {
-        Intent i = new Intent(this, ServerPreferencesActivity.class);
-        startActivity(i);
+    private void createFormMenu() {
+        Intent i = new Intent(this, FilterFormActivity.class);
+        i.putExtra("location", locationVisit);
+        startActivityForResult(i, FILTER_FORM);
     }
 
     /**
@@ -709,12 +723,15 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+            	if(menuItemForm != null) {
+                  	menuItemForm.setVisible(false);
+                 }    
             	locationVisit = locationVisit.completeVisit();
                 sf.setLocationVisit(locationVisit);
                 ef.setLocationVisit(locationVisit);
                 stateMachine.transitionTo(State.FINISH_VISIT);
                 stateMachine.transitionTo(State.SELECT_LOCATION);
-                vf.onLoaderReset(null);
+                vf.onLoaderReset(null);    
                 }
         });
         alertDialogBuilder.setNegativeButton("Cancel", null);
@@ -1049,7 +1066,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	}
             filledForm = formFiller.fillDeathForm(locationVisit, sg);
             updatable = new DeathUpdate();
-
+            cursor.close();
             return null;
         }
 
@@ -1068,6 +1085,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onClearIndividual() {
         locationVisit.setSelectedIndividual(null);
         stateMachine.transitionTo(State.SELECT_INDIVIDUAL);
+        
+        if(this.menuItemForm != null) {
+        	this.menuItemForm.setVisible(false);
+        }
     }
 
     public void loadForm(final int requestCode) {
@@ -1163,6 +1184,11 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onIndividualSelected(Individual individual) {
         locationVisit.setSelectedIndividual(individual);
         stateMachine.transitionTo(State.SELECT_EVENT);
+        
+        if(this.menuItemForm != null) {
+        	this.menuItemForm.setVisible(true);
+        }
+       
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {

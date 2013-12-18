@@ -193,6 +193,22 @@ public class FormFiller {
         
         return form;
     }
+    
+    
+    
+    public FilledForm fillExtraForm(LocationVisit locationVisit, String formName) {
+    	  FilledForm form = new FilledForm(formName);
+
+          addFieldWorker(locationVisit, form);
+          addVisit(locationVisit, form);
+          addIndividual(locationVisit.getSelectedIndividual(), form);
+          form.setLocationId(locationVisit.getLocation().getExtId());
+          form.setRoundNumber(locationVisit.getRound().getRoundNumber());
+
+          return form;
+    }
+    
+    
 
     public void appendFatherId(FilledForm filledForm, String fatherId) {
         filledForm.setFatherExtId(fatherId);

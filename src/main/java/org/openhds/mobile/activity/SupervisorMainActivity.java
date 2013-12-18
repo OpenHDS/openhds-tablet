@@ -3,23 +3,32 @@ package org.openhds.mobile.activity;
 import java.net.URL;
 
 import org.openhds.mobile.R;
+import org.openhds.mobile.listener.CollectEntitiesListener;
 import org.openhds.mobile.task.AbstractHttpTask.RequestContext;
 import org.openhds.mobile.task.DownloadFormsTask;
+import org.openhds.mobile.task.SyncFormsTask;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class SupervisorMainActivity extends AbstractActivity {
+public class SupervisorMainActivity extends AbstractActivity implements CollectEntitiesListener {
 	
-	private Dialog dialog;
+	private ProgressDialog dialog;
+    private String url;
+    private String username;
+    private String password;
+	private SharedPreferences settings;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,10 @@ public class SupervisorMainActivity extends AbstractActivity {
 
 		Button downloadBtn = (Button) findViewById(R.id.download_btn);
 		downloadBtn.setOnClickListener(new DownloadButtonListener());
+		
+		Button downloadExtraBtn = (Button) findViewById(R.id.downloadextra_btn);
+		downloadExtraBtn.setOnClickListener(new DownloadExtraFormsButtonListener());
+
 
 		Button viewFormBtn = (Button) findViewById(R.id.view_form_btn);
 		viewFormBtn.setOnClickListener(new OnClickListener() {
@@ -88,6 +101,7 @@ public class SupervisorMainActivity extends AbstractActivity {
         startActivity(i);
     }
 
+    
 	private class DownloadButtonListener implements OnClickListener {
 		public void onClick(View arg0) {
 			dialog = ProgressDialog.show(SupervisorMainActivity.this, "Working", "Downloading all forms...");
@@ -134,6 +148,33 @@ public class SupervisorMainActivity extends AbstractActivity {
 					}, getBaseContext());
 			task.execute();
 		}
+	}
+    
+	private class DownloadExtraFormsButtonListener implements OnClickListener {
+		public void onClick(View arg0) {
+			dialog = ProgressDialog.show(SupervisorMainActivity.this, "Working", "Downloading extra forms...");
+            settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+			url = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_SERVER, getString(R.string.default_openhdsserver));
+			username = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_USERNAME, getString(R.string.username));
+			password = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_PASSWORD, getString(R.string.password));
+			
+			
+
+			SyncFormsTask task = new SyncFormsTask(url, username, password,
+					dialog, getBaseContext(), SupervisorMainActivity.this);
+			
+			
+			task.execute();
+		}
+	}
+
+	public void collectionComplete(Boolean result) {
+		if (result) 
+			Toast.makeText(getApplicationContext(),	getString(R.string.sync_forms_successful), Toast.LENGTH_LONG).show();
+		else 
+			Toast.makeText(getApplicationContext(), getString(R.string.sync_forms_failure), Toast.LENGTH_LONG).show();
+		dialog.dismiss();		
 	}
 
 }

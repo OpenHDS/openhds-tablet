@@ -11,7 +11,6 @@ import org.openhds.mobile.Converter;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.Queries;
 
-import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.database.Cursor;
 

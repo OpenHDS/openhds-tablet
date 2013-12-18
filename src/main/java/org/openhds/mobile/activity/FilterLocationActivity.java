@@ -67,19 +67,19 @@ public class FilterLocationActivity extends Activity implements ValueListener, S
     }
 
     public void onSeeListHierarchy1() {
-        valueFragment.loadLocationHierarchy();
+     //   valueFragment.loadLocationHierarchy();
     }
 
     public void onSeeListHierarchy2(String region) {
-        valueFragment.loadHierarchy2(region);
+     //   valueFragment.loadHierarchy2(region);
     }
     
     public void onSeeListHierarchy3(String hierarchyExtId) {
-        valueFragment.loadHierarchy3(hierarchyExtId);
+  //      valueFragment.loadHierarchy3(hierarchyExtId);
     }
 
     public void onSeeListHierarchy4(String subregion) {
-        valueFragment.loadHierarchy4(subregion);
+   //     valueFragment.loadHierarchy4(subregion);
     }
 
     public void onSeeListLocation(String village) {

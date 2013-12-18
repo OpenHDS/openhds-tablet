@@ -197,8 +197,8 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                      mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
                      
                      String deviceId = mTelephonyManager.getDeviceId();
-                     String orDeviceId = null;
-                     if (deviceId != null ) {
+                     String orDeviceId;
+					if (deviceId != null ) {
                              if ((deviceId.contains("*") || deviceId.contains("000000000000000"))) {
                                      deviceId =
                                                      Settings.Secure
