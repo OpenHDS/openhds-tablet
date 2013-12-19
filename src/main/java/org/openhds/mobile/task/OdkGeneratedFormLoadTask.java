@@ -261,7 +261,7 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
     }
 
     private File saveFile(String xml, String jrFormId) {
-    	 DateFormat df = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss");
+    	 DateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
          df.setTimeZone(TimeZone.getDefault());
          String date = df.format(new Date());
 
@@ -270,6 +270,25 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                 + File.separator + "org.openhds.mobile" + File.separator + "files"+ File.separator + jrFormId + date;
 
         File baseDir = new File(destinationPath);
+        /*File baseDir = null;
+        
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+        {
+        	baseDir = new File(android.os.Environment.getExternalStorageDirectory(),"Android" + File.separator + "data"
+                    + File.separator + "org.openhds.mobile" + File.separator + "files"+ File.separator + jrFormId);
+            if(!baseDir.exists())
+            {
+            	try {
+					baseDir.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        }*/
+        
+        
+        
         if (!baseDir.exists()) {
             boolean created = baseDir.mkdirs();
             if (!created) {

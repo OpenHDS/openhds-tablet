@@ -86,7 +86,7 @@ public class SyncFormsTask extends AsyncTask<Void, Integer, Boolean> {
         StringBuilder builder = new StringBuilder();
         switch (state) {
         case DOWNLOADING:
-            builder.append("Downloading ");
+            builder.append("Downloading");
             break;
         case SAVING:
             builder.append("Saving ");
@@ -95,7 +95,7 @@ public class SyncFormsTask extends AsyncTask<Void, Integer, Boolean> {
 
         switch (entity) {
         case FORMS:
-            builder.append(" Forms.");
+            builder.append("  Extra forms.");
             break;
         }
 
