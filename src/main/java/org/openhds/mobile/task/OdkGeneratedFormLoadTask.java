@@ -88,7 +88,13 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
             Document doc = builder.parse(new FileInputStream(formFilePath));
 
             Node node = doc.getElementsByTagName("data").item(0);
-            sbuilder.append("<data id=\"" + jrFormId + "\">" + "\r\n");
+            
+            if (node==null){
+            	node = doc.getElementsByTagName(jrFormId).item(0);
+                sbuilder.append("<"+jrFormId+" id=\"" + jrFormId + "\">" + "\r\n");
+            } else {
+            	sbuilder.append("<data id=\"" + jrFormId + "\">" + "\r\n");
+            }
 
             processNodeChildren(node, sbuilder);
 
