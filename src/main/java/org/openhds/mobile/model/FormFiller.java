@@ -196,14 +196,18 @@ public class FormFiller {
     
     
     
-    public FilledForm fillExtraForm(LocationVisit locationVisit, String formName) {
+    public FilledForm fillExtraForm(LocationVisit locationVisit, String formName, SocialGroup sg) {
     	  FilledForm form = new FilledForm(formName);
-
+          
           addFieldWorker(locationVisit, form);
           addVisit(locationVisit, form);
           addIndividual(locationVisit.getSelectedIndividual(), form);
           form.setLocationId(locationVisit.getLocation().getExtId());
           form.setRoundNumber(locationVisit.getRound().getRoundNumber());
+          form.setRoundNumber(locationVisit.getRound().getRoundNumber());
+          form.setMotherExtId(locationVisit.getSelectedIndividual().getMother());
+          if (sg !=null)
+  			addHousehold(sg, form);
 
           return form;
     }

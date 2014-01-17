@@ -162,6 +162,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
         switch (requestCode) {
         case SELECTED_XFORM:
         	handleXformResult(resultCode, data);
@@ -171,7 +173,14 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                  return;
              }
         	Form form =(Form) data.getExtras().getSerializable("form");
-        	filledForm = formFiller.fillExtraForm(locationVisit, form.getName());
+        	SocialGroup sg = null;
+        	cursor = Queries.getSocialGroupsByIndividualExtId(resolver,locationVisit.getSelectedIndividual().getExtId());
+        	if (cursor.moveToFirst()) {
+        	sg = Converter.convertToSocialGroup(cursor);
+        	locationVisit.getLocation().setHead(sg.getGroupHead());
+        	}
+        	filledForm = formFiller.fillExtraForm(locationVisit, form.getName(), sg);
+        	cursor.close();
         	loadForm(SELECTED_XFORM);
         	break;
         case FILTER_BIRTH_FATHER:
@@ -207,10 +216,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         case LOCATION_GEOPOINT:
             if (resultCode == RESULT_OK) {
                 String extId = data.getExtras().getString("extId");
-                ContentResolver resolver = getContentResolver();
                 // a few things need to happen here:
                 // * get the location by extId
-                Cursor cursor = Queries.getLocationByExtId(resolver, extId);
+                cursor = Queries.getLocationByExtId(resolver, extId);
                 Location location = Converter.toLocation(cursor);
 
                 // * figure out the parent location hierarchy
