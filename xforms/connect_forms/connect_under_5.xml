@@ -1,0 +1,469 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>connect_under_5</h:title>
+    <model>
+      <itext>
+        <translation lang="Swahili">
+          <text id="/connect_under_5/whoVisited/2:label">
+            <value>Mwingine</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/88:label">
+            <value>Sijui</value>
+          </text>
+          <text id="/connect_under_5/seekTreatment/1:label">
+            <value>Ndiyo</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks/1:label">
+            <value>Ndiyo</value>
+          </text>
+          <text id="/connect_under_5/soughtTreatmentWhere:label">
+            <value>Kwa ugonjwa wa hivi karibuni zaidi, ulitafuta matibabu wapi?</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks:label">
+            <value>Mtoto alipata homa katika wiki mbili zilizopita?</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks/2:label">
+            <value>Hapana</value>
+          </text>
+          <text id="/connect_under_5/whoVisited/1:label">
+            <value>WAJA </value>
+          </text>
+          <text id="/connect_under_5/householdId:label">
+            <value>Namba ya Kaya</value>
+          </text>
+          <text id="/connect_under_5/soughtTreatmentWhere/1:label">
+            <value>Zahanati</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks/88:label">
+            <value>Sijui</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit/5:label">
+            <value>Haihusiki</value>
+          </text>
+          <text id="/connect_under_5/fieldWorkerId:label">
+            <value>ID ya MUHOJAJI</value>
+          </text>
+          <text id="/connect_under_5/soughtTreatmentWhere/2:label">
+            <value>Duka la dawa</value>
+          </text>
+          <text id="/connect_under_5/soughtTreatmentWhere/4:label">
+            <value>Nyumbani</value>
+          </text>
+          <text id="/connect_under_5/fieldWorkerId:hint">
+            <value>kwa mfano FWAD1</value>
+          </text>
+          <text id="/connect_under_5/whoVisitedOther:label">
+            <value>Nani alitembelea kaya hii kutoa huduma? (Mwingine)</value>
+          </text>
+          <text id="/connect_under_5/visitId:label">
+            <value>Namba ya Uhudhurio</value>
+          </text>
+          <text id="/connect_under_5/seekTreatment/2:label">
+            <value>Hapana</value>
+          </text>
+          <text id="/connect_under_5/lastName:label">
+            <value>Jina la ukoo</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit/99:label">
+            <value>Hakuna jibu</value>
+          </text>
+          <text id="/connect_under_5/soughtTreatmentWhere/3:label">
+            <value>Hospitali</value>
+          </text>
+          <text id="/connect_under_5/middleName:hint">
+            <value>Kama haijulikani andika UNK</value>
+          </text>
+          <text id="/connect_under_5/firstName:label">
+            <value>Jina la kwanza</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/2:label">
+            <value>Kupumua kwa shida</value>
+          </text>
+          <text id="/connect_under_5/individualId:label">
+            <value>PERM ID ya mtoto</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit:label">
+            <value>Kwa ugonjwa wa hivi karibuni, kuna mtu yeyote alitembelea kaya hii kutoa huduma kwa mtoto?</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/3:label">
+            <value>Homa</value>
+          </text>
+          <text id="/connect_under_5/middleName:label">
+            <value>Jina la kati</value>
+          </text>
+          <text id="/connect_under_5/seekTreatment:label">
+            <value>Kwa ugonjwa wa hivi karibuni zaidi, ulikwenda kutafuta matibabu?</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks/3:label">
+            <value>Haihusiki</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit/2:label">
+            <value>Hapana</value>
+          </text>
+          <text id="/connect_under_5/dob:label">
+            <value>Tarehe ya kuzaliwa</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/5:label">
+            <value>Haihusiki</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks/99:label">
+            <value>Hakuna jibu</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction:label">
+            <value>Ni ugonjwa upi ulitokea hivi karibuni zaidi?</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit/88:label">
+            <value>Sijui</value>
+          </text>
+          <text id="/connect_under_5/seekTreatment/88:label">
+            <value>Sijui</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/99:label">
+            <value>Hakuna jibu</value>
+          </text>
+          <text id="/connect_under_5/whoVisited:label">
+            <value>Kama ndiyo, nani alitembelea kaya hii kutoa huduma?</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/1:label">
+            <value>Kuhara</value>
+          </text>
+          <text id="/connect_under_5/seekTreatment/99:label">
+            <value>Hakuna jibu</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit/1:label">
+            <value>Ndiyo</value>
+          </text>
+        </translation>
+        <translation lang="English">
+          <text id="/connect_under_5/whoVisited/2:label">
+            <value>Other</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/88:label">
+            <value>I do not know</value>
+          </text>
+          <text id="/connect_under_5/seekTreatment/1:label">
+            <value>Yes</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks/1:label">
+            <value>Yes</value>
+          </text>
+          <text id="/connect_under_5/soughtTreatmentWhere:label">
+            <value>For the last illness, where did you seek treatment?</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks:label">
+            <value>Has the child experienced fever in the past 2 weeks?</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks/2:label">
+            <value>No</value>
+          </text>
+          <text id="/connect_under_5/whoVisited/1:label">
+            <value>Community Health Workers</value>
+          </text>
+          <text id="/connect_under_5/householdId:label">
+            <value>Household ID</value>
+          </text>
+          <text id="/connect_under_5/soughtTreatmentWhere/1:label">
+            <value>Dispensary</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks/88:label">
+            <value>I do not know</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit/5:label">
+            <value>Not relevant</value>
+          </text>
+          <text id="/connect_under_5/fieldWorkerId:label">
+            <value>Fieldworker ID</value>
+          </text>
+          <text id="/connect_under_5/soughtTreatmentWhere/2:label">
+            <value>Pharmacy</value>
+          </text>
+          <text id="/connect_under_5/soughtTreatmentWhere/4:label">
+            <value>Home</value>
+          </text>
+          <text id="/connect_under_5/fieldWorkerId:hint">
+            <value>e.g FWAD1</value>
+          </text>
+          <text id="/connect_under_5/whoVisitedOther:label">
+            <value>Who visited the household to provide health services? (Other)</value>
+          </text>
+          <text id="/connect_under_5/visitId:label">
+            <value>Visit ID</value>
+          </text>
+          <text id="/connect_under_5/seekTreatment/2:label">
+            <value>No</value>
+          </text>
+          <text id="/connect_under_5/lastName:label">
+            <value>Surname</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit/99:label">
+            <value>No answer</value>
+          </text>
+          <text id="/connect_under_5/soughtTreatmentWhere/3:label">
+            <value>Hospital</value>
+          </text>
+          <text id="/connect_under_5/middleName:hint">
+            <value>Enter UNK if this is not known</value>
+          </text>
+          <text id="/connect_under_5/firstName:label">
+            <value>First name</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/2:label">
+            <value>Breathing difficulties</value>
+          </text>
+          <text id="/connect_under_5/individualId:label">
+            <value>PERM ID</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit:label">
+            <value>For the last illness, was there a home visit?</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/3:label">
+            <value>Fever</value>
+          </text>
+          <text id="/connect_under_5/middleName:label">
+            <value>Middle name</value>
+          </text>
+          <text id="/connect_under_5/seekTreatment:label">
+            <value>For the last illness, did you seek treatment?</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks/3:label">
+            <value>Not relevant</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit/2:label">
+            <value>No</value>
+          </text>
+          <text id="/connect_under_5/dob:label">
+            <value>Date of birth</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/5:label">
+            <value>Not relevant</value>
+          </text>
+          <text id="/connect_under_5/feverLast2Wks/99:label">
+            <value>No answer</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction:label">
+            <value>What is the last illness suffered by the child?</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit/88:label">
+            <value>I do not know</value>
+          </text>
+          <text id="/connect_under_5/seekTreatment/88:label">
+            <value>I do not know</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/99:label">
+            <value>No answer</value>
+          </text>
+          <text id="/connect_under_5/whoVisited:label">
+            <value>If yes, who visited the household to provide health services?</value>
+          </text>
+          <text id="/connect_under_5/mostRecentAffliction/1:label">
+            <value>Diarhoea</value>
+          </text>
+          <text id="/connect_under_5/seekTreatment/99:label">
+            <value>No answer</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit/1:label">
+            <value>Yes</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <connect_under_5 id="connect_under_5">
+          <start/>
+          <deviceid/>
+          <today/>
+          <householdId/>
+          <visitId/>
+          <fieldWorkerId/>
+          <individualId/>
+          <firstName/>
+          <middleName/>
+          <lastName/>
+          <dob/>
+          <feverLast2Wks/>
+          <mostRecentAffliction/>
+          <seekTreatment/>
+          <soughtTreatmentWhere/>
+          <hadHomeVisit/>
+          <whoVisited/>
+          <whoVisitedOther/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </connect_under_5>
+      </instance>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/connect_under_5/start" type="dateTime"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/connect_under_5/deviceid" type="string"/>
+      <bind jr:preload="date" jr:preloadParams="today" nodeset="/connect_under_5/today" type="date"/>
+      <bind nodeset="/connect_under_5/householdId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/connect_under_5/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/connect_under_5/fieldWorkerId" readonly="true()" type="string"/>
+      <bind constraint="regex(.,'^[A-Z]{3}[0-9]{9}$')" jr:constraintMsg="Fuata muundo uliotolewa kama mfano. Herufi 3 za UPPERCASE ikifuatiwa na namba 9." nodeset="/connect_under_5/individualId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/connect_under_5/firstName" required="true()" type="string"/>
+      <bind nodeset="/connect_under_5/middleName" required="true()" type="string"/>
+      <bind nodeset="/connect_under_5/lastName" required="true()" type="string"/>
+      <bind nodeset="/connect_under_5/dob" required="true()" type="date"/>
+      <bind nodeset="/connect_under_5/feverLast2Wks" required="true()" type="select1"/>
+      <bind nodeset="/connect_under_5/mostRecentAffliction" required="true()" type="select1"/>
+      <bind nodeset="/connect_under_5/seekTreatment" required="true()" type="select1"/>
+      <bind nodeset="/connect_under_5/soughtTreatmentWhere" required="true()" type="select1"/>
+      <bind nodeset="/connect_under_5/hadHomeVisit" required="true()" type="select1"/>
+      <bind nodeset="/connect_under_5/whoVisited" relevant="selected(/connect_under_5/hadHomeVisit,'1')" required="true()" type="select1"/>
+      <bind nodeset="/connect_under_5/whoVisitedOther" relevant="selected(/connect_under_5/whoVisited,'2')" required="true()" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/connect_under_5/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/connect_under_5/householdId">
+      <label ref="jr:itext('/connect_under_5/householdId:label')"/>
+    </input>
+    <input ref="/connect_under_5/visitId">
+      <label ref="jr:itext('/connect_under_5/visitId:label')"/>
+    </input>
+    <input ref="/connect_under_5/fieldWorkerId">
+      <label ref="jr:itext('/connect_under_5/fieldWorkerId:label')"/>
+      <hint ref="jr:itext('/connect_under_5/fieldWorkerId:hint')"/>
+    </input>
+    <input ref="/connect_under_5/individualId">
+      <label ref="jr:itext('/connect_under_5/individualId:label')"/>
+    </input>
+    <input ref="/connect_under_5/firstName">
+      <label ref="jr:itext('/connect_under_5/firstName:label')"/>
+    </input>
+    <input ref="/connect_under_5/middleName">
+      <label ref="jr:itext('/connect_under_5/middleName:label')"/>
+      <hint ref="jr:itext('/connect_under_5/middleName:hint')"/>
+    </input>
+    <input ref="/connect_under_5/lastName">
+      <label ref="jr:itext('/connect_under_5/lastName:label')"/>
+    </input>
+    <input ref="/connect_under_5/dob">
+      <label ref="jr:itext('/connect_under_5/dob:label')"/>
+    </input>
+    <select1 ref="/connect_under_5/feverLast2Wks">
+      <label ref="jr:itext('/connect_under_5/feverLast2Wks:label')"/>
+      <item>
+        <label ref="jr:itext('/connect_under_5/feverLast2Wks/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/feverLast2Wks/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/feverLast2Wks/3:label')"/>
+        <value>3</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/feverLast2Wks/88:label')"/>
+        <value>88</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/feverLast2Wks/99:label')"/>
+        <value>99</value>
+      </item>
+    </select1>
+    <select1 ref="/connect_under_5/mostRecentAffliction">
+      <label ref="jr:itext('/connect_under_5/mostRecentAffliction:label')"/>
+      <item>
+        <label ref="jr:itext('/connect_under_5/mostRecentAffliction/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/mostRecentAffliction/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/mostRecentAffliction/3:label')"/>
+        <value>3</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/mostRecentAffliction/5:label')"/>
+        <value>5</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/mostRecentAffliction/88:label')"/>
+        <value>88</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/mostRecentAffliction/99:label')"/>
+        <value>99</value>
+      </item>
+    </select1>
+    <select1 ref="/connect_under_5/seekTreatment">
+      <label ref="jr:itext('/connect_under_5/seekTreatment:label')"/>
+      <item>
+        <label ref="jr:itext('/connect_under_5/seekTreatment/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/seekTreatment/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/seekTreatment/88:label')"/>
+        <value>88</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/seekTreatment/99:label')"/>
+        <value>99</value>
+      </item>
+    </select1>
+    <select1 ref="/connect_under_5/soughtTreatmentWhere">
+      <label ref="jr:itext('/connect_under_5/soughtTreatmentWhere:label')"/>
+      <item>
+        <label ref="jr:itext('/connect_under_5/soughtTreatmentWhere/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/soughtTreatmentWhere/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/soughtTreatmentWhere/3:label')"/>
+        <value>3</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/soughtTreatmentWhere/4:label')"/>
+        <value>4</value>
+      </item>
+    </select1>
+    <select1 ref="/connect_under_5/hadHomeVisit">
+      <label ref="jr:itext('/connect_under_5/hadHomeVisit:label')"/>
+      <item>
+        <label ref="jr:itext('/connect_under_5/hadHomeVisit/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/hadHomeVisit/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/hadHomeVisit/5:label')"/>
+        <value>5</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/hadHomeVisit/88:label')"/>
+        <value>88</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/hadHomeVisit/99:label')"/>
+        <value>99</value>
+      </item>
+    </select1>
+    <select1 ref="/connect_under_5/whoVisited">
+      <label ref="jr:itext('/connect_under_5/whoVisited:label')"/>
+      <item>
+        <label ref="jr:itext('/connect_under_5/whoVisited/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/connect_under_5/whoVisited/2:label')"/>
+        <value>2</value>
+      </item>
+    </select1>
+    <input ref="/connect_under_5/whoVisitedOther">
+      <label ref="jr:itext('/connect_under_5/whoVisitedOther:label')"/>
+    </input>
+  </h:body>
+</h:html>
