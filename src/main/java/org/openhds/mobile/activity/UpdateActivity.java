@@ -220,15 +220,37 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 // * get the location by extId
                 cursor = Queries.getLocationByExtId(resolver, extId);
                 Location location = Converter.toLocation(cursor);
-
+               
                 // * figure out the parent location hierarchy
                 cursor = Queries.getHierarchyByExtId(resolver, location.getHierarchy());
+                LocationHierarchy subvVllage = Converter.toHierarhcy(cursor, true);
+                
+
+                cursor = Queries.getHierarchyByExtId(resolver, subvVllage.getParent());
                 LocationHierarchy village = Converter.toHierarhcy(cursor, true);
-
+                
                 cursor = Queries.getHierarchyByExtId(resolver, village.getParent());
-                LocationHierarchy subRegion = Converter.toHierarhcy(cursor, true);
-
-                cursor = Queries.getHierarchyByExtId(resolver, subRegion.getParent());
+                LocationHierarchy district = Converter.toHierarhcy(cursor, true);
+                
+                cursor = Queries.getHierarchyByExtId(resolver, district.getParent());
+                LocationHierarchy region = Converter.toHierarhcy(cursor, true);
+                
+                cursor = Queries.allRounds(resolver);
+                Round round = Converter.convertToRound(cursor);
+                
+                locationVisit.setHierarchy1(region);
+                locationVisit.setHierarchy2(district);
+                locationVisit.setHierarchy3(village);
+                locationVisit.setHierarchy4(subvVllage);
+                locationVisit.setRound(round);
+                locationVisit.setLocation(location);
+                
+                
+                sf.setLocationVisit(locationVisit);
+                sf.setAll();
+            	vf.onLoaderReset(null);
+                stateMachine.transitionTo(State.CREATE_VISIT);
+                cursor.close();
             }
         }
     }

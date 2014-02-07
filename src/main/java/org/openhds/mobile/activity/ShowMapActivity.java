@@ -19,18 +19,23 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
-import com.google.android.maps.MyLocationOverlay;
 
-public class ShowMapActivity extends MapActivity implements OnItemClickListener {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+
+
+public class ShowMapActivity extends FragmentActivity implements OnItemClickListener, OnCameraChangeListener {
 	
 	private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // meters
 	private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // milliseconds
@@ -38,12 +43,12 @@ public class ShowMapActivity extends MapActivity implements OnItemClickListener 
 	private static final int LOCATION_RADIUS = 25;
 	
 	private DatabaseAdapter databaseAdapter;
-	private MapController mapController;
-	private MapView mapView;
+	//private MapView mapView;
 	private ListView locationsView;
 	private LocationManager locationManager;
-	private MyLocationOverlay myLocationOverlay;
+	//private MyLocationOverlay myLocationOverlay;
 	private GeoUpdateHandler handler;
+	private GoogleMap googleMap;
 
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
@@ -52,15 +57,29 @@ public class ShowMapActivity extends MapActivity implements OnItemClickListener 
 	    setDatabaseAdapter(new DatabaseAdapter(getBaseContext()));
 		handler = new GeoUpdateHandler();
 
-		mapView = (MapView) findViewById(R.id.mapview);
-		mapView.setBuiltInZoomControls(true);
-		mapView.setSatellite(true);
-		
+		FragmentManager myFragmentManager = getSupportFragmentManager();
+		   SupportMapFragment mySupportMapFragment
+		    = (SupportMapFragment)myFragmentManager.findFragmentById(R.id.mapview);
+		   googleMap = mySupportMapFragment.getMap();
+		    
+		   googleMap.setMyLocationEnabled(true);
+		 
+		   //googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		   //googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+		   //googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+		     googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+		     
+		     googleMap.setOnCameraChangeListener(new OnCameraChangeListener() {
+		            
+			     public void onCameraChange(CameraPosition arg0) {
+			    
+				googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+			        googleMap.setOnCameraChangeListener(ShowMapActivity.this);
+			      }
+			});
 		locationsView = (ListView) findViewById(R.id.locationsListView);
 		locationsView.setOnItemClickListener(this);
 		
-		mapController = mapView.getController();
-		mapController.setZoom(14); 
 		
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		
@@ -71,14 +90,22 @@ public class ShowMapActivity extends MapActivity implements OnItemClickListener 
 			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 
 					MINIMUM_TIME_BETWEEN_UPDATES, MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, handler);
 			
-			myLocationOverlay = new MyLocationOverlay(this, mapView);
-			mapView.getOverlays().add(myLocationOverlay);
-	
-			myLocationOverlay.runOnFirstFix(new Runnable() {
-				public void run() {
-					mapView.getController().animateTo(myLocationOverlay.getMyLocation());
-				}
-			});
+			
+			final LatLng pos = new LatLng(-0.4, 34.166667);
+			/*googleMap.addMarker(new MarkerOptions()
+			                          .position(rusinga)
+			                          .title("Rusinga")
+			                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));*/
+			
+			
+			//final LatLng pos = displayCurrentLocation();
+			 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 22));
+			/*	googleMap.setOnCameraChangeListener(new OnCameraChangeListener() {
+			        public void onCameraChange(CameraPosition arg0) {
+			            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 13));
+			        }
+			    });*/
+			
 			
 			displayCurrentLocation();
 			List<org.openhds.mobile.model.Location> nearestLocations = displayNearestLocations();
@@ -86,16 +113,26 @@ public class ShowMapActivity extends MapActivity implements OnItemClickListener 
 		}
 	}
 
-	private void displayCurrentLocation() {
+	private LatLng displayCurrentLocation() {
 		Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		if (location==null){
+			location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		}
 		String message = String.format("Current Location \n Longitude: %1$s \n Latitude: %2$s",
 				location.getLongitude(), location.getLatitude());
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        
+        return new LatLng(location.getLatitude() , location.getLongitude());
 	}
+	
+	
 	
 	private List<org.openhds.mobile.model.Location> displayNearestLocations() {
 		
 		Location currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		if (currentLocation==null){
+			currentLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		}
 		double currentLatitude = currentLocation.getLatitude();
 		double currentLongitude = currentLocation.getLongitude();
 		
@@ -146,17 +183,13 @@ public class ShowMapActivity extends MapActivity implements OnItemClickListener 
 		alertDialog.show();
 	}
 
-	@Override
-	protected boolean isRouteDisplayed() {
-		return false;
-	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (myLocationOverlay != null) {
-			myLocationOverlay.enableMyLocation();
-			myLocationOverlay.enableCompass();
+		if (googleMap != null) {
+			googleMap.setMyLocationEnabled(true);
+			googleMap.getUiSettings().setCompassEnabled(true);
 		}
 	}
 	
@@ -169,9 +202,9 @@ public class ShowMapActivity extends MapActivity implements OnItemClickListener 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		if (myLocationOverlay != null) {
-			myLocationOverlay.disableMyLocation();
-			myLocationOverlay.disableCompass();
+		if (googleMap != null) {
+			googleMap.setMyLocationEnabled(false);
+			googleMap.getUiSettings().setCompassEnabled(false);
 		}
 	}
 		
@@ -197,8 +230,12 @@ public class ShowMapActivity extends MapActivity implements OnItemClickListener 
 		public void onLocationChanged(Location location) {
 			int lat = (int) (location.getLatitude() * 1E6);
 			int lng = (int) (location.getLongitude() * 1E6);
-			GeoPoint point = new GeoPoint(lat, lng);
-	        mapController.animateTo(point); 
+			final LatLng point = new LatLng(lat, lng);
+			googleMap.setOnCameraChangeListener(new OnCameraChangeListener() {
+		        public void onCameraChange(CameraPosition arg0) {
+		            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 13));
+		        }
+		    });
 	        displayCurrentLocation();
 		}
 
@@ -213,5 +250,9 @@ public class ShowMapActivity extends MapActivity implements OnItemClickListener 
 		public void onStatusChanged(String provider, int status, Bundle extras) { 
 			Toast.makeText(ShowMapActivity.this, "Provider status changed", Toast.LENGTH_LONG).show();
 		}
+	}
+
+	public void onCameraChange(CameraPosition position) {
+		// TODO Auto-generated method stub
 	}
 } 

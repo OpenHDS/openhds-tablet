@@ -401,4 +401,13 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         locationLatitudeText.setText(location.getLatitude());
         locationLongitudeText.setText(location.getLongitude());
     }
+
+	public void setAll() {
+		setLocation();
+		setHierarchy1();
+		setHierarchy2();
+		setHierarchy3();
+		setHierarchy4();
+		setRound();
+	}
 }

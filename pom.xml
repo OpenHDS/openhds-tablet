@@ -66,6 +66,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+			  <groupId>com.google.android.gms</groupId>
+			  <artifactId>google-play-services</artifactId>
+			  <version>7</version>
+		</dependency>
+        <dependency>
             <groupId>net.sqlcipher</groupId>
             <artifactId>sqlcipher</artifactId>
             <version>3.0.1</version>
