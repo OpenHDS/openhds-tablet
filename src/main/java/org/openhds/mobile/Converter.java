@@ -254,11 +254,13 @@ public class Converter {
 
     public static Round convertToRound(Cursor cursor) {
     	Round round = new Round();
-    	if (cursor.moveToNext()) {
+    	if (cursor.getPosition()==-1){
+    		cursor.moveToNext();
+    	}
         round.setEndDate(cursor.getString(cursor.getColumnIndex(OpenHDS.Rounds.COLUMN_ROUND_ENDDATE)));
         round.setRoundNumber(cursor.getString(cursor.getColumnIndex(OpenHDS.Rounds.COLUMN_ROUND_NUMBER)));
         round.setStartDate(cursor.getString(cursor.getColumnIndex(OpenHDS.Rounds.COLUMN_ROUND_STARTDATE)));
-    	}
+    
 
         return round;
     }
