@@ -18,10 +18,10 @@ import android.util.Log;
 
 public class PregnancyOutcomeUpdate implements Updatable {
 
-    public void updateDatabase(ContentResolver resolver, String filepath) {
+    public void updateDatabase(ContentResolver resolver, String filepath, String jrFormId) {
         FormXmlReader xmlReader = new FormXmlReader();
         try {
-            PregnancyOutcome pregOut = xmlReader.readPregnancyOutcome(new FileInputStream(new File(filepath)));
+            PregnancyOutcome pregOut = xmlReader.readPregnancyOutcome(new FileInputStream(new File(filepath)), jrFormId);
 
             if (pregOut == null) {
                 return;

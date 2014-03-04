@@ -23,14 +23,17 @@ public class FormXmlReader {
     private XPath xpath = XPathFactory.newInstance().newXPath();
     private DocumentBuilder builder;
 
-    public Location readLocation(InputStream is) {
+    public Location readLocation(InputStream is, String jrFormId) {
         try {
             Location location = new Location();
-
+            
             Document doc = buildDocument(is);
-            location.setName(xpath.evaluate("/data/locationName/text()", doc));
-            location.setExtId(xpath.evaluate("/data/locationId/text()", doc));
-            location.setHierarchy(xpath.evaluate("/data/hierarchyId/text()", doc));
+            if(xpath.evaluate("/"+jrFormId+"/visitId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
+            location.setName(xpath.evaluate("/"+jrFormId+"/locationName/text()", doc));
+            location.setExtId(xpath.evaluate("/"+jrFormId+"/locationId/text()", doc));
+            location.setHierarchy(xpath.evaluate("/"+jrFormId+"/hierarchyId/text()", doc));
 
             return location;
         } catch (ParserConfigurationException e) {
@@ -51,15 +54,18 @@ public class FormXmlReader {
         return doc;
     }
 
-    public Visit readVisit(InputStream input) {
+    public Visit readVisit(InputStream input, String jrFormId) {
         try {
             Visit visit = new Visit();
             Document doc = buildDocument(input);
-            visit.setDate(xpath.evaluate("/data/visitDate/text()", doc));
-            visit.setExtId(xpath.evaluate("/data/visitId/text()", doc));
-            visit.setLocation(xpath.evaluate("/data/locationId/text()", doc));
-            visit.setRound(xpath.evaluate("/data/roundNumber/text()", doc));
-            visit.setIntervieweeId(xpath.evaluate("/data/intervieweeId/text()", doc));
+            if(xpath.evaluate("/"+jrFormId+"/visitId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
+            visit.setDate(xpath.evaluate("/"+jrFormId+"/visitDate/text()", doc));
+            visit.setExtId(xpath.evaluate("/"+jrFormId+"/visitId/text()", doc));
+            visit.setLocation(xpath.evaluate("/"+jrFormId+"/locationId/text()", doc));
+            visit.setRound(xpath.evaluate("/"+jrFormId+"/roundNumber/text()", doc));
+            visit.setIntervieweeId(xpath.evaluate("/"+jrFormId+"/intervieweeId/text()", doc));
             return visit;
         } catch (ParserConfigurationException e) {
         } catch (SAXException e) {
@@ -70,12 +76,15 @@ public class FormXmlReader {
     }
 
     
-    public Membership readMembership(InputStream input) {
+    public Membership readMembership(InputStream input, String jrFormId) {
         try {
             Membership membership = new Membership();
             Document doc = buildDocument(input);
-            membership.setIndExtId(xpath.evaluate("/data/individualId/text()", doc));
-            membership.setGroupextId(xpath.evaluate("/data/householdId/text()", doc));
+            if(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
+            membership.setIndExtId(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc));
+            membership.setGroupextId(xpath.evaluate("/"+jrFormId+"/householdId/text()", doc));
            
             return membership;
         } catch (ParserConfigurationException e) {
@@ -87,14 +96,16 @@ public class FormXmlReader {
     }
     
     
-    public SocialGroup readSocialGroup(InputStream input) {
+    public SocialGroup readSocialGroup(InputStream input, String jrFormId) {
         try {
             Document doc = buildDocument(input);
-            
+            if(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
             SocialGroup sg = new SocialGroup();
-            sg.setExtId(xpath.evaluate("/data/householdId/text()", doc));
-            sg.setGroupHead(xpath.evaluate("/data/individualId/text()", doc));
-            sg.setGroupName(xpath.evaluate("/data/householdName/text()", doc));
+            sg.setExtId(xpath.evaluate("/"+jrFormId+"/householdId/text()", doc));
+            sg.setGroupHead(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc));
+            sg.setGroupName(xpath.evaluate("/"+jrFormId+"/householdName/text()", doc));
             
             return sg;
         } catch (ParserConfigurationException e) {
@@ -105,20 +116,22 @@ public class FormXmlReader {
         return null;
     }
 
-    public Individual readInMigration(FileInputStream fileInputStream) {
+    public Individual readInMigration(FileInputStream fileInputStream, String jrFormId)  {
         try {
             Document doc = buildDocument(fileInputStream);
-            
+            if(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
             Individual individual = new Individual();
-            individual.setCurrentResidence(xpath.evaluate("/data/locationId/text()", doc));
-            individual.setDobIn(xpath.evaluate("/data/individualInfo/dateOfBirth/text()", doc));
-            individual.setExtId(xpath.evaluate("/data/individualInfo/individualId/text()", doc));
-            individual.setFather(xpath.evaluate("/data/individualInfo/fatherId/text()", doc));
-            individual.setFirstName(xpath.evaluate("/data/individualInfo/firstName/text()", doc));
-            individual.setMiddleName(xpath.evaluate("/data/individualInfo/middletName/text()", doc));
-            individual.setGender(xpath.evaluate("/data/individualInfo/gender/text()", doc));
-            individual.setLastName(xpath.evaluate("/data/individualInfo/lastName/text()", doc));
-            individual.setMother(xpath.evaluate("/data/individualInfo/motherId/text()", doc));
+            individual.setCurrentResidence(xpath.evaluate("/"+jrFormId+"/locationId/text()", doc));
+            individual.setDobIn(xpath.evaluate("/"+jrFormId+"/individualInfo/dateOfBirth/text()", doc));
+            individual.setExtId(xpath.evaluate("/"+jrFormId+"/individualInfo/individualId/text()", doc));
+            individual.setFather(xpath.evaluate("/"+jrFormId+"/individualInfo/fatherId/text()", doc));
+            individual.setFirstName(xpath.evaluate("/"+jrFormId+"/individualInfo/firstName/text()", doc));
+            individual.setMiddleName(xpath.evaluate("/"+jrFormId+"/individualInfo/middletName/text()", doc));
+            individual.setGender(xpath.evaluate("/"+jrFormId+"/individualInfo/gender/text()", doc));
+            individual.setLastName(xpath.evaluate("/"+jrFormId+"/individualInfo/lastName/text()", doc));
+            individual.setMother(xpath.evaluate("/"+jrFormId+"/individualInfo/motherId/text()", doc));
             
             return individual;
         } catch (ParserConfigurationException e) {
@@ -129,21 +142,23 @@ public class FormXmlReader {
         return null;
     }
 
-    public PregnancyOutcome readPregnancyOutcome(FileInputStream fileInputStream) {
+    public PregnancyOutcome readPregnancyOutcome(FileInputStream fileInputStream, String jrFormId)  {
         try {
             Document doc = buildDocument(fileInputStream);
             
             PregnancyOutcome pregOutcome = new PregnancyOutcome();
-            
+            if(xpath.evaluate("/"+jrFormId+"/motherId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
             Individual mother = new Individual();
-            mother.setExtId(xpath.evaluate("/data/motherId/text()", doc));
+            mother.setExtId(xpath.evaluate("/"+jrFormId+"/motherId/text()", doc));
             pregOutcome.setMother(mother);
             
             Individual father = new Individual();
-            father.setExtId(xpath.evaluate("/data/fatherId/text()", doc));
+            father.setExtId(xpath.evaluate("/"+jrFormId+"/fatherId/text()", doc));
             pregOutcome.setFather(father);
             
-            pregOutcome.setRecordedDate(xpath.evaluate("/data/recordedDate/text()", doc));
+            pregOutcome.setRecordedDate(xpath.evaluate("/"+jrFormId+"/recordedDate/text()", doc));
             
             // read the children that were born
             NodeList nodeList = (NodeList) xpath.evaluate("//outcomes", doc, XPathConstants.NODESET);
@@ -178,14 +193,16 @@ public class FormXmlReader {
         return null;
     }
 
-    public Relationship readRelationship(FileInputStream fileInputStream) {
+    public Relationship readRelationship(FileInputStream fileInputStream, String jrFormId)  {
         try {
             Document doc = buildDocument(fileInputStream);
-            
+            if(xpath.evaluate("/"+jrFormId+"/individualA/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
             Relationship relationship = new Relationship();
-            relationship.setIndividualA(xpath.evaluate("/data/individualA/text()", doc));
-            relationship.setIndividualB(xpath.evaluate("/data/individualB/text()", doc));
-            relationship.setStartDate(xpath.evaluate("/data/startDate/text()", doc));
+            relationship.setIndividualA(xpath.evaluate("/"+jrFormId+"/individualA/text()", doc));
+            relationship.setIndividualB(xpath.evaluate("/"+jrFormId+"/individualB/text()", doc));
+            relationship.setStartDate(xpath.evaluate("/"+jrFormId+"/startDate/text()", doc));
             
             return relationship;
         } catch (ParserConfigurationException e) {
@@ -196,11 +213,14 @@ public class FormXmlReader {
         return null;
     }
     
-    public Individual readOutMigration(FileInputStream fileInputStream) {
+    public Individual readOutMigration(FileInputStream fileInputStream, String jrFormId)  {
         try {
             Document doc = buildDocument(fileInputStream);
             Individual individual = new Individual();
-            individual.setExtId(xpath.evaluate("/data/individualId/text()", doc));
+            if(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
+            individual.setExtId(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc));
             return individual;
         } catch (ParserConfigurationException e) {
         } catch (SAXException e) {
@@ -210,11 +230,14 @@ public class FormXmlReader {
         return null;
     }
 
-    public Individual readDeath(FileInputStream fileInputStream) {
+    public Individual readDeath(FileInputStream fileInputStream, String jrFormId) {
         try {
             Document doc = buildDocument(fileInputStream);
             Individual individual = new Individual();
-            individual.setExtId(xpath.evaluate("/data/individualId/text()", doc));
+            if(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
+            individual.setExtId(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc));
             return individual;
         } catch (ParserConfigurationException e) {
         } catch (SAXException e) {

@@ -14,10 +14,10 @@ import android.util.Log;
 
 public class ExternalInMigrationUpdate implements Updatable {
 
-    public void updateDatabase(ContentResolver resolver, String filepath) {
+    public void updateDatabase(ContentResolver resolver, String filepath,String jrFormId) {
         FormXmlReader xmlReader = new FormXmlReader();
         try {
-            Individual individual = xmlReader.readInMigration(new FileInputStream(new File(filepath)));
+            Individual individual = xmlReader.readInMigration(new FileInputStream(new File(filepath)), jrFormId);
             
             if (individual == null) {
                 return;

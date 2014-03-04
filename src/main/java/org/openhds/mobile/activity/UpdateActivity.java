@@ -1,6 +1,7 @@
 package org.openhds.mobile.activity;
 
 import org.openhds.mobile.Converter;
+import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.Queries;
@@ -106,6 +107,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private boolean showingProgress;
     private Updatable updatable;
     private boolean extInm;
+    private String jrFormId;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -310,7 +312,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 String filepath = cursor.getString(cursor
                         .getColumnIndex(InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH));
                 LocationUpdate update = new LocationUpdate();
-                update.updateDatabase(resolver, filepath);
+                update.updateDatabase(resolver, filepath, jrFormId);
                 cursor.close();
                 return true;
             } else {
@@ -470,7 +472,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             if (cursor.moveToNext()) {
                 String filepath = cursor.getString(cursor
                         .getColumnIndex(InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH));
-                updatable.updateDatabase(getContentResolver(), filepath);
+                updatable.updateDatabase(getContentResolver(), filepath, jrFormId);
                 cursor.close();
                 return true;
             } else {
@@ -1095,6 +1097,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	locationVisit.getLocation().setHead(sg.getGroupHead());
         	}
             filledForm = formFiller.fillDeathForm(locationVisit, sg);
+            
             updatable = new DeathUpdate();
             cursor.close();
             return null;
@@ -1124,6 +1127,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void loadForm(final int requestCode) {
         new OdkGeneratedFormLoadTask(getBaseContext(), filledForm, new OdkFormLoadListener() {
             public void onOdkFormLoadSuccess(Uri contentUri) {
+            	Cursor cursor = getCursorForFormsProvider(filledForm.getFormName());
+                if (cursor.moveToFirst()) {
+                    jrFormId = cursor.getString(0);
+                }
                 UpdateActivity.this.contentUri = contentUri;
                 startActivityForResult(new Intent(Intent.ACTION_EDIT, contentUri), requestCode);
             }
@@ -1276,7 +1283,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
 	public void onFilterLocation() {
-		startFilterLocActivity(FILTER_LOCATION);		
+		startFilterLocActivity(FILTER_LOCATION);	
+		
 	}
-
+    private Cursor getCursorForFormsProvider(String name) {
+    	ContentResolver resolver = getContentResolver();
+        return resolver.query(FormsProviderAPI.FormsColumns.CONTENT_URI, new String[] {
+                FormsProviderAPI.FormsColumns.JR_FORM_ID, FormsProviderAPI.FormsColumns.FORM_FILE_PATH },
+                FormsProviderAPI.FormsColumns.JR_FORM_ID + " like ?", new String[] { name + "%" }, null);
+    }
 }

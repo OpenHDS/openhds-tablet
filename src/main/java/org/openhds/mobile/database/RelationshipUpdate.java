@@ -14,10 +14,10 @@ import android.util.Log;
 
 public class RelationshipUpdate implements Updatable {
 
-    public void updateDatabase(ContentResolver resolver, String filepath) {
+    public void updateDatabase(ContentResolver resolver, String filepath, String jrFormId) {
         FormXmlReader xmlReader = new FormXmlReader();
         try {
-            Relationship rel = xmlReader.readRelationship(new FileInputStream(new File(filepath)));
+            Relationship rel = xmlReader.readRelationship(new FileInputStream(new File(filepath)), jrFormId);
 
             if (rel == null) {
                 return;

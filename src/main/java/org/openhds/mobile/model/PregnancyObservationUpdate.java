@@ -6,7 +6,7 @@ import android.content.ContentResolver;
 
 public class PregnancyObservationUpdate implements Updatable {
 
-    public void updateDatabase(ContentResolver resolver, String filepath) {
+    public void updateDatabase(ContentResolver resolver, String filepath, String jrFormId) {
         // TODO Auto-generated method stub
 
     }

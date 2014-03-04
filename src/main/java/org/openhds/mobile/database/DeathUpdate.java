@@ -17,10 +17,10 @@ import android.util.Log;
 
 public class DeathUpdate implements Updatable {
 
-	public void updateDatabase(ContentResolver resolver, String filepath) {
+	public void updateDatabase(ContentResolver resolver, String filepath,String jrFormId) {
         FormXmlReader xmlReader = new FormXmlReader();
         try {
-            Individual individual = xmlReader.readDeath(new FileInputStream(new File(filepath)));
+            Individual individual = xmlReader.readDeath(new FileInputStream(new File(filepath)), jrFormId );
 
             if (individual == null) {
                 return;

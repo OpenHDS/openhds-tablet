@@ -14,10 +14,10 @@ import android.util.Log;
 
 public class VisitUpdate implements Updatable {
 
-    public void updateDatabase(ContentResolver resolver, String filepath) {
+    public void updateDatabase(ContentResolver resolver, String filepath, String jrFormId) {
         FormXmlReader xmlReader = new FormXmlReader();
         try {
-            Visit visit = xmlReader.readVisit(new FileInputStream(new File(filepath)));
+            Visit visit = xmlReader.readVisit(new FileInputStream(new File(filepath)), jrFormId);
             
             if (visit == null) {
                 return;

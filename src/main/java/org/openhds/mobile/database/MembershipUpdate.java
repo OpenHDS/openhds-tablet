@@ -14,10 +14,10 @@ import android.util.Log;
 
 public class MembershipUpdate implements Updatable {
 
-    public void updateDatabase(ContentResolver resolver, String filepath) {
+    public void updateDatabase(ContentResolver resolver, String filepath,String jrFormId) {
     	 FormXmlReader xmlReader = new FormXmlReader();
          try {
-             Membership membership = xmlReader.readMembership(new FileInputStream(new File(filepath)));
+             Membership membership = xmlReader.readMembership(new FileInputStream(new File(filepath)), jrFormId);
              
              if (membership == null) {
                  return;

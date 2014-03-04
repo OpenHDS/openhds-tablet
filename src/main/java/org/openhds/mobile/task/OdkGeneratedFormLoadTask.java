@@ -48,7 +48,7 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
 
     public OdkGeneratedFormLoadTask(Context context, FilledForm filledForm, OdkFormLoadListener listener) {
         this.listener = listener;
-        this.resolver = context.getContentResolver();;
+        this.resolver = context.getContentResolver();
         this.filledForm = filledForm;
         this.mContext = context;
     }

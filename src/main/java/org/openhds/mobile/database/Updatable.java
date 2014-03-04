@@ -4,5 +4,5 @@ import android.content.ContentResolver;
 
 public interface Updatable {
 
-    void updateDatabase(ContentResolver resolver, String filepath);
+    void updateDatabase(ContentResolver resolver, String filepath, String jrFormId);
 }

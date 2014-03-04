@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class LocationUpdate implements Updatable {
 
-    public void updateDatabase(ContentResolver resolver, String filepath) {
+    public void updateDatabase(ContentResolver resolver, String filepath,String jrFormId) {
         Location location = readLocationFromXml(filepath);
 
         if (location == null) {
@@ -42,7 +42,7 @@ public class LocationUpdate implements Updatable {
         File file = new File(filepath);
         FormXmlReader reader = new FormXmlReader();
         try {
-            return reader.readLocation(new FileInputStream(file));
+            return reader.readLocation(new FileInputStream(file), filepath);
         } catch (FileNotFoundException e) {
             return null;
         }

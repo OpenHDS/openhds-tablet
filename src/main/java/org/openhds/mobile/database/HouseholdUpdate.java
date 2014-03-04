@@ -14,12 +14,12 @@ import android.util.Log;
 
 public class HouseholdUpdate implements Updatable {
 
-    public void updateDatabase(ContentResolver resolver, String filepath) {
+    public void updateDatabase(ContentResolver resolver, String filepath,String jrFormId) {
         try {
             File file = new File(filepath);
             FormXmlReader reader = new FormXmlReader();
 
-            SocialGroup sg = reader.readSocialGroup(new FileInputStream(file));
+            SocialGroup sg = reader.readSocialGroup(new FileInputStream(file), jrFormId);
             
             // creat the social group
             ContentValues cv = new ContentValues();
