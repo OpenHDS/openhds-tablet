@@ -5,7 +5,6 @@
     android:baselineAligned="false"
     android:orientation="horizontal" >
 
-
     <fragment
         android:id="@+id/fragment1"
         android:name="org.openhds.mobile.fragment.FieldWorkerLoginFragment"

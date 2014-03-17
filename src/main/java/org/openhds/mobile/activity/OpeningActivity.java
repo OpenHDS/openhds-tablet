@@ -8,32 +8,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class OpeningActivity extends Activity implements OnClickListener {
+public class OpeningActivity extends Activity {
 	
-	private Button fieldWorkerLoginBtn;
-	private Button supervisorLoginBtn;
-	
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.opening_screen);
-		    
-		fieldWorkerLoginBtn = (Button) findViewById(R.id.fieldWorkerLoginBtn);
-		fieldWorkerLoginBtn.setOnClickListener(this);
-		    
-		supervisorLoginBtn = (Button) findViewById(R.id.supervisorLoginBtn);
-		supervisorLoginBtn.setOnClickListener(this);   
-	}
+	    protected void onCreate(Bundle savedInstanceState) {
 
-	public void onClick(View view) {
-		switch (view.getId()) {
-			case R.id.fieldWorkerLoginBtn: 
-				Intent fwIntent = new Intent(getApplicationContext(), FieldWorkerLoginActivity.class);
-				startActivity(fwIntent);
-				break;
-			case R.id.supervisorLoginBtn:
-				Intent supervisorIntent = new Intent(getApplicationContext(), SupervisorLoginActivity.class);
-				startActivity(supervisorIntent);
-				break;
-		}
-	}
-}
+		        super.onCreate(savedInstanceState);
+
+		        setContentView(R.layout.opening_activity);
+
+		    }
+
+		 }
