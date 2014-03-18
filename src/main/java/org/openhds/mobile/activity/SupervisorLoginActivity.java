@@ -252,10 +252,4 @@ public class SupervisorLoginActivity extends AbstractActivity {
 		return true;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		startActivity(new Intent(getApplicationContext(),
-				ServerPreferencesActivity.class));
-		return true;
-	}
 }

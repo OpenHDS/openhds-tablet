@@ -151,14 +151,14 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.extra_forms:
-        	createFormMenu();
-            return true;
-        case R.id.sync_database:
-            createSyncDatabaseMenu();
-            return true;
-        }
+        int itemId = item.getItemId();
+		if (itemId == R.id.extra_forms) {
+			createFormMenu();
+			return true;
+		} else if (itemId == R.id.sync_database) {
+			createSyncDatabaseMenu();
+			return true;
+		}
         return super.onOptionsItemSelected(item);
     }
 

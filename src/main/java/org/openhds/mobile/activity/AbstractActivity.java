@@ -17,7 +17,7 @@ public abstract class AbstractActivity extends Activity {
 
 	protected URL getServerUrl(String path) {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		String url = sp.getString(ServerPreferencesActivity.INTEROP_SERVER, getString(R.string.default_server_url));
+		String url = sp.getString(getString(R.string.openhds_server_url_key), getString(R.string.default_openhds_server_url));
 
 		if (url.trim().length() == 0) {
 			showToastWithText(getString(R.string.no_server_url));

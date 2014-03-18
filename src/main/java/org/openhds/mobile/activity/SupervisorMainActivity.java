@@ -63,7 +63,7 @@ public class SupervisorMainActivity extends AbstractActivity implements CollectE
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.mainmenu, menu);
+        inflater.inflate(R.menu.main_menu, menu);
         super.onCreateOptionsMenu(menu);
         return true;
 	}
@@ -73,24 +73,14 @@ public class SupervisorMainActivity extends AbstractActivity implements CollectE
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.configure_server:
-            createPreferencesMenu();
-            return true;
-        case R.id.sync_database:
-            createSyncDatabaseMenu();
-            return true;
-        }
+        int itemId = item.getItemId();
+		if (itemId == R.id.configure_server) {
+			return true;
+		} else if (itemId == R.id.sync_database) {
+			createSyncDatabaseMenu();
+			return true;
+		}
         return super.onOptionsItemSelected(item);
-    }
-    
-    
-    /**
-     * Creates the 'Configure Server' option in the action menu.
-     */
-    private void createPreferencesMenu() {
-        Intent i = new Intent(this, ServerPreferencesActivity.class);
-        startActivity(i);
     }
 
     /**
@@ -155,9 +145,9 @@ public class SupervisorMainActivity extends AbstractActivity implements CollectE
 			dialog = ProgressDialog.show(SupervisorMainActivity.this, getString(R.string.working_lbl), getString(R.string.sprvmain_downl_extraforms));
             settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-			url = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_SERVER, getString(R.string.default_openhdsserver));
-			username = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_USERNAME, getString(R.string.username));
-			password = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_PASSWORD, getString(R.string.password));
+//			url = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_SERVER, getString(R.string.default_openhdsserver));
+//			username = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_USERNAME, getString(R.string.username));
+//			password = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_PASSWORD, getString(R.string.password));
 			
 			
 

@@ -164,32 +164,24 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     }
 
     public void onClick(View view) {
-        switch (view.getId()) {
-        case R.id.hierarchy1Btn:
-            listener.onHierarchy1();
-            break;
-        case R.id.hierarchy2Btn:
-            listener.onHierarchy2();
-            break;
-        case R.id.hierarchy3Btn:
-            listener.onHierarchy3();
-            break;
-        case R.id.hierarchy4Btn:
-            listener.onHierarchy4();
-            break;
-        case R.id.locationBtn:
-            listener.onLocation();
-            break;
-        case R.id.roundBtn:
-            listener.onRound();
-            break;
-        case R.id.individualBtn:
-            listener.onIndividual();
-            break;
-        case R.id.searchlBtn:
-            listener.onFilterLocation();
-            break;
-        }
+        int id = view.getId();
+		if (id == R.id.hierarchy1Btn) {
+			listener.onHierarchy1();
+		} else if (id == R.id.hierarchy2Btn) {
+			listener.onHierarchy2();
+		} else if (id == R.id.hierarchy3Btn) {
+			listener.onHierarchy3();
+		} else if (id == R.id.hierarchy4Btn) {
+			listener.onHierarchy4();
+		} else if (id == R.id.locationBtn) {
+			listener.onLocation();
+		} else if (id == R.id.roundBtn) {
+			listener.onRound();
+		} else if (id == R.id.individualBtn) {
+			listener.onIndividual();
+		} else if (id == R.id.searchlBtn) {
+			listener.onFilterLocation();
+		}
     }
 
     public void setLocationVisit(LocationVisit locationVisit) {

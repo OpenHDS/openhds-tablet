@@ -64,14 +64,12 @@ public class SelectionFilterLocFragment extends Fragment implements OnClickListe
     }
 
     public void onClick(View view) {
-        switch (view.getId()) {
-        case R.id.searchFilterBtn:
-            listener.onSearch(locationTxt.getText().toString());
-            break;
-        case R.id.clearFilterBtn:
-            clear();
-            break;
-        }
+        int id = view.getId();
+		if (id == R.id.searchFilterBtn) {
+			listener.onSearch(locationTxt.getText().toString());
+		} else if (id == R.id.clearFilterBtn) {
+			clear();
+		}
     }
 
     private void clear() {

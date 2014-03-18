@@ -69,31 +69,17 @@ public class FieldWorkerLoginActivity extends Activity implements OnClickListene
     	//inflater.inflate(R.menu.loginmenu, menu);
         return true;
     }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.configure_server:
-                Intent i = new Intent(this, ServerPreferencesActivity.class);
-                startActivity(i);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-		
+    		
 	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.registerChkBox: 
+		int id = view.getId();
+		if (id == R.id.registerChkBox) {
 			if (registerChkBox.isChecked()) 
 				loginButton.setText(getString(R.string.fwlogin_registerlbl));
 			else 
 				loginButton.setText(getString(R.string.fwlogin_loginlbl));
-			break;
-		case R.id.loginBtn: 
-			
+		} else if (id == R.id.loginBtn) {
 			String extId = extIdText.getText().toString();
 			String password = passwordText.getText().toString();
-			
 			if (registerChkBox.isChecked()) {
 				dialog.show();
 				SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -120,7 +106,6 @@ public class FieldWorkerLoginActivity extends Activity implements OnClickListene
 
                 }).execute();
 			}
-			break;
 		}
 	}
 	

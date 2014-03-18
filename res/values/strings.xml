@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources  xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
 
     <string name="amendments">Amendments</string>
     <string name="app_name">OpenHDS Mobile</string>
@@ -14,6 +14,10 @@
     <string name="databaseSync">Sync with OpenHDS Database</string>
     <string name="choose">Please choose </string>
     <string name="default_server_url">http://solarmal.mbita.icipe.org:8080/openhdsMbita/mobile-interop</string>
+	<string name="default_openhds_server_url">http://130.111.132.88:8080/openhds</string>    
+	<string name="openhds_server_url">http://130.111.132.88:8080/openhds</string>
+    <string name="openhds_server_url_default_summary">Same URL used for OpenHDS Server via Web browser</string>    
+	<string name="openhds_server_url_key">openhds_server_url</string>
     <string name="default_openhdsserver">http://solarmal.mbita.icipe.org:8080/openhdsMbita</string>
     <string name="delete_form_btn">Delete Form</string>
     <string name="download_form_button">Download Forms</string>
@@ -132,6 +136,8 @@
 	
 	<string name="fieldWorkerLoginBtn_lbl">Log in as Field Worker</string>
 	<string name="supervisorLoginBtn_lbl">Log in as Supervisor</string>
+	<string name="supervisor_username_key">Supervisor Login</string>
+	<string name="supervisor_password_key">Supervisor Pw</string>		
 	
 	<string name="server_preferences_lbl">Server Preferences</string>
 	
@@ -232,138 +238,138 @@
 
 	<string name="hello_lbl">Hello</string>
 	
-	<string name="fwlogin_task_retrieving_fws">Retrieving Field Workers</string>  <string name="roundBtn_lbl">Select Round</string>
-	<string name="roundNumber_lbl">Round Number:</string>
-	<string name="roundStartDate_lbl">Start Date:</string>
-	<string name="roundEndDate_lbl">End Date:</string>
-	<string name="locationBtn_lbl">Select Location</string>
-	<string name="locationName_lbl">Name:</string>
-	<string name="locationLatitude_lbl">Latitude:</string>
-	<string name="locationLongitude_lbl">Longitude:</string>
-	<string name="searchlBtn_lbl">Filter Location</string>
-	<string name="individualBtn_lbl">Select Individual</string>
-	<string name="individualFirstName_lbl">First Name:</string>
-	<string name="individualLastName_lbl">Last Name:</string>
+<!-- 	<string name="fwlogin_task_retrieving_fws">Retrieving Field Workers</string>  <string name="roundBtn_lbl">Select Round</string> -->
+<!-- 	<string name="roundNumber_lbl">Round Number:</string> -->
+<!-- 	<string name="roundStartDate_lbl">Start Date:</string> -->
+<!-- 	<string name="roundEndDate_lbl">End Date:</string> -->
+<!-- 	<string name="locationBtn_lbl">Select Location</string> -->
+<!-- 	<string name="locationName_lbl">Name:</string> -->
+<!-- 	<string name="locationLatitude_lbl">Latitude:</string> -->
+<!-- 	<string name="locationLongitude_lbl">Longitude:</string> -->
+<!-- 	<string name="searchlBtn_lbl">Filter Location</string> -->
+<!-- 	<string name="individualBtn_lbl">Select Individual</string> -->
+<!-- 	<string name="individualFirstName_lbl">First Name:</string> -->
+<!-- 	<string name="individualLastName_lbl">Last Name:</string> -->
 	
-	<string name="findLocationGeoPointBtn_lbl">Find Location with GeoPoint</string>
-	<string name="createLocationBtn_lbl">Create Location</string>
-	<string name="createVisitBtn_lbl">Create Visit</string>
-	<string name="clearIndividualBtn_lbl">Clear Individual</string>
-	<string name="householdBtn_lbl">Household</string>
-	<string name="membershipBtn_lbl">Membership</string>
-	<string name="relationshipBtn_lbl">Relationship</string>
-	<string name="inMigrationBtn_lbl">In Migration</string>
-	<string name="outMigrationBtn_lbl">Out Migration</string>
-	<string name="pregRegBtn_lbl">Pregnancy Observation</string>
-	<string name="birthRegBtn_lbl">Pregnancy Outcome</string>
-	<string name="deathBtn_lbl">Death</string>
-	<string name="finishVisitBtn_lbl">Finish Visit</string>
+<!-- 	<string name="findLocationGeoPointBtn_lbl">Find Location with GeoPoint</string> -->
+<!-- 	<string name="createLocationBtn_lbl">Create Location</string> -->
+<!-- 	<string name="createVisitBtn_lbl">Create Visit</string> -->
+<!-- 	<string name="clearIndividualBtn_lbl">Clear Individual</string> -->
+<!-- 	<string name="householdBtn_lbl">Household</string> -->
+<!-- 	<string name="membershipBtn_lbl">Membership</string> -->
+<!-- 	<string name="relationshipBtn_lbl">Relationship</string> -->
+<!-- 	<string name="inMigrationBtn_lbl">In Migration</string> -->
+<!-- 	<string name="outMigrationBtn_lbl">Out Migration</string> -->
+<!-- 	<string name="pregRegBtn_lbl">Pregnancy Observation</string> -->
+<!-- 	<string name="birthRegBtn_lbl">Pregnancy Outcome</string> -->
+<!-- 	<string name="deathBtn_lbl">Death</string> -->
+<!-- 	<string name="finishVisitBtn_lbl">Finish Visit</string> -->
     
-	<string name="fworkerExtId_lbl">Field Worker ExtId</string>
-	<string name="registerChkBox_lbl">Register Field Worker on Device</string>
+<!-- 	<string name="fworkerExtId_lbl">Field Worker ExtId</string> -->
+<!-- 	<string name="registerChkBox_lbl">Register Field Worker on Device</string> -->
 	
-	<string name="fieldWorkerLoginBtn_lbl">Log in as Field Worker</string>
-	<string name="supervisorLoginBtn_lbl">Log in as Supervisor</string>
+<!-- 	<string name="fieldWorkerLoginBtn_lbl">Log in as Field Worker</string> -->
+<!-- 	<string name="supervisorLoginBtn_lbl">Log in as Supervisor</string> -->
 	
-	<string name="server_preferences_lbl">Server Preferences</string>
+<!-- 	<string name="server_preferences_lbl">Server Preferences</string> -->
 	
-	<string name="configure_server_lbl">Configure Server</string>
+<!-- 	<string name="configure_server_lbl">Configure Server</string> -->
 	
-	<string name="locations_nearesert_you_lbl">Locations nearest you</string>
+<!-- 	<string name="locations_nearesert_you_lbl">Locations nearest you</string> -->
 		
-	<string name="hierarchy5Btn_lbl">Select Neighborhood</string>
-	<string name="hierarchy5_lbl">Neighborhood:</string>
-    <string name="hierarchy5_hint_lbl">Neighb. External Id</string>
+<!-- 	<string name="hierarchy5Btn_lbl">Select Neighborhood</string> -->
+<!-- 	<string name="hierarchy5_lbl">Neighborhood:</string> -->
+<!--     <string name="hierarchy5_hint_lbl">Neighb. External Id</string> -->
 	
-    <string name="dialog_working_lbl">Working...</string>
-	<string name="dialog_dont_interrupt_lbl">Do not interrupt</string>
+<!--     <string name="dialog_working_lbl">Working...</string> -->
+<!-- 	<string name="dialog_dont_interrupt_lbl">Do not interrupt</string> -->
 	
-	<string name="formmenu_extraforms">Extra Forms</string>
-	<string name="loginmenu_configure">Configure Server</string>
+<!-- 	<string name="formmenu_extraforms">Extra Forms</string> -->
+<!-- 	<string name="loginmenu_configure">Configure Server</string> -->
 	
-	<string name="no_server_url">No server URL has been set. Set server URL from preferences</string>
-	<string name="bad_server_url">Bad Server URL</string>
+<!-- 	<string name="no_server_url">No server URL has been set. Set server URL from preferences</string> -->
+<!-- 	<string name="bad_server_url">Bad Server URL</string> -->
 		
-	<string name="fwlogin_registerlbl">Register</string>
-	<string name="fwlogin_loginlbl">Login</string>
-	<string name="authenticating_lbl">Authenticating...</string>
-	<string name="please_wait_lbl">Please Wait</string>
+<!-- 	<string name="fwlogin_registerlbl">Register</string> -->
+<!-- 	<string name="fwlogin_loginlbl">Login</string> -->
+<!-- 	<string name="authenticating_lbl">Authenticating...</string> -->
+<!-- 	<string name="please_wait_lbl">Please Wait</string> -->
 		
-	<string name="please_choose_lbl">Please choose </string>
+<!-- 	<string name="please_choose_lbl">Please choose </string> -->
 		
-	<string name="loading_lbl">Loading</string>
-	<string name="loading_form_subm_lbl">Loading form submission...</string>
-	<string name="loading_into_odk_lbl">Loading form into ODK Collect...</string>
-	<string name="formload_failed_writedir_lbl">There was a problem creating directories</string>
-	<string name="formload_failed_writexml_lbl">There was a problem writing the XML file</string>
-	<string name="formload_failed_odkins_lbl">There was a problem with ODK Collect</string>
-	<string name="formload_already_completed_lbl">This form has already been completed</string>
-	<string name="updating_lbl">Updating</string>
-	<string name="updating_form_info_lbl">Updating form information...</string>
-	<string name="completed_lbl">Completed</string>
-	<string name="not_completed_lbl">Not Completed</string>
+<!-- 	<string name="loading_lbl">Loading</string> -->
+<!-- 	<string name="loading_form_subm_lbl">Loading form submission...</string> -->
+<!-- 	<string name="loading_into_odk_lbl">Loading form into ODK Collect...</string> -->
+<!-- 	<string name="formload_failed_writedir_lbl">There was a problem creating directories</string> -->
+<!-- 	<string name="formload_failed_writexml_lbl">There was a problem writing the XML file</string> -->
+<!-- 	<string name="formload_failed_odkins_lbl">There was a problem with ODK Collect</string> -->
+<!-- 	<string name="formload_already_completed_lbl">This form has already been completed</string> -->
+<!-- 	<string name="updating_lbl">Updating</string> -->
+<!-- 	<string name="updating_form_info_lbl">Updating form information...</string> -->
+<!-- 	<string name="completed_lbl">Completed</string> -->
+<!-- 	<string name="not_completed_lbl">Not Completed</string> -->
 		
-	<string name="map_curlocation_format_lbl">Current Location \n Longitude: %1$s \n Latitude: %2$s</string>
-	<string name="warning_lbl">Warning</string>
-	<string name="showmap_gps_disabled_lbl">Your GPS seems to be disabled. Please make sure that it\'s enabled in order to use this service.</string>
-	<string name="showmap_gps_turned_off">Provider disabled by the user. GPS turned off</string>
-	<string name="showmap_gps_turned_on">Provider enabled by the user. GPS turned on</string>
-	<string name="showmap_gps_changed">Provider status changed</string>
+<!-- 	<string name="map_curlocation_format_lbl">Current Location \n Longitude: %1$s \n Latitude: %2$s</string> -->
+<!-- 	<string name="warning_lbl">Warning</string> -->
+<!-- 	<string name="showmap_gps_disabled_lbl">Your GPS seems to be disabled. Please make sure that it\'s enabled in order to use this service.</string> -->
+<!-- 	<string name="showmap_gps_turned_off">Provider disabled by the user. GPS turned off</string> -->
+<!-- 	<string name="showmap_gps_turned_on">Provider enabled by the user. GPS turned on</string> -->
+<!-- 	<string name="showmap_gps_changed">Provider status changed</string> -->
 		
-	<string name="sprvlogin_bad_auth">Failed to authenticate username and password</string>
-	<string name="sprvlogin_created_user">Successfully created new user</string>
-	<string name="sprvlogin_connection_error">There was a problem communicating with the server</string>
-	<string name="sprvlogin_error_user">There was an error creating the user</string>
-	<string name="sprvlogin_user_notrecon">User not recognized</string>
-	<string name="sprvlogin_authenticate_with_server">Do you want to authenticate with the server?</string>
-	<string name="yes_lbl">Yes</string>
-	<string name="no_lbl">No</string>
-	<string name="error_lbl">Error</string>
-	<string name="success_lbl">Success</string>
-	<string name="trying_to_authenticate_lbl">Trying to authenticate...</string>
-	<string name="sprvlogin_enter_in_user">Please enter in a user</string>
-	<string name="sprvlogin_enter_in_pass">Please enter in a password</string>
+<!-- 	<string name="sprvlogin_bad_auth">Failed to authenticate username and password</string> -->
+<!-- 	<string name="sprvlogin_created_user">Successfully created new user</string> -->
+<!-- 	<string name="sprvlogin_connection_error">There was a problem communicating with the server</string> -->
+<!-- 	<string name="sprvlogin_error_user">There was an error creating the user</string> -->
+<!-- 	<string name="sprvlogin_user_notrecon">User not recognized</string> -->
+<!-- 	<string name="sprvlogin_authenticate_with_server">Do you want to authenticate with the server?</string> -->
+<!-- 	<string name="yes_lbl">Yes</string> -->
+<!-- 	<string name="no_lbl">No</string> -->
+<!-- 	<string name="error_lbl">Error</string> -->
+<!-- 	<string name="success_lbl">Success</string> -->
+<!-- 	<string name="trying_to_authenticate_lbl">Trying to authenticate...</string> -->
+<!-- 	<string name="sprvlogin_enter_in_user">Please enter in a user</string> -->
+<!-- 	<string name="sprvlogin_enter_in_pass">Please enter in a password</string> -->
 		
-	<string name="sprvmain_downlall_forms">Downloading all forms...</string>
-	<string name="working_lbl">Working</string>
-	<string name="sprvmain_failed_auth">Bad username and/or password</string>
-	<string name="sprvmain_failure">There was a problem reading response from server</string>
-	<string name="sprvmain_connection_error">There was a error with the network connection</string>
-	<string name="sprvmain_connection_timeout">Connection to the server timed out</string>
-	<string name="sprvmain_on_success">Download all forms successfully</string>
-	<string name="sprvmain_no_content">No forms to download</string>
-	<string name="sprvmain_downl_extraforms">Downloading extra forms...</string>
+<!-- 	<string name="sprvmain_downlall_forms">Downloading all forms...</string> -->
+<!-- 	<string name="working_lbl">Working</string> -->
+<!-- 	<string name="sprvmain_failed_auth">Bad username and/or password</string> -->
+<!-- 	<string name="sprvmain_failure">There was a problem reading response from server</string> -->
+<!-- 	<string name="sprvmain_connection_error">There was a error with the network connection</string> -->
+<!-- 	<string name="sprvmain_connection_timeout">Connection to the server timed out</string> -->
+<!-- 	<string name="sprvmain_on_success">Download all forms successfully</string> -->
+<!-- 	<string name="sprvmain_no_content">No forms to download</string> -->
+<!-- 	<string name="sprvmain_downl_extraforms">Downloading extra forms...</string> -->
 		
-	<string name="sync_db_stop_sync">Are you sure you want to stop sync?</string>
+<!-- 	<string name="sync_db_stop_sync">Are you sure you want to stop sync?</string> -->
 		
-	<string name="odk_problem_lbl">There was a problem with ODK</string>
-	<string name="update_unfinish_msg1">Form started but not saved. This form instance will be deleted. What do you want to do?</string>
-	<string name="update_unfinish_pos_button">Delete form</string>
-	<string name="update_unfinish_neg_button">Edit form</string>
-	<string name="update_xform_not_found_msg">The XForm could not be found within ODK Collect. Please make sure that it exists and it\'s named correctly.</string>
-	<string name="visit_lbl">Visit</string>
-	<string name="update_finish_visit_msg">Did you capture all events and want to finish the visit?</string>
-	<string name="cancel_lbl">Cancel</string>
-	<string name="socialgroup_lbl">Socialgroup</string>
-	<string name="update_on_sgexists_msg">The Socialgroup for the location selected is already existing.</string>
-	<string name="in_migration_lbl">In Migration</string>
-	<string name="update_create_inmigration_msg">Is this an Internal or External In Migration event?</string>
-	<string name="update_create_inmigration_pos_button">Internal</string>
-	<string name="update_create_inmigration_neg_button">External</string>
-	<string name="update_finish_ext_inmigration_msg">Please, now create a Membership for the individual</string>
-	<string name="mother_lbl">Mother</string>
-	<string name="update_build_mother_msg">Is the mother known and registered in the system?</string>
-	<string name="father_lbl">Father</string>
-	<string name="update_build_father_msg">Is the father known and registered in the system?</string>
-	<string name="update_build_pregnancy_lbr_count_msg">Number of Outcomes</string>
-	<string name="update_pregoutcome_choose_father">Choose Father</string>
-	<string name="update_pregoutcome_search_hdss">Search HDSS</string>
-	<string name="update_pregoutcome_father_not_found">Father not within HDSS</string>
-	<string name="update_pregoutcome_not_within_hdss">Not within HDSS</string>
-	<string name="update_load_finished_select_hh_msg">Select a Household for the Individual</string>
+<!-- 	<string name="odk_problem_lbl">There was a problem with ODK</string> -->
+<!-- 	<string name="update_unfinish_msg1">Form started but not saved. This form instance will be deleted. What do you want to do?</string> -->
+<!-- 	<string name="update_unfinish_pos_button">Delete form</string> -->
+<!-- 	<string name="update_unfinish_neg_button">Edit form</string> -->
+<!-- 	<string name="update_xform_not_found_msg">The XForm could not be found within ODK Collect. Please make sure that it exists and it\'s named correctly.</string> -->
+<!-- 	<string name="visit_lbl">Visit</string> -->
+<!-- 	<string name="update_finish_visit_msg">Did you capture all events and want to finish the visit?</string> -->
+<!-- 	<string name="cancel_lbl">Cancel</string> -->
+<!-- 	<string name="socialgroup_lbl">Socialgroup</string> -->
+<!-- 	<string name="update_on_sgexists_msg">The Socialgroup for the location selected is already existing.</string> -->
+<!-- 	<string name="in_migration_lbl">In Migration</string> -->
+<!-- 	<string name="update_create_inmigration_msg">Is this an Internal or External In Migration event?</string> -->
+<!-- 	<string name="update_create_inmigration_pos_button">Internal</string> -->
+<!-- 	<string name="update_create_inmigration_neg_button">External</string> -->
+<!-- 	<string name="update_finish_ext_inmigration_msg">Please, now create a Membership for the individual</string> -->
+<!-- 	<string name="mother_lbl">Mother</string> -->
+<!-- 	<string name="update_build_mother_msg">Is the mother known and registered in the system?</string> -->
+<!-- 	<string name="father_lbl">Father</string> -->
+<!-- 	<string name="update_build_father_msg">Is the father known and registered in the system?</string> -->
+<!-- 	<string name="update_build_pregnancy_lbr_count_msg">Number of Outcomes</string> -->
+<!-- 	<string name="update_pregoutcome_choose_father">Choose Father</string> -->
+<!-- 	<string name="update_pregoutcome_search_hdss">Search HDSS</string> -->
+<!-- 	<string name="update_pregoutcome_father_not_found">Father not within HDSS</string> -->
+<!-- 	<string name="update_pregoutcome_not_within_hdss">Not within HDSS</string> -->
+<!-- 	<string name="update_load_finished_select_hh_msg">Select a Household for the Individual</string> -->
 
-	<string name="hello_lbl">Hello</string>
+<!-- 	<string name="hello_lbl">Hello</string> -->
 	
-	<string name="fwlogin_task_retrieving_fws">Retrieving Field Workers</string>
+<!-- 	<string name="fwlogin_task_retrieving_fws">Retrieving Field Workers</string> -->
     
 </resources>

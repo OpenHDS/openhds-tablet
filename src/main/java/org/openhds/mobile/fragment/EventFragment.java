@@ -133,47 +133,34 @@ public class EventFragment extends Fragment implements OnClickListener {
     }
 
     public void onClick(View view) {
-        switch (view.getId()) {
-        case R.id.findLocationGeoPointBtn:
-            listener.onLocationGeoPoint();
-            break;
-        case R.id.createLocationBtn:
-            listener.onCreateLocation();
-            break;
-        case R.id.createVisitBtn:
-            listener.onCreateVisit();
-            break;
-        case R.id.finishVisitBtn:
-            listener.onFinishVisit();
-            break;
-        case R.id.householdBtn:
-            listener.onHousehold();
-            break;
-        case R.id.membershipBtn:
-            listener.onMembership();
-            break;
-        case R.id.relationshipBtn:
-            listener.onRelationship();
-            break;
-        case R.id.inMigrationBtn:
-            listener.onInMigration();
-            break;
-        case R.id.outMigrationBtn:
-            listener.onOutMigration();
-            break;
-        case R.id.pregRegBtn:
-            listener.onPregnancyRegistration();
-            break;
-        case R.id.birthRegBtn:
-            listener.onPregnancyOutcome();
-            break;
-        case R.id.deathBtn:
-            listener.onDeath();
-            break;
-        case R.id.clearIndividualBtn:
-            listener.onClearIndividual();
-            break;
-        }
+        int id = view.getId();
+		if (id == R.id.findLocationGeoPointBtn) {
+			listener.onLocationGeoPoint();
+		} else if (id == R.id.createLocationBtn) {
+			listener.onCreateLocation();
+		} else if (id == R.id.createVisitBtn) {
+			listener.onCreateVisit();
+		} else if (id == R.id.finishVisitBtn) {
+			listener.onFinishVisit();
+		} else if (id == R.id.householdBtn) {
+			listener.onHousehold();
+		} else if (id == R.id.membershipBtn) {
+			listener.onMembership();
+		} else if (id == R.id.relationshipBtn) {
+			listener.onRelationship();
+		} else if (id == R.id.inMigrationBtn) {
+			listener.onInMigration();
+		} else if (id == R.id.outMigrationBtn) {
+			listener.onOutMigration();
+		} else if (id == R.id.pregRegBtn) {
+			listener.onPregnancyRegistration();
+		} else if (id == R.id.birthRegBtn) {
+			listener.onPregnancyOutcome();
+		} else if (id == R.id.deathBtn) {
+			listener.onDeath();
+		} else if (id == R.id.clearIndividualBtn) {
+			listener.onClearIndividual();
+		}
     }
 
     public void setLocationVisit(LocationVisit locationVisit) {

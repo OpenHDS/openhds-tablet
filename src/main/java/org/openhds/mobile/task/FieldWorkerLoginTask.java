@@ -23,7 +23,6 @@ import org.apache.http.params.HttpParams;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.R;
 import org.openhds.mobile.activity.FieldWorkerLoginActivity;
-import org.openhds.mobile.activity.ServerPreferencesActivity;
 import org.openhds.mobile.listener.RetrieveFieldWorkersListener;
 import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.Result;
@@ -31,6 +30,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -56,19 +56,18 @@ public class FieldWorkerLoginTask extends AsyncTask<Boolean, Void, Result> {
 	
 	private List<FieldWorker> list;
     private ContentResolver resolver;
-		
-    private Context mContext;
+    private Activity callingActivity;
     
-	public FieldWorkerLoginTask(Context context, SharedPreferences settings, RetrieveFieldWorkersListener listener, 
+    public FieldWorkerLoginTask(Activity callingActivity, SharedPreferences settings, RetrieveFieldWorkersListener listener, 
 			ProgressDialog dialog, String extId, String password, boolean isRegistering) {
-		this.resolver = context.getContentResolver();
+    	this.callingActivity = callingActivity;
+    	this.resolver = callingActivity.getContentResolver();
 		this.settings = settings;
 		this.listener = listener;
 		this.dialog = dialog;
 		this.extId = extId;
 		this.password = password;
 		this.isRegistering = isRegistering;
-		this.mContext = context;
 		
 		list = new ArrayList<FieldWorker>();
 	}
@@ -110,9 +109,9 @@ public class FieldWorkerLoginTask extends AsyncTask<Boolean, Void, Result> {
 	
 	private void invokeWebService() throws AuthenticationException, ClientProtocolException, IOException, XmlPullParserException {
 		
-		String username = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_USERNAME, ((FieldWorkerLoginActivity) listener).getString(R.string.username));
-	    String password = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_PASSWORD, ((FieldWorkerLoginActivity) listener).getString(R.string.password));
-	    String url = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_SERVER, ((FieldWorkerLoginActivity) listener).getString(R.string.default_openhdsserver));
+		String username = settings.getString(callingActivity.getString(R.string.supervisor_username_key), "");
+		String password = settings.getString(callingActivity.getString(R.string.supervisor_password_key), "");
+		String url = settings.getString(callingActivity.getString(R.string.openhds_server_url_key), "");
 		
 		creds = new UsernamePasswordCredentials(username, password);
 		 
@@ -163,7 +162,7 @@ public class FieldWorkerLoginTask extends AsyncTask<Boolean, Void, Result> {
 	
 	private Runnable changeMessageFieldWorker = new Runnable() {
 	    public void run() {
-	        dialog.setMessage(mContext.getResources().getString(R.string.fwlogin_task_retrieving_fws));
+	        dialog.setMessage(callingActivity.getResources().getString(R.string.fwlogin_task_retrieving_fws));
 	    }
 	};
 	

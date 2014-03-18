@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditTextPreference
+        android:defaultValue="@string/default_openhds_server_url"
+        android:dialogTitle="Enter your OpenHDS Server URL"
+        android:inputType="textUri"
+        android:key="@string/openhds_server_url_key"
+        android:summary="@string/openhds_server_url_default_summary"
+        android:title="OpenHDS Server URL" />
+
+</PreferenceScreen>

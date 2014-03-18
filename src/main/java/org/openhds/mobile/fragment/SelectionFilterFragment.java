@@ -96,36 +96,29 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
     }
 
     public void onClick(View view) {
-        switch (view.getId()) {
-        case R.id.hierarchy1_see_list:
-            listener.onSeeListHierarchy1();
-            break;
-        case R.id.hierarchy2_see_list:
-            listener.onSeeListHierarchy2(hierarchy1Txt.getText().toString());
-            break;
-        case R.id.hierarchy3_see_list:
-            listener.onSeeListHierarchy3(hierarchy2Txt.getText().toString());
-            break;
-        case R.id.hierarchy4_see_list:
-            listener.onSeeListHierarchy4(hierarchy3Txt.getText().toString());
-            break;
-        case R.id.location_see_list:
-            listener.onSeeListLocation(hierarchy4Txt.getText().toString());
-            break;
-        case R.id.searchFilterBtn:
-            String gender = "";
-            String loc = "";
-            loc = locationTxt.getText().toString();
-            if (maleBtn.isChecked() || femaleBtn.isChecked()) {
+        int id = view.getId();
+		if (id == R.id.hierarchy1_see_list) {
+			listener.onSeeListHierarchy1();
+		} else if (id == R.id.hierarchy2_see_list) {
+			listener.onSeeListHierarchy2(hierarchy1Txt.getText().toString());
+		} else if (id == R.id.hierarchy3_see_list) {
+			listener.onSeeListHierarchy3(hierarchy2Txt.getText().toString());
+		} else if (id == R.id.hierarchy4_see_list) {
+			listener.onSeeListHierarchy4(hierarchy3Txt.getText().toString());
+		} else if (id == R.id.location_see_list) {
+			listener.onSeeListLocation(hierarchy4Txt.getText().toString());
+		} else if (id == R.id.searchFilterBtn) {
+			String gender = "";
+			String loc = "";
+			loc = locationTxt.getText().toString();
+			if (maleBtn.isChecked() || femaleBtn.isChecked()) {
                 gender = maleBtn.isChecked() ? "M" : "F";
             }
-            listener.onSearch(loc, firstNameTxt.getText().toString(), lastNameTxt
+			listener.onSearch(loc, firstNameTxt.getText().toString(), lastNameTxt
                     .getText().toString(), gender);
-            break;
-        case R.id.clearFilterBtn:
-            clear();
-            break;
-        }
+		} else if (id == R.id.clearFilterBtn) {
+			clear();
+		}
     }
 
     private void clear() {
