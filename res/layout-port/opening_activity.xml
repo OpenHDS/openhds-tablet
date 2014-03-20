@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/opening_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:tag="portrait" >
 
     <FrameLayout
         android:id="@+id/login_pref_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_weight="3" />
+        android:layout_weight="0"
+        android:paddingLeft="200dp"
+        android:paddingRight="200dp" />
 
-    <fragment
-        android:id="@+id/fieldWorkerLoginFragment"
-        android:name="org.openhds.mobile.fragment.FieldWorkerLoginFragment"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/field_worker_login_container"
+        android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_weight="3" />
+        android:layout_weight="3"
+        android:paddingLeft="200dp"
+        android:paddingRight="200dp" />
 
-    <fragment
-        android:id="@+id/supervisorLoginFragment"
-        android:name="org.openhds.mobile.fragment.SupervisorLoginFragment"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/supervisor_login_container"
+        android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_weight="14" />
+        android:layout_weight="10"
+        android:paddingBottom="100dp"
+        android:paddingLeft="200dp"
+        android:paddingRight="200dp" />
 
 </LinearLayout>

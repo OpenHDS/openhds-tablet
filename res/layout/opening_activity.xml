@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/opening_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:tag="landscape" >
+
+    <FrameLayout
+        android:id="@+id/field_worker_login_container"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="50dp"
+        android:paddingRight="30dp"
+        android:paddingTop="100dp" />
+
+    <FrameLayout
+        android:id="@+id/supervisor_login_container"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="30dp"
+        android:paddingRight="50dp"
+        android:paddingTop="100dp" />
 
     <FrameLayout
         android:id="@+id/login_pref_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" >
-    </FrameLayout>
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:paddingTop="100dp" />
 
-    <fragment
-        android:id="@+id/fieldWorkerLoginFragment"
-        android:name="org.openhds.mobile.fragment.FieldWorkerLoginFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/supervisorLoginFragment"
-        android:layout_centerHorizontal="true" />
-
-    <fragment
-        android:id="@+id/supervisorLoginFragment"
-        android:name="org.openhds.mobile.fragment.SupervisorLoginFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-
-</RelativeLayout>
+</LinearLayout>

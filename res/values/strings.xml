@@ -14,6 +14,7 @@
     <string name="databaseSync">Sync with OpenHDS Database</string>
     <string name="choose">Please choose </string>
     <string name="default_server_url">http://solarmal.mbita.icipe.org:8080/openhdsMbita/mobile-interop</string>
+    <string name="interop_server_url_key">interop_server_url</string>
 	<string name="default_openhds_server_url">http://data-management.local:8080/openhds</string>    
 	<string name="openhds_server_url">http://data-management.local:8080/openhds</string>
     <string name="openhds_server_url_default_summary">Same URL used for OpenHDS Server via Web browser</string>    
