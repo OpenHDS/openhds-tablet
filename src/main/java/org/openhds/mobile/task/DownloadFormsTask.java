@@ -24,7 +24,6 @@ public class DownloadFormsTask extends AbstractHttpTask<Void, Void> {
 
 	private DatabaseAdapter storage;
 
-
 	public DownloadFormsTask(RequestContext requestCtx, TaskListener listener,
 			Context context) {
 		super(requestCtx, listener);
@@ -37,10 +36,10 @@ public class DownloadFormsTask extends AbstractHttpTask<Void, Void> {
 			StringReader reader;
 			reader = new StringReader(EntityUtils.toString(entity));
 			List<FormSubmissionRecord> records = parseResponseXml(reader);
-			for(FormSubmissionRecord rec : records) {
-				rec.setFormOwnerId(requestCtx.user);
+			for (FormSubmissionRecord rec : records) {
+				rec.setFormOwnerId(requestContext.user);
 			}
-			
+
 			saveRecords(records);
 			return EndResult.SUCCESS;
 		} catch (ParseException e) {
@@ -125,8 +124,7 @@ public class DownloadFormsTask extends AbstractHttpTask<Void, Void> {
 		while (!isEndTag(eventType)
 				|| !"formSubmission".equals(parser.getName())) {
 			eventType = parser.next();
-			if (isStartTag(eventType)
-					&& "formType".equals(parser.getName())) {
+			if (isStartTag(eventType) && "formType".equals(parser.getName())) {
 				checkTextPresent(parser);
 				record.setFormType(parser.getText());
 			} else if (isStartTag(eventType)
@@ -136,14 +134,16 @@ public class DownloadFormsTask extends AbstractHttpTask<Void, Void> {
 			} else if (isStartTag(eventType)
 					&& "formErrors".equals(parser.getName())) {
 				parseFormErrors(parser, record);
-			} else if (isStartTag(eventType) && "formId".equals(parser.getName())) {
+			} else if (isStartTag(eventType)
+					&& "formId".equals(parser.getName())) {
 				checkTextPresent(parser);
 				record.setFormId(parser.getText());
 			} else if (isStartTag(eventType) && "id".equals(parser.getName())) {
 				checkTextPresent(parser);
 				try {
 					record.setRemoteId(Integer.parseInt(parser.getText()));
-				} catch(NumberFormatException e) { }
+				} catch (NumberFormatException e) {
+				}
 			}
 		}
 

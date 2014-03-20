@@ -6,16 +6,19 @@ import java.net.URL;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 public abstract class AbstractHttpTask<Params, Progress> extends
 		AsyncTask<Params, Progress, AbstractHttpTask.EndResult> {
@@ -23,11 +26,11 @@ public abstract class AbstractHttpTask<Params, Progress> extends
 	private static final int SUCCESS_STATUS_CODE = 200;
 	private static final int NO_CONTENT_CODE = 204;
 
-	protected RequestContext requestCtx;
+	protected RequestContext requestContext;
 	private TaskListener listener;
 
-	public AbstractHttpTask(RequestContext requestCtx, TaskListener listener) {
-		this.requestCtx = requestCtx;
+	public AbstractHttpTask(RequestContext requestContext, TaskListener listener) {
+		this.requestContext = requestContext;
 		this.listener = listener;
 	}
 
@@ -72,11 +75,11 @@ public abstract class AbstractHttpTask<Params, Progress> extends
 
 	@Override
 	protected EndResult doInBackground(Params... params) {
-		DefaultHttpClient httpClient = buildHttpClient(requestCtx.user,
-				requestCtx.password);
+		DefaultHttpClient httpClient = buildHttpClient(requestContext.user,
+				requestContext.password);
 		try {
-			HttpResponse response = executeGet(httpClient, requestCtx.url);
-			switch(response.getStatusLine().getStatusCode()) {
+			HttpResponse response = executeGet(httpClient, requestContext);
+			switch (response.getStatusLine().getStatusCode()) {
 			case SUCCESS_STATUS_CODE:
 				return handleResponseData(response);
 			case NO_CONTENT_CODE:
@@ -119,11 +122,24 @@ public abstract class AbstractHttpTask<Params, Progress> extends
 		httpClient.setCredentialsProvider(credsProvider);
 	}
 
-	public HttpResponse executeGet(DefaultHttpClient client, URL url)
-			throws ClientProtocolException, IOException {
-		HttpHost host = new HttpHost(url.getHost(), url.getPort());
-		HttpGet httpget = new HttpGet(url.getPath());
-		return client.execute(host, httpget);
+	public HttpResponse executeGet(DefaultHttpClient client,
+			RequestContext requestContext) throws ClientProtocolException,
+			IOException {
+		HttpHost host = new HttpHost(requestContext.url.getHost(),
+				requestContext.url.getPort());
+		HttpGet httpGet = new HttpGet(requestContext.url.getPath());
+
+		// preemptively provide credentials
+		UsernamePasswordCredentials creds = new UsernamePasswordCredentials(
+				requestContext.user, requestContext.password);
+
+		try {
+			httpGet.addHeader(new BasicScheme().authenticate(creds, httpGet));
+		} catch (AuthenticationException e) {
+			throw new RuntimeException(e);
+		}
+
+		return client.execute(host, httpGet);
 	}
 
 	@Override

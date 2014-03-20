@@ -20,8 +20,8 @@ public class AuthenticateTask extends AbstractHttpTask<Void, Void> {
 	@Override
 	protected EndResult handleResponseData(HttpResponse response) {
 		Supervisor user = new Supervisor();
-		user.setName(requestCtx.user);
-		user.setPassword(requestCtx.password);
+		user.setName(requestContext.user);
+		user.setPassword(requestContext.password);
 
 		store.addSupervisor(user);
 

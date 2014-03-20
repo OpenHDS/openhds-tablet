@@ -92,6 +92,7 @@
 
 <!-- 	 <string name="hierarchy1_lbl">Region:</string>
     <string name="hierarchy1_hint_lbl">Region External Id</string>
+<<<<<<< HEAD
     <string name="hierarchy2_lbl">District:</string>
     <string name="hierarchy2_hint_lbl">District External Id</string>
 	 <string name="hierarchy3_lbl">Village:</string>
@@ -373,7 +374,13 @@
 <!-- 	<string name="update_pregoutcome_not_within_hdss">Not within HDSS</string> -->
 <!-- 	<string name="update_load_finished_select_hh_msg">Select a Household for the Individual</string> -->
 
-<!-- 	<string name="hello_lbl">Hello</string> -->
+    <string name="hierarchy2_select_lbl">Select Map Area</string>
+    <string name="hierarchy3_select_lbl">Select Sector</string>
+    <string name="hierarchy4_select_lbl">Select Building</string>
+    <string name="hierarchy5_select_lbl">Select Floor</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="fieldworker_login">Field Worker Login</string>
 	
 <!-- 	<string name="fwlogin_task_retrieving_fws">Retrieving Field Workers</string> -->
     
