@@ -4,11 +4,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.openhds.mobile.R;
+import org.openhds.mobile.activity.SupervisorMainActivity;
 import org.openhds.mobile.database.DatabaseAdapter;
+import org.openhds.mobile.model.Supervisor;
 import org.openhds.mobile.task.AbstractHttpTask.RequestContext;
 import org.openhds.mobile.task.AuthenticateTask;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -46,17 +49,17 @@ public class SupervisorLoginFragment extends Fragment implements
 		return v;
 	}
 
+	public void onClick(View view) {
+		authenticateSupervisor();
+	}
+
 	private String getUsernameFromEditText() {
-
 		String username = usernameEditText.getText().toString();
-
 		return username;
 	}
 
 	private String getPasswordFromEditText() {
-
 		String password = passwordEditText.getText().toString();
-
 		return password;
 	}
 
@@ -66,6 +69,9 @@ public class SupervisorLoginFragment extends Fragment implements
 
 		String openHdsUrl = preferences.getString(
 				getString(R.string.openhds_server_url_key), "");
+
+		// supervisor_login_url needs to be a secured resource on the sever
+		// for example openhds/api/rest/socialgroups
 		String endpointUrl = openHdsUrl
 				+ getString(R.string.supervisor_login_url);
 
@@ -74,11 +80,9 @@ public class SupervisorLoginFragment extends Fragment implements
 		} catch (MalformedURLException e) {
 			return null;
 		}
-
 	}
 
 	private void authenticateSupervisor() {
-
 		URL url = getUrl();
 		if (null == url) {
 			Toast.makeText(getActivity(),
@@ -97,46 +101,76 @@ public class SupervisorLoginFragment extends Fragment implements
 
 	}
 
+	private void onConnectedAndAuthenticated() {
+		// valid credentials were cached in tablet database by AuthenticateTask
+		launchSupervisorMainActivity();
+	}
+
+	private void onConnectedButNotAuthenticated() {
+		// delete unauthorized user from tablet database
+		// to prevent login when not connected to network
+		Supervisor user = new Supervisor();
+		user.setName(getUsernameFromEditText());
+		user.setPassword(getUsernameFromEditText());
+		int nDeleted = databaseAdapter.deleteSupervisor(user);
+		Toast.makeText(getActivity(), "Deleted " + nDeleted + " supervisors.",
+				Toast.LENGTH_LONG).show();
+	}
+
+	private void onNotConnected() {
+		// attempt to log in using cached credentials in tablet database
+	}
+
+	private void launchSupervisorMainActivity() {
+		Intent intent = new Intent(getActivity(), SupervisorMainActivity.class);
+		String usernameKey = getString(R.string.supervisor_username_key);
+		String passwordKey = getString(R.string.supervisor_password_key);
+		intent.putExtra(usernameKey, getUsernameFromEditText());
+		intent.putExtra(passwordKey, getPasswordFromEditText());
+		startActivity(intent);
+	}
+
 	private class AuthenticateListener implements AuthenticateTask.TaskListener {
 		public void onFailedAuthentication() {
 			Toast.makeText(getActivity(),
 					"Supervisor credentials not authenticated.",
 					Toast.LENGTH_LONG).show();
+			onConnectedButNotAuthenticated();
 		}
 
 		public void onConnectionError() {
 			Toast.makeText(getActivity(),
-					"Connection error authenticating supervisor.",
+					"Connection error trying to authenticate supervisor.",
 					Toast.LENGTH_LONG).show();
+			onNotConnected();
 		}
 
 		public void onConnectionTimeout() {
 			Toast.makeText(getActivity(),
-					"Connection timeout authenticating supervisor.",
+					"Connection timeout trying to authenticate supervisor.",
 					Toast.LENGTH_LONG).show();
+			onNotConnected();
 		}
 
 		public void onSuccess() {
 			Toast.makeText(getActivity(), "Authenticated supervisor.",
 					Toast.LENGTH_LONG).show();
+			onConnectedAndAuthenticated();
 		}
 
 		public void onFailure() {
 			Toast.makeText(getActivity(),
-					"Unknown failure authenticating supervisor.",
+					"Unknown failure trying to authenticate supervisor.",
 					Toast.LENGTH_LONG).show();
+			onNotConnected();
 		}
 
 		public void onNoContent() {
 			Toast.makeText(getActivity(),
-					"No content authenticating supervisor.", Toast.LENGTH_LONG)
-					.show();
+					"No content trying to authenticate supervisor.",
+					Toast.LENGTH_LONG).show();
+			onNotConnected();
 		}
 	}
-
-	public void onClick(View view) {
-
-		Toast.makeText(getActivity(), "WORKS.", Toast.LENGTH_LONG).show();
-		authenticateSupervisor();
-	}
 }
+
