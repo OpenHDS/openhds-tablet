@@ -3,9 +3,10 @@
     android:id="@+id/opening_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:baselineAligned="false"
     android:orientation="horizontal"
-    android:tag="landscape" >
+    android:tag="@string/landscape_layout_tag" >
 
     <FrameLayout
         android:id="@+id/field_worker_login_container"
@@ -29,7 +30,8 @@
         android:id="@+id/login_pref_container"
         android:layout_width="0px"
         android:layout_height="match_parent"
-        android:layout_weight="0"
-        android:paddingTop="100dp" />
+        android:layout_weight="1"
+        android:paddingTop="100dp"
+        android:visibility="gone" />
 
 </LinearLayout>
