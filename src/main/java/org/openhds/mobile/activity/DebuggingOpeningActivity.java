@@ -18,11 +18,11 @@ import org.openhds.mobile.listener.CollectEntitiesListener;
 import org.openhds.mobile.listener.RetrieveFieldWorkersListener;
 import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.Result;
-import org.openhds.mobile.task.AuthenticateTask;
 import org.openhds.mobile.task.FieldWorkerLoginTask;
+import org.openhds.mobile.task.HttpTask;
 import org.openhds.mobile.task.SupervisorLoginTask;
 import org.openhds.mobile.task.SyncEntitiesTask;
-import org.openhds.mobile.task.AbstractHttpTask.RequestContext;
+import org.openhds.mobile.task.HttpTask.RequestContext;
 
 public class DebuggingOpeningActivity extends Activity {
 
@@ -91,8 +91,8 @@ public class DebuggingOpeningActivity extends Activity {
 		}
 		requestCtx.url(serverURL).user(SUPERVISOR_USER)
 				.password(SUPERVISOR_PASSWORD);
-		AuthenticateTask authenticateTask = new AuthenticateTask(requestCtx,
-				new AuthenticateListener(), databaseAdapter);
+		HttpTask<Void, Void> authenticateTask = new HttpTask<Void, Void>(
+				requestCtx, new AuthenticateListener());
 		authenticateTask.execute();
 	}
 
@@ -150,7 +150,7 @@ public class DebuggingOpeningActivity extends Activity {
 	}
 
 	// async handler for authenticateSupervisor()
-	private class AuthenticateListener implements AuthenticateTask.TaskListener {
+	private class AuthenticateListener implements HttpTask.TaskListener {
 		public void onFailedAuthentication() {
 			Toast.makeText(getApplicationContext(),
 					"Supervisor credentials not authenticated.",

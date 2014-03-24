@@ -18,10 +18,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 
 import android.os.AsyncTask;
-import android.widget.Toast;
 
-public abstract class AbstractHttpTask<Params, Progress> extends
-		AsyncTask<Params, Progress, AbstractHttpTask.EndResult> {
+public class HttpTask<Params, Progress> extends
+		AsyncTask<Params, Progress, HttpTask.EndResult> {
 	private static final int UNAUTHORIZED_STATUS_CODE = 401;
 	private static final int SUCCESS_STATUS_CODE = 200;
 	private static final int NO_CONTENT_CODE = 204;
@@ -29,7 +28,7 @@ public abstract class AbstractHttpTask<Params, Progress> extends
 	protected RequestContext requestContext;
 	private TaskListener listener;
 
-	public AbstractHttpTask(RequestContext requestContext, TaskListener listener) {
+	public HttpTask(RequestContext requestContext, TaskListener listener) {
 		this.requestContext = requestContext;
 		this.listener = listener;
 	}
@@ -166,5 +165,7 @@ public abstract class AbstractHttpTask<Params, Progress> extends
 		}
 	}
 
-	protected abstract EndResult handleResponseData(HttpResponse response);
+	protected EndResult handleResponseData(HttpResponse response) {
+		return EndResult.SUCCESS;
+	}
 }

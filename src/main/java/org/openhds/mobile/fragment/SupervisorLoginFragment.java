@@ -7,8 +7,8 @@ import org.openhds.mobile.R;
 import org.openhds.mobile.activity.SupervisorMainActivity;
 import org.openhds.mobile.database.DatabaseAdapter;
 import org.openhds.mobile.model.Supervisor;
-import org.openhds.mobile.task.AbstractHttpTask.RequestContext;
-import org.openhds.mobile.task.AuthenticateTask;
+import org.openhds.mobile.task.HttpTask;
+import org.openhds.mobile.task.HttpTask.RequestContext;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -95,9 +95,8 @@ public class SupervisorLoginFragment extends Fragment implements
 		requestCtx.url(url).user(getUsernameFromEditText())
 				.password(getPasswordFromEditText());
 
-		AuthenticateTask authenticateTask = new AuthenticateTask(requestCtx,
-				new AuthenticateListener(), databaseAdapter);
-		authenticateTask.execute();
+		HttpTask<Void, Void> httpTask = new HttpTask<Void, Void>(requestCtx, new AuthenticateListener());
+		httpTask.execute();
 
 	}
 
@@ -130,7 +129,7 @@ public class SupervisorLoginFragment extends Fragment implements
 		startActivity(intent);
 	}
 
-	private class AuthenticateListener implements AuthenticateTask.TaskListener {
+	private class AuthenticateListener implements HttpTask.TaskListener {
 		public void onFailedAuthentication() {
 			Toast.makeText(getActivity(),
 					"Supervisor credentials not authenticated.",

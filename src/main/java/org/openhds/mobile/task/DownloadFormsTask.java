@@ -20,7 +20,7 @@ import org.openhds.mobile.BadXmlException;
  * AsyncTask that fetches partial forms (and potentially associated validation
  * failure messages for those forms) and stores them in SQL Lite DB
  */
-public class DownloadFormsTask extends AbstractHttpTask<Void, Void> {
+public class DownloadFormsTask extends HttpTask<Void, Void> {
 
 	private DatabaseAdapter storage;
 

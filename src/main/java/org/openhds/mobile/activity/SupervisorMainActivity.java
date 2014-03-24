@@ -3,7 +3,7 @@ package org.openhds.mobile.activity;
 import java.net.URL;
 
 import org.openhds.mobile.R;
-import org.openhds.mobile.task.AbstractHttpTask.RequestContext;
+import org.openhds.mobile.task.HttpTask.RequestContext;
 import org.openhds.mobile.task.DownloadFormsTask;
 
 import android.app.Dialog;
