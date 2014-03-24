@@ -102,7 +102,7 @@ public class DebuggingOpeningActivity extends Activity {
 		SupervisorLoginTask loginTask = new SupervisorLoginTask(
 				databaseAdapter, SUPERVISOR_USER, SUPERVISOR_PASSWORD,
 				new LoginListener());
-		loginTask.execute(false);
+		loginTask.execute();
 	}
 
 	// sync data with server
@@ -190,12 +190,6 @@ public class DebuggingOpeningActivity extends Activity {
 
 	// async handler for logInSupervisor()
 	private class LoginListener implements SupervisorLoginTask.Listener {
-		public void onNewUser() {
-			Toast.makeText(getApplicationContext(),
-					"Must create a new supervisor user.", Toast.LENGTH_LONG)
-					.show();
-		}
-
 		public void onAuthenticated() {
 			Toast.makeText(getApplicationContext(), "Logged in as supervisor.",
 					Toast.LENGTH_LONG).show();
@@ -205,11 +199,6 @@ public class DebuggingOpeningActivity extends Activity {
 		public void onBadAuthentication() {
 			Toast.makeText(getApplicationContext(),
 					"Supervisor not logged in with credentials.",
-					Toast.LENGTH_LONG).show();
-		}
-
-		public void onCreatedUser() {
-			Toast.makeText(getApplicationContext(), "Created new user.",
 					Toast.LENGTH_LONG).show();
 		}
 	}

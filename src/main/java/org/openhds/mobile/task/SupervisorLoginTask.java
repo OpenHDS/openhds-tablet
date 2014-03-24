@@ -16,17 +16,13 @@ public class SupervisorLoginTask extends AsyncTask<Boolean, Void, SupervisorLogi
 	private Listener listener;
 
 	public enum Result {
-		NEW_USER, AUTHENTICATED, BAD_AUTHENTICATION, CREATED_USER_SUCCESS
+		AUTHENTICATED, BAD_AUTHENTICATION
 	}
 
 	public interface Listener {
-		void onNewUser();
-
 		void onAuthenticated();
 
 		void onBadAuthentication();
-
-		void onCreatedUser();
 	}
 
 	public SupervisorLoginTask(DatabaseAdapter storage, String user, String password,
@@ -42,11 +38,9 @@ public class SupervisorLoginTask extends AsyncTask<Boolean, Void, SupervisorLogi
 		Supervisor user = storage.findSupervisorByUsername(username);
 		if (user != null && user.getPassword().equals(password)) {
 			return Result.AUTHENTICATED;
-		} else if (user != null) {
+		} else {
 			return Result.BAD_AUTHENTICATION;
 		}
-
-		return Result.NEW_USER;
 	}
 
 	@Override
@@ -58,11 +52,6 @@ public class SupervisorLoginTask extends AsyncTask<Boolean, Void, SupervisorLogi
 		case AUTHENTICATED:
 			listener.onAuthenticated();
 			break;
-		case NEW_USER:
-			listener.onNewUser();
-			break;
-		case CREATED_USER_SUCCESS:
-			listener.onCreatedUser();
 		}
 	}
 

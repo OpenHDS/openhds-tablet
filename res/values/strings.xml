@@ -20,8 +20,8 @@
     <string name="openhds_server_url_default_summary">Same URL used for OpenHDS Server via Web browser</string>    
 	<string name="openhds_server_url_key">openhds_server_url</string>
 	<string name="openhds_server_url_title">OpenHDS Server URL</string>
-	<string name="supervisor_login_url">/api/user/authenticate</string>	
-<!-- 	<string name="supervisor_login_url">/api/rest/socialgroups</string>	 -->
+<!-- 	<string name="supervisor_login_url">/api/user/authenticate</string>	 -->
+	<string name="supervisor_login_url">/api/rest/socialgroups</string>	
 	<string name="supervisor_login">Supervisor Login</string>	
     <string name="default_openhdsserver">http://solarmal.mbita.icipe.org:8080/openhdsMbita</string>
     <string name="delete_form_btn">Delete Form</string>
@@ -384,5 +384,6 @@
     <string name="fieldworker_login">Field Worker Login</string>
     <string name="landscape_layout_tag">landscape</string>
     <string name="portrait_layout_tag">portrait</string>
+    <string name="supervisor_bad_credentials">Supervisor credentials not authenticated</string>
 
 </resources>

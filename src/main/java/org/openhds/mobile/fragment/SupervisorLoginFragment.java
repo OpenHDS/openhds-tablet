@@ -8,6 +8,7 @@ import org.openhds.mobile.activity.SupervisorMainActivity;
 import org.openhds.mobile.database.DatabaseAdapter;
 import org.openhds.mobile.model.Supervisor;
 import org.openhds.mobile.task.HttpTask;
+import org.openhds.mobile.task.SupervisorLoginTask;
 import org.openhds.mobile.task.HttpTask.RequestContext;
 
 import android.app.Fragment;
@@ -95,29 +96,51 @@ public class SupervisorLoginFragment extends Fragment implements
 		requestCtx.url(url).user(getUsernameFromEditText())
 				.password(getPasswordFromEditText());
 
-		HttpTask<Void, Void> httpTask = new HttpTask<Void, Void>(requestCtx, new AuthenticateListener());
+		HttpTask<Void, Void> httpTask = new HttpTask<Void, Void>(requestCtx,
+				new AuthenticateListener());
 		httpTask.execute();
 
 	}
 
 	private void onConnectedAndAuthenticated() {
 		// valid credentials were cached in tablet database by AuthenticateTask
+		// delete any stale credentials from local then add authenticated
+		// credentials to match server
+		deleteSupervisor();
+		addSupervisor();
 		launchSupervisorMainActivity();
 	}
 
 	private void onConnectedButNotAuthenticated() {
 		// delete unauthorized user from tablet database
 		// to prevent login when not connected to network
+		Toast.makeText(getActivity(),
+				getString(R.string.supervisor_bad_credentials),
+				Toast.LENGTH_LONG).show();
+		deleteSupervisor();
+	}
+
+	private void deleteSupervisor() {
 		Supervisor user = new Supervisor();
 		user.setName(getUsernameFromEditText());
-		user.setPassword(getUsernameFromEditText());
-		int nDeleted = databaseAdapter.deleteSupervisor(user);
-		Toast.makeText(getActivity(), "Deleted " + nDeleted + " supervisors.",
-				Toast.LENGTH_LONG).show();
+		databaseAdapter.deleteSupervisor(user);
+
+	}
+
+	private void addSupervisor() {
+		Supervisor user = new Supervisor();
+		user.setName(getUsernameFromEditText());
+		user.setPassword(getPasswordFromEditText());
+		databaseAdapter.addSupervisor(user);
+
 	}
 
 	private void onNotConnected() {
 		// attempt to log in using cached credentials in tablet database
+		SupervisorLoginTask loginTask = new SupervisorLoginTask(
+				databaseAdapter, getUsernameFromEditText(),
+				getPasswordFromEditText(), new LoginListener());
+		loginTask.execute();
 	}
 
 	private void launchSupervisorMainActivity() {
@@ -131,44 +154,39 @@ public class SupervisorLoginFragment extends Fragment implements
 
 	private class AuthenticateListener implements HttpTask.TaskListener {
 		public void onFailedAuthentication() {
-			Toast.makeText(getActivity(),
-					"Supervisor credentials not authenticated.",
-					Toast.LENGTH_LONG).show();
 			onConnectedButNotAuthenticated();
 		}
 
 		public void onConnectionError() {
-			Toast.makeText(getActivity(),
-					"Connection error trying to authenticate supervisor.",
-					Toast.LENGTH_LONG).show();
 			onNotConnected();
 		}
 
 		public void onConnectionTimeout() {
-			Toast.makeText(getActivity(),
-					"Connection timeout trying to authenticate supervisor.",
-					Toast.LENGTH_LONG).show();
 			onNotConnected();
 		}
 
 		public void onSuccess() {
-			Toast.makeText(getActivity(), "Authenticated supervisor.",
-					Toast.LENGTH_LONG).show();
 			onConnectedAndAuthenticated();
 		}
 
 		public void onFailure() {
-			Toast.makeText(getActivity(),
-					"Unknown failure trying to authenticate supervisor.",
-					Toast.LENGTH_LONG).show();
 			onNotConnected();
 		}
 
 		public void onNoContent() {
-			Toast.makeText(getActivity(),
-					"No content trying to authenticate supervisor.",
-					Toast.LENGTH_LONG).show();
 			onNotConnected();
+		}
+	}
+
+	private class LoginListener implements SupervisorLoginTask.Listener {
+		public void onAuthenticated() {
+			launchSupervisorMainActivity();
+		}
+
+		public void onBadAuthentication() {
+			Toast.makeText(getActivity(),
+					getString(R.string.supervisor_bad_credentials),
+					Toast.LENGTH_LONG).show();
 		}
 	}
 }
