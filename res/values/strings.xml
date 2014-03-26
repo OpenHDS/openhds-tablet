@@ -12,6 +12,7 @@
     <string name="configuration">Configuration</string>
     <string name="configureDatabase">Configure Database</string>
     <string name="databaseSync">Sync with OpenHDS Database</string>
+	<string name="sync_database_name">Sync Database</string>    
     <string name="choose">Please choose </string>
     <string name="default_server_url">http://solarmal.mbita.icipe.org:8080/openhdsMbita/mobile-interop</string>
     <string name="interop_server_url_key">interop_server_url</string>
@@ -50,6 +51,8 @@
     <string name="shared_pref_server_url_key">server_url</string>
 	<string name="syncDatabase">Sync Database</string>
 	<string name="syncDatabaseMessage">This procedure will attempt to download OpenHDS entities onto the device. Please be patient while the download is in progress.</string>
+	<string name="sync_database_description">Syncs census data with server.</string>	
+	<string name="sync_field_worker_description">Syncs field workers with server.</string>
 	<string name="sync_entities_failure">Failed to Collect OpenHDS Entities</string>
 	<string name="sync_forms_successful">Forms Collected Successfully</string>
 	<string name="sync_forms_failure">Failed to Collect the forms</string>

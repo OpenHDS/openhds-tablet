@@ -14,6 +14,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 public class OpeningActivity extends Activity {
+	
+	public static final String USERNAME_KEY = "usernameKey";
+	public static final String PASSWORD_KEY = "passwordKey";	
 
 	private FrameLayout loginPrefContainer;
 

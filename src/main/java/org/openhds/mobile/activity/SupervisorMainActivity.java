@@ -2,9 +2,10 @@ package org.openhds.mobile.activity;
 
 import org.openhds.mobile.R;
 import org.openhds.mobile.fragment.LoginPreferenceFragment;
+import org.openhds.mobile.utilities.SyncDatabaseHelper;
 
+import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +21,7 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 
 	private FrameLayout prefContainer;
 	private LinearLayout supervisorOptionsList;
+	private SyncDatabaseHelper syncDatabaseHelper;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,8 +32,9 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 
 		supervisorOptionsList = (LinearLayout) findViewById(R.id.supervisor_activity_options);
 
-		makeNewOptionsButton("This button will sync the database.",
-				"Sync Database", this);
+		makeNewOptionsButton(
+				getResourceString(this, R.string.sync_database_description),
+				getResourceString(this, R.string.sync_database_name), this);
 
 		if (null != savedInstanceState) {
 			return;
@@ -74,19 +77,34 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 		Button b = (Button) v.findViewById(R.id.generic_button);
 		TextView t = (TextView) v.findViewById(R.id.generic_button_description);
 
-		
-		b.setText(buttonName);
 		t.setText(description);
-
+		b.setText(buttonName);
+		b.setTag(buttonName);
 		b.setOnClickListener(listener);
 
 		return b;
 	}
 
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		Intent syncIntent = new Intent(this, SyncDatabaseActivity.class);
-		startActivity(syncIntent);
+		if (v.getTag().equals(
+				getResourceString(this, R.string.sync_database_name))) {
+			syncDatabase();
+		}
+
 	}
 
+	private void syncDatabase() {
+
+		if (null == syncDatabaseHelper) {
+			String username = (String) getIntent().getExtras().get(
+					OpeningActivity.USERNAME_KEY);
+			String password = (String) getIntent().getExtras().get(
+					OpeningActivity.PASSWORD_KEY);
+			syncDatabaseHelper = new SyncDatabaseHelper(username, password,
+					this);
+			
+		}
+
+		syncDatabaseHelper.startSync();
+	}
 }

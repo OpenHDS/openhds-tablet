@@ -567,8 +567,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
      * Creates the 'Sync Database' option in the action menu.
      */
     private void createSyncDatabaseMenu() {
-        Intent i = new Intent(this, SyncDatabaseActivity.class);
-        startActivity(i);
+        //Intent i = new Intent(this, SyncDatabaseActivity.class);
+        //startActivity(i);
     }
 
     /**
