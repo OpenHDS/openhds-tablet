@@ -15,8 +15,9 @@ import android.widget.FrameLayout;
 
 public class OpeningActivity extends Activity {
 	
+	
 	public static final String USERNAME_KEY = "usernameKey";
-	public static final String PASSWORD_KEY = "passwordKey";	
+	public static final String PASSWORD_KEY = "passwordKey";
 
 	private FrameLayout loginPrefContainer;
 
@@ -39,11 +40,6 @@ public class OpeningActivity extends Activity {
 				.add(R.id.supervisor_login_container,
 						new SupervisorLoginFragment()).commit();
 	}
-	
-
-	
-	
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

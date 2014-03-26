@@ -6,12 +6,10 @@ import android.preference.PreferenceManager;
 
 public class ConfigUtils {
 	
-	public static final String USERNAME_PARAM = "username";
-	public static final String PASSWORD_PARAM = "password";
 	public static final String FORM_ID = "form_id";
 
-	public static String getResourceString(Context context, int key) {
-		return (context.getString(key));
+	public static String getResourceString(Context context, int id) {
+		return (context.getString(id));
 	}
 
 	public static String getPreferenceString(Context context, int key,

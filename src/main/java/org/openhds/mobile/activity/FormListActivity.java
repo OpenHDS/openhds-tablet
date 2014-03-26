@@ -21,7 +21,7 @@ public class FormListActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		String user = getIntent().getExtras().getString(
-				ConfigUtils.USERNAME_PARAM);
+				OpeningActivity.USERNAME_KEY);
 
 		DatabaseAdapter store = new DatabaseAdapter(this);
 

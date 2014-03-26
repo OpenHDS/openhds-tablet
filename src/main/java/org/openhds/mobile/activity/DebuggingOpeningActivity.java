@@ -63,9 +63,9 @@ public class DebuggingOpeningActivity extends Activity {
 				OPENHDS_URL);
 		editor.putString(getString(R.string.interop_server_url_key),
 				INTEROP_URL);
-		editor.putString(getString(R.string.supervisor_username_key),
+		editor.putString(OpeningActivity.USERNAME_KEY,
 				SUPERVISOR_USER);
-		editor.putString(getString(R.string.supervisor_password_key),
+		editor.putString(OpeningActivity.PASSWORD_KEY,
 				SUPERVISOR_PASSWORD);
 		if (editor.commit()) {
 			Toast.makeText(getApplicationContext(), "Set server URLs",
