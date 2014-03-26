@@ -9,7 +9,6 @@ import org.openhds.mobile.R;
 import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
 import static org.openhds.mobile.utilities.ConfigUtils.getPreferenceString;
 
-
 public class UrlUtils {
 
 	public static boolean isValidUrl(String url) {
@@ -21,21 +20,21 @@ public class UrlUtils {
 		}
 	}
 
-	public URL buildServerUrl(Context context, String path) {
-		String openHdsBaseUrl = getPreferenceString(context, R.string.openhds_server_url_key, "");
+	public static URL buildServerUrl(Context context, String path) {
+		String openHdsBaseUrl = getPreferenceString(context,
+				R.string.openhds_server_url_key, "");
 
 		if (0 == openHdsBaseUrl.trim().length()) {
-			showLongToast(context, "No server URL has been set. Set server URL from preferences");
+			showLongToast(context,
+					"No server URL has been set. Set server URL from preferences");
 			return null;
 		}
 
-		URL parsedUrl = null;
 		try {
-			parsedUrl = new URL(openHdsBaseUrl + path);
+			return new URL(openHdsBaseUrl + path);
 		} catch (MalformedURLException e) {
 			showLongToast(context, "Bad Server URL");
+			return null;
 		}
-
-		return parsedUrl;
 	}
 }

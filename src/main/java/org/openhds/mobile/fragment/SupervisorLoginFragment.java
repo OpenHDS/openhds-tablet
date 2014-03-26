@@ -1,21 +1,23 @@
 package org.openhds.mobile.fragment;
 
-import java.net.MalformedURLException;
+import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
+import static org.openhds.mobile.utilities.UrlUtils.buildServerUrl;
+import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
+
 import java.net.URL;
 
 import org.openhds.mobile.R;
+import org.openhds.mobile.activity.OpeningActivity;
 import org.openhds.mobile.activity.SupervisorMainActivity;
 import org.openhds.mobile.database.DatabaseAdapter;
 import org.openhds.mobile.model.Supervisor;
 import org.openhds.mobile.task.HttpTask;
-import org.openhds.mobile.task.SupervisorLoginTask;
 import org.openhds.mobile.task.HttpTask.RequestContext;
+import org.openhds.mobile.task.SupervisorLoginTask;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +25,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SupervisorLoginFragment extends Fragment implements
 		OnClickListener {
@@ -65,30 +66,19 @@ public class SupervisorLoginFragment extends Fragment implements
 	}
 
 	private URL getUrl() {
-		SharedPreferences preferences = PreferenceManager
-				.getDefaultSharedPreferences(getActivity());
-
-		String openHdsUrl = preferences.getString(
-				getString(R.string.openhds_server_url_key), "");
-
 		// supervisor_login_url needs to be a secured resource on the sever
 		// for example openhds/api/rest/socialgroups
-		String endpointUrl = openHdsUrl
-				+ getString(R.string.supervisor_login_url);
-
-		try {
-			return new URL(endpointUrl);
-		} catch (MalformedURLException e) {
-			return null;
-		}
+		String path = getResourceString(getActivity(),
+				R.string.supervisor_login_url);
+		return buildServerUrl(getActivity(), path);
 	}
 
 	private void authenticateSupervisor() {
 		URL url = getUrl();
 		if (null == url) {
-			Toast.makeText(getActivity(),
-					getString(R.string.openhds_server_url_key) + " is bad.",
-					Toast.LENGTH_LONG).show();
+			String urlName = getResourceString(getActivity(),
+					R.string.openhds_server_url_key);
+			showLongToast(getActivity(), urlName + " is bad.");
 			return;
 		}
 
@@ -114,9 +104,7 @@ public class SupervisorLoginFragment extends Fragment implements
 	private void onConnectedButNotAuthenticated() {
 		// delete unauthorized user from tablet database
 		// to prevent login when not connected to network
-		Toast.makeText(getActivity(),
-				getString(R.string.supervisor_bad_credentials),
-				Toast.LENGTH_LONG).show();
+		showLongToast(getActivity(), R.string.supervisor_bad_credentials);
 		deleteSupervisor();
 	}
 
@@ -143,10 +131,8 @@ public class SupervisorLoginFragment extends Fragment implements
 
 	private void launchSupervisorMainActivity() {
 		Intent intent = new Intent(getActivity(), SupervisorMainActivity.class);
-		String usernameKey = getString(R.string.supervisor_username_key);
-		String passwordKey = getString(R.string.supervisor_password_key);
-		intent.putExtra(usernameKey, getUsernameFromEditText());
-		intent.putExtra(passwordKey, getPasswordFromEditText());
+		intent.putExtra(OpeningActivity.USERNAME_KEY, getUsernameFromEditText());
+		intent.putExtra(OpeningActivity.PASSWORD_KEY, getPasswordFromEditText());
 		startActivity(intent);
 	}
 
@@ -182,9 +168,7 @@ public class SupervisorLoginFragment extends Fragment implements
 		}
 
 		public void onBadAuthentication() {
-			Toast.makeText(getActivity(),
-					getString(R.string.supervisor_bad_credentials),
-					Toast.LENGTH_LONG).show();
+			showLongToast(getActivity(), R.string.supervisor_bad_credentials);
 		}
 	}
 }

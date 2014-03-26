@@ -1,7 +1,14 @@
 package org.openhds.mobile.fragment;
 
+import static org.openhds.mobile.utilities.ConfigUtils.getPreferenceString;
+import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
+import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
+import static org.openhds.mobile.utilities.UrlUtils.isValidUrl;
+
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
+
 import org.openhds.mobile.R;
-import org.openhds.mobile.utilities.UrlUtils;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -10,7 +17,6 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 public class LoginPreferenceFragment extends PreferenceFragment implements
 		OnSharedPreferenceChangeListener {
@@ -26,16 +32,18 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 	@Override
 	public void onResume() {
 		super.onResume();
-		getPreferenceScreen().getSharedPreferences()
+
+		PreferenceManager.getDefaultSharedPreferences(getActivity())
 				.registerOnSharedPreferenceChangeListener(this);
-		updatePreference(getResources().getString(
+		refreshPreferenceSummary(getResourceString(getActivity(),
 				R.string.openhds_server_url_key));
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getPreferenceScreen().getSharedPreferences()
+
+		PreferenceManager.getDefaultSharedPreferences(getActivity())
 				.unregisterOnSharedPreferenceChangeListener(this);
 	}
 
@@ -45,36 +53,50 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 	}
 
 	private void updatePreference(String key) {
-
-		// TODO:
-		// Break into validatePreference and refreshPreferenceSummary
-		// onResume should call refreshPreferenceSummary
-		// onSharedPreferenceChanged should call validatePreference
-		// validatePreference should call refreshPreferenceSummary
-		// validatePreference
-		
-		Preference preference = findPreference(key);
-
-		if (key.equals(getResources()
-				.getString(R.string.openhds_server_url_key))) {
-			EditTextPreference editTextPreference = (EditTextPreference) preference;
-			SharedPreferences prefs = PreferenceManager
-					.getDefaultSharedPreferences(getActivity());
-			String newUrl = prefs.getString(key, "");
-
-			if (validateUrl(newUrl)) {
-				editTextPreference.setSummary(newUrl);
-			} else {
-				editTextPreference
-						.setSummary(R.string.openhds_server_url_default_summary);
-			}
+		if (validatePreference(key)) {
+			refreshPreferenceSummary(key);
+		} else {
+			showInvalidPreferenceSummary(key);
+			showLongToast(getActivity(), R.string.preference_invalid_warning);
 		}
 	}
 
-	private boolean validateUrl(String url) {
-		if (null == url) {
+	private boolean validatePreference(String key) {
+		Preference preference = findPreference(key);
+		if (null == preference) {
 			return false;
 		}
-		return UrlUtils.isValidUrl(url);
+
+		if (key.equals(getResourceString(getActivity(),
+				(R.string.openhds_server_url_key)))) {
+			String newUrl = getPreferenceString(getActivity(), key, "");
+			return isValidUrl(newUrl);
+		}
+
+		return false;
+	}
+
+	private void refreshPreferenceSummary(String key) {
+		Preference preference = findPreference(key);
+		if (null == preference) {
+			return;
+		}
+
+		if (key.equals(getResourceString(getActivity(),
+				(R.string.openhds_server_url_key)))) {
+			EditTextPreference editTextPreference = (EditTextPreference) preference;
+			String currentText = editTextPreference.getText();
+			editTextPreference.setSummary(editTextPreference.getText());
+		}
+	}
+
+	private void showInvalidPreferenceSummary(String key) {
+		Preference preference = findPreference(key);
+		if (null == preference) {
+			return;
+		}
+
+		preference.setSummary(getResourceString(getActivity(),
+				(R.string.preference_invalid_label)));
 	}
 }
