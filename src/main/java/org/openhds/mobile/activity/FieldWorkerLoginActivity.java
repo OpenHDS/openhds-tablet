@@ -46,17 +46,17 @@ public class FieldWorkerLoginActivity extends Activity implements OnClickListene
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.fieldworker_login);
+	    //setContentView(R.layout.fieldworker_login);
 	    
 	    initializeProgressDialog();
 	    
-        extIdText = (TextView) findViewById(R.id.extIdText);
-        passwordText = (TextView) findViewById(R.id.passwordText);
+        //extIdText = (TextView) findViewById(R.id.extIdText);
+        //passwordText = (TextView) findViewById(R.id.passwordText);
         
-	    loginButton = (Button) findViewById(R.id.loginBtn);
+	    //loginButton = (Button) findViewById(R.id.loginBtn);
 	    loginButton.setOnClickListener(this);
 	    
-	    registerChkBox = (CheckBox) findViewById(R.id.registerChkBox);
+	    //registerChkBox = (CheckBox) findViewById(R.id.registerChkBox);
 	    registerChkBox.setOnClickListener(this);
 	    
 	    ActionBar actionBar = getActionBar();
@@ -71,42 +71,46 @@ public class FieldWorkerLoginActivity extends Activity implements OnClickListene
     }
     		
 	public void onClick(View view) {
-		int id = view.getId();
-		if (id == R.id.registerChkBox) {
-			if (registerChkBox.isChecked()) 
-				loginButton.setText(getString(R.string.fwlogin_registerlbl));
-			else 
-				loginButton.setText(getString(R.string.fwlogin_loginlbl));
-		} else if (id == R.id.loginBtn) {
-			String extId = extIdText.getText().toString();
-			String password = passwordText.getText().toString();
-			if (registerChkBox.isChecked()) {
-				dialog.show();
-				SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-				if (loginTask == null)
-					loginTask = new FieldWorkerLoginTask(this, settings, this, dialog, extId, password, true);
-				
-	    		if (loginTask.getStatus() == Status.PENDING) {
-                    loginTask.execute();
-                }
-			}
-			else {
-                dialog = ProgressDialog.show(this, getString(R.string.authenticating_lbl), getString(R.string.please_wait_lbl));
-                new AuthenticateFieldWorker(getContentResolver(), extId, password, new Listener() {
-
-                    public void onAuthenticated(FieldWorker fw) {
-                        dialog.dismiss();
-                        if (fw == null) {
-                            Toast.makeText(getApplicationContext(), getString(R.string.bad_authentication),
-                                    Toast.LENGTH_LONG).show();
-                        } else {
-                            startUpdateActivity(fw);
-                        }
-                    }
-
-                }).execute();
-			}
-		}
+//		switch (view.getId()) {
+//		case R.id.registerChkBox: 
+//			if (registerChkBox.isChecked()) 
+//				loginButton.setText("Register");
+//			else 
+//				loginButton.setText("Login");
+//			break;
+//		case R.id.loginBtn: 
+//			
+//			String extId = extIdText.getText().toString();
+//			String password = passwordText.getText().toString();
+//			
+//			if (registerChkBox.isChecked()) {
+//				dialog.show();
+//				SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+//				if (loginTask == null)
+//					loginTask = new FieldWorkerLoginTask(this, settings, this, dialog, extId, password, true);
+//				
+//	    		if (loginTask.getStatus() == Status.PENDING) {
+//                    loginTask.execute();
+//                }
+//			}
+//			else {
+//                dialog = ProgressDialog.show(this, "Authenticating...", "Please Wait");
+//                new AuthenticateFieldWorker(getContentResolver(), extId, password, new Listener() {
+//
+//                    public void onAuthenticated(FieldWorker fw) {
+//                        dialog.dismiss();
+//                        if (fw == null) {
+//                            Toast.makeText(getApplicationContext(), getString(R.string.bad_authentication),
+//                                    Toast.LENGTH_LONG).show();
+//                        } else {
+//                            startUpdateActivity(fw);
+//                        }
+//                    }
+//
+//                }).execute();
+//			}
+//			break;
+//		}
 	}
 	
 	public static class AuthenticateFieldWorker extends android.os.AsyncTask<Void, Void, org.openhds.mobile.model.FieldWorker> {
