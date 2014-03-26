@@ -2,6 +2,7 @@ package org.openhds.mobile.activity;
 
 import org.openhds.mobile.R;
 import org.openhds.mobile.database.DatabaseAdapter;
+import org.openhds.mobile.utilities.ConfigUtils;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -20,7 +21,7 @@ public class FormListActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		String user = getIntent().getExtras().getString(
-				AbstractActivity.USERNAME_PARAM);
+				ConfigUtils.USERNAME_PARAM);
 
 		DatabaseAdapter store = new DatabaseAdapter(this);
 
@@ -63,7 +64,7 @@ public class FormListActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		Intent intent = new Intent(getApplicationContext(),
 				FormViewActivity.class);
-		intent.putExtra(AbstractActivity.FORM_ID, id);
+		intent.putExtra(ConfigUtils.FORM_ID, id);
 		startActivity(intent);
 	}
 }

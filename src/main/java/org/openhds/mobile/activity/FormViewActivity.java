@@ -5,6 +5,10 @@ import org.openhds.mobile.R;
 import org.openhds.mobile.database.DatabaseAdapter;
 import org.openhds.mobile.model.FormSubmissionRecord;
 import org.openhds.mobile.task.OdkFormLoadTask;
+import org.openhds.mobile.utilities.ConfigUtils;
+import org.openhds.mobile.utilities.MessageUtils;
+
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,7 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class FormViewActivity extends AbstractActivity {
+public class FormViewActivity extends Activity {
 
 	private static final int ODK_FORM_ENTRY_RESULT = 1;
 
@@ -45,9 +49,9 @@ public class FormViewActivity extends AbstractActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.form_view);
-		formId = getFormIdFromIntent();
-		dialog = ProgressDialog.show(this, getString(R.string.loading_lbl),
-				getString(R.string.loading_form_subm_lbl), true);
+		formId = getIntent().getExtras().getLong(ConfigUtils.FORM_ID);
+		dialog = ProgressDialog.show(this, "Loading",
+				"Loading form submission...", true);
 		store = new DatabaseAdapter(this);
 		new LoadRecordTask().execute();
 		Button deleteBtn = (Button) findViewById(R.id.delete_form_btn);
@@ -57,7 +61,7 @@ public class FormViewActivity extends AbstractActivity {
 				store.deleteSubmission(record.getId());
 				finish();
 			}
-			
+
 		});
 	}
 
@@ -67,7 +71,7 @@ public class FormViewActivity extends AbstractActivity {
 
 		tv = (TextView) findViewById(R.id.location_value_txt);
 		tv.setText(record.getFormType());
-		
+
 		tv = (TextView) findViewById(R.id.form_status_lbl);
 		tv.setText(record.isCompleted() ? getString(R.string.completed_lbl) : getString(R.string.not_completed_lbl));
 
@@ -82,14 +86,15 @@ public class FormViewActivity extends AbstractActivity {
 
 		Button editOdkBtn = (Button) findViewById(R.id.edit_in_odk_btn);
 		if (!record.isCompleted()) {
-		editOdkBtn.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				dialog = ProgressDialog.show(FormViewActivity.this, getString(R.string.loading_lbl),
-						getString(R.string.loading_into_odk_lbl), true, true);
-				new OdkFormLoadTask(record, new OdkFormLoadListener(),
-						getContentResolver(), store).execute();
-			}
-		});
+			editOdkBtn.setOnClickListener(new OnClickListener() {
+				public void onClick(View arg0) {
+					dialog = ProgressDialog.show(FormViewActivity.this,
+							"Loading", "Loading form into ODK Collect...",
+							true, true);
+					new OdkFormLoadTask(record, new OdkFormLoadListener(),
+							getContentResolver(), store).execute();
+				}
+			});
 		} else {
 			editOdkBtn.setEnabled(false);
 		}
@@ -99,17 +104,20 @@ public class FormViewActivity extends AbstractActivity {
 
 		public void onFailedWritingDirs() {
 			dialog.dismiss();
-			showToastWithText(getString(R.string.formload_failed_writedir_lbl));
+			MessageUtils.showLongToast(FormViewActivity.this,
+					"There was a problem creating directories");
 		}
 
 		public void onFailedWritingXmlFile() {
 			dialog.dismiss();
-			showToastWithText(getString(R.string.formload_failed_writexml_lbl));
+			MessageUtils.showLongToast(FormViewActivity.this,
+					"There was a problem writing the XML file");
 		}
 
 		public void onFailedOdkInsert() {
 			dialog.dismiss();
-			showToastWithText(getString(R.string.formload_failed_odkins_lbl));
+			MessageUtils.showLongToast(FormViewActivity.this,
+					"There was a problem with ODK Collect");
 		}
 
 		public void onSuccess(Uri contentUri) {
@@ -119,11 +127,12 @@ public class FormViewActivity extends AbstractActivity {
 		}
 
 		public void onFormAlreadyCompleted() {
-			showToastWithText(getString(R.string.formload_already_completed_lbl));
+			MessageUtils.showLongToast(FormViewActivity.this,
+					"This form has already been completed");
 		}
 
 		public void onOrphanForm() {
-			//showToastWithText("")
+			// showToastWithText("")
 		}
 	}
 
@@ -136,27 +145,30 @@ public class FormViewActivity extends AbstractActivity {
 	}
 
 	private void handleFormEntry(int resultCode) {
-		dialog  = ProgressDialog.show(this, getString(R.string.updating_lbl), getString(R.string.updating_form_info_lbl), true);
+		dialog = ProgressDialog.show(this, "Updating",
+				"Updating form information...", true);
 		new UpdateSubmissionTask().execute();
 	}
-	
+
 	private class UpdateSubmissionTask extends AsyncTask<Void, Void, Boolean> {
 
 		@Override
 		protected Boolean doInBackground(Void... arg0) {
-			Cursor result = getContentResolver().query(Uri.parse(record.getOdkUri()), null,
-					null, null, null);
+			Cursor result = getContentResolver().query(
+					Uri.parse(record.getOdkUri()), null, null, null, null);
 			if (!result.moveToNext()) {
 				return false;
 			}
-			
-			String status = result.getString(result.getColumnIndex(InstanceProviderAPI.InstanceColumns.STATUS));
+
+			String status = result
+					.getString(result
+							.getColumnIndex(InstanceProviderAPI.InstanceColumns.STATUS));
 			result.close();
 			if (!InstanceProviderAPI.STATUS_INCOMPLETE.equals(status)) {
 				store.updateCompleteStatus(record.getId(), true);
 				return true;
 			}
-			
+
 			return false;
 		}
 
@@ -165,16 +177,16 @@ public class FormViewActivity extends AbstractActivity {
 			if (!result) {
 				return;
 			}
-			
+
 			TextView tv = (TextView) findViewById(R.id.form_status_lbl);
 			tv.setText("Completed");
-			
+
 			Button edit = (Button) findViewById(R.id.edit_in_odk_btn);
 			edit.setEnabled(false);
-			
+
 			dialog.dismiss();
 		}
-		
+
 	}
 
 }

@@ -3,6 +3,8 @@ package org.openhds.mobile.activity;
 import org.openhds.mobile.R;
 import org.openhds.mobile.fragment.LoginPreferenceFragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,10 +16,10 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SupervisorMainActivity extends AbstractActivity {
+public class SupervisorMainActivity extends Activity implements OnClickListener {
 
 	private FrameLayout prefContainer;
-	LinearLayout supervisorOptionsList;
+	private LinearLayout supervisorOptionsList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class SupervisorMainActivity extends AbstractActivity {
 		supervisorOptionsList = (LinearLayout) findViewById(R.id.supervisor_activity_options);
 
 		makeNewOptionsButton("This button will sync the database.",
-				"Sync Database", null);
+				"Sync Database", this);
 
 		if (null != savedInstanceState) {
 			return;
@@ -72,12 +74,19 @@ public class SupervisorMainActivity extends AbstractActivity {
 		Button b = (Button) v.findViewById(R.id.generic_button);
 		TextView t = (TextView) v.findViewById(R.id.generic_button_description);
 
+		
 		b.setText(buttonName);
 		t.setText(description);
 
 		b.setOnClickListener(listener);
 
 		return b;
+	}
+
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		Intent syncIntent = new Intent(this, SyncDatabaseActivity.class);
+		startActivity(syncIntent);
 	}
 
 }
