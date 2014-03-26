@@ -36,6 +36,11 @@ public class OpeningActivity extends Activity {
 				.add(R.id.supervisor_login_container,
 						new SupervisorLoginFragment()).commit();
 	}
+	
+
+	
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

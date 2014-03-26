@@ -124,7 +124,6 @@ public class SupervisorLoginFragment extends Fragment implements
 		Supervisor user = new Supervisor();
 		user.setName(getUsernameFromEditText());
 		databaseAdapter.deleteSupervisor(user);
-
 	}
 
 	private void addSupervisor() {
@@ -132,7 +131,6 @@ public class SupervisorLoginFragment extends Fragment implements
 		user.setName(getUsernameFromEditText());
 		user.setPassword(getPasswordFromEditText());
 		databaseAdapter.addSupervisor(user);
-
 	}
 
 	private void onNotConnected() {
