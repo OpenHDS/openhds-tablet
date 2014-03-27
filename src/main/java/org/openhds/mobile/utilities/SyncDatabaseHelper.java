@@ -1,32 +1,39 @@
 package org.openhds.mobile.utilities;
 
-import static org.openhds.mobile.utilities.ConfigUtils.getPreferenceString;
 import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
 
 import org.openhds.mobile.R;
-import org.openhds.mobile.listener.CollectEntitiesListener;
-import org.openhds.mobile.task.SyncEntitiesTask;
+import org.openhds.mobile.listener.SyncDatabaseListener;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
+import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 
-public class SyncDatabaseHelper {
+public class SyncDatabaseHelper implements SyncDatabaseListener {
 
-	private String username;
-	private String password;
 	private Context callingContext;
 	private ProgressDialog progressDialog;
-	private SyncEntitiesTask entitiesTask = null;
+	private AsyncTask<Void, Integer, Boolean> currentTask = null;
 
-	public SyncDatabaseHelper(String username, String password, Context context) {
-		this.username = username;
-		this.password = password;
+	public SyncDatabaseHelper(Context context) {
 		this.callingContext = context;
 		initializeProgressDialog();
+	}
+
+	public AsyncTask<Void, Integer, Boolean> getCurrentTask() {
+		return currentTask;
+	}
+
+	public void setCurrentTask(AsyncTask<Void, Integer, Boolean> currentTask) {
+		this.currentTask = currentTask;
+	}
+
+	public ProgressDialog getProgressDialog() {
+		return progressDialog;
 	}
 
 	private void initializeProgressDialog() {
@@ -40,15 +47,11 @@ public class SyncDatabaseHelper {
 	public void startSync() {
 		progressDialog.show();
 
-		if (null != entitiesTask && entitiesTask.getStatus() == Status.RUNNING) {
-			entitiesTask.cancel(true);
+		if (null != currentTask && currentTask.getStatus() == Status.RUNNING) {
+			currentTask.cancel(true);
 		}
 
-		String openHdsBaseUrl = getPreferenceString(callingContext,
-				R.string.openhds_server_url_key, "");
-		entitiesTask = new SyncEntitiesTask(openHdsBaseUrl, username, password,
-				progressDialog, callingContext, new SyncDatabaseListener());
-		entitiesTask.execute();
+		currentTask.execute();
 	}
 
 	private class SyncingOnCancelListener implements OnCancelListener {
@@ -63,17 +66,15 @@ public class SyncDatabaseHelper {
 			alert.show();
 		}
 	}
-
-	private class SyncDatabaseListener implements CollectEntitiesListener {
-		@Override
-		public void collectionComplete(Boolean result) {
-			if (result) {
-				showLongToast(callingContext, callingContext.getString(R.string.sync_entities_successful));
-			} else {
-				showLongToast(callingContext, callingContext.getString(R.string.sync_entities_failure));
-			}
-			progressDialog.dismiss();
+	
+	@Override
+	public void collectionComplete(Boolean result) {
+		if (result) {
+			showLongToast(callingContext, R.string.sync_entities_successful);
+		} else {
+			showLongToast(callingContext, R.string.sync_entities_failure);
 		}
+		progressDialog.dismiss();
 	}
 
 	private class ConfirmOnCancelListener implements
@@ -83,16 +84,15 @@ public class SyncDatabaseHelper {
 		public void onClick(DialogInterface dialogInterface, int which) {
 			switch (which) {
 			case DialogInterface.BUTTON_POSITIVE:
-				entitiesTask.cancel(true);
-				showLongToast(callingContext, callingContext.getString(R.string.sync_interrupted));
+				currentTask.cancel(true);
+				showLongToast(callingContext, R.string.sync_interrupted);
 				break;
 			case DialogInterface.BUTTON_NEGATIVE:
-				if (entitiesTask.getStatus() == Status.RUNNING) {
+				if (currentTask.getStatus() == Status.RUNNING) {
 					progressDialog.show();
 				}
 				break;
 			}
-
 		}
 	}
 }

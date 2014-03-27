@@ -19,7 +19,7 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.openhds.mobile.OpenHDS;
-import org.openhds.mobile.listener.CollectEntitiesListener;
+import org.openhds.mobile.listener.SyncDatabaseListener;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -44,7 +44,7 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
 
     private static final String API_PATH = "/api/rest";
 
-    private CollectEntitiesListener listener;
+    private SyncDatabaseListener listener;
     private ContentResolver resolver;
 
     private UsernamePasswordCredentials creds;
@@ -73,7 +73,7 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
     }
 
     public SyncEntitiesTask(String url, String username, String password, ProgressDialog dialog, Context context,
-            CollectEntitiesListener listener) {
+            SyncDatabaseListener listener) {
         this.baseurl = url;
         this.username = username;
         this.password = password;

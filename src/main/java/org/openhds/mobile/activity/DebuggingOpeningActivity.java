@@ -14,7 +14,7 @@ import android.widget.Toast;
 import org.openhds.mobile.R;
 import org.openhds.mobile.activity.FieldWorkerLoginActivity.AuthenticateFieldWorker;
 import org.openhds.mobile.database.DatabaseAdapter;
-import org.openhds.mobile.listener.CollectEntitiesListener;
+import org.openhds.mobile.listener.SyncDatabaseListener;
 import org.openhds.mobile.listener.RetrieveFieldWorkersListener;
 import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.Result;
@@ -112,10 +112,10 @@ public class DebuggingOpeningActivity extends Activity {
 		progressDialog.setMessage("Do not interrupt.");
 		progressDialog.show();
 
-		SyncEntitiesTask entitiesTask = new SyncEntitiesTask(OPENHDS_URL,
+/*		SyncEntitiesTask entitiesTask = new SyncEntitiesTask(OPENHDS_URL,
 				SUPERVISOR_USER, SUPERVISOR_PASSWORD, progressDialog,
 				getBaseContext(), new SyncDatabaseListener());
-		entitiesTask.execute();
+		entitiesTask.execute();*/
 	}
 
 	// authenticate field worker with server
@@ -204,7 +204,7 @@ public class DebuggingOpeningActivity extends Activity {
 	}
 
 	// async handler for syncData()
-	private class SyncDatabaseListener implements CollectEntitiesListener {
+/*	private class SyncDatabaseListener implements SyncDatabaseListener {
 		public void collectionComplete(Boolean result) {
 			progressDialog.dismiss();
 			Toast.makeText(getApplicationContext(), "Synced database.",
@@ -212,7 +212,7 @@ public class DebuggingOpeningActivity extends Activity {
 			registerFieldWorker();
 		}
 	}
-
+*/
 	// async handler for registerFieldWorker()
 	private class RegisterFieldWorkerListener implements
 			RetrieveFieldWorkersListener {

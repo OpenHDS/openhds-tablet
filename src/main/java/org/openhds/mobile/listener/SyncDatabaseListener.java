@@ -1,5 +1,5 @@
 package org.openhds.mobile.listener;
 
-public interface CollectEntitiesListener {
+public interface SyncDatabaseListener {
 	void collectionComplete(Boolean result);
 }

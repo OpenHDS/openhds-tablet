@@ -42,9 +42,9 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 	@Override
 	public void onPause() {
 		super.onPause();
-
 		PreferenceManager.getDefaultSharedPreferences(getActivity())
 				.unregisterOnSharedPreferenceChangeListener(this);
+
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
@@ -85,7 +85,6 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 		if (key.equals(getResourceString(getActivity(),
 				(R.string.openhds_server_url_key)))) {
 			EditTextPreference editTextPreference = (EditTextPreference) preference;
-			String currentText = editTextPreference.getText();
 			editTextPreference.setSummary(editTextPreference.getText());
 		}
 	}

@@ -1,10 +1,13 @@
 package org.openhds.mobile.activity;
 
+import static org.openhds.mobile.utilities.ConfigUtils.getPreferenceString;
+import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
+
 import org.openhds.mobile.R;
 import org.openhds.mobile.fragment.LoginPreferenceFragment;
+import org.openhds.mobile.task.SyncEntitiesTask;
 import org.openhds.mobile.utilities.SyncDatabaseHelper;
 
-import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,6 +38,8 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 		makeNewOptionsButton(
 				getResourceString(this, R.string.sync_database_description),
 				getResourceString(this, R.string.sync_database_name), this);
+
+		syncDatabaseHelper = new SyncDatabaseHelper(this);
 
 		if (null != savedInstanceState) {
 			return;
@@ -95,15 +100,17 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 
 	private void syncDatabase() {
 
-		if (null == syncDatabaseHelper) {
-			String username = (String) getIntent().getExtras().get(
-					OpeningActivity.USERNAME_KEY);
-			String password = (String) getIntent().getExtras().get(
-					OpeningActivity.PASSWORD_KEY);
-			syncDatabaseHelper = new SyncDatabaseHelper(username, password,
-					this);
-			
-		}
+		String username = (String) getIntent().getExtras().get(
+				OpeningActivity.USERNAME_KEY);
+		String password = (String) getIntent().getExtras().get(
+				OpeningActivity.PASSWORD_KEY);
+
+		String openHdsBaseUrl = getPreferenceString(this,
+				R.string.openhds_server_url_key, "");
+		SyncEntitiesTask currentTask = new SyncEntitiesTask(openHdsBaseUrl,
+				username, password, syncDatabaseHelper.getProgressDialog(),
+				this, syncDatabaseHelper);
+		syncDatabaseHelper.setCurrentTask(currentTask);
 
 		syncDatabaseHelper.startSync();
 	}
