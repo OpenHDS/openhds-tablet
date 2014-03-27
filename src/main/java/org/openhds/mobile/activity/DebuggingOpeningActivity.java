@@ -3,6 +3,15 @@ package org.openhds.mobile.activity;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.openhds.mobile.R;
+import org.openhds.mobile.database.DatabaseAdapter;
+import org.openhds.mobile.listener.RetrieveFieldWorkersListener;
+import org.openhds.mobile.model.FieldWorker;
+import org.openhds.mobile.model.Result;
+import org.openhds.mobile.task.HttpTask;
+import org.openhds.mobile.task.HttpTask.RequestContext;
+import org.openhds.mobile.task.SupervisorLoginTask;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,19 +19,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
-
-import org.openhds.mobile.R;
-import org.openhds.mobile.activity.FieldWorkerLoginActivity.AuthenticateFieldWorker;
-import org.openhds.mobile.database.DatabaseAdapter;
-import org.openhds.mobile.listener.SyncDatabaseListener;
-import org.openhds.mobile.listener.RetrieveFieldWorkersListener;
-import org.openhds.mobile.model.FieldWorker;
-import org.openhds.mobile.model.Result;
-import org.openhds.mobile.task.FieldWorkerLoginTask;
-import org.openhds.mobile.task.HttpTask;
-import org.openhds.mobile.task.SupervisorLoginTask;
-import org.openhds.mobile.task.SyncEntitiesTask;
-import org.openhds.mobile.task.HttpTask.RequestContext;
 
 public class DebuggingOpeningActivity extends Activity {
 
@@ -121,24 +117,24 @@ public class DebuggingOpeningActivity extends Activity {
 	// authenticate field worker with server
 	// log in as field worker on success
 	private void registerFieldWorker() {
-		progressDialog.setTitle("Registering field worker with server.");
-		progressDialog.setMessage("Do not interrupt.");
-		progressDialog.show();
-
-		boolean isRegister = true;
-		FieldWorkerLoginTask registerTask = new FieldWorkerLoginTask(this,
-				settings, new RegisterFieldWorkerListener(), progressDialog,
-				FIELDWORKER_USER, FIELDWORKER_PASSWORD, isRegister);
-		registerTask.execute();
+//		progressDialog.setTitle("Registering field worker with server.");
+//		progressDialog.setMessage("Do not interrupt.");
+//		progressDialog.show();
+//
+//		boolean isRegister = true;
+//		FieldWorkerLoginTask registerTask = new FieldWorkerLoginTask(this,
+//				settings, new RegisterFieldWorkerListener(), progressDialog,
+//				FIELDWORKER_USER, FIELDWORKER_PASSWORD, isRegister);
+//		registerTask.execute();
 	}
 
 	// log in as field worker locally
 	// start update activity on success
 	private void logInFieldWorker() {
-		AuthenticateFieldWorker logInTask = new AuthenticateFieldWorker(
-				getContentResolver(), FIELDWORKER_USER, FIELDWORKER_PASSWORD,
-				new LogInFieldWorkerListener());
-		logInTask.execute();
+//		AuthenticateFieldWorker logInTask = new AuthenticateFieldWorker(
+//				getContentResolver(), FIELDWORKER_USER, FIELDWORKER_PASSWORD,
+//				new LogInFieldWorkerListener());
+//		logInTask.execute();
 	}
 
 	// finally, go to the fieldworker update UI
@@ -255,13 +251,13 @@ public class DebuggingOpeningActivity extends Activity {
 	}
 
 	// async handler for logInFieldWorker()
-	private class LogInFieldWorkerListener implements
-			AuthenticateFieldWorker.Listener {
-		public void onAuthenticated(FieldWorker fieldWorker) {
-			Toast.makeText(getApplicationContext(),
-					"Logged in as field worker.", Toast.LENGTH_LONG).show();
-			startUpdateActivity(fieldWorker);
-		}
-	}
+//	private class LogInFieldWorkerListener implements
+//			AuthenticateFieldWorker.Listener {
+//		public void onAuthenticated(FieldWorker fieldWorker) {
+//			Toast.makeText(getApplicationContext(),
+//					"Logged in as field worker.", Toast.LENGTH_LONG).show();
+//			startUpdateActivity(fieldWorker);
+//		}
+//	}
 
 }

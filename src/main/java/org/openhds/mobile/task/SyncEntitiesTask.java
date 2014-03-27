@@ -40,7 +40,7 @@ import android.util.Log;
  * references that must be satisfied (e.g. individual references a location
  * location)
  */
-public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
+public class SyncEntitiesTask extends AsyncTask<Void, Integer, HttpTask.EndResult> {
 
     private static final String API_PATH = "/api/rest";
 
@@ -126,7 +126,7 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected HttpTask.EndResult doInBackground(Void... params) {
         creds = new UsernamePasswordCredentials(username, password);
 
         HttpParams httpParameters = new BasicHttpParams();
@@ -161,10 +161,10 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
              entity = Entity.SOCIALGROUP;
              processUrl(baseurl + API_PATH + "/socialgroups/cached");
         } catch (Exception e) {
-            return false;
+            return HttpTask.EndResult.FAILURE;
         }
 
-        return true;
+        return HttpTask.EndResult.SUCCESS;
     }
 
     private void deleteAllTables() {
@@ -635,7 +635,7 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
         }
     }
 
-    protected void onPostExecute(final Boolean result) {
+    protected void onPostExecute( HttpTask.EndResult result) {
         listener.collectionComplete(result);
     }
 }

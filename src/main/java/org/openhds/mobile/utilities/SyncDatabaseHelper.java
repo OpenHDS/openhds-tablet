@@ -4,6 +4,7 @@ import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
 
 import org.openhds.mobile.R;
 import org.openhds.mobile.listener.SyncDatabaseListener;
+import org.openhds.mobile.task.HttpTask;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -17,18 +18,19 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 
 	private Context callingContext;
 	private ProgressDialog progressDialog;
-	private AsyncTask<Void, Integer, Boolean> currentTask = null;
+	private AsyncTask<Void, Integer, HttpTask.EndResult> currentTask = null;
 
 	public SyncDatabaseHelper(Context context) {
 		this.callingContext = context;
 		initializeProgressDialog();
 	}
 
-	public AsyncTask<Void, Integer, Boolean> getCurrentTask() {
+	public AsyncTask<Void, Integer, HttpTask.EndResult> getCurrentTask() {
 		return currentTask;
 	}
 
-	public void setCurrentTask(AsyncTask<Void, Integer, Boolean> currentTask) {
+	public void setCurrentTask(
+			AsyncTask<Void, Integer, HttpTask.EndResult> currentTask) {
 		this.currentTask = currentTask;
 	}
 
@@ -54,6 +56,16 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 		currentTask.execute();
 	}
 
+	@Override
+	public void collectionComplete(HttpTask.EndResult result) {
+		if (result.equals(HttpTask.EndResult.SUCCESS)) {
+			showLongToast(callingContext, R.string.sync_entities_successful);
+		} else {
+			showLongToast(callingContext, R.string.sync_entities_failure);
+		}
+		progressDialog.dismiss();
+	}
+
 	private class SyncingOnCancelListener implements OnCancelListener {
 		public void onCancel(DialogInterface dialog) {
 			ConfirmOnCancelListener listener = new ConfirmOnCancelListener();
@@ -65,16 +77,6 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 			AlertDialog alert = builder.create();
 			alert.show();
 		}
-	}
-	
-	@Override
-	public void collectionComplete(Boolean result) {
-		if (result) {
-			showLongToast(callingContext, R.string.sync_entities_successful);
-		} else {
-			showLongToast(callingContext, R.string.sync_entities_failure);
-		}
-		progressDialog.dismiss();
 	}
 
 	private class ConfirmOnCancelListener implements

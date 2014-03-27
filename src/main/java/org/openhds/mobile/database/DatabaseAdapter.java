@@ -3,6 +3,8 @@ package org.openhds.mobile.database;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.openhds.mobile.OpenHDS;
+import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.FormSubmissionRecord;
 import org.openhds.mobile.model.Supervisor;
 
@@ -152,6 +154,60 @@ public class DatabaseAdapter {
 		return rows;
 	}
 
+	public long addFieldWorker(FieldWorker fwu) {
+		long id = -1;
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		db.beginTransaction();
+		try {
+			ContentValues cv = new ContentValues();
+			cv.put(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_EXTID, fwu.getExtId());
+			cv.put(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_FIRSTNAME,
+					fwu.getFirstName());
+			cv.put(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_LASTNAME,
+					fwu.getLastName());
+
+			id = db.insert(OpenHDS.FieldWorkers.TABLE_NAME, null, cv);
+			db.setTransactionSuccessful();
+		} finally {
+			db.endTransaction();
+		}
+
+		db.close();
+		return id;
+	}
+	
+	public int deleteFieldWorker(FieldWorker fwu) {
+		int rowCount = -1;
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		db.beginTransaction();
+		try {
+			rowCount = db.delete(OpenHDS.FieldWorkers.TABLE_NAME, OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_EXTID
+					+ " = ?", new String[] { fwu.getExtId() });
+			db.setTransactionSuccessful();
+		} finally {
+			db.endTransaction();
+		}
+
+		db.close();
+		return rowCount;
+	}
+	
+	public int deleteAllFieldWorkers() {
+		int rowCount = -1;
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		db.beginTransaction();
+		try {
+			rowCount = db.delete(OpenHDS.FieldWorkers.TABLE_NAME, "1", null);
+			db.setTransactionSuccessful();
+		} finally {
+			db.endTransaction();
+		}
+
+		db.close();
+		return rowCount;
+	}
+	
+	
 	public long addSupervisor(Supervisor u) {
 		long id = -1;
 		SQLiteDatabase db = dbHelper.getWritableDatabase();

@@ -29,10 +29,10 @@ import android.widget.TextView;
 public class SupervisorLoginFragment extends Fragment implements
 		OnClickListener {
 
-	EditText usernameEditText;
-	EditText passwordEditText;
-	Button loginButton;
-	DatabaseAdapter databaseAdapter;
+	private EditText usernameEditText;
+	private EditText passwordEditText;
+	private Button loginButton;
+	private DatabaseAdapter databaseAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

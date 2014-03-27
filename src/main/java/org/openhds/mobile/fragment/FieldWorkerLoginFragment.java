@@ -17,4 +17,10 @@ public class FieldWorkerLoginFragment extends Fragment {
         title.setText("Field Worker Login");
         return v;
     }
+    
+//    Use this to query for field workers:
+//        if (Queries.hasFieldWorker(resolver, extId, password)) {
+//            Cursor cursor = Queries.getFieldWorkByExtId(resolver, extId);
+//            return Converter.toFieldWorker(cursor);
+
 }

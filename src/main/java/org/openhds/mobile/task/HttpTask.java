@@ -26,14 +26,20 @@ public class HttpTask<Params, Progress> extends
 	private static final int NO_CONTENT_CODE = 204;
 
 	protected RequestContext requestContext;
-	private TaskListener listener;
+	protected TaskListener listener;
+	protected HttpGet httpGet;
 
 	public HttpTask(RequestContext requestContext, TaskListener listener) {
-		this.requestContext = requestContext;
+		this(requestContext);
 		this.listener = listener;
 	}
 
-	static enum EndResult {
+	public HttpTask(RequestContext requestContext) {
+		this.requestContext = requestContext;
+		httpGet = new HttpGet(requestContext.url.getPath());
+	}
+
+	public static enum EndResult {
 		BAD_AUTHENTICATION, CONNECTION_ERROR, CONNECTION_TIMEOUT, SUCCESS, FAILURE, NO_CONTENT
 	}
 
@@ -94,6 +100,8 @@ public class HttpTask<Params, Progress> extends
 			return EndResult.CONNECTION_TIMEOUT;
 		} catch (IOException e) {
 			return EndResult.CONNECTION_ERROR;
+		} catch (AuthenticationException e) {
+			return EndResult.BAD_AUTHENTICATION;
 		}
 	}
 
@@ -123,26 +131,24 @@ public class HttpTask<Params, Progress> extends
 
 	public HttpResponse executeGet(DefaultHttpClient client,
 			RequestContext requestContext) throws ClientProtocolException,
-			IOException {
+			IOException, AuthenticationException {
 		HttpHost host = new HttpHost(requestContext.url.getHost(),
 				requestContext.url.getPort());
-		HttpGet httpGet = new HttpGet(requestContext.url.getPath());
 
 		// preemptively provide credentials
 		UsernamePasswordCredentials creds = new UsernamePasswordCredentials(
 				requestContext.user, requestContext.password);
-
-		try {
-			httpGet.addHeader(new BasicScheme().authenticate(creds, httpGet));
-		} catch (AuthenticationException e) {
-			throw new RuntimeException(e);
-		}
+		httpGet.addHeader(new BasicScheme().authenticate(creds, httpGet));
 
 		return client.execute(host, httpGet);
 	}
 
+	public void addHeader(String name, String value) {
+		httpGet.addHeader(name, value);
+	}
+
 	@Override
-	protected void onPostExecute(DownloadFormsTask.EndResult result) {
+	protected void onPostExecute(EndResult result) {
 		switch (result) {
 		case BAD_AUTHENTICATION:
 			listener.onFailedAuthentication();

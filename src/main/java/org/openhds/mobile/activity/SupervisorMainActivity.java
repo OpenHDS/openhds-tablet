@@ -2,10 +2,14 @@ package org.openhds.mobile.activity;
 
 import static org.openhds.mobile.utilities.ConfigUtils.getPreferenceString;
 import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
+import static org.openhds.mobile.utilities.UrlUtils.buildServerUrl;
 
 import org.openhds.mobile.R;
+import org.openhds.mobile.database.DatabaseAdapter;
 import org.openhds.mobile.fragment.LoginPreferenceFragment;
+import org.openhds.mobile.task.HttpTask.RequestContext;
 import org.openhds.mobile.task.SyncEntitiesTask;
+import org.openhds.mobile.task.SyncFieldworkersTask;
 import org.openhds.mobile.utilities.SyncDatabaseHelper;
 
 import android.app.Activity;
@@ -32,14 +36,16 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 		setContentView(R.layout.supervisor_main);
 
 		prefContainer = (FrameLayout) findViewById(R.id.login_pref_container);
-
 		supervisorOptionsList = (LinearLayout) findViewById(R.id.supervisor_activity_options);
+		syncDatabaseHelper = new SyncDatabaseHelper(this);
 
 		makeNewOptionsButton(
 				getResourceString(this, R.string.sync_database_description),
 				getResourceString(this, R.string.sync_database_name), this);
 
-		syncDatabaseHelper = new SyncDatabaseHelper(this);
+		makeNewOptionsButton(
+				getResourceString(this, R.string.sync_field_worker_description),
+				getResourceString(this, R.string.sync_field_worker_name), this);
 
 		if (null != savedInstanceState) {
 			return;
@@ -91,11 +97,13 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 	}
 
 	public void onClick(View v) {
-		if (v.getTag().equals(
-				getResourceString(this, R.string.sync_database_name))) {
+		String tag = (String) v.getTag();
+		if (tag.equals(getResourceString(this, R.string.sync_database_name))) {
 			syncDatabase();
+		} else if (tag.equals(getResourceString(this,
+				R.string.sync_field_worker_name))) {
+			syncFieldWorkers();
 		}
-
 	}
 
 	private void syncDatabase() {
@@ -114,4 +122,23 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 
 		syncDatabaseHelper.startSync();
 	}
+
+	private void syncFieldWorkers() {
+
+		String username = (String) getIntent().getExtras().get(
+				OpeningActivity.USERNAME_KEY);
+		String password = (String) getIntent().getExtras().get(
+				OpeningActivity.PASSWORD_KEY);
+		String path = getResourceString(this, R.string.field_workers_sync_url);
+
+		RequestContext requestContext = new RequestContext().user(username)
+				.password(password).url(buildServerUrl(this, path));
+		SyncFieldworkersTask currentTask = new SyncFieldworkersTask(
+				requestContext, new DatabaseAdapter(this),
+				syncDatabaseHelper.getProgressDialog());
+		syncDatabaseHelper.setCurrentTask(currentTask);
+
+		// syncDatabaseHelper.startSync();
+	}
+
 }
