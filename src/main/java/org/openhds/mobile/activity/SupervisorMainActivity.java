@@ -5,7 +5,6 @@ import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
 import static org.openhds.mobile.utilities.UrlUtils.buildServerUrl;
 
 import org.openhds.mobile.R;
-import org.openhds.mobile.database.DatabaseAdapter;
 import org.openhds.mobile.fragment.LoginPreferenceFragment;
 import org.openhds.mobile.task.HttpTask.RequestContext;
 import org.openhds.mobile.task.SyncEntitiesTask;
@@ -134,11 +133,11 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 		RequestContext requestContext = new RequestContext().user(username)
 				.password(password).url(buildServerUrl(this, path));
 		SyncFieldworkersTask currentTask = new SyncFieldworkersTask(
-				requestContext, new DatabaseAdapter(this),
-				syncDatabaseHelper.getProgressDialog());
+				requestContext, getContentResolver(),
+				syncDatabaseHelper.getProgressDialog(), syncDatabaseHelper);
 		syncDatabaseHelper.setCurrentTask(currentTask);
 
-		// syncDatabaseHelper.startSync();
+		syncDatabaseHelper.startSync();
 	}
 
 }

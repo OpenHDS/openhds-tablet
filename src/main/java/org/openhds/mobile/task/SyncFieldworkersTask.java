@@ -8,31 +8,38 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sqlcipher.SQLException;
+
 import org.apache.http.HttpResponse;
-import org.openhds.mobile.database.DatabaseAdapter;
+import org.openhds.mobile.OpenHDS;
+import org.openhds.mobile.listener.SyncDatabaseListener;
 import org.openhds.mobile.model.FieldWorker;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 
 public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 
-	private DatabaseAdapter databaseAdapter;
+	private ContentResolver contentResolver;
 	private ProgressDialog progressDialog;
+	private SyncDatabaseListener syncListener;
 
 	public SyncFieldworkersTask(RequestContext requestContext,
-			DatabaseAdapter databaseAdapter, ProgressDialog progressDialog) {
+			ContentResolver contentResolver, ProgressDialog progressDialog,
+			SyncDatabaseListener syncListener) {
 		super(requestContext);
 		this.listener = new SyncFieldWorkerListener();
+		this.syncListener = syncListener;
 		this.progressDialog = progressDialog;
-		this.databaseAdapter = databaseAdapter;
+		this.contentResolver = contentResolver;
 	}
 
 	@Override
 	protected EndResult handleResponseData(HttpResponse response) {
-
 		try {
 			processXMLDocument(response.getEntity().getContent());
 		} catch (IllegalStateException | XmlPullParserException | IOException e) {
@@ -86,46 +93,87 @@ public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 
 		parser.nextTag();
 
-		return new FieldWorker(paramMap.get("extId"),
+		FieldWorker fw = new FieldWorker(paramMap.get("extId"),
 				paramMap.get("firstName"), paramMap.get("lastName"));
+		fw.setPassword("");
+		return fw;
 	}
 
 	private void replaceAllFieldWorkers(List<FieldWorker> list) {
-		databaseAdapter.deleteAllFieldWorkers();
+		deleteAllFieldWorkers();
 		for (FieldWorker fw : list) {
-			databaseAdapter.addFieldWorker(fw);
+			addFieldWorker(fw);
 		}
+	}
+
+	public boolean addFieldWorker(FieldWorker fwu) {
+		ContentValues cv = new ContentValues();
+		cv.put(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_EXTID, fwu.getExtId());
+		cv.put(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_FIRSTNAME,
+				fwu.getFirstName());
+		cv.put(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_LASTNAME,
+				fwu.getLastName());
+		cv.put(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_PASSWORD,
+				fwu.getPassword());
+
+		try {
+			contentResolver.insert(OpenHDS.FieldWorkers.CONTENT_URI, cv);
+			return true;
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+
+	public int deleteFieldWorker(FieldWorker fwu) {
+		return contentResolver.delete(OpenHDS.FieldWorkers.CONTENT_URI,
+				OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_EXTID + " = ?",
+				new String[] { fwu.getExtId() });
+	}
+
+	public int deleteAllFieldWorkers() {
+		return contentResolver.delete(OpenHDS.FieldWorkers.CONTENT_URI, "1",
+				null);
+	}
+
+	private void onSyncSuccess() {
+		progressDialog.setTitle("Synced field workers.");
+		syncListener.collectionComplete(HttpTask.EndResult.SUCCESS);
+	}
+
+	private void onSyncFailure() {
+		progressDialog.setTitle("Failed to sync field workers.");
+		syncListener.collectionComplete(HttpTask.EndResult.FAILURE);
 	}
 
 	private class SyncFieldWorkerListener implements TaskListener {
 		@Override
 		public void onFailedAuthentication() {
-			// progressDialog.setTitle("Failed to sync field workers.");
+			onSyncFailure();
 		}
 
 		@Override
 		public void onConnectionError() {
-			// progressDialog.setTitle("Failed to sync field workers.");
+			onSyncFailure();
 		}
 
 		@Override
 		public void onConnectionTimeout() {
-			// progressDialog.setTitle("Failed to sync field workers.");
+			onSyncFailure();
 		}
 
 		@Override
 		public void onSuccess() {
-			// progressDialog.setTitle("Synced field workers.");
+			onSyncSuccess();
 		}
 
 		@Override
 		public void onFailure() {
-			// progressDialog.setTitle("Failed to sync field workers.");
+			onSyncFailure();
 		}
 
 		@Override
 		public void onNoContent() {
-			// progressDialog.setTitle("Failed to sync field workers.");
+			onSyncFailure();
 		}
 	}
 }
