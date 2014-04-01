@@ -85,9 +85,9 @@ public class FieldWorkerLoginActivity extends Activity implements OnClickListene
 		switch (view.getId()) {
 		case R.id.registerChkBox: 
 			if (registerChkBox.isChecked()) 
-				loginButton.setText("Register");
+				loginButton.setText(getString(R.string.register));
 			else 
-				loginButton.setText("Login");
+				loginButton.setText(getString(R.string.login_btn));
 			break;
 		case R.id.loginBtn: 
 			
