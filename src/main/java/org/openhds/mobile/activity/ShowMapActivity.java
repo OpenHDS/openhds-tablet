@@ -40,7 +40,7 @@ public class ShowMapActivity extends FragmentActivity implements OnItemClickList
 	private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // meters
 	private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // milliseconds
 	private static final double METER_TO_MILE = 1609.34;
-	private static final int LOCATION_RADIUS = 25;
+	private static final int LOCATION_RADIUS = 3;
 	
 	private DatabaseAdapter databaseAdapter;
 	//private MapView mapView;
@@ -114,27 +114,37 @@ public class ShowMapActivity extends FragmentActivity implements OnItemClickList
 	}
 
 	private LatLng displayCurrentLocation() {
-		Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		if (location==null){
-			location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		}
+		if (location!=null){
 		String message = String.format("Current Location \n Longitude: %1$s \n Latitude: %2$s",
 				location.getLongitude(), location.getLatitude());
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-        
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();        
         return new LatLng(location.getLatitude() , location.getLongitude());
+		} else {
+			return new LatLng(-0.4, 34.166667);
+		}
 	}
 	
 	
 	
 	private List<org.openhds.mobile.model.Location> displayNearestLocations() {
+		double currentLatitude;
+		double currentLongitude;
 		
-		Location currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		Location currentLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		if (currentLocation==null){
-			currentLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		}
-		double currentLatitude = currentLocation.getLatitude();
-		double currentLongitude = currentLocation.getLongitude();
+		if (currentLocation!=null){
+			currentLatitude = currentLocation.getLatitude();
+			currentLongitude = currentLocation.getLongitude();
+		} else {
+			currentLatitude = -0.4;
+			currentLongitude = 34.166667;
+		}
 		
 		List<org.openhds.mobile.model.Location> nearestLocations = new ArrayList<org.openhds.mobile.model.Location>();
 		
