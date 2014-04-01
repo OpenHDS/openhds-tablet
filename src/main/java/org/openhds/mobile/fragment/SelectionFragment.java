@@ -7,7 +7,6 @@ import org.openhds.mobile.model.LocationHierarchy;
 import org.openhds.mobile.model.LocationVisit;
 import org.openhds.mobile.model.Round;
 import org.openhds.mobile.model.StateMachine;
-import org.openhds.mobile.model.StateMachine.State;
 import org.openhds.mobile.model.StateMachine.StateListener;
 
 import android.app.Activity;
@@ -204,11 +203,11 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     }
 
     private void registerFinishVisitListener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.FINISH_VISIT, new StateListener() {
+        stateMachine.registerListener("Finish Visit", new StateListener() {
             public void onEnterState() {
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 hierarchy1Btn.setEnabled(true);
                 hierarchy2Btn.setEnabled(true);
                 hierarchy3Btn.setEnabled(true);
@@ -220,22 +219,22 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     }
 
     private void registerEventListener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_EVENT, new StateListener() {
+        stateMachine.registerListener("Select Event", new StateListener() {
             public void onEnterState() {
                 setIndividual();
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
             }
         });
     }
 
     private void registerVisitListener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.CREATE_VISIT, new StateListener() {
+        stateMachine.registerListener("Create Visit", new StateListener() {
             public void onEnterState() {
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 hierarchy1Btn.setEnabled(false);
                 hierarchy2Btn.setEnabled(false);
                 hierarchy3Btn.setEnabled(false);
@@ -248,27 +247,27 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     }
 
     private void registerIndividualListener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_INDIVIDUAL, new StateListener() {
+        stateMachine.registerListener("Select Individual", new StateListener() {
             public void onEnterState() {
                 setIndividual();
                 individualBtn.setEnabled(true);
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 individualBtn.setEnabled(false);
             }
         });
     }
 
     private void registerLocationListener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_LOCATION, new StateListener() {
+        stateMachine.registerListener("Select Location", new StateListener() {
             public void onEnterState() {
                 resetToDefaultState(5, false);
                 locationBtn.setEnabled(true);
                 searchlBtn.setVisibility(1);
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 setLocation();
                 searchlBtn.setVisibility(8);
             }
@@ -276,66 +275,66 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     }
 
     private void registerRoundListener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_ROUND, new StateListener() {
+        stateMachine.registerListener("Select Round", new StateListener() {
             public void onEnterState() {
                 resetToDefaultState(4, false);
                 roundBtn.setEnabled(true);
 
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 setRound();
             }
         });
     }
 
     private void registerHierarchy3Listener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_HIERARCHY_3, new StateListener() {
+        stateMachine.registerListener("Select Hierarchy 3", new StateListener() {
             public void onEnterState() {
                 resetToDefaultState(2, false);
                 hierarchy3Btn.setEnabled(true);
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 setHierarchy3();
             }
         });
     }
 
     private void registerHierarchy4Listener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_HIERARCHY_4, new StateListener() {
+        stateMachine.registerListener("Select Hierarchy 4", new StateListener() {
             public void onEnterState() {
                 resetToDefaultState(3, false);
                 hierarchy4Btn.setEnabled(true);
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 setHierarchy4();
             }
         });
     }
 
     private void registerHierarchy2Listener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_HIERARCHY_2, new StateListener() {
+        stateMachine.registerListener("Select Hierarchy 2", new StateListener() {
             public void onEnterState() {
                 resetToDefaultState(1, false);
                 hierarchy2Btn.setEnabled(true);
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 setHierarchy2();
             }
         });
     }
 
     private void registerHierarchy1Listener(StateMachine stateMachine) {
-        stateMachine.registerListener(State.SELECT_HIERARCHY_1, new StateListener() {
+        stateMachine.registerListener("Select Hierarchy 1", new StateListener() {
             public void onEnterState() {
                 resetToDefaultState(0, false);
                 hierarchy1Btn.setEnabled(true);
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 setHierarchy1();
             }
         });

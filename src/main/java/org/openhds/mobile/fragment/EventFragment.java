@@ -10,7 +10,6 @@ import org.openhds.mobile.R;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.LocationVisit;
 import org.openhds.mobile.model.StateMachine;
-import org.openhds.mobile.model.StateMachine.State;
 import org.openhds.mobile.model.StateMachine.StateListener;
 
 import android.app.Activity;
@@ -176,7 +175,7 @@ public class EventFragment extends Fragment implements OnClickListener {
     }
 
     private void registerEventListeners(StateMachine machine) {
-        machine.registerListener(State.SELECT_EVENT, new StateListener() {
+        machine.registerListener("Select Event", new StateListener() {
             public void onEnterState() {
                 householdBtn.setEnabled(true);
                 finishVisitBtn.setEnabled(true);
@@ -195,7 +194,7 @@ public class EventFragment extends Fragment implements OnClickListener {
                 
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 membershipBtn.setEnabled(false);
                 relationshipBtn.setEnabled(false);
                 outMigrationBtn.setEnabled(false);
@@ -227,13 +226,13 @@ public class EventFragment extends Fragment implements OnClickListener {
     }
 
     private void registerIndividualListeners(StateMachine machine) {
-        machine.registerListener(State.SELECT_INDIVIDUAL, new StateListener() {
+        machine.registerListener("Select Individual", new StateListener() {
             public void onEnterState() {
                 finishVisitBtn.setEnabled(true);
                 inMigrationBtn.setEnabled(true);
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 finishVisitBtn.setEnabled(false);
                 inMigrationBtn.setEnabled(false);
             }
@@ -241,36 +240,36 @@ public class EventFragment extends Fragment implements OnClickListener {
     }
 
     private void registerVisitListener(StateMachine machine) {
-        machine.registerListener(State.CREATE_VISIT, new StateListener() {
+        machine.registerListener("Create Visit", new StateListener() {
             public void onEnterState() {
                 createVisitBtn.setEnabled(true);
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 createVisitBtn.setEnabled(false);
             }
         });
     }
 
     private void registerLocationListener(StateMachine machine) {
-        machine.registerListener(State.SELECT_LOCATION, new StateListener() {
+        machine.registerListener("Select Location", new StateListener() {
             public void onEnterState() {
                 createLocationBtn.setEnabled(true);
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 createLocationBtn.setEnabled(false);
             }
         });
     }
 
     private void registerRegionListener(StateMachine machine) {
-        machine.registerListener(State.SELECT_HIERARCHY_1, new StateListener() {
+        machine.registerListener("Select Hierarchy 1", new StateListener() {
             public void onEnterState() {
                 findLocationGeoPointBtn.setEnabled(true);
             }
 
-            public void onLeaveState() {
+            public void onExitState() {
                 findLocationGeoPointBtn.setEnabled(false);
             }
         });
