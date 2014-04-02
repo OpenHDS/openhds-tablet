@@ -7,9 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.openhds.mobile.Converter;
 import org.openhds.mobile.OpenHDS;
-import org.openhds.mobile.Queries;
+import org.openhds.mobile.database.queries.Converter;
+import org.openhds.mobile.database.queries.Queries;
 
 import android.content.ContentResolver;
 import android.database.Cursor;

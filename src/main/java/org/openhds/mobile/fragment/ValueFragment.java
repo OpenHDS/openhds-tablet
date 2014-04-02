@@ -3,9 +3,9 @@ package org.openhds.mobile.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openhds.mobile.Converter;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.R;
+import org.openhds.mobile.database.queries.Converter;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;

@@ -1,10 +1,8 @@
 package org.openhds.mobile.activity;
 
-import org.openhds.mobile.Converter;
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
-import org.openhds.mobile.Queries;
 import org.openhds.mobile.R;
 import org.openhds.mobile.database.DeathUpdate;
 import org.openhds.mobile.database.ExternalInMigrationUpdate;
@@ -17,6 +15,8 @@ import org.openhds.mobile.database.PregnancyOutcomeUpdate;
 import org.openhds.mobile.database.RelationshipUpdate;
 import org.openhds.mobile.database.Updatable;
 import org.openhds.mobile.database.VisitUpdate;
+import org.openhds.mobile.database.queries.Converter;
+import org.openhds.mobile.database.queries.Queries;
 import org.openhds.mobile.fragment.EventFragment;
 import org.openhds.mobile.fragment.ProgressFragment;
 import org.openhds.mobile.fragment.SelectionFragment;

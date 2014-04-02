@@ -2,12 +2,12 @@ package org.openhds.mobile.fragment;
 
 import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
 
-import org.openhds.mobile.Queries;
 import org.openhds.mobile.R;
 import org.openhds.mobile.activity.CensusActivity;
 import org.openhds.mobile.activity.OpeningActivity;
 import org.openhds.mobile.activity.SupervisorMainActivity;
 import org.openhds.mobile.database.DatabaseAdapter;
+import org.openhds.mobile.database.queries.Queries;
 
 import android.app.Fragment;
 import android.content.Intent;

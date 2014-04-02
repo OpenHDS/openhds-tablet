@@ -2,7 +2,7 @@ package org.openhds.mobile.fragment;
 
 
 
-import org.openhds.mobile.Converter;
+import org.openhds.mobile.database.queries.Converter;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.R;
 import org.openhds.mobile.model.Form;
