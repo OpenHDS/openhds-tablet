@@ -2,6 +2,7 @@ package org.openhds.mobile.activity;
 
 import static org.openhds.mobile.utilities.ConfigUtils.getPreferenceString;
 import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
+import static org.openhds.mobile.utilities.LayoutUtils.makeNewGenericButton;
 import static org.openhds.mobile.utilities.UrlUtils.buildServerUrl;
 
 import org.openhds.mobile.R;
@@ -18,10 +19,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class SupervisorMainActivity extends Activity implements OnClickListener {
 
@@ -38,13 +37,18 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 		supervisorOptionsList = (LinearLayout) findViewById(R.id.supervisor_activity_options);
 		syncDatabaseHelper = new SyncDatabaseHelper(this);
 
-		makeNewOptionsButton(
+		makeNewGenericButton(this,
 				getResourceString(this, R.string.sync_database_description),
-				getResourceString(this, R.string.sync_database_name), this);
+				getResourceString(this, R.string.sync_database_name),
+				getResourceString(this, R.string.sync_database_name), this,
+				supervisorOptionsList);
 
-		makeNewOptionsButton(
+		makeNewGenericButton(
+				this,
 				getResourceString(this, R.string.sync_field_worker_description),
-				getResourceString(this, R.string.sync_field_worker_name), this);
+				getResourceString(this, R.string.sync_field_worker_name),
+				getResourceString(this, R.string.sync_field_worker_name), this,
+				supervisorOptionsList);
 
 		if (null != savedInstanceState) {
 			return;
@@ -76,23 +80,6 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 			prefContainer.setVisibility(View.VISIBLE);
 		}
 		return true;
-	}
-
-	private Button makeNewOptionsButton(String description, String buttonName,
-			OnClickListener listener) {
-
-		View v = getLayoutInflater().inflate(R.layout.generic_textview_button,
-				null);
-		supervisorOptionsList.addView(v);
-		Button b = (Button) v.findViewById(R.id.generic_button);
-		TextView t = (TextView) v.findViewById(R.id.generic_button_description);
-
-		t.setText(description);
-		b.setText(buttonName);
-		b.setTag(buttonName);
-		b.setOnClickListener(listener);
-
-		return b;
 	}
 
 	public void onClick(View v) {
