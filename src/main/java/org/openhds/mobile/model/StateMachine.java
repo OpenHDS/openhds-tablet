@@ -27,7 +27,7 @@ public class StateMachine {
 		stateListeners = new HashMap<String, Set<StateListener>>();
 		transitionTo(defaultState);
 	}
-	
+
 	public String getState() {
 		return currentState;
 	}
@@ -42,7 +42,7 @@ public class StateMachine {
 					+ state);
 		}
 
-		if (currentState.equals(state)) {
+		if (state.equals(currentState)) {
 			return;
 		}
 
@@ -63,7 +63,6 @@ public class StateMachine {
 		}
 		stateListeners.get(state).add(stateListener);
 	}
-
 
 	private void fireOnExitListeners() {
 		Set<StateListener> listenersToFire = stateListeners.get(currentState);

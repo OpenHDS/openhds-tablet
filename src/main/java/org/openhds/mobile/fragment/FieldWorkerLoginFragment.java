@@ -4,9 +4,13 @@ import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
 
 import org.openhds.mobile.Queries;
 import org.openhds.mobile.R;
+import org.openhds.mobile.activity.CensusActivity;
+import org.openhds.mobile.activity.OpeningActivity;
+import org.openhds.mobile.activity.SupervisorMainActivity;
 import org.openhds.mobile.database.DatabaseAdapter;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +72,9 @@ public class FieldWorkerLoginFragment extends Fragment implements
 	}
 
 	private void launchCensusActivity() {
-		showLongToast(getActivity(), "poop");
+		//TODO pass in a fieldworker object
+		Intent intent = new Intent(getActivity(), CensusActivity.class);
+		startActivity(intent);
 	}
 
 }

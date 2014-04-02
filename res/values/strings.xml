@@ -394,4 +394,12 @@
     <string name="preference_invalid_warning">Invalid preference value</string>
     <string name="sync_field_worker_name">Sync Field Workers</string>
     <string name="field_worker_bad_credentials">Invalid field worker credentials</string>
+    <string name="region_label">Region</string>
+    <string name="map_area_label">Map Area</string>
+    <string name="sector_label">Sector</string>
+    <string name="household_label">Household</string>
+    <string name="individual_label">Individual</string>
+    
+    
+
 </resources>
