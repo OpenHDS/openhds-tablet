@@ -28,7 +28,7 @@ public class FormXmlReader {
             Location location = new Location();
             
             Document doc = buildDocument(is);
-            if(xpath.evaluate("/"+jrFormId+"/visitId/text()", doc).length()==0) {
+            if(xpath.evaluate("/"+jrFormId+"/locationId/text()", doc).length()==0) {
             	jrFormId ="data";
             }
             location.setName(xpath.evaluate("/"+jrFormId+"/locationName/text()", doc));
@@ -119,16 +119,18 @@ public class FormXmlReader {
     public Individual readInMigration(FileInputStream fileInputStream, String jrFormId)  {
         try {
             Document doc = buildDocument(fileInputStream);
-            if(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc).length()==0) {
+            if(xpath.evaluate("/"+jrFormId+"/visitId/text()", doc).length()==0) {
             	jrFormId ="data";
             }
             Individual individual = new Individual();
             individual.setCurrentResidence(xpath.evaluate("/"+jrFormId+"/locationId/text()", doc));
-            individual.setDobIn(xpath.evaluate("/"+jrFormId+"/individualInfo/dateOfBirth/text()", doc));
+            if(xpath.evaluate("/"+jrFormId+"/individualInfo/dateOfBirth/text()", doc).length()>0) {
+            	individual.setDobIn(xpath.evaluate("/"+jrFormId+"/individualInfo/dateOfBirth/text()", doc));
+            }
             individual.setExtId(xpath.evaluate("/"+jrFormId+"/individualInfo/individualId/text()", doc));
             individual.setFather(xpath.evaluate("/"+jrFormId+"/individualInfo/fatherId/text()", doc));
             individual.setFirstName(xpath.evaluate("/"+jrFormId+"/individualInfo/firstName/text()", doc));
-            individual.setMiddleName(xpath.evaluate("/"+jrFormId+"/individualInfo/middletName/text()", doc));
+            individual.setMiddleName(xpath.evaluate("/"+jrFormId+"/individualInfo/middleName/text()", doc));
             individual.setGender(xpath.evaluate("/"+jrFormId+"/individualInfo/gender/text()", doc));
             individual.setLastName(xpath.evaluate("/"+jrFormId+"/individualInfo/lastName/text()", doc));
             individual.setMother(xpath.evaluate("/"+jrFormId+"/individualInfo/motherId/text()", doc));

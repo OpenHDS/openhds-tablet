@@ -206,6 +206,7 @@ public class FormFiller {
           form.setRoundNumber(locationVisit.getRound().getRoundNumber());
           form.setRoundNumber(locationVisit.getRound().getRoundNumber());
           form.setMotherExtId(locationVisit.getSelectedIndividual().getMother());
+          form.setHierarchyId(locationVisit.getHierarchy4().getExtId());
           if (sg !=null)
   			addHousehold(sg, form);
 

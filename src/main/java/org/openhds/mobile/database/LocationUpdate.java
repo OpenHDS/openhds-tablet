@@ -15,7 +15,7 @@ import android.util.Log;
 public class LocationUpdate implements Updatable {
 
     public void updateDatabase(ContentResolver resolver, String filepath,String jrFormId) {
-        Location location = readLocationFromXml(filepath);
+        Location location = readLocationFromXml(filepath,jrFormId);
 
         if (location == null) {
             Log.e(LocationUpdate.class.getName(), "Was not able to read location from XML file");
@@ -38,11 +38,11 @@ public class LocationUpdate implements Updatable {
         resolver.insert(OpenHDS.Locations.CONTENT_ID_URI_BASE, cv);
     }
 
-    private Location readLocationFromXml(String filepath) {
+    private Location readLocationFromXml(String filepath,String jrFormId ) {
         File file = new File(filepath);
         FormXmlReader reader = new FormXmlReader();
         try {
-            return reader.readLocation(new FileInputStream(file), filepath);
+            return reader.readLocation(new FileInputStream(file), jrFormId);
         } catch (FileNotFoundException e) {
             return null;
         }

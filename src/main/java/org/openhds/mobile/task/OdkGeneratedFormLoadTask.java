@@ -163,7 +163,7 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                                 : "<lastName>" + filledForm.getIndividualLastName() + "</lastName>" + "\r\n");
                     } else if (name.equals(FilledParams.gender)) {
                         sbuilder.append(filledForm.getIndividualGender() == null ? "<gender />" + "\r\n" : "<gender>"
-                                + (filledForm.getIndividualGender().equalsIgnoreCase("Male") ? "1" : "2") + "</gender>"
+                                + (filledForm.getIndividualGender().startsWith("M") ? "1" : "2") + "</gender>"
                                 + "\r\n");
                     } else if (name.equals(FilledParams.dob)) {
                         sbuilder.append(filledForm.getIndividualDob() == null ? "<dob />" + "\r\n" : "<dob>"
