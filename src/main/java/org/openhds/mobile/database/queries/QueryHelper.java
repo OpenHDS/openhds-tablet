@@ -13,9 +13,9 @@ import android.database.Cursor;
 
 public class QueryHelper {
 
-	public static final String REGION_HIERARCHY_LEVEL_NAME = "Village";
-	public static final String MAP_AREA_HIERARCHY_LEVEL_NAME = "Subvillage";
-	public static final String SECTOR_HIERARCHY_LEVEL_NAME = "Floor";
+	public static final String REGION_HIERARCHY_LEVEL_NAME = "Region";
+	public static final String MAP_AREA_HIERARCHY_LEVEL_NAME = "MapArea";
+	public static final String SECTOR_HIERARCHY_LEVEL_NAME = "Sector";
 
 	public static List<QueryResult> getAll(ContentResolver contentResolver, String state) {
 
