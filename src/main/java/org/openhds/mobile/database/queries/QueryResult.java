@@ -30,4 +30,8 @@ public class QueryResult {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "QueryResult[name: " + name + " extId: " + extId + " state: " + state + " ]";
+	}
 }
