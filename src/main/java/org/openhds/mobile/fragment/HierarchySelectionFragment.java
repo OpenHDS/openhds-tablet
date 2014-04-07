@@ -32,7 +32,7 @@ public class HierarchySelectionFragment extends Fragment {
 		Map<String, Integer> labels = navigator.getStateLabels();
 		buttonsForStates = new HashMap<String, Button>();
 		for (String state : navigator.getStateSequence()) {
-			final String description = "";
+			final String description = null;
 			Button b = makeNewGenericButton(getActivity(), description,
 					getResourceString(getActivity(), labels.get(state)), state, listener, buttonContainer);
 			buttonsForStates.put(state, b);

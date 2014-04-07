@@ -19,6 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/generic_button_description"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dp"
+        android:singleLine="false"
         android:text="Button"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
