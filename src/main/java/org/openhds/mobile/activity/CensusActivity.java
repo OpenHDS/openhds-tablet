@@ -1,6 +1,5 @@
 package org.openhds.mobile.activity;
 
-import static org.openhds.mobile.utilities.MessageUtils.showShortToast;
 import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
 
 import java.util.ArrayList;
@@ -27,6 +26,7 @@ public class CensusActivity extends Activity implements HierarchyNavigator {
 	public static final String SECTOR_STATE = "sector";
 	public static final String HOUSEHOLD_STATE = "household";
 	public static final String INDIVIDUAL_STATE = "individual";
+	public static final String BOTTOM_STATE = "bottom";
 
 	private static final List<String> stateSequence = new ArrayList<String>();
 	private static final Map<String, Integer> stateLabels = new HashMap<String, Integer>();
@@ -36,12 +36,14 @@ public class CensusActivity extends Activity implements HierarchyNavigator {
 		stateSequence.add(SECTOR_STATE);
 		stateSequence.add(HOUSEHOLD_STATE);
 		stateSequence.add(INDIVIDUAL_STATE);
+		stateSequence.add(BOTTOM_STATE);
 
 		stateLabels.put(REGION_STATE, R.string.region_label);
 		stateLabels.put(MAP_AREA_STATE, R.string.map_area_label);
 		stateLabels.put(SECTOR_STATE, R.string.sector_label);
 		stateLabels.put(HOUSEHOLD_STATE, R.string.household_label);
 		stateLabels.put(INDIVIDUAL_STATE, R.string.individual_label);
+		stateLabels.put(BOTTOM_STATE, R.string.bottom_label);
 	}
 
 	private static final String SELECTION_FRAGMENT_TAG = "hierarchySelectionFragment";
@@ -237,8 +239,11 @@ public class CensusActivity extends Activity implements HierarchyNavigator {
 		public void onEnterState() {
 			String state = stateMachine.getState();
 			updateButtonLabel(state);
-			selectionFragment.setButtonAllowed(state, true);
 			valueFragment.populateValues(currentResults);
+			if (!state.equals(stateSequence.get(stateSequence.size() - 1))) {
+				selectionFragment.setButtonAllowed(state, true);
+				// show forms
+			}
 		}
 
 		@Override

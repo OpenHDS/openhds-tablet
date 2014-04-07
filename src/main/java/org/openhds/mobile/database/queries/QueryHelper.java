@@ -33,9 +33,9 @@ public class QueryHelper {
 			return getLocationQueryResults(cursor, state);
 		} else if (state.equals(CensusActivity.INDIVIDUAL_STATE)) {
 			Cursor cursor = Queries.getAllIndividuals(contentResolver);
-			return getLocationQueryResults(cursor, state);
+			return getIndividualQueryResults(cursor, state);
 		}
-		return null;
+		return new ArrayList<QueryResult>();
 	}
 
 	public static List<QueryResult> getChildren(ContentResolver contentResolver, QueryResult qr,
@@ -53,7 +53,7 @@ public class QueryHelper {
 			return getIndividualQueryResults(cursor, childState);
 		}
 
-		return null;
+		return new ArrayList<QueryResult>();
 	}
 
 	private static List<QueryResult> getHierarchyQueryResults(Cursor cursor, String state) {
