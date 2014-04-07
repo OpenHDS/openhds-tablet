@@ -11,7 +11,7 @@ public interface HierarchyNavigator {
 
 	public List<String> getStateSequence();
 
-	public void jump(String state);
+	public void jumpUp(String state);
 
-	public void descend(QueryResult qr);
+	public void stepDown(QueryResult qr);
 }

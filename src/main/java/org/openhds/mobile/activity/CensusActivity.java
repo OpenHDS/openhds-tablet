@@ -12,6 +12,7 @@ import org.openhds.mobile.R;
 import org.openhds.mobile.database.queries.QueryHelper;
 import org.openhds.mobile.database.queries.QueryResult;
 import org.openhds.mobile.fragment.HierarchySelectionFragment;
+import org.openhds.mobile.fragment.HierarchyValueFragment;
 import org.openhds.mobile.model.StateMachine;
 import org.openhds.mobile.model.StateMachine.StateListener;
 
@@ -43,11 +44,14 @@ public class CensusActivity extends Activity implements HierarchyNavigator {
 	}
 
 	private static final String CURRENT_STATE_KEY = "currentState";
-	private static final String HIERARCHY_SELECTION_FRAGMENT_TAG = "hierarchySelectionFragment";
+	private static final String SELECTION_FRAGMENT_TAG = "hierarchySelectionFragment";
+	private static final String VALUE_FRAGMENT_TAG = "hierarchyValueFragment";
 
 	private StateMachine stateMachine;
 	private Map<String, QueryResult> hierarchyPath;
 	private List<QueryResult> currentResults;
+	private HierarchySelectionFragment selectionFragment;
+	private HierarchyValueFragment valueFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,35 +61,59 @@ public class CensusActivity extends Activity implements HierarchyNavigator {
 
 		if (null == savedInstanceState) {
 			// create fresh activity
+			selectionFragment = new HierarchySelectionFragment();
+			selectionFragment.setNavigator(this);
+			valueFragment = new HierarchyValueFragment();
+			valueFragment.setNavigator(this);
+			getFragmentManager().beginTransaction()
+					.add(R.id.left_column, selectionFragment, SELECTION_FRAGMENT_TAG)
+					.add(R.id.middle_column, valueFragment, VALUE_FRAGMENT_TAG).commit();
+
 			stateMachine = new StateMachine(new HashSet<String>(stateSequence), stateSequence.get(0));
 			for (String state : stateSequence) {
 				stateMachine.registerListener(state, new HierarchyStateListener());
 			}
-			topLevelHierarchySetup();
-			HierarchySelectionFragment selectionFragment = new HierarchySelectionFragment();
-			selectionFragment.setNavigator(this);
-			getFragmentManager().beginTransaction()
-					.add(R.id.left_column, selectionFragment, HIERARCHY_SELECTION_FRAGMENT_TAG).commit();
+
 		} else {
 			// restore saved activity state
-			// TODO restore hierarchyPath from savedInstanceState
+			selectionFragment = (HierarchySelectionFragment) getFragmentManager().findFragmentByTag(
+					SELECTION_FRAGMENT_TAG);
+			selectionFragment.setNavigator(this);
+			valueFragment = (HierarchyValueFragment) getFragmentManager().findFragmentByTag(
+					VALUE_FRAGMENT_TAG);
+			valueFragment.setNavigator(this);
+
 			stateMachine = new StateMachine(new HashSet<String>(stateSequence),
 					savedInstanceState.getString(CURRENT_STATE_KEY));
-			HierarchySelectionFragment selectionFragment = (HierarchySelectionFragment) getFragmentManager()
-					.findFragmentByTag(HIERARCHY_SELECTION_FRAGMENT_TAG);
-			selectionFragment.setNavigator(this);
+			for (String state : stateSequence) {
+				stateMachine.registerListener(state, new HierarchyStateListener());
+			}
 		}
+	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		topLevelHierarchySetup();
+		// TODO restore hierarchyPath from savedInstanceState
+		// (best effort since database might have changed)
 	}
 
 	private void topLevelHierarchySetup() {
 		String topLevelState = stateSequence.get(0);
-		List<QueryResult> topLevelResults = QueryHelper.getAll(getContentResolver(), topLevelState);
-		if (null == topLevelResults) {
+		currentResults = QueryHelper.getAll(getContentResolver(), topLevelState);
+		if (null == currentResults) {
 			showShortToast(this, "No results for top level state: " + topLevelState);
 			return;
 		}
-		descend(topLevelResults.get(0));
+
+		hierarchyPath.clear();
+		if (1 == currentResults.size()) {
+			stepDown(currentResults.get(0));
+		} else {
+			valueFragment.populateValues(currentResults);
+		}
 	}
 
 	@Override
@@ -105,26 +133,57 @@ public class CensusActivity extends Activity implements HierarchyNavigator {
 		return stateSequence;
 	}
 
+	// Required to update currentResults for targetState and transition to the
+	// target state.
 	@Override
-	public void jump(String state) {
-		stateMachine.transitionTo(state);
-	}
-
-	@Override
-	public void descend(QueryResult selectedResult) {
+	public void jumpUp(String targetState) {
+		int targetIndex = stateSequence.indexOf(targetState);
+		if (targetIndex < 0) {
+			throw new IllegalStateException("Target state <" + targetState + "> is not a valid state");
+		}
 
 		String currentState = stateMachine.getState();
+		int currentIndex = stateSequence.indexOf(currentState);
+		if (targetIndex > currentIndex) {
+			// use stepDown() to go down the hierarchy
+			return;
+		}
 
-		if (!currentState.equals(selectedResult.getState())) {
-			throw new IllegalStateException("Selected state <" + selectedResult.getState()
+		// un-traverse the hierarchy up to the target state
+		for (int i = currentIndex; i >= targetIndex; i--) {
+			String state = stateSequence.get(i);
+			hierarchyPath.remove(state);
+		}
+
+		// prepare to stepDown() from this target state
+		if (0 == targetIndex) {
+			// root of the hierarchy
+			currentResults = QueryHelper.getAll(getContentResolver(), stateSequence.get(0));
+		} else {
+			// middle of the hierarchy
+			String previousState = stateSequence.get(targetIndex - 1);
+			QueryResult previousSelection = hierarchyPath.get(previousState);
+			currentResults = QueryHelper.getChildren(getContentResolver(), previousSelection, targetState);
+		}
+		stateMachine.transitionTo(targetState);
+	}
+
+	// Required to update currentResults with children of selected, and
+	// transition to the next state down.
+	@Override
+	public void stepDown(QueryResult selected) {
+
+		String currentState = stateMachine.getState();
+		if (!currentState.equals(selected.getState())) {
+			throw new IllegalStateException("Selected state <" + selected.getState()
 					+ "> mismatch with current state <" + currentState + ">");
 		}
 
-		int stateIndex = stateSequence.indexOf(currentState);
-		if (stateIndex >= 0 && stateIndex < stateSequence.size() - 1) {
-			String nextState = stateSequence.get(stateIndex + 1);
-			currentResults = QueryHelper.getChildren(getContentResolver(), selectedResult, nextState);
-			hierarchyPath.put(currentState, selectedResult);
+		int currentIndex = stateSequence.indexOf(currentState);
+		if (currentIndex >= 0 && currentIndex < stateSequence.size() - 1) {
+			String nextState = stateSequence.get(currentIndex + 1);
+			currentResults = QueryHelper.getChildren(getContentResolver(), selected, nextState);
+			hierarchyPath.put(currentState, selected);
 			stateMachine.transitionTo(nextState);
 		}
 	}
@@ -134,7 +193,7 @@ public class CensusActivity extends Activity implements HierarchyNavigator {
 		@Override
 		public void onEnterState() {
 			showShortToast(CensusActivity.this, "Entered state: " + stateMachine.getState());
-			// TODO: update value fragment with new list of results.
+			valueFragment.populateValues(currentResults);
 		}
 
 		@Override

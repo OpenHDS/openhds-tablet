@@ -21,17 +21,15 @@ public class HierarchySelectionFragment extends Fragment {
 	private HierarchyNavigator navigator;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		LinearLayout buttonContainer = (LinearLayout) inflater.inflate(
-				R.layout.hierarchy_selection_fragment, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		LinearLayout buttonContainer = (LinearLayout) inflater.inflate(R.layout.hierarchy_selection_fragment,
+				container, false);
 
 		HierarchyButtonListener listener = new HierarchyButtonListener();
 		Map<String, Integer> labels = navigator.getStateLabels();
 		for (String state : navigator.getStateSequence()) {
-			makeNewGenericButton(getActivity(), "",
-					getResourceString(getActivity(), labels.get(state)), state,
-					listener, buttonContainer);
+			makeNewGenericButton(getActivity(), "", getResourceString(getActivity(), labels.get(state)),
+					state, listener, buttonContainer);
 		}
 
 		return buttonContainer;
@@ -45,7 +43,7 @@ public class HierarchySelectionFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			navigator.jump((String) v.getTag());
+			navigator.jumpUp((String) v.getTag());
 		}
 	}
 }
