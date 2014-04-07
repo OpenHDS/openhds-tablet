@@ -22,11 +22,19 @@ public class QueryHelper {
 		if (state.equals(CensusActivity.REGION_STATE)) {
 			Cursor cursor = Queries.getHierarchysByLevel(contentResolver, REGION_HIERARCHY_LEVEL_NAME);
 			return getHierarchyQueryResults(cursor, state);
+		} else if (state.equals(CensusActivity.MAP_AREA_STATE)) {
+			Cursor cursor = Queries.getHierarchysByLevel(contentResolver, MAP_AREA_HIERARCHY_LEVEL_NAME);
+			return getHierarchyQueryResults(cursor, state);
+		} else if (state.equals(CensusActivity.SECTOR_STATE)) {
+			Cursor cursor = Queries.getHierarchysByLevel(contentResolver, SECTOR_HIERARCHY_LEVEL_NAME);
+			return getHierarchyQueryResults(cursor, state);
 		} else if (state.equals(CensusActivity.HOUSEHOLD_STATE)) {
 			Cursor cursor = Queries.getAllLocations(contentResolver);
 			return getLocationQueryResults(cursor, state);
+		} else if (state.equals(CensusActivity.INDIVIDUAL_STATE)) {
+			Cursor cursor = Queries.getAllIndividuals(contentResolver);
+			return getLocationQueryResults(cursor, state);
 		}
-
 		return null;
 	}
 
