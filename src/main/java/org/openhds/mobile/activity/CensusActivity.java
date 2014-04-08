@@ -159,12 +159,16 @@ public class CensusActivity extends Activity implements HierarchyNavigator {
 	}
 
 	private void updateButtonLabel(String state) {
+		
 		String buttonLabel = getResourceString(CensusActivity.this, stateLabels.get(state));
 		QueryResult selected = hierarchyPath.get(state);
+		boolean buttonIsHighlighted = true;
 		if (null != selected) {
+			buttonIsHighlighted = false;
 			buttonLabel = selected.getName() + "\n" + selected.getExtId();
 		}
 		selectionFragment.setButtonLabel(state, buttonLabel);
+		selectionFragment.setButtonHighlighted(state, buttonIsHighlighted);
 	}
 
 	@Override

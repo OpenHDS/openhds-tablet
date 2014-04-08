@@ -11,15 +11,15 @@
         android:layout_weight="1"
         android:paddingTop="20dp"
         android:paddingRight="20dp" 
-        android:background="#ffff0000"/>
+        android:background="#303030"/>
 
     <FrameLayout
         android:id="@+id/middle_column"
         android:layout_width="0px"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingTop="20dp" 
-        android:background="#99FFCC"/>
+        android:paddingTop="40dp"
+        android:background="#222222"/>
     
     <FrameLayout
         android:id="@+id/right_column"
@@ -27,7 +27,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:paddingTop="20dp" 
-        android:background="#CC7A29"/>
+        android:background="#303030"/>
     
     
 
