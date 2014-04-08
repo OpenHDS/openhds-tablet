@@ -7,12 +7,21 @@
     android:paddingTop="2.5dp" >
 
     <TextView
-        android:id="@+id/listview_text_container"
-        android:layout_width="match_parent"
+        android:id="@+id/name_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"/>
+        android:paddingLeft="15dp"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:text="Bob Bobson"/>
+
+    <TextView
+        android:id="@+id/ext_id_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_below="@id/name_text"
+        android:paddingLeft="15dp"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:text="b12345"/>
 
 </RelativeLayout>
