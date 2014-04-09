@@ -241,6 +241,7 @@ public class OpenHDSProvider extends ContentProvider {
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_FIRSTNAME + " TEXT,"
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_GENDER + " TEXT,"
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_LASTNAME + " TEXT,"
+                    + OpenHDS.Individuals.COLUMN_INDIVIDUAL_FULLNAME + " TEXT, "
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_MOTHER + " TEXT,"
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " TEXT,"
                     + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE + " TEXT);" 
