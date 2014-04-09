@@ -40,7 +40,7 @@ public class ShowMapActivity extends FragmentActivity implements OnItemClickList
 	private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // meters
 	private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // milliseconds
 	private static final double METER_TO_MILE = 1609.34;
-	private static final int LOCATION_RADIUS = 3;
+	private static final double LOCATION_RADIUS = 0.5;
 	
 	private DatabaseAdapter databaseAdapter;
 	//private MapView mapView;
@@ -119,7 +119,7 @@ public class ShowMapActivity extends FragmentActivity implements OnItemClickList
 			location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		}
 		if (location!=null){
-		String message = String.format("Current Location \n Longitude: %1$s \n Latitude: %2$s",
+		String message = String.format(getString(R.string.map_curlocation_format_lbl),
 				location.getLongitude(), location.getLatitude());
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();        
         return new LatLng(location.getLatitude() , location.getLongitude());
@@ -182,8 +182,8 @@ public class ShowMapActivity extends FragmentActivity implements OnItemClickList
 	
 	private void buildAlertMessageNoGPS() {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		alertDialogBuilder.setTitle("Warning");
-		alertDialogBuilder.setMessage("Your GPS seems to be disabled. Please make sure that it's enabled in order to use this service.");
+		alertDialogBuilder.setTitle(getString(R.string.warning_lbl));
+		alertDialogBuilder.setMessage(getString(R.string.showmap_gps_disabled_lbl));
 		alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -249,16 +249,16 @@ public class ShowMapActivity extends FragmentActivity implements OnItemClickList
 	        displayCurrentLocation();
 		}
 
-		public void onProviderDisabled(String provider) { 
-			Toast.makeText(ShowMapActivity.this, "Provider disabled by the user. GPS turned off", Toast.LENGTH_LONG).show();
+	public void onProviderDisabled(String provider) { 
+			Toast.makeText(ShowMapActivity.this, getString(R.string.showmap_gps_turned_off), Toast.LENGTH_LONG).show();
 		}
 
 		public void onProviderEnabled(String provider) { 
-			Toast.makeText(ShowMapActivity.this, "Provider enabled by the user. GPS turned on", Toast.LENGTH_LONG).show();
+			Toast.makeText(ShowMapActivity.this, getString(R.string.showmap_gps_turned_on), Toast.LENGTH_LONG).show();
 		}
 
 		public void onStatusChanged(String provider, int status, Bundle extras) { 
-			Toast.makeText(ShowMapActivity.this, "Provider status changed", Toast.LENGTH_LONG).show();
+			Toast.makeText(ShowMapActivity.this, getString(R.string.showmap_gps_changed), Toast.LENGTH_LONG).show();
 		}
 	}
 

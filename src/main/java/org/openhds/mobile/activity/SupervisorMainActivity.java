@@ -104,7 +104,7 @@ public class SupervisorMainActivity extends AbstractActivity implements CollectE
     
 	private class DownloadButtonListener implements OnClickListener {
 		public void onClick(View arg0) {
-			dialog = ProgressDialog.show(SupervisorMainActivity.this, "Working", "Downloading all forms...");
+			dialog = ProgressDialog.show(SupervisorMainActivity.this, getString(R.string.working_lbl), getString(R.string.sprvmain_downlall_forms));
 			URL parsedUrl = getServerUrl("/api/form/download");
 			if (parsedUrl == null) {
 				return;
@@ -118,32 +118,32 @@ public class SupervisorMainActivity extends AbstractActivity implements CollectE
 					new DownloadFormsTask.TaskListener() {
 						public void onFailedAuthentication() {
 							dialog.dismiss();
-							showToastWithText("Bad username and/or password");
+							showToastWithText(getString(R.string.sprvmain_failed_auth));
 						}
 
 						public void onFailure() {
 							dialog.dismiss();
-							showToastWithText("There was a problem reading response from server");
+							showToastWithText(getString(R.string.sprvmain_failure));
 						}
 
 						public void onConnectionError() {
 							dialog.dismiss();
-							showToastWithText("There was a error with the network connection");
+							showToastWithText(getString(R.string.sprvmain_connection_error));
 						}
 
 						public void onConnectionTimeout() {
 							dialog.dismiss();
-							showToastWithText("Connection to the server timed out");
+							showToastWithText(getString(R.string.sprvmain_connection_timeout));
 						}
 
 						public void onSuccess() {
 							dialog.dismiss();
-							showToastWithText("Download all forms successfully");
+							showToastWithText(getString(R.string.sprvmain_on_success));
 						}
 
 						public void onNoContent() {
 							dialog.dismiss();
-							showToastWithText("No forms to download");							
+							showToastWithText(getString(R.string.sprvmain_no_content));							
 						}
 					}, getBaseContext());
 			task.execute();
@@ -152,7 +152,7 @@ public class SupervisorMainActivity extends AbstractActivity implements CollectE
     
 	private class DownloadExtraFormsButtonListener implements OnClickListener {
 		public void onClick(View arg0) {
-			dialog = ProgressDialog.show(SupervisorMainActivity.this, "Working", "Downloading extra forms...");
+			dialog = ProgressDialog.show(SupervisorMainActivity.this, getString(R.string.working_lbl), getString(R.string.sprvmain_downl_extraforms));
             settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
 			url = settings.getString(ServerPreferencesActivity.OPENHDS_KEY_SERVER, getString(R.string.default_openhdsserver));

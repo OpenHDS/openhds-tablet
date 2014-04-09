@@ -194,7 +194,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
 
     public void setLocationVisit(LocationVisit locationVisit) {
         this.locationVisit = locationVisit;
-        loginGreetingText.setText("Hello, " + locationVisit.getFieldWorker().getFirstName() + " "
+        loginGreetingText.setText(getString(R.string.hello_lbl)+", " + locationVisit.getFieldWorker().getFirstName() + " "
                 + locationVisit.getFieldWorker().getLastName());
     }
 

@@ -70,9 +70,9 @@ public class SyncDatabaseActivity extends Activity implements CollectEntitiesLis
 	private void initializeAlertDialog(){
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Are you sure you want to stop sync?")
+		builder.setMessage(getString(R.string.sync_db_stop_sync))
 		       .setCancelable(false)
-		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+		       .setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface d, int id) {
 		        	   entitiesTask.cancel(true); 
 		        	   finish();
@@ -80,7 +80,7 @@ public class SyncDatabaseActivity extends Activity implements CollectEntitiesLis
 		   			
 		           }
 		       })
-		       .setNegativeButton("No", new DialogInterface.OnClickListener() {
+		       .setNegativeButton(getString(R.string.no_lbl), new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface d, int id) {
 		                //dialog.cancel();
 		        	Toast.makeText(getApplicationContext(),	getString(R.string.sync_restarting), Toast.LENGTH_SHORT).show();
@@ -96,8 +96,8 @@ public class SyncDatabaseActivity extends Activity implements CollectEntitiesLis
 	private void startSync() {
 
 		if (entitiesTask == null) {
-			dialog.setTitle("Working...");
-			dialog.setMessage("Do not interrupt");
+			dialog.setTitle(getString(R.string.dialog_working_lbl));
+			dialog.setMessage(getString(R.string.dialog_dont_interrupt_lbl));
 			dialog.show();
 			
 			entitiesTask = new SyncEntitiesTask(url, username, password,

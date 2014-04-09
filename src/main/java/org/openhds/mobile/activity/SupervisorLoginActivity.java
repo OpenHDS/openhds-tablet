@@ -57,22 +57,22 @@ public class SupervisorLoginActivity extends AbstractActivity {
 		Dialog dialog;
 		switch (id) {
 		case DIALOG_BAD_AUTH:
-			dialog = buildFailedDialog("Failed to authenticate username and password");
+			dialog = buildFailedDialog(getString(R.string.sprvlogin_bad_auth));
 			break;
 		case PROGRESS_DIALOG:
 			dialog = buildProgressDialog();
 			break;
 		case DIALOG_CREATED_USER:
-			dialog = buildSuccessDialog("Successfully created new user");
+			dialog = buildSuccessDialog(getString(R.string.sprvlogin_created_user));
 			break;
 		case DIALOG_NEW_USER:
 			dialog = buildNewUserDialog();
 			break;
 		case DIALOG_CONNECTION_ERROR:
-			dialog = buildFailedDialog("There was a problem communicating with the server");
+			dialog = buildFailedDialog(getString(R.string.sprvlogin_connection_error));
 			break;
 		case DIALOG_ERROR_USER:
-			dialog = buildFailedDialog("There was an error creating the user");
+			dialog = buildFailedDialog(getString(R.string.sprvlogin_error_user));
 			break;
 		default:
 			dialog = null;
@@ -82,9 +82,9 @@ public class SupervisorLoginActivity extends AbstractActivity {
 	}
 
 	private Dialog buildNewUserDialog() {
-		return buildGenericOkDialog("User not recognized",
-				"Do you want to authenticate with the server?")
-				.setPositiveButton("Yes",
+		return buildGenericOkDialog(getString(R.string.sprvlogin_user_notrecon),
+				getString(R.string.sprvlogin_authenticate_with_server))
+				.setPositiveButton(getString(R.string.yes_lbl),
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int which) {
@@ -93,7 +93,7 @@ public class SupervisorLoginActivity extends AbstractActivity {
 								executeAuthenticateTask();
 							}
 						})
-				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+				.setNegativeButton(getString(R.string.no_lbl), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 					}
 				}).create();
@@ -118,7 +118,7 @@ public class SupervisorLoginActivity extends AbstractActivity {
 	}
 
 	private Dialog buildFailedDialog(String message) {
-		return buildGenericOkDialog("Error", message).setPositiveButton("Ok",
+		return buildGenericOkDialog(getString(R.string.error_lbl), message).setPositiveButton("Ok",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 					}
@@ -133,7 +133,7 @@ public class SupervisorLoginActivity extends AbstractActivity {
 	}
 
 	private Dialog buildSuccessDialog(String message) {
-		return buildGenericOkDialog("Success", message).setPositiveButton("Ok",
+		return buildGenericOkDialog(getString(R.string.success_lbl), message).setPositiveButton("Ok",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
@@ -145,8 +145,8 @@ public class SupervisorLoginActivity extends AbstractActivity {
 	private Dialog buildProgressDialog() {
 		ProgressDialog dialog = new ProgressDialog(this);
 		dialog.setCancelable(true);
-		dialog.setTitle("Please Wait");
-		dialog.setMessage("Trying to authenticate...");
+		dialog.setTitle(getString(R.string.please_wait_lbl));
+		dialog.setMessage(getString(R.string.trying_to_authenticate_lbl));
 		dialog.setIndeterminate(true);
 
 		return dialog;
@@ -179,14 +179,14 @@ public class SupervisorLoginActivity extends AbstractActivity {
 	private boolean isValidated() {
 		String user = getUsernameValue();
 		if ("".equals(user.trim())) {
-			Toast.makeText(getBaseContext(), "Please enter in a user",
+			Toast.makeText(getBaseContext(), getString(R.string.sprvlogin_enter_in_user),
 					Toast.LENGTH_LONG).show();
 			return false;
 		}
 
 		String password = getPasswordValue();
 		if ("".equals(password.trim())) {
-			Toast.makeText(getBaseContext(), "Please enter in a password",
+			Toast.makeText(getBaseContext(), getString(R.string.sprvlogin_enter_in_pass),
 					Toast.LENGTH_LONG).show();
 			return false;
 		}
@@ -248,7 +248,7 @@ public class SupervisorLoginActivity extends AbstractActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add("Server Preferences");
+		menu.add(getString(R.string.server_preferences_lbl));
 		return true;
 	}
 

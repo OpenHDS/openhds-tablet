@@ -85,9 +85,9 @@ public class FieldWorkerLoginActivity extends Activity implements OnClickListene
 		switch (view.getId()) {
 		case R.id.registerChkBox: 
 			if (registerChkBox.isChecked()) 
-				loginButton.setText(getString(R.string.register));
+				loginButton.setText(getString(R.string.fwlogin_registerlbl));
 			else 
-				loginButton.setText(getString(R.string.login_btn));
+				loginButton.setText(getString(R.string.fwlogin_loginlbl));
 			break;
 		case R.id.loginBtn: 
 			
@@ -105,7 +105,7 @@ public class FieldWorkerLoginActivity extends Activity implements OnClickListene
                 }
 			}
 			else {
-                dialog = ProgressDialog.show(this, "Authenticating...", "Please Wait");
+                dialog = ProgressDialog.show(this, getString(R.string.authenticating_lbl), getString(R.string.please_wait_lbl));
                 new AuthenticateFieldWorker(getContentResolver(), extId, password, new Listener() {
 
                     public void onAuthenticated(FieldWorker fw) {
@@ -192,8 +192,8 @@ public class FieldWorkerLoginActivity extends Activity implements OnClickListene
 	private void initializeProgressDialog() {
         dialog = new ProgressDialog(this);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        dialog.setTitle("Working...");
-        dialog.setMessage("Do not interrupt");
+        dialog.setTitle(getString(R.string.dialog_working_lbl));
+        dialog.setMessage(getString(R.string.dialog_dont_interrupt_lbl));
         dialog.setCancelable(true);
         dialog.setOnCancelListener(new MyOnCancelListener());
 	}

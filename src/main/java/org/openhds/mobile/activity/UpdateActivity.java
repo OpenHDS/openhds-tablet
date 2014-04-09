@@ -263,8 +263,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             }
 
             Individual individual = (Individual) data.getExtras().getSerializable("individual");
+            if (individual!=null) 
             filledForm.setIntervieweeId(individual.getExtId());	
             loadForm(SELECTED_XFORM);
+        
 
 	}
 
@@ -282,7 +284,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             showProgressFragment();
             new CheckLocationFormStatus(getContentResolver(), contentUri).execute();
         } else {
-            Toast.makeText(this, "There was a problem with ODK", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.odk_problem_lbl), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -389,7 +391,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             showProgressFragment();
             new CheckFormStatus(getContentResolver(), contentUri).execute();
         } else {
-            Toast.makeText(this, "There was a problem with ODK", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.odk_problem_lbl), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -427,7 +429,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showingProgress = true;
         FragmentTransaction txn = getFragmentManager().beginTransaction();
-        txn.replace(R.id.middle_col, progressFragment).commit();
+        txn.remove(progressFragment);
+        txn.add(R.id.middle_col, progressFragment).commit();
     }
 
     void hideProgressFragment() {
@@ -437,8 +440,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showingProgress = false;
         FragmentTransaction txn = getFragmentManager().beginTransaction();
-        txn.remove(progressFragment);
-        txn.add(R.id.middle_col, vf).commitAllowingStateLoss();
+        if (!vf.isAdded()) {
+        	txn.add(R.id.middle_col, vf).commitAllowingStateLoss();
+        } else {
+        	txn.show(vf);
+        }
+        
     }
 
     /**
@@ -658,11 +665,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         formUnFinished = true;
         if (xformUnfinishedDialog == null) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Warning");
-            alertDialogBuilder.setMessage("Form started but not saved. "
-                    + "This form instance will be deleted. What do you want to do?");
+            alertDialogBuilder.setTitle(getString(R.string.warning_lbl));
+            alertDialogBuilder.setMessage(getString(R.string.update_unfinish_msg1));
             alertDialogBuilder.setCancelable(true);
-            alertDialogBuilder.setPositiveButton("Delete form", new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setPositiveButton(getString(R.string.update_unfinish_pos_button), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     formUnFinished = false;
                     xformUnfinishedDialog.hide();
@@ -670,7 +676,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                             new String[] { InstanceProviderAPI.STATUS_INCOMPLETE });
                 }
             });
-            alertDialogBuilder.setNegativeButton("Edit form", new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setNegativeButton(getString(R.string.update_unfinish_neg_button), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     formUnFinished = false;
                     xformUnfinishedDialog.hide();
@@ -686,10 +692,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private void createXFormNotFoundDialog() {
         xFormNotFound = true;
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Warning");
-        alertDialogBuilder.setMessage("The XForm could not be found within Open Data Kit Collect. "
-                + "Please make sure that it exists and it's named correctly.");
-        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+          alertDialogBuilder.setTitle(getString(R.string.warning_lbl));
+          alertDialogBuilder.setMessage(getString(R.string.update_xform_not_found_msg));
+          alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 xFormNotFound = false;
             }
@@ -750,10 +755,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     public void onFinishVisit() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Visit");
-        alertDialogBuilder.setMessage("Did you capture all events and want to finish the visit?");
+        alertDialogBuilder.setTitle(getString(R.string.visit_lbl));
+        alertDialogBuilder.setMessage(getString(R.string.update_finish_visit_msg));
         alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             	if(menuItemForm != null) {
                   	menuItemForm.setVisible(false);
@@ -766,7 +771,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 vf.onLoaderReset(null);    
                 }
         });
-        alertDialogBuilder.setNegativeButton("Cancel", null);
+        alertDialogBuilder.setNegativeButton(getString(R.string.cancel_lbl), null);
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
@@ -810,8 +815,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     
     public void onSGexists() {
     	 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-         alertDialogBuilder.setTitle("Socialgroup");
-         alertDialogBuilder.setMessage("The Socialgroup for the location selected is already existing.");
+         alertDialogBuilder.setTitle(getString(R.string.socialgroup_lbl));
+         alertDialogBuilder.setMessage(getString(R.string.update_on_sgexists_msg));
          alertDialogBuilder.setCancelable(true);
          alertDialogBuilder.setPositiveButton("Ok", null);
          AlertDialog alertDialog = alertDialogBuilder.create();
@@ -837,17 +842,17 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     private void createInMigrationFormDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("In Migration");
-        alertDialogBuilder.setMessage("Is this an Internal or External In Migration event?");
+        alertDialogBuilder.setTitle(getString(R.string.in_migration_lbl));
+        alertDialogBuilder.setMessage(getString(R.string.update_create_inmigration_msg));
         alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setPositiveButton("Internal", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
+        alertDialogBuilder.setPositiveButton(getString(R.string.update_create_inmigration_pos_button), new DialogInterface.OnClickListener() {
+        	 public void onClick(DialogInterface dialog, int which) {
             	extInm= true;
             	startFilterActivity(FILTER_INMIGRATION);
-                
+     
             }
         });
-        alertDialogBuilder.setNegativeButton("External", new DialogInterface.OnClickListener() {
+             alertDialogBuilder.setNegativeButton(getString(R.string.update_create_inmigration_neg_button), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 showProgressFragment();
                 extInm= true;
@@ -880,8 +885,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     
 	private void onFinishExternalInmigration() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Inmigration");
-        alertDialogBuilder.setMessage("Please, now create a Membership for the individual");
+        alertDialogBuilder.setTitle(getString(R.string.in_migration_lbl));
+        alertDialogBuilder.setMessage(getString(R.string.update_finish_ext_inmigration_msg));
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton("Ok", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -890,15 +895,15 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     private void buildMotherDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Mother");
-        alertDialogBuilder.setMessage("Is the mother known and registered in the system?");
+        alertDialogBuilder.setTitle(getString(R.string.mother_lbl));
+        alertDialogBuilder.setMessage(getString(R.string.update_build_mother_msg));
         alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 startFilterActivity(FILTER_INMIGRATION_MOTHER);
             }
         });
-        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setNegativeButton(getString(R.string.no_lbl), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 filledForm.setMotherExtId("UNK");
                 buildFatherDialog();
@@ -910,15 +915,15 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     private void buildFatherDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("father");
-        alertDialogBuilder.setMessage("Is the father known and registered in the system?");
+       alertDialogBuilder.setTitle(getString(R.string.father_lbl));
+        alertDialogBuilder.setMessage(getString(R.string.update_build_father_msg));
         alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
+        alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
+        	  public void onClick(DialogInterface dialog, int which) {
                 startFilterActivity(FILTER_INMIGRATION_FATHER);
             }
         });
-        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setNegativeButton(getString(R.string.no_lbl), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 filledForm.setFatherExtId("UNK");
                 loadForm(SELECTED_XFORM);
@@ -986,7 +991,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     private void buildPregnancyLiveBirthCountDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Number of Outcomes").setCancelable(true)
+        builder.setTitle(getString(R.string.update_build_pregnancy_lbr_count_msg)).setCancelable(true)
                 .setItems(new String[] {"1", "2", "3", "4" }, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         showProgressFragment();
@@ -1018,12 +1023,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             hideProgressFragment();
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(UpdateActivity.this);
-            alertDialogBuilder.setTitle("Choose Father");
+            alertDialogBuilder.setTitle(getString(R.string.update_pregoutcome_choose_father));
             alertDialogBuilder.setCancelable(true);
 
             if (father != null) {
                 String fatherName = father.getFullName() + " (" + father.getExtId() + ")";
-                String items[] = { fatherName, "Search HDSS", "Father not within HDSS" };
+                String items[] = { fatherName, getString(R.string.update_pregoutcome_search_hdss), getString(R.string.update_pregoutcome_father_not_found) };
                 alertDialogBuilder.setItems(items, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int choice) {
                         if (choice == 0) {
@@ -1038,7 +1043,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 });
             } else {
                 Toast.makeText(getApplicationContext(), getString(R.string.fatherNotFound), Toast.LENGTH_LONG).show();
-                String items[] = { "Search HDSS", "Not within HDSS" };
+                String items[] = { getString(R.string.update_pregoutcome_search_hdss), getString(R.string.update_pregoutcome_not_within_hdss) };
                 alertDialogBuilder.setItems(items, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int choice) {
                         if (choice == 0) {
@@ -1254,7 +1259,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select a Household for the Individual");
+        builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
                 new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
                         OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
@@ -1266,7 +1271,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 appendSocialGroupFromCursor(cursor);
             }
         });
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(getString(R.string.cancel_lbl), null);
         householdDialog = builder.create();
         householdDialog.show();
     }

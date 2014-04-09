@@ -15,7 +15,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Find Location with GeoPoint"
+	        android:text="@string/findLocationGeoPointBtn_lbl"
 	        android:enabled="false" />
 	    
 	    <Button
@@ -25,7 +25,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Create Location"
+	        android:text="@string/createLocationBtn_lbl"
 	        android:enabled="false" />
 	    
 	    <Button
@@ -35,7 +35,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Create Visit"
+	        android:text="@string/createVisitBtn_lbl"
 	        android:enabled="false" />
 	    
 	     <Button
@@ -45,7 +45,7 @@
 	        android:layout_marginTop="22dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Household"
+	        android:text="@string/householdBtn_lbl"
 	        android:enabled="false"  />
 	    
 	     <Button
@@ -55,7 +55,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Membership"
+	        android:text="@string/membershipBtn_lbl"
 	        android:enabled="false"  />
 	    
 	     <Button
@@ -65,7 +65,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Relationship"
+	        android:text="@string/relationshipBtn_lbl"
 	        android:enabled="false"  />
 	    
 	    <Button
@@ -75,7 +75,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="In Migration"
+	        android:text="@string/inMigrationBtn_lbl"
 	        android:enabled="false"  />
 	    
 	     <Button
@@ -85,7 +85,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Out Migration"
+	        android:text="@string/outMigrationBtn_lbl"
 	        android:enabled="false"  />
 	     
 	      <Button
@@ -95,7 +95,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Pregnancy Observation"
+	        android:text="@string/pregRegBtn_lbl"
 	        android:enabled="false"  />
 	      
 	       <Button
@@ -105,7 +105,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Pregnancy Outcome"
+	        android:text="@string/birthRegBtn_lbl"
 	        android:enabled="false"  />
 	       
 	     <Button
@@ -115,7 +115,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Death"
+	        android:text="@string/deathBtn_lbl"
 	        android:enabled="false"  />
 	          
 	    <Button
@@ -125,7 +125,7 @@
 	        android:layout_marginTop="22dp"
 	        android:layout_marginLeft="20dp"
 	        android:layout_gravity="center"
-	        android:text="Finish Visit"
+	        android:text="@string/finishVisitBtn_lbl"
 	        android:enabled="false"  />
 	
 	</LinearLayout>

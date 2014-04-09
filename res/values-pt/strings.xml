@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="amendments">Correções</string>
+    <string name="app_name">OpenHDS Mobile</string>
+    <string name="bad_authentication">Falhou a autenticação</string>
+    <string name="bad_xml">Erro ao converter XML</string>
+    <string name="changePassword">Alterar Senha</string>
+    <string name="changeServer">Alterar Servidor</string>
+    <string name="changeUsername">Alterar Nome do usuário</string>
+    <string name="configuration">Configuração</string>
+    <string name="configureDatabase">Configurar Base de Dados</string>
+    <string name="databaseSync">Sincr. com Base de dados OpenHDS</string>
+    <string name="default_server_url">https://openhds.ihi.or.tz/openhdsRUR/mobile-interop</string>
+    <string name="default_openhdsserver">https://openhds.ihi.or.tz/openhdsRUR</string>
+    <string name="default_username">orvaquim</string>
+    <string name="default_password">holahola</string>
+    <string name="delete_form_btn">Apagar Formulário</string>
+    <string name="download_form_button">Baixar Formulários</string>
+    <string name="download_extraform_button">Baixar Form. Extras</string>
+    <string name="failure_reasons_txt">Erros:</string>
+    <string name="fatherNotFound">O Pai não foi encontrado</string>
+    <string name="field_worker_already_exists">Trabalhador de Campo já existe!</string>
+    <string name="field_worker_created">Trabalhador de Campo foi criado com sucesso</string>
+    <string name="form_status">Estado do Form.:</string>
+    <string name="form_view_lbl">Visualizar Formulário</string>
+    <string name="hello">Olá</string>
+    <string name="household_not_found">Não foi possível encontrar um Agregado Familiar para este Indivíduo</string>
+    <string name="idGenerationFailure">Um erro ocorreu ao gerar uma ID</string>
+    <string name="location_lbl">Localização:</string>
+    <string name="form_lbl">Formulário:</string>
+    <string name="login_btn">Entrar</string>
+    <string name="logout_btn">Sair</string>
+    <string name="main_txt">Gestor de Formulário</string>
+    <string name="openhdswebservice">OpenHDS Web Service</string>
+    <string name="owner_txt">Form Owner Id:</string>
+    <string name="password">Senha do OpenHDS</string>
+    <string name="retrieving_fieldworkers_interrupted">A Obtenção de trabalhadores de campo foi interropida</string>
+    <string name="send_to_odk_btn">Editar em ODK</string>
+    <string name="shared_pref_file_name">server_prefs</string>
+    <string name="shared_pref_server_url_key">server_url</string>
+	<string name="syncDatabase">Sincr. Base de Dados</string>
+	<string name="syncDatabaseMessage">Esta operação vai tentar descarregar entidades do OpenHDS para o dispositivo. Por favor, seja paciente enquanto a operação está em progresso.</string>
+	<string name="sync_entities_failure">Ocorreu uma falha ao tentar baixar as entidades do OpenHDS</string>
+	<string name="sync_forms_successful">Formulários obtidos com sucesso</string>
+	<string name="sync_forms_failure">Ocorreu uma falha ao tentar obter os formulários</string>
+	<string name="sync_entities_successful">Entidades do OpenHDS obtidas com sucesso</string>
+    <string name="sync_interrupted">A Obtenção de entidades OpenHDS foi interropida</string>
+    <string name="sync_restarting">Recomeçando sincronização</string>
+    <string name="unable_to_connect">Não foi possível conectar-se</string>
+    <string name="url_error">URL inválida!</string>
+    <string name="update">Atualizar</string>
+    <string name="username">Nome do usuário OpenHDS</string>
+    <string name="view_forms_btn">Ver meus formulários</string>
+	<string name="see_list">Ver Lista</string>
+    <string name="hierarchy1_lbl">Província:</string>
+    <string name="hierarchy1_hint_lbl">ExtId da Província</string>
+    <string name="hierarchy2_lbl">Distrito:</string>
+    <string name="hierarchy2_hint_lbl">ExtId do Distrito</string>
+    <string name="hierarchy3_lbl">Posto Admin.:</string>
+    <string name="hierarchy3_hint_lbl">ExtId do Posto Adm.</string>
+    <string name="hierarchy4_lbl">Localidade:</string>
+    <string name="hierarchy4_hint_lbl">ExtId da Localidade</string>    
+    <string name="location_hint_lbl">ExtId da Localização</string>
+    <string name="form_hint_lbl">Nome do Formulário</string>
+    <string name="firstname_lbl">Nome:</string>
+    <string name="firstname_hint_lbl">Nome</string>
+    <string name="lastname_lbl">Apelido:</string>
+    <string name="lastname_hint_lbl">Apelido</string>
+    <string name="gender_lbl">Sexo:</string>
+    <string name="male_lbl">Masculino</string>
+    <string name="female_lbl">Feminino</string>
+    <string name="clear_lbl">Limpar</string>
+    <string name="search_lbl">Procurar</string>
+    <string name="search_loc_lbl">Procurar Localização</string>
+    <string name="search_form_lbl">Procurar Formulário</string>
+    <string name="search_individual_lbl">Procurar um Indivíduo</string>
+    
+    <!-- adding new strings from hardcoded -->
+    
+    <string name="hierarchy1Btn_lbl">Selecionar Província</string>
+    <string name="hierarchy2Btn_lbl">Selecionar Distrito</string>
+    <string name="hierarchy3Btn_lbl">Selecionar Posto Admin.</string>
+    <string name="hierarchy4Btn_lbl">Selecionar Localidade</string>
+    <string name="roundBtn_lbl">Selecionar Ronda</string>
+	<string name="roundNumber_lbl">Número da Ronda:</string>
+	<string name="roundStartDate_lbl">Data de Início:</string>
+	<string name="roundEndDate_lbl">Data do Fim:</string>
+	<string name="locationBtn_lbl">Selecionar Localização</string>
+	<string name="locationName_lbl">Nome:</string>
+	<string name="locationLatitude_lbl">Latitude:</string>
+	<string name="locationLongitude_lbl">Longitude:</string>
+	<string name="searchlBtn_lbl">Filtrar Localização</string>
+	<string name="individualBtn_lbl">Selecionar Indivíduo</string>
+	<string name="individualFirstName_lbl">Nome:</string>
+	<string name="individualLastName_lbl">Apelido:</string>
+	
+	<string name="findLocationGeoPointBtn_lbl">Encontrar Localização com (GeoPoint)</string>
+	<string name="createLocationBtn_lbl">Criar Localização</string>
+	<string name="createVisitBtn_lbl">Criar Visita</string>
+	<string name="clearIndividualBtn_lbl">Limpar Indivíduo</string>
+	<string name="householdBtn_lbl">Agregado Familiar</string>
+	<string name="membershipBtn_lbl">Membrasia</string>
+	<string name="relationshipBtn_lbl">Relacionamentos</string>
+	<string name="inMigrationBtn_lbl">Imigração</string>
+	<string name="outMigrationBtn_lbl">Emigração</string>
+	<string name="pregRegBtn_lbl">Observação de Gravidez</string>
+	<string name="birthRegBtn_lbl">Resultado da Gravidez</string>
+	<string name="deathBtn_lbl">Óbito</string>
+	<string name="finishVisitBtn_lbl">Terminar Visita</string>
+	
+	<string name="fworkerExtId_lbl">ExtId do Trabalhador de Campo</string>
+	<string name="registerChkBox_lbl">Registar Trab. de Campo no Dispositivo</string>
+	
+	<string name="fieldWorkerLoginBtn_lbl">Entrar como Trabalhador de Campo</string>
+	<string name="supervisorLoginBtn_lbl">Entrar como Supervisor</string>
+	
+	<string name="server_preferences_lbl">Definições do Servidor</string>
+	
+	<string name="configure_server_lbl">Configurar Servidor</string>
+	
+	<string name="locations_nearesert_you_lbl">Localizações mais próxima de você</string>
+	
+	<string name="hierarchy5Btn_lbl">Selecionar Bairro</string>
+	<string name="hierarchy5_lbl">Bairro:</string>
+    <string name="hierarchy5_hint_lbl">ExtId do Bairro</string>
+    
+    <string name="dialog_working_lbl">Executando...</string>
+	<string name="dialog_dont_interrupt_lbl">Não interrompa</string>
+		
+	<string name="formmenu_extraforms">Formulárs. Extras</string>
+	<string name="loginmenu_configure">Configurar Servidor</string>
+	
+	<string name="no_server_url">A URL do servidor não foi configurado. Configure a URL apartir das (Definições do Servidor)</string>
+	<string name="bad_server_url">URL do servidor incorrecto</string>
+		
+	<string name="fwlogin_registerlbl">Registar</string>
+	<string name="fwlogin_loginlbl">Entrar</string>
+	<string name="authenticating_lbl">Autenticando...</string>
+	<string name="please_wait_lbl">Espere por favor</string>
+		
+	<string name="please_choose_lbl">Por favor escolha </string>
+		
+	<string name="loading_lbl">Carregando</string>
+	<string name="loading_form_subm_lbl">Carregando formulário...</string>
+	<string name="loading_into_odk_lbl">Carregando formulário para o ODK Collect...</string>
+	<string name="formload_failed_writedir_lbl">Ocorreu um problema ao criar directórios</string>
+	<string name="formload_failed_writexml_lbl">Ocorreu um problema ao gravar o ficheiro XML</string>
+	<string name="formload_failed_odkins_lbl">Ocorreu um problema com o ODK Collect</string>
+	<string name="formload_already_completed_lbl">Este formulário já foi completado</string>
+	<string name="updating_lbl">Atualizando</string>
+	<string name="updating_form_info_lbl">Atualizando informação do formulário...</string>
+	<string name="completed_lbl">Completado</string>
+	<string name="not_completed_lbl">Não Completado</string>
+		
+	<string name="map_curlocation_format_lbl">Localização corrente \n Longitude: %1$s \n Latitude: %2$s</string>
+	<string name="warning_lbl">Aviso</string>
+	<string name="showmap_gps_disabled_lbl">O teu GPS aparenta estar desativado. Por favor, certifique-se que está ativo, para que possa utilizar este serviço.</string>
+	<string name="showmap_gps_turned_off">O provedor foi desativado pelo usuário. O GPS está desativado</string>
+	<string name="showmap_gps_turned_on">O provedor foi ativado pelo usuário. O GPS está ativo</string>
+	<string name="showmap_gps_changed">O estado do provedor foi alterado</string>
+		
+	<string name="sprvlogin_bad_auth">Falhou a autenticação do nome de usuário e senha</string>
+	<string name="sprvlogin_created_user">Usuário foi criado com sucesso</string>
+	<string name="sprvlogin_connection_error">Não foi possivel conectar-se ao servidor</string>
+	<string name="sprvlogin_error_user">Ocorreu um erro ao criar usuário</string>
+	<string name="sprvlogin_user_notrecon">Usuário não reconhecido</string>
+	<string name="sprvlogin_authenticate_with_server">Deseja autenticar com o servidor?</string>
+	<string name="yes_lbl">Sim</string>
+	<string name="no_lbl">Não</string>
+	<string name="error_lbl">Erro</string>
+	<string name="success_lbl">Sucesso</string>
+	<string name="trying_to_authenticate_lbl">Autenticando...</string>
+	<string name="sprvlogin_enter_in_user">Por favor introduza o usuário</string>
+	<string name="sprvlogin_enter_in_pass">Por favor introduza a senha</string>
+		
+	<string name="sprvmain_downlall_forms">Baixando todos formulários...</string>
+	<string name="working_lbl">Executando</string>
+	<string name="sprvmain_failed_auth">Nome do usuário e/ou senha incorrectos</string>
+	<string name="sprvmain_failure">Ocorreu um problema ao ler a resposta do Servidor</string>
+	<string name="sprvmain_connection_error">Ocorreu um erro com a conexão de rede</string>
+	<string name="sprvmain_connection_timeout">Conexão com o servidor excedeu o tempo limite</string>
+	<string name="sprvmain_on_success">Todos formulários foram baixados com sucesso</string>
+	<string name="sprvmain_no_content">Não existe formulários para baixar</string>
+	<string name="sprvmain_downl_extraforms">Baixando formulários extras...</string>
+		
+	<string name="sync_db_stop_sync">Tem certeza que deseja parar a sincronização?</string>
+		
+	<string name="odk_problem_lbl">Ocorreu um problema com o ODK</string>
+	<string name="update_unfinish_msg1">O formulário foi aberto mas não foi salvo. Esta instância do formulário será apagada. O que deseja fazer?</string>
+	<string name="update_unfinish_pos_button">Apagar formulário</string>
+	<string name="update_unfinish_neg_button">Alterar formulário</string>
+	<string name="update_xform_not_found_msg">O XForm não pôde ser encontrado dentro do ODK Collect. Por favor, certifique-se que ele existe e que foi escrito corretamente.</string>
+	<string name="visit_lbl">Visit</string>
+	<string name="update_finish_visit_msg">Já capturou todos eventos e deseja terminar a visita?</string>
+	<string name="cancel_lbl">Cancelar</string>
+	<string name="socialgroup_lbl">Grupo Social</string>
+	<string name="update_on_sgexists_msg">O grupo social para a localização seleciona já existe.</string>
+	<string name="in_migration_lbl">Imigração</string>
+	<string name="update_create_inmigration_msg">É esta uma Imigração Interna ou Externa?</string>
+	<string name="update_create_inmigration_pos_button">Interna</string>
+	<string name="update_create_inmigration_neg_button">Externa</string>
+	<string name="update_finish_ext_inmigration_msg">Por favor, agora crie uma Associação(Membership) para o individuo</string>
+	<string name="mother_lbl">Mãe</string>
+	<string name="update_build_mother_msg">É a mãe conhecida e está registada no sistema?</string>
+	<string name="father_lbl">Pai</string>
+	<string name="update_build_father_msg">É a pai conhecido e está registada no sistema?</string>
+	<string name="update_build_pregnancy_lbr_count_msg">Número de resultados</string>
+	<string name="update_pregoutcome_choose_father">Escolher Pai</string>
+	<string name="update_pregoutcome_search_hdss">Pesquisar HDSS</string>
+	<string name="update_pregoutcome_father_not_found">O Pai não está dentro do HDSS</string>
+	<string name="update_pregoutcome_not_within_hdss">Não está dentro do HDSS</string>
+	<string name="update_load_finished_select_hh_msg">Selecione o Agregado para o individuo</string>
+
+	<string name="hello_lbl">Olá</string>
+	
+	<string name="fwlogin_task_retrieving_fws">Obtendo trabalhadores de campo</string>
+</resources>

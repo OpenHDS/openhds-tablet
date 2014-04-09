@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="Field Worker ExtId" />
+        android:text="@string/fworkerExtId_lbl" />
 
     <EditText
         android:id="@+id/extIdText"
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="Register Field Worker on Device" />
+        android:text="@string/registerChkBox_lbl" />
 
     <Button
         android:id="@+id/loginBtn"
@@ -47,6 +47,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="Login" />
+        android:text="@string/login_btn" />
     
 </LinearLayout>

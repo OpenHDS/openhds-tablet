@@ -55,7 +55,7 @@ public class FilterActivity extends Activity implements ValueListener, Selection
 
     public void onIndividualSelected(Individual individual) {
         if (requireGender != null && !requireGender.equals(individual.getGender())) {
-            Toast.makeText(getApplicationContext(), getString(R.string.choose)+ requireGender, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.please_choose_lbl) + requireGender, Toast.LENGTH_LONG).show();
             return;
         }
 

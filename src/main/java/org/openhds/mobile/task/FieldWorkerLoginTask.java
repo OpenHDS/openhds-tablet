@@ -36,6 +36,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -56,6 +57,8 @@ public class FieldWorkerLoginTask extends AsyncTask<Boolean, Void, Result> {
 	private List<FieldWorker> list;
     private ContentResolver resolver;
 		
+    private Context mContext;
+    
 	public FieldWorkerLoginTask(Context context, SharedPreferences settings, RetrieveFieldWorkersListener listener, 
 			ProgressDialog dialog, String extId, String password, boolean isRegistering) {
 		this.resolver = context.getContentResolver();
@@ -65,6 +68,7 @@ public class FieldWorkerLoginTask extends AsyncTask<Boolean, Void, Result> {
 		this.extId = extId;
 		this.password = password;
 		this.isRegistering = isRegistering;
+		this.mContext = context;
 		
 		list = new ArrayList<FieldWorker>();
 	}
@@ -159,7 +163,7 @@ public class FieldWorkerLoginTask extends AsyncTask<Boolean, Void, Result> {
 	
 	private Runnable changeMessageFieldWorker = new Runnable() {
 	    public void run() {
-	        dialog.setMessage("Retrieving Field Workers");
+	        dialog.setMessage(mContext.getResources().getString(R.string.fwlogin_task_retrieving_fws));
 	    }
 	};
 	

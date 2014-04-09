@@ -46,8 +46,8 @@ public class FormViewActivity extends AbstractActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.form_view);
 		formId = getFormIdFromIntent();
-		dialog = ProgressDialog.show(this, "Loading",
-				"Loading form submission...", true);
+		dialog = ProgressDialog.show(this, getString(R.string.loading_lbl),
+				getString(R.string.loading_form_subm_lbl), true);
 		store = new DatabaseAdapter(this);
 		new LoadRecordTask().execute();
 		Button deleteBtn = (Button) findViewById(R.id.delete_form_btn);
@@ -69,7 +69,7 @@ public class FormViewActivity extends AbstractActivity {
 		tv.setText(record.getFormType());
 		
 		tv = (TextView) findViewById(R.id.form_status_lbl);
-		tv.setText(record.isCompleted() ? "Completed" : "Not Completed");
+		tv.setText(record.isCompleted() ? getString(R.string.completed_lbl) : getString(R.string.not_completed_lbl));
 
 		tv = (TextView) findViewById(R.id.failure_messages);
 		StringBuilder builder = new StringBuilder();
@@ -84,8 +84,8 @@ public class FormViewActivity extends AbstractActivity {
 		if (!record.isCompleted()) {
 		editOdkBtn.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				dialog = ProgressDialog.show(FormViewActivity.this, "Loading",
-						"Loading form into ODK Collect...", true, true);
+				dialog = ProgressDialog.show(FormViewActivity.this, getString(R.string.loading_lbl),
+						getString(R.string.loading_into_odk_lbl), true, true);
 				new OdkFormLoadTask(record, new OdkFormLoadListener(),
 						getContentResolver(), store).execute();
 			}
@@ -99,17 +99,17 @@ public class FormViewActivity extends AbstractActivity {
 
 		public void onFailedWritingDirs() {
 			dialog.dismiss();
-			showToastWithText("There was a problem creating directories");
+			showToastWithText(getString(R.string.formload_failed_writedir_lbl));
 		}
 
 		public void onFailedWritingXmlFile() {
 			dialog.dismiss();
-			showToastWithText("There was a problem writing the XML file");
+			showToastWithText(getString(R.string.formload_failed_writexml_lbl));
 		}
 
 		public void onFailedOdkInsert() {
 			dialog.dismiss();
-			showToastWithText("There was a problem with ODK Collect");
+			showToastWithText(getString(R.string.formload_failed_odkins_lbl));
 		}
 
 		public void onSuccess(Uri contentUri) {
@@ -119,7 +119,7 @@ public class FormViewActivity extends AbstractActivity {
 		}
 
 		public void onFormAlreadyCompleted() {
-			showToastWithText("This form has already been completed");
+			showToastWithText(getString(R.string.formload_already_completed_lbl));
 		}
 
 		public void onOrphanForm() {
@@ -136,7 +136,7 @@ public class FormViewActivity extends AbstractActivity {
 	}
 
 	private void handleFormEntry(int resultCode) {
-		dialog  = ProgressDialog.show(this, "Updating", "Updating form information...", true);
+		dialog  = ProgressDialog.show(this, getString(R.string.updating_lbl), getString(R.string.updating_form_info_lbl), true);
 		new UpdateSubmissionTask().execute();
 	}
 	

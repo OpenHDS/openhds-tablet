@@ -20,7 +20,7 @@ public abstract class AbstractActivity extends Activity {
 		String url = sp.getString(ServerPreferencesActivity.INTEROP_SERVER, getString(R.string.default_server_url));
 
 		if (url.trim().length() == 0) {
-			showToastWithText("No server URL has been set. Set server URL from preferences");
+			showToastWithText(getString(R.string.no_server_url));
 			return null;
 		}
 
@@ -28,7 +28,7 @@ public abstract class AbstractActivity extends Activity {
 		try {
 			parsedUrl = new URL(url + path);
 		} catch (MalformedURLException e) {
-			showToastWithText("Bad Server URL");
+			showToastWithText(getString(R.string.bad_server_url));
 		}
 
 		return parsedUrl;

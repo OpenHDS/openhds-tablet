@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 	<item
 		android:id="@+id/extra_forms"
-		android:title="Extra Forms"
+		android:title="@string/formmenu_extraforms"
 		android:showAsAction="ifRoom|withText" />
 </menu>
 

@@ -5,22 +5,22 @@
 
     <Button
         android:id="@+id/fieldWorkerLoginBtn"
-        android:layout_width="250dp"
+        android:layout_width="350dp"
         android:layout_height="75dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="43dp"
-        android:text="Log in as Field Worker"
+        android:text="@string/fieldWorkerLoginBtn_lbl"
         android:textSize="20dp" />
 
     <Button
         android:id="@+id/supervisorLoginBtn"
-        android:layout_width="250dp"
+        android:layout_width="350dp"
         android:layout_height="75dp"
         android:layout_below="@+id/fieldWorkerLoginBtn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
-        android:text="Log in as Supervisor"
+        android:text="@string/supervisorLoginBtn_lbl"
         android:textSize="20dp" />
 
 </RelativeLayout>
