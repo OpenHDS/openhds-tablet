@@ -206,9 +206,10 @@ public class LocationVisit implements Serializable {
         //String visitPrefix = location.getExtId() + round.getRoundNumber();
         
         String suffix= round.getRoundNumber();
-    	if(suffix.length() < 3)
+    	while(suffix.length() < 3){
     		suffix="0"+suffix;
-    	    		
+    	}
+    	
         String generatedId = location.getExtId() + suffix ;
 
         /*Cursor cursor = resolver.query(OpenHDS.Visits.CONTENT_ID_URI_BASE,
