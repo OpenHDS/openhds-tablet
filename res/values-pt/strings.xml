@@ -215,4 +215,15 @@
 	<string name="hello_lbl">Olá</string>
 	
 	<string name="fwlogin_task_retrieving_fws">Obtendo trabalhadores de campo</string>
+	<string name="sync_task_downloading">Baixando </string>
+	<string name="sync_task_saving">Guardando </string>
+	<string name="sync_task_individuals">Indivíduos.</string>
+	<string name="sync_task_locations">Localizações.</string>
+	<string name="sync_task_loc_hierarchy">Hierarquia de Localização.</string>
+	<string name="sync_task_relationships">Relacionamentos.</string>
+	<string name="sync_task_rounds">Rondas.</string>
+	<string name="sync_task_socialgroups">Grupos Sociais/Agregados.</string>
+	<string name="sync_task_visits">Visitas.</string>
+	<string name="sync_task_saved">Guardado</string>
+	<string name="sync_task_items">ítens</string>
 </resources>

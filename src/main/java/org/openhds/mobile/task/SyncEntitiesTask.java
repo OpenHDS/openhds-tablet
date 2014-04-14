@@ -19,6 +19,7 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.openhds.mobile.OpenHDS;
+import org.openhds.mobile.R;
 import org.openhds.mobile.listener.CollectEntitiesListener;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -63,7 +64,8 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
 
     private State state;
     private Entity entity;
-
+    private Context mContext;
+    
     private enum State {
         DOWNLOADING, SAVING
     }
@@ -87,43 +89,44 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
         StringBuilder builder = new StringBuilder();
         switch (state) {
         case DOWNLOADING:
-            builder.append("Downloading ");
+            builder.append(mContext.getString(R.string.sync_task_downloading));
             break;
         case SAVING:
-            builder.append("Saving ");
+            builder.append(mContext.getString(R.string.sync_task_saving));
             break;
         }
 
         switch (entity) {
         case INDIVIDUAL:
-            builder.append(" Individuals.");
+            builder.append(mContext.getString(R.string.sync_task_individuals));
             break;
         case LOCATION:
-            builder.append(" Locations.");
+            builder.append(mContext.getString(R.string.sync_task_locations));
             break;
         case LOCATION_HIERARCHY:
-            builder.append(" Location Hierarchy.");
+            builder.append(mContext.getString(R.string.sync_task_loc_hierarchy));
             break;
         case RELATIONSHIP:
-            builder.append(" Relationships.");
+            builder.append(mContext.getString(R.string.sync_task_relationships));
             break;
         case ROUND:
-            builder.append(" Rounds.");
+            builder.append(mContext.getString(R.string.sync_task_rounds));
             break;
         case SOCIALGROUP:
-            builder.append(" Social Groups.");
+            builder.append(mContext.getString(R.string.sync_task_socialgroups));
             break;
         case VISIT:
-            builder.append(" Visits.");
+            builder.append(mContext.getString(R.string.sync_task_visits));
             break;
         }
 
         if (values.length > 0) {
-            builder.append(" Saved " + values[0] + " items");
+            builder.append(mContext.getString(R.string.sync_task_saved) + values[0] + mContext.getString(R.string.sync_task_items));
         }
 
         dialog.setMessage(builder.toString());
     }
+
 
     @Override
     protected Boolean doInBackground(Void... params) {
