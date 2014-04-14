@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
-    <h:title>Connect Under 5</h:title>
+    <h:title>connect_under_5</h:title>
     <model>
       <itext>
         <translation lang="Swahili">
@@ -29,6 +29,9 @@
           <text id="/connect_under_5/whoVisited/1:label">
             <value>WAJA </value>
           </text>
+          <text id="/connect_under_5/householdId:label">
+            <value>Namba ya Kaya</value>
+          </text>
           <text id="/connect_under_5/soughtTreatmentWhere/1:label">
             <value>Zahanati</value>
           </text>
@@ -53,6 +56,9 @@
           <text id="/connect_under_5/whoVisitedOther:label">
             <value>Nani alitembelea kaya hii kutoa huduma? (Mwingine)</value>
           </text>
+          <text id="/connect_under_5/visitId:label">
+            <value>Namba ya Uhudhurio</value>
+          </text>
           <text id="/connect_under_5/seekTreatment/2:label">
             <value>Hapana</value>
           </text>
@@ -74,8 +80,11 @@
           <text id="/connect_under_5/mostRecentAffliction/2:label">
             <value>Kupumua kwa shida</value>
           </text>
-          <text id="/connect_under_5/individId:label">
+          <text id="/connect_under_5/individualId:label">
             <value>PERM ID ya mtoto</value>
+          </text>
+          <text id="/connect_under_5/hadHomeVisit:label">
+            <value>Kwa ugonjwa wa hivi karibuni, kuna mtu yeyote alitembelea kaya hii kutoa huduma kwa mtoto?</value>
           </text>
           <text id="/connect_under_5/mostRecentAffliction/3:label">
             <value>Homa</value>
@@ -91,9 +100,6 @@
           </text>
           <text id="/connect_under_5/hadHomeVisit/2:label">
             <value>Hapana</value>
-          </text>
-          <text id="/connect_under_5/hadHomeVisit:label">
-            <value>Kwa ugonjwa wa hivi karibuni, kuna mtu yeyote alitembelea kaya hii kutoa huduma kwa mtoto?</value>
           </text>
           <text id="/connect_under_5/dob:label">
             <value>Tarehe ya kuzaliwa</value>
@@ -154,6 +160,9 @@
           <text id="/connect_under_5/whoVisited/1:label">
             <value>Community Health Workers</value>
           </text>
+          <text id="/connect_under_5/householdId:label">
+            <value>Household ID</value>
+          </text>
           <text id="/connect_under_5/soughtTreatmentWhere/1:label">
             <value>Dispensary</value>
           </text>
@@ -178,6 +187,9 @@
           <text id="/connect_under_5/whoVisitedOther:label">
             <value>Who visited the household to provide health services? (Other)</value>
           </text>
+          <text id="/connect_under_5/visitId:label">
+            <value>Visit ID</value>
+          </text>
           <text id="/connect_under_5/seekTreatment/2:label">
             <value>No</value>
           </text>
@@ -199,6 +211,9 @@
           <text id="/connect_under_5/mostRecentAffliction/2:label">
             <value>Breathing difficulties</value>
           </text>
+          <text id="/connect_under_5/individualId:label">
+            <value>PERM ID</value>
+          </text>
           <text id="/connect_under_5/hadHomeVisit:label">
             <value>For the last illness, was there a home visit?</value>
           </text>
@@ -216,9 +231,6 @@
           </text>
           <text id="/connect_under_5/hadHomeVisit/2:label">
             <value>No</value>
-          </text>
-          <text id="/connect_under_5/individId:label">
-            <value>-</value>
           </text>
           <text id="/connect_under_5/dob:label">
             <value>Date of birth</value>
@@ -260,8 +272,10 @@
           <start/>
           <deviceid/>
           <today/>
+          <householdId/>
+          <visitId/>
           <fieldWorkerId/>
-          <individId/>
+          <individualId/>
           <firstName/>
           <middleName/>
           <lastName/>
@@ -281,12 +295,14 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/connect_under_5/start" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/connect_under_5/deviceid" type="string"/>
       <bind jr:preload="date" jr:preloadParams="today" nodeset="/connect_under_5/today" type="date"/>
-      <bind nodeset="/connect_under_5/fieldWorkerId" type="string"/>
-      <bind nodeset="/connect_under_5/individId" required="true()" type="string"/>
+      <bind nodeset="/connect_under_5/householdId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/connect_under_5/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/connect_under_5/fieldWorkerId" readonly="true()" type="string"/>
+      <bind constraint="regex(.,'^[A-Z]{3}[0-9]{9}$')" jr:constraintMsg="Fuata muundo uliotolewa kama mfano. Herufi 3 za UPPERCASE ikifuatiwa na namba 9." nodeset="/connect_under_5/individualId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/connect_under_5/firstName" required="true()" type="string"/>
       <bind nodeset="/connect_under_5/middleName" required="true()" type="string"/>
       <bind nodeset="/connect_under_5/lastName" required="true()" type="string"/>
-      <bind constraint=".&lt;=/connect_under_5/today" nodeset="/connect_under_5/dob" required="true()" type="date"/>
+      <bind nodeset="/connect_under_5/dob" required="true()" type="date"/>
       <bind nodeset="/connect_under_5/feverLast2Wks" required="true()" type="select1"/>
       <bind nodeset="/connect_under_5/mostRecentAffliction" required="true()" type="select1"/>
       <bind nodeset="/connect_under_5/seekTreatment" required="true()" type="select1"/>
@@ -298,12 +314,18 @@
     </model>
   </h:head>
   <h:body>
+    <input ref="/connect_under_5/householdId">
+      <label ref="jr:itext('/connect_under_5/householdId:label')"/>
+    </input>
+    <input ref="/connect_under_5/visitId">
+      <label ref="jr:itext('/connect_under_5/visitId:label')"/>
+    </input>
     <input ref="/connect_under_5/fieldWorkerId">
       <label ref="jr:itext('/connect_under_5/fieldWorkerId:label')"/>
       <hint ref="jr:itext('/connect_under_5/fieldWorkerId:hint')"/>
     </input>
-    <input ref="/connect_under_5/individId">
-      <label ref="jr:itext('/connect_under_5/individId:label')"/>
+    <input ref="/connect_under_5/individualId">
+      <label ref="jr:itext('/connect_under_5/individualId:label')"/>
     </input>
     <input ref="/connect_under_5/firstName">
       <label ref="jr:itext('/connect_under_5/firstName:label')"/>

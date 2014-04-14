@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
-    <h:title>Connect Baby</h:title>
+    <h:title>connect_baby</h:title>
     <model>
       <itext>
         <translation lang="Swahili">
           <text id="/connect_baby/monthsOrYrsSinceLastNetTreatment/1:label">
             <value>Ndio</value>
+          </text>
+          <text id="/connect_baby/babyInfo/lastName:label">
+            <value>Jina la ukoo la mtoto</value>
           </text>
           <text id="/connect_baby/vaccinations/vitaminA1stDose/2:label">
             <value>Hapana</value>
@@ -23,9 +26,6 @@
           <text id="/connect_baby/vaccinations/polio2:label">
             <value>Polio2 Kapewa?</value>
           </text>
-          <text id="/connect_baby/babyInfo/childId:label">
-            <value>PERMID ya mtoto</value>
-          </text>
           <text id="/connect_baby/babyInfo/yrsOfEducationMother:label">
             <value>Idadi ya miaka iliokamilika aliyosoma mama:</value>
           </text>
@@ -40,6 +40,9 @@
           </text>
           <text id="/connect_baby/vaccinations/vitaminA1stDose/1:label">
             <value>Ndio</value>
+          </text>
+          <text id="/connect_baby/vaccinations/DPT_HB2Date:hint">
+            <value>Kama alipata chanjo lakini tarehe haikuandikwa jaza 6/6/1966</value>
           </text>
           <text id="/connect_baby/babyInfo/isBiologicalMother/2:label">
             <value>Hapana</value>
@@ -62,17 +65,17 @@
           <text id="/connect_baby/babyInfo/numVisits/5:label">
             <value>Mara ya tano</value>
           </text>
-          <text id="/connect_baby/babyInfo/childFirstName:label">
-            <value>Jina la kwanza la mtoto</value>
+          <text id="/connect_baby/babyInfo/fieldWorkerId:hint">
+            <value>kwa mfano FWAD1</value>
           </text>
           <text id="/connect_baby/vaccinations/DPT_HB1Date:label">
             <value>Tarehe ya kupewa DPT-HB1</value>
           </text>
-          <text id="/connect_baby/healthInformation:label">
-            <value>Taarifa za afya</value>
+          <text id="/connect_baby/babyInfo/daysB41stBreastFeed:label">
+            <value>Baada ya kuzaliwa, ilichukua siku ngapi kumnyonyesha ziwa la mama mtoto?</value>
           </text>
-          <text id="/connect_baby/vaccinations/DPT_HB2Date:hint">
-            <value>Kama alipata chanjo lakini tarehe haikuandikwa jaza 6/6/1966</value>
+          <text id="/connect_baby/babyInfo/dob:label">
+            <value>Tarehe ya kuzaliwa kwa mtoto</value>
           </text>
           <text id="/connect_baby/vaccinations/polio0Date:hint">
             <value>Kama alipata chanjo lakini tarehe haikuandikwa jaza 6/6/1966</value>
@@ -85,6 +88,9 @@
           </text>
           <text id="/connect_baby/vaccinations/bcgScar:label">
             <value>Imeacha kovu?</value>
+          </text>
+          <text id="/connect_baby/babyInfo/fieldWorkerId:label">
+            <value>ID ya MUHOJAJI</value>
           </text>
           <text id="/connect_baby/babyInfo/isBiologicalMotherLiving/2:label">
             <value>Hapana</value>
@@ -107,11 +113,14 @@
           <text id="/connect_baby/healthInformation/numWeightEntries:label">
             <value>Una nukuu vipimo vingapi leo?</value>
           </text>
+          <text id="/connect_baby/vaccinations/surua/2:label">
+            <value>Hapana</value>
+          </text>
           <text id="/connect_baby/babyInfo/numVisits/3:label">
             <value>Mara ya tatu</value>
           </text>
-          <text id="/connect_baby/vaccinations/polio1:label">
-            <value>Polio1 Kapewa?</value>
+          <text id="/connect_baby/babyInfo/hoursB41stBreastFeed:label">
+            <value>Baada ya kuzaliwa, ilichukua masaa mangapi kumnyonyesha ziwa la mama mtoto?</value>
           </text>
           <text id="/connect_baby/babyInfo/isChildHere/2:label">
             <value>Hapana</value>
@@ -119,14 +128,17 @@
           <text id="/connect_baby/healthInformation/isClinicCardAvailable:label">
             <value>Kuna kadi ya clinic au daftari?</value>
           </text>
+          <text id="/connect_baby/babyInfo/middleName:label">
+            <value>Jina la kati la mtoto</value>
+          </text>
           <text id="/connect_baby/babyInfo/motherMiddleName:hint">
             <value>Andika UNK kama namba haijulikani</value>
           </text>
           <text id="/connect_baby/vaccinations/polio2/2:label">
             <value>Hapana</value>
           </text>
-          <text id="/connect_baby/babyInfo/birthingPlace/1:label">
-            <value>Hospitali</value>
+          <text id="/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed/1:label">
+            <value>Dakika</value>
           </text>
           <text id="/connect_baby/babyInfo/birthingPlace:label">
             <value>Mtoto kazaliwa wapi?</value>
@@ -146,8 +158,8 @@
           <text id="/connect_baby/babyInfo/isChildHere/1:label">
             <value>Ndio</value>
           </text>
-          <text id="/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed/1:label">
-            <value>Dakika</value>
+          <text id="/connect_baby/babyInfo/birthingPlace/1:label">
+            <value>Hospitali</value>
           </text>
           <text id="/connect_baby/isNetTreated/1:label">
             <value>Ndio</value>
@@ -163,9 +175,6 @@
           </text>
           <text id="/connect_baby/babyInfo/numVisits/1:label">
             <value>Mara ya kwanza</value>
-          </text>
-          <text id="/connect_baby/babyInfo/childLastName:label">
-            <value>Jina la ukoo la mtoto</value>
           </text>
           <text id="/connect_baby/vaccinations/surua/1:label">
             <value>Ndio</value>
@@ -221,11 +230,17 @@
           <text id="/connect_baby/vaccinations/DPT_HB3/1:label">
             <value>Ndio</value>
           </text>
+          <text id="/connect_baby/babyInfo/individualId:label">
+            <value>PERMID ya mtoto</value>
+          </text>
           <text id="/connect_baby/healthInformation/hasChildWeightBeenMeasured/1:label">
             <value>Ndio</value>
           </text>
           <text id="/connect_baby/vaccinations/surua:label">
             <value>Chanjo ya surua kapewa?</value>
+          </text>
+          <text id="/connect_baby/babyInfo/middleName:hint">
+            <value>Andika UNK kama namba haijulikani</value>
           </text>
           <text id="/connect_baby/babyInfo/birthingPlaceOther:label">
             <value>Mtoto kazaliwa wapi? (Nyingine)</value>
@@ -241,6 +256,9 @@
           </text>
           <text id="/connect_baby/sleptUnderNet:label">
             <value>Je, mtoto alilala ndani ya chandarua kwa usiku uliyopita?</value>
+          </text>
+          <text id="/connect_baby/babyInfo/householdId:label">
+            <value>Kaya</value>
           </text>
           <text id="/connect_baby/vaccinations/DPT_HB2/1:label">
             <value>Ndio</value>
@@ -265,9 +283,6 @@
           </text>
           <text id="/connect_baby/babyInfo/dateChildLeft:label">
             <value>Tarehe ya mtoto kuondoka</value>
-          </text>
-          <text id="/connect_baby/babyInfo/childMiddleName:label">
-            <value>Jina la kati la mtoto</value>
           </text>
           <text id="/connect_baby/babyInfo/motherMiddleName:label">
             <value>Jina la kati la mama</value>
@@ -302,11 +317,8 @@
           <text id="/connect_baby/vaccinations/DPT_HB2Date:label">
             <value>Tarehe ya kupewa DPT-HB2</value>
           </text>
-          <text id="/connect_baby/babyInfo/childDob:label">
-            <value>Tarehe ya kuzaliwa kwa mtoto</value>
-          </text>
-          <text id="/connect_baby/babyInfo/hoursB41stBreastFeed:label">
-            <value>Baada ya kuzaliwa, ilichukua masaa mangapi kumnyonyesha ziwa la mama mtoto?</value>
+          <text id="/connect_baby/vaccinations/polio1:label">
+            <value>Polio1 Kapewa?</value>
           </text>
           <text id="/connect_baby/vaccinations/vitaminA1stDose:label">
             <value>VITAMIN A dozi ya kwanza kapewa?</value>
@@ -344,8 +356,8 @@
           <text id="/connect_baby/vaccinations/polio0/2:label">
             <value>Hapana</value>
           </text>
-          <text id="/connect_baby/sleptUnderNet/1:label">
-            <value>Ndio</value>
+          <text id="/connect_baby/babyInfo/firstName:label">
+            <value>Jina la kwanza la mtoto</value>
           </text>
           <text id="/connect_baby/vaccinations/polio2Date:hint">
             <value>Kama alipata chanjo lakini tarehe haikuandikwa jaza 6/6/1966</value>
@@ -356,17 +368,14 @@
           <text id="/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed:label">
             <value>Baada ya kuzaliwa, ilichukua muda gani kumnyonyesha ziwa la mama mtoto?</value>
           </text>
-          <text id="/connect_baby/babyInfo/daysB41stBreastFeed:label">
-            <value>Baada ya kuzaliwa, ilichukua siku ngapi kumnyonyesha ziwa la mama mtoto?</value>
+          <text id="/connect_baby/healthInformation:label">
+            <value>Taarifa za afya</value>
           </text>
           <text id="/connect_baby/lastTimeNetTreatedYears:label">
             <value>Ni miaka mingapi imepita tangu chandarua kiwekewe dawa?</value>
           </text>
           <text id="/connect_baby/vaccinations/DPT_HB1:label">
             <value>DPT-HB1 kapewa?</value>
-          </text>
-          <text id="/connect_baby/babyInfo/childMiddleName:hint">
-            <value>Andika UNK kama namba haijulikani</value>
           </text>
           <text id="/connect_baby/healthInformation/note:label">
             <value>Uzito wa mtoto uchukuliwe kutoka kwenye kadi ya kliniki. Kwa utembeleo wa kwanza andika uzito wote kama ulivyoandikwa kwenye kadi. Kwa utembeleo wa pili na kuendelea andkika uzito wa kwanza na wa mwisho.</value>
@@ -386,8 +395,8 @@
           <text id="/connect_baby/babyInfo/isChildHere:label">
             <value>Mtoto yupo?</value>
           </text>
-          <text id="/connect_baby/babyInfo/housholdId:label">
-            <value>Kaya</value>
+          <text id="/connect_baby/sleptUnderNet/1:label">
+            <value>Ndio</value>
           </text>
           <text id="/connect_baby/babyInfo/isBiologicalMotherLiving:label">
             <value>Je, mama wa mtoto yupo hai?</value>
@@ -398,13 +407,16 @@
           <text id="/connect_baby/monthsOrYrsSinceLastNetTreatment/2:label">
             <value>Hapana</value>
           </text>
-          <text id="/connect_baby/vaccinations/surua/2:label">
-            <value>Hapana</value>
+          <text id="/connect_baby/babyInfo/visitId:label">
+            <value>Namba ya Uhudhurio</value>
           </text>
         </translation>
         <translation lang="English">
           <text id="/connect_baby/monthsOrYrsSinceLastNetTreatment/1:label">
             <value>Yes</value>
+          </text>
+          <text id="/connect_baby/babyInfo/lastName:label">
+            <value>Child's last name</value>
           </text>
           <text id="/connect_baby/vaccinations/vitaminA1stDose/2:label">
             <value>No</value>
@@ -421,9 +433,6 @@
           <text id="/connect_baby/vaccinations/polio2:label">
             <value>Polio2 Administered?</value>
           </text>
-          <text id="/connect_baby/babyInfo/childId:label">
-            <value>Child ID</value>
-          </text>
           <text id="/connect_baby/babyInfo/yrsOfEducationMother:label">
             <value>Total number of years of education for the mother:</value>
           </text>
@@ -438,6 +447,9 @@
           </text>
           <text id="/connect_baby/vaccinations/vitaminA1stDose/1:label">
             <value>Yes</value>
+          </text>
+          <text id="/connect_baby/vaccinations/DPT_HB2Date:hint">
+            <value>If vaccinated but date is not available, enter 6/6/1966</value>
           </text>
           <text id="/connect_baby/babyInfo/isBiologicalMother/2:label">
             <value>No</value>
@@ -460,17 +472,17 @@
           <text id="/connect_baby/babyInfo/numVisits/5:label">
             <value>Fifth visit</value>
           </text>
-          <text id="/connect_baby/babyInfo/childFirstName:label">
-            <value>Child's First Name</value>
+          <text id="/connect_baby/babyInfo/fieldWorkerId:hint">
+            <value>e.g FWAD1</value>
           </text>
           <text id="/connect_baby/vaccinations/DPT_HB1Date:label">
             <value>Date DP-THB1 Administered</value>
           </text>
-          <text id="/connect_baby/healthInformation:label">
-            <value>Health Information</value>
+          <text id="/connect_baby/babyInfo/daysB41stBreastFeed:label">
+            <value>How many days after birth did it take before the child first breast fed from the mother?</value>
           </text>
-          <text id="/connect_baby/vaccinations/DPT_HB2Date:hint">
-            <value>If vaccinated but date is not available, enter 6/6/1966</value>
+          <text id="/connect_baby/babyInfo/dob:label">
+            <value>Childs date of birth</value>
           </text>
           <text id="/connect_baby/vaccinations/polio0Date:hint">
             <value>If vaccinated but date is not available, enter 6/6/1966</value>
@@ -483,6 +495,9 @@
           </text>
           <text id="/connect_baby/vaccinations/bcgScar:label">
             <value>Is there a scar?</value>
+          </text>
+          <text id="/connect_baby/babyInfo/fieldWorkerId:label">
+            <value>Fieldworker ID</value>
           </text>
           <text id="/connect_baby/babyInfo/isBiologicalMotherLiving/2:label">
             <value>No</value>
@@ -505,11 +520,14 @@
           <text id="/connect_baby/healthInformation/numWeightEntries:label">
             <value>Number of weight entries you are recording:</value>
           </text>
+          <text id="/connect_baby/vaccinations/surua/2:label">
+            <value>No</value>
+          </text>
           <text id="/connect_baby/babyInfo/numVisits/3:label">
             <value>Third visit</value>
           </text>
-          <text id="/connect_baby/vaccinations/polio1:label">
-            <value>Polio1 Administered?</value>
+          <text id="/connect_baby/babyInfo/hoursB41stBreastFeed:label">
+            <value>How many hours after birth did it take before the child first breast fed from the mother?</value>
           </text>
           <text id="/connect_baby/babyInfo/isChildHere/2:label">
             <value>No</value>
@@ -517,14 +535,17 @@
           <text id="/connect_baby/healthInformation/isClinicCardAvailable:label">
             <value>Is there a child/mother clinic card?</value>
           </text>
+          <text id="/connect_baby/babyInfo/middleName:label">
+            <value>Child's middle name</value>
+          </text>
           <text id="/connect_baby/babyInfo/motherMiddleName:hint">
             <value>Enter UNK if unknown</value>
           </text>
           <text id="/connect_baby/vaccinations/polio2/2:label">
             <value>No</value>
           </text>
-          <text id="/connect_baby/babyInfo/birthingPlace/1:label">
-            <value>Hospital</value>
+          <text id="/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed/1:label">
+            <value>Minutes</value>
           </text>
           <text id="/connect_baby/babyInfo/birthingPlace:label">
             <value>Where was the child born?</value>
@@ -544,8 +565,8 @@
           <text id="/connect_baby/babyInfo/isChildHere/1:label">
             <value>Yes</value>
           </text>
-          <text id="/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed/1:label">
-            <value>Minutes</value>
+          <text id="/connect_baby/babyInfo/birthingPlace/1:label">
+            <value>Hospital</value>
           </text>
           <text id="/connect_baby/isNetTreated/1:label">
             <value>Yes</value>
@@ -561,9 +582,6 @@
           </text>
           <text id="/connect_baby/babyInfo/numVisits/1:label">
             <value>First visit</value>
-          </text>
-          <text id="/connect_baby/babyInfo/childLastName:label">
-            <value>Child's last name</value>
           </text>
           <text id="/connect_baby/vaccinations/surua/1:label">
             <value>Yes</value>
@@ -619,11 +637,17 @@
           <text id="/connect_baby/vaccinations/DPT_HB3/1:label">
             <value>Yes</value>
           </text>
+          <text id="/connect_baby/babyInfo/individualId:label">
+            <value>Child ID</value>
+          </text>
           <text id="/connect_baby/healthInformation/hasChildWeightBeenMeasured/1:label">
             <value>Yes</value>
           </text>
           <text id="/connect_baby/vaccinations/surua:label">
             <value>Measles/Chickenpox vaccine Administered?Chanjo ya surua kapewa?</value>
+          </text>
+          <text id="/connect_baby/babyInfo/middleName:hint">
+            <value>Enter UNK if unknown</value>
           </text>
           <text id="/connect_baby/babyInfo/birthingPlaceOther:label">
             <value>Where was the child born? (Other)</value>
@@ -639,6 +663,9 @@
           </text>
           <text id="/connect_baby/sleptUnderNet:label">
             <value>Did the child sleep under a mosquito net last night?</value>
+          </text>
+          <text id="/connect_baby/babyInfo/householdId:label">
+            <value>Household</value>
           </text>
           <text id="/connect_baby/vaccinations/DPT_HB2/1:label">
             <value>Yes</value>
@@ -663,9 +690,6 @@
           </text>
           <text id="/connect_baby/babyInfo/dateChildLeft:label">
             <value>When did the child leave?</value>
-          </text>
-          <text id="/connect_baby/babyInfo/childMiddleName:label">
-            <value>Child's middle name</value>
           </text>
           <text id="/connect_baby/babyInfo/motherMiddleName:label">
             <value>Mothers Middle Name</value>
@@ -700,11 +724,8 @@
           <text id="/connect_baby/vaccinations/DPT_HB2Date:label">
             <value>Date DP-THB2 Administered</value>
           </text>
-          <text id="/connect_baby/babyInfo/childDob:label">
-            <value>Childs date of birth</value>
-          </text>
-          <text id="/connect_baby/babyInfo/hoursB41stBreastFeed:label">
-            <value>How many hours after birth did it take before the child first breast fed from the mother?</value>
+          <text id="/connect_baby/vaccinations/polio1:label">
+            <value>Polio1 Administered?</value>
           </text>
           <text id="/connect_baby/vaccinations/vitaminA1stDose:label">
             <value>Has the 1st dose of Vitamin A been administered?</value>
@@ -742,8 +763,8 @@
           <text id="/connect_baby/vaccinations/polio0/2:label">
             <value>No</value>
           </text>
-          <text id="/connect_baby/sleptUnderNet/1:label">
-            <value>Yes</value>
+          <text id="/connect_baby/babyInfo/firstName:label">
+            <value>Child's First Name</value>
           </text>
           <text id="/connect_baby/vaccinations/polio2Date:hint">
             <value>If vaccinated but date is not available, enter 6/6/1966</value>
@@ -754,17 +775,14 @@
           <text id="/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed:label">
             <value>How long after birth did it take before the child first breast fed from the mother?</value>
           </text>
-          <text id="/connect_baby/babyInfo/daysB41stBreastFeed:label">
-            <value>How many days after birth did it take before the child first breast fed from the mother?</value>
+          <text id="/connect_baby/healthInformation:label">
+            <value>Health Information</value>
           </text>
           <text id="/connect_baby/lastTimeNetTreatedYears:label">
             <value>How many years since the mosquito net last got treated?</value>
           </text>
           <text id="/connect_baby/vaccinations/DPT_HB1:label">
             <value>DPT-HB1 Administered?</value>
-          </text>
-          <text id="/connect_baby/babyInfo/childMiddleName:hint">
-            <value>Enter UNK if unknown</value>
           </text>
           <text id="/connect_baby/healthInformation/note:label">
             <value>The childs weight should be taken from the clinic card. For a 1st visit, enter ALL the childs weights just as it is on the card. For subsequent visits, just enter the first weight and last weight.</value>
@@ -784,8 +802,8 @@
           <text id="/connect_baby/babyInfo/isChildHere:label">
             <value>Is the the child here?</value>
           </text>
-          <text id="/connect_baby/babyInfo/housholdId:label">
-            <value>Household</value>
+          <text id="/connect_baby/sleptUnderNet/1:label">
+            <value>Yes</value>
           </text>
           <text id="/connect_baby/babyInfo/isBiologicalMotherLiving:label">
             <value>Is the biological mother alive?</value>
@@ -796,8 +814,8 @@
           <text id="/connect_baby/monthsOrYrsSinceLastNetTreatment/2:label">
             <value>No</value>
           </text>
-          <text id="/connect_baby/vaccinations/surua/2:label">
-            <value>No</value>
+          <text id="/connect_baby/babyInfo/visitId:label">
+            <value>Visit ID</value>
           </text>
         </translation>
       </itext>
@@ -810,17 +828,19 @@
             <interviewDate/>
             <bundleNo/>
             <roundNo/>
-            <housholdId/>
+            <visitId/>
+            <fieldWorkerId/>
+            <householdId/>
             <motherId/>
             <motherFirstName/>
             <motherMiddleName/>
             <motherLastName/>
             <yrsOfEducationMother/>
-            <childId/>
-            <childFirstName/>
-            <childMiddleName/>
-            <childLastName/>
-            <childDob/>
+            <individualId/>
+            <firstName/>
+            <middleName/>
+            <lastName/>
+            <dob/>
             <minHrsOrDaysB41stBreastFeed/>
             <minutesB41stBreastFeed/>
             <hoursB41stBreastFeed/>
@@ -887,17 +907,19 @@
       <bind nodeset="/connect_baby/babyInfo/interviewDate" required="true()" type="date"/>
       <bind nodeset="/connect_baby/babyInfo/bundleNo" required="true()" type="int"/>
       <bind nodeset="/connect_baby/babyInfo/roundNo" required="true()" type="int"/>
-      <bind nodeset="/connect_baby/babyInfo/housholdId" required="true()" type="string"/>
-      <bind nodeset="/connect_baby/babyInfo/motherId" required="true()" type="string"/>
+      <bind nodeset="/connect_baby/babyInfo/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/connect_baby/babyInfo/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/connect_baby/babyInfo/householdId" readonly="true()" required="true()" type="string"/>
+      <bind jr:constraintMsg="Fuata muundo uliotolewa kama mfano. Herufi 3 za UPPERCASE ikifuatiwa na namba 9." nodeset="/connect_baby/babyInfo/motherId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/connect_baby/babyInfo/motherFirstName" required="true()" type="string"/>
       <bind nodeset="/connect_baby/babyInfo/motherMiddleName" required="true()" type="string"/>
       <bind nodeset="/connect_baby/babyInfo/motherLastName" required="true()" type="string"/>
       <bind nodeset="/connect_baby/babyInfo/yrsOfEducationMother" required="true()" type="int"/>
-      <bind nodeset="/connect_baby/babyInfo/childId" required="true()" type="string"/>
-      <bind nodeset="/connect_baby/babyInfo/childFirstName" required="true()" type="string"/>
-      <bind nodeset="/connect_baby/babyInfo/childMiddleName" required="true()" type="string"/>
-      <bind nodeset="/connect_baby/babyInfo/childLastName" required="true()" type="string"/>
-      <bind nodeset="/connect_baby/babyInfo/childDob" required="true()" type="date"/>
+      <bind constraint="regex(.,'^[A-Z]{3}[0-9]{9}$')" jr:constraintMsg="Fuata muundo uliotolewa kama mfano. Herufi 3 za UPPERCASE ikifuatiwa na namba 9." nodeset="/connect_baby/babyInfo/individualId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/connect_baby/babyInfo/firstName" required="true()" type="string"/>
+      <bind nodeset="/connect_baby/babyInfo/middleName" required="true()" type="string"/>
+      <bind nodeset="/connect_baby/babyInfo/lastName" required="true()" type="string"/>
+      <bind nodeset="/connect_baby/babyInfo/dob" required="true()" type="date"/>
       <bind nodeset="/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed" required="true()" type="select1"/>
       <bind nodeset="/connect_baby/babyInfo/minutesB41stBreastFeed" relevant="selected(/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed,'1')" required="true()" type="int"/>
       <bind nodeset="/connect_baby/babyInfo/hoursB41stBreastFeed" relevant="selected(/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed,'2')" required="true()" type="int"/>
@@ -983,8 +1005,15 @@
       <input ref="/connect_baby/babyInfo/roundNo">
         <label ref="jr:itext('/connect_baby/babyInfo/roundNo:label')"/>
       </input>
-      <input ref="/connect_baby/babyInfo/housholdId">
-        <label ref="jr:itext('/connect_baby/babyInfo/housholdId:label')"/>
+      <input ref="/connect_baby/babyInfo/visitId">
+        <label ref="jr:itext('/connect_baby/babyInfo/visitId:label')"/>
+      </input>
+      <input ref="/connect_baby/babyInfo/fieldWorkerId">
+        <label ref="jr:itext('/connect_baby/babyInfo/fieldWorkerId:label')"/>
+        <hint ref="jr:itext('/connect_baby/babyInfo/fieldWorkerId:hint')"/>
+      </input>
+      <input ref="/connect_baby/babyInfo/householdId">
+        <label ref="jr:itext('/connect_baby/babyInfo/householdId:label')"/>
       </input>
       <input ref="/connect_baby/babyInfo/motherId">
         <label ref="jr:itext('/connect_baby/babyInfo/motherId:label')"/>
@@ -1003,21 +1032,21 @@
       <input ref="/connect_baby/babyInfo/yrsOfEducationMother">
         <label ref="jr:itext('/connect_baby/babyInfo/yrsOfEducationMother:label')"/>
       </input>
-      <input ref="/connect_baby/babyInfo/childId">
-        <label ref="jr:itext('/connect_baby/babyInfo/childId:label')"/>
+      <input ref="/connect_baby/babyInfo/individualId">
+        <label ref="jr:itext('/connect_baby/babyInfo/individualId:label')"/>
       </input>
-      <input ref="/connect_baby/babyInfo/childFirstName">
-        <label ref="jr:itext('/connect_baby/babyInfo/childFirstName:label')"/>
+      <input ref="/connect_baby/babyInfo/firstName">
+        <label ref="jr:itext('/connect_baby/babyInfo/firstName:label')"/>
       </input>
-      <input ref="/connect_baby/babyInfo/childMiddleName">
-        <label ref="jr:itext('/connect_baby/babyInfo/childMiddleName:label')"/>
-        <hint ref="jr:itext('/connect_baby/babyInfo/childMiddleName:hint')"/>
+      <input ref="/connect_baby/babyInfo/middleName">
+        <label ref="jr:itext('/connect_baby/babyInfo/middleName:label')"/>
+        <hint ref="jr:itext('/connect_baby/babyInfo/middleName:hint')"/>
       </input>
-      <input ref="/connect_baby/babyInfo/childLastName">
-        <label ref="jr:itext('/connect_baby/babyInfo/childLastName:label')"/>
+      <input ref="/connect_baby/babyInfo/lastName">
+        <label ref="jr:itext('/connect_baby/babyInfo/lastName:label')"/>
       </input>
-      <input ref="/connect_baby/babyInfo/childDob">
-        <label ref="jr:itext('/connect_baby/babyInfo/childDob:label')"/>
+      <input ref="/connect_baby/babyInfo/dob">
+        <label ref="jr:itext('/connect_baby/babyInfo/dob:label')"/>
       </input>
       <select1 ref="/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed">
         <label ref="jr:itext('/connect_baby/babyInfo/minHrsOrDaysB41stBreastFeed:label')"/>
