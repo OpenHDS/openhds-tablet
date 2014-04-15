@@ -14,10 +14,13 @@
     <string name="databaseSync">Sync with OpenHDS Database</string>
     <string name="choose">Please choose </string>
     <string name="default_server_url">http://solarmal.mbita.icipe.org:8080/openhdsMbita/mobile-interop</string>
-	<string name="default_openhds_server_url">http://130.111.132.88:8080/openhds</string>    
-	<string name="openhds_server_url">http://130.111.132.88:8080/openhds</string>
+	<string name="default_openhds_server_url">http://data-management.local:8080/openhds</string>    
+	<string name="openhds_server_url">http://data-management.local:8080/openhds</string>
     <string name="openhds_server_url_default_summary">Same URL used for OpenHDS Server via Web browser</string>    
 	<string name="openhds_server_url_key">openhds_server_url</string>
+	<string name="openhds_server_url_title">OpenHDS Server URL</string>
+	<string name="supervisor_login_url">/api/user/authenticate</string>	
+	<string name="supervisor_login">Supervisor Login</string>	
     <string name="default_openhdsserver">http://solarmal.mbita.icipe.org:8080/openhdsMbita</string>
     <string name="delete_form_btn">Delete Form</string>
     <string name="download_form_button">Download Forms</string>

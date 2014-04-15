@@ -7,6 +7,6 @@
         android:inputType="textUri"
         android:key="@string/openhds_server_url_key"
         android:summary="@string/openhds_server_url_default_summary"
-        android:title="OpenHDS Server URL" />
+        android:title="@string/openhds_server_url_title" />
 
 </PreferenceScreen>
