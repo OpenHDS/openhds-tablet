@@ -3,24 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:orientation="vertical">
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/login_pref_container"
+        android:layout_width="wrap_content"
+        android:layout_height="0px"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_weight="3" />
 
     <fragment
         android:id="@+id/fieldWorkerLoginFragment"
         android:name="org.openhds.mobile.fragment.FieldWorkerLoginFragment"
         android:layout_width="wrap_content"
         android:layout_height="0px"
-        android:layout_gravity="center"
-        android:layout_margin="70dp"
-        android:layout_weight="1" />
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_weight="3" />
 
     <fragment
         android:id="@+id/supervisorLoginFragment"
         android:name="org.openhds.mobile.fragment.SupervisorLoginFragment"
         android:layout_width="wrap_content"
         android:layout_height="0px"
-        android:layout_gravity="center"
-        android:layout_margin="70dp"
-        android:layout_weight="4" />
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_weight="14" />
 
 </LinearLayout>

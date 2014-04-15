@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 	<item
 		android:id="@+id/configure_server"
-		android:title="@string/loginmenu_configure"
+		android:title="@string/preferences"
 		android:showAsAction="ifRoom|withText" />
 </menu>
 

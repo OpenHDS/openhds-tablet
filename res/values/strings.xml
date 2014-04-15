@@ -140,6 +140,7 @@
 	<string name="supervisor_password_key">Supervisor Pw</string>		
 	
 	<string name="server_preferences_lbl">Server Preferences</string>
+	<string name="preferences">Preferences</string>	
 	
 	<string name="configure_server_lbl">Configure Server</string>
 	

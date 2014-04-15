@@ -40,7 +40,7 @@ public class LoginPreferenceFragment extends PreferenceFragment implements OnSha
     private void updatePreference(String key) {
 
         Preference preference = findPreference(key);
-        if (key.equals(getResources().getString(R.string.openhds_server_url))) {
+        if (key.equals(getResources().getString(R.string.openhds_server_url_key))) {
             EditTextPreference editTextPreference = (EditTextPreference) preference;
             if (validateUrl(editTextPreference.getText())) {
                 editTextPreference.setSummary(editTextPreference.getText());
