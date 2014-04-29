@@ -135,6 +135,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         }
 
         adapter.swapCursor(null);
+        //listener.updateButtons();
     }
 
     public void loadLocationHierarchy() {

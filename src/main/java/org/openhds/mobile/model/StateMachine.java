@@ -42,9 +42,9 @@ public class StateMachine {
 					+ state);
 		}
 
-		if (state.equals(currentState)) {
-			return;
-		}
+//		if (state.equals(currentState)) {
+//			return;
+//		}
 
 		fireOnExitListeners();
 		currentState = state;
@@ -85,4 +85,19 @@ public class StateMachine {
 			listener.onEnterState();
 		}
 	}
+	
+	public void transitionInSequence(String toState) {
+		Object stateArray[] = stateSet.toArray();
+        for (int i = 0; i < stateSet.size(); i++) {
+            String state = (String)stateArray[i];
+            
+            if (state.equals(toState)) {
+                break;
+            }
+
+            transitionTo(state);
+        }
+
+        transitionTo(toState);
+    }	
 }

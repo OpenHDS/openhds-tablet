@@ -267,5 +267,7 @@
     <string name="household_label">Household</string>
     <string name="individual_label">Individual</string>
     <string name="bottom_label">Bottom</string>
+    
+    <string name="hello_lbl">Hello</string>
 
 </resources>

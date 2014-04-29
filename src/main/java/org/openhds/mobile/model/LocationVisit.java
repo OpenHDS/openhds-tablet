@@ -94,7 +94,7 @@ public class LocationVisit implements Serializable {
         this.hierarchy1 = region;
         clearLevelsBelow(1);
     }
-
+    
     public void clearLevelsBelow(int i) {
         switch (i) {
         case 0:
@@ -133,6 +133,11 @@ public class LocationVisit implements Serializable {
         this.round = round;
         clearLevelsBelow(5);
     }
+    
+    public void setLocation(Location location) {
+        this.location = location;
+        clearLevelsBelow(6);
+    }    
 
     public Location getLocation() {
         return location;
@@ -160,10 +165,6 @@ public class LocationVisit implements Serializable {
         }
 
         return 5;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
     }
 
     public void createLocation(ContentResolver resolver) {

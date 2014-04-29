@@ -1,5 +1,11 @@
 package org.openhds.mobile.activity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
@@ -107,11 +113,54 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private Updatable updatable;
     private boolean extInm;
     private String jrFormId;
+    
+    //State machine stuff
+    
+	public static final String SELECT_HIERARCHY_1 = "Select Hierarchy 1";
+	public static final String SELECT_HIERARCHY_2 = "Select Hierarchy 2";
+	public static final String SELECT_HIERARCHY_3 = "Select Hierarchy 3";
+	public static final String SELECT_HIERARCHY_4 = "Select Hierarchy 4";
+	public static final String SELECT_ROUND = "Select Round";
+	public static final String SELECT_LOCATION = "Select Location";
+	public static final String CREATE_VISIT = "Create Visit";
+	public static final String SELECT_INDIVIDUAL = "Select Individual";
+	public static final String SELECT_EVENT = "Select Event";
+	public static final String FINISH_VISIT = "Finish Visit";
+	public static final String INMIGRATION = "Inmigration";
+	
+	private static final List<String> stateSequence = new ArrayList<String>();
+	private static final Map<String, Integer> stateLabels = new HashMap<String, Integer>();
+	static {
+		stateSequence.add(SELECT_HIERARCHY_1);
+		stateSequence.add(SELECT_HIERARCHY_2);
+		stateSequence.add(SELECT_HIERARCHY_3);
+		stateSequence.add(SELECT_HIERARCHY_4);
+		stateSequence.add(SELECT_ROUND);
+		stateSequence.add(SELECT_LOCATION);
+		stateSequence.add(CREATE_VISIT);
+		stateSequence.add(SELECT_INDIVIDUAL);
+		stateSequence.add(SELECT_EVENT);
+		stateSequence.add(FINISH_VISIT);
+		stateSequence.add(INMIGRATION);
+
+//		stateLabels.put(SELECT_HIERARCHY_1, R.string.region_label);
+//		stateLabels.put(SELECT_HIERARCHY_2, R.string.map_area_label);
+//		stateLabels.put(SELECT_HIERARCHY_3, R.string.sector_label);
+//		stateLabels.put(SELECT_HIERARCHY_4, R.string.household_label);
+//		stateLabels.put(SELECT_ROUND, R.string.individual_label);
+//		stateLabels.put(SELECT_LOCATION, R.string.bottom_label);
+//		stateLabels.put(CREATE_VISIT, R.string.bottom_label);
+//		stateLabels.put(SELECT_INDIVIDUAL, R.string.bottom_label);
+//		stateLabels.put(SELECT_EVENT, R.string.bottom_label);
+//		stateLabels.put(FINISH_VISIT, R.string.bottom_label);
+//		stateLabels.put(INMIGRATION, R.string.bottom_label);
+	}    
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
+        
         FieldWorker fw = (FieldWorker) getIntent().getExtras().getSerializable("fieldWorker");
         locationVisit.setFieldWorker(fw);
 
@@ -120,15 +169,97 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         txn.add(R.id.middle_col, vf).commit();
 
         sf = (SelectionFragment) getFragmentManager().findFragmentById(R.id.selectionFragment);
-        sf.setLocationVisit(locationVisit);
-
         ef = (EventFragment) getFragmentManager().findFragmentById(R.id.eventFragment);
-        ef.setLocationVisit(locationVisit);
-
+        
         ActionBar actionBar = getActionBar();
-        actionBar.show();
+        actionBar.show();        
+        
+        if(savedInstanceState == null){
+            //Create state machine
+            stateMachine = new StateMachine(new HashSet<String>(stateSequence), stateSequence.get(0));
+            
+            registerTransitions();
+	        sf.setLocationVisit(locationVisit);
+	        ef.setLocationVisit(locationVisit);   
+	        
+	        String state = "Select Hierarchy 1";
+	        stateMachine.transitionInSequence(state);
+        }
+        else{
+        	String state = (String)savedInstanceState.getSerializable("currentState");
+        	stateMachine = new StateMachine(new HashSet<String>(stateSequence), state);
+        	//restoreState(savedInstanceState);
+        	
+            locationVisit = (LocationVisit) savedInstanceState.getSerializable("locationvisit");
 
-        restoreState(savedInstanceState);
+            String uri = savedInstanceState.getString("uri");
+            if (uri != null)
+                contentUri = Uri.parse(uri);
+
+            if (savedInstanceState.getBoolean("xFormNotFound"))
+                createXFormNotFoundDialog();
+            if (savedInstanceState.getBoolean("unfinishedFormDialog"))
+                createUnfinishedFormDialog();
+
+            registerTransitions();
+            sf.setLocationVisit(locationVisit);
+            ef.setLocationVisit(locationVisit);
+            
+            //Restore last state
+            stateMachine.transitionInSequence(state);
+//            stateMachine.transitionTo(state);
+        	
+        }
+        
+    }
+    
+    /**
+     * At any given point in time, the screen can be rotated. This method is
+     * responsible for saving the screen state.
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putSerializable("locationvisit", locationVisit);
+        outState.putString("currentState", stateMachine.getState().toString());
+        outState.putBoolean("unfinishedFormDialog", formUnFinished);
+        outState.putBoolean("xFormNotFound", xFormNotFound);
+
+        if (contentUri != null)
+            outState.putString("uri", contentUri.toString());
+    }
+
+    /**
+     * This method is responsible for restoring the screen state.
+     */
+    private void restoreState(Bundle savedState) {
+        if (savedState != null) {
+            locationVisit = (LocationVisit) savedState.getSerializable("locationvisit");
+
+            String uri = savedState.getString("uri");
+            if (uri != null)
+                contentUri = Uri.parse(uri);
+
+            if (savedState.getBoolean("xFormNotFound"))
+                createXFormNotFoundDialog();
+            if (savedState.getBoolean("unfinishedFormDialog"))
+                createUnfinishedFormDialog();
+
+            sf.setLocationVisit(locationVisit);
+            ef.setLocationVisit(locationVisit);
+            
+            //Restore last state
+            String state = (String)savedState.getSerializable("currentState");
+            //stateMachine.transitionInSequence(state);
+            stateMachine.transitionTo(state);
+        }
+    }    
+    
+    @Override
+    protected void onStart() {
+    	// TODO Auto-generated method stub
+    	super.onStart();
     }
 
     /**
@@ -256,8 +387,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
     }
 
-    private void handleFilterIndivVisit(int resultCode, Intent data) {
-            if (resultCode != RESULT_OK) {
+    private void handleFilterIndivVisit(int resultCode, Intent data) { 	
+    		if (resultCode != RESULT_OK) {
                 return;
             }
 
@@ -266,7 +397,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             filledForm.setIntervieweeId(individual.getExtId());	
             loadForm(SELECTED_XFORM);
         
-
 	}
 
 	private void handleFatherBirthResult(int resultCode, Intent data) {
@@ -509,48 +639,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     /**
-     * At any given point in time, the screen can be rotated. This method is
-     * responsible for saving the screen state.
-     */
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putSerializable("locationvisit", locationVisit);
-        outState.putString("currentState", stateMachine.getState().toString());
-        outState.putBoolean("unfinishedFormDialog", formUnFinished);
-        outState.putBoolean("xFormNotFound", xFormNotFound);
-
-        if (contentUri != null)
-            outState.putString("uri", contentUri.toString());
-    }
-
-    /**
-     * This method is responsible for restoring the screen state.
-     */
-    private void restoreState(Bundle savedState) {
-        String state = "Select Hierarchy 1";
-        if (savedState != null) {
-            locationVisit = (LocationVisit) savedState.getSerializable("locationvisit");
-
-            String uri = savedState.getString("uri");
-            if (uri != null)
-                contentUri = Uri.parse(uri);
-
-            if (savedState.getBoolean("xFormNotFound"))
-                createXFormNotFoundDialog();
-            if (savedState.getBoolean("unfinishedFormDialog"))
-                createUnfinishedFormDialog();
-
-            sf.setLocationVisit(locationVisit);
-            ef.setLocationVisit(locationVisit);
-        }
-
-        registerTransitions();
-        //stateMachine.transitionInSequence(state);
-    }
-
-    /**
      * Creates the 'Configure Server' option in the action menu.
      */
     private void createFormMenu() {
@@ -728,12 +816,18 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onCreateVisit() {
-        showProgressFragment();
         new CreateVisitTask().execute();
     }
 
     private class CreateVisitTask extends AsyncTask<Void, Void, Void> {
 
+    	@Override
+    	protected void onPreExecute() {
+    		// TODO Auto-generated method stub
+    		super.onPreExecute();
+    		showProgressFragment();
+    	}
+    	
         @Override
         protected Void doInBackground(Void... params) {
             locationVisit.createVisit(getContentResolver());
@@ -745,6 +839,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         @Override
         protected void onPostExecute(Void result) {
+        	super.onPostExecute(result);
             hideProgressFragment();
         }
     }
@@ -1186,6 +1281,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onHierarchy1Selected(LocationHierarchy hierarchy) {
         locationVisit.setHierarchy1(hierarchy);
         stateMachine.transitionTo("Select Hierarchy 2");
+        updateButtons(0);
+        onHierarchy2();
     }
 
     private void registerTransitions() {
@@ -1196,17 +1293,27 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onHierarchy2Selected(LocationHierarchy subregion) {
         locationVisit.setHierarchy2(subregion);
         stateMachine.transitionTo("Select Hierarchy 3");
+        updateButtons(1);
+        onHierarchy3();
     }
     
 
     public void onHierarchy3Selected(LocationHierarchy hierarchy) {
         locationVisit.setHierarchy3(hierarchy);
         stateMachine.transitionTo("Select Hierarchy 4");
+        updateButtons(2);
+        onHierarchy4();
     }
 
     public void onHierarchy4Selected(LocationHierarchy village) {
         locationVisit.setHierarchy4(village);
         stateMachine.transitionTo("Select Round");
+        updateButtons(3);
+        onRound();
+    }
+    
+    private void updateButtons(int level){
+//    	sf.updateButtons(level);
     }
 
     public void onRoundSelected(Round round) {

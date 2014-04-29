@@ -41,6 +41,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
+			 		android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	        </TableRow>
 	        <TableRow>
@@ -58,6 +59,7 @@
 			        android:layout_marginLeft="5dp"
 			        android:paddingBottom="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	        </TableRow> 
 		</TableLayout>
@@ -88,6 +90,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	        </TableRow>
 	        <TableRow>
@@ -105,6 +108,7 @@
 			        android:layout_marginLeft="5dp"
 			        android:paddingBottom="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	        </TableRow> 
 		</TableLayout>
@@ -133,6 +137,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="1dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	        </TableRow>
 	        <TableRow>
@@ -150,6 +155,7 @@
 			        android:layout_marginLeft="1dp"
 			        android:paddingBottom="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	        </TableRow> 
 		</TableLayout>
@@ -178,6 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:inputType="text"
+                    android:textColor="#ff8c00" 
                     android:textAppearance="?android:attr/textAppearanceSmall"  />
             </TableRow>
             <TableRow>
@@ -195,6 +202,7 @@
                     android:layout_marginLeft="5dp"
                     android:paddingBottom="5dp"
                     android:inputType="text"
+                    android:textColor="#ff8c00" 
                     android:textAppearance="?android:attr/textAppearanceSmall"  />
             </TableRow> 
         </TableLayout>         
@@ -226,6 +234,7 @@
               android:layout_height="wrap_content"
               android:layout_marginLeft="5dp"
               android:inputType="text"
+              android:textColor="#ff8c00" 
               android:textAppearance="?android:attr/textAppearanceSmall"  />
           </TableRow>
           <TableRow>
@@ -243,6 +252,7 @@
               android:layout_height="wrap_content"
               android:layout_marginLeft="10dp"
               android:inputType="text"
+              android:textColor="#ff8c00" 
               android:textAppearance="?android:attr/textAppearanceSmall"  />
         </TableRow> 
         <TableRow>
@@ -261,6 +271,7 @@
               android:layout_marginLeft="5dp"
               android:paddingBottom="5dp"
               android:inputType="text"
+              android:textColor="#ff8c00" 
               android:textAppearance="?android:attr/textAppearanceSmall"  />
         </TableRow> 
     </TableLayout>       
@@ -290,6 +301,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	       	</TableRow>
 	        <TableRow>
@@ -307,6 +319,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
 	    	<TableRow>
@@ -324,6 +337,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
 	    	<TableRow>
@@ -342,6 +356,7 @@
 			        android:layout_marginLeft="5dp"
 			        android:paddingBottom="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
 		</TableLayout>
@@ -376,6 +391,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	       	</TableRow>
 	        <TableRow>
@@ -393,6 +409,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
 	    	<TableRow>
@@ -410,6 +427,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
 	    	<TableRow>
@@ -428,6 +446,7 @@
 			        android:layout_marginLeft="5dp"
 			        android:paddingBottom="5dp"
 			        android:inputType="text"
+			        android:textColor="#ff8c00" 
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
 		</TableLayout>

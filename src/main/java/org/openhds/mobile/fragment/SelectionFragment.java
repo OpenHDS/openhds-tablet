@@ -1,5 +1,8 @@
 package org.openhds.mobile.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openhds.mobile.R;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
@@ -11,6 +14,8 @@ import org.openhds.mobile.model.StateMachine.StateListener;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.graphics.PorterDuff;
 
 public class SelectionFragment extends Fragment implements OnClickListener {
 
@@ -43,6 +49,8 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     private LocationVisit locationVisit;
 
     private Button hierarchy1Btn, hierarchy2Btn, hierarchy3Btn, hierarchy4Btn, locationBtn, roundBtn, individualBtn, searchlBtn;
+    private List<Button> hierarchyButtons;
+    private Drawable defaultDrawable;
 
     private TextView loginGreetingText, hierarchy1NameText, hierarchy1ExtIdText, hierarchy2NameText,
             hierarchy2ExtIdText, hierarchy3NameText, hierarchy3ExtIdText, hierarchy4NameText, hierarchy4ExtIdText,
@@ -60,6 +68,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.selection, container, false);
         bindViews(view);
+        
         return view;
     }
 
@@ -109,6 +118,24 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         individualFirstNameText = (TextView) view.findViewById(R.id.individualFirstNameText);
         individualLastNameText = (TextView) view.findViewById(R.id.individualLastNameText);
         individualDobText = (TextView) view.findViewById(R.id.individualDobText);
+        
+        hierarchyButtons = new ArrayList<Button>();
+        hierarchyButtons.add(hierarchy1Btn);
+        hierarchyButtons.add(hierarchy2Btn);
+        hierarchyButtons.add(hierarchy3Btn);
+        hierarchyButtons.add(hierarchy4Btn);
+        hierarchyButtons.add(roundBtn);
+        
+        defaultDrawable = hierarchy1Btn.getBackground();
+    }
+    
+    private Button getButtonForState(String state){
+    	for(Button button : hierarchyButtons){
+    		if(button.getText().toString().equals(state)){
+    			return button;
+    		}
+    	}
+    	return null;
     }
 
     private void setHierarchy1() {
@@ -182,11 +209,42 @@ public class SelectionFragment extends Fragment implements OnClickListener {
 			listener.onFilterLocation();
 		}
     }
+    
+    public void updateButtons(int level){
+//    	int selectedLevel = level;
+//    	if(selectedLevel >= 0 && selectedLevel < hierarchyButtons.size()){
+//    		for(int i = 0 ; i < hierarchyButtons.size(); i++){
+//    			
+//    			Button btn = hierarchyButtons.get(i);
+//    			
+//    			if(btn.isEnabled()){
+////	    			if(i < selectedLevel){
+////	    				btn.setBackgroundColor(Color.GREEN);
+////	    			}
+////	    			else{
+////	    				btn.setBackgroundColor(Color.RED);
+////	    			}
+//    				btn.setBackgroundColor(Color.LTGRAY);
+//    			}
+//    			else
+//    			{
+//    				btn.setBackgroundColor(Color.DKGRAY);
+//    			}
+//    		}
+//    	}
+//    	if(selectedLevel+1 < hierarchyButtons.size()){
+//    		Button btn = hierarchyButtons.get(selectedLevel+1);
+//    		btn.setBackgroundColor(Color.GREEN);
+//    	}
+    }
 
     public void setLocationVisit(LocationVisit locationVisit) {
         this.locationVisit = locationVisit;
         loginGreetingText.setText(getString(R.string.hello_lbl)+", " + locationVisit.getFieldWorker().getFirstName() + " "
                 + locationVisit.getFieldWorker().getLastName());
+        
+        //Restore previous selections
+        setAll();
     }
 
     public void registerTransitions(StateMachine stateMachine) {
@@ -251,10 +309,12 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             public void onEnterState() {
                 setIndividual();
                 individualBtn.setEnabled(true);
+                individualBtn.setBackgroundColor(Color.LTGRAY);
             }
 
             public void onExitState() {
                 individualBtn.setEnabled(false);
+                individualBtn.setBackgroundColor(Color.DKGRAY);
             }
         });
     }
@@ -265,11 +325,13 @@ public class SelectionFragment extends Fragment implements OnClickListener {
                 resetToDefaultState(5, false);
                 locationBtn.setEnabled(true);
                 searchlBtn.setVisibility(1);
+                locationBtn.setBackgroundColor(Color.LTGRAY);
             }
 
             public void onExitState() {
                 setLocation();
                 searchlBtn.setVisibility(8);
+                locationBtn.setBackgroundColor(Color.DKGRAY);
             }
         });
     }
@@ -279,11 +341,12 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             public void onEnterState() {
                 resetToDefaultState(4, false);
                 roundBtn.setEnabled(true);
-
+                roundBtn.setBackgroundColor(Color.LTGRAY);
             }
 
             public void onExitState() {
                 setRound();
+                roundBtn.setBackgroundColor(Color.DKGRAY);
             }
         });
     }
@@ -293,10 +356,12 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             public void onEnterState() {
                 resetToDefaultState(2, false);
                 hierarchy3Btn.setEnabled(true);
+                hierarchy3Btn.setBackgroundColor(Color.LTGRAY);
             }
 
             public void onExitState() {
                 setHierarchy3();
+                hierarchy3Btn.setBackgroundColor(Color.DKGRAY);
             }
         });
     }
@@ -306,10 +371,12 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             public void onEnterState() {
                 resetToDefaultState(3, false);
                 hierarchy4Btn.setEnabled(true);
+                hierarchy4Btn.setBackgroundColor(Color.LTGRAY);
             }
 
             public void onExitState() {
                 setHierarchy4();
+                hierarchy4Btn.setBackgroundColor(Color.DKGRAY);
             }
         });
     }
@@ -319,10 +386,12 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             public void onEnterState() {
                 resetToDefaultState(1, false);
                 hierarchy2Btn.setEnabled(true);
+                hierarchy2Btn.setBackgroundColor(Color.LTGRAY);
             }
 
             public void onExitState() {
                 setHierarchy2();
+                hierarchy2Btn.setBackgroundColor(Color.DKGRAY);
             }
         });
     }
@@ -332,10 +401,12 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             public void onEnterState() {
                 resetToDefaultState(0, false);
                 hierarchy1Btn.setEnabled(true);
+                hierarchy1Btn.setBackgroundColor(Color.LTGRAY);
             }
 
             public void onExitState() {
                 setHierarchy1();
+                hierarchy1Btn.setBackgroundColor(Color.DKGRAY);
             }
         });
     }
@@ -367,6 +438,8 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             searchlBtn.setVisibility(8);
             setIndividual();
         }
+        
+        updateButtons(level);
     }
 
     private void setIndividual() {
