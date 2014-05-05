@@ -95,9 +95,11 @@ public class StateMachine {
                 break;
             }
 
+            System.out.println("transition to state " + state);
             transitionTo(state);
         }
 
+        System.out.println("transition to state " + toState);
         transitionTo(toState);
     }	
 }

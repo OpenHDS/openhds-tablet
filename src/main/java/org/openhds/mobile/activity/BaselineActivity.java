@@ -42,6 +42,7 @@ import org.openhds.mobile.model.PregnancyOutcome;
 import org.openhds.mobile.model.Round;
 import org.openhds.mobile.model.SocialGroup;
 import org.openhds.mobile.model.StateMachine;
+import org.openhds.mobile.model.Visit;
 import org.openhds.mobile.task.OdkGeneratedFormLoadTask;
 
 import android.app.ActionBar;
@@ -55,13 +56,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -69,7 +74,7 @@ import android.widget.Toast;
  * buttons in the left most column drive a state machine while the user
  * interacts with the application.
  */
-public class UpdateActivity extends Activity implements ValueFragment.ValueListener, LoaderCallbacks<Cursor>,
+public class BaselineActivity extends Activity implements ValueFragment.ValueListener, LoaderCallbacks<Cursor>,
         EventFragment.Listener, SelectionFragment.Listener {
 
     private SelectionFragment sf;
@@ -115,8 +120,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private boolean extInm;
     private String jrFormId;
     
-    //State machine stuff
-    
+    //State machine states  
 	public static final String SELECT_HIERARCHY_1 = "Select Hierarchy 1";
 	public static final String SELECT_HIERARCHY_2 = "Select Hierarchy 2";
 	public static final String SELECT_HIERARCHY_3 = "Select Hierarchy 3";
@@ -161,6 +165,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
+        this.setTitle("Baseline");
         
         FieldWorker fw = (FieldWorker) getIntent().getExtras().getSerializable("fieldWorker");
         locationVisit.setFieldWorker(fw);
@@ -177,7 +182,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         
         if(savedInstanceState == null){
             //Create state machine
-            stateMachine = new StateMachine(new LinkedHashSet<String>(stateSequence), stateSequence.get(0));
+            stateMachine = new StateMachine(new LinkedHashSet<String>(stateSequence), stateSequence.get(0)); //Pass in LinkedHashSet instead of normal HashSet to preserve  
             
             registerTransitions();
 	        sf.setLocationVisit(locationVisit);
@@ -188,7 +193,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
         else{
         	String state = (String)savedInstanceState.getSerializable("currentState");
-        	stateMachine = new StateMachine(new LinkedHashSet<String>(stateSequence), state);
+        	stateMachine = new StateMachine(new LinkedHashSet<String>(stateSequence), stateSequence.get(0));
+//        	stateMachine = new StateMachine(new HashSet<String>(stateSequence), state);
         	//restoreState(savedInstanceState);
         	
             locationVisit = (LocationVisit) savedInstanceState.getSerializable("locationvisit");
@@ -332,7 +338,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	Location location1 = (Location) data.getExtras().getSerializable("location");
         	locationVisit.setLocation(location1);
         	vf.onLoaderReset(null);
-            stateMachine.transitionTo("Create Visit");
+            transitionToCreateVisit();
             break;
         case FILTER_INMIGRATION:
             handleFilterInMigrationResult(resultCode, data);
@@ -382,10 +388,15 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 sf.setLocationVisit(locationVisit);
                 sf.setAll();
             	vf.onLoaderReset(null);
-                stateMachine.transitionTo("Create Visit");
+                transitionToCreateVisit();
                 cursor.close();
             }
         }
+    }
+    
+    private void transitionToCreateVisit(){
+    	stateMachine.transitionTo("Create Visit"); 	
+    	onCreateVisit();
     }
 
     private void handleFilterIndivVisit(int resultCode, Intent data) { 	
@@ -419,7 +430,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     /**
-     * This differs from {@link UpdateActivity.CheckFormStatus} in that, upon
+     * This differs from {@link BaselineActivity.CheckFormStatus} in that, upon
      * creating a new location, the user is automatically forwarded to creating
      * a visit. This happens because the user could in theory create a location,
      * and then skip the visit.
@@ -458,7 +469,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             hideProgressFragment();
 
             if (result) {
-                stateMachine.transitionTo("Create Visit");
+            	//Handle new Location, load list and select first entry
+            	String locationExtId = locationVisit.getLocation().getExtId();
+            	if(locationExtId.length() > 0){
+            		vf.loadFilteredLocationById(locationExtId);
+            		vf.selectItemNoInList(0);
+            	}
+//                transitionToCreateVisit();
             } else {
                 createUnfinishedFormDialog();
             }
@@ -570,6 +587,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showingProgress = false;
         FragmentTransaction txn = getFragmentManager().beginTransaction();
+        
+        if(progressFragment != null){
+        	txn.remove(progressFragment).commitAllowingStateLoss();
+//        	txn.commit();
+        	progressFragment = null;
+        }
+        
         if (!vf.isAdded()) {
         	txn.add(R.id.middle_col, vf).commitAllowingStateLoss();
         } else {
@@ -744,6 +768,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     private void loadIndividualValueData() {
         vf.loadIndividuals(locationVisit.getLocation().getExtId());
+//        int count = vf.getNumberOfEntriesInCurrentList();
+//        if(count == 0){
+//        	Toast.makeText(this, "No Individuals found in " + locationVisit.getLocation().getName(), Toast.LENGTH_LONG).show();
+//        }
     }
 
     private void createUnfinishedFormDialog() {
@@ -817,7 +845,15 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onCreateVisit() {
-        new CreateVisitTask().execute();
+//        new CreateVisitTask().execute();   	
+//        Individual individual = (Individual) data.getExtras().getSerializable("individual");
+//    	Individual individual = new Individual();
+//        if (individual!=null) 
+//        	filledForm.setIntervieweeId(individual.getExtId());	
+//        loadForm(SELECTED_XFORM);
+    	locationVisit.createVisit(getContentResolver());
+    	
+    	stateMachine.transitionTo("Select Individual");
     }
 
     private class CreateVisitTask extends AsyncTask<Void, Void, Void> {
@@ -892,14 +928,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         @Override
         protected void onPostExecute(Void result) {
+        	hideProgressFragment();
         	 SocialGroup sg = locationVisit.createSocialGroup(getContentResolver());
-             if (sg==null){
+             if (sg==null){            	
             	onSGexists();
-            	this.cancel(true);
-             	hideProgressFragment();
-             	
-             } else {
-            	hideProgressFragment();
+            	this.cancel(true);  	
+             } else {;
             	loadForm(SELECTED_XFORM);
              }
         }
@@ -982,7 +1016,16 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton("Ok", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();			
+        alertDialog.show();		
+        
+        String test = filledForm.getIndividualExtId();
+        if(test.length() > 0){
+        	System.out.println("Individual Id is : " + test);
+        	vf.onLoaderReset(null);
+        	vf.loadFilteredIndividualById(test);
+        	vf.selectItemNoInList(0);
+        	
+        }
 	}
 
     private void buildMotherDialog() {
@@ -1114,7 +1157,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         protected void onPostExecute(final Individual father) {
             hideProgressFragment();
 
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(UpdateActivity.this);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BaselineActivity.this);
             alertDialogBuilder.setTitle(getString(R.string.update_pregoutcome_choose_father));
             alertDialogBuilder.setCancelable(true);
 
@@ -1228,7 +1271,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 if (cursor.moveToFirst()) {
                     jrFormId = cursor.getString(0);
                 }
-                UpdateActivity.this.contentUri = contentUri;
+                BaselineActivity.this.contentUri = contentUri;
                 startActivityForResult(new Intent(Intent.ACTION_EDIT, contentUri), requestCode);
             }
 
@@ -1271,7 +1314,16 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onRound() {
         locationVisit.clearLevelsBelow(4);
         stateMachine.transitionTo("Select Round");
-        loadRoundValueData();
+//        loadRoundValueData();
+        
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+        cursor = Queries.allRounds(resolver);
+        Round round = Converter.convertToRound(cursor);
+    	vf.onLoaderReset(null);
+        cursor.close();        
+        
+        onRoundSelected(round);
     }
 
     public void onIndividual() {
@@ -1308,7 +1360,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     public void onHierarchy4Selected(LocationHierarchy village) {
         locationVisit.setHierarchy4(village);
-        stateMachine.transitionTo("Select Round");
+        //stateMachine.transitionTo("Select Round");
         updateButtons(3);
         onRound();
     }
@@ -1324,13 +1376,15 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     public void onLocationSelected(Location location) {
         locationVisit.setLocation(location);
-        stateMachine.transitionTo("Create Visit");
+//        stateMachine.transitionTo("Create Visit");
+        transitionToCreateVisit();
     }
 
     public void onIndividualSelected(Individual individual) {
         locationVisit.setSelectedIndividual(individual);
         stateMachine.transitionTo("Select Event");
         
+        //Display Extra Forms Menu
         if(this.menuItemForm != null) {
         	this.menuItemForm.setVisible(true);
         }
@@ -1355,18 +1409,43 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         hideProgressFragment();
-        if (cursor.getCount() == 1 && loader.getId() == SOCIAL_GROUP_FOR_INDIVIDUAL) {
-            cursor.moveToFirst();
-            appendSocialGroupFromCursor(cursor);
-            return;
-        }
+	        if (cursor.getCount() == 1 && loader.getId() == SOCIAL_GROUP_FOR_INDIVIDUAL) {
+	            cursor.moveToFirst();
+	            appendSocialGroupFromCursor(cursor);
+	            return;
+	        }
+	        else if (cursor.getCount() == 0 && loader.getId() == SOCIAL_GROUP_AT_LOCATION){
+	        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        	builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
+	        	builder.setMessage("Please first create a household");
+	        	builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, just close
+						// the dialog box and do nothing
+						dialog.cancel();
+					}
+				});
+	            householdDialog = builder.create();
+	            householdDialog.show();
+	            return;
+	        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
                 new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
                         OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
-                        android.R.id.text2 }, 0);
+                        android.R.id.text2 }, 0){
+        	@Override //Overwritten to prevent invisible text due to white on white color
+        	public View getView(int position, View convertView,
+        			ViewGroup parent) {
+        		// TODO Auto-generated method stub
+        		View view = super.getView(position, convertView, parent);
+        		TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                text1.setTextColor(Color.BLACK);
+        		return view;
+        	}
+        };
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {

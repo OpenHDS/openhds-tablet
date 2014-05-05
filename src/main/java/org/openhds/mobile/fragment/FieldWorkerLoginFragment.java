@@ -3,6 +3,7 @@ package org.openhds.mobile.fragment;
 import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
 
 import org.openhds.mobile.R;
+import org.openhds.mobile.activity.BaselineActivity;
 import org.openhds.mobile.activity.CensusActivity;
 import org.openhds.mobile.activity.OpeningActivity;
 import org.openhds.mobile.activity.SupervisorMainActivity;
@@ -129,8 +130,16 @@ public class FieldWorkerLoginFragment extends Fragment implements
 
 	private void launchCensusActivity() {
 		//TODO pass in a fieldworker object
-		Intent intent = new Intent(getActivity(), CensusActivity.class);
-		startActivity(intent);
+//		Intent intent = new Intent(getActivity(), CensusActivity.class);
+//		startActivity(intent);
+		FieldWorker fieldWorker = new FieldWorker();
+		fieldWorker.setFirstName("TEST");
+		fieldWorker.setLastName("TEST");
+		fieldWorker.setExtId("FWEB1");
+		fieldWorker.setPassword("");
+		Intent intent = new Intent(getActivity(), BaselineActivity.class);
+		intent.putExtra("fieldWorker", fieldWorker);
+		startActivity(intent);		
 	}
 	
 	private void launchUpdateActivity(FieldWorker fieldWorker) {

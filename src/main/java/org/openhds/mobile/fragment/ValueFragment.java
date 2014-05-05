@@ -13,6 +13,7 @@ import org.openhds.mobile.model.Round;
 
 import android.app.Activity;
 import android.app.ListFragment;
+import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -23,6 +24,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 /**
  * ValueFragment is responsible for showing a list of entities, and then
@@ -42,6 +44,8 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private static final int INDIVIDUAL_FILTER_LOADER = 5;
     private static final int INDIMG_FILTER_LOADER = 6;
     private static final int INDIVIDUAL18_FILTER_LOADER = 7;
+    private static final int INDIVIDUAL_FILTER_ID_LOADER = 8; 
+    private static final int LOCATION_FILTER_ID_LOADER = 9;
 
     // create the column mappings so they don't need to be recreated on every
     // load
@@ -172,53 +176,79 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 
     public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
         switch (arg0) {
-        case HIERARCHY_LOADER:
-            adapter.changeCursorAndColumns(null, HIERARCHY_COLUMNS, VIEW_BINDINGS);
-            return new CursorLoader(getActivity(), OpenHDS.HierarchyItems.CONTENT_ID_URI_BASE, null,
-                    OpenHDS.HierarchyItems.COLUMN_HIERARCHY_LEVEL + " = ?",
-                    new String[] { START_HIERARCHY_LEVEL_NAME }, null);
-        case REGION_LOADER:
-            adapter.changeCursorAndColumns(null, HIERARCHY_COLUMNS, VIEW_BINDINGS);
-            return buildRegionCursorLoader(arg1);
-        case ROUND_LOADER:
-            adapter.changeCursorAndColumns(null, ROUNDS_COLUMNS, VIEW_BINDINGS);
-            return new CursorLoader(getActivity(), OpenHDS.Rounds.CONTENT_ID_URI_BASE, null, null, null, null);
-        case LOCATION_LOADER:
-            adapter.changeCursorAndColumns(null, LOCATION_COLUMNS, VIEW_BINDINGS);
-            return buildLocationCursorLoader(arg1);
-        case INDIVIDUAL_LOADER:
-            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
-            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null,
-                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ? AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"='NA'",
-                    new String[] { arg1.getString("locationExtId") }, null);
-        case INDIVIDUAL_FILTER_LOADER:
-            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
-
-            String filter = buildFilter(arg1);
-            String[] args = buildArguments(arg1);
-
-            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter, args,
-                    OpenHDS.Individuals._ID + " ASC");
-        case INDIVIDUAL18_FILTER_LOADER:
-            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
-
-            String filter2 = buildFilter(arg1);
-            String[] args2 = buildArguments(arg1);
-            if (filter2.length()>0) {
-            	filter2 = filter2 + " AND ";
-            }   
-            //filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13";
-            filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13 AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"!='OMG'";
-            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter2, args2,
-                    OpenHDS.Individuals._ID + " ASC");
-        case INDIMG_FILTER_LOADER:
-            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
-
-            String filter1 = buildFilter(arg1);
-            String[] args1 = buildArguments(arg1);
-
-            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter1, args1,
-                    OpenHDS.Individuals._ID + " ASC");
+	        case HIERARCHY_LOADER:
+	            adapter.changeCursorAndColumns(null, HIERARCHY_COLUMNS, VIEW_BINDINGS);
+	            return new CursorLoader(getActivity(), OpenHDS.HierarchyItems.CONTENT_ID_URI_BASE, null,
+	                    OpenHDS.HierarchyItems.COLUMN_HIERARCHY_LEVEL + " = ?",
+	                    new String[] { START_HIERARCHY_LEVEL_NAME }, null);
+	        case REGION_LOADER:
+	            adapter.changeCursorAndColumns(null, HIERARCHY_COLUMNS, VIEW_BINDINGS);
+	            return buildRegionCursorLoader(arg1);
+	        case ROUND_LOADER:
+	            adapter.changeCursorAndColumns(null, ROUNDS_COLUMNS, VIEW_BINDINGS);
+	            return new CursorLoader(getActivity(), OpenHDS.Rounds.CONTENT_ID_URI_BASE, null, null, null, null);
+	        case LOCATION_LOADER:
+	            adapter.changeCursorAndColumns(null, LOCATION_COLUMNS, VIEW_BINDINGS);
+	            return buildLocationCursorLoader(arg1);
+	        case INDIVIDUAL_LOADER:
+	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
+	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null,
+	                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ? AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"='NA'",
+	                    new String[] { arg1.getString("locationExtId") }, null);
+	        case INDIVIDUAL_FILTER_LOADER:
+	        {
+	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
+	
+	            String filter = buildFilter(arg1);
+	            String[] args = buildArguments(arg1);
+	
+	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter, args,
+	                    OpenHDS.Individuals._ID + " ASC");
+	        }
+	        case INDIVIDUAL18_FILTER_LOADER:
+	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
+	
+	            String filter2 = buildFilter(arg1);
+	            String[] args2 = buildArguments(arg1);
+	            if (filter2.length()>0) {
+	            	filter2 = filter2 + " AND ";
+	            }   
+	            //filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13";
+	            filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13 AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"!='OMG'";
+	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter2, args2,
+	                    OpenHDS.Individuals._ID + " ASC");
+	        case INDIMG_FILTER_LOADER:
+	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
+	
+	            String filter1 = buildFilter(arg1);
+	            String[] args1 = buildArguments(arg1);
+	
+	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter1, args1,
+	                    OpenHDS.Individuals._ID + " ASC");
+	        case INDIVIDUAL_FILTER_ID_LOADER:
+	        {
+	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
+	
+	            String filter3 = OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " = ?";
+	            String[] args3 = new String[] { arg1.getString("extId") };
+	            
+	            CursorLoader cl = new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter3, args3,
+	                    OpenHDS.Individuals._ID + " ASC");
+	
+	            return cl;   
+	        }
+	        case LOCATION_FILTER_ID_LOADER:
+	        {
+	            adapter.changeCursorAndColumns(null, LOCATION_COLUMNS, VIEW_BINDINGS);
+	
+	            String filter = OpenHDS.Locations.COLUMN_LOCATION_EXTID + " = ?";
+	            String[] args = new String[] { arg1.getString("extId") };
+	            
+	            CursorLoader cl = new CursorLoader(getActivity(), OpenHDS.Locations.CONTENT_ID_URI_BASE, null, filter, args,
+	                    OpenHDS.Locations._ID + " ASC");
+	
+	            return cl;                   
+	        }
         }
 
         return null;
@@ -309,8 +339,22 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         return builder.toString();
     }
 
-    public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
-        adapter.swapCursor(arg1);
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        adapter.swapCursor(cursor);
+        
+        //Show different messages depending on currently displayed list
+        switch(listCurrentlyDisplayed){
+        	case INDIVIDUAL:
+        	{
+        		if(cursor.getCount() == 0){
+        			Toast.makeText(getActivity(), "No Individuals found!", Toast.LENGTH_LONG).show();
+        		}
+        	}
+        	default:
+        	{
+        		
+        	}
+        }
     }
 
     public void onLoaderReset(Loader<Cursor> arg0) {
@@ -360,6 +404,14 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         bundle.putString("locationExtId", extId);
         getLoaderManager().restartLoader(INDIVIDUAL_LOADER, bundle, this);
     }
+    
+    public int getNumberOfEntriesInCurrentList(){
+    	int count = 0;
+//	    ListView listView = getListView(); // Save a local reference rather than calling `getListView()` three times
+//	    count = listView.getCount();
+    	count = adapter.getCount();
+    	return count;
+    }
 
     /**
      * Loads a list of individuals that are filtered by the arguments
@@ -405,5 +457,56 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	        bundle.putString("lastName", lastName);
 	        bundle.putString("gender", gender);
 	        getLoaderManager().restartLoader(INDIMG_FILTER_LOADER, bundle, this);	
+	}
+	
+    /**
+     * Load a single individual based on his id
+     * 
+     * @param individialExtId
+     *            filter by the ext id (userid) of the individual
+     */	
+	public void loadFilteredIndividualById(String individialExtId){
+		listCurrentlyDisplayed = Displayed.INDIVIDUAL;
+		Bundle bundle = new Bundle();
+		bundle.putString("extId", individialExtId);
+		getLoaderManager().restartLoader(INDIVIDUAL_FILTER_ID_LOADER, bundle, this);	
+	}
+	
+    /**
+     * Load a single individual based on his id
+     * 
+     * @param individialExtId
+     *            filter by the ext id (userid) of the individual
+     */	
+	public void loadFilteredLocationById(String locationExtId){
+		listCurrentlyDisplayed = Displayed.LOCATION;
+		Bundle bundle = new Bundle();
+		bundle.putString("extId", locationExtId);
+		getLoaderManager().restartLoader(LOCATION_FILTER_ID_LOADER, bundle, this);	
+	}	
+	
+	public void selectItemNoInList(int position){
+		
+//		ListView mList = getListView();
+		final int mActivePosition = position;
+//		mList.setSelection(0);
+//		
+//		//Cursor cursor = (Cursor) adapter.getItem(position);
+//		Cursor c = adapter.getCursor();
+//		System.out.println("Nr of current rows in cursor : " + c.getCount());
+//		
+//		mList.performItemClick(adapter.getView(mActivePosition, null, null), mActivePosition, adapter.getItemId(mActivePosition));
+		
+		
+		//w.performItemClick(w, position, 234525);
+		
+		    getListView().postDelayed(new Runnable() {
+		        @Override
+		        public void run() {
+		            ListView listView = getListView(); // Save a local reference rather than calling `getListView()` three times
+		            listView.setSelection(mActivePosition);
+		            listView.performItemClick(listView.getChildAt(0), mActivePosition, mActivePosition);
+		        }
+		    }, 500);		
 	}
 }

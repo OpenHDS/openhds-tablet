@@ -179,6 +179,8 @@ public class EventFragment extends Fragment implements OnClickListener {
             public void onEnterState() {
                 householdBtn.setEnabled(true);
                 finishVisitBtn.setEnabled(true);
+                //Check no of households and disable button if necessary
+                
                 membershipBtn.setEnabled(true);
                 relationshipBtn.setEnabled(true);
                 outMigrationBtn.setEnabled(true);

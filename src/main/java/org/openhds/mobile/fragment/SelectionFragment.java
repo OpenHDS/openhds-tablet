@@ -127,6 +127,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         hierarchyButtons.add(roundBtn);
         
         defaultDrawable = hierarchy1Btn.getBackground();
+        roundBtn.setVisibility(View.GONE);
     }
     
     private Button getButtonForState(String state){
@@ -298,7 +299,8 @@ public class SelectionFragment extends Fragment implements OnClickListener {
                 hierarchy3Btn.setEnabled(false);
                 hierarchy4Btn.setEnabled(false);
                 roundBtn.setEnabled(false);
-                locationBtn.setEnabled(false);
+//                locationBtn.setEnabled(false);
+                locationBtn.setEnabled(true);
                 searchlBtn.setVisibility(8);
             }
         });
@@ -331,6 +333,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             public void onExitState() {
                 setLocation();
                 searchlBtn.setVisibility(8);
+                locationBtn.setEnabled(false);
                 locationBtn.setBackgroundColor(Color.DKGRAY);
             }
         });
@@ -473,5 +476,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
 		setHierarchy3();
 		setHierarchy4();
 		setRound();
+		setLocation();
+		setIndividual();
 	}
 }

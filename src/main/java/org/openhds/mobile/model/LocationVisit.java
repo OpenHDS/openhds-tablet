@@ -292,6 +292,7 @@ public class LocationVisit implements Serializable {
  //           int lastIncrement = Integer.parseInt(cursor.getString(0).substring(9, 11));
   //          int nextIncrement = lastIncrement + 1;
     //        sg.setExtId(socialGroupPrefix + String.format("%02d", nextIncrement));
+        	cursor.close();
         	return null;
         } else {
             sg.setExtId(socialGroupPrefix + "00");
