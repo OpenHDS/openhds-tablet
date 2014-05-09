@@ -55,7 +55,7 @@ public class EventFragment extends Fragment implements OnClickListener {
 
         void onRelationship();
 
-        void onInMigration();
+        void onBaseline();
 
         void onOutMigration();
 
@@ -66,6 +66,8 @@ public class EventFragment extends Fragment implements OnClickListener {
         void onDeath();
 
         void onClearIndividual();
+        
+        void onInMigration();
     }
 
     @Override
@@ -111,6 +113,7 @@ public class EventFragment extends Fragment implements OnClickListener {
         relationshipBtn.setOnClickListener(this);
 
         inMigrationBtn = (Button) view.findViewById(R.id.inMigrationBtn);
+        inMigrationBtn.setText("Baseline");
         inMigrationBtn.setOnClickListener(this);
 
         outMigrationBtn = (Button) view.findViewById(R.id.outMigrationBtn);
@@ -148,7 +151,7 @@ public class EventFragment extends Fragment implements OnClickListener {
 		} else if (id == R.id.relationshipBtn) {
 			listener.onRelationship();
 		} else if (id == R.id.inMigrationBtn) {
-			listener.onInMigration();
+			listener.onBaseline();
 		} else if (id == R.id.outMigrationBtn) {
 			listener.onOutMigration();
 		} else if (id == R.id.pregRegBtn) {

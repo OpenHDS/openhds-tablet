@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.MethodNotSupportedException;
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
@@ -100,6 +101,7 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
     protected static final int FILTER_INMIGRATION_MOTHER = 60;
     protected static final int FILTER_INMIGRATION_FATHER = 70;
     protected static final int FILTER_INDIV_VISIT = 75;
+    protected static final int FILTER_SOCIALGROUP = 80;
     // the uri of the last viewed xform
     private Uri contentUri;
 
@@ -340,6 +342,18 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
         	vf.onLoaderReset(null);
             transitionToCreateVisit();
             break;
+        case FILTER_SOCIALGROUP:
+            if (resultCode != RESULT_OK) {
+                return;
+            }
+        	SocialGroup socialGroup = (SocialGroup) data.getExtras().getSerializable("socialGroup");
+//        	locationVisit.setLocation(location1);
+        	vf.onLoaderReset(null);
+//            transitionToCreateVisit();
+        	System.out.println("Return from searching social group ! Selected: " + socialGroup.getGroupName());
+            filledForm = formFiller.appendSocialGroup(socialGroup, filledForm);
+            loadForm(SELECTED_XFORM);
+            break;            
         case FILTER_INMIGRATION:
             handleFilterInMigrationResult(resultCode, data);
             break;
@@ -654,7 +668,14 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
             	} else if (stateMachine.getState()=="Select Individual") {
             		if (extInm)
                 		onFinishExternalInmigration();
-            	}else {
+            		//Select newly created indiv.
+                    selectIndividual();
+            	}
+            	else if(stateMachine.getState() == "Select Event"){
+            		System.out.println("Handle select event in statemachine");
+            		
+            	}
+            	else {
             		stateMachine.transitionTo("Select Individual");
             	}
             } else {
@@ -685,9 +706,13 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
      */
     private void startFilterActivity(int requestCode) {
     	Intent i =null;
-    	if (requestCode==75) {
+    	if (requestCode==FILTER_INDIV_VISIT) {
             i = new Intent(this, FilterVisitActivity.class);
-    	} else {
+    	} 
+    	else if(requestCode == FILTER_SOCIALGROUP){
+    		i = new Intent(this, FilterSocialGroupActivity.class);
+    	}
+    	else {
     		i = new Intent(this, FilterActivity.class);
     	}
     	
@@ -961,36 +986,43 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
         updatable = new RelationshipUpdate();
         startFilterActivity(FILTER_RELATIONSHIP);
     }
-
-    public void onInMigration() {
-        createInMigrationFormDialog();
+    
+    public void onInMigration(){
+    	throw new UnsupportedOperationException("Method not used in Baseline.");
     }
 
-    private void createInMigrationFormDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle(getString(R.string.in_migration_lbl));
-        alertDialogBuilder.setMessage(getString(R.string.update_create_inmigration_msg));
-        alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setPositiveButton(getString(R.string.update_create_inmigration_pos_button), new DialogInterface.OnClickListener() {
-        	 public void onClick(DialogInterface dialog, int which) {
-            	extInm= true;
-            	startFilterActivity(FILTER_INMIGRATION);
-     
-            }
-        });
-             alertDialogBuilder.setNegativeButton(getString(R.string.update_create_inmigration_neg_button), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                showProgressFragment();
-                extInm= true;
-                new CreateExternalInmigrationTask().execute();
-
-            }
-        });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+    public void onBaseline() {
+        createBaselineFormDialog();
     }
 
-    private class CreateExternalInmigrationTask extends AsyncTask<Void, Void, Void> {
+    private void createBaselineFormDialog() {
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+//        alertDialogBuilder.setTitle(getString(R.string.in_migration_lbl));
+//        alertDialogBuilder.setMessage(getString(R.string.update_create_inmigration_msg));
+//        alertDialogBuilder.setCancelable(true);
+//        alertDialogBuilder.setPositiveButton(getString(R.string.update_create_inmigration_pos_button), new DialogInterface.OnClickListener() {
+//        	 public void onClick(DialogInterface dialog, int which) {
+//            	extInm= true;
+//            	startFilterActivity(FILTER_INMIGRATION);
+//     
+//            }
+//        });
+//             alertDialogBuilder.setNegativeButton(getString(R.string.update_create_inmigration_neg_button), new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                showProgressFragment();
+//                extInm= true;
+//                new CreateExternalInmigrationTask().execute();
+//
+//            }
+//        });
+//        AlertDialog alertDialog = alertDialogBuilder.create();
+//        alertDialog.show();
+    	showProgressFragment();
+//    	extInm= true;
+    	new CreateBaselineTask().execute();
+    }
+
+    private class CreateBaselineTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -1009,6 +1041,16 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
 
     }
     
+    private void selectIndividual(){
+        String test = filledForm.getIndividualExtId();
+        if(test.length() > 0){
+        	System.out.println("Individual Id is : " + test);
+        	vf.onLoaderReset(null);
+        	vf.loadFilteredIndividualById(test);
+        	vf.selectItemNoInList(0);
+        }    	
+    }
+    
 	private void onFinishExternalInmigration() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle(getString(R.string.in_migration_lbl));
@@ -1017,15 +1059,8 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
         alertDialogBuilder.setPositiveButton("Ok", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();		
-        
-        String test = filledForm.getIndividualExtId();
-        if(test.length() > 0){
-        	System.out.println("Individual Id is : " + test);
-        	vf.onLoaderReset(null);
-        	vf.loadFilteredIndividualById(test);
-        	vf.selectItemNoInList(0);
-        	
-        }
+                
+        extInm = false;
 	}
 
     private void buildMotherDialog() {
@@ -1443,19 +1478,44 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
         		View view = super.getView(position, convertView, parent);
         		TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                 text1.setTextColor(Color.BLACK);
+                
+                Cursor cursor = (Cursor) getItem(position);
+                System.out.println("-------DATA: " + cursor.getString(0) + " / " + cursor.getString(1));
         		return view;
         	}
         };
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-
             public void onClick(DialogInterface dialog, int which) {
                 Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
                 appendSocialGroupFromCursor(cursor);
             }
         });
         builder.setNegativeButton(getString(R.string.cancel_lbl), null);
+    	builder.setNeutralButton("Search", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				// if this button is clicked, just close
+				// the dialog box and do nothing
+				searchSocialGroup();
+			}
+		});        
         householdDialog = builder.create();
         householdDialog.show();
+    }
+    
+    private void searchSocialGroup(){
+    	System.out.println("Search for social group");
+    	
+//    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//    	builder.setTitle("Search Social Group");
+//    	builder.setMessage("search action dummy");
+//    	builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+//			public void onClick(DialogInterface dialog,int id) {
+//				dialog.cancel();
+//			}
+//		});
+//        householdDialog = builder.create();
+//        householdDialog.show();
+    	startFilterActivity(FILTER_SOCIALGROUP);
     }
 
     private void appendSocialGroupFromCursor(Cursor cursor) {

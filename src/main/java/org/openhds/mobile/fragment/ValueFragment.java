@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.R;
+import org.openhds.mobile.activity.FilterSocialGroupActivity;
 import org.openhds.mobile.database.queries.Converter;
+import org.openhds.mobile.fragment.SelectionFilterSocialgroupFragment.Listener;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
 import org.openhds.mobile.model.Round;
+import org.openhds.mobile.model.SocialGroup;
 
 import android.app.Activity;
 import android.app.ListFragment;
@@ -46,6 +49,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private static final int INDIVIDUAL18_FILTER_LOADER = 7;
     private static final int INDIVIDUAL_FILTER_ID_LOADER = 8; 
     private static final int LOCATION_FILTER_ID_LOADER = 9;
+    private static final int SOCIALGROUP_FILTER_LOADER = 10;
 
     // create the column mappings so they don't need to be recreated on every
     // load
@@ -57,6 +61,8 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             OpenHDS.Locations.COLUMN_LOCATION_EXTID};
     private static final String[] INDIVIDUAL_COLUMNS = new String[] { OpenHDS.Individuals.COLUMN_INDIVIDUAL_FULLNAME,
             OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID, OpenHDS.Individuals.COLUMN_INDIVIDUAL_DOB };
+    private static final String[] SOCIALGROUP_COLUMNS = new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
+        OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID};    
 
     private static final int[] VIEW_BINDINGS = new int[] { android.R.id.text1, android.R.id.text2 };
     private static final int[] VIEW_BINDINGSI = new int[] { android.R.id.text1, android.R.id.text2,R.id.text3 };
@@ -69,7 +75,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private ValueListener listener;
 
     private enum Displayed {
-        HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, ROUND, LOCATION, INDIVIDUAL;
+        HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, ROUND, LOCATION, INDIVIDUAL, SOCIALGROUP;
     }
 
     public interface ValueListener {
@@ -136,7 +142,19 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             Individual individual = Converter.convertToIndividual(cursor);
             listener.onIndividualSelected(individual);
             break;
-        }
+	    case SOCIALGROUP:
+	        //Individual individual = Converter.convertToIndividual(cursor);
+	    	SocialGroup sg = Converter.convertToSocialGroup(cursor);
+	    	
+	        //listener.onIndividualSelected(null);
+	        try {
+	            FilterSocialGroupActivity filterSocialGroup = (FilterSocialGroupActivity)listener;
+	            filterSocialGroup.onSocialGroupSelected(sg);
+	        } catch (ClassCastException e) {
+	            throw new ClassCastException("Could not cast listener to FilterSocialGroupActivity.");
+	        }
+	        break;
+	    }        
 
         adapter.swapCursor(null);
         //listener.updateButtons();
@@ -249,6 +267,18 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	
 	            return cl;                   
 	        }
+	        case SOCIALGROUP_FILTER_LOADER:
+	        {
+	            adapter.changeCursorAndColumns(null, SOCIALGROUP_COLUMNS, VIEW_BINDINGS);
+	
+	            String filter = ""; //OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " = ?";
+	            String[] args = new String[]{}; // { arg1.getString("extId") };
+	            
+	            CursorLoader cl = new CursorLoader(getActivity(), OpenHDS.SocialGroups.CONTENT_ID_URI_BASE, null, filter, args,
+	                    OpenHDS.SocialGroups._ID + " ASC");
+	
+	            return cl;                   
+	        }	        
         }
 
         return null;
@@ -485,6 +515,13 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 		getLoaderManager().restartLoader(LOCATION_FILTER_ID_LOADER, bundle, this);	
 	}	
 	
+	public void loadFilteredSocialGroups(String location) {
+		listCurrentlyDisplayed = Displayed.SOCIALGROUP;
+        Bundle bundle = new Bundle();
+        bundle.putString("location", location);
+        getLoaderManager().restartLoader(SOCIALGROUP_FILTER_LOADER, bundle, this);	
+	}	
+	
 	public void selectItemNoInList(int position){
 		
 //		ListView mList = getListView();
@@ -504,8 +541,10 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 		        @Override
 		        public void run() {
 		            ListView listView = getListView(); // Save a local reference rather than calling `getListView()` three times
-		            listView.setSelection(mActivePosition);
-		            listView.performItemClick(listView.getChildAt(0), mActivePosition, mActivePosition);
+		            if(listView.getCount() > 0){
+		            	listView.setSelection(mActivePosition);
+		            	listView.performItemClick(listView.getChildAt(0), mActivePosition, mActivePosition);
+		            }
 		        }
 		    }, 500);		
 	}

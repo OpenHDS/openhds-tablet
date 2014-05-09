@@ -18,6 +18,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.google.android.maps.GeoPoint;
+
 public class FormXmlReader {
 
     private XPath xpath = XPathFactory.newInstance().newXPath();
@@ -34,6 +36,14 @@ public class FormXmlReader {
             location.setName(xpath.evaluate("/"+jrFormId+"/locationName/text()", doc));
             location.setExtId(xpath.evaluate("/"+jrFormId+"/locationId/text()", doc));
             location.setHierarchy(xpath.evaluate("/"+jrFormId+"/hierarchyId/text()", doc));
+            // String of form: 
+            // mLocation.getLatitude() + " " + mLocation.getLongitude() + " " + mLocation.getAltitude() + " " + mLocation.getAccuracy()
+            String geoPoint = xpath.evaluate("/"+jrFormId+"/geopoint/text()", doc);
+            String[] gpsCoordinates = geoPoint.split(" ");
+            if(gpsCoordinates.length == 4){
+            	location.setLatitude(gpsCoordinates[0]);
+            	location.setLongitude(gpsCoordinates[1]);
+            }
 
             return location;
         } catch (ParserConfigurationException e) {
@@ -105,7 +115,7 @@ public class FormXmlReader {
             SocialGroup sg = new SocialGroup();
             sg.setExtId(xpath.evaluate("/"+jrFormId+"/householdId/text()", doc));
             sg.setGroupHead(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc));
-            sg.setGroupName(xpath.evaluate("/"+jrFormId+"/householdName/text()", doc));
+            sg.setGroupName(xpath.evaluate("/"+jrFormId+"/groupName/text()", doc));
             
             return sg;
         } catch (ParserConfigurationException e) {

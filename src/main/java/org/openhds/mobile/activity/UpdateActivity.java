@@ -927,6 +927,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         updatable = new RelationshipUpdate();
         startFilterActivity(FILTER_RELATIONSHIP);
     }
+    
+    public void onBaseline(){
+    	throw new UnsupportedOperationException("Method not used in Update.");
+    }
 
     public void onInMigration() {
         createInMigrationFormDialog();
