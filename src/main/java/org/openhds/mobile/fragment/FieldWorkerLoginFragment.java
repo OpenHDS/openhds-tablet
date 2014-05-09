@@ -102,7 +102,7 @@ public class FieldWorkerLoginFragment extends Fragment implements
                 	showLongToast(ctx, getString(R.string.field_worker_bad_credentials));
                 } else {
                 	if(getBaselineEnabled())
-                		launchCensusActivity();
+                		launchCensusActivity(fw);
                 	else
                 		launchUpdateActivity(fw);
                 }
@@ -128,15 +128,10 @@ public class FieldWorkerLoginFragment extends Fragment implements
 //		}
 	}
 
-	private void launchCensusActivity() {
+	private void launchCensusActivity(FieldWorker fieldWorker) {
 		//TODO pass in a fieldworker object
 //		Intent intent = new Intent(getActivity(), CensusActivity.class);
 //		startActivity(intent);
-		FieldWorker fieldWorker = new FieldWorker();
-		fieldWorker.setFirstName("TEST");
-		fieldWorker.setLastName("TEST");
-		fieldWorker.setExtId("FWEB1");
-		fieldWorker.setPassword("");
 		Intent intent = new Intent(getActivity(), BaselineActivity.class);
 		intent.putExtra("fieldWorker", fieldWorker);
 		startActivity(intent);		

@@ -274,6 +274,29 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	            String filter = ""; //OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " = ?";
 	            String[] args = new String[]{}; // { arg1.getString("extId") };
 	            
+	            String extId = arg1.getString("extId");
+	            String groupName = arg1.getString("groupName");
+	            
+	            StringBuilder filterBuilder = new StringBuilder();
+	            List<String> argumentList = new ArrayList<String>();
+	            
+	            if(extId.length() > 0){
+	            	argumentList.add(extId + "%");
+	            	filterBuilder.append("upper(" + OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + ")" + " LIKE upper(?)" );
+	            }
+	            
+	            if(groupName.length() > 0){
+	            	argumentList.add(groupName + "%");
+	            	
+	            	if(extId.length() > 0){
+	            		filterBuilder.append(" AND ");
+	            	}
+	            	filterBuilder.append("upper(" +OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME + ")" + " LIKE upper(?)" );
+	            }
+	            
+	            filter = filterBuilder.toString();
+	            args = argumentList.toArray(new String[] {});
+	            
 	            CursorLoader cl = new CursorLoader(getActivity(), OpenHDS.SocialGroups.CONTENT_ID_URI_BASE, null, filter, args,
 	                    OpenHDS.SocialGroups._ID + " ASC");
 	
@@ -515,10 +538,19 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 		getLoaderManager().restartLoader(LOCATION_FILTER_ID_LOADER, bundle, this);	
 	}	
 	
-	public void loadFilteredSocialGroups(String location) {
+    /**
+     * Load a social groups based on their extId and / or groupname
+     * 
+     * @param extId
+     *            filter by the ext id (userid) of the social group
+     * @param groupName
+     *            filter by the group name (groupname) of the social group     *            
+     */	
+	public void loadFilteredSocialGroups(String extId, String groupName) {
 		listCurrentlyDisplayed = Displayed.SOCIALGROUP;
         Bundle bundle = new Bundle();
-        bundle.putString("location", location);
+        bundle.putString("extId", extId);
+        bundle.putString("groupName", groupName);
         getLoaderManager().restartLoader(SOCIALGROUP_FILTER_LOADER, bundle, this);	
 	}	
 	

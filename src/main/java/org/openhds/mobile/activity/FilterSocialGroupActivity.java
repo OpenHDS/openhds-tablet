@@ -66,19 +66,19 @@ public class FilterSocialGroupActivity extends Activity implements ValueListener
     }    
 
     public void onHierarchy1Selected(LocationHierarchy hierarchy) {
-        selectionFilterSocialgroupFragment.updateHierarchy1Text(hierarchy.getExtId());
+    	// not implemented
     }
 
     public void onHierarchy2Selected(LocationHierarchy hierarchy) {
-        selectionFilterSocialgroupFragment.updateHierarchy2Text(hierarchy.getExtId());
+    	// not implemented
     }
     
     public void onHierarchy3Selected(LocationHierarchy hierarchy) {
-        selectionFilterSocialgroupFragment.updateHierarchy3Text(hierarchy.getExtId());
+    	// not implemented
     }
 
     public void onHierarchy4Selected(LocationHierarchy hierarchy) {
-        selectionFilterSocialgroupFragment.updateHierarchy4Text(hierarchy.getExtId());
+    	// not implemented
     }
 
     public void onRoundSelected(Round round) {
@@ -86,31 +86,11 @@ public class FilterSocialGroupActivity extends Activity implements ValueListener
     }
 
     public void onLocationSelected(Location location) {
-        selectionFilterSocialgroupFragment.updateLocationText(location.getExtId());
+    	// not implemented
     }    
     
-    public void onSearch(String location, String firstName, String lastName, String gender) {
+    public void onSearch(String extId, String groupName) {
         //valueFragment.loadFilteredIndividuals2(location, firstName, lastName, gender);
-    	valueFragment.loadFilteredSocialGroups(location);
-    }
-
-    public void onSeeListHierarchy1() {
-        valueFragment.loadLocationHierarchy();
-    }
-
-    public void onSeeListHierarchy2(String region) {
-        valueFragment.loadHierarchy2(region);
-    }
-    
-    public void onSeeListHierarchy3(String hierarchyExtId) {
-        valueFragment.loadHierarchy3(hierarchyExtId);
-    }
-
-    public void onSeeListHierarchy4(String subregion) {
-        valueFragment.loadHierarchy4(subregion);
-    }
-
-    public void onSeeListLocation(String village) {
-        valueFragment.loadLocations(village);
-    }    
+    	valueFragment.loadFilteredSocialGroups(extId, groupName);
+    }   
 }
