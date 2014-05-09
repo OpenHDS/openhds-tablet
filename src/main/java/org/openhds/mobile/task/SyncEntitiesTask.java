@@ -82,6 +82,7 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
         this.dialog = dialog;
         this.listener = listener;
         this.resolver = context.getContentResolver();
+        this.mContext = context;
     }
 
     @Override

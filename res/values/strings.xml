@@ -232,19 +232,16 @@
 <string name="update_pregoutcome_father_not_found">Father not within HDSS</string>
 <string name="update_pregoutcome_not_within_hdss">Not within HDSS</string>
 <string name="update_load_finished_select_hh_msg">Select a Household for the Individual</string>
-
-
-
 <string name="sync_task_downloading">Downloading </string>
 <string name="sync_task_saving">Saving </string>
-<string name="sync_task_individuals">Individuals.</string>
-<string name="sync_task_locations">Locations.</string>
+<string name="sync_task_individuals">Individuals. </string>
+<string name="sync_task_locations">Locations. </string>
 <string name="sync_task_loc_hierarchy">Location Hierarchy.</string>
-<string name="sync_task_relationships">Relationships.</string>
-<string name="sync_task_rounds">Rounds.</string>
-<string name="sync_task_socialgroups">Social Groups.</string>
-<string name="sync_task_visits">Visits.</string>
-<string name="sync_task_saved">Saved</string>
-<string name="sync_task_items">items</string>
+<string name="sync_task_relationships">Relationships. </string>
+<string name="sync_task_rounds">Rounds. </string>
+<string name="sync_task_socialgroups">Social Groups. </string>
+<string name="sync_task_visits">Visits. </string>
+<string name="sync_task_saved">Saved </string>
+<string name="sync_task_items"> items</string>
     
 </resources>
