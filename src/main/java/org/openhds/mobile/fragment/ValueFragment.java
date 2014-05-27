@@ -143,10 +143,9 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             listener.onIndividualSelected(individual);
             break;
 	    case SOCIALGROUP:
-	        //Individual individual = Converter.convertToIndividual(cursor);
 	    	SocialGroup sg = Converter.convertToSocialGroup(cursor);
 	    	
-	        //listener.onIndividualSelected(null);
+	    	//Cast listener to FilterSocialGroupActivity
 	        try {
 	            FilterSocialGroupActivity filterSocialGroup = (FilterSocialGroupActivity)listener;
 	            filterSocialGroup.onSocialGroupSelected(sg);
@@ -157,7 +156,6 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	    }        
 
         adapter.swapCursor(null);
-        //listener.updateButtons();
     }
 
     public void loadLocationHierarchy() {
@@ -271,8 +269,8 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	        {
 	            adapter.changeCursorAndColumns(null, SOCIALGROUP_COLUMNS, VIEW_BINDINGS);
 	
-	            String filter = ""; //OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " = ?";
-	            String[] args = new String[]{}; // { arg1.getString("extId") };
+	            String filter = "";
+	            String[] args = new String[]{};
 	            
 	            String extId = arg1.getString("extId");
 	            String groupName = arg1.getString("groupName");
@@ -437,6 +435,13 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         getLoaderManager().restartLoader(LOCATION_LOADER, bundle, this);
     }
     
+    
+    /**
+     * Loads a location based on the extId
+     * 
+     * @param ExtId
+     *            the extId to filter
+     */
     public void loadLocation(String ExtId) {
         listCurrentlyDisplayed = Displayed.LOCATION;
         Bundle bundle = new Bundle();
@@ -456,14 +461,6 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         Bundle bundle = new Bundle();
         bundle.putString("locationExtId", extId);
         getLoaderManager().restartLoader(INDIVIDUAL_LOADER, bundle, this);
-    }
-    
-    public int getNumberOfEntriesInCurrentList(){
-    	int count = 0;
-//	    ListView listView = getListView(); // Save a local reference rather than calling `getListView()` three times
-//	    count = listView.getCount();
-    	count = adapter.getCount();
-    	return count;
     }
 
     /**

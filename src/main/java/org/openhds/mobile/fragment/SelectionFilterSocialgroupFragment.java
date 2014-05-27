@@ -64,34 +64,4 @@ public class SelectionFilterSocialgroupFragment extends Fragment implements OnCl
     	groupNameTxt.setText("");
     	groupExtIdTxt.setText("");
     }
-
-    public void setHierarchy1(String region) {
-    }
-
-    public void setHierarchy2(String subregion) {
-    }
-    
-    public void setHierarchy3(String hierarchy) {
-    }
-
-    public void setHierarchy4(String village) {
-    }
-
-    public void setLocation(String location) {
-    }
-
-    public void updateHierarchy1Text(String text) {
-    }
-
-    public void updateHierarchy2Text(String text) {
-    }
-
-    public void updateHierarchy3Text(String text) {
-    }    
-    
-    public void updateHierarchy4Text(String text) {
-    }
-
-    public void updateLocationText(String text) {
-    }
 }

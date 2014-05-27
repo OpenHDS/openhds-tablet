@@ -36,26 +36,12 @@ public class FilterSocialGroupActivity extends Activity implements ValueListener
         processExtras();
     }
     
-    private void processExtras() {
-        LocationHierarchy hierarchy1 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy1");
-        LocationHierarchy hierarchy2 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy2");
-        LocationHierarchy hierarchy3 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy3");
-        LocationHierarchy hierarchy4 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy4");
-        
-        Location location = (Location) getIntent().getExtras().getSerializable("location");
-
-        selectionFilterSocialgroupFragment.setHierarchy1(hierarchy1.getExtId());
-        selectionFilterSocialgroupFragment.setHierarchy2(hierarchy2.getExtId());
-        selectionFilterSocialgroupFragment.setHierarchy3(hierarchy3.getExtId());
-        selectionFilterSocialgroupFragment.setHierarchy4(hierarchy4.getExtId());
-        selectionFilterSocialgroupFragment.setLocation(location.getExtId());
+    private void processExtras() {       
+//        Location location = (Location) getIntent().getExtras().getSerializable("location");
     }    
     
     public void onIndividualSelected(Individual individual) {
-        Intent i = new Intent();
-        //i.putExtra("individual", individual);
-        setResult(Activity.RESULT_OK, i);
-        finish();
+    	// not implemented
     }
     
     public void onSocialGroupSelected(SocialGroup socialGroup) {
@@ -90,7 +76,6 @@ public class FilterSocialGroupActivity extends Activity implements ValueListener
     }    
     
     public void onSearch(String extId, String groupName) {
-        //valueFragment.loadFilteredIndividuals2(location, firstName, lastName, gender);
     	valueFragment.loadFilteredSocialGroups(extId, groupName);
     }   
 }

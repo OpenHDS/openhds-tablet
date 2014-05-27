@@ -844,10 +844,6 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
 
     private void loadIndividualValueData() {
         vf.loadIndividuals(locationVisit.getLocation().getExtId());
-//        int count = vf.getNumberOfEntriesInCurrentList();
-//        if(count == 0){
-//        	Toast.makeText(this, "No Individuals found in " + locationVisit.getLocation().getName(), Toast.LENGTH_LONG).show();
-//        }
     }
 
     private void createUnfinishedFormDialog() {
@@ -1307,9 +1303,6 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
         showProgressFragment();
         new CreateDeathTask().execute();
     }
-
-    
-  
     
     private class CreateDeathTask extends AsyncTask<Void, Void, Void> {
 
@@ -1400,16 +1393,44 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
     public void onRound() {
         locationVisit.clearLevelsBelow(4);
         stateMachine.transitionTo("Select Round");
-//        loadRoundValueData();
         
     	ContentResolver resolver = getContentResolver();
     	Cursor cursor = null;
         cursor = Queries.allRounds(resolver);
-        Round round = Converter.convertToRound(cursor);
-    	vf.onLoaderReset(null);
+        int rows = cursor.getCount();
+        boolean baselineFound = false;
+        Round round = null;
+        if(rows > 0){        	
+        	while(cursor.moveToNext()){
+        		round = Converter.convertToRound(cursor);
+        		
+        		if(round.getRoundNumber().equalsIgnoreCase("0")){
+        			baselineFound = true;
+        			break;
+        		}
+        	}
+        	
+            if(baselineFound){
+            	if(round != null){
+            		onRoundSelected(round);
+            	}
+            }
+            else{
+            	System.out.println("Could not find baseline.");
+            	Toast.makeText(this, "Could not find baseline. Please make sure there is a round with number 0. Continuing anyways.", Toast.LENGTH_LONG).show();
+            	
+            	cursor.moveToFirst();
+            	round = Converter.convertToRound(cursor);
+            	onRoundSelected(round);
+            }        	
+        }
+        else{
+        	Toast.makeText(this, "No round information found. Please sync with server!", Toast.LENGTH_LONG).show();
+        }
+                
+        vf.onLoaderReset(null);
         cursor.close();        
-        
-        onRoundSelected(round);
+       
     }
 
     public void onIndividual() {
@@ -1500,61 +1521,9 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
 	            appendSocialGroupFromCursor(cursor);
 	            return;
 	        }
-	        
 	        if(loader.getId() == SOCIAL_GROUP_AT_LOCATION){
 	        	handleSocialGroup(loader, cursor);
 	        }
-//	        else if (cursor.getCount() == 0 && loader.getId() == SOCIAL_GROUP_AT_LOCATION){
-//	        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//	        	builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
-//	        	builder.setMessage("Please first create a household");
-//	        	builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog,int id) {
-//						// if this button is clicked, just close
-//						// the dialog box and do nothing
-//						dialog.cancel();
-//					}
-//				});
-//	            householdDialog = builder.create();
-//	            householdDialog.show();
-//	            return;
-//	        }
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
-//        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
-//                new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
-//                        OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
-//                        android.R.id.text2 }, 0){
-//        	@Override //Overwritten to prevent invisible text due to white on white color
-//        	public View getView(int position, View convertView,
-//        			ViewGroup parent) {
-//        		// TODO Auto-generated method stub
-//        		View view = super.getView(position, convertView, parent);
-//        		TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-//                text1.setTextColor(Color.BLACK);
-//                
-//                Cursor cursor = (Cursor) getItem(position);
-//                System.out.println("-------DATA: " + cursor.getString(0) + " / " + cursor.getString(1));
-//        		return view;
-//        	}
-//        };
-//        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
-//                appendSocialGroupFromCursor(cursor);
-//            }
-//        });
-//        builder.setNegativeButton(getString(R.string.cancel_lbl), null);
-//    	builder.setNeutralButton("Search", new DialogInterface.OnClickListener() {
-//			public void onClick(DialogInterface dialog,int id) {
-//				// if this button is clicked, just close
-//				// the dialog box and do nothing
-//				searchSocialGroup();
-//			}
-//		});        
-//        householdDialog = builder.create();
-//        householdDialog.show();
     }
     
     private void handleSocialGroup(Loader<Cursor> loader, Cursor cursor){
@@ -1571,15 +1540,11 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
 			});
         	builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog,int id) {
-    				// if this button is clicked, just close
-    				// the dialog box and do nothing
     				onHousehold();
     			}
     		});           	
     		builder.setNeutralButton("Search", new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog,int id) {
-    				// if this button is clicked, just close
-    				// the dialog box and do nothing
     				searchSocialGroup();
     			}
     		});           	
@@ -1588,57 +1553,49 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
         }
         else
         {
-		    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		    builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
-		    SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
-		            new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
-		                    OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
-		                    android.R.id.text2 }, 0){
-		    	@Override //Overwritten to prevent invisible text due to white on white color
-		    	public View getView(int position, View convertView,
-		    			ViewGroup parent) {
-		    		// TODO Auto-generated method stub
-		    		View view = super.getView(position, convertView, parent);
-		    		TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-		            text1.setTextColor(Color.BLACK);
-		            
-		            Cursor cursor = (Cursor) getItem(position);
-		            System.out.println("-------DATA: " + cursor.getString(0) + " / " + cursor.getString(1));
-		    		return view;
-		    	}
-		    };
-		    builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		            Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
-		            appendSocialGroupFromCursor(cursor);
-		        }
-		    });
-        	builder.setNegativeButton(getString(R.string.cancel_lbl),new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,int id) {
-					// if this button is clicked, just close
-					// the dialog box and do nothing
-					dialog.cancel();
-				}
-			});
-//		    builder.setNegativeButton(getString(R.string.cancel_lbl), null);     
-		    householdDialog = builder.create();
-		    householdDialog.show();    	
+//		    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//		    builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
+//		    SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
+//		            new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
+//		                    OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
+//		                    android.R.id.text2 }, 0){
+//		    	@Override //Overwritten to prevent invisible text due to white on white color
+//		    	public View getView(int position, View convertView,
+//		    			ViewGroup parent) {
+//		    		// TODO Auto-generated method stub
+//		    		View view = super.getView(position, convertView, parent);
+//		    		TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+//		            text1.setTextColor(Color.BLACK);
+//		            
+//		            Cursor cursor = (Cursor) getItem(position);
+//		            System.out.println("-------DATA: " + cursor.getString(0) + " / " + cursor.getString(1));
+//		    		return view;
+//		    	}
+//		    };
+//		    builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+//		        public void onClick(DialogInterface dialog, int which) {
+//		            Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
+//		            appendSocialGroupFromCursor(cursor);
+//		        }
+//		    });
+//        	builder.setNegativeButton(getString(R.string.cancel_lbl),new DialogInterface.OnClickListener() {
+//				public void onClick(DialogInterface dialog,int id) {
+//					// if this button is clicked, just close
+//					// the dialog box and do nothing
+//					dialog.cancel();
+//				}
+//			});
+////		    builder.setNegativeButton(getString(R.string.cancel_lbl), null);     
+//		    householdDialog = builder.create();
+//		    householdDialog.show();   
+        	
+            if(cursor.moveToNext()){
+            	appendSocialGroupFromCursor(cursor);
+            }
         }
     }
     
-    private void searchSocialGroup(){
-    	System.out.println("Search for social group");
-    	
-//    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//    	builder.setTitle("Search Social Group");
-//    	builder.setMessage("search action dummy");
-//    	builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-//			public void onClick(DialogInterface dialog,int id) {
-//				dialog.cancel();
-//			}
-//		});
-//        householdDialog = builder.create();
-//        householdDialog.show();
+    private void searchSocialGroup(){ 	
     	startFilterActivity(FILTER_SOCIALGROUP);
     }
 
