@@ -89,6 +89,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     protected static final int FILTER_INMIGRATION_MOTHER = 60;
     protected static final int FILTER_INMIGRATION_FATHER = 70;
     protected static final int FILTER_INDIV_VISIT = 75;
+    protected static final int FILTER_SOCIALGROUP = 80;
     // the uri of the last viewed xform
     private Uri contentUri;
 
@@ -237,6 +238,16 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         case FILTER_INMIGRATION_FATHER:
             handleFilterFather(resultCode, data);
             break;
+        case FILTER_SOCIALGROUP:
+            if (resultCode != RESULT_OK) {
+                return;
+            }
+            SocialGroup socialGroup = (SocialGroup) data.getExtras().getSerializable("socialGroup");
+            vf.onLoaderReset(null);
+            //System.out.println("Return from searching social group ! Selected: " + socialGroup.getGroupName());
+            filledForm = formFiller.appendSocialGroup(socialGroup, filledForm);
+            loadForm(SELECTED_XFORM);
+            break;             
         case LOCATION_GEOPOINT:
             if (resultCode == RESULT_OK) {
                 String extId = data.getExtras().getString("extId");
@@ -598,9 +609,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
      */
     private void startFilterActivity(int requestCode) {
     	Intent i =null;
-    	if (requestCode==75) {
+    	if (requestCode==FILTER_INDIV_VISIT) {
             i = new Intent(this, FilterVisitActivity.class);
-    	} else {
+    	}
+    	else if(requestCode == FILTER_SOCIALGROUP){
+    		i = new Intent(this, FilterSocialGroupActivity.class);
+    	}
+    	else {
     		i = new Intent(this, FilterActivity.class);
     	}
     	
@@ -822,16 +837,16 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         @Override
         protected void onPostExecute(Void result) {
-        	 SocialGroup sg = locationVisit.createSocialGroup(getContentResolver());
-             if (sg==null){
-            	onSGexists();
-            	this.cancel(true);
-             	hideProgressFragment();
-             	
-             } else {
-            	hideProgressFragment();
-            	loadForm(SELECTED_XFORM);
-             }
+        	hideProgressFragment();
+			SocialGroup sg = locationVisit
+					.createSocialGroup(getContentResolver());
+			if (sg == null) {
+				onSGexists();
+				this.cancel(true);
+
+			} else {
+				loadForm(SELECTED_XFORM);
+			}
         }
     }
     
@@ -1279,24 +1294,50 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             appendSocialGroupFromCursor(cursor);
             return;
         }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
-                new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
-                        OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
-                        android.R.id.text2 }, 0);
-        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
-                appendSocialGroupFromCursor(cursor);
-            }
-        });
-        builder.setNegativeButton(getString(R.string.cancel_lbl), null);
-        householdDialog = builder.create();
-        householdDialog.show();
+    	if(loader.getId() == SOCIAL_GROUP_AT_LOCATION){
+    		handleSocialGroup(loader, cursor);
+    	}
     }
+    
+    private void handleSocialGroup(Loader<Cursor> loader, Cursor cursor){
+		if (cursor.getCount() == 0) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("No household found");
+			builder.setMessage("Please search for an existing or create a new household.");
+			builder.setNegativeButton(getString(R.string.cancel_lbl),
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							// if this button is clicked, just close
+							// the dialog box and do nothing
+							dialog.cancel();
+						}
+					});
+//			builder.setPositiveButton("Create",
+//					new DialogInterface.OnClickListener() {
+//						public void onClick(DialogInterface dialog, int id) {
+//							onHousehold();
+//						}
+//					});
+			builder.setNeutralButton("Search",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							searchSocialGroup();
+						}
+					});
+			householdDialog = builder.create();
+			householdDialog.show();
+		}
+        else
+        {
+        	if(cursor.moveToNext()){
+        		appendSocialGroupFromCursor(cursor);
+            }     	
+        }
+    }
+    
+    private void searchSocialGroup(){
+        startFilterActivity(FILTER_SOCIALGROUP);
+    }    
 
     private void appendSocialGroupFromCursor(Cursor cursor) {
         SocialGroup sg = Converter.convertToSocialGroup(cursor);
