@@ -145,6 +145,28 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         super.onCreateOptionsMenu(menu);
         return true;
 	}
+    
+    /**
+	* Display dialog when user clicks on back button
+	*/
+	@Override
+	public void onBackPressed() {
+		new AlertDialog.Builder(this)
+			.setMessage(getString(R.string.exit_confirmation))
+			.setCancelable(false)
+			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					try{
+						UpdateActivity.this.finish();
+					}
+					catch(Exception e){
+						
+					}
+				}
+		})
+		.setNegativeButton("No", null)
+		.show();
+	}    
 
     /**
      * Defining what happens when a main menu item is selected

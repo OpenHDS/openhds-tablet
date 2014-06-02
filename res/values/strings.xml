@@ -53,6 +53,7 @@
     <string name="username">OpenHDS Username</string>
     <string name="view_forms_btn">View My Forms</string>
 <string name="see_list">See List</string>
+<string name="exit_confirmation">"Are you sure you want to exit?"</string>
 
     <string name="location_hint_lbl">Location External Id</string>
     <string name="form_hint_lbl">Form Name</string>
