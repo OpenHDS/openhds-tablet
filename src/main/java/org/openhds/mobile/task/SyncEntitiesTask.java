@@ -99,30 +99,30 @@ public class SyncEntitiesTask extends AsyncTask<Void, Integer, Boolean> {
 
         switch (entity) {
         case INDIVIDUAL:
-            builder.append(mContext.getString(R.string.sync_task_individuals));
+            builder.append(" " + mContext.getString(R.string.sync_task_individuals) + " ");
             break;
         case LOCATION:
-            builder.append(mContext.getString(R.string.sync_task_locations));
+            builder.append(" " + mContext.getString(R.string.sync_task_locations) + " " );
             break;
         case LOCATION_HIERARCHY:
-            builder.append(mContext.getString(R.string.sync_task_loc_hierarchy));
+            builder.append(" " + mContext.getString(R.string.sync_task_loc_hierarchy) + " ");
             break;
         case RELATIONSHIP:
-            builder.append(mContext.getString(R.string.sync_task_relationships));
+            builder.append(" " + mContext.getString(R.string.sync_task_relationships) + " ");
             break;
         case ROUND:
-            builder.append(mContext.getString(R.string.sync_task_rounds));
+            builder.append(" " + mContext.getString(R.string.sync_task_rounds) + " ");
             break;
         case SOCIALGROUP:
-            builder.append(mContext.getString(R.string.sync_task_socialgroups));
+            builder.append(" " + mContext.getString(R.string.sync_task_socialgroups) + " ");
             break;
         case VISIT:
-            builder.append(mContext.getString(R.string.sync_task_visits));
+            builder.append(" " + mContext.getString(R.string.sync_task_visits) + " ");
             break;
         }
 
         if (values.length > 0) {
-            builder.append(mContext.getString(R.string.sync_task_saved) + values[0] + mContext.getString(R.string.sync_task_items));
+            builder.append(mContext.getString(R.string.sync_task_saved) + " " + values[0] + " " + mContext.getString(R.string.sync_task_items));
         }
 
         dialog.setMessage(builder.toString());
