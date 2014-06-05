@@ -199,6 +199,7 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                                 + filledForm.getMigrationType() + "</migrationType>" + "\r\n");
                     } else if (name.equals(FilledParams.socialGroupType)) {
                         sbuilder.append("<socialGroupType>FAM</socialGroupType>" + "\r\n");
+                   
                     } else if (name.equals(FilledParams.deviceId)) {
                      mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
                      
@@ -253,7 +254,11 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                         sbuilder.append("<relationshipToGroupHead />\r\n");
                         sbuilder.append("</outcomes>\r\n");
                     }
-                } else {
+                /*} else if (name.equalsIgnoreCase("processedByMirth")) {
+                    sbuilder.append("<processedByMirth>0</processedByMirth>" + "\r\n");
+                } else if (name.equalsIgnoreCase("locationType")) {
+                    sbuilder.append("<locationType>RUR</locationType>" + "\r\n"); */
+                }   else {
                     if (!n.hasChildNodes())
                         sbuilder.append("<" + name + " />" + "\r\n");
                     else {
