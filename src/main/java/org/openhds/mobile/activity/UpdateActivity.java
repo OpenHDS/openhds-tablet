@@ -543,7 +543,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             	} else if (stateMachine.getState()==State.SELECT_INDIVIDUAL) {
             		if (extInm)
                 		onFinishExternalInmigration();
-            	}else {
+            	}
+                else if(stateMachine.getState() == State.SELECT_EVENT){
+                    System.out.println("Handle select event in statemachine");
+                   
+                    }            	
+            	else {
             		stateMachine.transitionTo(State.SELECT_INDIVIDUAL);
             	}
             } else {
