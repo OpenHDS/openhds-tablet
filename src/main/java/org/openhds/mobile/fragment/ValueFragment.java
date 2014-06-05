@@ -44,6 +44,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private static final int INDIVIDUAL_FILTER_LOADER = 5;
     private static final int INDIMG_FILTER_LOADER = 6;
     private static final int INDIVIDUAL18_FILTER_LOADER = 7;
+    private static final int LOCATION_FILTER_ID_LOADER = 9;    
     private static final int SOCIALGROUP_FILTER_LOADER = 10;
 
     // create the column mappings so they don't need to be recreated on every
@@ -236,6 +237,18 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 
             return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter1, args1,
                     OpenHDS.Individuals._ID + " ASC");
+    	case LOCATION_FILTER_ID_LOADER:
+    	{
+	    	adapter.changeCursorAndColumns(null, LOCATION_COLUMNS, VIEW_BINDINGS);
+	
+	    	String filter = OpenHDS.Locations.COLUMN_LOCATION_EXTID + " = ?";
+	    	String[] args = new String[] { arg1.getString("extId") };
+	
+	    	CursorLoader cl = new CursorLoader(getActivity(), OpenHDS.Locations.CONTENT_ID_URI_BASE, null, filter, args,
+	    	OpenHDS.Locations._ID + " ASC");
+	
+	    	return cl;
+    	}            
 		case SOCIALGROUP_FILTER_LOADER:
 		{
 			adapter.changeCursorAndColumns(null, SOCIALGROUP_COLUMNS,
@@ -404,6 +417,19 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         bundle.putString("extId", ExtId);
         getLoaderManager().restartLoader(LOCATION_LOADER, bundle, this);
     }
+    
+    /**
+	* Load a single location based on its id
+	*
+	* @param locationExtId
+	* filter by the ext id (locid) of the location
+	*/	
+	public void loadFilteredLocationById(String locationExtId){
+		listCurrentlyDisplayed = Displayed.LOCATION;
+		Bundle bundle = new Bundle();
+		bundle.putString("extId", locationExtId);
+		getLoaderManager().restartLoader(LOCATION_FILTER_ID_LOADER, bundle, this);	
+	}	    
 
     /**
      * Load a list of individuals based on their current residency

@@ -1,5 +1,9 @@
 package org.openhds.mobile.activity;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import org.openhds.mobile.Converter;
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
@@ -26,6 +30,7 @@ import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.FilledForm;
 import org.openhds.mobile.model.Form;
 import org.openhds.mobile.model.FormFiller;
+import org.openhds.mobile.model.FormXmlReader;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
@@ -46,6 +51,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -343,6 +349,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                     InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH },
                     InstanceProviderAPI.InstanceColumns.STATUS + "=?",
                     new String[] { InstanceProviderAPI.STATUS_COMPLETE }, null);
+            
+            System.out.println("Cursor count: " + cursor.getCount());
             if (cursor.moveToNext()) {
                 String filepath = cursor.getString(cursor
                         .getColumnIndex(InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH));
@@ -361,7 +369,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             hideProgressFragment();
 
             if (result) {
-                stateMachine.transitionTo(State.CREATE_VISIT);
+            	String locExtId = locationVisit.getLocation().getExtId();
+            	vf.loadFilteredLocationById(locExtId);
+//                stateMachine.transitionTo(State.CREATE_VISIT);
             } else {
                 createUnfinishedFormDialog();
             }
@@ -700,7 +710,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     private void createUnfinishedFormDialog() {
         formUnFinished = true;
-        if (xformUnfinishedDialog == null) {
+        System.out.println("Show dialog");
+        if (xformUnfinishedDialog == null) {	
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(getString(R.string.warning_lbl));
             alertDialogBuilder.setMessage(getString(R.string.update_unfinish_msg1));
@@ -708,7 +719,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             alertDialogBuilder.setPositiveButton(getString(R.string.update_unfinish_pos_button), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     formUnFinished = false;
-                    xformUnfinishedDialog.hide();
+//                    xformUnfinishedDialog.hide();
+                    System.out.println("Content URI to delete: " + contentUri.getPath());
                     getContentResolver().delete(contentUri, InstanceProviderAPI.InstanceColumns.STATUS + "=?",
                             new String[] { InstanceProviderAPI.STATUS_INCOMPLETE });
                 }
@@ -716,11 +728,18 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             alertDialogBuilder.setNegativeButton(getString(R.string.update_unfinish_neg_button), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     formUnFinished = false;
-                    xformUnfinishedDialog.hide();
+//                    xformUnfinishedDialog.hide();
                     startActivityForResult(new Intent(Intent.ACTION_EDIT, contentUri), SELECTED_XFORM);
                 }
             });
             xformUnfinishedDialog = alertDialogBuilder.create();
+            xformUnfinishedDialog.setOnDismissListener(new OnDismissListener() {
+                @Override
+                public void onDismiss(final DialogInterface arg0) {
+                    // do something
+                	System.out.println("Dialog was dismissed!");
+                }
+            });            
         }
 
         xformUnfinishedDialog.show();
