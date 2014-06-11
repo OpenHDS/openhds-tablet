@@ -724,8 +724,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             alertDialogBuilder.setPositiveButton(getString(R.string.update_unfinish_pos_button), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     formUnFinished = false;
-//                    xformUnfinishedDialog.hide();
-                    System.out.println("Content URI to delete: " + contentUri.getPath());
                     getContentResolver().delete(contentUri, InstanceProviderAPI.InstanceColumns.STATUS + "=?",
                             new String[] { InstanceProviderAPI.STATUS_INCOMPLETE });
                 }
@@ -733,18 +731,11 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             alertDialogBuilder.setNegativeButton(getString(R.string.update_unfinish_neg_button), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     formUnFinished = false;
-//                    xformUnfinishedDialog.hide();
                     startActivityForResult(new Intent(Intent.ACTION_EDIT, contentUri), SELECTED_XFORM);
                 }
             });
             xformUnfinishedDialog = alertDialogBuilder.create();
-            xformUnfinishedDialog.setOnDismissListener(new OnDismissListener() {
-                @Override
-                public void onDismiss(final DialogInterface arg0) {
-                    // do something
-                	System.out.println("Dialog was dismissed!");
-                }
-            });            
+   
         }
 
         xformUnfinishedDialog.show();
@@ -1370,8 +1361,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onLoaderReset(Loader<Cursor> arg0) {
-        householdDialog.dismiss();
-        householdDialog = null;
+        if (householdDialog !=null) {
+        	householdDialog.dismiss();
+        	householdDialog = null;
+        }
     }
 
 	public void onFilterLocation() {
