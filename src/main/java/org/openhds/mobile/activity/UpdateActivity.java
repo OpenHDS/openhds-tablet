@@ -1342,11 +1342,28 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 			householdDialog = builder.create();
 			householdDialog.show();
 		}
-        else
-        {
+		else if(cursor.getCount() == 1){
         	if(cursor.moveToNext()){
         		appendSocialGroupFromCursor(cursor);
-            }     	
+            } 			
+		}
+        else
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
+            SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
+                    new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
+                            OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
+                            android.R.id.text2 }, 0);
+            builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
+                    appendSocialGroupFromCursor(cursor);
+                }
+            });
+            builder.setNegativeButton(getString(R.string.cancel_lbl), null);
+            householdDialog = builder.create();
+            householdDialog.show();        	
         }
     }
     
