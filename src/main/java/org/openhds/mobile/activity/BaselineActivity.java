@@ -1349,6 +1349,8 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
             	Cursor cursor = getCursorForFormsProvider(filledForm.getFormName());
                 if (cursor.moveToFirst()) {
                     jrFormId = cursor.getString(0);
+                    System.out.println("Cursor col 1: " + cursor.getString(0));
+                    System.out.println("Cursor col 2: " + cursor.getString(1));
                 }
                 BaselineActivity.this.contentUri = contentUri;
                 startActivityForResult(new Intent(Intent.ACTION_EDIT, contentUri), requestCode);

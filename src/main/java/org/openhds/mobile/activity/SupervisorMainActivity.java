@@ -10,6 +10,7 @@ import org.openhds.mobile.fragment.LoginPreferenceFragment;
 import org.openhds.mobile.task.HttpTask.RequestContext;
 import org.openhds.mobile.task.SyncEntitiesTask;
 import org.openhds.mobile.task.SyncFieldworkersTask;
+import org.openhds.mobile.task.SyncFormsTask;
 import org.openhds.mobile.utilities.SyncDatabaseHelper;
 
 import android.app.Activity;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class SupervisorMainActivity extends Activity implements OnClickListener {
 
@@ -49,6 +51,13 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 				getResourceString(this, R.string.sync_field_worker_name),
 				getResourceString(this, R.string.sync_field_worker_name), this,
 				supervisorOptionsList);
+		
+		makeNewGenericButton(
+				this,
+				getResourceString(this, R.string.download_extraform_button),
+				getResourceString(this, R.string.formmenu_extraforms),
+				getResourceString(this, R.string.formmenu_extraforms), this,
+				supervisorOptionsList);		
 
 		if (null != savedInstanceState) {
 			return;
@@ -89,7 +98,23 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 		} else if (tag.equals(getResourceString(this,
 				R.string.sync_field_worker_name))) {
 			syncFieldWorkers();
+		} else if (tag.equals(getResourceString(this,
+				R.string.formmenu_extraforms))) {
+			syncExtraForms();
 		}
+	}
+	
+	private void syncExtraForms(){
+		Toast.makeText(this, "SYNCING EXTRA FORMS", Toast.LENGTH_SHORT).show();
+		String url = getPreferenceString(this, R.string.openhds_server_url_key, "");
+		String username = (String) getIntent().getExtras().get( OpeningActivity.USERNAME_KEY);
+		String password = (String) getIntent().getExtras().get( OpeningActivity.PASSWORD_KEY);
+
+		SyncFormsTask task = new SyncFormsTask(url, username, password,
+				syncDatabaseHelper.getProgressDialog(), this, syncDatabaseHelper);
+		
+		syncDatabaseHelper.setCurrentTask(task);
+		syncDatabaseHelper.startSync();
 	}
 
 	private void syncDatabase() {

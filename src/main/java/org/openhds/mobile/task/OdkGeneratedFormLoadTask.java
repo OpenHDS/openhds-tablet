@@ -105,6 +105,9 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
         } catch (SAXException e) {
             e.printStackTrace();
         }
+        catch(Exception e){
+        	e.printStackTrace();
+        }
 
         return sbuilder.toString();
     }
