@@ -61,9 +61,19 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 		if (result.equals(HttpTask.EndResult.SUCCESS)) {
 			showLongToast(callingContext, R.string.sync_entities_successful);
 		} else {
-			showLongToast(callingContext, R.string.sync_entities_failure);
+			displayEntityFetchFailedDialog();
 		}
 		progressDialog.dismiss();
+	}
+	
+	private void displayEntityFetchFailedDialog(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(
+				callingContext);
+		builder.setMessage(R.string.sync_entities_failure);
+		builder.setCancelable(false);
+		builder.setPositiveButton("Ok", null);
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
 
 	private class SyncingOnCancelListener implements OnCancelListener {

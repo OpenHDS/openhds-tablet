@@ -105,7 +105,6 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 	}
 	
 	private void syncExtraForms(){
-		Toast.makeText(this, "SYNCING EXTRA FORMS", Toast.LENGTH_SHORT).show();
 		String url = getPreferenceString(this, R.string.openhds_server_url_key, "");
 		String username = (String) getIntent().getExtras().get( OpeningActivity.USERNAME_KEY);
 		String password = (String) getIntent().getExtras().get( OpeningActivity.PASSWORD_KEY);
