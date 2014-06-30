@@ -1,7 +1,9 @@
 package org.openhds.mobile.task;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -83,7 +85,15 @@ public class HttpTask<Params, Progress> extends
 		DefaultHttpClient httpClient = buildHttpClient(requestContext.user,
 				requestContext.password);
 		try {
-			HttpResponse response = executeGet(httpClient, requestContext);
+			HttpResponse response;
+			boolean isReachable = false;
+			isReachable = InetAddress.getByName(requestContext.url.getHost()).isReachable(1000);
+			if(isReachable){
+				response = executeGet(httpClient, requestContext);
+			}
+			else{
+				return EndResult.CONNECTION_ERROR;
+			}
 			switch (response.getStatusLine().getStatusCode()) {
 			case SUCCESS_STATUS_CODE:
 				return handleResponseData(response);
@@ -103,6 +113,9 @@ public class HttpTask<Params, Progress> extends
 		} catch (AuthenticationException e) {
 			return EndResult.BAD_AUTHENTICATION;
 		}
+		catch(Exception e){
+			return EndResult.CONNECTION_ERROR;
+		}
 	}
 
 	public DefaultHttpClient buildHttpClient(String user, String password) {
@@ -115,6 +128,8 @@ public class HttpTask<Params, Progress> extends
 	private void setHttpClientParams(DefaultHttpClient httpClient) {
 		httpClient.getParams().setIntParameter(
 				HttpConnectionParams.CONNECTION_TIMEOUT, 60 * 1000);
+		httpClient.getParams().setIntParameter(
+				HttpConnectionParams.SO_TIMEOUT, 60 * 1000);		
 	}
 
 	private void setHttpClientCredentials(DefaultHttpClient httpClient,
@@ -174,4 +189,44 @@ public class HttpTask<Params, Progress> extends
 	protected EndResult handleResponseData(HttpResponse response) {
 		return EndResult.SUCCESS;
 	}
+	
+	private boolean testDNS(String hostname) {
+		  try
+		  {
+		    DNSResolver dnsRes = new DNSResolver(hostname);
+		    Thread t = new Thread(dnsRes);
+		    t.start();
+		    t.join(1000);
+		    InetAddress inetAddr = dnsRes.get();            
+		    return inetAddr != null;
+		  }
+		  catch(Exception e)
+		  { 
+		    return false;
+		  }
+		}
+
+		private class DNSResolver implements Runnable {
+		    private String domain;
+		    private InetAddress inetAddr;
+
+		    public DNSResolver(String domain) {
+		        this.domain = domain;
+		    }
+
+		    public void run() {
+		        try {
+		            InetAddress addr = InetAddress.getByName(domain);
+		            set(addr);
+		        } catch (UnknownHostException e) {                
+		        }
+		    }
+
+		    public synchronized void set(InetAddress inetAddr) {
+		        this.inetAddr = inetAddr;
+		    }
+		    public synchronized InetAddress get() {
+		        return inetAddr;
+		    }
+		}	
 }
