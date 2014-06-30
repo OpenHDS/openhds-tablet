@@ -40,11 +40,16 @@ public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 
 	@Override
 	protected EndResult handleResponseData(HttpResponse response) {
-		try {
-			processXMLDocument(response.getEntity().getContent());
-		} catch (IllegalStateException | XmlPullParserException | IOException e) {
-			return EndResult.FAILURE;
-		}
+			try {
+				processXMLDocument(response.getEntity().getContent());
+			} catch (IllegalStateException e) {
+				return EndResult.FAILURE;
+			} catch (XmlPullParserException e) {
+				return EndResult.FAILURE;
+			} catch (IOException e) {
+				return EndResult.FAILURE;
+			}
+	 
 		return EndResult.SUCCESS;
 	}
 
