@@ -69,6 +69,7 @@ public class FieldWorkerLoginFragment extends Fragment implements
 	}
 
 	public void onClick(View view) {
+		loginButton.setEnabled(false);
 		authenticateFieldWorker();
 	}
 
@@ -98,6 +99,7 @@ public class FieldWorkerLoginFragment extends Fragment implements
 		new AuthenticateFieldWorker(cr, extId, password, new AuthenticateFieldWorkerListener() {
 
             public void onAuthenticated(FieldWorker fw) {
+            	loginButton.setEnabled(true);
                 if (fw == null) {
                 	showLongToast(ctx, getString(R.string.field_worker_bad_credentials));
                 } else {
@@ -134,6 +136,8 @@ public class FieldWorkerLoginFragment extends Fragment implements
 //		startActivity(intent);
 		Intent intent = new Intent(getActivity(), BaselineActivity.class);
 		intent.putExtra("fieldWorker", fieldWorker);
+//		usernameEditText.setText("");
+		passwordEditText.setText("");
 		startActivity(intent);		
 	}
 	
@@ -141,6 +145,8 @@ public class FieldWorkerLoginFragment extends Fragment implements
 		//TODO pass in a fieldworker object
 		Intent intent = new Intent(getActivity(), UpdateActivity.class);
 		intent.putExtra("fieldWorker", fieldWorker);
+//		usernameEditText.setText("");
+		passwordEditText.setText("");		
 		startActivity(intent);
 	}	
 	

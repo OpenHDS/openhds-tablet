@@ -52,6 +52,7 @@ public class SupervisorLoginFragment extends Fragment implements
 	}
 
 	public void onClick(View view) {
+		loginButton.setEnabled(false);
 		authenticateSupervisor();
 	}
 
@@ -106,6 +107,7 @@ public class SupervisorLoginFragment extends Fragment implements
 		// to prevent login when not connected to network
 		showLongToast(getActivity(), R.string.supervisor_bad_credentials);
 		deleteSupervisor();
+		loginButton.setEnabled(true);	
 	}
 
 	private void deleteSupervisor() {
@@ -133,6 +135,9 @@ public class SupervisorLoginFragment extends Fragment implements
 		Intent intent = new Intent(getActivity(), SupervisorMainActivity.class);
 		intent.putExtra(OpeningActivity.USERNAME_KEY, getUsernameFromEditText());
 		intent.putExtra(OpeningActivity.PASSWORD_KEY, getPasswordFromEditText());
+//		usernameEditText.setText("");
+		passwordEditText.setText("");
+		loginButton.setEnabled(true);		
 		startActivity(intent);
 	}
 
@@ -168,6 +173,7 @@ public class SupervisorLoginFragment extends Fragment implements
 		}
 
 		public void onBadAuthentication() {
+			loginButton.setEnabled(true);	
 			showLongToast(getActivity(), R.string.supervisor_bad_credentials);
 		}
 	}
