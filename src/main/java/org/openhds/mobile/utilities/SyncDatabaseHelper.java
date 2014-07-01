@@ -64,6 +64,7 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 			displayEntityFetchFailedDialog();
 		}
 		progressDialog.dismiss();
+		initializeProgressDialog();
 	}
 	
 	private void displayEntityFetchFailedDialog(){
@@ -97,6 +98,7 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 			switch (which) {
 			case DialogInterface.BUTTON_POSITIVE:
 				currentTask.cancel(true);
+				initializeProgressDialog();
 				showLongToast(callingContext, R.string.sync_interrupted);
 				break;
 			case DialogInterface.BUTTON_NEGATIVE:
