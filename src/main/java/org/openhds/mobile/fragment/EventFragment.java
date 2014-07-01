@@ -116,7 +116,6 @@ public class EventFragment extends Fragment implements OnClickListener {
         relationshipBtn.setOnClickListener(this);
 
         inMigrationBtn = (Button) view.findViewById(R.id.inMigrationBtn);
-        inMigrationBtn.setText("Baseline");
         inMigrationBtn.setOnClickListener(this);
 
         outMigrationBtn = (Button) view.findViewById(R.id.outMigrationBtn);
@@ -134,7 +133,15 @@ public class EventFragment extends Fragment implements OnClickListener {
         clearIndividualBtn = (Button) view.findViewById(R.id.clearIndividualBtn);
         clearIndividualBtn.setOnClickListener(this);
         
-        householdBtn.setVisibility(LinearLayout.GONE);
+    }
+    
+    public void setBaseLine(){
+    	if(inMigrationBtn != null){
+    		inMigrationBtn.setText("Baseline");
+    	}
+    	if(householdBtn != null){
+    		householdBtn.setVisibility(LinearLayout.GONE);
+    	}
     }
 
     public void onClick(View view) {

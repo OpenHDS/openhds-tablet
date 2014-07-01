@@ -292,6 +292,26 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		}
         return super.onOptionsItemSelected(item);
     }
+    
+    /**
+     * Display dialog when user clicks on back button
+     */    
+	@Override
+	public void onBackPressed() {
+	    new AlertDialog.Builder(this)
+	           .setMessage("Are you sure you want to exit?")
+	           .setCancelable(false)
+	           .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	               public void onClick(DialogInterface dialog, int id) {
+	            	   try{
+	                    UpdateActivity.this.finish();
+	            	   }
+	            	   catch(Exception e){}
+	               }
+	           })
+	           .setNegativeButton("No", null)
+	           .show();
+	}    
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

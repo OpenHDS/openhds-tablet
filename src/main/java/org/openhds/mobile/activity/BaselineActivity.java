@@ -77,7 +77,7 @@ import android.widget.Toast;
  * interacts with the application.
  */
 public class BaselineActivity extends Activity implements ValueFragment.ValueListener, LoaderCallbacks<Cursor>,
-        EventFragment.Listener, SelectionFragment.Listener {
+EventFragment.Listener, SelectionFragment.Listener {
 
     private SelectionFragment sf;
     private ValueFragment vf;
@@ -179,6 +179,8 @@ public class BaselineActivity extends Activity implements ValueFragment.ValueLis
 
         sf = (SelectionFragment) getFragmentManager().findFragmentById(R.id.selectionFragment);
         ef = (EventFragment) getFragmentManager().findFragmentById(R.id.eventFragment);
+        //Turn on baseline
+        ef.setBaseLine();
         
         ActionBar actionBar = getActionBar();
         actionBar.show();        
