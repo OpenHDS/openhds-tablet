@@ -60,4 +60,14 @@ public class OpeningActivity extends Activity {
 		}
 		return true;
 	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		getFragmentManager()
+		.beginTransaction()
+		.replace(R.id.login_pref_container, new LoginPreferenceFragment()).commit();
+		
+		super.onResume();
+	}	
 }
