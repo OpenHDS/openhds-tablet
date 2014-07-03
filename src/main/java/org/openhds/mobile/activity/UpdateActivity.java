@@ -477,11 +477,21 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         protected void onPostExecute(Boolean result) {
             hideProgressFragment();
 
+//            if (result) {
+//                stateMachine.transitionTo("Create Visit");
+//            } else {
+//                createUnfinishedFormDialog();
+//            }
             if (result) {
-                stateMachine.transitionTo("Create Visit");
+            	//Handle new Location, load list and select first entry
+            	String locationExtId = locationVisit.getLocation().getExtId();
+            	if(locationExtId.length() > 0){
+            		vf.loadFilteredLocationById(locationExtId);
+            		vf.selectItemNoInList(0);
+            	}
             } else {
                 createUnfinishedFormDialog();
-            }
+            }            
         }
     }
 
