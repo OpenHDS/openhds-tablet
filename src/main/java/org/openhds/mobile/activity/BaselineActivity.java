@@ -12,6 +12,7 @@ import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.R;
+import org.openhds.mobile.database.BaselineUpdate;
 import org.openhds.mobile.database.DeathUpdate;
 import org.openhds.mobile.database.ExternalInMigrationUpdate;
 import org.openhds.mobile.database.HouseholdUpdate;
@@ -1076,8 +1077,8 @@ EventFragment.Listener, SelectionFragment.Listener {
         @Override
         protected Void doInBackground(Void... params) {
             String id = locationVisit.generateIndividualId(getContentResolver());
-            filledForm = formFiller.fillExternalInmigration(locationVisit, id);
-            updatable = new ExternalInMigrationUpdate();            
+            filledForm = formFiller.fillBaseline(locationVisit, id);
+            updatable = new BaselineUpdate();            
             return null;
         }
 

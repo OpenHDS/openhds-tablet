@@ -194,7 +194,19 @@ public class FormFiller {
         return form;
     }
     
-    
+    public FilledForm fillBaseline(LocationVisit locationVisit, String id) {
+        FilledForm form = new FilledForm(UpdateEvent.BASELINE);
+
+        addFieldWorker(locationVisit, form);
+        addVisit(locationVisit, form);
+
+        form.setIndividualExtId(id);
+//        form.setMigrationType("INTERNAL_INMIGRATION");
+        form.setLocationId(locationVisit.getLocation().getExtId());
+        form.setMigrationType("BASELINE");
+        
+        return form;
+    }
     
     public FilledForm fillExtraForm(LocationVisit locationVisit, String formName, SocialGroup sg) {
     	  FilledForm form = new FilledForm(formName);

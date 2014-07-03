@@ -12,6 +12,7 @@ public class UpdateEvent {
 	public static final String PREGNANCYOUTCOME = "PREGNANCY_OUTCOME";
 	public static final String DEATH = "DEATH";
 	public static final String DEATHTOHOH = "DEATHTOHOH";
+	public static final String BASELINE = "BASELINE";
 	public static final String INMIGRATION = "IN_MIGRATION";
 	public static final String OUTMIGRATION = "OUT_MIGRATION";
 	public static final String PREGNANCYOBSERVATION = "PREGNANCY_OBSERVATION";
