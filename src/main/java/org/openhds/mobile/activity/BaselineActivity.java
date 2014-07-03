@@ -2,19 +2,16 @@ package org.openhds.mobile.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.MethodNotSupportedException;
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.R;
 import org.openhds.mobile.database.BaselineUpdate;
 import org.openhds.mobile.database.DeathUpdate;
-import org.openhds.mobile.database.ExternalInMigrationUpdate;
 import org.openhds.mobile.database.HouseholdUpdate;
 import org.openhds.mobile.database.InternalInMigrationUpdate;
 import org.openhds.mobile.database.LocationUpdate;
@@ -44,7 +41,6 @@ import org.openhds.mobile.model.PregnancyOutcome;
 import org.openhds.mobile.model.Round;
 import org.openhds.mobile.model.SocialGroup;
 import org.openhds.mobile.model.StateMachine;
-import org.openhds.mobile.model.Visit;
 import org.openhds.mobile.task.OdkGeneratedFormLoadTask;
 
 import android.app.ActionBar;
@@ -58,18 +54,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -152,17 +142,7 @@ EventFragment.Listener, SelectionFragment.Listener {
 		stateSequence.add(FINISH_VISIT);
 		stateSequence.add(INMIGRATION);
 
-//		stateLabels.put(SELECT_HIERARCHY_1, R.string.region_label);
-//		stateLabels.put(SELECT_HIERARCHY_2, R.string.map_area_label);
-//		stateLabels.put(SELECT_HIERARCHY_3, R.string.sector_label);
-//		stateLabels.put(SELECT_HIERARCHY_4, R.string.household_label);
-//		stateLabels.put(SELECT_ROUND, R.string.individual_label);
-//		stateLabels.put(SELECT_LOCATION, R.string.bottom_label);
-//		stateLabels.put(CREATE_VISIT, R.string.bottom_label);
-//		stateLabels.put(SELECT_INDIVIDUAL, R.string.bottom_label);
-//		stateLabels.put(SELECT_EVENT, R.string.bottom_label);
-//		stateLabels.put(FINISH_VISIT, R.string.bottom_label);
-//		stateLabels.put(INMIGRATION, R.string.bottom_label);
+
 	}    
 
     public void onCreate(Bundle savedInstanceState) {
