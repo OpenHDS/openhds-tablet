@@ -1411,7 +1411,6 @@ EventFragment.Listener, SelectionFragment.Listener {
             	}
             }
             else{
-            	System.out.println("Could not find baseline.");
             	Toast.makeText(this, "Could not find baseline. Please make sure there is a round with number 0. Continuing anyways.", Toast.LENGTH_LONG).show();
             	
             	cursor.moveToFirst();

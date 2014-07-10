@@ -142,6 +142,18 @@ public class EventFragment extends Fragment implements OnClickListener {
     	if(householdBtn != null){
     		householdBtn.setVisibility(LinearLayout.GONE);
     	}
+    	if(outMigrationBtn != null){
+    		outMigrationBtn.setVisibility(LinearLayout.GONE);
+    	}
+    	if(deathBtn != null){
+    		deathBtn.setVisibility(LinearLayout.GONE);
+    	}
+    	if(birthRegBtn != null){
+    		birthRegBtn.setVisibility(LinearLayout.GONE);
+    	}
+    	if(findLocationGeoPointBtn != null){
+    		findLocationGeoPointBtn.setVisibility(LinearLayout.GONE);
+    	}    	
     }
 
     public void onClick(View view) {
