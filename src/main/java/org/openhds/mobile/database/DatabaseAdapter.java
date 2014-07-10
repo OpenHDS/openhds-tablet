@@ -3,8 +3,6 @@ package org.openhds.mobile.database;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.openhds.mobile.OpenHDS;
-import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.FormSubmissionRecord;
 import org.openhds.mobile.model.Supervisor;
 

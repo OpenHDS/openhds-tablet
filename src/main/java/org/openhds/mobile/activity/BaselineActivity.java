@@ -142,17 +142,7 @@ EventFragment.Listener, SelectionFragment.Listener {
 		stateSequence.add(FINISH_VISIT);
 		stateSequence.add(INMIGRATION);
 
-//		stateLabels.put(SELECT_HIERARCHY_1, R.string.region_label);
-//		stateLabels.put(SELECT_HIERARCHY_2, R.string.map_area_label);
-//		stateLabels.put(SELECT_HIERARCHY_3, R.string.sector_label);
-//		stateLabels.put(SELECT_HIERARCHY_4, R.string.household_label);
-//		stateLabels.put(SELECT_ROUND, R.string.individual_label);
-//		stateLabels.put(SELECT_LOCATION, R.string.bottom_label);
-//		stateLabels.put(CREATE_VISIT, R.string.bottom_label);
-//		stateLabels.put(SELECT_INDIVIDUAL, R.string.bottom_label);
-//		stateLabels.put(SELECT_EVENT, R.string.bottom_label);
-//		stateLabels.put(FINISH_VISIT, R.string.bottom_label);
-//		stateLabels.put(INMIGRATION, R.string.bottom_label);
+
 	}    
 
     public void onCreate(Bundle savedInstanceState) {
