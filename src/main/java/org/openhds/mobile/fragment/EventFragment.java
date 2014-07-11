@@ -17,10 +17,12 @@ import android.app.Fragment;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -152,7 +154,9 @@ public class EventFragment extends Fragment implements OnClickListener {
     		birthRegBtn.setVisibility(LinearLayout.GONE);
     	}
     	if(findLocationGeoPointBtn != null){
+    		LayoutParams lp = findLocationGeoPointBtn.getLayoutParams();
     		findLocationGeoPointBtn.setVisibility(LinearLayout.GONE);
+    		createLocationBtn.setLayoutParams(lp);
     	}    	
     }
 

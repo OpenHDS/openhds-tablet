@@ -51,7 +51,7 @@ public class FieldWorkerLoginFragment extends Fragment implements
 		usernameEditText = (EditText) v.findViewById(R.id.usernameEditText);
 		
 		//DEBUG
-		usernameEditText.setText("FWEB1");
+//		usernameEditText.setText("FWEB1");
 		passwordEditText = (EditText) v.findViewById(R.id.passwordEditText);
 		loginButton = (Button) v.findViewById(R.id.loginButton);
 		loginButton.setOnClickListener(this);
