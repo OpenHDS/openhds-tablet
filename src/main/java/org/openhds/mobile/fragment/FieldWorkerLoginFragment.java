@@ -91,7 +91,7 @@ public class FieldWorkerLoginFragment extends Fragment implements
 	private void authenticateFieldWorker() {
 		
 		// current implementation does not require password
-		String password = "";
+		String password = getPasswordFromEditText();
 		String extId = getUsernameFromEditText();
 		
 		ContentResolver cr = this.getActivity().getContentResolver();
@@ -166,14 +166,14 @@ public class FieldWorkerLoginFragment extends Fragment implements
 		public AuthenticateFieldWorker(ContentResolver resolver, String extId,
 				String password, AuthenticateFieldWorkerListener listener) {
 			this.resolver = resolver;
-			this.extId = extId;
-			this.password = password;
+			this.extId = extId.trim();
+			this.password = password.trim();
 			this.listener = listener;
 		}
 
 		@Override
 		protected FieldWorker doInBackground(Void... arg0) {
-			if (Queries.hasFieldWorker(resolver, extId, password)) {
+			if (Queries.hasFieldWorker(resolver, extId, "")) {
 				Cursor cursor = Queries.getFieldWorkByExtId(resolver, extId);
 				return Converter.toFieldWorker(cursor);
 			} else {
@@ -183,7 +183,18 @@ public class FieldWorkerLoginFragment extends Fragment implements
 
 		@Override
 		protected void onPostExecute(FieldWorker result) {
-			listener.onAuthenticated(result);
+			// We want really basic authentication. For the moment, just check if password equals extId
+			if(result != null){
+				if(password.equalsIgnoreCase(result.getExtId())){
+					listener.onAuthenticated(result);
+				}
+				else{
+					listener.onAuthenticated(null);
+				}
+			}
+			else{
+				listener.onAuthenticated(result);
+			}
 		}
 
 	}
