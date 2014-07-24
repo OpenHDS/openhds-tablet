@@ -112,6 +112,7 @@ EventFragment.Listener, SelectionFragment.Listener {
     private boolean showingProgress;
     private Updatable updatable;
     private boolean extInm;
+    private boolean hhCreation;
     private String jrFormId;
     
     //State machine states  
@@ -707,7 +708,9 @@ EventFragment.Listener, SelectionFragment.Listener {
             	}
             	else if(stateMachine.getState() == "Select Event"){
             		System.out.println("Handle select event in statemachine");
-            		
+            		if(hhCreation){
+            			onFinishedHouseHoldCreation();
+            		}
             	}
             	else {
             		stateMachine.transitionTo("Select Individual");
@@ -717,6 +720,18 @@ EventFragment.Listener, SelectionFragment.Listener {
             }
         }
     }
+    
+	private void onFinishedHouseHoldCreation() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getString(R.string.baseline_lbl));
+        alertDialogBuilder.setMessage(getString(R.string.finish_household_creation_msg));
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setPositiveButton("Ok", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();		
+                
+        hhCreation = false;
+	}    
 
     /**
      * Creates the 'Configure Server' option in the action menu.
@@ -988,7 +1003,8 @@ EventFragment.Listener, SelectionFragment.Listener {
              if (sg==null){            	
             	onSGexists();
             	this.cancel(true);  	
-             } else {;
+             } else {
+            	hhCreation = true;
             	loadForm(SELECTED_XFORM);
              }
         }
@@ -1083,7 +1099,7 @@ EventFragment.Listener, SelectionFragment.Listener {
     
 	private void onFinishExternalInmigration() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle(getString(R.string.in_migration_lbl));
+        alertDialogBuilder.setTitle(getString(R.string.baseline_lbl));
         alertDialogBuilder.setMessage(getString(R.string.update_finish_ext_inmigration_msg));
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton("Ok", null);
