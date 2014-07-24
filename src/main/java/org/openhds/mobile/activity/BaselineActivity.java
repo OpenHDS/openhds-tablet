@@ -20,7 +20,6 @@ import org.openhds.mobile.database.OutMigrationUpdate;
 import org.openhds.mobile.database.PregnancyOutcomeUpdate;
 import org.openhds.mobile.database.RelationshipUpdate;
 import org.openhds.mobile.database.Updatable;
-import org.openhds.mobile.database.VisitUpdate;
 import org.openhds.mobile.database.queries.Converter;
 import org.openhds.mobile.database.queries.Queries;
 import org.openhds.mobile.fragment.EventFragment;
@@ -180,8 +179,6 @@ EventFragment.Listener, SelectionFragment.Listener {
         else{
         	String state = (String)savedInstanceState.getSerializable("currentState");
         	stateMachine = new StateMachine(new LinkedHashSet<String>(stateSequence), stateSequence.get(0));
-//        	stateMachine = new StateMachine(new HashSet<String>(stateSequence), state);
-        	//restoreState(savedInstanceState);
         	
             locationVisit = (LocationVisit) savedInstanceState.getSerializable("locationvisit");
 
@@ -200,7 +197,6 @@ EventFragment.Listener, SelectionFragment.Listener {
             
             //Restore last state
             stateMachine.transitionInSequence(state);
-//            stateMachine.transitionTo(state);
         	
         }
         
@@ -244,7 +240,6 @@ EventFragment.Listener, SelectionFragment.Listener {
             
             //Restore last state
             String state = (String)savedState.getSerializable("currentState");
-            //stateMachine.transitionInSequence(state);
             stateMachine.transitionTo(state);
         }
     }    
@@ -306,35 +301,6 @@ EventFragment.Listener, SelectionFragment.Listener {
 	}
 
     
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        //Handle the back button
-//        if(keyCode == KeyEvent.KEYCODE_BACK) {
-//            //Ask the user if they want to quit
-//            new AlertDialog.Builder(this)
-//            .setIcon(android.R.drawable.ic_dialog_alert)
-//            .setTitle(R.string.quit)
-//            .setMessage(R.string.really_quit)
-//            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-//
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//
-//                    //Stop the activity
-//                    BaselineActivity.this.finish();    
-//                }
-//            })
-//            .setNegativeButton(R.string.no, null)
-//            .show();
-//
-//            return true;
-//        }
-//        else {
-//            return super.onKeyDown(keyCode, event);
-//        }
-//
-//    }    
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	ContentResolver resolver = getContentResolver();
@@ -821,9 +787,6 @@ EventFragment.Listener, SelectionFragment.Listener {
         vf.loadLocations(locationVisit.getHierarchy4().getExtId());
     }
 
-    private void loadRoundValueData() {
-        vf.loadRounds();
-    }
 
     private void loadIndividualValueData() {
         vf.loadIndividuals(locationVisit.getLocation().getExtId());
@@ -900,41 +863,12 @@ EventFragment.Listener, SelectionFragment.Listener {
     }
 
     public void onCreateVisit() {
-//        new CreateVisitTask().execute();   	
-//        Individual individual = (Individual) data.getExtras().getSerializable("individual");
-//    	Individual individual = new Individual();
-//        if (individual!=null) 
-//        	filledForm.setIntervieweeId(individual.getExtId());	
-//        loadForm(SELECTED_XFORM);
     	locationVisit.createVisit(getContentResolver());
     	
     	stateMachine.transitionTo("Select Individual");
     }
 
-    private class CreateVisitTask extends AsyncTask<Void, Void, Void> {
 
-    	@Override
-    	protected void onPreExecute() {
-    		// TODO Auto-generated method stub
-    		super.onPreExecute();
-    		showProgressFragment();
-    	}
-    	
-        @Override
-        protected Void doInBackground(Void... params) {
-            locationVisit.createVisit(getContentResolver());
-            filledForm = formFiller.fillVisitForm(locationVisit);
-            updatable = new VisitUpdate();
-        	startFilterActivity(FILTER_INDIV_VISIT);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-        	super.onPostExecute(result);
-            hideProgressFragment();
-        }
-    }
 
     public void onFinishVisit() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -1026,27 +960,6 @@ EventFragment.Listener, SelectionFragment.Listener {
     }
 
     private void createBaselineFormDialog() {
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//        alertDialogBuilder.setTitle(getString(R.string.in_migration_lbl));
-//        alertDialogBuilder.setMessage(getString(R.string.update_create_inmigration_msg));
-//        alertDialogBuilder.setCancelable(true);
-//        alertDialogBuilder.setPositiveButton(getString(R.string.update_create_inmigration_pos_button), new DialogInterface.OnClickListener() {
-//        	 public void onClick(DialogInterface dialog, int which) {
-//            	extInm= true;
-//            	startFilterActivity(FILTER_INMIGRATION);
-//     
-//            }
-//        });
-//             alertDialogBuilder.setNegativeButton(getString(R.string.update_create_inmigration_neg_button), new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                showProgressFragment();
-//                extInm= true;
-//                new CreateExternalInmigrationTask().execute();
-//
-//            }
-//        });
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        alertDialog.show();
     	showProgressFragment();
     	extInm= true;
     	new CreateBaselineTask().execute();
@@ -1537,42 +1450,7 @@ EventFragment.Listener, SelectionFragment.Listener {
         }
         else
         {
-//		    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//		    builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
-//		    SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
-//		            new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
-//		                    OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
-//		                    android.R.id.text2 }, 0){
-//		    	@Override //Overwritten to prevent invisible text due to white on white color
-//		    	public View getView(int position, View convertView,
-//		    			ViewGroup parent) {
-//		    		// TODO Auto-generated method stub
-//		    		View view = super.getView(position, convertView, parent);
-//		    		TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-//		            text1.setTextColor(Color.BLACK);
-//		            
-//		            Cursor cursor = (Cursor) getItem(position);
-//		            System.out.println("-------DATA: " + cursor.getString(0) + " / " + cursor.getString(1));
-//		    		return view;
-//		    	}
-//		    };
-//		    builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-//		        public void onClick(DialogInterface dialog, int which) {
-//		            Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
-//		            appendSocialGroupFromCursor(cursor);
-//		        }
-//		    });
-//        	builder.setNegativeButton(getString(R.string.cancel_lbl),new DialogInterface.OnClickListener() {
-//				public void onClick(DialogInterface dialog,int id) {
-//					// if this button is clicked, just close
-//					// the dialog box and do nothing
-//					dialog.cancel();
-//				}
-//			});
-////		    builder.setNegativeButton(getString(R.string.cancel_lbl), null);     
-//		    householdDialog = builder.create();
-//		    householdDialog.show();   
-        	
+       	
             if(cursor.moveToNext()){
             	appendSocialGroupFromCursor(cursor);
             }
