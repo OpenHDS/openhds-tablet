@@ -1048,7 +1048,7 @@ EventFragment.Listener, SelectionFragment.Listener {
 //        AlertDialog alertDialog = alertDialogBuilder.create();
 //        alertDialog.show();
     	showProgressFragment();
-//    	extInm= true;
+    	extInm= true;
     	new CreateBaselineTask().execute();
     }
 
