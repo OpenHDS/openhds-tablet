@@ -112,6 +112,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private boolean showingProgress;
     private Updatable updatable;
     private boolean extInm;
+    private boolean hhCreation;
     private String jrFormId;
     
     //State machine stuff
@@ -659,6 +660,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             	} else if (stateMachine.getState()=="Select Individual") {
             		if (extInm)
                 		onFinishExternalInmigration();
+            	}else if (stateMachine.getState()=="Select Event") {
+            		if (hhCreation)
+            			onFinishedHouseHoldCreation();
             	}else {
             		stateMachine.transitionTo("Select Individual");
             	}
@@ -667,6 +671,18 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             }
         }
     }
+    
+	private void onFinishedHouseHoldCreation() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getString(R.string.householdBtn_lbl));
+        alertDialogBuilder.setMessage(getString(R.string.finish_household_creation_msg));
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setPositiveButton("Ok", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();		
+                
+        hhCreation = false;
+	}       
 
     /**
      * Creates the 'Configure Server' option in the action menu.
@@ -929,6 +945,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
              	
              } else {
             	hideProgressFragment();
+            	hhCreation = true;
             	loadForm(SELECTED_XFORM);
              }
         }
@@ -958,7 +975,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
     
     public void onBaseline(){
-    	throw new UnsupportedOperationException("Method not used in Update.");
+//    	throw new UnsupportedOperationException("Method not used in Update.");
+    	//We call onMigration
+    	onInMigration();
     }
 
     public void onInMigration() {
