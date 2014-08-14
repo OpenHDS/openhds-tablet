@@ -169,7 +169,9 @@
     <string name="dialog_working_lbl">Working...</string>
 	<string name="dialog_dont_interrupt_lbl">Do not interrupt</string>
 	
-	<string name="formmenu_extraforms">Sync Extra Forms</string>
+	<string name="formmenu_extraforms">Extra Forms</string>
+	<string name="sync_extraforms">Sync Extra Forms</string>
+	
 	<string name="loginmenu_configure">Configure Server</string>
 	
 	<string name="no_server_url">No server URL has been set. Set server URL from preferences</string>
