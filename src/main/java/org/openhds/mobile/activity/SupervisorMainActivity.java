@@ -55,8 +55,8 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 		makeNewGenericButton(
 				this,
 				getResourceString(this, R.string.download_extraform_button),
-				getResourceString(this, R.string.formmenu_extraforms),
-				getResourceString(this, R.string.formmenu_extraforms), this,
+				getResourceString(this, R.string.sync_extraforms),
+				getResourceString(this, R.string.sync_extraforms), this,
 				supervisorOptionsList);		
 
 		if (null != savedInstanceState) {
