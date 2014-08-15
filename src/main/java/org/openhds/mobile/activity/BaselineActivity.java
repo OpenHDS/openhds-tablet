@@ -648,7 +648,10 @@ EventFragment.Listener, SelectionFragment.Listener {
             if (cursor.moveToNext()) {
                 String filepath = cursor.getString(cursor
                         .getColumnIndex(InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH));
-                updatable.updateDatabase(getContentResolver(), filepath, jrFormId);
+                if(updatable != null){
+                	updatable.updateDatabase(getContentResolver(), filepath, jrFormId);
+                	updatable = null;
+                }
                 cursor.close();
                 return true;
             } else {
