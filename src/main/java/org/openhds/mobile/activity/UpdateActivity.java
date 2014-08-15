@@ -1,9 +1,5 @@
 package org.openhds.mobile.activity;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import org.openhds.mobile.Converter;
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
@@ -30,7 +26,6 @@ import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.FilledForm;
 import org.openhds.mobile.model.Form;
 import org.openhds.mobile.model.FormFiller;
-import org.openhds.mobile.model.FormXmlReader;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
@@ -51,7 +46,6 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
