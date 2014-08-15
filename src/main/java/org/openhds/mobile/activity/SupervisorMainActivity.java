@@ -8,6 +8,7 @@ import org.openhds.mobile.task.AbstractHttpTask.RequestContext;
 import org.openhds.mobile.task.DownloadFormsTask;
 import org.openhds.mobile.task.SyncFormsTask;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -170,11 +171,21 @@ public class SupervisorMainActivity extends AbstractActivity implements CollectE
 	}
 
 	public void collectionComplete(Boolean result) {
+		dialog.dismiss();		
 		if (result) 
 			Toast.makeText(getApplicationContext(),	getString(R.string.sync_forms_successful), Toast.LENGTH_LONG).show();
-		else 
-			Toast.makeText(getApplicationContext(), getString(R.string.sync_forms_failure), Toast.LENGTH_LONG).show();
-		dialog.dismiss();		
+		else {
+			displayEntityFetchFailedDialog();
+		}		
 	}
+	
+	private void displayEntityFetchFailedDialog(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.sync_forms_failure);
+		builder.setCancelable(false);
+		builder.setPositiveButton("Ok", null);
+		AlertDialog alert = builder.create();
+		alert.show();
+	}	
 
 }
