@@ -1,0 +1,346 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Pregnancy observation  registration</h:title>
+    <model>
+      <itext>
+        <translation lang="Swahili">
+          <text id="/pregnancy_observation/ttinjection/YES:label">
+            <value>Ndiyo</value>
+          </text>
+          <text id="/pregnancy_observation/ttinjection:label">
+            <value>Have you received TT injection?</value>
+          </text>
+          <text id="/pregnancy_observation/expectedDeliveryDate:label">
+            <value>expectedDeliveryDate</value>
+          </text>
+          <text id="/pregnancy_observation/ttinjection/NO:label">
+            <value>Hapana</value>
+          </text>
+          <text id="/pregnancy_observation/recordedDate:label">
+            <value>Tarehe iliyo andikishwa</value>
+          </text>
+          <text id="/pregnancy_observation/estimatedAgeOfPreg:label">
+            <value>Idadi ya miezi ya ujauzito</value>
+          </text>
+          <text id="/pregnancy_observation/ageOfPregFromPregNotes:label">
+            <value>Umri wa mimba kutoka kwenye kadi</value>
+          </text>
+          <text id="/pregnancy_observation/anteNatalClinic/NO:label">
+            <value>Hapana</value>
+          </text>
+          <text id="/pregnancy_observation/processedByMirth:label">
+            <value>processed</value>
+          </text>
+          <text id="/pregnancy_observation/pregnancyNumber:label">
+            <value>Ujauzito wa ngapi?</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/99:label">
+            <value>Other</value>
+          </text>
+          <text id="/pregnancy_observation/pregNotes/1:label">
+            <value>Kadi ya Kliniki</value>
+          </text>
+          <text id="/pregnancy_observation/medicineforpregnancy:label">
+            <value>Have you received any medicine for the pregnancy?</value>
+          </text>
+          <text id="/pregnancy_observation/medicineforpregnancy/YES:label">
+            <value>Ndiyo</value>
+          </text>
+          <text id="/pregnancy_observation/visitId:label">
+            <value>Nambari ya hudhurio</value>
+          </text>
+          <text id="/pregnancy_observation/pregNotes:label">
+            <value>Je, Mama mjamzito ana:</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/1:label">
+            <value>Hospital</value>
+          </text>
+          <text id="/pregnancy_observation/lastClinicVisitDate:label">
+            <value>Tarehe ya mwisho kuhuduria kliniki</value>
+          </text>
+          <text id="/pregnancy_observation/othermedicine:label">
+            <value>Specify if other medicine</value>
+          </text>
+          <text id="/pregnancy_observation/anteNatalClinic/YES:label">
+            <value>Ndiyo</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility:label">
+            <value>Have you attended any other Health Facility?</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/2:label">
+            <value>Health Center or Clinic</value>
+          </text>
+          <text id="/pregnancy_observation/medicineforpregnancy/NO:label">
+            <value>Hapana</value>
+          </text>
+          <text id="/pregnancy_observation/anteNatalClinic:label">
+            <value>Uliwahi hudhuria kliniki ya ANC?</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/4:label">
+            <value>Traditional healer</value>
+          </text>
+          <text id="/pregnancy_observation/pregNotes/2:label">
+            <value>Daftari la uandikishaji ujauzito</value>
+          </text>
+          <text id="/pregnancy_observation/individualId:label">
+            <value>PERM Id</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/3:label">
+            <value>TBA's Home</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/5:label">
+            <value>None</value>
+          </text>
+          <text id="/pregnancy_observation/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
+          </text>
+        </translation>
+        <translation default="true()" lang="English">
+          <text id="/pregnancy_observation/ttinjection/YES:label">
+            <value>Yes</value>
+          </text>
+          <text id="/pregnancy_observation/ttinjection:label">
+            <value>Have you received TT injection?</value>
+          </text>
+          <text id="/pregnancy_observation/expectedDeliveryDate:label">
+            <value>expectedDeliveryDate</value>
+          </text>
+          <text id="/pregnancy_observation/ttinjection/NO:label">
+            <value>No</value>
+          </text>
+          <text id="/pregnancy_observation/recordedDate:label">
+            <value>Recorded Date</value>
+          </text>
+          <text id="/pregnancy_observation/estimatedAgeOfPreg:label">
+            <value>Number of months pregnant</value>
+          </text>
+          <text id="/pregnancy_observation/ageOfPregFromPregNotes:label">
+            <value>Age of pregnancy from pregnancy notes</value>
+          </text>
+          <text id="/pregnancy_observation/anteNatalClinic/NO:label">
+            <value>No</value>
+          </text>
+          <text id="/pregnancy_observation/processedByMirth:label">
+            <value>processed</value>
+          </text>
+          <text id="/pregnancy_observation/pregnancyNumber:label">
+            <value>Total number of pregnancies to date</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/99:label">
+            <value>Other</value>
+          </text>
+          <text id="/pregnancy_observation/pregNotes/1:label">
+            <value>Clinic card/Pregnancy register</value>
+          </text>
+          <text id="/pregnancy_observation/medicineforpregnancy:label">
+            <value>Have you received any medicine for the pregnancy?</value>
+          </text>
+          <text id="/pregnancy_observation/medicineforpregnancy/YES:label">
+            <value>Yes</value>
+          </text>
+          <text id="/pregnancy_observation/visitId:label">
+            <value>Visit Id</value>
+          </text>
+          <text id="/pregnancy_observation/pregNotes:label">
+            <value>Does the expectant mother have:</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/1:label">
+            <value>Hospital</value>
+          </text>
+          <text id="/pregnancy_observation/lastClinicVisitDate:label">
+            <value>Last clinic visit date</value>
+          </text>
+          <text id="/pregnancy_observation/othermedicine:label">
+            <value>Specify if other medicine</value>
+          </text>
+          <text id="/pregnancy_observation/anteNatalClinic/YES:label">
+            <value>Yes</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility:label">
+            <value>Have you attended any other Health Facility?</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/2:label">
+            <value>Health Center or Clinic</value>
+          </text>
+          <text id="/pregnancy_observation/medicineforpregnancy/NO:label">
+            <value>No</value>
+          </text>
+          <text id="/pregnancy_observation/anteNatalClinic:label">
+            <value>Have you been to an ANC clinic?</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/4:label">
+            <value>Traditional healer</value>
+          </text>
+          <text id="/pregnancy_observation/pregNotes/2:label">
+            <value>I have not attended ANC/Cannot find my card</value>
+          </text>
+          <text id="/pregnancy_observation/individualId:label">
+            <value>PERM Id</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/3:label">
+            <value>TBA's Home</value>
+          </text>
+          <text id="/pregnancy_observation/healthfacility/5:label">
+            <value>None</value>
+          </text>
+          <text id="/pregnancy_observation/fieldWorkerId:label">
+            <value>Field Worker Id</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <pregnancy_observation id="pregnancy_observation">
+          <start/>
+          <end/>
+          <deviceid/>
+          <estimatedAgeOfPreg/>
+          <pregNotes/>
+          <ageOfPregFromPregNotes/>
+          <anteNatalClinic/>
+          <lastClinicVisitDate/>
+          <healthfacility/>
+          <medicineforpregnancy/>
+          <ttinjection/>
+          <othermedicine/>
+          <pregnancyNumber/>
+          <individualId/>
+          <fieldWorkerId/>
+          <visitId/>
+          <expectedDeliveryDate/>
+          <recordedDate/>
+          <processedByMirth/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </pregnancy_observation>
+      </instance>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/pregnancy_observation/start" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/pregnancy_observation/end" type="dateTime"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/pregnancy_observation/deviceid" type="string"/>
+      <bind nodeset="/pregnancy_observation/estimatedAgeOfPreg" required="true()" type="int"/>
+      <bind nodeset="/pregnancy_observation/pregNotes" required="true()" type="select1"/>
+      <bind constraint=".&lt;52" nodeset="/pregnancy_observation/ageOfPregFromPregNotes" relevant="../pregNotes = 1" required="true()" type="int"/>
+      <bind nodeset="/pregnancy_observation/anteNatalClinic" required="true()" type="select1"/>
+      <bind constraint=".&lt; today()" nodeset="/pregnancy_observation/lastClinicVisitDate" relevant="../anteNatalClinic=1" required="true()" type="date"/>
+      <bind nodeset="/pregnancy_observation/healthfacility" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_observation/medicineforpregnancy" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_observation/ttinjection" required="true()" type="select1"/>
+      <bind nodeset="/pregnancy_observation/othermedicine" type="string"/>
+      <bind nodeset="/pregnancy_observation/pregnancyNumber" required="true()" type="int"/>
+      <bind nodeset="/pregnancy_observation/individualId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_observation/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_observation/visitId" readonly="true()" required="true()" type="string"/>
+      <bind constraint=".&gt; today()" nodeset="/pregnancy_observation/expectedDeliveryDate" required="true()" type="date"/>
+      <bind nodeset="/pregnancy_observation/recordedDate" readonly="true()" required="true()" type="date"/>
+      <bind nodeset="/pregnancy_observation/processedByMirth" relevant="1=2" type="int"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/pregnancy_observation/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/pregnancy_observation/estimatedAgeOfPreg">
+      <label ref="jr:itext('/pregnancy_observation/estimatedAgeOfPreg:label')"/>
+    </input>
+    <select1 ref="/pregnancy_observation/pregNotes">
+      <label ref="jr:itext('/pregnancy_observation/pregNotes:label')"/>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/pregNotes/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/pregNotes/2:label')"/>
+        <value>2</value>
+      </item>
+    </select1>
+    <input ref="/pregnancy_observation/ageOfPregFromPregNotes">
+      <label ref="jr:itext('/pregnancy_observation/ageOfPregFromPregNotes:label')"/>
+    </input>
+    <select1 ref="/pregnancy_observation/anteNatalClinic">
+      <label ref="jr:itext('/pregnancy_observation/anteNatalClinic:label')"/>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/anteNatalClinic/YES:label')"/>
+        <value>YES</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/anteNatalClinic/NO:label')"/>
+        <value>NO</value>
+      </item>
+    </select1>
+    <input ref="/pregnancy_observation/lastClinicVisitDate">
+      <label ref="jr:itext('/pregnancy_observation/lastClinicVisitDate:label')"/>
+    </input>
+    <select1 ref="/pregnancy_observation/healthfacility">
+      <label ref="jr:itext('/pregnancy_observation/healthfacility:label')"/>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/healthfacility/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/healthfacility/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/healthfacility/3:label')"/>
+        <value>3</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/healthfacility/4:label')"/>
+        <value>4</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/healthfacility/5:label')"/>
+        <value>5</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/healthfacility/99:label')"/>
+        <value>99</value>
+      </item>
+    </select1>
+    <select1 ref="/pregnancy_observation/medicineforpregnancy">
+      <label ref="jr:itext('/pregnancy_observation/medicineforpregnancy:label')"/>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/medicineforpregnancy/YES:label')"/>
+        <value>YES</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/medicineforpregnancy/NO:label')"/>
+        <value>NO</value>
+      </item>
+    </select1>
+    <select1 ref="/pregnancy_observation/ttinjection">
+      <label ref="jr:itext('/pregnancy_observation/ttinjection:label')"/>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/ttinjection/YES:label')"/>
+        <value>YES</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/pregnancy_observation/ttinjection/NO:label')"/>
+        <value>NO</value>
+      </item>
+    </select1>
+    <input ref="/pregnancy_observation/othermedicine">
+      <label ref="jr:itext('/pregnancy_observation/othermedicine:label')"/>
+    </input>
+    <input ref="/pregnancy_observation/pregnancyNumber">
+      <label ref="jr:itext('/pregnancy_observation/pregnancyNumber:label')"/>
+    </input>
+    <input ref="/pregnancy_observation/individualId">
+      <label ref="jr:itext('/pregnancy_observation/individualId:label')"/>
+    </input>
+    <input ref="/pregnancy_observation/fieldWorkerId">
+      <label ref="jr:itext('/pregnancy_observation/fieldWorkerId:label')"/>
+    </input>
+    <input ref="/pregnancy_observation/visitId">
+      <label ref="jr:itext('/pregnancy_observation/visitId:label')"/>
+    </input>
+    <input ref="/pregnancy_observation/expectedDeliveryDate">
+      <label ref="jr:itext('/pregnancy_observation/expectedDeliveryDate:label')"/>
+    </input>
+    <input ref="/pregnancy_observation/recordedDate">
+      <label ref="jr:itext('/pregnancy_observation/recordedDate:label')"/>
+    </input>
+    <input ref="/pregnancy_observation/processedByMirth">
+      <label ref="jr:itext('/pregnancy_observation/processedByMirth:label')"/>
+    </input>
+  </h:body>
+</h:html>
