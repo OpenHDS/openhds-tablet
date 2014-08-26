@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Location registration</h:title>
+    <model>
+      <itext>
+        <translation lang="Swahili">
+          <text id="/location_registration/hierarchyId:label">
+            <value>Kijiji</value>
+          </text>
+          <text id="/location_registration/locationName:label">
+            <value>Jina la Kaya</value>
+          </text>
+          <text id="/location_registration/processedByMirth:label">
+            <value>processed</value>
+          </text>
+          <text id="/location_registration/locationType/RUR:label">
+            <value>Kijijini</value>
+          </text>
+          <text id="/location_registration/locationId:label">
+            <value>Nambari ya Kaya</value>
+          </text>
+          <text id="/location_registration/geopoint:label">
+            <value>Geopoint</value>
+          </text>
+          <text id="/location_registration/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
+          </text>
+          <text id="/location_registration/locationType:label">
+            <value>Aina ya Kaya</value>
+          </text>
+        </translation>
+        <translation default="true()" lang="English">
+          <text id="/location_registration/hierarchyId:label">
+            <value>Village</value>
+          </text>
+          <text id="/location_registration/locationName:label">
+            <value>Location Name</value>
+          </text>
+          <text id="/location_registration/processedByMirth:label">
+            <value>processed</value>
+          </text>
+          <text id="/location_registration/locationType/RUR:label">
+            <value>Rural</value>
+          </text>
+          <text id="/location_registration/locationId:label">
+            <value>Location Id</value>
+          </text>
+          <text id="/location_registration/geopoint:label">
+            <value>Geopoint</value>
+          </text>
+          <text id="/location_registration/fieldWorkerId:label">
+            <value>Field Worker Id</value>
+          </text>
+          <text id="/location_registration/locationType:label">
+            <value>Location Type</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <location_registration id="location_registration">
+          <start/>
+          <end/>
+          <deviceId/>
+          <hierarchyId/>
+          <fieldWorkerId/>
+          <locationId/>
+          <locationName/>
+          <locationType/>
+          <geopoint/>
+          <processedByMirth/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </location_registration>
+      </instance>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/location_registration/start" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/location_registration/end" type="dateTime"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/location_registration/deviceId" type="string"/>
+      <bind nodeset="/location_registration/hierarchyId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/location_registration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/location_registration/locationId" readonly="true()" required="true()" type="string"/>
+      <bind calculate=" /location_registration/locationId " nodeset="/location_registration/locationName" required="true()" type="string"/>
+      <bind nodeset="/location_registration/locationType" required="true()" type="select1"/>
+      <bind nodeset="/location_registration/geopoint" required="true()" type="geopoint"/>
+      <bind nodeset="/location_registration/processedByMirth" relevant="1=2" type="int"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/location_registration/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/location_registration/hierarchyId">
+      <label ref="jr:itext('/location_registration/hierarchyId:label')"/>
+    </input>
+    <input ref="/location_registration/fieldWorkerId">
+      <label ref="jr:itext('/location_registration/fieldWorkerId:label')"/>
+    </input>
+    <input ref="/location_registration/locationId">
+      <label ref="jr:itext('/location_registration/locationId:label')"/>
+    </input>
+    <input ref="/location_registration/locationName">
+      <label ref="jr:itext('/location_registration/locationName:label')"/>
+    </input>
+    <select1 ref="/location_registration/locationType">
+      <label ref="jr:itext('/location_registration/locationType:label')"/>
+      <item>
+        <label ref="jr:itext('/location_registration/locationType/RUR:label')"/>
+        <value>RUR</value>
+      </item>
+    </select1>
+    <input ref="/location_registration/geopoint">
+      <label ref="jr:itext('/location_registration/geopoint:label')"/>
+      <hint>GPS coordinates can only be collected when outside.</hint>
+    </input>
+    <input ref="/location_registration/processedByMirth">
+      <label ref="jr:itext('/location_registration/processedByMirth:label')"/>
+    </input>
+  </h:body>
+</h:html>

@@ -1,213 +1,186 @@
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
-    <h:head><!-- ODK Aggregate upload time: 2013-07-16T12:23:36.050+0000 on http://localhost:8181/ODKAggregate -->
-        <h:title>Membership</h:title>
-        <model>
-            <instance>
-                <data id="membership">
-				    <deviceId/>
-                    <processedByMirth/>
-					<meta>
-						<instanceID/>
-					</meta>
-                    <start />
-                    <individualId />                    
-                    <householdId />
-                    <fieldWorkerId />
-                    <relationshipToGroupHead />
-                    <startDate />
-                    <end />
-                </data>
-            </instance>
-            <itext>
-			<translation lang="Swahili">
-                    <text id="/data/individualId:label">
-                        <value>Nambari ya Mwanakaya</value>
-                    </text>
-                    <text id="/data/individualId:hint">
-                        <value />
-                    </text>
-                    <text id="/data/householdId:label">
-                        <value>Nambari ya Kikundi</value>
-                    </text>
-                    <text id="/data/householdId:hint">
-                        <value></value>
-                    </text>
-                    <text id="/data/fieldWorkerId:label">
-                        <value>Nambari ya Mhojaji</value>
-                    </text>
-                    <text id="/data/fieldWorkerId:hint">
-                        <value />
-                    </text>
-                    <text id="/data/relationshipToGroupHead:label">
-                        <value>Uhusiano na Mkuu wa Kaya</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:hint">
-                        <value />
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option0">
-                        <value>Mkuu wa Kaya </value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option1">
-                        <value>Mke/Mme</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option2">
-                        <value>Mtoto Kiume/Kike</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option3">
-                        <value>Kaka/Dada</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option4">
-                        <value>Mzazi</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option5">
-                        <value>Mjukuu</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option6">
-                        <value>Hakuna Mahusiano</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option7">
-                        <value>Uhusiano Mwingine</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option8">
-                        <value>Sijui</value>
-                    </text>
-                    <text id="/data/startDate:label">
-                        <value>Tarehe ya Kuanza</value>
-                    </text>
-                    <text id="/data/startDate:hint">
-                        <value />
-                    </text>
-                </translation>
-                <translation lang="English">
-                    <text id="/data/individualId:label">
-                        <value>Individual Id</value>
-                    </text>
-                    <text id="/data/individualId:hint">
-                        <value />
-                    </text>
-                    <text id="/data/householdId:label">
-                        <value>Social Group Id</value>
-                    </text>
-                    <text id="/data/householdId:hint">
-                        <value></value>
-                    </text>
-                    <text id="/data/fieldWorkerId:label">
-                        <value>Field Worker Id</value>
-                    </text>
-                    <text id="/data/fieldWorkerId:hint">
-                        <value />
-                    </text>
-                    <text id="/data/relationshipToGroupHead:label">
-                        <value>Relationship to Group Head</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:hint">
-                        <value />
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option0">
-                        <value>Head</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option1">
-                        <value>Spouse</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option2">
-                        <value>Son/Daughter</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option3">
-                        <value>Brother/Sister</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option4">
-                        <value>Parent</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option5">
-                        <value>Grandchild</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option6">
-                        <value>Not Related</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option7">
-                        <value>Other Relative</value>
-                    </text>
-                    <text id="/data/relationshipToGroupHead:option8">
-                        <value>Don't Know</value>
-                    </text>
-                    <text id="/data/startDate:label">
-                        <value>Start Date</value>
-                    </text>
-                    <text id="/data/startDate:hint">
-                        <value />
-                    </text>
-                </translation>
-            </itext>
-			<bind nodeset="/data/deviceId" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
-			<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
-            <bind nodeset="/data/processedByMirth" type="boolean" />
-						<bind nodeset="/data/start" type="string"/>  
-
-            <bind nodeset="/data/individualId" readonly="true()" type="string" required="true()" />
-            <bind nodeset="/data/householdId" readonly="true()" type="string" required="true()" />
-            <bind nodeset="/data/fieldWorkerId" readonly="true()" type="string" required="true()" />
-            <bind nodeset="/data/relationshipToGroupHead" required="true()" type="select1" />
-            <bind nodeset="/data/startDate" constraint=". &lt;= today()" type="date" />
-            <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>
-        </model>
-    </h:head>
-    <h:body>
-        <input ref="/data/individualId">
-            <label ref="jr:itext('/data/individualId:label')" />
-            <hint ref="jr:itext('/data/individualId:hint')" />
-        </input>
-        <input ref="/data/householdId">
-            <label ref="jr:itext('/data/householdId:label')" />
-            <hint ref="jr:itext('/data/householdId:hint')" />
-        </input>
-        <input ref="/data/fieldWorkerId">
-            <label ref="jr:itext('/data/fieldWorkerId:label')" />
-            <hint ref="jr:itext('/data/fieldWorkerId:hint')" />
-        </input>
-        <select1 ref="/data/relationshipToGroupHead">
-            <label ref="jr:itext('/data/relationshipToGroupHead:label')" />
-            <hint ref="jr:itext('/data/relationshipToGroupHead:hint')" />
-            <item>
-                <label ref="jr:itext('/data/relationshipToGroupHead:option0')" />
-                <value>1</value>
-            </item>
-            <item>
-                <label ref="jr:itext('/data/relationshipToGroupHead:option1')" />
-                <value>2</value>
-            </item>
-            <item>
-                <label ref="jr:itext('/data/relationshipToGroupHead:option2')" />
-                <value>3</value>
-            </item>
-            <item>
-                <label ref="jr:itext('/data/relationshipToGroupHead:option3')" />
-                <value>4</value>
-            </item>
-            <item>
-                <label ref="jr:itext('/data/relationshipToGroupHead:option4')" />
-                <value>5</value>
-            </item>
-            <item>
-                <label ref="jr:itext('/data/relationshipToGroupHead:option5')" />
-                <value>6</value>
-            </item>
-            <item>
-                <label ref="jr:itext('/data/relationshipToGroupHead:option6')" />
-                <value>7</value>
-            </item>
-            <item>
-                <label ref="jr:itext('/data/relationshipToGroupHead:option7')" />
-                <value>8</value>
-            </item>
-            <item>
-                <label ref="jr:itext('/data/relationshipToGroupHead:option8')" />
-                <value>9</value>
-            </item>
-        </select1>
-        <input ref="/data/startDate">
-            <label ref="jr:itext('/data/startDate:label')" />
-            <hint ref="jr:itext('/data/startDate:hint')" />
-        </input>
-    </h:body>
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Membership registration</h:title>
+    <model>
+      <itext>
+        <translation lang="Swahili">
+          <text id="/membership/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/9:label">
+            <value>Sijui</value>
+          </text>
+          <text id="/membership/householdId:label">
+            <value>Nambari ya Kikundi</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/2:label">
+            <value>Mke/Mme</value>
+          </text>
+          <text id="/membership/processedByMirth:label">
+            <value>processed</value>
+          </text>
+          <text id="/membership/individualId:label">
+            <value>individualId</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/7:label">
+            <value>Hakuna Mahusiano</value>
+          </text>
+          <text id="/membership/startDate:label">
+            <value>Start date of membership</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/4:label">
+            <value>Kaka/Dada</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/3:label">
+            <value>Mtoto Kiume/Kike</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/8:label">
+            <value>Uhusiano Mwingine</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/6:label">
+            <value>Mjukuu</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/1:label">
+            <value>Mkuu wa Kaya</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead:label">
+            <value>Uhusiano na Mkuu wa Kaya</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/5:label">
+            <value>Mzazi</value>
+          </text>
+        </translation>
+        <translation default="true()" lang="English">
+          <text id="/membership/fieldWorkerId:label">
+            <value>Field Worker Id</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/9:label">
+            <value>Don't Know</value>
+          </text>
+          <text id="/membership/householdId:label">
+            <value>Social Group Id</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/2:label">
+            <value>Spouse</value>
+          </text>
+          <text id="/membership/processedByMirth:label">
+            <value>processed</value>
+          </text>
+          <text id="/membership/individualId:label">
+            <value>individualId</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/7:label">
+            <value>Not Related</value>
+          </text>
+          <text id="/membership/startDate:label">
+            <value>Start date of membership</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/4:label">
+            <value>Brother/Sister</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/3:label">
+            <value>Son/Daughter</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/8:label">
+            <value>Other Relative</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/6:label">
+            <value>Grandchild</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/1:label">
+            <value>Head</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead:label">
+            <value>Relationship to Group Head</value>
+          </text>
+          <text id="/membership/relationshipToGroupHead/5:label">
+            <value>Parent</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <membership id="membership">
+          <start/>
+          <end/>
+          <deviceid/>
+          <individualId/>
+          <householdId/>
+          <fieldWorkerId/>
+          <relationshipToGroupHead/>
+          <startDate/>
+          <processedByMirth/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </membership>
+      </instance>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/membership/start" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/membership/end" readonly="true()" type="dateTime"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/membership/deviceid" readonly="true()" type="string"/>
+      <bind nodeset="/membership/individualId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/membership/householdId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/membership/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/membership/relationshipToGroupHead" required="true()" type="select1"/>
+      <bind constraint=". &lt; today()" nodeset="/membership/startDate" required="true()" type="date"/>
+      <bind nodeset="/membership/processedByMirth" relevant="1=2" type="int"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/membership/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/membership/individualId">
+      <label ref="jr:itext('/membership/individualId:label')"/>
+    </input>
+    <input ref="/membership/householdId">
+      <label ref="jr:itext('/membership/householdId:label')"/>
+    </input>
+    <input ref="/membership/fieldWorkerId">
+      <label ref="jr:itext('/membership/fieldWorkerId:label')"/>
+    </input>
+    <select1 ref="/membership/relationshipToGroupHead">
+      <label ref="jr:itext('/membership/relationshipToGroupHead:label')"/>
+      <item>
+        <label ref="jr:itext('/membership/relationshipToGroupHead/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/membership/relationshipToGroupHead/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/membership/relationshipToGroupHead/3:label')"/>
+        <value>3</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/membership/relationshipToGroupHead/4:label')"/>
+        <value>4</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/membership/relationshipToGroupHead/5:label')"/>
+        <value>5</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/membership/relationshipToGroupHead/6:label')"/>
+        <value>6</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/membership/relationshipToGroupHead/7:label')"/>
+        <value>7</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/membership/relationshipToGroupHead/8:label')"/>
+        <value>8</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/membership/relationshipToGroupHead/9:label')"/>
+        <value>9</value>
+      </item>
+    </select1>
+    <input ref="/membership/startDate">
+      <label ref="jr:itext('/membership/startDate:label')"/>
+    </input>
+    <input ref="/membership/processedByMirth">
+      <label ref="jr:itext('/membership/processedByMirth:label')"/>
+    </input>
+  </h:body>
 </h:html>

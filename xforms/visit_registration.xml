@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Visit Registration</h:title>
+    <model>
+      <itext>
+        <translation lang="Swahili">
+          <text id="/visit_registration/correctInterviewee/0:label">
+            <value>Hapana</value>
+          </text>
+          <text id="/visit_registration/whynotrightcode:label">
+            <value>-</value>
+          </text>
+          <text id="/visit_registration/reason/99:label">
+            <value>Other</value>
+          </text>
+          <text id="/visit_registration/whynotrightcode/1:label">
+            <value>Barcode not readable</value>
+          </text>
+          <text id="/visit_registration/reason/3:label">
+            <value>Neighbor interviewed</value>
+          </text>
+          <text id="/visit_registration/intervieweeId:label">
+            <value>Nambari ya Mhojaji</value>
+          </text>
+          <text id="/visit_registration/whynotrightcode/0:label">
+            <value>Hapana Barcode</value>
+          </text>
+          <text id="/visit_registration/reason/2:label">
+            <value>Person Out Migrated</value>
+          </text>
+          <text id="/visit_registration/locationIdCheck:label">
+            <value>Nambari ya Kaya</value>
+          </text>
+          <text id="/visit_registration/farmhouse/0:label">
+            <value>Shambani</value>
+          </text>
+          <text id="/visit_registration/reason:label">
+            <value>Sababu ya kuhojiwa</value>
+          </text>
+          <text id="/visit_registration/farmhouse:label">
+            <value>Uhojaji Umefanyikia Wapi?</value>
+          </text>
+          <text id="/visit_registration/visitId:label">
+            <value>Nambari ya Hudhurio</value>
+          </text>
+          <text id="/visit_registration/correctInterviewee/1:label">
+            <value>Ndiyo</value>
+          </text>
+          <text id="/visit_registration/checkRightId:label">
+            <value>-</value>
+          </text>
+          <text id="/visit_registration/reason/1:label">
+            <value>New House</value>
+          </text>
+          <text id="/visit_registration/visitDate:label">
+            <value>Tarehe ya Hudhurio</value>
+          </text>
+          <text id="/visit_registration/correctInterviewee:label">
+            <value>Je, Mwanakaya uliye mchagua ndiye unaye muhoji?</value>
+          </text>
+          <text id="/visit_registration/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
+          </text>
+          <text id="/visit_registration/coordinates:label">
+            <value>Nukuhu Takwimu za GPS:</value>
+          </text>
+          <text id="/visit_registration/intervieweeName:label">
+            <value>Jina la Mhojiwa</value>
+          </text>
+          <text id="/visit_registration/farmhouse/1:label">
+            <value>Nyumbani</value>
+          </text>
+          <text id="/visit_registration/locationId:label">
+            <value>Nambari ya Kaya</value>
+          </text>
+          <text id="/visit_registration/processedByMirth:label">
+            <value>processed</value>
+          </text>
+          <text id="/visit_registration/roundNumber:label">
+            <value>Round number</value>
+          </text>
+          <text id="/visit_registration/locationcalculated:label">
+            <value>check</value>
+          </text>
+        </translation>
+        <translation default="true()" lang="English">
+          <text id="/visit_registration/correctInterviewee/0:label">
+            <value>No</value>
+          </text>
+          <text id="/visit_registration/whynotrightcode:label">
+            <value>Why the barcode doesn't correspond?</value>
+          </text>
+          <text id="/visit_registration/reason/99:label">
+            <value>Other</value>
+          </text>
+          <text id="/visit_registration/whynotrightcode/1:label">
+            <value>Barcode not readable</value>
+          </text>
+          <text id="/visit_registration/reason/3:label">
+            <value>Neighbor interviewed</value>
+          </text>
+          <text id="/visit_registration/intervieweeId:label">
+            <value>Interviewee ID</value>
+          </text>
+          <text id="/visit_registration/whynotrightcode/0:label">
+            <value>No Barcode in the house</value>
+          </text>
+          <text id="/visit_registration/reason/2:label">
+            <value>Person Out Migrated</value>
+          </text>
+          <text id="/visit_registration/locationIdCheck:label">
+            <value>Location Id</value>
+          </text>
+          <text id="/visit_registration/reason/1:label">
+            <value>New House</value>
+          </text>
+          <text id="/visit_registration/reason:label">
+            <value>Reason for being interviewed</value>
+          </text>
+          <text id="/visit_registration/farmhouse:label">
+            <value>Where is the visit taking place?</value>
+          </text>
+          <text id="/visit_registration/visitId:label">
+            <value>Visit Id</value>
+          </text>
+          <text id="/visit_registration/correctInterviewee/1:label">
+            <value>Yes</value>
+          </text>
+          <text id="/visit_registration/checkRightId:label">
+            <value>The barcode doesn't match the Location ID are you sure you want to proceed?</value>
+          </text>
+          <text id="/visit_registration/farmhouse/0:label">
+            <value>Not at home</value>
+          </text>
+          <text id="/visit_registration/visitDate:label">
+            <value>Visit Date</value>
+          </text>
+          <text id="/visit_registration/correctInterviewee:label">
+            <value>Is the person selected the one you are actually interviewing?</value>
+          </text>
+          <text id="/visit_registration/fieldWorkerId:label">
+            <value>Field Worker Id</value>
+          </text>
+          <text id="/visit_registration/coordinates:label">
+            <value>Record the GPS coordinates:</value>
+          </text>
+          <text id="/visit_registration/intervieweeName:label">
+            <value>Name of interviewee</value>
+          </text>
+          <text id="/visit_registration/farmhouse/1:label">
+            <value>House</value>
+          </text>
+          <text id="/visit_registration/locationId:label">
+            <value>Location Id</value>
+          </text>
+          <text id="/visit_registration/processedByMirth:label">
+            <value>processed</value>
+          </text>
+          <text id="/visit_registration/roundNumber:label">
+            <value>Round number</value>
+          </text>
+          <text id="/visit_registration/locationcalculated:label">
+            <value>check</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <visit_registration id="visit_registration">
+          <start/>
+          <end/>
+          <deviceid/>
+          <visitId/>
+          <fieldWorkerId/>
+          <locationId/>
+          <roundNumber/>
+          <locationIdCheck/>
+          <locationcalculated/>
+          <checkRightId/>
+          <whynotrightcode/>
+          <visitDate/>
+          <intervieweeId/>
+          <correctInterviewee/>
+          <intervieweeName/>
+          <reason/>
+          <farmhouse/>
+          <coordinates/>
+          <processedByMirth/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </visit_registration>
+      </instance>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/visit_registration/start" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/visit_registration/end" type="dateTime"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/visit_registration/deviceid" type="string"/>
+      <bind nodeset="/visit_registration/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/visit_registration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/visit_registration/locationId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/visit_registration/roundNumber" readonly="true()" required="true()" type="int"/>
+      <bind nodeset="/visit_registration/locationIdCheck" type="barcode"/>
+      <bind calculate="concat(substr( /visit_registration/locationIdCheck ,0,3),'0000',substr( /visit_registration/locationIdCheck ,3,5))" nodeset="/visit_registration/locationcalculated" readonly="true()" type="string"/>
+      <bind nodeset="/visit_registration/checkRightId" relevant=" /visit_registration/locationId  != /visit_registration/locationcalculated  and  /visit_registration/locationId  != /visit_registration/locationIdCheck " required="true()" type="string"/>
+      <bind nodeset="/visit_registration/whynotrightcode" relevant=" /visit_registration/locationId  != /visit_registration/locationcalculated  and  /visit_registration/locationId  != /visit_registration/locationIdCheck " required="true()" type="select1"/>
+      <bind nodeset="/visit_registration/visitDate" readonly="true()" required="true()" type="date"/>
+      <bind nodeset="/visit_registration/intervieweeId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/visit_registration/correctInterviewee" required="true()" type="select1"/>
+      <bind nodeset="/visit_registration/intervieweeName" relevant="../correctInterviewee = '0'" required="true()" type="string"/>
+      <bind nodeset="/visit_registration/reason" relevant="../correctInterviewee = '0'" required="true()" type="select1"/>
+      <bind nodeset="/visit_registration/farmhouse" required="true()" type="select1"/>
+      <bind nodeset="/visit_registration/coordinates" relevant="../farmhouse = '1' and ( /visit_registration/locationId  != /visit_registration/locationcalculated )" required="true()" type="geopoint"/>
+      <bind nodeset="/visit_registration/processedByMirth" relevant="1=2" type="int"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/visit_registration/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/visit_registration/visitId">
+      <label ref="jr:itext('/visit_registration/visitId:label')"/>
+    </input>
+    <input ref="/visit_registration/fieldWorkerId">
+      <label ref="jr:itext('/visit_registration/fieldWorkerId:label')"/>
+    </input>
+    <input ref="/visit_registration/locationId">
+      <label ref="jr:itext('/visit_registration/locationId:label')"/>
+    </input>
+    <input ref="/visit_registration/roundNumber">
+      <label ref="jr:itext('/visit_registration/roundNumber:label')"/>
+    </input>
+    <input ref="/visit_registration/locationIdCheck">
+      <label ref="jr:itext('/visit_registration/locationIdCheck:label')"/>
+    </input>
+    <input ref="/visit_registration/locationcalculated">
+      <label ref="jr:itext('/visit_registration/locationcalculated:label')"/>
+    </input>
+    <trigger ref="/visit_registration/checkRightId">
+      <label ref="jr:itext('/visit_registration/checkRightId:label')"/>
+    </trigger>
+    <select1 ref="/visit_registration/whynotrightcode">
+      <label ref="jr:itext('/visit_registration/whynotrightcode:label')"/>
+      <item>
+        <label ref="jr:itext('/visit_registration/whynotrightcode/0:label')"/>
+        <value>0</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/visit_registration/whynotrightcode/1:label')"/>
+        <value>1</value>
+      </item>
+    </select1>
+    <input ref="/visit_registration/visitDate">
+      <label ref="jr:itext('/visit_registration/visitDate:label')"/>
+    </input>
+    <input ref="/visit_registration/intervieweeId">
+      <label ref="jr:itext('/visit_registration/intervieweeId:label')"/>
+    </input>
+    <select1 ref="/visit_registration/correctInterviewee">
+      <label ref="jr:itext('/visit_registration/correctInterviewee:label')"/>
+      <item>
+        <label ref="jr:itext('/visit_registration/correctInterviewee/0:label')"/>
+        <value>0</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/visit_registration/correctInterviewee/1:label')"/>
+        <value>1</value>
+      </item>
+    </select1>
+    <input ref="/visit_registration/intervieweeName">
+      <label ref="jr:itext('/visit_registration/intervieweeName:label')"/>
+    </input>
+    <select1 ref="/visit_registration/reason">
+      <label ref="jr:itext('/visit_registration/reason:label')"/>
+      <item>
+        <label ref="jr:itext('/visit_registration/reason/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/visit_registration/reason/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/visit_registration/reason/3:label')"/>
+        <value>3</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/visit_registration/reason/99:label')"/>
+        <value>99</value>
+      </item>
+    </select1>
+    <select1 ref="/visit_registration/farmhouse">
+      <label ref="jr:itext('/visit_registration/farmhouse:label')"/>
+      <item>
+        <label ref="jr:itext('/visit_registration/farmhouse/0:label')"/>
+        <value>0</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/visit_registration/farmhouse/1:label')"/>
+        <value>1</value>
+      </item>
+    </select1>
+    <input ref="/visit_registration/coordinates">
+      <label ref="jr:itext('/visit_registration/coordinates:label')"/>
+      <hint>GPS coordinates can only be collected when outside.</hint>
+    </input>
+    <input ref="/visit_registration/processedByMirth">
+      <label ref="jr:itext('/visit_registration/processedByMirth:label')"/>
+    </input>
+  </h:body>
+</h:html>

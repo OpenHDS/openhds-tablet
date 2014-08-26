@@ -5,302 +5,646 @@
     <model>
       <itext>
         <translation lang="Swahili">
-          <text id="/data/individualId:label">
-            <value>Namba ya Mkuu wa Kaya aliyefariki</value>
+          <text id="/deathToHOHform/diagnoseddeath:label">
+            <value>Death Cause diagnosed by health authority?</value>
           </text>
-          <text id="/data/visitId:hint">
-            <value>kwa mfano IFA001001018</value>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/5:label">
+            <value>Mzazi</value>
           </text>
-          <text id="/data/numHHmembers:label">
-            <value>Idadi ya Wanakaya wanoishi kaya hii</value>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Accident:label">
+            <value>Accident</value>
           </text>
-          <text id="/data/newHOHMiddleName:label">
-            <value>Jina la Kati la Mkuu wa Kaya Mpya</value>
-          </text>
-          <text id="/data/individualId:hint">
-            <value>kwa mfano IFA001001001</value>
-          </text>
-          <text id="/data/member/memberDob:label">
-            <value>Tarehe ya kuzaliwa ya Mwanakaya</value>
-          </text>
-          <text id="/data/member/mindividualId:label">
-            <value>DSS ID</value>
-          </text>
-          <text id="/data/member/relationToNewHead:label">
-            <value>Uhusiano na Mkuu wa kaya Mpya</value>
-          </text>
-          <text id="/data/member/memberMiddleName:label">
-            <value>Jina la Kati la Mwanakaya</value>
-          </text>
-          <text id="/data/newHOHdob:label">
-            <value>Tarehe ya kuzaliwa ya Mkuu wa Kaya Mpya</value>
-          </text>
-          <text id="/data/newHOHFirstName:label">
-            <value>Jina la Kwanza la Mkuu wa Kaya Mpya</value>
-          </text>
-          <text id="/data/member/memberLastName:label">
+          <text id="/deathToHOHform/members/membersGRP/memberLastName:label">
             <value>Jina la Ukoo wa Mwanakaya</value>
           </text>
-          <text id="/data/fieldWorkerId:hint">
-            <value>kwa mfano FWAD1</value>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/9:label">
+            <value>Sijui</value>
           </text>
-          <text id="/data/fieldWorkerId:label">
-            <value>Mhojaji</value>
-          </text>
-          <text id="/data/newHOHId:hint">
-            <value>kwa mfano IFA001001001</value>
-          </text>
-          <text id="/data/newHOHLastName:label">
-            <value>Jina la Ukoo la Mkuu wa Kaya Mpya</value>
-          </text>
-          <text id="/data/member:label">
-            <value>Taarifa za Mwanakaya</value>
-          </text>
-          <text id="/data/householdId:label">
+          <text id="/deathToHOHform/householdId:label">
             <value>Namba ya Kaya</value>
           </text>
-          <text id="/data/member/memberFirstName:label">
-            <value>Jina la kwanza la mwanakaya</value>
+          <text id="/deathToHOHform/placeOfDeath/HOSPITAL:label">
+            <value>Hospitali</value>
           </text>
-       
-          <text id="/data/newHOHId:label">
+          <text id="/deathToHOHform/remaining:label">
+            <value>-</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/3:label">
+            <value>Mtoto Kiume/Kike</value>
+          </text>
+          <text id="/deathToHOHform/hhgroup/newHOHFirstName:label">
+            <value>Jina la Kwanza la Mkuu wa Kaya Mpya</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/4:label">
+            <value>Kaka/Dada</value>
+          </text>
+          <text id="/deathToHOHform/numHHmembers:label">
+            <value>Idadi ya Wanakaya wanoishi kaya hii</value>
+          </text>
+          <text id="/deathToHOHform/hhgroup/newHOHId:label">
             <value>Namba ya Mkuu wa Kaya Mpya</value>
           </text>
- 
-          <text id="/data/visitId:label">
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/2:label">
+            <value>Mke/Mme</value>
+          </text>
+          <text id="/deathToHOHform/placeOfDeath/HEALTH_CENTER:label">
+            <value>Health Centre or Clinic</value>
+          </text>
+          <text id="/deathToHOHform/whom/4:label">
+            <value>Traditional healer</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Other:label">
+            <value>Other</value>
+          </text>
+          <text id="/deathToHOHform/diagnoseddeath/2:label">
+            <value>Hapana</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/memberDob:label">
+            <value>Tarehe ya kuzaliwa ya Mwanakaya</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/HIV_AIDS:label">
+            <value>HIV/AIDS</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/memberFirstName:label">
+            <value>Jina la kwanza la mwanakaya</value>
+          </text>
+          <text id="/deathToHOHform/placeOfDeath/OTHER:label">
+            <value>Kwingine</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/7:label">
+            <value>Hakuna Mahusiano</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP:label">
+            <value>WanakayaGRP</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed:label">
+            <value>Cause of death?</value>
+          </text>
+          <text id="/deathToHOHform/diagnoseddeath/1:label">
+            <value>Ndiyo</value>
+          </text>
+          <text id="/deathToHOHform/placeOfDeath/HOME:label">
+            <value>Nyumbani</value>
+          </text>
+          <text id="/deathToHOHform/causofdeathnotdiagnosed:label">
+            <value>Cause of death?</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Malaria:label">
+            <value>Malaria</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Other_viral_bacterial_infection:label">
+            <value>Other viral/bacterial infection</value>
+          </text>
+          <text id="/deathToHOHform/interviewDate:label">
+            <value>Tarehe ya mahojiano</value>
+          </text>
+          <text id="/deathToHOHform/hhgroup:label">
+            <value>hhgroup</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/position:label">
+            <value>Position</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/TB:label">
+            <value>TB</value>
+          </text>
+          <text id="/deathToHOHform/hhgroup/newHOHLastName:label">
+            <value>Jina la Ukoo la Mkuu wa Kaya Mpya</value>
+          </text>
+          <text id="/deathToHOHform/causofdeathnotdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/deathToHOHform/causofdeathnotdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/deathToHOHform/date:label">
+            <value>Tarehe ya siku kifo kilipotokea</value>
+          </text>
+          <text id="/deathToHOHform/causofdeathnotdiagnosed/Accident:label">
+            <value>Accident</value>
+          </text>
+          <text id="/deathToHOHform/causofdeathnotdiagnosed/Disease_Illness:label">
+            <value>Disease, Illness</value>
+          </text>
+          <text id="/deathToHOHform/whom/2:label">
+            <value>Nurse</value>
+          </text>
+          <text id="/deathToHOHform/placeOfDeath/TRAD_HEALER:label">
+            <value>Traditional healer's home</value>
+          </text>
+          <text id="/deathToHOHform/OtherplaceOfDeath:label">
+            <value>Sehemu kifo kilipotokea</value>
+          </text>
+          <text id="/deathToHOHform/processedByMirth:label">
+            <value>processed</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Age:label">
+            <value>Age</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/6:label">
+            <value>Mjukuu</value>
+          </text>
+          <text id="/deathToHOHform/whom/3:label">
+            <value>Community health worker</value>
+          </text>
+          <text id="/deathToHOHform/individualId:label">
+            <value>Namba ya Mkuu wa Kaya aliyefariki</value>
+          </text>
+          <text id="/deathToHOHform/placeOfDeath:label">
+            <value>Sehemu kifo kilipotokea</value>
+          </text>
+          <text id="/deathToHOHform/whom:label">
+            <value>by whom?</value>
+          </text>
+          <text id="/deathToHOHform/members:label">
+            <value>Wanakaya</value>
+          </text>
+          <text id="/deathToHOHform/hhgroup/newHOHdob:label">
+            <value>Tarehe ya kuzaliwa ya Mkuu wa Kaya Mpya</value>
+          </text>
+          <text id="/deathToHOHform/fieldWorkerId:label">
+            <value>Mhojaji</value>
+          </text>
+          <text id="/deathToHOHform/visitId:label">
             <value>Namba ya Uhudhurio</value>
           </text>
-          <text id="/data/member/mindividualId:hint">
-            <value>kwa mfano IFA001001001</value>
+          <text id="/deathToHOHform/whom/1:label">
+            <value>Doctor</value>
           </text>
-          <text id="/data/householdId:hint">
-            <value>kwa mfano IFA00000100</value>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/8:label">
+            <value>Uhusiano Mwingine</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead:label">
+            <value>Uhusiano na Mkuu wa kaya Mpya</value>
           </text>
         </translation>
-        <translation lang="English">
-          <text id="/data/individualId:label">
-            <value>Deceased Head of House ID</value>
+        <translation default="true()" lang="English">
+          <text id="/deathToHOHform/diagnoseddeath:label">
+            <value>Death Cause diagnosed by health authority?</value>
           </text>
-          <text id="/data/visitId:hint">
-            <value>e.g. IFA001001018</value>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/5:label">
+            <value>Parent</value>
           </text>
-     
-          <text id="/data/numHHmembers:label">
-            <value>Number of Resident Household Members</value>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Accident:label">
+            <value>Accident</value>
           </text>
-          <text id="/data/newHOHMiddleName:label">
-            <value>Middle Name of New Head of House</value>
-          </text>
-          <text id="/data/individualId:hint">
-            <value>e.g. IFA001001001</value>
-          </text>
-          <text id="/data/member/memberDob:label">
-            <value>Member Date of Birth</value>
-          </text>
-          <text id="/data/member/mindividualId:label">
-            <value>DSS ID</value>
-          </text>
-          <text id="/data/member/relationToNewHead:label">
-            <value>Relationship to New Head of House</value>
-          </text>
-          <text id="/data/member/memberMiddleName:label">
-            <value>Member Middle Name</value>
-          </text>
-          <text id="/data/newHOHdob:label">
-            <value>Date of Birth of the New Head of House</value>
-          </text>
-          <text id="/data/newHOHFirstName:label">
-            <value>First Name of New Head of House</value>
-          </text>
-          <text id="/data/member/memberLastName:label">
+          <text id="/deathToHOHform/members/membersGRP/memberLastName:label">
             <value>Member Last Name</value>
           </text>
-          <text id="/data/fieldWorkerId:hint">
-            <value>e.g. FWAD1</value>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/9:label">
+            <value>Don't Know</value>
           </text>
-          <text id="/data/fieldWorkerId:label">
-            <value>Field Worker</value>
-          </text>
-          <text id="/data/newHOHId:hint">
-            <value>e.g. IFA001001001</value>
-          </text>
-          <text id="/data/newHOHLastName:label">
-            <value>Last name of New Head of House</value>
-          </text>
-   
-          <text id="/data/member:label">
-            <value>Member Details</value>
-          </text>
-          <text id="/data/householdId:label">
+          <text id="/deathToHOHform/householdId:label">
             <value>Household ID</value>
           </text>
-          <text id="/data/member/memberFirstName:label">
-            <value>Member First Name</value>
+          <text id="/deathToHOHform/placeOfDeath/HOSPITAL:label">
+            <value>Hospital</value>
           </text>
-       
-          <text id="/data/newHOHId:label">
+          <text id="/deathToHOHform/remaining:label">
+            <value>remaining</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/3:label">
+            <value>Son/Daughter</value>
+          </text>
+          <text id="/deathToHOHform/hhgroup/newHOHFirstName:label">
+            <value>First Name of New Head of House</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/4:label">
+            <value>Brother/Sister</value>
+          </text>
+          <text id="/deathToHOHform/numHHmembers:label">
+            <value>Number of Resident Household Members</value>
+          </text>
+          <text id="/deathToHOHform/hhgroup/newHOHId:label">
             <value>New Head of House ID</value>
           </text>
-       
-          <text id="/data/visitId:label">
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/2:label">
+            <value>Spouse</value>
+          </text>
+          <text id="/deathToHOHform/placeOfDeath/HEALTH_CENTER:label">
+            <value>Health Centre or Clinic</value>
+          </text>
+          <text id="/deathToHOHform/whom/4:label">
+            <value>Traditional healer</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Other:label">
+            <value>Other</value>
+          </text>
+          <text id="/deathToHOHform/diagnoseddeath/2:label">
+            <value>No</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/memberDob:label">
+            <value>Member Date of Birth</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/deathToHOHform/processedByMirth:label">
+            <value>processed</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/memberFirstName:label">
+            <value>Member First Name</value>
+          </text>
+          <text id="/deathToHOHform/placeOfDeath/OTHER:label">
+            <value>Other</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/7:label">
+            <value>Not Related</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP:label">
+            <value>-</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed:label">
+            <value>Cause of death?</value>
+          </text>
+          <text id="/deathToHOHform/diagnoseddeath/1:label">
+            <value>Yes</value>
+          </text>
+          <text id="/deathToHOHform/placeOfDeath/HOME:label">
+            <value>Home</value>
+          </text>
+          <text id="/deathToHOHform/causofdeathnotdiagnosed:label">
+            <value>Cause of death?</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Malaria:label">
+            <value>Malaria</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Other_viral_bacterial_infection:label">
+            <value>Other viral/bacterial infection</value>
+          </text>
+          <text id="/deathToHOHform/fieldWorkerId:label">
+            <value>Field Worker</value>
+          </text>
+          <text id="/deathToHOHform/hhgroup:label">
+            <value>-</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/position:label">
+            <value>Position</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/TB:label">
+            <value>TB</value>
+          </text>
+          <text id="/deathToHOHform/hhgroup/newHOHLastName:label">
+            <value>Last name of New Head of House</value>
+          </text>
+          <text id="/deathToHOHform/causofdeathnotdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/deathToHOHform/causofdeathnotdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/deathToHOHform/date:label">
+            <value>Date of Death</value>
+          </text>
+          <text id="/deathToHOHform/causofdeathnotdiagnosed/Accident:label">
+            <value>Accident</value>
+          </text>
+          <text id="/deathToHOHform/causofdeathnotdiagnosed/Disease_Illness:label">
+            <value>Disease, Illness</value>
+          </text>
+          <text id="/deathToHOHform/whom/2:label">
+            <value>Nurse</value>
+          </text>
+          <text id="/deathToHOHform/placeOfDeath/TRAD_HEALER:label">
+            <value>Traditional healer's home</value>
+          </text>
+          <text id="/deathToHOHform/OtherplaceOfDeath:label">
+            <value>Place of Death(Other)</value>
+          </text>
+          <text id="/deathToHOHform/interviewDate:label">
+            <value>Interview Date</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Age:label">
+            <value>Age</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/6:label">
+            <value>Grandchild</value>
+          </text>
+          <text id="/deathToHOHform/whom/3:label">
+            <value>Community health worker</value>
+          </text>
+          <text id="/deathToHOHform/individualId:label">
+            <value>Deceased Head of House ID</value>
+          </text>
+          <text id="/deathToHOHform/placeOfDeath:label">
+            <value>Place of Death</value>
+          </text>
+          <text id="/deathToHOHform/whom:label">
+            <value>by whom?</value>
+          </text>
+          <text id="/deathToHOHform/members:label">
+            <value>members</value>
+          </text>
+          <text id="/deathToHOHform/hhgroup/newHOHdob:label">
+            <value>Date of Birth of the New Head of House</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/HIV_AIDS:label">
+            <value>HIV/AIDS</value>
+          </text>
+          <text id="/deathToHOHform/visitId:label">
             <value>Visit ID</value>
           </text>
-          <text id="/data/member/mindividualId:hint">
-            <value>e.g. IFA001001001</value>
+          <text id="/deathToHOHform/whom/1:label">
+            <value>Doctor</value>
           </text>
-          <text id="/data/householdId:hint">
-            <value>e.g. IFA00000100</value>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead/8:label">
+            <value>Other Relative</value>
+          </text>
+          <text id="/deathToHOHform/causeofdeathdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/deathToHOHform/members/membersGRP/relationToNewHead:label">
+            <value>Relationship to New Head of House</value>
           </text>
         </translation>
       </itext>
       <instance>
-        <data id="deathToHOHform">
+        <deathToHOHform id="deathToHOHform">
           <start/>
           <end/>
-          <deviceId/>
-          <processedByMirth/>
+          <deviceid/>
           <interviewDate/>
           <householdId/>
           <fieldWorkerId/>
           <visitId/>
           <individualId/>
           <numHHmembers/>
-          <newHOHId/>
-          <newHOHFirstName/>
-          <newHOHMiddleName/>
-          <newHOHLastName/>
-          <newHOHdob/>
-          <member jr:template="">
-            <position/>
-            <mindividualId/>
-            <memberFirstName/>
-            <memberMiddleName/>
-            <memberLastName/>
-            <memberDob/>
-            <relationToNewHead/>
-          </member>
+          <hhgroup>
+            <newHOHId/>
+            <newHOHFirstName/>
+            <newHOHLastName/>
+            <newHOHdob/>
+          </hhgroup>
+          <date/>
+          <diagnoseddeath/>
+          <whom/>
+          <causeofdeathdiagnosed/>
+          <causofdeathnotdiagnosed/>
+          <placeOfDeath/>
+          <OtherplaceOfDeath/>
+          <remaining/>
+          <members_count/>
+          <members jr:template="">
+            <membersGRP>
+              <position/>
+              <memberFirstName/>
+              <memberLastName/>
+              <memberDob/>
+              <relationToNewHead/>
+            </membersGRP>
+          </members>
+          <processedByMirth/>
           <meta>
             <instanceID/>
           </meta>
-        </data>
+        </deathToHOHform>
       </instance>
-			<bind nodeset="/data/processedByMirth" type="boolean" />
-			<bind nodeset="/data/start" type="string"/> 
-			<bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/end" type="dateTime"/>
-      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/data/deviceId" type="string"/>
-      <bind jr:preload="date" jr:preloadParams="today" nodeset="/data/interviewDate" type="date"/>
-      <bind nodeset="/data/householdId" required="true()" type="string" readonly="true()"/>
-      <bind nodeset="/data/fieldWorkerId" required="true()" type="string" readonly="true()"/>
-      <bind nodeset="/data/visitId" required="true()" type="string" readonly="true()"/>
-      <bind nodeset="/data/individualId" required="true()" type="string" readonly="true()"/>
-      <bind nodeset="/data/numHHmembers" required="true()" type="int"/>
-      <bind constraint="regex(.,'^[A-Z]{3}[0-9]{9}$')" jr:constraintMsg="Fuata muundo uliotolewa kama mfano. Herufi 3 za UPPERCASE ikifuatiwa na namba 9" nodeset="/data/newHOHId" relevant="/data/numHHmembers&gt;=1" required="true()" type="string"/>
-      <bind nodeset="/data/newHOHFirstName" relevant="/data/numHHmembers&gt;=1" required="true()" type="string"/>
-      <bind nodeset="/data/newHOHMiddleName" relevant="/data/numHHmembers&gt;=1" required="true()" type="string"/>
-      <bind nodeset="/data/newHOHLastName" relevant="/data/numHHmembers&gt;=1" required="true()" type="string"/>
-      <bind nodeset="/data/newHOHdob" relevant="/data/numHHmembers&gt;=1" required="true()" type="date"/>
-      <bind nodeset="/data/member" relevant="/data/numHHmembers&gt;=1"/>
-      <bind calculate="position(..)" nodeset="/data/member/position" type="string"/>
-      <bind constraint="regex(.,'^[A-Z]{3}[0-9]{9}$')" jr:constraintMsg="Fuata muundo uliotolewa kama mfano. Herufi 3 za UPPERCASE ikifuatiwa na namba 9" nodeset="/data/member/mindividualId" relevant="/data/member/position&lt;=/data/numHHmembers" required="true()" type="string"/>
-      <bind nodeset="/data/member/memberFirstName" relevant="/data/member/position&lt;=/data/numHHmembers" required="true()" type="string"/>
-      <bind nodeset="/data/member/memberMiddleName" relevant="/data/member/position&lt;=/data/numHHmembers" required="true()" type="string"/>
-      <bind nodeset="/data/member/memberLastName" relevant="/data/member/position&lt;=/data/numHHmembers" required="true()" type="string"/>
-      <bind nodeset="/data/member/memberDob" relevant="/data/member/position&lt;=/data/numHHmembers" required="true()" type="date"/>
-      <bind nodeset="/data/member/relationToNewHead" relevant="/data/member/position&lt;=/data/numHHmembers" required="true()" type="select1"/>
-      <bind calculate="concat('uuid:', uuid())" nodeset="/data/meta/instanceID" readonly="true()" type="string"/>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/deathToHOHform/start" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/deathToHOHform/end" type="dateTime"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/deathToHOHform/deviceid" type="string"/>
+      <bind nodeset="/deathToHOHform/interviewDate" readonly="true()" required="true()" type="date"/>
+      <bind nodeset="/deathToHOHform/householdId" required="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/individualId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/numHHmembers" required="true()" type="int"/>
+      <bind nodeset="/deathToHOHform/hhgroup" relevant="../numHHmembers &gt;= 1"/>
+      <bind constraint="regex(.,'^[A-Z0-9]{12}$')" jr:constraintMsg="Please check that the Id is in the correct format" nodeset="/deathToHOHform/hhgroup/newHOHId" required="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/hhgroup/newHOHFirstName" required="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/hhgroup/newHOHLastName" required="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/hhgroup/newHOHdob" required="true()" type="date"/>
+      <bind nodeset="/deathToHOHform/date" required="true()" type="date"/>
+      <bind nodeset="/deathToHOHform/diagnoseddeath" required="true()" type="select1"/>
+      <bind nodeset="/deathToHOHform/whom" relevant="selected( /deathToHOHform/diagnoseddeath , '1')" required="true()" type="select1"/>
+      <bind nodeset="/deathToHOHform/causeofdeathdiagnosed" relevant="selected( /deathToHOHform/diagnoseddeath , '1')" required="true()" type="select1"/>
+      <bind nodeset="/deathToHOHform/causofdeathnotdiagnosed" relevant="selected( /deathToHOHform/diagnoseddeath , '2')" required="true()" type="select1"/>
+      <bind nodeset="/deathToHOHform/placeOfDeath" required="true()" type="select1"/>
+      <bind nodeset="/deathToHOHform/OtherplaceOfDeath" relevant="selected( /deathToHOHform/placeOfDeath , 'OTHER')" required="true()" type="string"/>
+      <bind calculate="if( /deathToHOHform/numHHmembers &gt;1, /deathToHOHform/numHHmembers  -1,0)" nodeset="/deathToHOHform/remaining" type="int"/>
+      <bind calculate=" /deathToHOHform/remaining " nodeset="/deathToHOHform/members_count" readonly="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/members" relevant="../numHHmembers &gt;1"/>
+      <bind calculate="position(..)" nodeset="/deathToHOHform/members/membersGRP/position" readonly="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/members/membersGRP/memberFirstName" required="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/members/membersGRP/memberLastName" required="true()" type="string"/>
+      <bind nodeset="/deathToHOHform/members/membersGRP/memberDob" required="true()" type="date"/>
+      <bind nodeset="/deathToHOHform/members/membersGRP/relationToNewHead" required="true()" type="select1"/>
+      <bind nodeset="/deathToHOHform/processedByMirth" relevant="1=2" type="int"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/deathToHOHform/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
   <h:body>
-    <input ref="/data/householdId">
-      <label ref="jr:itext('/data/householdId:label')"/>
-      <hint ref="jr:itext('/data/householdId:hint')"/>
+    <input ref="/deathToHOHform/interviewDate">
+      <label ref="jr:itext('/deathToHOHform/interviewDate:label')"/>
     </input>
-     <input ref="/data/fieldWorkerId">
-      <label ref="jr:itext('/data/fieldWorkerId:label')"/>
-      <hint ref="jr:itext('/data/fieldWorkerId:hint')"/>
+    <input ref="/deathToHOHform/householdId">
+      <label ref="jr:itext('/deathToHOHform/householdId:label')"/>
     </input>
-    <input ref="/data/visitId">
-      <label ref="jr:itext('/data/visitId:label')"/>
-      <hint ref="jr:itext('/data/visitId:hint')"/>
+    <input ref="/deathToHOHform/fieldWorkerId">
+      <label ref="jr:itext('/deathToHOHform/fieldWorkerId:label')"/>
     </input>
-    <input ref="/data/individualId">
-      <label ref="jr:itext('/data/individualId:label')"/>
-      <hint ref="jr:itext('/data/individualId:hint')"/>
+    <input ref="/deathToHOHform/visitId">
+      <label ref="jr:itext('/deathToHOHform/visitId:label')"/>
     </input>
- 	  <input ref="/data/numHHmembers">
-      <label ref="jr:itext('/data/numHHmembers:label')"/>
+    <input ref="/deathToHOHform/individualId">
+      <label ref="jr:itext('/deathToHOHform/individualId:label')"/>
     </input>
-    <input ref="/data/newHOHId">
-      <label ref="jr:itext('/data/newHOHId:label')"/>
-      <hint ref="jr:itext('/data/newHOHId:hint')"/>
+    <input ref="/deathToHOHform/numHHmembers">
+      <label ref="jr:itext('/deathToHOHform/numHHmembers:label')"/>
     </input>
-    <input ref="/data/newHOHFirstName">
-      <label ref="jr:itext('/data/newHOHFirstName:label')"/>
+    <group ref="/deathToHOHform/hhgroup">
+      <label ref="jr:itext('/deathToHOHform/hhgroup:label')"/>
+      <input ref="/deathToHOHform/hhgroup/newHOHId">
+        <label ref="jr:itext('/deathToHOHform/hhgroup/newHOHId:label')"/>
+      </input>
+      <input ref="/deathToHOHform/hhgroup/newHOHFirstName">
+        <label ref="jr:itext('/deathToHOHform/hhgroup/newHOHFirstName:label')"/>
+      </input>
+      <input ref="/deathToHOHform/hhgroup/newHOHLastName">
+        <label ref="jr:itext('/deathToHOHform/hhgroup/newHOHLastName:label')"/>
+      </input>
+      <input ref="/deathToHOHform/hhgroup/newHOHdob">
+        <label ref="jr:itext('/deathToHOHform/hhgroup/newHOHdob:label')"/>
+      </input>
+    </group>
+    <input ref="/deathToHOHform/date">
+      <label ref="jr:itext('/deathToHOHform/date:label')"/>
     </input>
-    <input ref="/data/newHOHMiddleName">
-      <label ref="jr:itext('/data/newHOHMiddleName:label')"/>
+    <select1 ref="/deathToHOHform/diagnoseddeath">
+      <label ref="jr:itext('/deathToHOHform/diagnoseddeath:label')"/>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/diagnoseddeath/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/diagnoseddeath/2:label')"/>
+        <value>2</value>
+      </item>
+    </select1>
+    <select1 ref="/deathToHOHform/whom">
+      <label ref="jr:itext('/deathToHOHform/whom:label')"/>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/whom/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/whom/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/whom/3:label')"/>
+        <value>3</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/whom/4:label')"/>
+        <value>4</value>
+      </item>
+    </select1>
+    <select1 ref="/deathToHOHform/causeofdeathdiagnosed">
+      <label ref="jr:itext('/deathToHOHform/causeofdeathdiagnosed:label')"/>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causeofdeathdiagnosed/Malaria:label')"/>
+        <value>Malaria</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causeofdeathdiagnosed/HIV_AIDS:label')"/>
+        <value>HIV_AIDS</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causeofdeathdiagnosed/TB:label')"/>
+        <value>TB</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causeofdeathdiagnosed/Other_viral_bacterial_infection:label')"/>
+        <value>Other_viral_bacterial_infection</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causeofdeathdiagnosed/Accident:label')"/>
+        <value>Accident</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causeofdeathdiagnosed/Crime:label')"/>
+        <value>Crime</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causeofdeathdiagnosed/Age:label')"/>
+        <value>Age</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causeofdeathdiagnosed/Unknown:label')"/>
+        <value>Unknown</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causeofdeathdiagnosed/Other:label')"/>
+        <value>Other</value>
+      </item>
+    </select1>
+    <select1 ref="/deathToHOHform/causofdeathnotdiagnosed">
+      <label ref="jr:itext('/deathToHOHform/causofdeathnotdiagnosed:label')"/>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causofdeathnotdiagnosed/Disease_Illness:label')"/>
+        <value>Disease_Illness</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causofdeathnotdiagnosed/Accident:label')"/>
+        <value>Accident</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causofdeathnotdiagnosed/Crime:label')"/>
+        <value>Crime</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/causofdeathnotdiagnosed/Unknown:label')"/>
+        <value>Unknown</value>
+      </item>
+    </select1>
+    <select1 ref="/deathToHOHform/placeOfDeath">
+      <label ref="jr:itext('/deathToHOHform/placeOfDeath:label')"/>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/placeOfDeath/HOME:label')"/>
+        <value>HOME</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/placeOfDeath/HOSPITAL:label')"/>
+        <value>HOSPITAL</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/placeOfDeath/HEALTH_CENTER:label')"/>
+        <value>HEALTH_CENTER</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/placeOfDeath/TRAD_HEALER:label')"/>
+        <value>TRAD_HEALER</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/deathToHOHform/placeOfDeath/OTHER:label')"/>
+        <value>OTHER</value>
+      </item>
+    </select1>
+    <input ref="/deathToHOHform/OtherplaceOfDeath">
+      <label ref="jr:itext('/deathToHOHform/OtherplaceOfDeath:label')"/>
     </input>
-    <input ref="/data/newHOHLastName">
-      <label ref="jr:itext('/data/newHOHLastName:label')"/>
+    <input ref="/deathToHOHform/remaining">
+      <label ref="jr:itext('/deathToHOHform/remaining:label')"/>
     </input>
-    <input ref="/data/newHOHdob">
-      <label ref="jr:itext('/data/newHOHdob:label')"/>
-    </input>
-    <group ref="/data/member">
-      <label ref="jr:itext('/data/member:label')"/>
-      <repeat jr:count="/data/numHHmembers" nodeset="/data/member">
-        <input ref="/data/member/mindividualId">
-          <label ref="jr:itext('/data/member/mindividualId:label')"/>
-          <hint ref="jr:itext('/data/member/mindividualId:hint')"/>
-        </input>
-        <input ref="/data/member/memberFirstName">
-          <label ref="jr:itext('/data/member/memberFirstName:label')"/>
-        </input>
-        <input ref="/data/member/memberMiddleName">
-          <label ref="jr:itext('/data/member/memberMiddleName:label')"/>
-        </input>
-        <input ref="/data/member/memberLastName">
-          <label ref="jr:itext('/data/member/memberLastName:label')"/>
-        </input>
-        <input ref="/data/member/memberDob">
-          <label ref="jr:itext('/data/member/memberDob:label')"/>
-        </input>
-        <select1 ref="/data/member/relationToNewHead">
-          <label ref="jr:itext('/data/member/relationToNewHead:label')"/>
-          <item>
-            <label>Spouse</label>
-            <value>2</value>
-          </item>
-          <item>
-            <label>Son/Daughter</label>
-            <value>3</value>
-          </item>
-          <item>
-            <label>Brother/Sister</label>
-            <value>4</value>
-          </item>
-          <item>
-            <label>Parent</label>
-            <value>5</value>
-          </item>
-          <item>
-            <label>Grandchild</label>
-            <value>6</value>
-          </item>
-          <item>
-            <label>Not Related</label>
-            <value>7</value>
-          </item>
-          <item>
-            <label>Other Relative</label>
-            <value>8</value>
-          </item>
-          <item>
-            <label>Don't Know</label>
-            <value>9</value>
-          </item>
-        </select1>
+    <group ref="/deathToHOHform/members">
+      <label ref="jr:itext('/deathToHOHform/members:label')"/>
+      <repeat jr:count=" /deathToHOHform/members_count " nodeset="/deathToHOHform/members">
+        <group ref="/deathToHOHform/members/membersGRP">
+          <label ref="jr:itext('/deathToHOHform/members/membersGRP:label')"/>
+          <input ref="/deathToHOHform/members/membersGRP/memberFirstName">
+            <label ref="jr:itext('/deathToHOHform/members/membersGRP/memberFirstName:label')"/>
+          </input>
+          <input ref="/deathToHOHform/members/membersGRP/memberLastName">
+            <label ref="jr:itext('/deathToHOHform/members/membersGRP/memberLastName:label')"/>
+          </input>
+          <input ref="/deathToHOHform/members/membersGRP/memberDob">
+            <label ref="jr:itext('/deathToHOHform/members/membersGRP/memberDob:label')"/>
+          </input>
+          <select1 ref="/deathToHOHform/members/membersGRP/relationToNewHead">
+            <label ref="jr:itext('/deathToHOHform/members/membersGRP/relationToNewHead:label')"/>
+            <item>
+              <label ref="jr:itext('/deathToHOHform/members/membersGRP/relationToNewHead/2:label')"/>
+              <value>2</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/deathToHOHform/members/membersGRP/relationToNewHead/3:label')"/>
+              <value>3</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/deathToHOHform/members/membersGRP/relationToNewHead/4:label')"/>
+              <value>4</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/deathToHOHform/members/membersGRP/relationToNewHead/5:label')"/>
+              <value>5</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/deathToHOHform/members/membersGRP/relationToNewHead/6:label')"/>
+              <value>6</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/deathToHOHform/members/membersGRP/relationToNewHead/7:label')"/>
+              <value>7</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/deathToHOHform/members/membersGRP/relationToNewHead/8:label')"/>
+              <value>8</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/deathToHOHform/members/membersGRP/relationToNewHead/9:label')"/>
+              <value>9</value>
+            </item>
+          </select1>
+        </group>
       </repeat>
     </group>
+    <input ref="/deathToHOHform/processedByMirth">
+      <label ref="jr:itext('/deathToHOHform/processedByMirth:label')"/>
+    </input>
   </h:body>
 </h:html>

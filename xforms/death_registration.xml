@@ -1,0 +1,402 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Death registration</h:title>
+    <model>
+      <itext>
+        <translation lang="Swahili">
+          <text id="/death_registration/placeOfDeath/HOSPITAL:label">
+            <value>Hospitali</value>
+          </text>
+          <text id="/death_registration/processedByMirth:label">
+            <value>Mirth</value>
+          </text>
+          <text id="/death_registration/diagnoseddeath/1:label">
+            <value>Ndiyo</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed:label">
+            <value>Cause of death?</value>
+          </text>
+          <text id="/death_registration/diagnoseddeath:label">
+            <value>Death Cause diagnosed by health authority?</value>
+          </text>
+          <text id="/death_registration/diagnoseddeath/2:label">
+            <value>Hapana</value>
+          </text>
+          <text id="/death_registration/placeOfDeath/TRAD_HEALER:label">
+            <value>Traditional healer's home</value>
+          </text>
+          <text id="/death_registration/whom/4:label">
+            <value>Traditional healer</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Other:label">
+            <value>Other</value>
+          </text>
+          <text id="/death_registration/placeOfDeath/HEALTH_CENTER:label">
+            <value>Health Centre or Clinic</value>
+          </text>
+          <text id="/death_registration/causeOfDeath:label">
+            <value>Cause of death</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Other_viral_bacterial_infection:label">
+            <value>Other viral/bacterial infection</value>
+          </text>
+          <text id="/death_registration/placeOfDeath:label">
+            <value>Amefia wapi/Kifo kilitokea wapi?</value>
+          </text>
+          <text id="/death_registration/whom/3:label">
+            <value>Community health worker</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/TB:label">
+            <value>TB</value>
+          </text>
+          <text id="/death_registration/visitId:label">
+            <value>Nambari ya Hudhurio</value>
+          </text>
+          <text id="/death_registration/causofdeathnotdiagnosed/Accident:label">
+            <value>Accident</value>
+          </text>
+          <text id="/death_registration/dateOfDeath:label">
+            <value>Tarehe ya Kifo</value>
+          </text>
+          <text id="/death_registration/causofdeathnotdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/death_registration/causofdeathnotdiagnosed/Disease_Illness:label">
+            <value>Disease, Illness</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Accident:label">
+            <value>Accident</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Age:label">
+            <value>Age</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/death_registration/placeOfDeath/OTHER:label">
+            <value>Kwingine</value>
+          </text>
+          <text id="/death_registration/whom/1:label">
+            <value>Doctor</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/HIV_AIDS:label">
+            <value>HIV/AIDS</value>
+          </text>
+          <text id="/death_registration/whom:label">
+            <value>by whom?</value>
+          </text>
+          <text id="/death_registration/causofdeathnotdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/death_registration/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
+          </text>
+          <text id="/death_registration/placeOfDeath/HOME:label">
+            <value>Nyumbani</value>
+          </text>
+          <text id="/death_registration/placeOfDeathOther:label">
+            <value>Amefia wapi/Kifo kilitokea wapi kwingine taja?</value>
+          </text>
+          <text id="/death_registration/individualId:label">
+            <value>Nambari ya Mwanakaya</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Malaria:label">
+            <value>Malaria</value>
+          </text>
+          <text id="/death_registration/causofdeathnotdiagnosed:label">
+            <value>Cause of death?</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/death_registration/whom/2:label">
+            <value>Nurse</value>
+          </text>
+        </translation>
+        <translation default="true()" lang="English">
+          <text id="/death_registration/placeOfDeath/HOSPITAL:label">
+            <value>Hospital</value>
+          </text>
+          <text id="/death_registration/processedByMirth:label">
+            <value>Mirth</value>
+          </text>
+          <text id="/death_registration/diagnoseddeath/1:label">
+            <value>Yes</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed:label">
+            <value>Cause of death?</value>
+          </text>
+          <text id="/death_registration/diagnoseddeath:label">
+            <value>Death Cause diagnosed by health authority?</value>
+          </text>
+          <text id="/death_registration/diagnoseddeath/2:label">
+            <value>No</value>
+          </text>
+          <text id="/death_registration/placeOfDeath/TRAD_HEALER:label">
+            <value>Traditional healer's home</value>
+          </text>
+          <text id="/death_registration/whom/4:label">
+            <value>Traditional healer</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Other:label">
+            <value>Other</value>
+          </text>
+          <text id="/death_registration/placeOfDeath/HEALTH_CENTER:label">
+            <value>Health Centre or Clinic</value>
+          </text>
+          <text id="/death_registration/causeOfDeath:label">
+            <value>Cause of death</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Other_viral_bacterial_infection:label">
+            <value>Other viral/bacterial infection</value>
+          </text>
+          <text id="/death_registration/placeOfDeath:label">
+            <value>Place of Death</value>
+          </text>
+          <text id="/death_registration/whom/3:label">
+            <value>Community health worker</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/TB:label">
+            <value>TB</value>
+          </text>
+          <text id="/death_registration/visitId:label">
+            <value>Visit Id</value>
+          </text>
+          <text id="/death_registration/causofdeathnotdiagnosed/Accident:label">
+            <value>Accident</value>
+          </text>
+          <text id="/death_registration/dateOfDeath:label">
+            <value>Date of Death</value>
+          </text>
+          <text id="/death_registration/causofdeathnotdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/death_registration/causofdeathnotdiagnosed/Disease_Illness:label">
+            <value>Disease, Illness</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Accident:label">
+            <value>Accident</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Age:label">
+            <value>Age</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/death_registration/placeOfDeath/OTHER:label">
+            <value>Other</value>
+          </text>
+          <text id="/death_registration/whom/1:label">
+            <value>Doctor</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/HIV_AIDS:label">
+            <value>HIV/AIDS</value>
+          </text>
+          <text id="/death_registration/whom:label">
+            <value>by whom?</value>
+          </text>
+          <text id="/death_registration/causofdeathnotdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/death_registration/fieldWorkerId:label">
+            <value>Field Worker Id</value>
+          </text>
+          <text id="/death_registration/placeOfDeath/HOME:label">
+            <value>Home</value>
+          </text>
+          <text id="/death_registration/placeOfDeathOther:label">
+            <value>Place of Death Other</value>
+          </text>
+          <text id="/death_registration/individualId:label">
+            <value>Individual Id</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Malaria:label">
+            <value>Malaria</value>
+          </text>
+          <text id="/death_registration/causofdeathnotdiagnosed:label">
+            <value>Cause of death?</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/death_registration/whom/2:label">
+            <value>Nurse</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <death_registration id="death_registration">
+          <start/>
+          <end/>
+          <deviceid/>
+          <individualId/>
+          <fieldWorkerId/>
+          <visitId/>
+          <dateOfDeath/>
+          <diagnoseddeath/>
+          <whom/>
+          <causeofdeathdiagnosed/>
+          <causofdeathnotdiagnosed/>
+          <placeOfDeath/>
+          <placeOfDeathOther/>
+          <causeOfDeath/>
+          <processedByMirth/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </death_registration>
+      </instance>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/death_registration/start" readonly="true()" required="true()" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/death_registration/end" readonly="true()" required="true()" type="dateTime"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/death_registration/deviceid" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/death_registration/individualId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/death_registration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/death_registration/visitId" required="true()" type="string"/>
+      <bind constraint=". &lt; today()" nodeset="/death_registration/dateOfDeath" required="true()" type="date"/>
+      <bind nodeset="/death_registration/diagnoseddeath" required="true()" type="select1"/>
+      <bind nodeset="/death_registration/whom" relevant="selected( /death_registration/diagnoseddeath , '1')" required="true()" type="select1"/>
+      <bind nodeset="/death_registration/causeofdeathdiagnosed" relevant="selected( /death_registration/diagnoseddeath , '1')" required="true()" type="select1"/>
+      <bind nodeset="/death_registration/causofdeathnotdiagnosed" relevant="selected( /death_registration/diagnoseddeath , '2')" required="true()" type="select1"/>
+      <bind nodeset="/death_registration/placeOfDeath" required="true()" type="select1"/>
+      <bind nodeset="/death_registration/placeOfDeathOther" relevant="selected( /death_registration/placeOfDeath , 'OTHER')" required="true()" type="string"/>
+      <bind calculate="concat( /death_registration/causeofdeathdiagnosed , /death_registration/causofdeathnotdiagnosed )" nodeset="/death_registration/causeOfDeath" readonly="true()" type="string"/>
+      <bind nodeset="/death_registration/processedByMirth" readonly="true()" relevant="1=2" type="int"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/death_registration/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/death_registration/individualId">
+      <label ref="jr:itext('/death_registration/individualId:label')"/>
+    </input>
+    <input ref="/death_registration/fieldWorkerId">
+      <label ref="jr:itext('/death_registration/fieldWorkerId:label')"/>
+    </input>
+    <input ref="/death_registration/visitId">
+      <label ref="jr:itext('/death_registration/visitId:label')"/>
+    </input>
+    <input ref="/death_registration/dateOfDeath">
+      <label ref="jr:itext('/death_registration/dateOfDeath:label')"/>
+    </input>
+    <select1 ref="/death_registration/diagnoseddeath">
+      <label ref="jr:itext('/death_registration/diagnoseddeath:label')"/>
+      <item>
+        <label ref="jr:itext('/death_registration/diagnoseddeath/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/diagnoseddeath/2:label')"/>
+        <value>2</value>
+      </item>
+    </select1>
+    <select1 ref="/death_registration/whom">
+      <label ref="jr:itext('/death_registration/whom:label')"/>
+      <item>
+        <label ref="jr:itext('/death_registration/whom/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/whom/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/whom/3:label')"/>
+        <value>3</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/whom/4:label')"/>
+        <value>4</value>
+      </item>
+    </select1>
+    <select1 ref="/death_registration/causeofdeathdiagnosed">
+      <label ref="jr:itext('/death_registration/causeofdeathdiagnosed:label')"/>
+      <item>
+        <label ref="jr:itext('/death_registration/causeofdeathdiagnosed/Malaria:label')"/>
+        <value>Malaria</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causeofdeathdiagnosed/HIV_AIDS:label')"/>
+        <value>HIV_AIDS</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causeofdeathdiagnosed/TB:label')"/>
+        <value>TB</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causeofdeathdiagnosed/Other_viral_bacterial_infection:label')"/>
+        <value>Other_viral_bacterial_infection</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causeofdeathdiagnosed/Accident:label')"/>
+        <value>Accident</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causeofdeathdiagnosed/Crime:label')"/>
+        <value>Crime</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causeofdeathdiagnosed/Age:label')"/>
+        <value>Age</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causeofdeathdiagnosed/Unknown:label')"/>
+        <value>Unknown</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causeofdeathdiagnosed/Other:label')"/>
+        <value>Other</value>
+      </item>
+    </select1>
+    <select1 ref="/death_registration/causofdeathnotdiagnosed">
+      <label ref="jr:itext('/death_registration/causofdeathnotdiagnosed:label')"/>
+      <item>
+        <label ref="jr:itext('/death_registration/causofdeathnotdiagnosed/Disease_Illness:label')"/>
+        <value>Disease_Illness</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causofdeathnotdiagnosed/Accident:label')"/>
+        <value>Accident</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causofdeathnotdiagnosed/Crime:label')"/>
+        <value>Crime</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/causofdeathnotdiagnosed/Unknown:label')"/>
+        <value>Unknown</value>
+      </item>
+    </select1>
+    <select1 ref="/death_registration/placeOfDeath">
+      <label ref="jr:itext('/death_registration/placeOfDeath:label')"/>
+      <item>
+        <label ref="jr:itext('/death_registration/placeOfDeath/HOME:label')"/>
+        <value>HOME</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/placeOfDeath/HOSPITAL:label')"/>
+        <value>HOSPITAL</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/placeOfDeath/HEALTH_CENTER:label')"/>
+        <value>HEALTH_CENTER</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/placeOfDeath/TRAD_HEALER:label')"/>
+        <value>TRAD_HEALER</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/death_registration/placeOfDeath/OTHER:label')"/>
+        <value>OTHER</value>
+      </item>
+    </select1>
+    <input ref="/death_registration/placeOfDeathOther">
+      <label ref="jr:itext('/death_registration/placeOfDeathOther:label')"/>
+    </input>
+    <input ref="/death_registration/causeOfDeath">
+      <label ref="jr:itext('/death_registration/causeOfDeath:label')"/>
+    </input>
+    <input ref="/death_registration/processedByMirth">
+      <label ref="jr:itext('/death_registration/processedByMirth:label')"/>
+    </input>
+  </h:body>
+</h:html>
