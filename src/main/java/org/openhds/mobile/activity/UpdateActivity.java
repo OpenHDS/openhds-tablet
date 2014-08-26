@@ -663,6 +663,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             	} else if (stateMachine.getState()=="Select Individual") {
             		if (extInm)
                 		onFinishExternalInmigration();
+            		selectIndividual();
             	}else if (stateMachine.getState()=="Select Event") {
             		if (hhCreation)
             			onFinishedHouseHoldCreation();
@@ -1028,6 +1029,16 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
          }
 
 
+    }
+
+    private void selectIndividual(){
+        String indExtId = filledForm.getIndividualExtId();
+        if(indExtId.length() > 0){
+        	System.out.println("Individual Id is : " + indExtId);
+        	vf.onLoaderReset(null);
+        	vf.loadFilteredIndividualById(indExtId);
+        	vf.selectItemNoInList(0);
+        }    	
     }
     
 	private void onFinishExternalInmigration() {
