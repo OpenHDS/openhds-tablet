@@ -1004,11 +1004,11 @@ EventFragment.Listener, SelectionFragment.Listener {
     }
     
     private void selectIndividual(){
-        String test = filledForm.getIndividualExtId();
-        if(test.length() > 0){
-        	System.out.println("Individual Id is : " + test);
+        String indExtId = filledForm.getIndividualExtId();
+        if(indExtId.length() > 0){
+        	System.out.println("Individual Id is : " + indExtId);
         	vf.onLoaderReset(null);
-        	vf.loadFilteredIndividualById(test);
+        	vf.loadFilteredIndividualById(indExtId);
         	vf.selectItemNoInList(0);
         }    	
     }
