@@ -108,6 +108,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private boolean showingProgress;
     private Updatable updatable;
     private boolean extInm;
+    private boolean hhCreation;
     private String jrFormId;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -244,7 +245,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             }
             SocialGroup socialGroup = (SocialGroup) data.getExtras().getSerializable("socialGroup");
             vf.onLoaderReset(null);
-            //System.out.println("Return from searching social group ! Selected: " + socialGroup.getGroupName());
             filledForm = formFiller.appendSocialGroup(socialGroup, filledForm);
             loadForm(SELECTED_XFORM);
             break;             
@@ -344,7 +344,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                     InstanceProviderAPI.InstanceColumns.STATUS + "=?",
                     new String[] { InstanceProviderAPI.STATUS_COMPLETE }, null);
             
-            System.out.println("Cursor count: " + cursor.getCount());
             if (cursor.moveToNext()) {
                 String filepath = cursor.getString(cursor
                         .getColumnIndex(InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH));
@@ -429,6 +428,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             new CheckFormStatus(getContentResolver(), contentUri).execute();
         } else {
             Toast.makeText(this, getString(R.string.odk_problem_lbl), Toast.LENGTH_LONG).show();
+            hhCreation = false;
         }
     }
 
@@ -540,16 +540,19 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             	} else if (stateMachine.getState()==State.SELECT_INDIVIDUAL) {
             		if (extInm)
                 		onFinishExternalInmigration();
+            		selectIndividual();            		
             	}
                 else if(stateMachine.getState() == State.SELECT_EVENT){
-                    System.out.println("Handle select event in statemachine");
-                   
-                    }            	
+                	if (hhCreation){
+                		onFinishedHouseHoldCreation();
+                	}            	
+                }
             	else {
             		stateMachine.transitionTo(State.SELECT_INDIVIDUAL);
             	}
             } else {
                 createUnfinishedFormDialog();
+                hhCreation = false;
             }
         }
     }
@@ -712,7 +715,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     private void createUnfinishedFormDialog() {
         formUnFinished = true;
-        System.out.println("Show dialog");
         if (xformUnfinishedDialog == null) {	
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(getString(R.string.warning_lbl));
@@ -857,6 +859,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 				this.cancel(true);
 
 			} else {
+				hhCreation = true;
 				loadForm(SELECTED_XFORM);
 			}
         }
@@ -928,9 +931,19 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             hideProgressFragment();
             buildMotherDialog();
          }
-
-
     }
+    
+    private void onFinishedHouseHoldCreation() {
+    	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+    	alertDialogBuilder.setTitle(getString(R.string.householdBtn_lbl));
+    	alertDialogBuilder.setMessage(getString(R.string.finish_household_creation_msg));
+    	alertDialogBuilder.setCancelable(true);
+    	alertDialogBuilder.setPositiveButton("Ok", null);
+    	AlertDialog alertDialog = alertDialogBuilder.create();
+    	alertDialog.show();
+    	
+    	hhCreation = false;
+    }     
     
 	private void onFinishExternalInmigration() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -941,6 +954,16 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();			
 	}
+	
+
+	private void selectIndividual(){
+		String indExtId = filledForm.getIndividualExtId();
+		vf.onLoaderReset(null);
+		if(indExtId.length() > 0){
+			vf.onLoaderReset(null);
+			vf.loadFilteredIndividualById(indExtId);
+		}
+	}	
 
     private void buildMotherDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
