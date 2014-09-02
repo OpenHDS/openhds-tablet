@@ -44,6 +44,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private static final int INDIVIDUAL_FILTER_LOADER = 5;
     private static final int INDIMG_FILTER_LOADER = 6;
     private static final int INDIVIDUAL18_FILTER_LOADER = 7;
+    private static final int INDIVIDUAL_FILTER_ID_LOADER = 8; 
     private static final int LOCATION_FILTER_ID_LOADER = 9;    
     private static final int SOCIALGROUP_FILTER_LOADER = 10;
 
@@ -237,6 +238,15 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 
             return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter1, args1,
                     OpenHDS.Individuals._ID + " ASC");
+    	case INDIVIDUAL_FILTER_ID_LOADER:
+    	{
+	    	adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
+	    	String filter3 = OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " = ?";
+	    	String[] args3 = new String[] { arg1.getString("extId") };
+	    	CursorLoader cl = new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter3, args3,
+	    	OpenHDS.Individuals._ID + " ASC");
+	    	return cl;
+    	}
     	case LOCATION_FILTER_ID_LOADER:
     	{
 	    	adapter.changeCursorAndColumns(null, LOCATION_COLUMNS, VIEW_BINDINGS);
@@ -490,6 +500,19 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	        bundle.putString("gender", gender);
 	        getLoaderManager().restartLoader(INDIMG_FILTER_LOADER, bundle, this);	
 	}
+	
+	/**
+	* Load a single individual based on his id
+	*
+	* @param individialExtId
+	* filter by the ext id (userid) of the individual
+	*/	
+	public void loadFilteredIndividualById(String individialExtId){
+		listCurrentlyDisplayed = Displayed.INDIVIDUAL;
+		Bundle bundle = new Bundle();
+		bundle.putString("extId", individialExtId);
+		getLoaderManager().restartLoader(INDIVIDUAL_FILTER_ID_LOADER, bundle, this);	
+	}	
 	
 	/**
 	 * Load a social groups based on their extId and / or groupname
