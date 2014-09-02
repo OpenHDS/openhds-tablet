@@ -13,8 +13,10 @@
     <string name="configureDatabase">Configure Database</string>
     <string name="databaseSync">Sync with OpenHDS Database</string>
     <string name="choose">Please choose </string>
-    <string name="default_server_url">https://openhds.ihi.or.tz/openhdsRUR/mobile-interop</string>
-    <string name="default_openhdsserver">https://openhds.ihi.or.tz/openhdsRUR/</string>
+     <string name="default_server_url">https://openhds.ihi.or.tz/openhdsRUR/mobile-interop</string>
+    <string name="default_openhdsserver">https://openhds.ihi.or.tz/openhdsRUR/</string> 
+    <!--<string name="default_server_url">http://solarmal.mbita.icipe.org:8080/openhdsMbita/mobile-interop</string>
+    <string name="default_openhdsserver">http://solarmal.mbita.icipe.org:8080/openhdsMbita/</string>-->
     <string name="delete_form_btn">Delete Form</string>
     <string name="download_form_button">Download Forms</string>
     <string name="download_extraform_button">Download Extra Forms</string>
@@ -69,20 +71,22 @@
     <string name="search_loc_lbl">Search Location</string>
     <string name="search_form_lbl">Search Form</string>
     <string name="search_individual_lbl">Search for an Individual</string>
-<!-- <string name="hierarchy1_lbl">Province:</string> -->
-<!-- <string name="hierarchy1_hint_lbl">Province External Id</string> -->
-<!-- <string name="hierarchy2_lbl">District:</string> -->
-<!-- <string name="hierarchy2_hint_lbl">District External Id</string> -->
-<!-- <string name="hierarchy3_lbl">Zone:</string> -->
-<!-- <string name="hierarchy3_hint_lbl">Zone External Id</string> -->
-<!-- <string name="hierarchy4_lbl">Village:</string> -->
-<!-- <string name="hierarchy4_hint_lbl">Village External Id</string> -->
-<!-- <string name="select_hierarchy1_lbl">Select Province</string> -->
-<!-- <string name="select_hierarchy2_lbl">Select District</string> -->
-<!-- <string name="select_hierarchy3_lbl">Select Zone</string> -->
-<!-- <string name="select_hierarchy4_lbl">Select Village</string> -->
     
-
+    <!-- Mbita Hierarchy levels-->
+	<!--<string name="hierarchy1_lbl">Province:</string>
+	<string name="hierarchy1_hint_lbl">Province External Id</string> 
+	<string name="hierarchy2_lbl">District:</string> 
+	<string name="hierarchy2_hint_lbl">District External Id</string> 
+	<string name="hierarchy3_lbl">Zone:</string> 
+	<string name="hierarchy3_hint_lbl">Zone External Id</string> 
+	<string name="hierarchy4_lbl">Village:</string> 
+	<string name="hierarchy4_hint_lbl">Village External Id</string> 
+	<string name="select_hierarchy1_lbl">Select Province</string> 
+	<string name="select_hierarchy2_lbl">Select District</string>
+	<string name="select_hierarchy3_lbl">Select Zone</string> 
+	<string name="select_hierarchy4_lbl">Select Village</string>-->
+    
+  <!-- IHI Hierarchy levels-->
 <string name="hierarchy1_lbl">Region:</string>
     <string name="hierarchy1_hint_lbl">Region External Id</string>
     <string name="hierarchy2_lbl">District:</string>
