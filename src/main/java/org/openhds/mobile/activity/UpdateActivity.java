@@ -651,6 +651,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         case FILTER_INMIGRATION_MOTHER:
             i.putExtra("requireGender", "F");
             break;
+        case FILTER_INMIGRATION_FATHER:
+            i.putExtra("requireGender", "M");
+            break;
         case FILTER_BIRTH_FATHER:
             i.putExtra("requireGender", "M");
         case FILTER_INMIGRATION:

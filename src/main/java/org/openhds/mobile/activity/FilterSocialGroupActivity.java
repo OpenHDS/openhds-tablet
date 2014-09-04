@@ -1,7 +1,6 @@
 package org.openhds.mobile.activity;
 
 import org.openhds.mobile.R;
-import org.openhds.mobile.fragment.SelectionFilterFragment;
 import org.openhds.mobile.fragment.SelectionFilterSocialgroupFragment;
 import org.openhds.mobile.fragment.ValueFragment;
 import org.openhds.mobile.fragment.ValueFragment.ValueListener;
@@ -14,10 +13,6 @@ import org.openhds.mobile.model.SocialGroup;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 public class FilterSocialGroupActivity extends Activity implements ValueListener, SelectionFilterSocialgroupFragment.Listener {
 
