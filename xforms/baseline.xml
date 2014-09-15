@@ -8,9 +8,6 @@
           <text id="/baseline/individualInfo/gender/M:label">
             <value>Mamuna</value>
           </text>
-          <text id="/baseline/reason:label">
-            <value>-</value>
-          </text>
           <text id="/baseline/migrationType:label">
             <value>Registration Type</value>
           </text>
@@ -80,9 +77,6 @@
           <text id="/baseline/individualInfo/lastName:label">
             <value>Dzina Lomaliza</value>
           </text>
-          <text id="/baseline/movedFrom:label">
-            <value>-</value>
-          </text>
           <text id="/baseline/visitDate:label">
             <value>Tsiku loyendeledwa</value>
           </text>
@@ -99,9 +93,6 @@
         <translation default="true()" lang="English">
           <text id="/baseline/individualInfo/gender/M:label">
             <value>Male</value>
-          </text>
-          <text id="/baseline/reason:label">
-            <value>reason</value>
           </text>
           <text id="/baseline/migrationType:label">
             <value>Registration Type</value>
@@ -130,8 +121,8 @@
           <text id="/baseline/individualInfo/firstName:label">
             <value>First Name</value>
           </text>
-          <text id="/baseline/majo4mo:label">
-            <value>Has he/she spent the majority of the last 6 months residing here</value>
+          <text id="/baseline/individualInfo/fatherId:label">
+            <value>Father Id</value>
           </text>
           <text id="/baseline/individualInfo/partialDate:label">
             <value>Partial Date</value>
@@ -163,17 +154,14 @@
           <text id="/baseline/fieldWorkerId:label">
             <value>Field Worker Id</value>
           </text>
-          <text id="/baseline/individualInfo/fatherId:label">
-            <value>Father Id</value>
+          <text id="/baseline/majo4mo:label">
+            <value>Has he/she spent the majority of the last 6 months residing here</value>
           </text>
           <text id="/baseline/individualInfo:label">
             <value>-</value>
           </text>
           <text id="/baseline/individualInfo/lastName:label">
             <value>Last Name</value>
-          </text>
-          <text id="/baseline/movedFrom:label">
-            <value>Place member Moved FROM:</value>
           </text>
           <text id="/baseline/visitDate:label">
             <value>Visit Date</value>
@@ -211,8 +199,6 @@
           </individualInfo>
           <dateOfMigration/>
           <warning/>
-          <reason/>
-          <movedFrom/>
           <visitDate/>
           <majo4mo/>
           <spelasni/>
@@ -240,8 +226,6 @@
       <bind nodeset="/baseline/individualInfo/partialDate" relevant=" /baseline/migrationType  = 'BASELINE'" required="true()" type="select1"/>
       <bind constraint=". &lt;= today()" jr:constraintMsg="the residency date can not be in the future" nodeset="/baseline/dateOfMigration" readonly="true()" required="true()" type="date"/>
       <bind nodeset="/baseline/warning" readonly="true()" relevant=" /baseline/individualInfo/dateOfBirth &gt; /baseline/dateOfMigration  and ../migrationType = 'BASELINE'" required="true()" type="string"/>
-      <bind nodeset="/baseline/reason" relevant="1=2" required="true()" type="string"/>
-      <bind nodeset="/baseline/movedFrom" relevant="1=2" required="true()" type="string"/>
       <bind constraint=". &lt;= today()" jr:constraintMsg="the visit date can not be in the future" nodeset="/baseline/visitDate" readonly="true()" required="true()" type="date"/>
       <bind nodeset="/baseline/majo4mo" required="true()" type="select1"/>
       <bind nodeset="/baseline/spelasni" required="true()" type="select1"/>
@@ -313,12 +297,6 @@
     </input>
     <input ref="/baseline/warning">
       <label ref="jr:itext('/baseline/warning:label')"/>
-    </input>
-    <input ref="/baseline/reason">
-      <label ref="jr:itext('/baseline/reason:label')"/>
-    </input>
-    <input ref="/baseline/movedFrom">
-      <label ref="jr:itext('/baseline/movedFrom:label')"/>
     </input>
     <input ref="/baseline/visitDate">
       <label ref="jr:itext('/baseline/visitDate:label')"/>
