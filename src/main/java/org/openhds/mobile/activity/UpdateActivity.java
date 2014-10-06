@@ -955,7 +955,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton("Ok", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();			
+        alertDialog.show();	
+        extInm= false;
 	}
 	
 
