@@ -41,6 +41,7 @@ public class FilledForm {
     private int nboutcomes;
     
     private List<Child> children = new ArrayList<Child>();
+    private List<Individual> hhMembers = new ArrayList<Individual>();
 
     public FilledForm(String formName) {
         this.formName = formName;
@@ -225,6 +226,18 @@ public class FilledForm {
     public void addChild(Child child) {
         children.add(child);
     }
+    
+    public void addHouseHoldMember(Individual member) {
+        hhMembers.add(member);
+    }    
+    
+    public List<Individual> getHouseHoldMembers(){
+    	return hhMembers;
+    }
+    
+    public void setHouseHoldMembers(List<Individual> members){
+    	this.hhMembers = members;
+    }    
 
 	public String getIndividualMiddleName() {
 		return individualMiddleName;

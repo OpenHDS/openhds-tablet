@@ -1,5 +1,8 @@
 package org.openhds.mobile.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Fills in the event forms with pre-filled values based on the location visit
  * and possibly other entity types
@@ -129,6 +132,42 @@ public class FormFiller {
         addIndividual(locationVisit.getSelectedIndividual(), form);
 
         return form;
+    }
+    
+    public FilledForm fillDeathOfHouseholdForm(LocationVisit locationVisit, SocialGroup sg){
+    	FilledForm form = null;
+    	form = new FilledForm(UpdateEvent.DEATHTOHOH);
+    	
+    	if(sg != null){
+    		addHousehold(sg, form);
+    	}
+    	addFieldWorker(locationVisit, form);
+        addVisit(locationVisit, form);
+        addIndividual(locationVisit.getSelectedIndividual(), form);
+        
+//        List<Individual> people = new ArrayList<Individual>();
+//        Individual p1 = new Individual();
+//        p1.setExtId("id1");
+//        p1.setFirstName("fn1");
+//        p1.setLastName("ln1");
+//        
+//        Individual p2 = new Individual();
+//        p2.setExtId("id2"); 
+//        p2.setFirstName("fn2");
+//        p2.setLastName("ln2");        
+//        
+//        people.add(p1);
+//        people.add(p2);
+//        
+//        form.setHouseHoldMembers(people);
+//        for(Individual p : people)
+//        	form.addHouseHoldMember(p);
+        
+//        form.setNboutcomes(people.size());
+        
+//        form.setIndividualA("NEWHOHID");
+        
+    	return form;
     }
 
     public FilledForm fillInMigrationForm(LocationVisit locationVisit, Individual individual) {

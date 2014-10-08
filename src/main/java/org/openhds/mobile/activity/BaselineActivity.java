@@ -53,12 +53,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 /**
@@ -1443,37 +1445,81 @@ EventFragment.Listener, SelectionFragment.Listener {
     }
     
     private void handleSocialGroup(Loader<Cursor> loader, Cursor cursor){
-        if (cursor.getCount() == 0){
-        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        	builder.setTitle("No household found");
-        	builder.setMessage("Please search for an existing or create a new household.");
-        	builder.setNegativeButton(getString(R.string.cancel_lbl),new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog,int id) {
-					// if this button is clicked, just close
-					// the dialog box and do nothing
-					dialog.cancel();
-				}
-			});
-        	builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-    			public void onClick(DialogInterface dialog,int id) {
-    				onHousehold();
-    			}
-    		});           	
-    		builder.setNeutralButton("Search", new DialogInterface.OnClickListener() {
-    			public void onClick(DialogInterface dialog,int id) {
-    				searchSocialGroup();
-    			}
-    		});           	
-            householdDialog = builder.create();
-            householdDialog.show();
-        }
-        else
-        {
-       	
-            if(cursor.moveToNext()){
-            	appendSocialGroupFromCursor(cursor);
-            }
-        }
+//        if (cursor.getCount() == 0){
+//        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        	builder.setTitle("No household found");
+//        	builder.setMessage("Please search for an existing or create a new household.");
+//        	builder.setNegativeButton(getString(R.string.cancel_lbl),new DialogInterface.OnClickListener() {
+//				public void onClick(DialogInterface dialog,int id) {
+//					// if this button is clicked, just close
+//					// the dialog box and do nothing
+//					dialog.cancel();
+//				}
+//			});
+//        	builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+//    			public void onClick(DialogInterface dialog,int id) {
+//    				onHousehold();
+//    			}
+//    		});           	
+//    		builder.setNeutralButton("Search", new DialogInterface.OnClickListener() {
+//    			public void onClick(DialogInterface dialog,int id) {
+//    				searchSocialGroup();
+//    			}
+//    		});           	
+//            householdDialog = builder.create();
+//            householdDialog.show();
+//        }
+//        else
+//        {
+//       	
+//            if(cursor.moveToNext()){
+//            	appendSocialGroupFromCursor(cursor);
+//            }
+//        }
+    	
+    	String cursorString = DatabaseUtils.dumpCursorToString(cursor);
+    	System.out.println(cursorString);
+    	System.out.println("Cursor entries: " + cursor.getCount());
+    	
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	
+    	if(cursor.getCount() > 0){
+    		builder.setTitle("Select Household");
+        	SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
+        			new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
+        			OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
+        			android.R.id.text2 }, 0);
+        	builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int which) {
+        				Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
+        				appendSocialGroupFromCursor(cursor);
+        			}
+        	});     		
+    	}
+    	else{
+    		builder.setTitle("Select Household");
+    		builder.setMessage("Please search for an existing or create a new household.");
+    	}
+    	
+    	builder.setNegativeButton(getString(R.string.cancel_lbl),new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				// if this button is clicked, just close
+				// the dialog box and do nothing
+				dialog.cancel();
+			}
+		});   	
+    	builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				onHousehold();
+			}
+		});           	
+		builder.setNeutralButton("Search", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				searchSocialGroup();
+			}
+		});           	
+        householdDialog = builder.create();
+        householdDialog.show();    	
     }
     
     private void searchSocialGroup(){ 	

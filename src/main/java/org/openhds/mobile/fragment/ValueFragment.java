@@ -21,6 +21,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -38,21 +39,21 @@ import android.widget.Toast;
 public class ValueFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
     private static String START_HIERARCHY_LEVEL_NAME; //"Region";
+    
     // loader identifiers
-    private static final int HIERARCHY_LOADER = 0;
-    private static final int REGION_LOADER = 1;
-    private static final int ROUND_LOADER = 2;
-    private static final int LOCATION_LOADER = 3;
-    private static final int INDIVIDUAL_LOADER = 4;
-    private static final int INDIVIDUAL_FILTER_LOADER = 5;
-    private static final int INDIMG_FILTER_LOADER = 6;
-    private static final int INDIVIDUAL18_FILTER_LOADER = 7;
-    private static final int INDIVIDUAL_FILTER_ID_LOADER = 8; 
-    private static final int LOCATION_FILTER_ID_LOADER = 9;
-    private static final int SOCIALGROUP_FILTER_LOADER = 10;
+    private static final int HIERARCHY_LOADER = 9990;
+    private static final int REGION_LOADER = 9991;
+    private static final int ROUND_LOADER = 9992;
+    private static final int LOCATION_LOADER = 9993;
+    private static final int INDIVIDUAL_LOADER = 9994;
+    private static final int INDIVIDUAL_FILTER_LOADER = 9995;
+    private static final int INDIMG_FILTER_LOADER = 9996;
+    private static final int INDIVIDUAL18_FILTER_LOADER = 9997;
+    private static final int INDIVIDUAL_FILTER_ID_LOADER = 9998; 
+    private static final int LOCATION_FILTER_ID_LOADER = 9999;
+    private static final int SOCIALGROUP_FILTER_LOADER = 99910;
 
-    // create the column mappings so they don't need to be recreated on every
-    // load
+    // create the column mappings so they don't need to be recreated on every load
     private static final String[] HIERARCHY_COLUMNS = new String[] { OpenHDS.HierarchyItems.COLUMN_HIERARCHY_NAME,
             OpenHDS.HierarchyItems.COLUMN_HIERARCHY_EXTID};
     private static final String[] ROUNDS_COLUMNS = new String[] { OpenHDS.Rounds.COLUMN_ROUND_NUMBER,
@@ -72,10 +73,11 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     // since this fragment displays different types of entities, it needs to
     // keep track of which one is currently showing
     private Displayed listCurrentlyDisplayed;
+    
     private ValueListener listener;
 
     private enum Displayed {
-        HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, ROUND, LOCATION, INDIVIDUAL, SOCIALGROUP;
+        NONE, HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, ROUND, LOCATION, INDIVIDUAL, SOCIALGROUP;
     }
 
     public interface ValueListener {
@@ -95,6 +97,27 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+    	super.onActivityCreated(savedInstanceState);
+    	
+//    	setEmptyText("No data to display");
+
+        adapter = new SimpleCursorAdapter(getActivity(), R.layout.list_item, null, HIERARCHY_COLUMNS,
+                VIEW_BINDINGS, 0);
+        
+        setListAdapter(adapter);
+        
+        // Start out with a progress indicator.
+//        setListShown(false);
+
+        // Prepare the loader.  Either re-connect with an existing one,
+        // or start a new one.
+        getLoaderManager().initLoader(-1, null, this);
+        
+        listCurrentlyDisplayed = Displayed.NONE;
+    }
+    
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         
@@ -105,10 +128,6 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
         }
-
-        adapter = new SimpleCursorAdapter(getActivity(), R.layout.list_item, null, HIERARCHY_COLUMNS,
-                VIEW_BINDINGS, 0);
-        setListAdapter(adapter);
     }
 
     @Override
@@ -193,6 +212,18 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     }
 
     public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+    	
+    	if(arg0 == -1) return null;
+    	setListShown(false);
+    	
+    	System.out.println("Current id of loader: " + arg0);
+    	System.out.println("List currently displayed: " + listCurrentlyDisplayed);
+    	if(arg1 != null){
+	    	for(String key : arg1.keySet()){
+	    		System.out.println("Key: " + key + " / Value: " + arg1.getString(key));
+	    	}
+    	}
+    	
         switch (arg0) {
 	        case HIERARCHY_LOADER:
 	            adapter.changeCursorAndColumns(null, HIERARCHY_COLUMNS, VIEW_BINDINGS);
@@ -224,6 +255,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	                    OpenHDS.Individuals._ID + " ASC");
 	        }
 	        case INDIVIDUAL18_FILTER_LOADER:
+	        {
 	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
 	
 	            String filter2 = buildFilter(arg1);
@@ -235,7 +267,9 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	            filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13 AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"!='OMG'";
 	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter2, args2,
 	                    OpenHDS.Individuals._ID + " ASC");
+	        }
 	        case INDIMG_FILTER_LOADER:
+	        {
 	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
 	
 	            String filter1 = buildFilter(arg1);
@@ -243,6 +277,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	
 	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter1, args1,
 	                    OpenHDS.Individuals._ID + " ASC");
+	        }
 	        case INDIVIDUAL_FILTER_ID_LOADER:
 	        {
 	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
@@ -393,21 +428,41 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     }
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        adapter.swapCursor(cursor);
-        
-        //Show different messages depending on currently displayed list
-        switch(listCurrentlyDisplayed){
-        	case INDIVIDUAL:
-        	{
-        		if(cursor.getCount() == 0){
-        			Toast.makeText(getActivity(), "No Individuals found!", Toast.LENGTH_LONG).show();
-        		}
-        	}
-        	default:
-        	{
-        		
-        	}
+        if(adapter != null && cursor != null){
+        	String contents = DatabaseUtils.dumpCursorToString(cursor);
+        	System.out.println(contents);
+        	
+        	if(listCurrentlyDisplayed == Displayed.LOCATION && cursor.getColumnIndex("name") == -1)
+        		System.out.println("Display Location, but cursor doesnt contain index with columnname 'name'");
+        	else
+        		adapter.swapCursor(cursor);
+        	contents = DatabaseUtils.dumpCursorToString(cursor);
+        	System.out.println(contents);
+        	
+            if(listCurrentlyDisplayed != null){
+    	        //Show different messages depending on currently displayed list
+    	        switch(listCurrentlyDisplayed){
+    	        	case INDIVIDUAL:
+    	        	{
+    	        		if(cursor.getCount() == 0){
+    	        			Toast.makeText(getActivity(), "No Individuals found!", Toast.LENGTH_LONG).show();
+    	        		}
+    	        	}
+    	        	default:
+    	        	{
+    	        		
+    	        	}
+    	        } 
+            }        	
         }
+        
+        // The list should now be shown.
+        if (isResumed()) {
+            setListShown(true);
+        } else {
+            setListShownNoAnimation(true);
+        }
+
     }
 
     public void onLoaderReset(Loader<Cursor> arg0) {

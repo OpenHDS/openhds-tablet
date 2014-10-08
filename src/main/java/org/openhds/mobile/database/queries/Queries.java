@@ -124,7 +124,9 @@ public class Queries {
 	}
 
 	public static Cursor getSocialGroupsByIndividualExtId(ContentResolver resolver, String extId) {
-		Uri uri = OpenHDS.Individuals.CONTENT_SG_URI_BASE.buildUpon().appendPath(extId).build();
+//		Uri uri = OpenHDS.Individuals.CONTENT_SG_URI_BASE.buildUpon().appendPath(extId).build();
+		Uri uri = OpenHDS.SocialGroups.CONTENT_INDIVIDUAL_ID_URI_BASE.buildUpon()
+                .appendPath(extId).build();
 		return resolver.query(uri, null, "x." + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID + " = ?",
 				new String[] { extId }, "s." + OpenHDS.SocialGroups._ID);
 	}

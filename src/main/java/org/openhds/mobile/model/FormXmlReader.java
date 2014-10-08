@@ -231,7 +231,7 @@ public class FormXmlReader {
         }
         return null;
     }
-
+    
     public Relationship readRelationship(FileInputStream fileInputStream, String jrFormId)  {
         try {
             Document doc = buildDocument(fileInputStream);
@@ -285,5 +285,47 @@ public class FormXmlReader {
         }
         return null;
     }
+    
+    public DeathOfHeadOfHousehold readDeathOfHeadOfHousehold(FileInputStream fileInputStream, String jrFormId) {
+        try {
+            Document doc = buildDocument(fileInputStream);
+            
+            DeathOfHeadOfHousehold dHoh = new DeathOfHeadOfHousehold();
+            
+            Individual oldHoh = new Individual();
+            if(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
+            oldHoh.setExtId(xpath.evaluate("/"+jrFormId+"/individualId/text()", doc));
+            dHoh.setOldHoh(oldHoh);
+            
+            Individual newHoh = new Individual();
+            newHoh.setExtId(xpath.evaluate("/"+jrFormId+"/new_hoh_id/text()", doc));
+            dHoh.setNewHoh(newHoh);
+            
+            dHoh.setDate(xpath.evaluate("/"+jrFormId+"/date/text()", doc));
+            dHoh.setHouseHoldExtId(xpath.evaluate("/"+jrFormId+"/householdId/text()", doc));         
+            
+            // read the relationships
+            NodeList nodeList = (NodeList) xpath.evaluate("//membershiptonewhoh", doc, XPathConstants.NODESET);
+            for(int i = 0; i < nodeList.getLength(); i++) {
+            	Node node = nodeList.item(i);
+            	
+                Relationship relationship = new Relationship();
+                relationship.setIndividualA(newHoh.getExtId());
+                relationship.setIndividualB(xpath.evaluate("./extId/text()", node));
+                relationship.setStartDate(dHoh.getDate());
+                
+                dHoh.addRelationship(relationship);
+            }
+            
+            return dHoh;
+        } catch (ParserConfigurationException e) {
+        } catch (SAXException e) {
+        } catch (IOException e) {
+        } catch (XPathExpressionException e) {
+        }
+        return null;
+    }    
 
 }

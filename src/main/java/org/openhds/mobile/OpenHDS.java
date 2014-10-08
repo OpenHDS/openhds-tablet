@@ -23,12 +23,14 @@ public class OpenHDS {
         private static final String PATH_NOTES = "/individuals";
         private static final String PATH_NOTE_ID = "/individuals/";
         private static final String PATH_SG = "/individuals/sg/";
+        private static final String PATH_SG_ACTIVE_ID = "/individuals/sga/";
 
         public static final int NOTE_ID_PATH_POSITION = 1;
 
         public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_NOTES);
         public static final Uri CONTENT_ID_URI_BASE = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID);
         public static final Uri CONTENT_SG_URI_BASE = Uri.parse(SCHEME + AUTHORITY + PATH_SG);
+        public static final Uri CONTENT_SG_ACTIVE_URI_BASE = Uri.parse(SCHEME + AUTHORITY + PATH_SG_ACTIVE_ID);
         public static final Uri CONTENT_ID_URI_PATTERN = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID + "/#");
 
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.openhds.individual";

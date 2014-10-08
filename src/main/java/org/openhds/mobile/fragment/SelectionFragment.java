@@ -300,7 +300,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
                 hierarchy4Btn.setEnabled(false);
                 roundBtn.setEnabled(false);
 //                locationBtn.setEnabled(false);
-                locationBtn.setEnabled(true);
+                locationBtn.setEnabled(false);
                 searchlBtn.setVisibility(8);
             }
         });

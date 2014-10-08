@@ -20,6 +20,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
@@ -49,10 +50,12 @@ public class OpenHDSProvider extends ContentProvider {
     private static HashMap<String, String> socialgroupsJoinProjectionMap;
     private static HashMap<String, String> individualgroupsProjectionMap;
     private static HashMap<String, String> formsProjectionMap;
+    private static HashMap<String, String> individualsJoinProjectionMap;
 
     private static final int INDIVIDUALS = 1;
     private static final int INDIVIDUAL_ID = 2;
     private static final int INDIVIDUAL_SG = 19;
+    private static final int INDIVIDUAL_SG_ACTIVE_ID = 23;
     private static final int LOCATIONS = 3;
     private static final int LOCATION_ID = 4;
     private static final int HIERARCHYITEMS = 5;
@@ -82,6 +85,7 @@ public class OpenHDSProvider extends ContentProvider {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "individuals", INDIVIDUALS);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "individuals/sg/*", INDIVIDUAL_SG);
+        sUriMatcher.addURI(OpenHDS.AUTHORITY, "individuals/sga/*", INDIVIDUAL_SG_ACTIVE_ID);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "individuals/#", INDIVIDUAL_ID);
 
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "locations", LOCATIONS);
@@ -224,6 +228,22 @@ public class OpenHDSProvider extends ContentProvider {
                 OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID);
         individualgroupsProjectionMap.put(OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID,
                 OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID);
+        
+        //NEW
+        individualsJoinProjectionMap = new HashMap<String, String>();
+        individualsJoinProjectionMap.put(OpenHDS.Individuals._ID, "s." + OpenHDS.Individuals._ID);
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID, "s."
+                + OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID);
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_FIRSTNAME, "s."
+                + OpenHDS.Individuals.COLUMN_INDIVIDUAL_FIRSTNAME);    
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_LASTNAME, "s."
+                + OpenHDS.Individuals.COLUMN_INDIVIDUAL_LASTNAME);         
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE, "s."
+                + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE);
+        individualsJoinProjectionMap.put(OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID, "x."
+                + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID);        
+        individualsJoinProjectionMap.put(OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID, "x."
+                + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID);        
     }
 
     static class DatabaseHelper extends SQLiteOpenHelper {
@@ -360,7 +380,7 @@ public class OpenHDSProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-
+        
         switch (sUriMatcher.match(uri)) {
         case INDIVIDUALS:
             qb.setTables(OpenHDS.Individuals.TABLE_NAME);
@@ -372,12 +392,33 @@ public class OpenHDSProvider extends ContentProvider {
             qb.appendWhere(OpenHDS.Individuals._ID + "="
                     + uri.getPathSegments().get(OpenHDS.Individuals.NOTE_ID_PATH_POSITION));
             break;
-        case INDIVIDUAL_SG:
-            qb.setTables(OpenHDS.SocialGroups.TABLE_NAME + " s inner join " + OpenHDS.IndividualGroups.TABLE_NAME
-                    + " x on s." + OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " = x."
-                    + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID);
-            qb.setProjectionMap(socialgroupsJoinProjectionMap);
-            break;
+//        case INDIVIDUAL_SG:
+//        	String indExtId = uri.getPathSegments().get(2);
+//            qb.setTables(OpenHDS.SocialGroups.TABLE_NAME + " s inner join " + OpenHDS.IndividualGroups.TABLE_NAME
+//                    + " x on s." + OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " = x."
+//                    + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID);
+//            qb.setProjectionMap(socialgroupsJoinProjectionMap);
+//            
+//            System.out.println("In INDIVIDUAL_SG: " + " individual extId: " + indExtId);
+//            break;
+            //Get all active (not dead) individuals that live in a specific socialgroup
+        case INDIVIDUAL_SG_ACTIVE_ID:
+        	String sg = uri.getPathSegments().get(2);
+            qb.setTables(OpenHDS.Individuals.TABLE_NAME + " s INNER JOIN " + OpenHDS.IndividualGroups.TABLE_NAME + " x " 
+//            		+ " on s." + "_id" + " = x." + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID);
+            		+ " on s." + OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " = x." + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID);
+            qb.appendWhere("s." + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE + " != 'DTH'");
+//            qb.appendWhere(" AND s." + OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + "="
+//                    + uri.getPathSegments().get(2));            
+            qb.appendWhere(" AND (x." + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID + " = '"
+                    + sg + "')");  
+//            qb.appendWhere(" x.socialgroup_extId like '" + uri.getPathSegments().get(2) + "'");
+//            qb.appendWhere("1=1");
+            
+            System.out.println("Pathsegment: " + sg);
+            qb.setProjectionMap(individualsJoinProjectionMap);
+            sortOrder = "s." + OpenHDS.Individuals._ID;
+            break;            
         case LOCATIONS:
             qb.setTables(OpenHDS.Locations.TABLE_NAME);
             qb.setProjectionMap(locationsProjectionMap);
@@ -496,7 +537,7 @@ public class OpenHDSProvider extends ContentProvider {
                 null, // don't filter by row groups
                 orderBy // The sort order
                 );
-
+        
         c.setNotificationUri(getContext().getContentResolver(), uri);
         return c;
     }
@@ -546,6 +587,8 @@ public class OpenHDSProvider extends ContentProvider {
             return OpenHDS.Individuals.CONTENT_ITEM_TYPE;
         case INDIVIDUAL_SG:
             return OpenHDS.SocialGroups.CONTENT_TYPE;
+        case INDIVIDUAL_SG_ACTIVE_ID:
+            return OpenHDS.SocialGroups.CONTENT_TYPE;            
         case LOCATIONS:
             return OpenHDS.Locations.CONTENT_TYPE;
         case LOCATION_ID:

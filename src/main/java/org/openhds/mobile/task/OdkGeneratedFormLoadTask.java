@@ -20,6 +20,7 @@ import org.openhds.mobile.listener.OdkFormLoadListener;
 import org.openhds.mobile.model.Child;
 import org.openhds.mobile.model.FilledForm;
 import org.openhds.mobile.model.FilledParams;
+import org.openhds.mobile.model.Individual;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -256,7 +257,29 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                         sbuilder.append("<relationshipToGroupHead />\r\n");
                         sbuilder.append("</outcomes>\r\n");
                     }
-                } else {
+                }
+                // special case for new hoh
+                else if(name.equalsIgnoreCase("membershiptonewhoh") 
+                		|| name.equalsIgnoreCase("hh_people_nb") 
+                			|| name.equalsIgnoreCase("new_hoh_id")){
+                	if(name.equalsIgnoreCase("membershiptonewhoh")){
+	                	for(Individual hhMember : filledForm.getHouseHoldMembers()) {
+		                	sbuilder.append("<membershiptonewhoh>\r\n");
+		                	sbuilder.append("<extId>" + hhMember.getExtId() + "</extId>\r\n");
+		                	sbuilder.append("<memberName>" + hhMember.getFirstName() + " " + hhMember.getLastName() + "</memberName>\r\n");
+		                	sbuilder.append("<socialGroupId>" + filledForm.getHouseholdId() + "</socialGroupId>\r\n");
+		                	sbuilder.append("<relationshipToGroupHead />\r\n");
+		                	sbuilder.append("</membershiptonewhoh>\r\n");
+	                	}
+                	}
+                	else if (name.equalsIgnoreCase("hh_people_nb")){
+                		sbuilder.append("<hh_people_nb>" + filledForm.getHouseHoldMembers().size() + "</hh_people_nb>\r\n");
+                	}
+                	else{
+                		sbuilder.append("<new_hoh_id>" + filledForm.getIndividualA() + "</new_hoh_id>\r\n");
+                	}
+                }
+                else {
                     if (!n.hasChildNodes())
                         sbuilder.append("<" + name + " />" + "\r\n");
                     else {
