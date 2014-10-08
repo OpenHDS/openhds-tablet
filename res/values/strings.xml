@@ -279,6 +279,9 @@
     <string name="household_label">Household</string>
     <string name="individual_label">Individual</string>
     <string name="bottom_label">Bottom</string>
+    <string name="create_membership">Please first create a membership for this individual!</string>
+    <string name="no_individual_left">There is no active individual left in the Socialgroup that could replace the Head.</string>
+    
     
     <string name="hello_lbl">Hello</string>
     <string name="STARTHIERARCHYLEVELNAME">District</string>

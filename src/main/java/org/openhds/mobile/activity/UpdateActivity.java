@@ -55,8 +55,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -128,7 +126,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private String jrFormId;
     
     //State machine stuff
-    
 	public static final String SELECT_HIERARCHY_1 = "Select Hierarchy 1";
 	public static final String SELECT_HIERARCHY_2 = "Select Hierarchy 2";
 	public static final String SELECT_HIERARCHY_3 = "Select Hierarchy 3";
@@ -155,18 +152,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		stateSequence.add(SELECT_EVENT);
 		stateSequence.add(FINISH_VISIT);
 		stateSequence.add(INMIGRATION);
-
-//		stateLabels.put(SELECT_HIERARCHY_1, R.string.region_label);
-//		stateLabels.put(SELECT_HIERARCHY_2, R.string.map_area_label);
-//		stateLabels.put(SELECT_HIERARCHY_3, R.string.sector_label);
-//		stateLabels.put(SELECT_HIERARCHY_4, R.string.household_label);
-//		stateLabels.put(SELECT_ROUND, R.string.individual_label);
-//		stateLabels.put(SELECT_LOCATION, R.string.bottom_label);
-//		stateLabels.put(CREATE_VISIT, R.string.bottom_label);
-//		stateLabels.put(SELECT_INDIVIDUAL, R.string.bottom_label);
-//		stateLabels.put(SELECT_EVENT, R.string.bottom_label);
-//		stateLabels.put(FINISH_VISIT, R.string.bottom_label);
-//		stateLabels.put(INMIGRATION, R.string.bottom_label);
 	}    
 
     public void onCreate(Bundle savedInstanceState) {
@@ -201,7 +186,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         else{
         	String state = (String)savedInstanceState.getSerializable("currentState");
         	stateMachine = new StateMachine(new LinkedHashSet<String>(stateSequence), state);
-        	//restoreState(savedInstanceState);
         	
             locationVisit = (LocationVisit) savedInstanceState.getSerializable("locationvisit");
 
@@ -219,9 +203,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             ef.setLocationVisit(locationVisit);
             
             //Restore last state
-            stateMachine.transitionInSequence(state);
-//            stateMachine.transitionTo(state);
-        	
+            stateMachine.transitionInSequence(state);        	
         }
         
     }
@@ -264,14 +246,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             
             //Restore last state
             String state = (String)savedState.getSerializable("currentState");
-            //stateMachine.transitionInSequence(state);
             stateMachine.transitionTo(state);
         }
     }    
     
     @Override
     protected void onStart() {
-    	// TODO Auto-generated method stub
     	super.onStart();
     }
 
@@ -293,7 +273,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	public void onResume()
 	{
 	    super.onResume();
-//	    getLoaderManager().initLoader(-1, null, this);
 	}    
 
     /**
@@ -497,12 +476,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         @Override
         protected void onPostExecute(Boolean result) {
             hideProgressFragment();
-
-//            if (result) {
-//                stateMachine.transitionTo("Create Visit");
-//            } else {
-//                createUnfinishedFormDialog();
-//            }
             if (result) {
             	//Handle new Location, load list and select first entry
             	String locationExtId = locationVisit.getLocation().getExtId();
@@ -678,7 +651,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 }
                 return true;
             } else {
-//                cursor.close();
             	try{
             		cursor.close();
             	}catch(Exception e){
@@ -692,8 +664,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         @Override
         protected void onPostExecute(Boolean result) {
             hideProgressFragment();
-
-            System.out.println("Statemachine state: " + stateMachine.getState());
             
             if (result) {
             	if (stateMachine.getState()=="Inmigration") {
@@ -707,9 +677,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             	}else if (stateMachine.getState()=="Select Event") {
             		if (hhCreation)
             			onFinishedHouseHoldCreation();
-            		else if(deathCreation){
-            			//TODO: ADDITIONAL CHECK IF WE JUST DELETED A HOH AND NEED TO SET NEW HOH TO SOCIALGROUP
-            			
+            		else if(deathCreation){            			
             			onClearIndividual();
             		}
             	}else {
@@ -920,7 +888,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     	@Override
     	protected void onPreExecute() {
-    		// TODO Auto-generated method stub
     		super.onPreExecute();
     		showProgressFragment();
     	}
@@ -1026,7 +993,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
     
     public void onBaseline(){
-//    	throw new UnsupportedOperationException("Method not used in Update.");
     	//We call onMigration
     	onInMigration();
     }
@@ -1339,9 +1305,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         protected void onPostExecute(Void result) {
         	if(this.sg != null){
         		deathCreation = true;
-//	    		if(locationVisit.getSelectedIndividual().getExtId().equalsIgnoreCase(sg.getGroupHead())){
         		if(locationVisit.getSelectedIndividual().getExtId().equalsIgnoreCase(locationVisit.getLocation().getHead())){
-	    			Toast.makeText(UpdateActivity.this, "Individual is HoH!", Toast.LENGTH_LONG).show();	    			
+//	    			Toast.makeText(UpdateActivity.this, "Individual is HoH!", Toast.LENGTH_LONG).show();	    			
 	    			updatable = new DeathOfHoHUpdate();
 	    	        showProgressFragment();
 	    	        Bundle bundle = new Bundle();
@@ -1351,51 +1316,15 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	    	        filledForm = formFiller.fillDeathOfHouseholdForm(locationVisit, sg);
 	    		}
 	    		else{
-	    			Toast.makeText(UpdateActivity.this, "Individual is not HoH of this SG!", Toast.LENGTH_LONG).show();
+//	    			Toast.makeText(UpdateActivity.this, "Individual is not HoH of this SG!", Toast.LENGTH_LONG).show();
 	    			loadForm(SELECTED_XFORM);
 	    		}
-//	            loadForm(SELECTED_XFORM);
         	}
     		else{
-    			Toast.makeText(UpdateActivity.this, "Please first create a membership for this individual!", Toast.LENGTH_LONG).show();
+    			Toast.makeText(UpdateActivity.this, getString(R.string.create_membership), Toast.LENGTH_LONG).show();
     		}        	        
         }
     }
-    
-//    void test(Cursor cursor){
-//    	
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(UpdateActivity.this);
-//        alertDialogBuilder.setTitle(getString(R.string.update_pregoutcome_choose_father));
-//        
-//        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
-//                new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
-//                        OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
-//                        android.R.id.text2 }, 0);
-//        alertDialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-//
-//            public void onClick(DialogInterface dialog, int which) {
-//                Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
-//                appendSocialGroupFromCursor(cursor);
-//            }
-//        });
-//        
-//        
-//        alertDialogBuilder.setCancelable(true);
-//        String fatherName = "TEST";
-//        String items[] = { fatherName, getString(R.string.update_pregoutcome_search_hdss), getString(R.string.update_pregoutcome_father_not_found) };
-//        alertDialogBuilder.setItems(items, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int choice) {
-//                if (choice == 0) {
-//                    startFilterActivity(FILTER_BIRTH_FATHER);
-//                } else if (choice == 1) {
-//                    new CreatePregnancyOutcomeTask(null).execute();
-//                }
-//            }
-//        });	                
-//        
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        alertDialog.show();	      	
-//    }
 
     private void loadSocialGroupsForIndividual() {
         showProgressFragment();
@@ -1504,7 +1433,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
     
     private void updateButtons(int level){
-//    	sf.updateButtons(level);
     }
 
     public void onRoundSelected(Round round) {
@@ -1526,9 +1454,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
     }
 
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    	System.out.println("onCreateLoader(). Loader id: " + id);
-    	
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {	
         Uri uri = null;
         switch (id) {
 	        case SOCIAL_GROUP_AT_LOCATION:
@@ -1554,26 +1480,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        	String sg = args.getString("sg");
 	        	String hohExtId = args.getString("hohExtId");
 	            uri = OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE;
-//	            
-//	            String where = "((" + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID + " = ? ) " + 
-//	            		"AND (" + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID + " != ? ) " +
-//	            		")";
-//	            String[] criteria = new String[] { sg, hohExtId };
-//	            return new CursorLoader(this, uri, null, where, criteria, null);
-	        	
-//	        	final SQLiteQueryBuilder qBuilder = new SQLiteQueryBuilder();
-//	        	String MESSAGES_TABLE_NAME = OpenHDS.Individuals.TABLE_NAME;
-//	        	String USERS_TABLE_NAME = OpenHDS.SocialGroups.TABLE_NAME;
-//	        	
-//	        	qBuilder.setTables(MESSAGES_TABLE_NAME + " T1 INNER JOIN " + USERS_TABLE_NAME + " T2 ON (T1.COLUMN_INDIVIDUAL_EXTID = T2.COLUMN_INDIVIDUALUUID)");
-//	        	CursorLoader CursorLoader = new CursorLoader(this);
 	        	
 	        	Cursor cursor = Queries.getSocialGroupsByIndividualExtId(getContentResolver(), locationVisit.getSelectedIndividual().getExtId());
 	        	
-	        	if(cursor.moveToNext()){
-//	        		String cursorString = DatabaseUtils.dumpCursorToString(cursor);
-//	        		System.out.println(cursorString);
-	        		
+	        	if(cursor.moveToNext()){	        		
 	        		int columnIndex = cursor.getColumnIndex("_id");
 	        		int extIdIndex = cursor.getColumnIndex("extId");
 	        		if(columnIndex > -1  && extIdIndex > -1) {
@@ -1581,30 +1491,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        			String extId = cursor.getString(extIdIndex);
 	        			cursor.close();
 	        			
-	        			System.out.println("SG UUID is: " + sg_uuid);
-	        			System.out.println("SG extId is: " + extId);
-	        			
-//	        			uri = OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE.buildUpon().appendPath(Integer.toString(sg_uuid)).build();
 	        			uri = OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE.buildUpon().appendPath(extId).build();
-//	    	            String where = "x." + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID + " = ?";
 	        			String where = "s." + OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " != ?";
-//	    	            String[] criteria = new String[] { Integer.toString(sg_uuid) };
 	    	            String[] criteria = new String[] { locationVisit.getSelectedIndividual().getExtId() };	    	            
 	    	            return new CursorLoader(this, uri, null, where, criteria, null);
-//	    	            return new CursorLoader(this, uri, null, null, null, null);
 	        		}
-	        	}
-	        	else{
-	        		System.out.println("Found No Socialgroup entries for this extId");
-	        	}
-	        	
-	        	
-//	        	public static Cursor getSocialGroupsByIndividualExtId(ContentResolver resolver, String extId) {
-//	        		Uri uri = OpenHDS.Individuals.CONTENT_SG_URI_BASE.buildUpon().appendPath(extId).build();
-//	        		return resolver.query(uri, null, "x." + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID + " = ?",
-//	        				new String[] { extId }, "s." + OpenHDS.SocialGroups._ID);
-//	        	}
-	        	
+	        	}       	
 	        }
         }
 
@@ -1612,8 +1504,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-    	System.out.println("LoaderID: " + loader.getId());
-    	
         hideProgressFragment();
         
         if(loader.getId() == -1 ) return;
@@ -1624,7 +1514,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             return;
         }
         else if(loader.getId() == INDIVIDUALS_IN_SOCIAL_GROUP_ACTIVE){       
-        	System.out.println("Found no of people: " + cursor.getCount());
 	        if(cursor.moveToNext()){
 		        List<String> uniqueExtIds = new ArrayList<String>();     
 		        List<Individual> uniqueIndividuals = new ArrayList<Individual>();
@@ -1636,25 +1525,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 					if(!uniqueExtIds.contains(individualExtId)){
 						uniqueExtIds.add(individualExtId);
 		        		Cursor individualCursor = Queries.getIndividualByExtId(this.getContentResolver(), individualExtId);
-//		        		System.out.println("Individuals found with this extId: " + individualCursor.getCount());
 		        		if(individualCursor.moveToNext()){
 	        				Individual individual = Converter.convertToIndividual(individualCursor);
-//	        				if(individual != null){
-//	        					
-//	        					if(individual.getEndType() != null && individual.getEndType().equalsIgnoreCase("DTH")){
-//	        						System.out.println("This individual seems to be dead!");
-//		        					System.out.println("getCurrentResidence() for ind. (" + individual.getExtId() + "): "+ individual.getCurrentResidence());
-//		        					System.out.println("getEndType() for ind. (" + individual.getExtId() + "): "+ individual.getEndType());
-//	        					}
-//	        					else{
-//		        					System.out.println("getCurrentResidence() for ind. (" + individual.getExtId() + "): "+ individual.getCurrentResidence());
-//	//        						System.out.println("Individual with extId: " + individualExtId + " in Socialgroup: " + sgExtId);
-//	//        						System.out.println(individual.getFirstName() + " / " + individual.getLastName());   
-//	        						uniqueIndividuals.add(individual);
-//	        					}
-//	        				}
 	        				if(individual != null){
-	        					System.out.println("Individual: " + individual.getExtId());
 	        					uniqueIndividuals.add(individual);
 	        				}
 		        		}
@@ -1678,24 +1551,19 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
       			  }
       			};
     	        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//    	        builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
     	        builder.setTitle("Please select new HoH");
     	        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
     	
     	            public void onClick(DialogInterface dialog, int which) {
     	            	ListView lw = ((AlertDialog)dialog).getListView();    	            	
     	            	Object checkedItem = lw.getItemAtPosition(which);
-    	            	System.out.println("Checked item of class: " + checkedItem.getClass());
     	            	
     	            	Individual newHoh = null;
     	            	List<Individual> members = new ArrayList<Individual>();
     	            	
     	            	if(checkedItem instanceof Individual){
     	            		newHoh = (Individual)checkedItem;
-    	            		System.out.println("Selected new HoH with extId: " + newHoh.getExtId());
     	            	}
-    	            	
-    	            	///////////////
     	            	
     	            	ListAdapter listAdapter = lw.getAdapter();
     	            	for(int i = 0; i < listAdapter.getCount();i++){
@@ -1704,14 +1572,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     	            			Individual member = (Individual)obj;
     	            			if(newHoh != null && !newHoh.getExtId().equalsIgnoreCase(member.getExtId())){
     	            				members.add(member);
-    	            				System.out.println("Member: " + member.getExtId());
     	            			}
     	            		}
-    	            	}
-    	            	
+    	            	}   	            	
 	            		selectedNewHoh(newHoh, members);
-    	            	
-    	            	///////////////
     	            }
     	        });
     	        builder.setNegativeButton(getString(R.string.cancel_lbl), new DialogInterface.OnClickListener() {
@@ -1724,9 +1588,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        }
 	        else{
     	        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//    	        builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
     	        builder.setTitle("No individual found in SG");
-    	        builder.setMessage("There is no member left in HH.");
+    	        builder.setMessage(getString(R.string.no_individual_left));
     	        builder.setNegativeButton(getString(R.string.cancel_lbl), null);
     	        AlertDialog dlg = builder.create();
     	        dlg.show();  

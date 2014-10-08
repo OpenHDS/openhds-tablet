@@ -1,0 +1,550 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Death to Head of household</h:title>
+    <model>
+      <itext>
+        <translation lang="Swahili">
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/6:label">
+            <value>Sijui</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/2:label">
+            <value>Kaka/Dada</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath/HOSPITAL:label">
+            <value>Hospitali</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Age:label">
+            <value>Age</value>
+          </text>
+          <text id="/DEATHTOHOH/householdId:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/1:label">
+            <value>Mtoto wa Kike/Kiume</value>
+          </text>
+          <text id="/DEATHTOHOH/causofdeathnotdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Other_viral_bacterial_infection:label">
+            <value>Other viral/bacterial infection</value>
+          </text>
+          <text id="/DEATHTOHOH/date:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/processedByMirth:hint">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/whom/4:label">
+            <value>Traditional healer</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath/HEALTH_CENTER:label">
+            <value>Health Centre or Clinic</value>
+          </text>
+          <text id="/DEATHTOHOH/diagnoseddeath:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/4:label">
+            <value>Hakuna Uhusiano</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Other:label">
+            <value>Other</value>
+          </text>
+          <text id="/DEATHTOHOH/diagnoseddeath/2:label">
+            <value>Hapana</value>
+          </text>
+          <text id="/DEATHTOHOH/diagnoseddeath/1:label">
+            <value>Ndiyo</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/socialGroupId:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/causofdeathnotdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/DEATHTOHOH/new_hoh_id:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Malaria:label">
+            <value>Malaria</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/5:label">
+            <value>Uhusiano Mwingine</value>
+          </text>
+          <text id="/DEATHTOHOH/visitId:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/HIV_AIDS:label">
+            <value>HIV/AIDS</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/TB:label">
+            <value>TB</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath/OTHER:label">
+            <value>Kwingine</value>
+          </text>
+          <text id="/DEATHTOHOH/whom/1:label">
+            <value>Doctor</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/3:label">
+            <value>Mjukuu</value>
+          </text>
+          <text id="/DEATHTOHOH/individualId:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/processedByMirth:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/whom/2:label">
+            <value>Nurse</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/extId:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/whom:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/DEATHTOHOH/causofdeathnotdiagnosed/Disease_Illness:label">
+            <value>Disease, Illness</value>
+          </text>
+          <text id="/DEATHTOHOH/hh_people_nb:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Accident:label">
+            <value>Accident</value>
+          </text>
+          <text id="/DEATHTOHOH/whom/3:label">
+            <value>Community health worker</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath/TRAD_HEALER:label">
+            <value>Traditional healer's home</value>
+          </text>
+          <text id="/DEATHTOHOH/OtherplaceOfDeath:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/causofdeathnotdiagnosed:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/memberName:label">
+            <value>-</value>
+          </text>
+          <text id="/DEATHTOHOH/causofdeathnotdiagnosed/Accident:label">
+            <value>Accident</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath/HOME:label">
+            <value>Nyumbani</value>
+          </text>
+          <text id="/DEATHTOHOH/fieldWorkerId:label">
+            <value>-</value>
+          </text>
+        </translation>
+        <translation default="true()" lang="English">
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/6:label">
+            <value>Don't Know</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead:label">
+            <value>Relationship to Group Head</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/2:label">
+            <value>Brother/Sister</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath/HOSPITAL:label">
+            <value>Hospital</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Age:label">
+            <value>Age</value>
+          </text>
+          <text id="/DEATHTOHOH/householdId:label">
+            <value>HouseHoldId</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/memberName:label">
+            <value>Member Name</value>
+          </text>
+          <text id="/DEATHTOHOH/causofdeathnotdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Other_viral_bacterial_infection:label">
+            <value>Other viral/bacterial infection</value>
+          </text>
+          <text id="/DEATHTOHOH/date:label">
+            <value>Date of Death</value>
+          </text>
+          <text id="/DEATHTOHOH/processedByMirth:hint">
+            <value>pbm</value>
+          </text>
+          <text id="/DEATHTOHOH/whom/4:label">
+            <value>Traditional healer</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath/HEALTH_CENTER:label">
+            <value>Health Centre or Clinic</value>
+          </text>
+          <text id="/DEATHTOHOH/diagnoseddeath:label">
+            <value>Death Cause diagnosed by health authority?</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/4:label">
+            <value>Not Related</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Other:label">
+            <value>Other</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/1:label">
+            <value>Son/Daughter</value>
+          </text>
+          <text id="/DEATHTOHOH/processedByMirth:label">
+            <value>pbm</value>
+          </text>
+          <text id="/DEATHTOHOH/diagnoseddeath/2:label">
+            <value>No</value>
+          </text>
+          <text id="/DEATHTOHOH/diagnoseddeath/1:label">
+            <value>Yes</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/socialGroupId:label">
+            <value>Social Group Id</value>
+          </text>
+          <text id="/DEATHTOHOH/causofdeathnotdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/DEATHTOHOH/new_hoh_id:label">
+            <value>New Hoh Id</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed:label">
+            <value>Cause of death?</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/5:label">
+            <value>Other Relative</value>
+          </text>
+          <text id="/DEATHTOHOH/visitId:label">
+            <value>Visit Id</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/HIV_AIDS:label">
+            <value>HIV/AIDS</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/TB:label">
+            <value>TB</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath/OTHER:label">
+            <value>Other</value>
+          </text>
+          <text id="/DEATHTOHOH/whom/1:label">
+            <value>Doctor</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath:label">
+            <value>Place of Death</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Malaria:label">
+            <value>Malaria</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/3:label">
+            <value>Grandchild</value>
+          </text>
+          <text id="/DEATHTOHOH/individualId:label">
+            <value>Individual ID</value>
+          </text>
+          <text id="/DEATHTOHOH/whom:label">
+            <value>by whom?</value>
+          </text>
+          <text id="/DEATHTOHOH/whom/2:label">
+            <value>Nurse</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh/extId:label">
+            <value>Member Id</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Crime:label">
+            <value>Crime</value>
+          </text>
+          <text id="/DEATHTOHOH/causofdeathnotdiagnosed/Disease_Illness:label">
+            <value>Disease, Illness</value>
+          </text>
+          <text id="/DEATHTOHOH/hh_people_nb:label">
+            <value>Outcomes</value>
+          </text>
+          <text id="/DEATHTOHOH/causeofdeathdiagnosed/Accident:label">
+            <value>Accident</value>
+          </text>
+          <text id="/DEATHTOHOH/whom/3:label">
+            <value>Community health worker</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath/TRAD_HEALER:label">
+            <value>Traditional healer's home</value>
+          </text>
+          <text id="/DEATHTOHOH/OtherplaceOfDeath:label">
+            <value>Place of Death(Other)</value>
+          </text>
+          <text id="/DEATHTOHOH/causofdeathnotdiagnosed:label">
+            <value>Cause of death?</value>
+          </text>
+          <text id="/DEATHTOHOH/membershiptonewhoh:label">
+            <value>Membership</value>
+          </text>
+          <text id="/DEATHTOHOH/causofdeathnotdiagnosed/Accident:label">
+            <value>Accident</value>
+          </text>
+          <text id="/DEATHTOHOH/placeOfDeath/HOME:label">
+            <value>Home</value>
+          </text>
+          <text id="/DEATHTOHOH/fieldWorkerId:label">
+            <value>Field Worker Id</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <DEATHTOHOH id="DEATHTOHOH">
+          <start/>
+          <end/>
+          <deviceid/>
+          <visitId/>
+          <individualId/>
+          <new_hoh_id/>
+          <fieldWorkerId/>
+          <householdId/>
+          <date/>
+          <diagnoseddeath/>
+          <whom/>
+          <causeofdeathdiagnosed/>
+          <causofdeathnotdiagnosed/>
+          <placeOfDeath/>
+          <OtherplaceOfDeath/>
+          <hh_people_nb/>
+          <membershiptonewhoh_count/>
+          <membershiptonewhoh jr:template="">
+            <extId/>
+            <memberName/>
+            <socialGroupId/>
+            <relationshipToGroupHead/>
+          </membershiptonewhoh>
+          <processedByMirth/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </DEATHTOHOH>
+      </instance>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/DEATHTOHOH/start" readonly="true()" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/DEATHTOHOH/end" readonly="true()" type="dateTime"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/DEATHTOHOH/deviceid" readonly="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/individualId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/new_hoh_id" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/householdId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/date" required="true()" type="date"/>
+      <bind nodeset="/DEATHTOHOH/diagnoseddeath" required="true()" type="select1"/>
+      <bind nodeset="/DEATHTOHOH/whom" relevant="selected( /DEATHTOHOH/diagnoseddeath , '1')" required="true()" type="select1"/>
+      <bind nodeset="/DEATHTOHOH/causeofdeathdiagnosed" relevant="selected( /DEATHTOHOH/diagnoseddeath , '1')" required="true()" type="select1"/>
+      <bind nodeset="/DEATHTOHOH/causofdeathnotdiagnosed" relevant="selected( /DEATHTOHOH/diagnoseddeath , '2')" required="true()" type="select1"/>
+      <bind nodeset="/DEATHTOHOH/placeOfDeath" required="true()" type="select1"/>
+      <bind nodeset="/DEATHTOHOH/OtherplaceOfDeath" relevant="selected( /DEATHTOHOH/placeOfDeath , 'OTHER')" required="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/hh_people_nb" readonly="true()" relevant="false()" required="true()" type="int"/>
+      <bind calculate=" /DEATHTOHOH/hh_people_nb " nodeset="/DEATHTOHOH/membershiptonewhoh_count" readonly="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/membershiptonewhoh/extId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/membershiptonewhoh/memberName" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/membershiptonewhoh/socialGroupId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead" required="true()" type="select1"/>
+      <bind nodeset="/DEATHTOHOH/processedByMirth" relevant="1=2" type="int"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/DEATHTOHOH/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/DEATHTOHOH/visitId">
+      <label ref="jr:itext('/DEATHTOHOH/visitId:label')"/>
+    </input>
+    <input ref="/DEATHTOHOH/individualId">
+      <label ref="jr:itext('/DEATHTOHOH/individualId:label')"/>
+    </input>
+    <input ref="/DEATHTOHOH/new_hoh_id">
+      <label ref="jr:itext('/DEATHTOHOH/new_hoh_id:label')"/>
+    </input>
+    <input ref="/DEATHTOHOH/fieldWorkerId">
+      <label ref="jr:itext('/DEATHTOHOH/fieldWorkerId:label')"/>
+    </input>
+    <input ref="/DEATHTOHOH/householdId">
+      <label ref="jr:itext('/DEATHTOHOH/householdId:label')"/>
+    </input>
+    <input ref="/DEATHTOHOH/date">
+      <label ref="jr:itext('/DEATHTOHOH/date:label')"/>
+    </input>
+    <select1 ref="/DEATHTOHOH/diagnoseddeath">
+      <label ref="jr:itext('/DEATHTOHOH/diagnoseddeath:label')"/>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/diagnoseddeath/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/diagnoseddeath/2:label')"/>
+        <value>2</value>
+      </item>
+    </select1>
+    <select1 ref="/DEATHTOHOH/whom">
+      <label ref="jr:itext('/DEATHTOHOH/whom:label')"/>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/whom/1:label')"/>
+        <value>1</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/whom/2:label')"/>
+        <value>2</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/whom/3:label')"/>
+        <value>3</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/whom/4:label')"/>
+        <value>4</value>
+      </item>
+    </select1>
+    <select1 ref="/DEATHTOHOH/causeofdeathdiagnosed">
+      <label ref="jr:itext('/DEATHTOHOH/causeofdeathdiagnosed:label')"/>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causeofdeathdiagnosed/Malaria:label')"/>
+        <value>Malaria</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causeofdeathdiagnosed/HIV_AIDS:label')"/>
+        <value>HIV_AIDS</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causeofdeathdiagnosed/TB:label')"/>
+        <value>TB</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causeofdeathdiagnosed/Other_viral_bacterial_infection:label')"/>
+        <value>Other_viral_bacterial_infection</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causeofdeathdiagnosed/Accident:label')"/>
+        <value>Accident</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causeofdeathdiagnosed/Crime:label')"/>
+        <value>Crime</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causeofdeathdiagnosed/Age:label')"/>
+        <value>Age</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causeofdeathdiagnosed/Unknown:label')"/>
+        <value>Unknown</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causeofdeathdiagnosed/Other:label')"/>
+        <value>Other</value>
+      </item>
+    </select1>
+    <select1 ref="/DEATHTOHOH/causofdeathnotdiagnosed">
+      <label ref="jr:itext('/DEATHTOHOH/causofdeathnotdiagnosed:label')"/>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causofdeathnotdiagnosed/Disease_Illness:label')"/>
+        <value>Disease_Illness</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causofdeathnotdiagnosed/Accident:label')"/>
+        <value>Accident</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causofdeathnotdiagnosed/Crime:label')"/>
+        <value>Crime</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/causofdeathnotdiagnosed/Unknown:label')"/>
+        <value>Unknown</value>
+      </item>
+    </select1>
+    <select1 ref="/DEATHTOHOH/placeOfDeath">
+      <label ref="jr:itext('/DEATHTOHOH/placeOfDeath:label')"/>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/placeOfDeath/HOME:label')"/>
+        <value>HOME</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/placeOfDeath/HOSPITAL:label')"/>
+        <value>HOSPITAL</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/placeOfDeath/HEALTH_CENTER:label')"/>
+        <value>HEALTH_CENTER</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/placeOfDeath/TRAD_HEALER:label')"/>
+        <value>TRAD_HEALER</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/DEATHTOHOH/placeOfDeath/OTHER:label')"/>
+        <value>OTHER</value>
+      </item>
+    </select1>
+    <input ref="/DEATHTOHOH/OtherplaceOfDeath">
+      <label ref="jr:itext('/DEATHTOHOH/OtherplaceOfDeath:label')"/>
+    </input>
+    <input ref="/DEATHTOHOH/hh_people_nb">
+      <label ref="jr:itext('/DEATHTOHOH/hh_people_nb:label')"/>
+    </input>
+    <group ref="/DEATHTOHOH/membershiptonewhoh">
+      <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh:label')"/>
+      <repeat jr:count=" /DEATHTOHOH/membershiptonewhoh_count " nodeset="/DEATHTOHOH/membershiptonewhoh">
+        <input ref="/DEATHTOHOH/membershiptonewhoh/extId">
+          <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh/extId:label')"/>
+        </input>
+        <input ref="/DEATHTOHOH/membershiptonewhoh/memberName">
+          <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh/memberName:label')"/>
+        </input>
+        <input ref="/DEATHTOHOH/membershiptonewhoh/socialGroupId">
+          <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh/socialGroupId:label')"/>
+        </input>
+        <select1 ref="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead">
+          <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead:label')"/>
+          <item>
+            <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/1:label')"/>
+            <value>1</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/2:label')"/>
+            <value>2</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/3:label')"/>
+            <value>3</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/4:label')"/>
+            <value>4</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/5:label')"/>
+            <value>5</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/6:label')"/>
+            <value>6</value>
+          </item>
+        </select1>
+      </repeat>
+    </group>
+    <input ref="/DEATHTOHOH/processedByMirth">
+      <label ref="jr:itext('/DEATHTOHOH/processedByMirth:label')"/>
+      <hint ref="jr:itext('/DEATHTOHOH/processedByMirth:hint')"/>
+    </input>
+  </h:body>
+</h:html>

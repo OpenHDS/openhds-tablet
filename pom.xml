@@ -65,11 +65,11 @@
             <version>19_r4</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-			  <groupId>com.google.android.gms</groupId>
-			  <artifactId>google-play-services</artifactId>
-			  <version>17.0.0</version>
-		</dependency>
+<!--         <dependency> -->
+<!-- 			  <groupId>com.google.android.gms</groupId> -->
+<!-- 			  <artifactId>google-play-services</artifactId> -->
+<!-- 			  <version>17.0.0</version> -->
+<!-- 		</dependency> -->
         <dependency>
             <groupId>net.sqlcipher</groupId>
             <artifactId>sqlcipher</artifactId>

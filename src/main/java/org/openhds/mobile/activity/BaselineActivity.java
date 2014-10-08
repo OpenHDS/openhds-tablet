@@ -53,7 +53,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -353,7 +352,6 @@ EventFragment.Listener, SelectionFragment.Listener {
 //        	locationVisit.setLocation(location1);
         	vf.onLoaderReset(null);
 //            transitionToCreateVisit();
-        	System.out.println("Return from searching social group ! Selected: " + socialGroup.getGroupName());
             filledForm = formFiller.appendSocialGroup(socialGroup, filledForm);
             loadForm(SELECTED_XFORM);
             break;            
@@ -678,7 +676,6 @@ EventFragment.Listener, SelectionFragment.Listener {
                     selectIndividual();
             	}
             	else if(stateMachine.getState() == "Select Event"){
-            		System.out.println("Handle select event in statemachine");
             		if(hhCreation){
             			onFinishedHouseHoldCreation();
             		}
@@ -1011,7 +1008,6 @@ EventFragment.Listener, SelectionFragment.Listener {
     private void selectIndividual(){
         String indExtId = filledForm.getIndividualExtId();
         if(indExtId.length() > 0){
-        	System.out.println("Individual Id is : " + indExtId);
         	vf.onLoaderReset(null);
         	vf.loadFilteredIndividualById(indExtId);
         	vf.selectItemNoInList(0);
@@ -1269,8 +1265,6 @@ EventFragment.Listener, SelectionFragment.Listener {
             	Cursor cursor = getCursorForFormsProvider(filledForm.getFormName());
                 if (cursor.moveToFirst()) {
                     jrFormId = cursor.getString(0);
-                    System.out.println("Cursor col 1: " + cursor.getString(0));
-                    System.out.println("Cursor col 2: " + cursor.getString(1));
                 }
                 BaselineActivity.this.contentUri = contentUri;
                 startActivityForResult(new Intent(Intent.ACTION_EDIT, contentUri), requestCode);
@@ -1447,43 +1441,7 @@ EventFragment.Listener, SelectionFragment.Listener {
 	        }
     }
     
-    private void handleSocialGroup(Loader<Cursor> loader, Cursor cursor){
-//        if (cursor.getCount() == 0){
-//        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        	builder.setTitle("No household found");
-//        	builder.setMessage("Please search for an existing or create a new household.");
-//        	builder.setNegativeButton(getString(R.string.cancel_lbl),new DialogInterface.OnClickListener() {
-//				public void onClick(DialogInterface dialog,int id) {
-//					// if this button is clicked, just close
-//					// the dialog box and do nothing
-//					dialog.cancel();
-//				}
-//			});
-//        	builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-//    			public void onClick(DialogInterface dialog,int id) {
-//    				onHousehold();
-//    			}
-//    		});           	
-//    		builder.setNeutralButton("Search", new DialogInterface.OnClickListener() {
-//    			public void onClick(DialogInterface dialog,int id) {
-//    				searchSocialGroup();
-//    			}
-//    		});           	
-//            householdDialog = builder.create();
-//            householdDialog.show();
-//        }
-//        else
-//        {
-//       	
-//            if(cursor.moveToNext()){
-//            	appendSocialGroupFromCursor(cursor);
-//            }
-//        }
-    	
-    	String cursorString = DatabaseUtils.dumpCursorToString(cursor);
-    	System.out.println(cursorString);
-    	System.out.println("Cursor entries: " + cursor.getCount());
-    	
+    private void handleSocialGroup(Loader<Cursor> loader, Cursor cursor){	
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	
     	if(cursor.getCount() > 0){
