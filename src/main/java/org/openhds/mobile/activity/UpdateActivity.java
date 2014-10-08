@@ -523,7 +523,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showProgressFragment();
         Individual individual = (Individual) data.getExtras().getSerializable("individual");
-        //extInm= false;
+    
 
 
         new CreateInternalInMigrationTask(individual).execute();
@@ -780,6 +780,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         switch (requestCode) {
         case FILTER_INMIGRATION_MOTHER:
             i.putExtra("requireGender", "F");
+            break;
+        case FILTER_INMIGRATION_FATHER:
+            i.putExtra("requireGender", "M");
             break;
         case FILTER_BIRTH_FATHER:
             i.putExtra("requireGender", "M");
@@ -1089,7 +1092,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton("Ok", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();			
+        alertDialog.show();		
+        extInm= false;
 	}
 
     private void buildMotherDialog() {
