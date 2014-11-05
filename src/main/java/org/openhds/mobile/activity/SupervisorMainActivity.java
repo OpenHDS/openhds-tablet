@@ -99,7 +99,7 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 				R.string.sync_field_worker_name))) {
 			syncFieldWorkers();
 		} else if (tag.equals(getResourceString(this,
-				R.string.formmenu_extraforms))) {
+				R.string.sync_extraforms))) {
 			syncExtraForms();
 		}
 	}
