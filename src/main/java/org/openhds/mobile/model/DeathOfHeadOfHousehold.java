@@ -2,7 +2,6 @@ package org.openhds.mobile.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class DeathOfHeadOfHousehold implements Serializable {

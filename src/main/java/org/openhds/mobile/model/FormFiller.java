@@ -1,8 +1,5 @@
 package org.openhds.mobile.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Fills in the event forms with pre-filled values based on the location visit
  * and possibly other entity types

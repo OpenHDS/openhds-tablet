@@ -7,7 +7,6 @@ import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.R;
 import org.openhds.mobile.activity.FilterSocialGroupActivity;
 import org.openhds.mobile.database.queries.Converter;
-import org.openhds.mobile.fragment.SelectionFilterSocialgroupFragment.Listener;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
@@ -16,7 +15,6 @@ import org.openhds.mobile.model.SocialGroup;
 
 import android.app.Activity;
 import android.app.ListFragment;
-import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -174,6 +172,8 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	            throw new ClassCastException("Could not cast listener to FilterSocialGroupActivity.");
 	        }
 	        break;
+		default:
+			break;
 	    }        
 
         adapter.swapCursor(null);
@@ -624,7 +624,6 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 		//w.performItemClick(w, position, 234525);
 		
 		    getListView().postDelayed(new Runnable() {
-		        @Override
 		        public void run() {
 		            ListView listView = getListView(); // Save a local reference rather than calling `getListView()` three times
 		            if(listView.getCount() > 0){

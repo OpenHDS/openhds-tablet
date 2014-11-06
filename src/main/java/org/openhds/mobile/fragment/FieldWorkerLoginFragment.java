@@ -4,11 +4,7 @@ import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
 
 import org.openhds.mobile.R;
 import org.openhds.mobile.activity.BaselineActivity;
-import org.openhds.mobile.activity.CensusActivity;
-import org.openhds.mobile.activity.OpeningActivity;
-import org.openhds.mobile.activity.SupervisorMainActivity;
 import org.openhds.mobile.activity.UpdateActivity;
-import org.openhds.mobile.database.DatabaseAdapter;
 import org.openhds.mobile.database.queries.Converter;
 import org.openhds.mobile.database.queries.Queries;
 import org.openhds.mobile.fragment.FieldWorkerLoginFragment.AuthenticateFieldWorker.AuthenticateFieldWorkerListener;
