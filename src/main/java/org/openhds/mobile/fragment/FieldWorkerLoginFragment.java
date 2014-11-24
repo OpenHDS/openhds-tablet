@@ -2,6 +2,7 @@ package org.openhds.mobile.fragment;
 
 import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.openhds.mobile.R;
 import org.openhds.mobile.activity.BaselineActivity;
 import org.openhds.mobile.activity.UpdateActivity;
@@ -169,7 +170,7 @@ public class FieldWorkerLoginFragment extends Fragment implements
 
 		@Override
 		protected FieldWorker doInBackground(Void... arg0) {
-			if (Queries.hasFieldWorker(resolver, extId, "")) {
+			if (Queries.hasFieldWorker(resolver, extId)) {
 				Cursor cursor = Queries.getFieldWorkByExtId(resolver, extId);
 				return Converter.toFieldWorker(cursor);
 			} else {
@@ -181,7 +182,7 @@ public class FieldWorkerLoginFragment extends Fragment implements
 		protected void onPostExecute(FieldWorker result) {
 			// We want really basic authentication. For the moment, just check if password equals extId
 			if(result != null){
-				if(password.equalsIgnoreCase(result.getExtId())){
+				if(BCrypt.checkpw(password,result.getPasswordHash())){
 					listener.onAuthenticated(result);
 				}
 				else{
@@ -192,7 +193,6 @@ public class FieldWorkerLoginFragment extends Fragment implements
 				listener.onAuthenticated(result);
 			}
 		}
-
 	}
 
 }

@@ -96,11 +96,15 @@ public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 		parser.nextTag();
 		paramMap.put("lastName", parser.nextText());
 
+		
 		parser.nextTag();
 
 		FieldWorker fw = new FieldWorker(paramMap.get("extId"),
 				paramMap.get("firstName"), paramMap.get("lastName"));
-		fw.setPassword("");
+		
+		paramMap.put("passwordHash", parser.nextText());
+		fw.setPasswordHash(paramMap.get("passwordHash"));
+		
 		return fw;
 	}
 
@@ -119,7 +123,7 @@ public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 		cv.put(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_LASTNAME,
 				fwu.getLastName());
 		cv.put(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_PASSWORD,
-				fwu.getPassword());
+				fwu.getPasswordHash());
 
 		try {
 			contentResolver.insert(OpenHDS.FieldWorkers.CONTENT_URI, cv);

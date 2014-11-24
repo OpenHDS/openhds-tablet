@@ -99,12 +99,10 @@ public class Queries {
 				OpenHDS.HierarchyItems.COLUMN_HIERARCHY_PARENT, extId);
 	}
 
-	public static boolean hasFieldWorker(ContentResolver resolver, String extId, String password) {
+	public static boolean hasFieldWorker(ContentResolver resolver, String extId) {
 		Cursor cursor = resolver.query(OpenHDS.FieldWorkers.CONTENT_ID_URI_BASE,
 				new String[] { OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_EXTID },
-				OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_EXTID + " = ? AND "
-						+ OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_PASSWORD + " = ?", new String[] { extId,
-						password }, null);
+				OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_EXTID + " = ?", new String[] { extId }, null);
 		return isFound(cursor);
 	}
 

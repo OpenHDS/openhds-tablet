@@ -115,7 +115,7 @@ public class Converter {
             fw.setExtId(cursor.getString(cursor.getColumnIndex(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_EXTID)));
             fw.setFirstName(cursor.getString(cursor.getColumnIndex(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_FIRSTNAME)));
             fw.setLastName(cursor.getString(cursor.getColumnIndex(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_LASTNAME)));
-            fw.setPassword(cursor.getString(cursor.getColumnIndex(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_PASSWORD)));
+            fw.setPasswordHash(cursor.getString(cursor.getColumnIndex(OpenHDS.FieldWorkers.COLUMN_FIELDWORKER_PASSWORD)));
         }
 
         cursor.close();

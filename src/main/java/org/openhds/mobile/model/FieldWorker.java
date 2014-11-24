@@ -6,7 +6,7 @@ public class FieldWorker implements Serializable {
 	
 	private static final long serialVersionUID = -8973040054481039466L;
 	private String extId;
-	private String password;
+	private String passwordHash;
 	private String firstName;
 	private String lastName;
 	
@@ -42,11 +42,11 @@ public class FieldWorker implements Serializable {
 		this.lastName = lastName;
 	}
 	
-	public String getPassword() {
-		return password;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 }
