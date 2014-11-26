@@ -257,7 +257,11 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                         sbuilder.append("<relationshipToGroupHead />\r\n");
                         sbuilder.append("</outcomes>\r\n");
                     }
-                }
+                } else if (name.equalsIgnoreCase("processedByMirth")) {
+                    sbuilder.append("<processedByMirth>0</processedByMirth>" + "\r\n");
+                } else if (name.equalsIgnoreCase("locationType")) {
+                    sbuilder.append("<locationType>RUR</locationType>" + "\r\n"); 
+                } 
                 // special case for new hoh
                 else if(name.equalsIgnoreCase("membershiptonewhoh") 
                 		|| name.equalsIgnoreCase("hh_people_nb") 
