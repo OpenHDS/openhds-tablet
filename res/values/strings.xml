@@ -63,8 +63,7 @@
     <string name="update">Update</string>
     <string name="username">OpenHDS Username</string>
     <string name="view_forms_btn">View My Forms</string>
-	<string name="see_list">See List</string>
-
+	  <string name="see_list">See List</string>
     <string name="location_hint_lbl">Location External Id</string>
     <string name="form_hint_lbl">Form Name</string>
     <string name="firstname_lbl">First Name:</string>

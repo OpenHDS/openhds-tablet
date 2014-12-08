@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources  xmlns:tools="http://schemas.android.com/tools" tools:locale="es">
+
+    <string name="amendments">Enmiendas</string>
+    <string name="app_name">OpenHDS Mobile</string>
+    <string name="bad_authentication">Autenticación Falló</string>
+    <string name="register">Registrarse</string>
+    <string name="bad_xml">Error en validar el XML</string>
+    <string name="changePassword">Cambiar Contraseña</string>
+    <string name="changeServer">Cambiar Servidor</string>
+    <string name="changeUsername">Cambiar Nombre de Usuario</string>
+    <string name="configuration">Configuración</string>
+    <string name="configureDatabase">Configurar Base de Datos </string>
+    <string name="databaseSync">Sincronizar con OpenHDS Base de Datos</string>
+  	<string name="sync_database_name">Sincronizar Base de Datos</string>    
+    <string name="choose">Por favor, elija</string>
+    <string name="default_server_url">http://data-management.local:8080/openhds/mobile-interop</string>
+    <string name="interop_server_url_key">interop_server_url</string>
+	  <string name="default_openhds_server_url">http://data-management.local:8080/openhds</string>    
+	  <string name="openhds_server_url">http://data-management.local:8080/openhds</string>
+    <string name="openhds_server_url_default_summary">Same URL used for OpenHDS Server via Web browser</string>    
+	  <string name="openhds_server_url_key">openhds_server_url</string> 
+	  <string name="openhds_server_url_title">URL del OpenHDS Server</string>
+	  <string name="supervisor_login_url">/api/rest/socialgroups</string>
+    <string name="supervisor_login">Informacion del Supervisor</string>
+    <string name="default_openhdsserver">http://data-management.local:8080/openhds</string>
+	  <string name="delete_form_btn">Borrar Impreso</string>
+    <string name="download_form_button">Descargar Impresos</string>
+    <string name="download_extraform_button">Descarga cuestionarios adicionales</string>
+    <string name="failure_reasons_txt">Mensajes de Falla:</string>
+    <string name="fatherNotFound">Un padre no se pudo encontrar</string>
+    <string name="field_worker_already_exists">Enucestador Ya Existe</string>
+    <string name="field_worker_created">Enucestador Creado con Éxito</string>
+    <string name="form_status">Estado de Impreso:</string>
+    <string name="form_view_lbl">Vista de Impreso:</string>
+    <string name="hello">Hello, Android!</string>
+    <string name="household_not_found">Un domicilio no se ha encontrado para esto individuo</string>
+    <string name="idGenerationFailure">Se ha producido un error al generar un ID</string>
+    <string name="location_lbl">Ubicación:</string>
+    <string name="form_lbl">Impreso:</string>
+    <string name="login_btn">Entrar</string>
+    <string name="logout_btn">Cerrar sesión</string>
+    <string name="main_txt">Administración de Impresos</string>
+    <string name="openhdswebservice">OpenHDS Web Service</string>
+    <string name="owner_txt">Proprietario del Impreso ID:</string>
+    <string name="passwordHash">OpenHDS Contraseña</string>
+    <string name="retrieving_fieldworkers_interrupted">Descargar Enucestadores se ha Interrumpido</string>
+    <string name="send_to_odk_btn">Editar en ODK</string>
+    <string name="shared_pref_file_name">server_prefs</string>
+    <string name="shared_pref_server_url_key">server_url</string>
+    <string name="syncDatabase">Sincronizar Base de Datos</string>
+    <string name="syncDatabaseMessage">Este procedimiento intentará descargar entidades OpenHDS en el dispositivo. Por favor tenga paciencia mientras que la descarga está en curso</string>
+    <string name="sync_database_description">Sincroniza los datos del censo con el servidor</string>
+    <string name="sync_field_worker_description">Sincronizas los Encuestadores con el servidor</string>   
+    <string name="sync_entities_failure">La Recopilacion de Entidades de OpenHDS ha fallado</string>
+    <string name="sync_forms_successful">Impresos recopilado con éxito</string>
+    <string name="sync_forms_failure">Recopilación de Impresos Falló</string>
+    <string name="sync_entities_successful">La Recopilacion de Entidades de OpenHDS ha sido exitosa</string>
+    <string name="sync_interrupted">La Recopilacion de Entidades de OpenHDS ha sido interrumpida</string>
+    <string name="sync_restarting">Sincronización reiniciando</string>
+    <string name="unable_to_connect">No se puede conectar</string>
+    <string name="url_error">URL inválido!</string>
+    <string name="update">Actualizar</string>
+    <string name="username">OpenHDS Nombre de Usuario</string>
+    <string name="view_forms_btn">Examinar Mis Impresos</string>
+    <string name="see_list">Consulte la Lista</string>
+    <string name="location_hint_lbl">Ubicación ID Externa</string>
+    <string name="form_hint_lbl">Nombre de Impreso</string>
+    <string name="firstname_lbl">Nombre:</string>
+    <string name="firstname_hint_lbl">Nombre</string>
+    <string name="lastname_lbl">Apellido:</string>
+    <string name="lastname_hint_lbl">Apellido</string>
+    <string name="gender_lbl">Género</string>
+    <string name="male_lbl">Hombre</string>
+    <string name="female_lbl">Mujer</string>
+    <string name="clear_lbl">Clear</string>
+    <string name="search_lbl">Buscar</string>
+    <string name="search_loc_lbl">Buscar Ubicación</string>
+    <string name="search_form_lbl">Buscar Impreso</string>
+    <string name="search_individual_lbl">Buscar por una persona</string>
+    <string name="external_id_lbl">ExtId:</string>
+    <string name="hierarchy1_select_lbl">Seleccionar una Región</string>
+    <string name="hierarchy1_lbl">Región:</string>
+    <string name="hierarchy1_hint_lbl">Región ID Externa</string>
+    <string name="hierarchy2_select_lbl">Seleccionar Área de Mapa</string>
+    <string name="hierarchy2_lbl">Área de Mapa:</string>
+    <string name="hierarchy2_hint_lbl">Área de Mapa ID Externa</string>
+    <string name="hierarchy3_select_lbl">Seleccionar Sector</string>
+    <string name="hierarchy3_lbl">Sector:</string>
+    <string name="hierarchy3_hint_lbl">Sector ID Externa</string>
+    <string name="hierarchy4_select_lbl">Seleccionar Edificio</string>
+    <string name="hierarchy4_lbl">Edificio:</string>
+    <string name="hierarchy4_hint_lbl">Edificio ID Externa</string>
+    <string name="hierarchy5_select_lbl">Seleccionar piso</string>
+    <string name="hierarchy5_lbl">Piso:</string>
+    <string name="hierarchy5_hint_lbl">Piso ID Externa</string>
+    <string name="roundBtn_lbl">Seleccione Ronda</string>
+  	<string name="roundNumber_lbl">Numero de ronda:</string>
+  	<string name="roundStartDate_lbl">Fecha de inicio:</string>
+  	<string name="roundEndDate_lbl">Fecha final:</string>
+	<string name="locationBtn_lbl">Seleccionar Ubicación</string>
+	<string name="locationName_lbl">Nombre:</string>
+	<string name="locationLatitude_lbl">Latitud:</string>
+	<string name="locationLongitude_lbl">Longitud:</string>
+	<string name="searchlBtn_lbl">Filtrar ubicación</string>
+	<string name="individualBtn_lbl">Seleccione Individuo</string>
+	<string name="individualFirstName_lbl">Nombre:</string>
+	<string name="individualLastName_lbl">Appellido:</string>
+	
+	<string name="findLocationGeoPointBtn_lbl">Buscar Domicilio con GeoPoint</string>
+	<string name="createLocationBtn_lbl">Crear un Domicilio</string>
+	<string name="createVisitBtn_lbl">Empezar la Visita</string>
+	<string name="clearIndividualBtn_lbl">Anular seleccion Individuo</string>
+	<string name="householdBtn_lbl">Hogar</string>
+	<string name="membershipBtn_lbl">Afiliación</string>
+	<string name="relationshipBtn_lbl">Relación</string>
+	<string name="inMigrationBtn_lbl">Inmigración</string>
+	<string name="outMigrationBtn_lbl">Enmigración</string>
+	<string name="pregRegBtn_lbl">Observación Embarazo</string>
+	<string name="birthRegBtn_lbl">Resultado del Embarazo</string>
+	<string name="deathBtn_lbl">Muerte</string>
+	<string name="finishVisitBtn_lbl">Terminar la Visita</string>  	
+  	
+  	<string name="locations_nearesert_you_lbl">Lugares cercanos</string>
+		
+	<string name="hierarchy5Btn_lbl">Seleccionar barrio</string>
+	<string name="hierarchy5_lbl">Barrio:</string>
+    <string name="hierarchy5_hint_lbl">barrio External Id</string>
+	
+    <string name="dialog_working_lbl">Trabajando...</string>
+	<string name="dialog_dont_interrupt_lbl">No Interrumpir</string>
+	
+	<string name="formmenu_extraforms">Cuestionarios adicionales</string>
+	<string name="sync_extraforms">Sync Cuestionarios adicionales</string>
+	
+	<string name="loginmenu_configure">Configurar Server</string>
+  	<string name="no_server_url">No server URL configurado. Configura URL en las preferencias</string>
+	<string name="bad_server_url">¡Inválido Server URL</string>
+  		<string name="fworkerExtId_lbl">Encuestador ExtId</string>
+	<string name="registerChkBox_lbl">Registrar Encuestador en el Device</string>
+	
+	<string name="fieldWorkerLoginBtn_lbl">Log in como Encuestador</string>
+	<string name="supervisorLoginBtn_lbl">Log in como Supervisor</string>
+	<string name="supervisor_username_key">Supervisor Usuario</string>
+	<string name="supervisor_password_key">Supervisor Contraseña</string>	
+	
+		<string name="server_preferences_lbl">Server Preferencias</string>
+<string name="configure_server_lbl">Configurar Server</string>
+	
+	
+		
+	<string name="fwlogin_registerlbl">Registrarse</string>
+	<string name="fwlogin_loginlbl">Iniciar Sesión</string>
+	<string name="authenticating_lbl">Autenticación...</string>
+	<string name="please_wait_lbl">Por favor espera</string>
+		
+	<string name="please_choose_lbl">Por favor  elegir </string>
+		
+	
+
+
+   	<string name="loading_lbl">Cargando</string>
+	<string name="loading_form_subm_lbl">Cargando form submission...</string>
+	<string name="loading_into_odk_lbl">Cargando impresos in ODK Collect...</string>
+	<string name="formload_failed_writedir_lbl">Hubo un problema al crear directorios</string>
+	<string name="formload_failed_writexml_lbl">Hubo un problema al escribir el archivo XML</string>
+	<string name="formload_failed_odkins_lbl">Hubo un problema con ODK Collect</string>
+	<string name="formload_already_completed_lbl">Este formulario ya ha sido completado</string>
+	<string name="updating_lbl">Actualización</string>
+	<string name="updating_form_info_lbl">Actualización de la información del formulario...</string>
+	<string name="completed_lbl">Completado</string>
+	<string name="not_completed_lbl">No Completado</string>
+		
+	<string name="map_curlocation_format_lbl">Ubicación actual \n Longitud: %1$s \n Latitud: %2$s</string>
+	<string name="warning_lbl">Advertencia</string>
+	<string name="showmap_gps_disabled_lbl">Su GPS parece estar deshabilitado. Por favor, asegúrese de que le ha permitido \ 's con el fin de utilizar este servicio.</string>
+	<string name="showmap_gps_turned_off">Proveedor deshabilitada por el usuario. GPS apagado</string>
+	<string name="showmap_gps_turned_on">Proveedor activado por el usuario. GPS activado</string>
+	<string name="showmap_gps_changed">Estado de Proveedor cambiado</string>
+		
+	<string name="sprvlogin_bad_auth">No se pudo autenticar nombre de usuario y contraseña</string>
+	<string name="sprvlogin_created_user">Creado con éxito nuevo usuario</string>
+	<string name="sprvlogin_connection_error">Había un problema de comunicación con el servidor</string>
+	<string name="sprvlogin_error_user">Se ha producido un error al crear el usuario</string>
+	<string name="sprvlogin_user_notrecon">Usuario no reconocido</string>
+	<string name="sprvlogin_authenticate_with_server">¿Quieres autenticarse con el servidor?</string>
+	<string name="yes_lbl">Si</string>
+	<string name="no_lbl">No</string>
+	<string name="error_lbl">Error</string>
+	<string name="success_lbl">Exito</string>
+	<string name="trying_to_authenticate_lbl">Intentando autenticar...</string>
+	<string name="sprvlogin_enter_in_user">Por favor ingrese en un usuario</string>
+	<string name="sprvlogin_enter_in_pass">Por favor, ingrese una contraseña</string>
+		
+	<string name="sprvmain_downlall_forms">Descarga de todos los impresos...</string>
+	<string name="working_lbl">Trabajando</string>
+	<string name="sprvmain_failed_auth">Nombre de usuario y / o contraseña no válidos</string>
+	<string name="sprvmain_failure">Hubo un problema al leer la respuesta desde el servidor</string>
+	<string name="sprvmain_connection_error">Hubo un error con la conexión de red</string>
+	<string name="sprvmain_connection_timeout">Agotado tiempo de espera de la conexión</string>
+	<string name="sprvmain_on_success">Todos los impresod descargados con exito</string>
+	<string name="sprvmain_no_content">No hay impresos de descargar</string>
+	<string name="sprvmain_downl_extraforms">Descargando cuestionarios adicionales...</string>
+		
+	<string name="sync_db_stop_sync">¿Seguro que quieres dejar de sincronización?</string>
+		
+	<string name="odk_problem_lbl">Hubo un problema con ODK</string>
+	<string name="update_unfinish_msg1">El cuestionario ha comenzado pero no se ha guardado. ¿Quieres borrarlo. Qué es lo que quieres hacer?</string>
+	<string name="update_unfinish_pos_button">Borrar impreso</string>
+	<string name="update_unfinish_neg_button">Editar impreso</string>
+	<string name="update_xform_not_found_msg">El XForm no se pudo encontrar dentro ODK Collect. Por favor, asegúrese de que existe y que tiene el nombre correcto.</string>
+	<string name="visit_lbl">Visita</string>
+	<string name="update_finish_visit_msg">Hiciste captura de todos los eventos y deseas finalizar la visita?</string>
+	<string name="cancel_lbl">Anular</string>
+	<string name="socialgroup_lbl">Hogar</string>
+	<string name="update_on_sgexists_msg">El Hogar para la ubicación seleccionada ya existe.</string>
+	<string name="in_migration_lbl">Inmigración</string>
+	<string name="baseline_lbl">Censo</string>
+	<string name="update_create_inmigration_msg">¿Es este una Inmigración interna o externa?</string>
+	<string name="update_create_inmigration_pos_button">Interna</string>
+	<string name="update_create_inmigration_neg_button">Externa</string>
+	<string name="update_finish_ext_inmigration_msg">Por favor, ahora crear una Membresía para el individuo</string>
+	<string name="finish_household_creation_msg">Por favor, ahora crear una Membresía para el individuo (HoH)</string>
+	<string name="mother_lbl">Madre</string>
+	<string name="update_build_mother_msg">¿Se conoce la madre y està registrada en el sistema?</string>
+	<string name="father_lbl">Padre</string>
+	<string name="update_build_father_msg">¿Se conoce el padre y està registrado en el sistema?</string>
+	<string name="update_build_pregnancy_lbr_count_msg">Numero de resultados </string>
+	<string name="update_pregoutcome_choose_father">Seleccione el padre</string>
+	<string name="update_pregoutcome_search_hdss">Buscar en HDSS</string>
+	<string name="update_pregoutcome_father_not_found">Padre no en HDSS</string>
+	<string name="update_pregoutcome_not_within_hdss">No en HDSS</string>
+	<string name="update_load_finished_select_hh_msg">Seleccione un Hogar por el Individuo</string>
+
+    <string name="hierarchy2_select_lbl">Seleccione Mapa de la zona</string>
+    <string name="hierarchy3_select_lbl">Seleccione Sector</string>
+    <string name="hierarchy4_select_lbl">Seleccione Edificio</string>
+    <string name="hierarchy5_select_lbl">Seleccione planta</string>
+    <string name="login_username">Usuario</string>
+    <string name="login_password">Contrasena</string>
+    <string name="fieldworker_login">Enucestador Login</string>
+
+    <string name="field_workers_sync_url">/api/rest/fieldworkers</string>
+    <string name="landscape_layout_tag">landscape</string>
+    <string name="portrait_layout_tag">portrait</string>
+    <string name="supervisor_bad_credentials">Credenciales de supervisor no válidos</string>
+    <string name="preference_invalid_label">Invalido!</string>
+    <string name="preference_invalid_warning">Valor de preferencia no válido</string>
+    <string name="sync_field_worker_name">Sincronizar Enucestadores</string>
+    <string name="field_worker_bad_credentials">Credenciales de Enucestador no válidos</string>
+    <string name="region_label">Region</string>
+    <string name="map_area_label">Mapa de la zona</string>
+    <string name="sector_label">Sector</string>
+    <string name="household_label">Hogar</string>
+    <string name="individual_label">Individuo</string>
+    <string name="bottom_label">Fondo</string>
+    <string name="create_membership">Por favor crea una membresía para este individuo!</string>
+    <string name="no_individual_left">No hay personas activas que queda en el Hogar que podría reemplazar al jefe.</string>
+    
+    
+    <string name="hello_lbl">Hola</string>
+    <string name="STARTHIERARCHYLEVELNAME">Districto</string>
+
+</resources>
