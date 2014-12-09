@@ -92,8 +92,8 @@
     <string name="hierarchy4_lbl">Edificio:</string>
     <string name="hierarchy4_hint_lbl">Edificio ID Externa</string>
     <string name="hierarchy5_select_lbl">Seleccionar piso</string>
-    <string name="hierarchy5_lbl">Piso:</string>
-    <string name="hierarchy5_hint_lbl">Piso ID Externa</string>
+  <!--  <string name="hierarchy5_lbl">Piso:</string>
+    <string name="hierarchy5_hint_lbl">Piso ID Externa</string>-->
     <string name="roundBtn_lbl">Seleccione Ronda</string>
   	<string name="roundNumber_lbl">Numero de ronda:</string>
   	<string name="roundStartDate_lbl">Fecha de inicio:</string>
@@ -173,7 +173,7 @@
 		
 	<string name="map_curlocation_format_lbl">Ubicación actual \n Longitud: %1$s \n Latitud: %2$s</string>
 	<string name="warning_lbl">Advertencia</string>
-	<string name="showmap_gps_disabled_lbl">Su GPS parece estar deshabilitado. Por favor, asegúrese de que le ha permitido \ 's con el fin de utilizar este servicio.</string>
+	<string name="showmap_gps_disabled_lbl">Su GPS parece estar deshabilitado. Por favor, asegurese de que le ha permitido con el fin de utilizar este servicio.</string>
 	<string name="showmap_gps_turned_off">Proveedor deshabilitada por el usuario. GPS apagado</string>
 	<string name="showmap_gps_turned_on">Proveedor activado por el usuario. GPS activado</string>
 	<string name="showmap_gps_changed">Estado de Proveedor cambiado</string>
@@ -232,10 +232,10 @@
 	<string name="update_pregoutcome_not_within_hdss">No en HDSS</string>
 	<string name="update_load_finished_select_hh_msg">Seleccione un Hogar por el Individuo</string>
 
-    <string name="hierarchy2_select_lbl">Seleccione Mapa de la zona</string>
+   <!--   <string name="hierarchy2_select_lbl">Seleccione Mapa de la zona</string>
     <string name="hierarchy3_select_lbl">Seleccione Sector</string>
     <string name="hierarchy4_select_lbl">Seleccione Edificio</string>
-    <string name="hierarchy5_select_lbl">Seleccione planta</string>
+    <string name="hierarchy5_select_lbl">Seleccione planta</string>-->
     <string name="login_username">Usuario</string>
     <string name="login_password">Contrasena</string>
     <string name="fieldworker_login">Enucestador Login</string>
