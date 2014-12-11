@@ -14,7 +14,6 @@ import org.openhds.mobile.task.SyncFormsTask;
 import org.openhds.mobile.utilities.SyncDatabaseHelper;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;

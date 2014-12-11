@@ -3,7 +3,6 @@ package org.openhds.mobile.utilities;
 import org.openhds.mobile.R;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;

@@ -1,23 +1,18 @@
 package org.openhds.mobile.activity;
 
-import java.util.Locale;
-
 import org.openhds.mobile.R;
 import org.openhds.mobile.fragment.FieldWorkerLoginFragment;
 import org.openhds.mobile.fragment.LoginPreferenceFragment;
 import org.openhds.mobile.fragment.SupervisorLoginFragment;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 public class OpeningActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
