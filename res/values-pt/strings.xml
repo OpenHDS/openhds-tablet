@@ -95,7 +95,7 @@
 	<string name="individualFirstName_lbl">Nome:</string>
 	<string name="individualLastName_lbl">Apelido:</string>
 	
-	<string name="findLocationGeoPointBtn_lbl">Encontrar Localização com (GeoPoint)</string>
+	<string name="findLocationGeoPointBtn_lbl">Encontrar Localização (GeoPoint)</string>
 	<string name="createLocationBtn_lbl">Criar Localização</string>
 	<string name="createVisitBtn_lbl">Criar Visita</string>
 	<string name="clearIndividualBtn_lbl">Limpar Indivíduo</string>
@@ -114,6 +114,11 @@
 	
 	<string name="fieldWorkerLoginBtn_lbl">Entrar como Trabalhador de Campo</string>
 	<string name="supervisorLoginBtn_lbl">Entrar como Supervisor</string>
+	
+	<string name="login_username">Usuario</string>
+    <string name="login_password">Senha</string>
+    <string name="fieldworker_login">Trabalhador de Campo</string>
+	<string name="supervisor_login">Supervisor</string>
 	
 	<string name="server_preferences_lbl">Definições do Servidor</string>
 	
