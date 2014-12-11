@@ -8,5 +8,12 @@
         android:key="@string/openhds_server_url_key"
         android:summary="@string/openhds_server_url_default_summary"
         android:title="@string/openhds_server_url_title" />
+    
+  	<ListPreference   android:title="Language"
+                      android:summary="Select the display language"
+                      android:key="displayLanguage"
+                      android:defaultValue="en"
+                      android:entries="@array/listArray"
+                      android:entryValues="@array/listValues" />
 
 </PreferenceScreen>

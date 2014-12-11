@@ -14,7 +14,10 @@ import org.openhds.mobile.task.SyncFormsTask;
 import org.openhds.mobile.utilities.SyncDatabaseHelper;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +26,7 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-public class SupervisorMainActivity extends Activity implements OnClickListener {
+public class SupervisorMainActivity extends Activity implements OnClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
 	private FrameLayout prefContainer;
 	private LinearLayout supervisorOptionsList;
@@ -103,6 +106,12 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 		}
 	}
 	
+	@Override
+	protected void onResume() {
+		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+		super.onResume();
+	}
+	
 	private void syncExtraForms(){
 		String url = getPreferenceString(this, R.string.openhds_server_url_key, "");
 		String username = (String) getIntent().getExtras().get( OpeningActivity.USERNAME_KEY);
@@ -148,6 +157,18 @@ public class SupervisorMainActivity extends Activity implements OnClickListener 
 		syncDatabaseHelper.setCurrentTask(currentTask);
 
 		syncDatabaseHelper.startSync();
+	}
+
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+			String key) {
+		if(key.equals("displayLanguage"))
+			restartActivity();
+	}
+	
+	private void restartActivity() {
+	    Intent intent = getIntent();
+	    finish();
+	    startActivity(intent);
 	}
 
 }

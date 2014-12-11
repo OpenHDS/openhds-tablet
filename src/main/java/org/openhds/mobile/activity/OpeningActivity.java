@@ -6,14 +6,18 @@ import org.openhds.mobile.fragment.LoginPreferenceFragment;
 import org.openhds.mobile.fragment.SupervisorLoginFragment;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
-public class OpeningActivity extends Activity {
+public class OpeningActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
 	
 	
 	public static final String USERNAME_KEY = "usernameKey";
@@ -58,6 +62,7 @@ public class OpeningActivity extends Activity {
 		} else {
 			loginPrefContainer.setVisibility(View.VISIBLE);
 		}
+		
 		return true;
 	}
 	
@@ -68,6 +73,20 @@ public class OpeningActivity extends Activity {
 		.beginTransaction()
 		.replace(R.id.login_pref_container, new LoginPreferenceFragment()).commit();
 		
+		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+		
 		super.onResume();
+	}
+
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+			String key) {
+		if(key.equals("displayLanguage"))
+			restartActivity();
 	}	
+	
+	private void restartActivity() {
+	    Intent intent = getIntent();
+	    finish();
+	    startActivity(intent);
+	}
 }

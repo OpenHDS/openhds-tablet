@@ -5,6 +5,7 @@ import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
 import static org.openhds.mobile.utilities.MessageUtils.showLongToast;
 import static org.openhds.mobile.utilities.UrlUtils.isValidUrl;
 
+import org.openhds.mobile.OpenHDSApplication;
 import org.openhds.mobile.R;
 
 import android.content.SharedPreferences;
@@ -46,7 +47,20 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
-		updatePreference(key);
+			
+		if(key.equals("displayLanguage")){
+			String language = sharedPreferences.getString("displayLanguage","en");
+			System.out.println("Switching to: " + language);
+			
+			((OpenHDSApplication)getActivity().getApplicationContext()).changeLang(language);
+			
+			
+		}
+		else if((key.equals(getResourceString(getActivity(),
+				(R.string.openhds_server_url_key))))){
+			updatePreference(key);
+		}
+		
 	}
 
 	private void updatePreference(String key) {
@@ -69,6 +83,9 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 			String newUrl = getPreferenceString(getActivity(), key, "");
 			return isValidUrl(newUrl);
 		}
+		else if(key.equals("displayLanguage")){
+			return true;
+		}
 
 		return false;
 	}
@@ -83,6 +100,9 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 				(R.string.openhds_server_url_key)))) {
 			EditTextPreference editTextPreference = (EditTextPreference) preference;
 			editTextPreference.setSummary(editTextPreference.getText());
+		}
+		else if(key.equals("displayLanguage")){
+			System.out.println("Selected entry");
 		}
 	}
 

@@ -1,0 +1,12 @@
+<resources>
+<string-array name="listArray">
+	<item>English</item>
+	<item>Spanish</item>
+	<item>Portuguese</item>
+</string-array>
+<string-array name="listValues">
+    <item>en</item>
+    <item>es</item>
+    <item>pt</item>
+</string-array>
+</resources>
