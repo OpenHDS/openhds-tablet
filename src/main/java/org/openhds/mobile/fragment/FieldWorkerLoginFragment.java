@@ -180,8 +180,8 @@ public class FieldWorkerLoginFragment extends Fragment implements
 
 		@Override
 		protected void onPostExecute(FieldWorker result) {
-			// We want really basic authentication. For the moment, just check if password equals extId
-			if(result != null){
+			// BCrypt hash authentication
+			if(result != null && validHash(result.getPasswordHash())){
 				if(BCrypt.checkpw(password,result.getPasswordHash())){
 					listener.onAuthenticated(result);
 				}
@@ -190,8 +190,13 @@ public class FieldWorkerLoginFragment extends Fragment implements
 				}
 			}
 			else{
-				listener.onAuthenticated(result);
+				listener.onAuthenticated(null);
 			}
+		}
+		
+		//*Check if pw-hash is valid bcrypt */
+		private boolean validHash(String hash){
+			return hash != null && (hash.startsWith("$2a$") || hash.startsWith("$2x$") || hash.startsWith("$2y$"));
 		}
 	}
 
