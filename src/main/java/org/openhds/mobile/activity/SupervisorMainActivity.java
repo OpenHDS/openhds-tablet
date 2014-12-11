@@ -161,14 +161,8 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
-		if(key.equals("displayLanguage"))
-			restartActivity();
+		if(key.equals("displayLanguage")){
+			recreate();
+		}
 	}
-	
-	private void restartActivity() {
-	    Intent intent = getIntent();
-	    finish();
-	    startActivity(intent);
-	}
-
 }

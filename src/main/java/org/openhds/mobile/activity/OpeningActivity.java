@@ -1,5 +1,7 @@
 package org.openhds.mobile.activity;
 
+import java.util.Locale;
+
 import org.openhds.mobile.R;
 import org.openhds.mobile.fragment.FieldWorkerLoginFragment;
 import org.openhds.mobile.fragment.LoginPreferenceFragment;
@@ -15,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 public class OpeningActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -80,13 +83,9 @@ public class OpeningActivity extends Activity implements SharedPreferences.OnSha
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
-		if(key.equals("displayLanguage"))
-			restartActivity();
+		if(key.equals("displayLanguage")){
+			recreate();
+		}
 	}	
-	
-	private void restartActivity() {
-	    Intent intent = getIntent();
-	    finish();
-	    startActivity(intent);
-	}
+
 }
