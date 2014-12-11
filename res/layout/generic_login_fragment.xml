@@ -21,7 +21,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/titleTextView"
         android:ems="10"
-        android:hint="Username" >
+        android:hint="@string/login_username" >
 
         <requestFocus />
     </EditText>

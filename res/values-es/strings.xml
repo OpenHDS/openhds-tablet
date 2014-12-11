@@ -22,7 +22,7 @@
 	  <string name="openhds_server_url_key">openhds_server_url</string> 
 	  <string name="openhds_server_url_title">URL del OpenHDS Server</string>
 	  <string name="supervisor_login_url">/api/rest/socialgroups</string>
-    <string name="supervisor_login">Informacion del Supervisor</string>
+    <string name="supervisor_login">Supervisor</string>
     <string name="default_openhdsserver">http://data-management.local:8080/openhds</string>
 	  <string name="delete_form_btn">Borrar Impreso</string>
     <string name="download_form_button">Descargar Impresos</string>
@@ -187,7 +187,7 @@
 	<string name="yes_lbl">Si</string>
 	<string name="no_lbl">No</string>
 	<string name="error_lbl">Error</string>
-	<string name="success_lbl">Exito</string>
+	<string name="success_lbl">Éxito</string>
 	<string name="trying_to_authenticate_lbl">Intentando autenticar...</string>
 	<string name="sprvlogin_enter_in_user">Por favor ingrese en un usuario</string>
 	<string name="sprvlogin_enter_in_pass">Por favor, ingrese una contraseña</string>
@@ -238,7 +238,7 @@
     <string name="hierarchy5_select_lbl">Seleccione planta</string>-->
     <string name="login_username">Usuario</string>
     <string name="login_password">Contrasena</string>
-    <string name="fieldworker_login">Enucestador Login</string>
+    <string name="fieldworker_login">Enucestador</string>
 
     <string name="field_workers_sync_url">/api/rest/fieldworkers</string>
     <string name="landscape_layout_tag">landscape</string>
