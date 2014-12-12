@@ -1,11 +1,8 @@
 package org.openhds.mobile.activity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
-
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
@@ -139,7 +136,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	public static final String INMIGRATION = "Inmigration";
 	
 	private static final List<String> stateSequence = new ArrayList<String>();
-	private static final Map<String, Integer> stateLabels = new HashMap<String, Integer>();
+//	private static final Map<String, Integer> stateLabels = new HashMap<String, Integer>();
 	static {
 		stateSequence.add(SELECT_HIERARCHY_1);
 		stateSequence.add(SELECT_HIERARCHY_2);
@@ -163,6 +160,11 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         locationVisit.setFieldWorker(fw);
 
         vf = new ValueFragment();
+        
+        Cursor startCursor = Queries.getStartHierarchyLevel(getContentResolver(), "2");
+        if (startCursor.moveToNext()) {
+        vf.setSTART_HIERARCHY_LEVEL_NAME(startCursor.getString(startCursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME)));
+        }
         FragmentTransaction txn = getFragmentManager().beginTransaction();
         txn.add(R.id.middle_col, vf).commit();
 
@@ -228,7 +230,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     /**
      * This method is responsible for restoring the screen state.
      */
-    private void restoreState(Bundle savedState) {
+    /*private void restoreState(Bundle savedState) {
         if (savedState != null) {
             locationVisit = (LocationVisit) savedState.getSerializable("locationvisit");
 
@@ -248,7 +250,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             String state = (String)savedState.getSerializable("currentState");
             stateMachine.transitionTo(state);
         }
-    }    
+    }    */
     
     @Override
     protected void onStart() {
@@ -802,9 +804,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         vf.loadLocations(locationVisit.getHierarchy4().getExtId());
     }
 
-    private void loadRoundValueData() {
+  /*  private void loadRoundValueData() {
         vf.loadRounds();
-    }
+    }*/
 
     private void loadIndividualValueData() {
         vf.loadIndividuals(locationVisit.getLocation().getExtId());
@@ -1515,8 +1517,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        }
 	        case INDIVIDUALS_IN_SOCIAL_GROUP_ACTIVE:
 	        {
-	        	String sg = args.getString("sg");
-	        	String hohExtId = args.getString("hohExtId");
+	        	//String sg = args.getString("sg");
+	        	//String hohExtId = args.getString("hohExtId");
 	            uri = OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE;
 	        	
 	        	Cursor cursor = Queries.getSocialGroupsByIndividualExtId(getContentResolver(), locationVisit.getSelectedIndividual().getExtId());
@@ -1525,7 +1527,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        		int columnIndex = cursor.getColumnIndex("_id");
 	        		int extIdIndex = cursor.getColumnIndex("extId");
 	        		if(columnIndex > -1  && extIdIndex > -1) {
-	        			int sg_uuid = cursor.getInt(columnIndex);
+	        			//int sg_uuid = cursor.getInt(columnIndex);
 	        			String extId = cursor.getString(extIdIndex);
 	        			cursor.close();
 	        			
@@ -1558,7 +1560,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		        
 	        	while(!cursor.isAfterLast()){
 	        		String individualExtId = cursor.getString(cursor.getColumnIndex(OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID));
-	        		String sgExtId = cursor.getString(cursor.getColumnIndex(OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID));
+	        //		String sgExtId = cursor.getString(cursor.getColumnIndex(OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID));
 	        		
 					if(!uniqueExtIds.contains(individualExtId)){
 						uniqueExtIds.add(individualExtId);

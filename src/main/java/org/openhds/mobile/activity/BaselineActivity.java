@@ -1,11 +1,8 @@
 package org.openhds.mobile.activity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
-
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
@@ -129,7 +126,7 @@ EventFragment.Listener, SelectionFragment.Listener {
 	public static final String INMIGRATION = "Inmigration";
 	
 	private static final List<String> stateSequence = new ArrayList<String>();
-	private static final Map<String, Integer> stateLabels = new HashMap<String, Integer>();
+//	private static final Map<String, Integer> stateLabels = new HashMap<String, Integer>();
 	static {
 		stateSequence.add(SELECT_HIERARCHY_1);
 		stateSequence.add(SELECT_HIERARCHY_2);
@@ -156,6 +153,10 @@ EventFragment.Listener, SelectionFragment.Listener {
         locationVisit.setFieldWorker(fw);
 
         vf = new ValueFragment();
+        Cursor startCursor = Queries.getStartHierarchyLevel(getContentResolver(), "2");
+        if (startCursor.moveToNext()) {
+        vf.setSTART_HIERARCHY_LEVEL_NAME(startCursor.getString(startCursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME)));
+        }
         FragmentTransaction txn = getFragmentManager().beginTransaction();
         txn.add(R.id.middle_col, vf).commit();
 
@@ -224,7 +225,7 @@ EventFragment.Listener, SelectionFragment.Listener {
     /**
      * This method is responsible for restoring the screen state.
      */
-    private void restoreState(Bundle savedState) {
+    /*   private void restoreState(Bundle savedState) {
         if (savedState != null) {
             locationVisit = (LocationVisit) savedState.getSerializable("locationvisit");
 
@@ -244,7 +245,7 @@ EventFragment.Listener, SelectionFragment.Listener {
             String state = (String)savedState.getSerializable("currentState");
             stateMachine.transitionTo(state);
         }
-    }    
+    }     */
     
     @Override
     protected void onStart() {

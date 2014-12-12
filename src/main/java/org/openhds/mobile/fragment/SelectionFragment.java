@@ -129,14 +129,14 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         roundBtn.setVisibility(View.GONE);
     }
     
-    private Button getButtonForState(String state){
+    /*   private Button getButtonForState(String state){
     	for(Button button : hierarchyButtons){
     		if(button.getText().toString().equals(state)){
     			return button;
     		}
     	}
     	return null;
-    }
+    }*/
 
     private void setHierarchy1() {
         LocationHierarchy region = locationVisit.getHierarchy1();

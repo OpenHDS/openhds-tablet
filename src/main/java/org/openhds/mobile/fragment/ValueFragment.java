@@ -19,7 +19,6 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -115,11 +114,16 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         listCurrentlyDisplayed = Displayed.NONE;
     }
     
-    @Override
+    public void setSTART_HIERARCHY_LEVEL_NAME(
+			String sTART_HIERARCHY_LEVEL_NAME) {
+		START_HIERARCHY_LEVEL_NAME = sTART_HIERARCHY_LEVEL_NAME;
+	}
+
+	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         
-        START_HIERARCHY_LEVEL_NAME = getString(R.string.STARTHIERARCHYLEVELNAME);
+       // START_HIERARCHY_LEVEL_NAME = getString(R.string.STARTHIERARCHYLEVELNAME);
 
         try {
             listener = (ValueListener) activity;
