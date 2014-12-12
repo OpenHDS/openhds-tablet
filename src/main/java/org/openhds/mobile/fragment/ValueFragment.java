@@ -216,14 +216,6 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     	if(arg0 == -1) return null;
     	setListShown(false);
     	
-    	System.out.println("Current id of loader: " + arg0);
-    	System.out.println("List currently displayed: " + listCurrentlyDisplayed);
-    	if(arg1 != null){
-	    	for(String key : arg1.keySet()){
-	    		System.out.println("Key: " + key + " / Value: " + arg1.getString(key));
-	    	}
-    	}
-    	
         switch (arg0) {
 	        case HIERARCHY_LOADER:
 	            adapter.changeCursorAndColumns(null, HIERARCHY_COLUMNS, VIEW_BINDINGS);
@@ -429,15 +421,14 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if(adapter != null && cursor != null){
-        	String contents = DatabaseUtils.dumpCursorToString(cursor);
-        	System.out.println(contents);
         	
-        	if(listCurrentlyDisplayed == Displayed.LOCATION && cursor.getColumnIndex("name") == -1)
-        		System.out.println("Display Location, but cursor doesnt contain index with columnname 'name'");
+        	if(listCurrentlyDisplayed == Displayed.LOCATION && cursor.getColumnIndex("name") == -1){
+//        		System.out.println("Display Location, but cursor doesnt contain index with columnname 'name'");
+        	}
         	else
+        	{
         		adapter.swapCursor(cursor);
-        	contents = DatabaseUtils.dumpCursorToString(cursor);
-        	System.out.println(contents);
+        	}
         	
             if(listCurrentlyDisplayed != null){
     	        //Show different messages depending on currently displayed list

@@ -8,6 +8,9 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 
+/*
+ * Handles on-the-fly internationalization of Application
+ */
 public class OpenHDSApplication extends Application {
 	
 	private Locale locale = null;
@@ -27,7 +30,8 @@ public class OpenHDSApplication extends Application {
     public void onCreate() {
         super.onCreate();
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        String lang = settings.getString(getString(R.string.locale_lang), "es");
+        String defaultLang = getString(R.string.locale_lang);
+        String lang = settings.getString(getString(R.string.locale_lang), defaultLang);
         changeLang(lang); 
     }
     

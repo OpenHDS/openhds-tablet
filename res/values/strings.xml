@@ -284,6 +284,6 @@
     
     <string name="hello_lbl">Hello</string>
     <string name="STARTHIERARCHYLEVELNAME">District</string>
-    <string name="locale_lang">es</string>
+    <string name="locale_lang">en</string>
 
 </resources>

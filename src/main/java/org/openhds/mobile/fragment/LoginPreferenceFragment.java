@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -25,6 +26,13 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 
 		// Load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.preferences);
+		
+		//Dynamically set default value of ListPreference according to settings
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String defaultLang = getString(R.string.locale_lang);
+        String lang = settings.getString(getString(R.string.locale_lang), defaultLang);
+		ListPreference languagePreferenceList = (ListPreference) findPreference ("displayLanguage");
+		languagePreferenceList.setValue(lang);
 	}
 
 	@Override
@@ -50,11 +58,8 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 			
 		if(key.equals("displayLanguage")){
 			String language = sharedPreferences.getString("displayLanguage","en");
-			System.out.println("Switching to: " + language);
 			
 			((OpenHDSApplication)getActivity().getApplicationContext()).changeLang(language);
-			
-			
 		}
 		else if((key.equals(getResourceString(getActivity(),
 				(R.string.openhds_server_url_key))))){
@@ -100,9 +105,6 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 				(R.string.openhds_server_url_key)))) {
 			EditTextPreference editTextPreference = (EditTextPreference) preference;
 			editTextPreference.setSummary(editTextPreference.getText());
-		}
-		else if(key.equals("displayLanguage")){
-			System.out.println("Selected entry");
 		}
 	}
 

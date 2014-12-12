@@ -1390,7 +1390,45 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onRound() {
         locationVisit.clearLevelsBelow(4);
         stateMachine.transitionTo("Select Round");
-        loadRoundValueData();
+//        loadRoundValueData();
+        
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+        cursor = Queries.allRounds(resolver);
+        int rows = cursor.getCount();       
+        if(rows > 0){        
+        	int highestRoundNumber = -1;
+        	Round latestRound = null;
+        	Round currentRound = null;
+        	while(cursor.moveToNext()){
+        		currentRound = Converter.convertToRound(cursor);
+        		String roundNumberString = currentRound.getRoundNumber();
+        		try{
+        			int currentRoundNumber = Integer.parseInt(roundNumberString);
+        			if(currentRoundNumber > highestRoundNumber){
+        				latestRound = currentRound;
+        				highestRoundNumber = currentRoundNumber;
+        			}
+        		}
+        		catch(NumberFormatException nfe){}
+        		
+        		if(highestRoundNumber == 0){
+        			Toast.makeText(this, "Round number with 0 found. This usually seems to be the baseline round.", Toast.LENGTH_LONG).show();
+        		}
+        		else if(highestRoundNumber > 0){
+        			onRoundSelected(latestRound);
+        		}
+        		else{
+        			Toast.makeText(this, "Could not parse round numbers", Toast.LENGTH_LONG).show();
+        		}
+        	}     	
+        }
+        else{
+        	Toast.makeText(this, "No round information found. Please sync with server and make sure tasks were created!", Toast.LENGTH_LONG).show();
+        }
+                
+        vf.onLoaderReset(null);
+        cursor.close();          
     }
 
     public void onIndividual() {
