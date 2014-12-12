@@ -114,7 +114,27 @@ public class OpenHDS {
         public static final String COLUMN_ROUND_ENDDATE = "endDate";
         public static final String COLUMN_ROUND_NUMBER = "roundNumber";
     }
+    
+    public static final class HierarchyLevels implements BaseColumns {
+        public static final String TABLE_NAME = "hierarchylevels";
+        private static final String SCHEME = "content://";
 
+        private static final String PATH_NOTES = "/hierarchylevels";
+        private static final String PATH_NOTE_ID = "/hierarchylevels/";
+
+        public static final int ID_PATH_POSITION = 1;
+
+        public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_NOTES);
+        public static final Uri CONTENT_ID_URI_BASE = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID);
+        public static final Uri CONTENT_ID_URI_PATTERN = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID + "/#");
+
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.openhds.hierarchylevels";
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.openhds.hierarchylevels";
+
+        public static final String COLUMN_LEVEL_IDENTIFIER = "keyIdentifier";
+        public static final String COLUMN_LEVEL_NAME = "name";
+        public static final String COLUMN_LEVEL_UUID = "uuid";
+    }
     public static final class Visits implements BaseColumns {
         public static final String TABLE_NAME = "visits";
         private static final String SCHEME = "content://";

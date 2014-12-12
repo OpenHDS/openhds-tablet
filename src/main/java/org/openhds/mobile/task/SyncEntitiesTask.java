@@ -70,7 +70,7 @@ public class SyncEntitiesTask extends
 	}
 
 	private enum Entity {
-		LOCATION_HIERARCHY, LOCATION, ROUND, VISIT, RELATIONSHIP, INDIVIDUAL, SOCIALGROUP
+		LOCATION_HIERARCHY, LOCATION, ROUND, VISIT, RELATIONSHIP, INDIVIDUAL, SOCIALGROUP, LOCATION_HIERARCHY_LEVELS
 	}
 
 	public SyncEntitiesTask(String url, String username, String password,
@@ -105,6 +105,9 @@ public class SyncEntitiesTask extends
 			break;
 		case LOCATION_HIERARCHY:
 			builder.append(" Location Hierarchy.");
+			break;
+		case LOCATION_HIERARCHY_LEVELS:
+			builder.append(" Location Hierarchy Levels.");
 			break;
 		case RELATIONSHIP:
 			builder.append(" Relationships.");
@@ -150,6 +153,9 @@ public class SyncEntitiesTask extends
 
 			entity = Entity.ROUND;
 			processUrl(baseurl + API_PATH + "/rounds");
+			
+			entity = Entity.LOCATION_HIERARCHY_LEVELS;
+			processUrl(baseurl + API_PATH + "/locationhierarchylevels");
 
 			entity = Entity.VISIT;
 			processUrl(baseurl + API_PATH + "/visits/cached");
@@ -238,6 +244,8 @@ public class SyncEntitiesTask extends
 					processHierarchyParams(parser);
 				} else if (name.equalsIgnoreCase("rounds")) {
 					processRoundParams(parser);
+				} else if (name.equalsIgnoreCase("locationhierarchylevels")) {
+					processHierarchyLevelsParams(parser);
 				} else if (name.equalsIgnoreCase("visits")) {
 					processVisitParams(parser);
 				} else if (name.equalsIgnoreCase("socialgroups")) {
@@ -522,6 +530,37 @@ public class SyncEntitiesTask extends
 		return groups;
 	}
 
+	
+	
+	private void processHierarchyLevelsParams(XmlPullParser parser)
+			throws XmlPullParserException, IOException {
+		parser.nextTag();
+
+		values.clear();
+		while (notEndOfXmlDoc("locationhierarchylevels", parser)) {
+			ContentValues cv = new ContentValues();
+
+			parser.nextTag();
+			cv.put(OpenHDS.HierarchyLevels.COLUMN_LEVEL_IDENTIFIER, parser.nextText());
+
+			parser.nextTag();
+			cv.put(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME, parser.nextText());
+
+			parser.nextTag();
+			cv.put(OpenHDS.HierarchyLevels.COLUMN_LEVEL_UUID, parser.nextText());
+
+
+			values.add(cv);
+
+			parser.nextTag(); // </locationhierarchylevels>
+			parser.nextTag(); // </locationhierarchylevels> or <locationhierarchylevel>
+		}
+
+		if (!values.isEmpty()) {
+			resolver.bulkInsert(OpenHDS.HierarchyLevels.CONTENT_ID_URI_BASE,
+					values.toArray(emptyArray));
+		}
+	}
 	private void processRoundParams(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		parser.nextTag();
