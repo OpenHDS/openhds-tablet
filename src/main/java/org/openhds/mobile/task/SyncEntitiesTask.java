@@ -185,6 +185,7 @@ public class SyncEntitiesTask extends
 		resolver.delete(OpenHDS.Relationships.CONTENT_ID_URI_BASE, null, null);
 		resolver.delete(OpenHDS.SocialGroups.CONTENT_ID_URI_BASE, null, null);
 		resolver.delete(OpenHDS.HierarchyItems.CONTENT_ID_URI_BASE, null, null);
+		resolver.delete(OpenHDS.HierarchyLevels.CONTENT_ID_URI_BASE, null, null);
 		resolver.delete(OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, null);
 		resolver.delete(OpenHDS.Locations.CONTENT_ID_URI_BASE, null, null);
 	}

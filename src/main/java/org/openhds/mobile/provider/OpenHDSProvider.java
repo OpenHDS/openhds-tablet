@@ -20,7 +20,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.UriMatcher;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
@@ -42,6 +41,7 @@ public class OpenHDSProvider extends ContentProvider {
     private static HashMap<String, String> individualsProjectionMap;
     private static HashMap<String, String> locationsProjectionMap;
     private static HashMap<String, String> hierarchyitemsProjectionMap;
+    private static HashMap<String, String> hierarchylevelsProjectionMap;
     private static HashMap<String, String> roundsProjectionMap;
     private static HashMap<String, String> visitsProjectionMap;
     private static HashMap<String, String> relationshipsProjectionMap;
@@ -77,6 +77,8 @@ public class OpenHDSProvider extends ContentProvider {
     private static final int FORMS = 22;
 
     private static final UriMatcher sUriMatcher;
+
+	private static final int HIERARCHYLEVELS = 24;
     private DatabaseHelper mOpenHelper;
 
     private String password;
@@ -90,6 +92,7 @@ public class OpenHDSProvider extends ContentProvider {
 
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "locations", LOCATIONS);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "locations/#", LOCATION_ID);
+        sUriMatcher.addURI(OpenHDS.AUTHORITY, "hierarchylevels", HIERARCHYLEVELS);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "hierarchyitems", HIERARCHYITEMS);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "hierarchyitems/#", HIERARCHYITEM_ID);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "rounds", ROUNDS);
@@ -156,6 +159,16 @@ public class OpenHDSProvider extends ContentProvider {
                 OpenHDS.HierarchyItems.COLUMN_HIERARCHY_NAME);
         hierarchyitemsProjectionMap.put(OpenHDS.HierarchyItems.COLUMN_HIERARCHY_PARENT,
                 OpenHDS.HierarchyItems.COLUMN_HIERARCHY_PARENT);
+        
+        hierarchylevelsProjectionMap = new HashMap<String, String>();
+        hierarchylevelsProjectionMap.put(OpenHDS.HierarchyLevels._ID, OpenHDS.HierarchyLevels._ID);
+        hierarchylevelsProjectionMap.put(OpenHDS.HierarchyLevels.COLUMN_LEVEL_IDENTIFIER,
+        		OpenHDS.HierarchyLevels.COLUMN_LEVEL_IDENTIFIER);
+        hierarchylevelsProjectionMap.put(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME,
+        		OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME);
+        hierarchylevelsProjectionMap.put(OpenHDS.HierarchyLevels.COLUMN_LEVEL_UUID,
+        		OpenHDS.HierarchyLevels.COLUMN_LEVEL_UUID);
+
 
         roundsProjectionMap = new HashMap<String, String>();
         roundsProjectionMap.put(OpenHDS.Rounds._ID, OpenHDS.Rounds._ID);
@@ -289,6 +302,13 @@ public class OpenHDSProvider extends ContentProvider {
                     + OpenHDS.HierarchyItems.COLUMN_HIERARCHY_PARENT + " TEXT NOT NULL);" 
                     + " CREATE UNIQUE INDEX IDX_HIERARCHY_EXTID ON " +  OpenHDS.HierarchyItems.TABLE_NAME
                     + "(" +  OpenHDS.HierarchyItems.COLUMN_HIERARCHY_EXTID + ")");
+            
+            db.execSQL("CREATE TABLE " + OpenHDS.HierarchyLevels.TABLE_NAME + " (" + OpenHDS.HierarchyLevels._ID
+                    + " INTEGER PRIMARY KEY," + OpenHDS.HierarchyLevels.COLUMN_LEVEL_IDENTIFIER + " TEXT NOT NULL,"
+                    + OpenHDS.HierarchyLevels.COLUMN_LEVEL_UUID + " TEXT NOT NULL,"
+                    + OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME + " TEXT NOT NULL);" 
+                    + " CREATE UNIQUE INDEX IDX_HIERARCHYLEVEL_MAME ON " +  OpenHDS.HierarchyLevels.TABLE_NAME
+                    + "(" +  OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME + ")");
    
 
             db.execSQL("CREATE TABLE " + OpenHDS.Rounds.TABLE_NAME + " (" + OpenHDS.Rounds._ID
@@ -348,6 +368,7 @@ public class OpenHDSProvider extends ContentProvider {
             db.execSQL("DROP TABLE IF EXISTS " + OpenHDS.Individuals.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + OpenHDS.Visits.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + OpenHDS.HierarchyItems.TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + OpenHDS.HierarchyLevels.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + OpenHDS.Locations.TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + OpenHDS.Forms.TABLE_NAME);
             onCreate(db);
@@ -453,6 +474,10 @@ public class OpenHDSProvider extends ContentProvider {
         case HIERARCHYITEMS:
             qb.setTables(OpenHDS.HierarchyItems.TABLE_NAME);
             qb.setProjectionMap(hierarchyitemsProjectionMap);
+            break;
+        case HIERARCHYLEVELS:
+            qb.setTables(OpenHDS.HierarchyLevels.TABLE_NAME);
+            qb.setProjectionMap(hierarchylevelsProjectionMap);
             break;
         case HIERARCHYITEM_ID:
             qb.setTables(OpenHDS.HierarchyItems.TABLE_NAME);
@@ -614,6 +639,8 @@ public class OpenHDSProvider extends ContentProvider {
             return OpenHDS.Locations.CONTENT_TYPE;
         case LOCATION_ID:
             return OpenHDS.Locations.CONTENT_ITEM_TYPE;
+        case HIERARCHYLEVELS:
+            return OpenHDS.HierarchyLevels.CONTENT_TYPE;
         case HIERARCHYITEMS:
             return OpenHDS.HierarchyItems.CONTENT_TYPE;
         case HIERARCHYITEM_ID:
@@ -662,6 +689,10 @@ public class OpenHDSProvider extends ContentProvider {
         case LOCATIONS:
             table = OpenHDS.Locations.TABLE_NAME;
             contentUriBase = OpenHDS.Locations.CONTENT_ID_URI_BASE;
+            break;
+        case HIERARCHYLEVELS:
+            table = OpenHDS.HierarchyLevels.TABLE_NAME;
+            contentUriBase = OpenHDS.HierarchyLevels.CONTENT_ID_URI_BASE;
             break;
         case HIERARCHYITEMS:
             table = OpenHDS.HierarchyItems.TABLE_NAME;
@@ -741,6 +772,9 @@ public class OpenHDSProvider extends ContentProvider {
         case LOCATION_ID:
             finalWhere = buildFinalWhere(uri, OpenHDS.Locations.NOTE_ID_PATH_POSITION, where);
             count = db.delete(OpenHDS.Locations.TABLE_NAME, finalWhere, whereArgs);
+            break;
+        case HIERARCHYLEVELS:
+            count = db.delete(OpenHDS.HierarchyLevels.TABLE_NAME, where, whereArgs);
             break;
         case HIERARCHYITEMS:
             count = db.delete(OpenHDS.HierarchyItems.TABLE_NAME, where, whereArgs);
@@ -833,6 +867,9 @@ public class OpenHDSProvider extends ContentProvider {
         case LOCATION_ID:
             finalWhere = buildFinalWhere(uri, OpenHDS.Locations.NOTE_ID_PATH_POSITION, where);
             count = db.update(OpenHDS.Locations.TABLE_NAME, values, finalWhere, whereArgs);
+            break;
+        case HIERARCHYLEVELS:
+            count = db.update(OpenHDS.HierarchyLevels.TABLE_NAME, values, where, whereArgs);
             break;
         case HIERARCHYITEMS:
             count = db.update(OpenHDS.HierarchyItems.TABLE_NAME, values, where, whereArgs);
