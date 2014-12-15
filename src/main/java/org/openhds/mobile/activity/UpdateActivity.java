@@ -53,7 +53,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -166,6 +165,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         Cursor startCursor = Queries.getStartHierarchyLevel(getContentResolver(), "2");
         if (startCursor.moveToNext()) {
         vf.setSTART_HIERARCHY_LEVEL_NAME(startCursor.getString(startCursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME)));
+        startCursor.close();
         }
         FragmentTransaction txn = getFragmentManager().beginTransaction();
         txn.add(R.id.middle_col, vf).commit();
