@@ -3,6 +3,7 @@ package org.openhds.mobile.activity;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
@@ -23,6 +24,7 @@ import org.openhds.mobile.fragment.EventFragment;
 import org.openhds.mobile.fragment.ProgressFragment;
 import org.openhds.mobile.fragment.SelectionFragment;
 import org.openhds.mobile.fragment.ValueFragment;
+import org.openhds.mobile.fragment.ValueFragment.OnlyOneEntryListener.Entity;
 import org.openhds.mobile.listener.OdkFormLoadListener;
 import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.FilledForm;
@@ -65,7 +67,7 @@ import android.widget.Toast;
  * interacts with the application.
  */
 public class BaselineActivity extends Activity implements ValueFragment.ValueListener, LoaderCallbacks<Cursor>,
-EventFragment.Listener, SelectionFragment.Listener {
+EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryListener {
 
     private SelectionFragment sf;
     private ValueFragment vf;
@@ -153,6 +155,8 @@ EventFragment.Listener, SelectionFragment.Listener {
         locationVisit.setFieldWorker(fw);
 
         vf = new ValueFragment();
+        vf.addOnlyOneEntryListener(this);
+        
         Cursor startCursor = Queries.getStartHierarchyLevel(getContentResolver(), "2");
         if (startCursor.moveToNext()) {
         	vf.setSTART_HIERARCHY_LEVEL_NAME(startCursor.getString(startCursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME)));
@@ -1281,31 +1285,108 @@ EventFragment.Listener, SelectionFragment.Listener {
     public void onHierarchy1() {
         locationVisit.clearLevelsBelow(0);
         stateMachine.transitionTo("Select Hierarchy 1");
-        loadHierarchy1ValueData();
+        
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+    	cursor = Queries.getHierarchysByLevel(resolver, vf.getSTART_HIERARCHY_LEVEL_NAME());
+    	
+    	if(cursor.getCount() == 1){
+    		cursor.moveToNext();
+    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+    		cursor.close();   
+    		onHierarchy1Selected(currentLocationHierarchy);
+    	}
+    	else{
+    		cursor.close();   
+    		loadHierarchy1ValueData();
+    		vf.onLoaderReset(null); 
+    	} 
     }
 
     public void onHierarchy2() {
         locationVisit.clearLevelsBelow(1);
         stateMachine.transitionTo("Select Hierarchy 2");
-        loadHierarchy2ValueData();
+
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+    	String parentExtId = locationVisit.getHierarchy1().getExtId();
+    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+    	
+    	if(cursor.getCount() == 1){
+    		cursor.moveToNext();
+    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+    		cursor.close();   
+    		onHierarchy2Selected(currentLocationHierarchy);
+    	}
+    	else{
+    		cursor.close();   
+    		loadHierarchy2ValueData();
+    		vf.onLoaderReset(null);
+    	} 
     }
     
     public void onHierarchy3() {
         locationVisit.clearLevelsBelow(2);
         stateMachine.transitionTo("Select Hierarchy 3");
-        loadHierarchy3ValueData();
+
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+    	String parentExtId = locationVisit.getHierarchy2().getExtId();
+    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+    	
+    	if(cursor.getCount() == 1){
+    		cursor.moveToNext();
+    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+    		cursor.close();   
+    		onHierarchy3Selected(currentLocationHierarchy);
+    	}
+    	else{
+    		cursor.close();   
+    		loadHierarchy3ValueData();
+    		vf.onLoaderReset(null);
+    	}   
     }
 
     public void onHierarchy4() {
         locationVisit.clearLevelsBelow(3);
         stateMachine.transitionTo("Select Hierarchy 4");
-        loadHierarchy4ValueData();
+
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+    	String parentExtId = locationVisit.getHierarchy3().getExtId();
+    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+    	
+    	if(cursor.getCount() == 1){
+    		cursor.moveToNext();
+    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+    		cursor.close();   
+    		onHierarchy4Selected(currentLocationHierarchy);
+    	}
+    	else{
+    		cursor.close();
+    		loadHierarchy4ValueData();
+    		vf.onLoaderReset(null);
+    	}          
     }
 
     public void onLocation() {
         locationVisit.clearLevelsBelow(5);
         stateMachine.transitionTo("Select Location");
-        loadLocationValueData();
+        
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+    	String parentExtId = locationVisit.getHierarchy4().getExtId();
+    	cursor = Queries.getLocationsByHierachy(resolver, parentExtId);
+    	
+    	if(cursor.getCount() == 1){
+    		cursor.moveToNext();
+    		Location location = Converter.convertToLocation(cursor);
+    		onLocationSelected(location);
+    	}
+    	else{
+    		loadLocationValueData();
+    	}
+    	cursor.close();
     }
 
     public void onRound() {
@@ -1510,4 +1591,10 @@ EventFragment.Listener, SelectionFragment.Listener {
                 FormsProviderAPI.FormsColumns.JR_FORM_ID, FormsProviderAPI.FormsColumns.FORM_FILE_PATH },
                 FormsProviderAPI.FormsColumns.JR_FORM_ID + " like ?", new String[] { name + "%" }, null);
     }
+    
+	public void handleResult(Entity entity) {
+		if(entity == Entity.INDIVIDUAL){
+			vf.selectItemNoInList(0);
+		}
+	}
 }
