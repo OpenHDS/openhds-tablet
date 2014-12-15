@@ -155,8 +155,9 @@ EventFragment.Listener, SelectionFragment.Listener {
         vf = new ValueFragment();
         Cursor startCursor = Queries.getStartHierarchyLevel(getContentResolver(), "2");
         if (startCursor.moveToNext()) {
-        vf.setSTART_HIERARCHY_LEVEL_NAME(startCursor.getString(startCursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME)));
+        	vf.setSTART_HIERARCHY_LEVEL_NAME(startCursor.getString(startCursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME)));
         }
+        startCursor.close();
         FragmentTransaction txn = getFragmentManager().beginTransaction();
         txn.add(R.id.middle_col, vf).commit();
 

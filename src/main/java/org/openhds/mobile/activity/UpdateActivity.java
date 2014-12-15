@@ -75,7 +75,7 @@ import android.widget.Toast;
  * interacts with the application.
  */
 public class UpdateActivity extends Activity implements ValueFragment.ValueListener, LoaderCallbacks<Cursor>,
-        EventFragment.Listener, SelectionFragment.Listener {
+        EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryListener {
 
     private SelectionFragment sf;
     private ValueFragment vf;
@@ -162,11 +162,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         locationVisit.setFieldWorker(fw);
 
         vf = new ValueFragment();
+        vf.addOnlyOneEntryListener(this);
         
         Cursor startCursor = Queries.getStartHierarchyLevel(getContentResolver(), "2");
         if (startCursor.moveToNext()) {
-        vf.setSTART_HIERARCHY_LEVEL_NAME(startCursor.getString(startCursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME)));
+        	vf.setSTART_HIERARCHY_LEVEL_NAME(startCursor.getString(startCursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME)));
         }
+        startCursor.close();
         FragmentTransaction txn = getFragmentManager().beginTransaction();
         txn.add(R.id.middle_col, vf).commit();
 
@@ -1372,14 +1374,14 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     	if(cursor.getCount() == 1){
     		cursor.moveToNext();
     		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+    		cursor.close();   
     		onHierarchy1Selected(currentLocationHierarchy);
     	}
     	else{
+    		cursor.close();   
     		loadHierarchy1ValueData();
-    	}
-    	
-        vf.onLoaderReset(null);
-        cursor.close();   
+    		vf.onLoaderReset(null); 
+    	}        
     }
 
     public void onHierarchy2() {
@@ -1451,7 +1453,21 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onLocation() {
         locationVisit.clearLevelsBelow(5);
         stateMachine.transitionTo("Select Location");
-        loadLocationValueData();
+                
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+    	String parentExtId = locationVisit.getHierarchy4().getExtId();
+    	cursor = Queries.getLocationsByHierachy(resolver, parentExtId);
+    	
+    	if(cursor.getCount() == 1){
+    		cursor.moveToNext();
+    		Location location = Converter.convertToLocation(cursor);
+    		onLocationSelected(location);
+    	}
+    	else{
+    		loadLocationValueData();
+    	}
+    	cursor.close();
     }
 
     public void onRound() {
@@ -1763,4 +1779,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 FormsProviderAPI.FormsColumns.JR_FORM_ID, FormsProviderAPI.FormsColumns.FORM_FILE_PATH },
                 FormsProviderAPI.FormsColumns.JR_FORM_ID + " like ?", new String[] { name + "%" }, null);
     }
+
+	@Override
+	public void handleResult(Entity entity) {
+		if(entity == Entity.INDIVIDUAL){
+			System.out.println("Found only one result, must select it!");
+			vf.selectItemNoInList(0);
+		}
+	}
 }

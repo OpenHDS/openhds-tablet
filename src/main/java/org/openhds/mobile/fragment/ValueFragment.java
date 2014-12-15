@@ -72,6 +72,8 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private Displayed listCurrentlyDisplayed;
     
     private ValueListener listener;
+    
+    private OnlyOneEntryListener onlyOneEntryListener;
 
     private enum Displayed {
         NONE, HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, ROUND, LOCATION, INDIVIDUAL, SOCIALGROUP;
@@ -91,6 +93,11 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         void onLocationSelected(Location location);
 
         void onIndividualSelected(Individual individual);
+    }
+    
+    public interface OnlyOneEntryListener {
+    	public enum Entity { INDIVIDUAL };
+    	void handleResult(Entity entity);
     }
 
     @Override
@@ -136,6 +143,10 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
             throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
         }
     }
+	
+	public void addOnlyOneEntryListener(OnlyOneEntryListener listener){
+		this.onlyOneEntryListener = listener;
+	}
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -446,6 +457,10 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     	        	{
     	        		if(cursor.getCount() == 0){
     	        			Toast.makeText(getActivity(), "No Individuals found!", Toast.LENGTH_LONG).show();
+    	        		}
+    	        		else if(cursor.getCount() == 1){
+    	        			if(onlyOneEntryListener != null)
+    	        				onlyOneEntryListener.handleResult(OnlyOneEntryListener.Entity.INDIVIDUAL);
     	        		}
     	        	}
     	        	default:
