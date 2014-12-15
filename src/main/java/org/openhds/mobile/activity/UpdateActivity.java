@@ -167,6 +167,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         if (startCursor.moveToNext()) {
         vf.setSTART_HIERARCHY_LEVEL_NAME(startCursor.getString(startCursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME)));
         startCursor.close();
+        }
 
         FragmentTransaction txn = getFragmentManager().beginTransaction();
         txn.add(R.id.middle_col, vf).commit();
@@ -1779,10 +1780,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 FormsProviderAPI.FormsColumns.JR_FORM_ID + " like ?", new String[] { name + "%" }, null);
     }
 
-	@Override
 	public void handleResult(Entity entity) {
 		if(entity == Entity.INDIVIDUAL){
-			System.out.println("Found only one result, must select it!");
 			vf.selectItemNoInList(0);
 		}
 	}
