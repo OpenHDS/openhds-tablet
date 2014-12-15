@@ -118,6 +118,11 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 			String sTART_HIERARCHY_LEVEL_NAME) {
 		START_HIERARCHY_LEVEL_NAME = sTART_HIERARCHY_LEVEL_NAME;
 	}
+    
+    public String getSTART_HIERARCHY_LEVEL_NAME(){
+    	return START_HIERARCHY_LEVEL_NAME;
+    }
+    
 
 	@Override
     public void onAttach(Activity activity) {

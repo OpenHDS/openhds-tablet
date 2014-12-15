@@ -3,6 +3,7 @@ package org.openhds.mobile.activity;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
 import org.openhds.mobile.OpenHDS;
@@ -52,6 +53,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -1362,25 +1364,88 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onHierarchy1() {
         locationVisit.clearLevelsBelow(0);
         stateMachine.transitionTo("Select Hierarchy 1");
-        loadHierarchy1ValueData();
+        
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+    	cursor = Queries.getHierarchysByLevel(resolver, vf.getSTART_HIERARCHY_LEVEL_NAME());
+    	
+    	if(cursor.getCount() == 1){
+    		cursor.moveToNext();
+    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+    		onHierarchy1Selected(currentLocationHierarchy);
+    	}
+    	else{
+    		loadHierarchy1ValueData();
+    	}
+    	
+        vf.onLoaderReset(null);
+        cursor.close();   
     }
 
     public void onHierarchy2() {
         locationVisit.clearLevelsBelow(1);
         stateMachine.transitionTo("Select Hierarchy 2");
-        loadHierarchy2ValueData();
+        
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+    	String parentExtId = locationVisit.getHierarchy1().getExtId();
+    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+    	
+    	if(cursor.getCount() == 1){
+    		cursor.moveToNext();
+    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+    		cursor.close();   
+    		onHierarchy2Selected(currentLocationHierarchy);
+    	}
+    	else{
+    		cursor.close();   
+    		loadHierarchy2ValueData();
+    		vf.onLoaderReset(null);
+    	}       
     }
     
     public void onHierarchy3() {
         locationVisit.clearLevelsBelow(2);
         stateMachine.transitionTo("Select Hierarchy 3");
-        loadHierarchy3ValueData();
+        
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+    	String parentExtId = locationVisit.getHierarchy2().getExtId();
+    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+    	
+    	if(cursor.getCount() == 1){
+    		cursor.moveToNext();
+    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+    		cursor.close();   
+    		onHierarchy3Selected(currentLocationHierarchy);
+    	}
+    	else{
+    		cursor.close();   
+    		loadHierarchy3ValueData();
+    		vf.onLoaderReset(null);
+    	}            
     }
 
     public void onHierarchy4() {
         locationVisit.clearLevelsBelow(3);
         stateMachine.transitionTo("Select Hierarchy 4");
-        loadHierarchy4ValueData();
+
+    	ContentResolver resolver = getContentResolver();
+    	Cursor cursor = null;
+    	String parentExtId = locationVisit.getHierarchy3().getExtId();
+    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+    	
+    	if(cursor.getCount() == 1){
+    		cursor.moveToNext();
+    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+    		cursor.close();   
+    		onHierarchy4Selected(currentLocationHierarchy);
+    	}
+    	else{
+    		cursor.close();
+    		loadHierarchy4ValueData();
+    		vf.onLoaderReset(null);
+    	}           
     }
 
     public void onLocation() {
@@ -1401,9 +1466,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         if(rows > 0){        
         	int highestRoundNumber = -1;
         	Round latestRound = null;
-        	Round currentRound = null;
         	while(cursor.moveToNext()){
-        		currentRound = Converter.convertToRound(cursor);
+        		Round currentRound = Converter.convertToRound(cursor);
         		String roundNumberString = currentRound.getRoundNumber();
         		try{
         			int currentRoundNumber = Integer.parseInt(roundNumberString);
@@ -1413,17 +1477,17 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         			}
         		}
         		catch(NumberFormatException nfe){}
-        		
-        		if(highestRoundNumber == 0){
-        			Toast.makeText(this, "Round number with 0 found. This usually seems to be the baseline round.", Toast.LENGTH_LONG).show();
-        		}
-        		else if(highestRoundNumber > 0){
-        			onRoundSelected(latestRound);
-        		}
-        		else{
-        			Toast.makeText(this, "Could not parse round numbers", Toast.LENGTH_LONG).show();
-        		}
-        	}     	
+        	}   
+        	
+    		if(highestRoundNumber == 0){
+    			Toast.makeText(this, "Round number with 0 found. This usually seems to be the baseline round.", Toast.LENGTH_LONG).show();
+    		}
+    		else if(highestRoundNumber > 0){
+    			onRoundSelected(latestRound);
+    		}
+    		else{
+    			Toast.makeText(this, "Could not parse round numbers", Toast.LENGTH_LONG).show();
+    		}
         }
         else{
         	Toast.makeText(this, "No round information found. Please sync with server and make sure tasks were created!", Toast.LENGTH_LONG).show();
