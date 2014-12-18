@@ -69,8 +69,7 @@ public class SupervisorLoginFragment extends Fragment implements
 	private URL getUrl() {
 		// supervisor_login_url needs to be a secured resource on the sever
 		// for example openhds/api/rest/socialgroups
-		String path = getResourceString(getActivity(),
-				R.string.supervisor_login_url);
+		String path = ""; //getResourceString(getActivity(), R.string.supervisor_login_url);
 		return buildServerUrl(getActivity(), path);
 	}
 
@@ -125,10 +124,13 @@ public class SupervisorLoginFragment extends Fragment implements
 
 	private void onNotConnected() {
 		// attempt to log in using cached credentials in tablet database
-		SupervisorLoginTask loginTask = new SupervisorLoginTask(
-				databaseAdapter, getUsernameFromEditText(),
-				getPasswordFromEditText(), new LoginListener());
-		loginTask.execute();
+//		SupervisorLoginTask loginTask = new SupervisorLoginTask(
+//				databaseAdapter, getUsernameFromEditText(),
+//				getPasswordFromEditText(), new LoginListener());
+//		loginTask.execute();
+		
+		loginButton.setEnabled(true);	
+		showLongToast(getActivity(), R.string.supervisor_bad_credentials);
 	}
 
 	private void launchSupervisorMainActivity() {

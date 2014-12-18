@@ -2,23 +2,30 @@ package org.openhds.mobile.task;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.SocketTimeoutException;
+import java.net.URI;
 import java.net.URL;
 import java.net.UnknownHostException;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 
 public class HttpTask<Params, Progress> extends
@@ -87,7 +94,7 @@ public class HttpTask<Params, Progress> extends
 		try {
 			HttpResponse response;
 			boolean isReachable = false;
-			isReachable = InetAddress.getByName(requestContext.url.getHost()).isReachable(1000);
+			isReachable = isReachable(requestContext.url);
 			if(isReachable){
 				response = executeGet(httpClient, requestContext);
 			}
@@ -116,6 +123,35 @@ public class HttpTask<Params, Progress> extends
 		catch(Exception e){
 			return EndResult.CONNECTION_ERROR;
 		}
+	}
+	
+	private boolean isReachable(URL pUrl){
+		boolean result = false;
+		try
+		{
+			String url = pUrl.toString();
+		    HttpGet request = new HttpGet(url);
+		    HttpParams httpParameters = new BasicHttpParams();
+		    int timeout = 3000;
+		    HttpConnectionParams.setConnectionTimeout(httpParameters, timeout);
+		    HttpClient httpClient = new DefaultHttpClient(httpParameters);
+		    HttpResponse response = httpClient.execute(request);
+
+		    int status = response.getStatusLine().getStatusCode();
+		    if (status == HttpStatus.SC_OK) 
+		    {
+		        result = true;
+		    }
+		}
+		catch (SocketTimeoutException e)
+		{
+		    result = false;
+		} catch (ClientProtocolException e) {
+			result = false;
+		} catch (IOException e) {
+			result = false;
+		}
+		return result;
 	}
 
 	public DefaultHttpClient buildHttpClient(String user, String password) {
