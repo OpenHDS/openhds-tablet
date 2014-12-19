@@ -132,6 +132,11 @@ public class SupervisorLoginFragment extends Fragment implements
 		loginButton.setEnabled(true);	
 		showLongToast(getActivity(), R.string.supervisor_bad_credentials);
 	}
+	
+	private void onNetworkConnection(){
+		loginButton.setEnabled(true);	
+		showLongToast(getActivity(), R.string.supervisor_connection_error);
+	}
 
 	private void launchSupervisorMainActivity() {
 		Intent intent = new Intent(getActivity(), SupervisorMainActivity.class);
@@ -149,11 +154,13 @@ public class SupervisorLoginFragment extends Fragment implements
 		}
 
 		public void onConnectionError() {
-			onNotConnected();
+			//onNotConnected();
+			onNetworkConnection();
 		}
 
 		public void onConnectionTimeout() {
-			onNotConnected();
+			//onNotConnected();
+			onNetworkConnection();
 		}
 
 		public void onSuccess() {
