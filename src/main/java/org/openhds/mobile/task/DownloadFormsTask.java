@@ -24,9 +24,9 @@ public class DownloadFormsTask extends HttpTask<Void, Void> {
 
 	private DatabaseAdapter storage;
 
-	public DownloadFormsTask(RequestContext requestCtx, TaskListener listener,
+	public DownloadFormsTask(Context ctx, RequestContext requestCtx, TaskListener listener,
 			Context context) {
-		super(requestCtx, listener);
+		super(ctx, requestCtx, listener);
 		storage = new DatabaseAdapter(context);
 	}
 

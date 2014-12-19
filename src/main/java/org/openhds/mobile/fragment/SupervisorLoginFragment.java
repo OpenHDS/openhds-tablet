@@ -86,7 +86,7 @@ public class SupervisorLoginFragment extends Fragment implements
 		requestCtx.url(url).user(getUsernameFromEditText())
 				.password(getPasswordFromEditText());
 
-		HttpTask<Void, Void> httpTask = new HttpTask<Void, Void>(requestCtx,
+		HttpTask<Void, Void> httpTask = new HttpTask<Void, Void>(getActivity().getApplicationContext(), requestCtx,
 				new AuthenticateListener());
 		httpTask.execute();
 

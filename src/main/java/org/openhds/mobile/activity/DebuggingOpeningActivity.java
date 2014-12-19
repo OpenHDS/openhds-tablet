@@ -88,7 +88,7 @@ public class DebuggingOpeningActivity extends Activity {
 		requestCtx.url(serverURL).user(SUPERVISOR_USER)
 				.password(SUPERVISOR_PASSWORD);
 		HttpTask<Void, Void> authenticateTask = new HttpTask<Void, Void>(
-				requestCtx, new AuthenticateListener());
+				getApplicationContext(), requestCtx, new AuthenticateListener());
 		authenticateTask.execute();
 	}
 

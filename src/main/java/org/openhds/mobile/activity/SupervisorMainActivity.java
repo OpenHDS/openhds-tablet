@@ -151,7 +151,7 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 		RequestContext requestContext = new RequestContext().user(username)
 				.password(password).url(buildServerUrl(this, path));
 		SyncFieldworkersTask currentTask = new SyncFieldworkersTask(
-				requestContext, getContentResolver(),
+				getApplicationContext(), requestContext, getContentResolver(),
 				syncDatabaseHelper.getProgressDialog(), syncDatabaseHelper);
 		syncDatabaseHelper.setCurrentTask(currentTask);
 

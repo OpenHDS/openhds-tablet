@@ -1,5 +1,7 @@
 package org.openhds.mobile.task;
 
+import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
@@ -24,9 +26,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.openhds.mobile.R;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 
 public class HttpTask<Params, Progress> extends
 		AsyncTask<Params, Progress, HttpTask.EndResult> {
@@ -37,13 +43,15 @@ public class HttpTask<Params, Progress> extends
 	protected RequestContext requestContext;
 	protected TaskListener listener;
 	protected HttpGet httpGet;
+	protected Context ctx;
 
-	public HttpTask(RequestContext requestContext, TaskListener listener) {
-		this(requestContext);
+	public HttpTask(Context ctx, RequestContext requestContext, TaskListener listener) {
+		this(ctx, requestContext);
 		this.listener = listener;
 	}
 
-	public HttpTask(RequestContext requestContext) {
+	public HttpTask(Context ctx, RequestContext requestContext) {
+		this.ctx = ctx;
 		this.requestContext = requestContext;
 		httpGet = new HttpGet(requestContext.url.getPath());
 	}
@@ -129,8 +137,11 @@ public class HttpTask<Params, Progress> extends
 		boolean result = false;
 		try
 		{
-			String url = pUrl.toString();
-		    HttpGet request = new HttpGet(url);
+	        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(ctx);
+	        String serverKey = getResourceString(ctx,R.string.openhds_server_url_key);
+	        String openhdsurl = settings.getString(serverKey, "UNDEF");
+					
+		    HttpGet request = new HttpGet(openhdsurl);
 		    HttpParams httpParameters = new BasicHttpParams();
 		    int timeout = 3000;
 		    HttpConnectionParams.setConnectionTimeout(httpParameters, timeout);

@@ -21,6 +21,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 
 public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 
@@ -28,10 +29,10 @@ public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 	private ProgressDialog progressDialog;
 	private SyncDatabaseListener syncListener;
 
-	public SyncFieldworkersTask(RequestContext requestContext,
+	public SyncFieldworkersTask(Context ctx, RequestContext requestContext,
 			ContentResolver contentResolver, ProgressDialog progressDialog,
 			SyncDatabaseListener syncListener) {
-		super(requestContext);
+		super(ctx, requestContext);
 		this.listener = new SyncFieldWorkerListener();
 		this.syncListener = syncListener;
 		this.progressDialog = progressDialog;
