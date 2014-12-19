@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openhds.mobile.R;
+import org.openhds.mobile.database.queries.Converter;
+import org.openhds.mobile.database.queries.Queries;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
+import org.openhds.mobile.model.LocationHierarchyLevel;
 import org.openhds.mobile.model.LocationVisit;
 import org.openhds.mobile.model.Round;
 import org.openhds.mobile.model.StateMachine;
@@ -14,6 +17,7 @@ import org.openhds.mobile.model.StateMachine.StateListener;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -123,10 +127,24 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         hierarchyButtons.add(hierarchy2Btn);
         hierarchyButtons.add(hierarchy3Btn);
         hierarchyButtons.add(hierarchy4Btn);
-        hierarchyButtons.add(roundBtn);
+        //hierarchyButtons.add(roundBtn);
         
         defaultDrawable = hierarchy1Btn.getBackground();
         roundBtn.setVisibility(View.GONE);
+        
+        setHierarchyButtonLabels();
+    }
+    
+    private void setHierarchyButtonLabels(){
+        Cursor c = Queries.getAllHierarchyLevels(getActivity().getContentResolver());
+        List<LocationHierarchyLevel> lhll = Converter.toLocationHierarchyLevelList(c); 
+        c.close();
+        
+        int startLevel = 1;
+        for(int i = 0; i < hierarchyButtons.size(); i++){
+        	hierarchyButtons.get(i).setText(lhll.get(startLevel).getName());
+        	startLevel++;
+        }     	
     }
     
     /*   private Button getButtonForState(String state){
