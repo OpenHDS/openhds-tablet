@@ -9,6 +9,7 @@ import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
+import org.openhds.mobile.model.LocationHierarchyLevel;
 import org.openhds.mobile.model.Relationship;
 import org.openhds.mobile.model.Round;
 import org.openhds.mobile.model.SocialGroup;
@@ -284,5 +285,27 @@ public class Converter {
         SocialGroup sg = new SocialGroup();
         populateSocialGroup(cursor, sg);
         return sg;
+    }
+    
+    public static LocationHierarchyLevel toLocationHierarchyLevel(Cursor cursor){
+    	LocationHierarchyLevel lhl = new LocationHierarchyLevel();
+    	
+    	if (cursor.getPosition()==-1){
+    		cursor.moveToNext();
+    	}
+    	
+    	lhl.setName(cursor.getString(cursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_NAME)));
+    	lhl.setUuid(cursor.getString(cursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_UUID)));
+    	lhl.setId(cursor.getString(cursor.getColumnIndex(OpenHDS.HierarchyLevels.COLUMN_LEVEL_IDENTIFIER)));
+    	return lhl;
+    }
+    
+    public static List<LocationHierarchyLevel> toLocationHierarchyLevelList(Cursor cursor){
+    	List<LocationHierarchyLevel> locationHierarchyList = new ArrayList<LocationHierarchyLevel>();
+    	while(cursor.moveToNext()){
+    		LocationHierarchyLevel lhl = toLocationHierarchyLevel(cursor);
+    		locationHierarchyList.add(lhl);
+    	}
+    	return locationHierarchyList;
     }
 }
