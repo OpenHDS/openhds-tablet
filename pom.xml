@@ -13,7 +13,7 @@
         <repository>
             <id>openhds-repo</id>
             <name>OpenHDS Repository</name>
-            <url>http://openhds.rcg.usm.maine.edu/nexus/content/groups/public/</url>
+            <url>http://swisstph.dyndns.org:8083/nexus/content/groups/public/</url>
         </repository>
     </repositories>
 
@@ -22,13 +22,13 @@
             <uniqueVersion>false</uniqueVersion>
             <id>nexus</id>
             <name>OpenHDS Release Repository</name>
-            <url>http://openhds.rcg.usm.maine.edu/nexus/content/repositories/releases/</url>
+            <url>http://swisstph.dyndns.org:8083/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
             <uniqueVersion>true</uniqueVersion>
             <id>nexus</id>
             <name>OpenHDS Snapshot Repository</name>
-            <url>http://openhds.rcg.usm.maine.edu/nexus/content/repositories/snapshots/</url>
+            <url>http://swisstph.dyndns.org:8083/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -65,11 +65,11 @@
             <version>19_r4</version>
             <scope>provided</scope>
         </dependency>
-<!--         <dependency> -->
-<!-- 			  <groupId>com.google.android.gms</groupId> -->
-<!-- 			  <artifactId>google-play-services</artifactId> -->
-<!-- 			  <version>17.0.0</version> -->
-<!-- 		</dependency> -->
+        <dependency> 
+			  <groupId>com.google.android.gms</groupId>
+ 			  <artifactId>google-play-services</artifactId> 
+			  <version>17.0.0</version> 
+	</dependency> 
         <dependency>
             <groupId>net.sqlcipher</groupId>
             <artifactId>sqlcipher</artifactId>
