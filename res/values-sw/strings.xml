@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources  xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
+
+    <string name="amendments">Mabadiliko</string>
+    <string name="app_name">OpenHDS Mobile</string>
+    <string name="bad_authentication">Utambulisho Umeshindikana</string>
+    <string name="register">Sajili</string>
+    <string name="bad_xml">Kosa kufungua XML</string>
+    <string name="changePassword">Badili Neno la Siri</string>
+    <string name="changeServer">Badili Server</string>
+    <string name="changeUsername">Badili Jina la Mtumiaji</string>
+    <string name="configuration">Configuration</string>
+    <string name="configureDatabase">Configure Database</string>
+    <string name="databaseSync">Sync with OpenHDS Database</string>
+	<string name="sync_database_name">Sync Database</string>    
+    <string name="choose">Tafadhali Chagua </string>
+    <string name="default_server_url">http://data-management.local:8080/openhds/mobile-interop</string>
+    <string name="interop_server_url_key">interop_server_url</string>
+	<string name="default_openhds_server_url">http://data-management.local:8080/openhds</string>    
+	<string name="openhds_server_url">http://data-management.local:8080/openhds</string>
+    <string name="openhds_server_url_default_summary">Same URL used for OpenHDS Server via Web browser</string>    
+	<string name="openhds_server_url_key">openhds_server_url</string>
+	<string name="openhds_server_url_title">OpenHDS Server URL</string>
+	<string name="supervisor_login_url">/api/rest/socialgroups</string>	
+	<string name="supervisor_login">Msimamizi Ingia</string>	
+    <string name="default_openhdsserver">http://data-management.local:8080/openhds</string>
+    <string name="delete_form_btn">Futa Fomu</string>
+    <string name="download_form_button">Chukua Fomu</string>
+    <string name="download_extraform_button">Chukua Fomu za Ziada</string>
+    <string name="failure_reasons_txt">Ujumbe Kuhusu Tatizo:</string>
+    <string name="fatherNotFound">Baba hakupatikana</string>
+    <string name="field_worker_already_exists">Mhojaji tayari yupo</string>
+    <string name="field_worker_created">Mhojaji Amefanikiwa kutengenezwa</string>
+    <string name="form_status">Hali ya Fomu:</string>
+    <string name="form_view_lbl">Muonekano wa Fomu</string>
+    <string name="hello">Hallo, Android!</string>
+    <string name="household_not_found">Kaya ya huyu mwanakaya haikupatikana</string>
+    <string name="idGenerationFailure">Kuna kosa limetokea wakati wa kutengeneza Nambari ya utambulisho</string>
+    <string name="location_lbl">Eneo:</string>
+    <string name="form_lbl">Fomu:</string>
+    <string name="login_btn">Ingia</string>
+    <string name="logout_btn">Toka</string>
+    <string name="main_txt">Malekebisho ya Fomu</string>
+    <string name="openhdswebservice">OpenHDS Web Service</string>
+    <string name="owner_txt">Numbari ya Mwenye Fomu:</string>
+    <string name="passwordHash">OpenHDS Neno la Siri</string>
+    <string name="retrieving_fieldworkers_interrupted">Retrieving Field Workers has been interrupted</string>
+    <string name="send_to_odk_btn">Rekebisha kwenye ODK</string>
+    <string name="shared_pref_file_name">server_prefs</string>
+    <string name="shared_pref_server_url_key">server_url</string>
+	<string name="syncDatabase">Sync Database</string>
+	<string name="syncDatabaseMessage">Mpagilio huu utajaribu kuchukua vitu na kutunza kwenye Tablet. Tafadhali kuwa mvumilivu wakati vitu vinachukuliwa.</string>
+	<string name="sync_database_description">Syncs census data with server.</string>	
+	<string name="sync_field_worker_description">Syncs field workers with server.</string>
+	<string name="sync_entities_failure">Imeshindwa kuchukua vitu vya OpenHDS</string>
+	<string name="sync_forms_successful">Fomu imefanikiwa kuchukuliwa</string>
+	<string name="sync_forms_failure">Fomu imeshindikana kuchukuliwa</string>
+	<string name="sync_entities_successful">Vitu vya OpenHDS imefanikiwa kuchukuliwa </string>
+    <string name="sync_interrupted">Uchukuaji wa vitu vya OpenHDS umekatishwa</string>
+    <string name="sync_restarting">Sync restarting</string>
+    <string name="unable_to_connect">Haikuwezekana kuunganishwa</string>
+    <string name="url_error">Sorry, invalid URL!</string>
+    <string name="update">Update</string>
+    <string name="username">Jina la Mtumiaji OpenHDS</string>
+    <string name="view_forms_btn">Angalia fomu yangu</string>
+	  <string name="see_list">Angalia Orodha</string>
+    <string name="location_hint_lbl">Location External Id</string>
+    <string name="form_hint_lbl">Jina la Fomu</string>
+    <string name="firstname_lbl">Jina la Kwanza:</string>
+    <string name="firstname_hint_lbl">Jina la Kwanza</string>
+    <string name="lastname_lbl">Jina la Mwisho:</string>
+    <string name="lastname_hint_lbl">Jina la Mwisho</string>
+    <string name="gender_lbl">Jinsia:</string>
+    <string name="male_lbl">Mwanaume</string>
+    <string name="female_lbl">Mwanamke</string>
+    <string name="clear_lbl">Futa</string>
+    <string name="search_lbl">Tafuta</string>
+    <string name="search_loc_lbl">Tafuta Eneo</string>
+    <string name="search_form_lbl">Tafuta Fomu</string>
+    <string name="search_individual_lbl">Tafuta mwanakaya</string>
+<!--     <string name="hierarchy1_lbl">Province:</string> -->
+<!--     <string name="hierarchy1_hint_lbl">Province External Id</string> -->
+<!--     <string name="hierarchy2_lbl">District:</string> -->
+<!--     <string name="hierarchy2_hint_lbl">District External Id</string> -->
+<!--     <string name="hierarchy3_lbl">Zone:</string> -->
+<!--     <string name="hierarchy3_hint_lbl">Zone External Id</string> -->
+    <string name="hierarchy1_lbl">Wilaya:</string>
+    <string name="hierarchy1_hint_lbl">Nambari ya Wilaya</string>
+    <string name="hierarchy2_lbl">TA:</string>
+    <string name="hierarchy2_hint_lbl">TA Nambari</string>
+    <string name="hierarchy3_lbl">CBO:</string>
+    <string name="hierarchy3_hint_lbl">CBO External Id</string>
+    <string name="hierarchy4_lbl">Kijiji:</string>
+    <string name="hierarchy4_hint_lbl">Nambari ya Kijiji</string> 
+<!--     <string name="select_hierarchy1_lbl">Select Province</string> -->
+<!--     <string name="select_hierarchy2_lbl">Select District</string>  -->
+<!--     <string name="select_hierarchy3_lbl">Select Zone</string> -->
+	<string name="select_hierarchy1_lbl">Chagua Wilaya</string>
+    <string name="select_hierarchy2_lbl">Chagua TA</string> 
+    <string name="select_hierarchy3_lbl">Chagua CBO</string>
+    <string name="select_hierarchy4_lbl">Chagua Kjiji</string>
+    
+
+<!-- 	 <string name="hierarchy1_lbl">Region:</string>
+    <string name="hierarchy1_hint_lbl">Region External Id</string>
+    <string name="hierarchy2_lbl">District:</string>
+    <string name="hierarchy2_hint_lbl">District External Id</string>
+	 <string name="hierarchy3_lbl">Village:</string>
+    <string name="hierarchy3_hint_lbl">Village External Id</string>
+	 <string name="hierarchy4_lbl">Subvillage:</string>
+    <string name="hierarchy4_hint_lbl">Subvillage External Id</string> 
+    
+     <string name="select_hierarchy1_lbl">Select Region</string>
+    <string name="select_hierarchy2_lbl">Select Distrinct</string> 
+    <string name="select_hierarchy3_lbl">Select Village</string>
+    <string name="select_hierarchy4_lbl">Select Subvillage</string> -->
+    
+    
+        <!-- adding new strings from hardcoded thanks to Paul Philimone-->
+
+    
+      <string name="roundBtn_lbl">Chagua Mzunguko</string>
+	<string name="roundNumber_lbl">Nambari ya mzunguko:</string>
+	<string name="roundStartDate_lbl">Tarehe ya Kuanza:</string>
+	<string name="roundEndDate_lbl">Tarehe ya Kumaliza:</string>
+	<string name="locationBtn_lbl">Changua Eneo</string>
+	<string name="locationName_lbl">Jina:</string>
+	<string name="locationLatitude_lbl">Latitude:</string>
+	<string name="locationLongitude_lbl">Longitude:</string>
+	<string name="searchlBtn_lbl">Chuja Eneo</string>
+	<string name="individualBtn_lbl">Chagua Mwanakaya</string>
+	<string name="individualFirstName_lbl">Jina la Kwanza:</string>
+	<string name="individualLastName_lbl">Jina la Mwisho:</string>
+	
+	<string name="findLocationGeoPointBtn_lbl">Tafuta Eneo kwa kutumia GeoPoint</string>
+	<string name="createLocationBtn_lbl">Tengeneza Eneo</string>
+	<string name="createVisitBtn_lbl">Tengeneza Hudhurio</string>
+	<string name="clearIndividualBtn_lbl">Ondoa Mwanakaya</string>
+	<string name="householdBtn_lbl">Kaya</string>
+	<string name="membershipBtn_lbl">Uanachama</string>
+	<string name="relationshipBtn_lbl">Mahusiano</string>
+	<string name="inMigrationBtn_lbl">Kuhamia</string>
+	<string name="outMigrationBtn_lbl">Kuhama</string>
+	<string name="pregRegBtn_lbl">Ufuatiliaji wa Mimba</string>
+	<string name="birthRegBtn_lbl">Matokeo ya Mimba</string>
+	<string name="deathBtn_lbl">Kifo</string>
+	<string name="finishVisitBtn_lbl">Maliza Hudhurio</string>
+    
+	<string name="fworkerExtId_lbl">Nambari ya Mhojaji</string>
+	<string name="registerChkBox_lbl">Sajili mhojaji kwenye Tablet</string>
+	
+	<string name="fieldWorkerLoginBtn_lbl">Ingia Kama Mhojaji</string>
+	<string name="supervisorLoginBtn_lbl">Ingia Kama Msimamizi</string>
+	<string name="supervisor_username_key">Msimamizi Ingia</string>
+	<string name="supervisor_password_key">Neno Siri la Msimamizi</string>		
+	
+	<string name="server_preferences_lbl">Server Preferences</string>
+	<string name="preferences">Preferences</string>	
+	
+	<string name="configure_server_lbl">Configure Server</string>
+	
+	<string name="locations_nearesert_you_lbl">Eneo Karibia na wewe</string>
+		
+	<string name="hierarchy5Btn_lbl">Chagua Ujilani</string>
+	<string name="hierarchy5_lbl">Ujilani:</string>
+    <string name="hierarchy5_hint_lbl">Nambari ya Ujilani</string>
+	
+    <string name="dialog_working_lbl">Inafanya kazi...</string>
+	<string name="dialog_dont_interrupt_lbl">Usi ibughudhi</string>
+	
+	<string name="formmenu_extraforms">Fomu za ziada</string>
+	<string name="sync_extraforms">Sync Extra Forms</string>
+	
+	<string name="loginmenu_configure">Configure Server</string>
+	
+	<string name="no_server_url">No server URL has been set. Set server URL from preferences</string>
+	<string name="bad_server_url">Bad Server URL</string>
+		
+	<string name="fwlogin_registerlbl">Sajili</string>
+	<string name="fwlogin_loginlbl">Ingia</string>
+	<string name="authenticating_lbl">Ina Thibitisha...</string>
+	<string name="please_wait_lbl">Tafadhali subiri</string>
+		
+	<string name="please_choose_lbl">Tafadhali Chagua </string>
+		
+	<string name="loading_lbl">Ina Fungua</string>
+	<string name="loading_form_subm_lbl">Ina fungua utumaji wa fomu...</string>
+	<string name="loading_into_odk_lbl">Inaweka fomu kwenye ODK Collect...</string>
+	<string name="formload_failed_writedir_lbl">There was a problem creating directories</string>
+	<string name="formload_failed_writexml_lbl">There was a problem writing the XML file</string>
+	<string name="formload_failed_odkins_lbl">Kuna tatiza kwenye ODK Collect</string>
+	<string name="formload_already_completed_lbl">Hii fomu imesha kamilika</string>
+	<string name="updating_lbl">Updating</string>
+	<string name="updating_form_info_lbl">Updating form information...</string>
+	<string name="completed_lbl">Kamilika</string>
+	<string name="not_completed_lbl">Haija Kamilika</string>
+		
+	<string name="map_curlocation_format_lbl">Current Location \n Longitude: %1$s \n Latitude: %2$s</string>
+	<string name="warning_lbl">Onyo</string>
+	<string name="showmap_gps_disabled_lbl">GPS yako inaonekana kama imezimwa. Tafadhali hakikisha imewashwa ili uweze kutumia huduma hii.</string>
+	<string name="showmap_gps_turned_off">Provider disabled by the user. GPS Imezimwa</string>
+	<string name="showmap_gps_turned_on">Provider enabled by the user. GPS imewashwa</string>
+	<string name="showmap_gps_changed">Provider status changed</string>
+		
+	<string name="sprvlogin_bad_auth">Failed to authenticate username and password</string>
+	<string name="sprvlogin_created_user">Successfully created new user</string>
+	<string name="sprvlogin_connection_error">There was a problem communicating with the server</string>
+	<string name="sprvlogin_error_user">There was an error creating the user</string>
+	<string name="sprvlogin_user_notrecon">User not recognized</string>
+	<string name="sprvlogin_authenticate_with_server">Do you want to authenticate with the server?</string>
+	<string name="yes_lbl">Ndiyo</string>
+	<string name="no_lbl">Hapana</string>
+	<string name="error_lbl">Kosa</string>
+	<string name="success_lbl">Imefanikiwa</string>
+	<string name="trying_to_authenticate_lbl">Inajaribu kuthibitisha...</string>
+	<string name="sprvlogin_enter_in_user">Tafadhali ingiza Mtumiaji</string>
+	<string name="sprvlogin_enter_in_pass">Tafadhali ingiza Neno la Siri</string>
+		
+	<string name="sprvmain_downlall_forms">Chukua fomu zote...</string>
+	<string name="working_lbl">Inafanya Kazi</string>
+	<string name="sprvmain_failed_auth">Imekosewa Jina la Mtumiaji na/au neno la siri</string>
+	<string name="sprvmain_failure">There was a problem reading response from server</string>
+	<string name="sprvmain_connection_error">There was a error with the network connection</string>
+	<string name="sprvmain_connection_timeout">Connection to the server timed out</string>
+	<string name="sprvmain_on_success">Fomu zote zimefanikiwa chukuliwa</string>
+	<string name="sprvmain_no_content">Hakuna fomu ya kuchukuliwa</string>
+	<string name="sprvmain_downl_extraforms">Chukua fomu za ziada...</string>
+		
+	<string name="sync_db_stop_sync">Are you sure you want to stop sync?</string>
+		
+	<string name="odk_problem_lbl">Kuna tatizo kwenye ODK</string>
+	<string name="update_unfinish_msg1">Fomu imefunguliwa lakini haija tunzwa. Fomu hii itafutwa. Unataka kufanyaje?</string>
+	<string name="update_unfinish_pos_button">Futa fomu</string>
+	<string name="update_unfinish_neg_button">Rekebisha Fomu</string>
+	<string name="update_xform_not_found_msg">The XForm could not be found within ODK Collect. Please make sure that it exists and it\'s named correctly.</string>
+	<string name="visit_lbl">Hudhurio</string>
+	<string name="update_finish_visit_msg">Je umeingiza matukio yote na hakika unataka kumaliza hudhurio hili?</string>
+	<string name="cancel_lbl">Sitisha</string>
+	<string name="socialgroup_lbl">Kikundi</string>
+	<string name="update_on_sgexists_msg">Kikundi cha eneo ulilo changua tayari kipoga.</string>
+	<string name="in_migration_lbl">Kuhamia</string>
+	<string name="baseline_lbl">Baseline</string>
+	<string name="update_create_inmigration_msg">Kuhamia huku ni Ndani au NjeIs this an Internal or External In Migration event?</string>
+	<string name="update_create_inmigration_pos_button">Ndani ya Eneo</string>
+	<string name="update_create_inmigration_neg_button">Nje ya Eneo</string>
+	<string name="update_finish_ext_inmigration_msg">Tafadhari, tengeneza uwanachama wa huyu mwanakaya</string>
+	<string name="finish_household_creation_msg">Tafadhali, sasa tengeneza uwanachama na mkuu wa kaya</string>
+	<string name="mother_lbl">Mama</string>
+	<string name="update_build_mother_msg">Je, mama anajulikana na amesha sajiliwa kwenye OpenHDS?</string>
+	<string name="father_lbl">Baba</string>
+	<string name="update_build_father_msg">Je, baba anajulikana na amesha sajiliwa kwenye OpenHDS?</string>
+	<string name="update_build_pregnancy_lbr_count_msg">Idadi ya matokeo</string>
+	<string name="update_pregoutcome_choose_father">Chagua Baba</string>
+	<string name="update_pregoutcome_search_hdss">Tafuta HDSS</string>
+	<string name="update_pregoutcome_father_not_found">Baba hayuko ndani ya HDSS</string>
+	<string name="update_pregoutcome_not_within_hdss">Siyo ndani ya HDSS</string>
+	<string name="update_load_finished_select_hh_msg">Chagua kaya ya mwanakaya</string>
+
+    <string name="hierarchy2_select_lbl">Chagua eneo la ramani</string>
+    <string name="hierarchy3_select_lbl">Chagua sekta</string>
+    <string name="hierarchy4_select_lbl">Chagua Nyumba</string>
+    <string name="hierarchy5_select_lbl">Chagua sakafu</string>
+    <string name="login_username">Mtumiaji</string>
+    <string name="login_password">Neno la siri</string>
+    <string name="fieldworker_login">Mhojaji Ingia</string>
+
+    <string name="field_workers_sync_url">/api/rest/fieldworkers</string>
+    <string name="landscape_layout_tag">landscape</string>
+    <string name="portrait_layout_tag">portrait</string>
+    <string name="supervisor_bad_credentials">Invalid supervisor credentials</string>
+    <string name="preference_invalid_label">Invalid!</string>
+    <string name="preference_invalid_warning">Invalid preference value</string>
+    <string name="sync_field_worker_name">Sync Field Workers</string>
+    <string name="field_worker_bad_credentials">Invalid field worker credentials</string>
+    <string name="region_label">Mkoa</string>
+    <string name="map_area_label">Eneo la Ramani</string>
+    <string name="sector_label">Sekta</string>
+    <string name="household_label">Kaya</string>
+    <string name="individual_label">Mwanakaya</string>
+    <string name="bottom_label">Chini</string>
+    <string name="create_membership">Tafadhali kwanza, tengeneza uanachama wa huyu mwanakaya!</string>
+    <string name="no_individual_left">Hakuna mwanakaya Hai aliyebakia katika kikundi hiki ambaye anaweza kumuwakilisha mkuu wa kaya.</string>
+    
+    
+    <string name="hello_lbl">Hallo</string>
+    <string name="locale_lang">sw</string>
+
+</resources>

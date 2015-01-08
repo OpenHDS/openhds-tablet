@@ -24,7 +24,6 @@ import org.openhds.mobile.fragment.EventFragment;
 import org.openhds.mobile.fragment.ProgressFragment;
 import org.openhds.mobile.fragment.SelectionFragment;
 import org.openhds.mobile.fragment.ValueFragment;
-import org.openhds.mobile.fragment.ValueFragment.OnlyOneEntryListener.Entity;
 import org.openhds.mobile.listener.OdkFormLoadListener;
 import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.FilledForm;
