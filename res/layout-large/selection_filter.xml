@@ -33,7 +33,7 @@
             <EditText
                 android:id="@+id/hierarchy1Txt"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
@@ -42,8 +42,8 @@
 
             <Button
                 android:id="@+id/hierarchy1_see_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
                 android:text="@string/see_list" />
@@ -65,7 +65,7 @@
             <EditText
                 android:id="@+id/hierarchy2Txt"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
@@ -74,8 +74,8 @@
 
             <Button
                 android:id="@+id/hierarchy2_see_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
                 android:text="@string/see_list" />
@@ -96,7 +96,7 @@
             <EditText
                 android:id="@+id/hierarchy3Txt"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
@@ -105,8 +105,8 @@
 
             <Button
                 android:id="@+id/hierarchy3_see_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
                 android:text="@string/see_list" />
@@ -128,7 +128,7 @@
             <EditText
                 android:id="@+id/hierarchy4Txt"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
@@ -137,8 +137,8 @@
 
             <Button
                 android:id="@+id/hierarchy4_see_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
                 android:text="@string/see_list" />
@@ -160,7 +160,7 @@
             <EditText
                 android:id="@+id/locationTxt"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
@@ -169,8 +169,8 @@
 
             <Button
                 android:id="@+id/location_see_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
                 android:text="@string/see_list" />
@@ -201,10 +201,10 @@
 
             <Button
                 android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:paddingLeft="1dp"
+                android:paddingRight="1dp"
                 android:text="@string/see_list"
                 android:visibility="invisible" />
         </LinearLayout>
@@ -233,10 +233,10 @@
                 android:hint="@string/lastname_hint_lbl" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:paddingLeft="1dp"
+                android:paddingRight="1dp"
                 android:text="@string/see_list"
                 android:visibility="invisible" />
         </LinearLayout>
