@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources  xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
+<resources  xmlns:tools="http://schemas.android.com/tools" tools:locale="sw">
 
     <string name="amendments">Mabadiliko</string>
     <string name="app_name">OpenHDS Mobile</string>

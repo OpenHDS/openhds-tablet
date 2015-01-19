@@ -92,6 +92,7 @@
     <string name="hierarchy3_hint_lbl">CBO External Id</string>
     <string name="hierarchy4_lbl">Village:</string>
     <string name="hierarchy4_hint_lbl">Village External Id</string> 
+
 <!--     <string name="select_hierarchy1_lbl">Select Province</string> -->
 <!--     <string name="select_hierarchy2_lbl">Select District</string>  -->
 <!--     <string name="select_hierarchy3_lbl">Select Zone</string> -->
@@ -99,6 +100,7 @@
     <string name="select_hierarchy2_lbl">Select TA</string> 
     <string name="select_hierarchy3_lbl">Select CBO</string>
     <string name="select_hierarchy4_lbl">Select Village</string>
+     <string name="select_hierarchy5_lbl">Select Sub-Village</string>
     
 
 <!-- 	 <string name="hierarchy1_lbl">Region:</string>

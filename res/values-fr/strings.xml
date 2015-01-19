@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources  xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+    
+    
+    <string name="amendments">Amendements</string>
+    <string name="app_name">OpenHDS Mobile</string>
+    <string name="bad_authentication">Echec Authentication</string>
+    <string name="register">Registre</string>
+    <string name="bad_xml">Erreur d\'analyse XML</string>
+    <string name="changePassword">Changer Mot de passe</string>
+    <string name="changeServer">Changer Serveur</string>
+    <string name="changeUsername">Changer Nom d\'utilisateur</string>
+    <string name="configuration">Configuration</string>
+    <string name="configureDatabase">Configurer Base de données</string>
+    <string name="databaseSync">Synchroniser avec la base de données de OpenHDS</string>
+	<string name="sync_database_name">Synchroniser Base de données</string>    
+    <string name="choose">Prière choisir </string>
+    <string name="default_server_url">http://data-management.local:8080/openhds/mobile-interop</string>
+    <string name="interop_server_url_key">interop_server_url</string>
+	<string name="default_openhds_server_url">http://data-management.local:8080/openhds</string>    
+	<string name="openhds_server_url">http://data-management.local:8080/openhds</string>
+    <string name="openhds_server_url_default_summary">Même URL utilisé pour le serveur OpenHDS via un navigateur Web</string>    
+	<string name="openhds_server_url_key">openhds_server_url</string>
+	<string name="openhds_server_url_title">OpenHDS Server URL</string>
+	<string name="supervisor_login_url">/api/rest/socialgroups</string>	
+	<string name="supervisor_login">Connection Superviseur</string>	
+    <string name="default_openhdsserver">http://data-management.local:8080/openhds</string>
+    <string name="delete_form_btn">Supprimer Formulaire</string>
+    <string name="download_form_button">Télécharger Formulaires</string>
+    <string name="download_extraform_button">Télécharger Formulaires Extra</string>
+    <string name="failure_reasons_txt">Messages d\'échec:</string>
+    <string name="fatherNotFound">Un père n\'a pas pu être trouvé</string>
+    <string name="field_worker_already_exists">L\'agent de terrain existe déjà</string>
+    <string name="field_worker_created">Agent de terrain créé avec succès</string>
+    <string name="form_status">Statut du formulaire:</string>
+    <string name="form_view_lbl">Aperçu Formulaire</string>
+    <string name="hello">Salut, Android!</string>
+    <string name="household_not_found">Un ménage n\'a pas été trouvé pour cet individu</string>
+    <string name="idGenerationFailure">Une erreur s\'est produite tout en générant un id</string>
+    <string name="location_lbl">Concession:</string>
+    <string name="form_lbl">Formulaire::</string>
+    <string name="login_btn">Connection</string>
+    <string name="logout_btn">Déconnection</string>
+    <string name="main_txt">Gestion Formulaire</string>
+    <string name="openhdswebservice">OpenHDS Web Service</string>
+    <string name="owner_txt">ID Propriétaire du Formulaire:</string>
+    <string name="password">Mot de passe OpenHDS</string>
+    <string name="retrieving_fieldworkers_interrupted">La Récupération des agents de terrain a été interrompue</string>
+    <string name="send_to_odk_btn">Edition dans ODK</string>
+    <string name="shared_pref_file_name">server_prefs</string>
+    <string name="shared_pref_server_url_key">server_url</string>
+	<string name="syncDatabase">Synchroniser Base de données</string>
+	<string name="syncDatabaseMessage">Cette procédure va tenter de télécharger les entités d\'OpenHDS sur l\'appareil. S\'il vous plaît veuillez être patient pendant que le téléchargement est en cours.</string>
+	<string name="sync_database_description">Synchronisation des données du recensement avec le serveur..</string>	
+	<string name="sync_field_worker_description">Synchronisation des agents de terrain avec le serveur.</string>
+	<string name="sync_entities_failure">Failed to Collect OpenHDS Entities</string>
+	<string name="sync_forms_successful">Forms Collected Successfully</string>
+	<string name="sync_forms_failure">Failed to Collect the forms</string>
+	<string name="sync_entities_successful">OpenHDS Entities Collected Successfully</string>
+    <string name="sync_interrupted">Collecting OpenHDS Entities has been interrupted</string>
+    <string name="sync_restarting">Redémarrage Synchronisation</string>
+    <string name="unable_to_connect">Impossible de se connecter</string>
+    <string name="url_error">Désolé, invalid URL!</string>
+    <string name="update">Mise à jour</string>
+    <string name="username">OpenHDS Nom d\'utilisateur</string>
+    <string name="view_forms_btn">Voir Mes formulaires</string>
+	<string name="see_list">Voir la liste</string>
+
+    <string name="location_hint_lbl">Lieu Id externe</string>
+    <string name="form_hint_lbl">Nom du formulaire</string>
+    <string name="firstname_lbl">Prénom:</string>
+    <string name="firstname_hint_lbl">Prénom</string>
+    <string name="lastname_lbl">Nom:</string>
+    <string name="lastname_hint_lbl">Nom</string>
+    <string name="gender_lbl">Sexe:</string>
+    <string name="male_lbl">Homme</string>
+    <string name="female_lbl">Femme</string>
+    <string name="clear_lbl">Effacer</string>
+    <string name="search_lbl">Rechercher</string>
+    <string name="search_loc_lbl">Rechercher Concession</string>
+    <string name="search_form_lbl">Rechercher Formulaire</string>
+    <string name="search_individual_lbl">Rechercher un Individu</string>
+<!--     <string name="hierarchy1_lbl">Province:</string> -->
+<!--     <string name="hierarchy1_hint_lbl">Province External Id</string> -->
+<!--     <string name="hierarchy2_lbl">District:</string> -->
+<!--     <string name="hierarchy2_hint_lbl">District External Id</string> -->
+<!--     <string name="hierarchy3_lbl">Zone:</string> -->
+<!--     <string name="hierarchy3_hint_lbl">Zone External Id</string> -->
+    <string name="hierarchy1_lbl">District:</string>
+    <string name="hierarchy1_hint_lbl">ID externe District</string>
+    <string name="hierarchy2_lbl">TA:</string>
+    <string name="hierarchy2_hint_lbl">ID externe TA </string>
+    <string name="hierarchy3_lbl">CBO:</string>
+    <string name="hierarchy3_hint_lbl">ID externe CBO </string>
+    <string name="hierarchy4_lbl">Village:</string>
+    <string name="hierarchy4_hint_lbl">ID externe Village </string> 
+<!--     <string name="select_hierarchy1_lbl">Select Province</string> -->
+<!--     <string name="select_hierarchy2_lbl">Select District</string>  -->
+<!--     <string name="select_hierarchy3_lbl">Select Zone</string> -->
+	<string name="select_hierarchy1_lbl">Sélectionnez District</string>
+    <string name="select_hierarchy2_lbl">Sélectionnez TA</string> 
+    <string name="select_hierarchy3_lbl">Sélectionnez CBO</string>
+    <string name="select_hierarchy4_lbl">Sélectionnez Village</string>
+    
+
+<!-- 	 <string name="hierarchy1_lbl">Region:</string>
+    <string name="hierarchy1_hint_lbl">Region External Id</string>
+    <string name="hierarchy2_lbl">District:</string>
+    <string name="hierarchy2_hint_lbl">District External Id</string>
+	 <string name="hierarchy3_lbl">Village:</string>
+    <string name="hierarchy3_hint_lbl">Village External Id</string>
+	 <string name="hierarchy4_lbl">Subvillage:</string>
+    <string name="hierarchy4_hint_lbl">Subvillage External Id</string> 
+    
+     <string name="select_hierarchy1_lbl">Select Region</string>
+    <string name="select_hierarchy2_lbl">Select Distrinct</string> 
+    <string name="select_hierarchy3_lbl">Select Village</string>
+    <string name="select_hierarchy4_lbl">Select Subvillage</string> -->
+          <string name="roundBtn_lbl">Choisir Rond</string>
+	<string name="roundNumber_lbl">Numéro rond:</string>
+	<string name="roundStartDate_lbl">Date de Début:</string>
+	<string name="roundEndDate_lbl">Date de fin:</string>
+	<string name="locationBtn_lbl">Choisir concession</string>
+	<string name="locationName_lbl">Nom:</string>
+	<string name="locationLatitude_lbl">Latitude:</string>
+	<string name="locationLongitude_lbl">Longitude:</string>
+	<string name="searchlBtn_lbl">Filtrer Localisation</string>
+	<string name="individualBtn_lbl">Sélectionnez Individu</string>
+	<string name="individualFirstName_lbl">Prénom:</string>
+	<string name="individualLastName_lbl">Nom:</string>
+	
+	<string name="findLocationGeoPointBtn_lbl">Trouver Concession avec GeoPoint</string>
+	<string name="createLocationBtn_lbl">Créer Concession</string>
+	<string name="createVisitBtn_lbl">Créer Visite</string>
+	<string name="clearIndividualBtn_lbl">Effacer Individu</string>
+	<string name="householdBtn_lbl">Ménage</string>
+	<string name="membershipBtn_lbl">Membership</string>
+	<string name="relationshipBtn_lbl">relations</string>
+	<string name="inMigrationBtn_lbl">Immigrations</string>
+	<string name="outMigrationBtn_lbl">Emigration</string>
+	<string name="pregRegBtn_lbl">Observation Grossesse </string>
+	<string name="birthRegBtn_lbl">Issue de la grossesse</string>
+	<string name="deathBtn_lbl">Décès</string>
+	<string name="finishVisitBtn_lbl">Terminer Visite</string>
+    
+	<string name="fworkerExtId_lbl">ExtId Agent de terrain</string>
+	<string name="registerChkBox_lbl">Enregistrer Agent de terrain sur le périphérique</string>
+	
+	<string name="fieldWorkerLoginBtn_lbl">Connecté en tant que Agent de terrain</string>
+	<string name="supervisorLoginBtn_lbl">Connecté en tant que Superviseur</string>
+	<string name="supervisor_username_key">Connexion Superviseur</string>
+	<string name="supervisor_password_key">Mot de passe  Superviseur</string>		
+	
+	<string name="server_preferences_lbl">Préférences du serveur</string>
+	<string name="preferences">Préférences</string>	
+	
+	<string name="configure_server_lbl">Configurer le serveur</string>
+	
+	<string name="locations_nearesert_you_lbl">Concessions proches</string>
+		
+	<string name="hierarchy5Btn_lbl">Sélectionnez Quartier</string>
+	<string name="hierarchy5_lbl">Quartier:</string>
+    <string name="hierarchy5_hint_lbl">ID externe quartier </string>
+	
+    <string name="dialog_working_lbl">En cours .</string>
+	<string name="dialog_dont_interrupt_lbl">Ne pas interrompre</string>
+	
+	<string name="formmenu_extraforms">Formulaires Extra</string>
+	<string name="sync_extraforms">Synchronisez les formulaires Extra</string>
+	
+	<string name="loginmenu_configure">Configurer le serveur</string>
+	
+	<string name="no_server_url">Aucu URL du serveur a été défini. Réglez URL du serveur dans Préférences</string>
+	<string name="bad_server_url">Mauvais URL du serveur</string>
+		
+	<string name="fwlogin_registerlbl">S’enregistrer</string>
+	<string name="fwlogin_loginlbl">S\'identifier</string>
+	<string name="authenticating_lbl">Authentification en cours </string>
+	<string name="please_wait_lbl">Prière attendre</string>
+		
+	<string name="please_choose_lbl">Prière choisir </string>
+		
+	<string name="loading_lbl">Chargement</string>
+	<string name="loading_form_subm_lbl">Chargement soumission du formulaire ...</string>
+	<string name="loading_into_odk_lbl">Chargement du formulaire dans ODK Collect ...</string>
+	<string name="formload_failed_writedir_lbl">Il y avait un problème de création de répertoires</string>
+    
+    
+    	<string name="formload_failed_writexml_lbl">Il y avait un problème d\'écriture du fichier XML</string>
+	<string name="formload_failed_odkins_lbl">Il y avait un problème avec ODK Collect</string>
+	<string name="formload_already_completed_lbl">Ce formulaire a déjà été rempli</string>
+	<string name="updating_lbl">Mise à jour</string>
+	<string name="updating_form_info_lbl">Mise à jour des informations du formulaire ...</string>
+	<string name="completed_lbl">Terminé</string>
+	<string name="not_completed_lbl">Non terminé</string>
+		
+	<string name="map_curlocation_format_lbl">Répertoire actuelle \n Longitude: %1$s \n Latitude: %2$s</string>
+	<string name="warning_lbl">Avertissement</string>
+	<string name="showmap_gps_disabled_lbl">Votre GPS semble être désactivé. SVP assurez-vous qu\'il est activé pour pouvoir utiliser ce service..</string>
+	<string name="showmap_gps_turned_off">Fournisseur désactivée par l\'utilisateur. GPS éteint</string>
+	<string name="showmap_gps_turned_on">Fournisseur activé par l\'utilisateur. GPS allumé</string>
+	<string name="showmap_gps_changed">Le statut de fournisseur a changé</string>
+		
+	<string name="sprvlogin_bad_auth">Échec d\'authentification de l’utilisateur et du mot de passe</string>
+	<string name="sprvlogin_created_user">Nouvel utilisateur créé avec succès </string>
+	<string name="sprvlogin_connection_error">Il y avait un problème de communication avec le serveur</string>
+	<string name="sprvlogin_error_user">Il y avait une erreur de création de l\'utilisateur</string>
+	<string name="sprvlogin_user_notrecon">Utilisateur inconnu</string>
+	<string name="sprvlogin_authenticate_with_server">Voulez-vous authentifier auprès du serveur</string>
+	<string name="yes_lbl">Oui</string>
+	<string name="no_lbl">Non</string>
+	<string name="error_lbl">Erreur</string>
+	<string name="success_lbl">Succès</string>
+	<string name="trying_to_authenticate_lbl">La tentative d\'authentification ...</string>
+	<string name="sprvlogin_enter_in_user">SVP entrer un utilisateur</string>
+	<string name="sprvlogin_enter_in_pass">SVP entrer un mot de passe</string>
+	
+	<string name="sprvmain_downlall_forms">Téléchargement de tous les formulaires .</string>
+	<string name="working_lbl">En cours</string>
+	<string name="sprvmain_failed_auth">Mauvais nom d\'utilisateur et/ou mot de passe</string>
+	<string name="sprvmain_failure">Il y avait un problème de lecture de réponse du serveur</string>
+	<string name="sprvmain_connection_error">Il y avait une erreur de la connexion réseau</string>
+	<string name="sprvmain_connection_timeout">La connexion au serveur a expiré</string>
+	<string name="sprvmain_on_success">Tous les formulaires téléchargés avec succès</string>
+	<string name="sprvmain_no_content">Pas de formulaires à télécharger</string>
+	<string name="sprvmain_downl_extraforms">Téléchargement de formulaires Extra ...</string>
+		
+	<string name="sync_db_stop_sync">Etes-vous sûr que vous voulez arrêter de synchronisation?</string>
+		
+	<string name="odk_problem_lbl">Il y avait un problème avec ODK</string>
+	<string name="update_unfinish_msg1">Formulaire débuté mais pas enregistré. Cette instance de formulaire sera supprimée. Qu\'est-ce que vous voulez faire?</string>
+	<string name="update_unfinish_pos_button">Effacer le formulaire</string>
+	<string name="update_unfinish_neg_button">Modifier le formulaire</string>
+	<string name="update_xform_not_found_msg">Le XForm ne peut pas être trouvée dans ODK Collect. SVP assurez-vous qu\'il existe et il est correctement nommé</string>
+	<string name="visit_lbl">Visite</string>
+	<string name="update_finish_visit_msg">Avez-vous de saisi tous les événements et voulez-vous terminer la visite?</string>
+	<string name="cancel_lbl">Annuler</string>
+	<string name="socialgroup_lbl">Ménage</string>
+	<string name="update_on_sgexists_msg">Le ménage de la concession sélectionnée existe déjà.</string>
+	<string name="in_migration_lbl">Immigrations</string>
+	<string name="baseline_lbl">Baseline</string>
+	<string name="update_create_inmigration_msg">Est-ce un une immigration interne ou externe?</string>
+	<string name="update_create_inmigration_pos_button">Interne</string>
+	<string name="update_create_inmigration_neg_button">Externe</string>
+	<string name="update_finish_ext_inmigration_msg">SVP, maintenant créer une appartenance pour l\'individu</string>
+	<string name="finish_household_creation_msg">SVP, maintenant créer une appartenance pour la CdM</string>
+	<string name="mother_lbl">Mère</string>
+	<string name="update_build_mother_msg">Est-ce que la mère est connue et enregistrée dans le système?</string>
+	<string name="father_lbl">père</string>
+	<string name="update_build_father_msg">Est-ce que le père est connu et enregistré dans le système?</string>
+	<string name="update_build_pregnancy_lbr_count_msg">Nombre d’issus</string>
+	<string name="update_pregoutcome_choose_father">Choisir Père</string>
+	<string name="update_pregoutcome_search_hdss">Recherche HDSS</string>
+	<string name="update_pregoutcome_father_not_found">Père pas dans HDSS</string>
+	<string name="update_pregoutcome_not_within_hdss">Pas dans HDSS</string>
+	<string name="update_load_finished_select_hh_msg">Sélectionnez un ménage pour l\'individu</string>
+    
+    
+    <string name="hierarchy2_select_lbl">Sélectionnez Carte de la région</string>
+    <string name="hierarchy3_select_lbl">Select Secteur</string>
+    <string name="hierarchy4_select_lbl">Sélectionnez bâtiment</string>
+    <string name="hierarchy5_select_lbl">Sélectionnez étage</string>
+    <string name="login_username">Nom d\'utilisateur</string>
+    <string name="login_password">Mot de passe</string>
+    <string name="fieldworker_login">connexion Agent de terrain</string>
+    
+    <string name="field_workers_sync_url">/api/rest/fieldworkers</string>
+    <string name="landscape_layout_tag">paysage</string>
+    <string name="portrait_layout_tag">portrait</string>
+    <string name="supervisor_bad_credentials">Certificats Superviseur invalide</string>
+    <string name="preference_invalid_label">Invalide!</string>
+    <string name="preference_invalid_warning">Valeur de préférence non valide</string>
+    <string name="sync_field_worker_name">Synchroniser Agent de terrain</string>
+    <string name="field_worker_bad_credentials">Certificats Agent de terrain invalide</string>
+    <string name="region_label">Region</string>
+    <string name="map_area_label">Carte de la région</string>
+    <string name="sector_label">Secteur</string>
+    <string name="household_label">Ménage</string>
+    <string name="individual_label">Individu</string>
+    <string name="bottom_label">Bas</string>
+    <string name="create_membership">SVP créér d\'abord une appartenance pour cet individu!</string>
+    <string name="no_individual_left">Il n\'y a personne active resté dans la ménage qui pourrait remplacer le chef</string>
+    
+    
+    <string name="hello_lbl">Bonjour</string>
+    <string name="STARTHIERARCHYLEVELNAME">District</string>
+
+</resources>
