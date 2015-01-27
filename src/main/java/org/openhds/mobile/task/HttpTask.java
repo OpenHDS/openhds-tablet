@@ -3,11 +3,8 @@ package org.openhds.mobile.task;
 import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.SocketTimeoutException;
-import java.net.URI;
 import java.net.URL;
-import java.net.UnknownHostException;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -30,7 +27,6 @@ import org.openhds.mobile.R;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 

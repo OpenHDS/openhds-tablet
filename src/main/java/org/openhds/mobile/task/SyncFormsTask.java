@@ -20,6 +20,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.listener.SyncDatabaseListener;
+import org.openhds.mobile.R;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -62,6 +63,7 @@ public class SyncFormsTask extends AsyncTask<Void, Integer, HttpTask.EndResult> 
 
     private State state;
     private Entity entity;
+    private Context mContext;
 
     private enum State {
         DOWNLOADING, SAVING
@@ -78,6 +80,7 @@ public class SyncFormsTask extends AsyncTask<Void, Integer, HttpTask.EndResult> 
         this.password = password;
         this.dialog = dialog;
         this.listener = listener;
+        this.mContext = context;
         this.resolver = context.getContentResolver();
     }
 
@@ -86,21 +89,21 @@ public class SyncFormsTask extends AsyncTask<Void, Integer, HttpTask.EndResult> 
         StringBuilder builder = new StringBuilder();
         switch (state) {
         case DOWNLOADING:
-            builder.append("Downloading");
+            builder.append(mContext.getString(R.string.sync_task_downloading));
             break;
         case SAVING:
-            builder.append("Saving ");
+            builder.append(mContext.getString(R.string.sync_task_saving));
             break;
         }
 
         switch (entity) {
         case FORMS:
-            builder.append("  Extra forms.");
+            builder.append(mContext.getString(R.string.sync_task_extraforms));
             break;
         }
 
         if (values.length > 0) {
-            builder.append(" Saved " + values[0] + " items");
+            builder.append(mContext.getString(R.string.sync_task_saved) + values[0] + mContext.getString(R.string.sync_task_items));
         }
 
         dialog.setMessage(builder.toString());

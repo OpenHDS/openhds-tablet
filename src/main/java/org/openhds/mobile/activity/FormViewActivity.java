@@ -50,8 +50,8 @@ public class FormViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.form_view);
 		formId = getIntent().getExtras().getLong(ConfigUtils.FORM_ID);
-		dialog = ProgressDialog.show(this, "Loading",
-				"Loading form submission...", true);
+		dialog = ProgressDialog.show(this, getString(R.string.loading_lbl),
+				getString(R.string.loading_form_subm_lbl), true);
 		store = new DatabaseAdapter(this);
 		new LoadRecordTask().execute();
 		Button deleteBtn = (Button) findViewById(R.id.delete_form_btn);
@@ -89,7 +89,7 @@ public class FormViewActivity extends Activity {
 			editOdkBtn.setOnClickListener(new OnClickListener() {
 				public void onClick(View arg0) {
 					dialog = ProgressDialog.show(FormViewActivity.this,
-							"Loading", "Loading form into ODK Collect...",
+							getString(R.string.loading_lbl), getString(R.string.loading_into_odk_lbl),
 							true, true);
 					new OdkFormLoadTask(record, new OdkFormLoadListener(),
 							getContentResolver(), store).execute();
@@ -105,19 +105,19 @@ public class FormViewActivity extends Activity {
 		public void onFailedWritingDirs() {
 			dialog.dismiss();
 			MessageUtils.showLongToast(FormViewActivity.this,
-					"There was a problem creating directories");
+					getString(R.string.formload_failed_writedir_lbl));
 		}
 
 		public void onFailedWritingXmlFile() {
 			dialog.dismiss();
 			MessageUtils.showLongToast(FormViewActivity.this,
-					"There was a problem writing the XML file");
+					getString(R.string.formload_failed_writexml_lbl));
 		}
 
 		public void onFailedOdkInsert() {
 			dialog.dismiss();
 			MessageUtils.showLongToast(FormViewActivity.this,
-					"There was a problem with ODK Collect");
+					getString(R.string.formload_failed_odkins_lbl));
 		}
 
 		public void onSuccess(Uri contentUri) {
@@ -128,7 +128,7 @@ public class FormViewActivity extends Activity {
 
 		public void onFormAlreadyCompleted() {
 			MessageUtils.showLongToast(FormViewActivity.this,
-					"This form has already been completed");
+					getString(R.string.formload_already_completed_lbl));
 		}
 
 		public void onOrphanForm() {
@@ -145,8 +145,8 @@ public class FormViewActivity extends Activity {
 	}
 
 	private void handleFormEntry(int resultCode) {
-		dialog = ProgressDialog.show(this, "Updating",
-				"Updating form information...", true);
+		dialog = ProgressDialog.show(this, getString(R.string.updating_lbl),
+				getString(R.string.updating_form_info_lbl), true);
 		new UpdateSubmissionTask().execute();
 	}
 

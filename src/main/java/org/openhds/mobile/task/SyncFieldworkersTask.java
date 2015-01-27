@@ -14,6 +14,7 @@ import org.apache.http.HttpResponse;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.listener.SyncDatabaseListener;
 import org.openhds.mobile.model.FieldWorker;
+import org.openhds.mobile.R;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -28,6 +29,7 @@ public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 	private ContentResolver contentResolver;
 	private ProgressDialog progressDialog;
 	private SyncDatabaseListener syncListener;
+	private Context mContext;
 
 	public SyncFieldworkersTask(Context ctx, RequestContext requestContext,
 			ContentResolver contentResolver, ProgressDialog progressDialog,
@@ -37,6 +39,7 @@ public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 		this.syncListener = syncListener;
 		this.progressDialog = progressDialog;
 		this.contentResolver = contentResolver;
+		this.mContext = ctx;
 	}
 
 	@Override
@@ -146,42 +149,42 @@ public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 	}
 
 	private void onSyncSuccess() {
-		progressDialog.setTitle("Synced field workers.");
+		progressDialog.setTitle(mContext.getString(R.string.synced_fws_lbl));
 		syncListener.collectionComplete(HttpTask.EndResult.SUCCESS);
 	}
 
 	private void onSyncFailure() {
-		progressDialog.setTitle("Failed to sync field workers.");
+		progressDialog.setTitle(mContext.getString(R.string.failed_sync_fws_lbl));
 		syncListener.collectionComplete(HttpTask.EndResult.FAILURE);
 	}
 
 	private class SyncFieldWorkerListener implements TaskListener {
-		@Override
+		
 		public void onFailedAuthentication() {
 			onSyncFailure();
 		}
 
-		@Override
+		
 		public void onConnectionError() {
 			onSyncFailure();
 		}
 
-		@Override
+		
 		public void onConnectionTimeout() {
 			onSyncFailure();
 		}
 
-		@Override
+		
 		public void onSuccess() {
 			onSyncSuccess();
 		}
 
-		@Override
+		
 		public void onFailure() {
 			onSyncFailure();
 		}
 
-		@Override
+		
 		public void onNoContent() {
 			onSyncFailure();
 		}

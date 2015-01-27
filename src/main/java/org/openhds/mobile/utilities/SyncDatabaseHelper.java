@@ -56,7 +56,6 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 		currentTask.execute();
 	}
 
-	@Override
 	public void collectionComplete(HttpTask.EndResult result) {
 		if (result.equals(HttpTask.EndResult.SUCCESS)) {
 			showLongToast(callingContext, R.string.sync_entities_successful);
@@ -93,7 +92,6 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 	private class ConfirmOnCancelListener implements
 			DialogInterface.OnClickListener {
 
-		@Override
 		public void onClick(DialogInterface dialogInterface, int which) {
 			switch (which) {
 			case DialogInterface.BUTTON_POSITIVE:
