@@ -41,7 +41,7 @@ public class Queries {
 	}
 	
 	public static Cursor getAllHierarchyLevels(ContentResolver resolver) {
-		return getCursorForAll(resolver, OpenHDS.HierarchyLevels.CONTENT_ID_URI_BASE);
+		return resolver.query(OpenHDS.HierarchyLevels.CONTENT_ID_URI_BASE,null,null,null,OpenHDS.HierarchyLevels.COLUMN_LEVEL_IDENTIFIER);
 	}
 
 	public static Cursor getStartHierarchyLevel(ContentResolver resolver, String level) {

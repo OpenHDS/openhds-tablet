@@ -34,6 +34,7 @@ import org.openhds.mobile.model.FormFiller;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
+import org.openhds.mobile.model.LocationHierarchyLevel;
 import org.openhds.mobile.model.LocationVisit;
 import org.openhds.mobile.model.PregnancyObservationUpdate;
 import org.openhds.mobile.model.PregnancyOutcome;
@@ -61,6 +62,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -101,6 +103,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     protected static final int FILTER_INMIGRATION_MOTHER = 60;
     protected static final int FILTER_INMIGRATION_FATHER = 70;
     protected static final int FILTER_INDIV_VISIT = 75;
+    protected static final int FILTER_SOCIALGROUP = 80;
+
     // the uri of the last viewed xform
     private Uri contentUri;
 
@@ -119,6 +123,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private boolean showingProgress;
     private Updatable updatable;
     private boolean extInm;
+    private int levelNumbers;
+    private String parentExtId;
     private boolean hhCreation;
     private boolean deathCreation;
     private String jrFormId;
@@ -128,6 +134,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	public static final String SELECT_HIERARCHY_2 = "Select Hierarchy 2";
 	public static final String SELECT_HIERARCHY_3 = "Select Hierarchy 3";
 	public static final String SELECT_HIERARCHY_4 = "Select Hierarchy 4";
+	public static final String SELECT_HIERARCHY_5 = "Select Hierarchy 5";
+	public static final String SELECT_HIERARCHY_6 = "Select Hierarchy 6";
+	public static final String SELECT_HIERARCHY_7 = "Select Hierarchy 7";
+	public static final String SELECT_HIERARCHY_8 = "Select Hierarchy 8";
 	public static final String SELECT_ROUND = "Select Round";
 	public static final String SELECT_LOCATION = "Select Location";
 	public static final String CREATE_VISIT = "Create Visit";
@@ -143,6 +153,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		stateSequence.add(SELECT_HIERARCHY_2);
 		stateSequence.add(SELECT_HIERARCHY_3);
 		stateSequence.add(SELECT_HIERARCHY_4);
+		stateSequence.add(SELECT_HIERARCHY_5);
+		stateSequence.add(SELECT_HIERARCHY_6);
+		stateSequence.add(SELECT_HIERARCHY_7);
+		stateSequence.add(SELECT_HIERARCHY_8);
 		stateSequence.add(SELECT_ROUND);
 		stateSequence.add(SELECT_LOCATION);
 		stateSequence.add(CREATE_VISIT);
@@ -154,7 +168,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Cursor curs = Queries.getAllHierarchyLevels(getContentResolver());
+        List<LocationHierarchyLevel> lhll = Converter.toLocationHierarchyLevelList(curs); 
+        curs.close();
+        
+        levelNumbers = lhll.size()-1;
+        
         setContentView(R.layout.main);
         
         FieldWorker fw = (FieldWorker) getIntent().getExtras().getSerializable("fieldWorker");
@@ -303,9 +322,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	@Override
 	public void onBackPressed() {
 	    new AlertDialog.Builder(this)
-	           .setMessage("Are you sure you want to exit?")
+	           .setMessage(getString(R.string.exiting_lbl))
 	           .setCancelable(false)
-	           .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	           .setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int id) {
 	            	   try{
 	                    UpdateActivity.this.finish();
@@ -313,7 +332,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	            	   catch(Exception e){}
 	               }
 	           })
-	           .setNegativeButton("No", null)
+	           .setNegativeButton(getString(R.string.no_lbl), null)
 	           .show();
 	}    
 
@@ -358,6 +377,15 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	vf.onLoaderReset(null);
             stateMachine.transitionTo("Create Visit");
             break;
+        case FILTER_SOCIALGROUP:
+            if (resultCode != RESULT_OK) {
+                return;
+            }
+        	SocialGroup socialGroup = (SocialGroup) data.getExtras().getSerializable("socialGroup");
+        	vf.onLoaderReset(null);
+            filledForm = formFiller.appendSocialGroup(socialGroup, filledForm);
+            loadForm(SELECTED_XFORM);
+            break;            
         case FILTER_INMIGRATION:
             handleFilterInMigrationResult(resultCode, data);
             vf.onLoaderReset(null);
@@ -732,9 +760,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
      */
     private void startFilterActivity(int requestCode) {
     	Intent i =null;
-    	if (requestCode==75) {
+    	if (requestCode==FILTER_INDIV_VISIT) {
             i = new Intent(this, FilterVisitActivity.class);
-    	} else {
+    	} 
+    	else if(requestCode == FILTER_SOCIALGROUP){
+    		i = new Intent(this, FilterSocialGroupActivity.class);
+    	}
+    	else {
     		i = new Intent(this, FilterActivity.class);
     	}
     	
@@ -743,7 +775,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         i.putExtra("hierarchy2", locationVisit.getHierarchy2());
         i.putExtra("hierarchy3", locationVisit.getHierarchy3());
         i.putExtra("hierarchy4", locationVisit.getHierarchy4());
-        
+        i.putExtra("hierarchy5", locationVisit.getHierarchy5());
+        i.putExtra("hierarchy6", locationVisit.getHierarchy6());
+        i.putExtra("hierarchy7", locationVisit.getHierarchy7());
+        i.putExtra("hierarchy8", locationVisit.getHierarchy8());
 
         Location loc = locationVisit.getLocation();
         if (loc == null) {
@@ -804,8 +839,23 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         vf.loadHierarchy4(locationVisit.getHierarchy3().getExtId());
     }
 
+    private void loadHierarchy5ValueData() {
+        vf.loadHierarchy5(locationVisit.getHierarchy4().getExtId());
+    }
+    
+    private void loadHierarchy6ValueData() {
+        vf.loadHierarchy6(locationVisit.getHierarchy5().getExtId());
+    }
+    
+    private void loadHierarchy7ValueData() {
+        vf.loadHierarchy7(locationVisit.getHierarchy6().getExtId());
+    }
+    
+    private void loadHierarchy8ValueData() {
+        vf.loadHierarchy8(locationVisit.getHierarchy7().getExtId());
+    }
     private void loadLocationValueData() {
-        vf.loadLocations(locationVisit.getHierarchy4().getExtId());
+        vf.loadLocations(parentExtId);
     }
 
   /*  private void loadRoundValueData() {
@@ -1141,10 +1191,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             
             if(this.sg != null){
             	if(locationVisit.getSelectedIndividual().getExtId().equalsIgnoreCase(sg.getGroupHead())){
-            		Toast.makeText(UpdateActivity.this, "You are about to outmigrate a HoH!" , Toast.LENGTH_LONG).show();
+            		Toast.makeText(UpdateActivity.this, getString(R.string.is_migrating_hoh_warning_lbl) , Toast.LENGTH_LONG).show();
             	}
             	else{
-            		Toast.makeText(UpdateActivity.this, "Individual you are about to outmigrate is not the HoH!" , Toast.LENGTH_LONG).show();
+            		Toast.makeText(UpdateActivity.this, getString(R.string.is_not_migrating_hoh_warning_lbl), Toast.LENGTH_LONG).show();
             	}
             }
             loadForm(SELECTED_XFORM);
@@ -1312,7 +1362,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	if(this.sg != null){
         		deathCreation = true;
         		if(locationVisit.getSelectedIndividual().getExtId().equalsIgnoreCase(locationVisit.getLocation().getHead())){
-//	    			Toast.makeText(UpdateActivity.this, "Individual is HoH!", Toast.LENGTH_LONG).show();	    			
 	    			updatable = new DeathOfHoHUpdate();
 	    	        showProgressFragment();
 	    	        Bundle bundle = new Bundle();
@@ -1449,14 +1498,124 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     		vf.onLoaderReset(null);
     	}           
     }
+    
+    
+	public void onHierarchy5() {
+		 locationVisit.clearLevelsBelow(4);
+	        stateMachine.transitionTo("Select Hierarchy 5");
+
+	    	ContentResolver resolver = getContentResolver();
+	    	Cursor cursor = null;
+	    	String parentExtId = locationVisit.getHierarchy4().getExtId();
+	    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+	    	
+	    	if(cursor.getCount() == 1){
+	    		cursor.moveToNext();
+	    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+	    		cursor.close();   
+	    		onHierarchy5Selected(currentLocationHierarchy);
+	    	}
+	    	else{
+	    		cursor.close();
+	    		loadHierarchy5ValueData();
+	    		vf.onLoaderReset(null);
+	    	}          
+		
+	}
+    
+	
+	public void onHierarchy6() {
+		 locationVisit.clearLevelsBelow(5);
+	        stateMachine.transitionTo("Select Hierarchy 6");
+
+	    	ContentResolver resolver = getContentResolver();
+	    	Cursor cursor = null;
+	    	String parentExtId = locationVisit.getHierarchy5().getExtId();
+	    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+	    	
+	    	if(cursor.getCount() == 1){
+	    		cursor.moveToNext();
+	    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+	    		cursor.close();   
+	    		onHierarchy6Selected(currentLocationHierarchy);
+	    	}
+	    	else{
+	    		cursor.close();
+	    		loadHierarchy6ValueData();
+	    		vf.onLoaderReset(null);
+	    	}          
+				
+	}
+
+	
+	public void onHierarchy7() {
+		 locationVisit.clearLevelsBelow(6);
+	        stateMachine.transitionTo("Select Hierarchy 7");
+
+	    	ContentResolver resolver = getContentResolver();
+	    	Cursor cursor = null;
+	    	String parentExtId = locationVisit.getHierarchy6().getExtId();
+	    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+	    	
+	    	if(cursor.getCount() == 1){
+	    		cursor.moveToNext();
+	    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+	    		cursor.close();   
+	    		onHierarchy7Selected(currentLocationHierarchy);
+	    	}
+	    	else{
+	    		cursor.close();
+	    		loadHierarchy7ValueData();
+	    		vf.onLoaderReset(null);
+	    	}          
+	}
+
+	
+	public void onHierarchy8() {
+		 locationVisit.clearLevelsBelow(7);
+	        stateMachine.transitionTo("Select Hierarchy 8");
+
+	    	ContentResolver resolver = getContentResolver();
+	    	Cursor cursor = null;
+	    	String parentExtId = locationVisit.getHierarchy7().getExtId();
+	    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+	    	
+	    	if(cursor.getCount() == 1){
+	    		cursor.moveToNext();
+	    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+	    		cursor.close();   
+	    		onHierarchy8Selected(currentLocationHierarchy);
+	    	}
+	    	else{
+	    		cursor.close();
+	    		loadHierarchy8ValueData();
+	    		vf.onLoaderReset(null);
+	    	}          
+		
+	}
+
 
     public void onLocation() {
-        locationVisit.clearLevelsBelow(5);
+        locationVisit.clearLevelsBelow(9);
         stateMachine.transitionTo("Select Location");
                 
     	ContentResolver resolver = getContentResolver();
     	Cursor cursor = null;
-    	String parentExtId = locationVisit.getHierarchy4().getExtId();
+    	if (levelNumbers==2) {
+    		parentExtId = locationVisit.getHierarchy2().getExtId();
+    	} else if (levelNumbers==3) {
+        	parentExtId = locationVisit.getHierarchy3().getExtId(); 
+    	} else if (levelNumbers==4) {
+    		parentExtId = locationVisit.getHierarchy4().getExtId();
+    	} else if (levelNumbers==5) {
+    		parentExtId = locationVisit.getHierarchy5().getExtId();
+    	} else if (levelNumbers==6) {
+    		parentExtId = locationVisit.getHierarchy6().getExtId();
+    	} else if (levelNumbers==7) {
+    		parentExtId = locationVisit.getHierarchy7().getExtId();
+    	} else if (levelNumbers==8) {
+    		parentExtId = locationVisit.getHierarchy8().getExtId();
+    	}
     	cursor = Queries.getLocationsByHierachy(resolver, parentExtId);
     	
     	if(cursor.getCount() == 1){
@@ -1471,7 +1630,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onRound() {
-        locationVisit.clearLevelsBelow(4);
+        locationVisit.clearLevelsBelow(8);
         stateMachine.transitionTo("Select Round");
 //        loadRoundValueData();
         
@@ -1496,17 +1655,17 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	}   
         	
     		if(highestRoundNumber == 0){
-    			Toast.makeText(this, "Round number with 0 found. This usually seems to be the baseline round.", Toast.LENGTH_LONG).show();
+    			Toast.makeText(this, getString(R.string.round_number_found_lbl), Toast.LENGTH_LONG).show();
     		}
     		else if(highestRoundNumber > 0){
     			onRoundSelected(latestRound);
     		}
     		else{
-    			Toast.makeText(this, "Could not parse round numbers", Toast.LENGTH_LONG).show();
+    			Toast.makeText(this, getString(R.string.couldnt_parse_roundnr_lbl), Toast.LENGTH_LONG).show();
     		}
         }
         else{
-        	Toast.makeText(this, "No round information found. Please sync with server and make sure tasks were created!", Toast.LENGTH_LONG).show();
+        	Toast.makeText(this, getString(R.string.no_round_info_found_lbl), Toast.LENGTH_LONG).show();
         }
                 
         vf.onLoaderReset(null);
@@ -1514,7 +1673,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onIndividual() {
-        locationVisit.clearLevelsBelow(6);
+        locationVisit.clearLevelsBelow(10);
         loadIndividualValueData();
     }
 
@@ -1534,7 +1693,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         locationVisit.setHierarchy2(subregion);
         stateMachine.transitionTo("Select Hierarchy 3");
         updateButtons(1);
-        onHierarchy3();
+        if (levelNumbers==2) {
+        	stateMachine.transitionTo("Select Round");
+        	onRound();	
+        } else {
+            stateMachine.transitionTo("Select Hierarchy 3");
+        	onHierarchy3();
+        }   
     }
     
 
@@ -1542,15 +1707,78 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         locationVisit.setHierarchy3(hierarchy);
         stateMachine.transitionTo("Select Hierarchy 4");
         updateButtons(2);
-        onHierarchy4();
+        if (levelNumbers==3) {
+        	stateMachine.transitionTo("Select Round");
+        	onRound();	
+        } else {
+            stateMachine.transitionTo("Select Hierarchy 4");
+        	onHierarchy4();
+        }   
     }
 
+
+    
+    
+    
     public void onHierarchy4Selected(LocationHierarchy village) {
         locationVisit.setHierarchy4(village);
-        stateMachine.transitionTo("Select Round");
         updateButtons(3);
-        onRound();
+        if (levelNumbers==4) {
+        	stateMachine.transitionTo("Select Round");
+        	onRound();	
+        } else {
+            stateMachine.transitionTo("Select Hierarchy 5");
+        	onHierarchy5();
+        }
     }
+    
+    
+	public void onHierarchy5Selected(LocationHierarchy hierarchy5) {
+        locationVisit.setHierarchy5(hierarchy5);
+        updateButtons(4);
+        if (levelNumbers==5) {
+        	stateMachine.transitionTo("Select Round");   	
+        	onRound();	
+        } else {
+        	stateMachine.transitionTo("Select Hierarchy 6");
+        	onHierarchy6();
+        }
+	}
+
+	
+	public void onHierarchy6Selected(LocationHierarchy hierarchy6) {
+        locationVisit.setHierarchy6(hierarchy6);
+        updateButtons(5);
+        if (levelNumbers==6) {
+        	stateMachine.transitionTo("Select Round"); 
+        	onRound();	
+        } else {
+        	stateMachine.transitionTo("Select Hierarchy 7");
+        	onHierarchy7();
+        }		
+	}
+
+	
+	public void onHierarchy7Selected(LocationHierarchy hierarchy7) {
+        locationVisit.setHierarchy7(hierarchy7);
+        updateButtons(6);
+        if (levelNumbers==7) {
+        	stateMachine.transitionTo("Select Round"); 
+        	onRound();	
+        } else {
+        	stateMachine.transitionTo("Select Hierarchy 8");
+        	onHierarchy8();
+        }		
+	}
+	
+
+	
+	public void onHierarchy8Selected(LocationHierarchy hierarchy8) {
+	     locationVisit.setHierarchy8(hierarchy8);
+	//        updateButtons(7);
+        	onRound();	
+	}
+    
     
     private void updateButtons(int level){
     }
@@ -1627,12 +1855,15 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         hideProgressFragment();
         
         if(loader.getId() == -1 ) return;
-    
+        
         if (cursor.getCount() == 1 && loader.getId() == SOCIAL_GROUP_FOR_INDIVIDUAL) {
             cursor.moveToFirst();
             appendSocialGroupFromCursor(cursor);
             return;
+        } else if(loader.getId() == SOCIAL_GROUP_AT_LOCATION){
+        	handleSocialGroup(loader, cursor);
         }
+        
         else if(loader.getId() == INDIVIDUALS_IN_SOCIAL_GROUP_ACTIVE){       
 	        if(cursor.moveToNext()){
 		        List<String> uniqueExtIds = new ArrayList<String>();     
@@ -1657,7 +1888,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        	}
 	        	   	
 	        	final List<Individual> list = uniqueIndividuals; 
-        		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, list) {
+        		@SuppressWarnings({ "unchecked", "rawtypes" })
+				ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, list) {
       			  @Override
       			  public View getView(int position, View convertView, android.view.ViewGroup parent) {
       			    View view = super.getView(position, convertView, parent);
@@ -1671,7 +1903,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
       			  }
       			};
     	        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	        builder.setTitle("Please select new HoH");
+    	        builder.setTitle(getString(R.string.pls_select_new_hoh_lbl));
     	        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
     	
     	            public void onClick(DialogInterface dialog, int which) {
@@ -1708,7 +1940,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        }
 	        else{
     	        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	        builder.setTitle("No individual found in SG");
+    	        builder.setTitle(getString(R.string.no_indiv_found_onsg_lbl));
     	        builder.setMessage(getString(R.string.no_individual_left));
     	        builder.setNegativeButton(getString(R.string.cancel_lbl), null);
     	        AlertDialog dlg = builder.create();
@@ -1741,13 +1973,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
         if(newHoh != null)
-        	builder.setMessage("Selected new HoH " + newHoh.getFirstName() + " " + newHoh.getLastName() + " with extId " + newHoh.getExtId());
+        	builder.setMessage(getString(R.string.selected_new_hoh_lbl)  + newHoh.getFirstName() + " " + newHoh.getLastName() +  getString(R.string.with_extid_lbl)  + newHoh.getExtId());
         builder.setNegativeButton(getString(R.string.cancel_lbl), new DialogInterface.OnClickListener() {
         	public void onClick(DialogInterface dialog, int id) {
         		deathCreation = false;
         	}
         });
-        builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.continue_lbl, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
             	filledForm.setIndividualA(newHoh.getExtId());
             	filledForm.setHouseHoldMembers(members);
@@ -1785,4 +2017,70 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 			vf.selectItemNoInList(0);
 		}
 	}
+
+	 private void handleSocialGroup(Loader<Cursor> loader, Cursor cursor){	
+	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    	
+	    	if(cursor.getCount() > 0){
+	    		builder.setTitle(getString(R.string.select_household_lbl));
+	        	SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
+	        			new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
+	        			OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
+	        			android.R.id.text2 }, 0 )
+	        			{
+	        			    @Override
+	        			    public View getView(int position, View convertView, ViewGroup parent)
+	        			    {
+	        			        final View row = super.getView(position, convertView, parent);
+	        			        TextView text1 = (TextView) row.findViewById(android.R.id.text1);
+	              			    TextView text2 = (TextView) row.findViewById(android.R.id.text2);
+	              			  
+	              			    text1.setTextColor(Color.BLACK);
+	              			    text2.setTextColor(Color.BLACK);
+	        			        if (position % 2 == 0)
+	        			            row.setBackgroundResource(android.R.color.darker_gray);
+	        			        else
+	        			            row.setBackgroundResource(android.R.color.background_light);
+	        			        return row;
+	        			    }
+	        			};
+	        	
+	      
+	        	
+	        	builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+	        			public void onClick(DialogInterface dialog, int which) {
+	        				Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
+	        				appendSocialGroupFromCursor(cursor);
+	        			}
+	        	});     		
+	    	}
+	    	else{
+	    		builder.setTitle(getString(R.string.select_household_lbl));
+	    		builder.setMessage(getString(R.string.search_for_household_lbl));
+	    	}
+	    	
+	    	builder.setNegativeButton(getString(R.string.cancel_lbl),new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, just close
+					// the dialog box and do nothing
+					dialog.cancel();
+				}
+			});   	
+	    	builder.setPositiveButton(getString(R.string.create_lbl), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					onHousehold();
+				}
+			});           	
+			builder.setNeutralButton(getString(R.string.search_lbl), new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					searchSocialGroup();
+				}
+			});           	
+	        householdDialog = builder.create();
+	        householdDialog.show();    	
+	    }
+	 
+	    private void searchSocialGroup(){ 	
+	    	startFilterActivity(FILTER_SOCIALGROUP);
+	    }
 }

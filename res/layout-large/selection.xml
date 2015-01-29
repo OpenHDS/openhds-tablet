@@ -29,6 +29,7 @@
 	            android:layout_height="wrap_content">  
 	        <TableRow> 
 	            <TextView
+	                android:id="@+id/hierarchy1Label"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
@@ -46,6 +47,7 @@
 	        </TableRow>
 	        <TableRow>
 	            <TextView
+	                android:id="@+id/hierarchy1LabelExtId"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
@@ -78,6 +80,7 @@
 	            android:layout_height="wrap_content">
 	        <TableRow> 
 	            <TextView
+	                android:id="@+id/hierarchy2Label"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
@@ -95,6 +98,7 @@
 	        </TableRow>
 	        <TableRow>
 	            <TextView
+	                android:id="@+id/hierarchy2LabelExtId"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="5dp"
@@ -125,6 +129,7 @@
 	            android:layout_height="wrap_content">  
 	        <TableRow> 
 	            <TextView
+	                android:id="@+id/hierarchy3Label" 
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="1dp"
@@ -142,6 +147,7 @@
 	        </TableRow>
 	        <TableRow>
 	            <TextView
+	                android:id="@+id/hierarchy3LabelExtId"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="1dp"
@@ -172,6 +178,7 @@
                 android:layout_height="wrap_content">  
             <TableRow> 
                 <TextView
+	                android:id="@+id/hierarchy4Label"                    
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -189,6 +196,7 @@
             </TableRow>
             <TableRow>
                 <TextView
+ 	                android:id="@+id/hierarchy4LabelExtId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -207,7 +215,203 @@
             </TableRow> 
         </TableLayout>         
          	    
-	   
+	    <Button
+            android:id="@+id/hierarchy5Btn"
+            android:layout_width="182dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/select_hierarchy5_lbl" />
+        
+         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">  
+            <TableRow> 
+                <TextView
+	                android:id="@+id/hierarchy5Label"                    
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/hierarchy5_lbl"
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+    
+                <TextView
+                    android:id="@+id/hierarchy5Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:inputType="text"
+                    android:textColor="#ff8c00" 
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            </TableRow>
+            <TableRow>
+                <TextView
+	                android:id="@+id/hierarchy5LabelExtId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="ExtId:"
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            
+                <TextView
+                    android:id="@+id/hierarchy5ExtId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:paddingBottom="5dp"
+                    android:inputType="text"
+                    android:textColor="#ff8c00" 
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            </TableRow> 
+        </TableLayout>         
+         
+    	    <Button
+            android:id="@+id/hierarchy6Btn"
+            android:layout_width="182dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="" />
+        
+         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">  
+            <TableRow> 
+                <TextView
+	                android:id="@+id/hierarchy6Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+    
+                <TextView
+                    android:id="@+id/hierarchy6Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:inputType="text"
+                    android:textColor="#ff8c00" 
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            </TableRow>
+            <TableRow>
+                <TextView
+	                android:id="@+id/hierarchy6LabelExtId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="ExtId:"
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            
+                <TextView
+                    android:id="@+id/hierarchy6ExtId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:paddingBottom="5dp"
+                    android:inputType="text"
+                    android:textColor="#ff8c00" 
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            </TableRow> 
+        </TableLayout>  
+        
+         
+        	    <Button
+            android:id="@+id/hierarchy7Btn"
+            android:layout_width="182dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="" />
+        
+         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">  
+            <TableRow> 
+                <TextView
+	                android:id="@+id/hierarchy7Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+    
+                <TextView
+                    android:id="@+id/hierarchy7Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:inputType="text"
+                    android:textColor="#ff8c00" 
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            </TableRow>
+            <TableRow>
+                <TextView
+	                android:id="@+id/hierarchy7LabelExtId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="ExtId:"
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            
+                <TextView
+                    android:id="@+id/hierarchy7ExtId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:paddingBottom="5dp"
+                    android:inputType="text"
+                    android:textColor="#ff8c00" 
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            </TableRow> 
+        </TableLayout>  
+        
+         
+        	    <Button
+            android:id="@+id/hierarchy8Btn"
+            android:layout_width="182dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="" />
+        
+         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">  
+            <TableRow> 
+                <TextView
+	                android:id="@+id/hierarchy8Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+    
+                <TextView
+                    android:id="@+id/hierarchy8Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:inputType="text"
+                    android:textColor="#ff8c00" 
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            </TableRow>
+            <TableRow>
+                <TextView
+	                android:id="@+id/hierarchy8LabelExtId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="ExtId:"
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            
+                <TextView
+                    android:id="@+id/hierarchy8ExtId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:paddingBottom="5dp"
+                    android:inputType="text"
+                    android:textColor="#ff8c00" 
+                    android:textAppearance="?android:attr/textAppearanceSmall"  />
+            </TableRow> 
+        </TableLayout>   
 
     <Button
           android:id="@+id/roundBtn"

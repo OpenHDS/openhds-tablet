@@ -24,8 +24,8 @@ public class FilterSocialGroupActivity extends Activity implements ValueListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filter_socialgroups);
 
-        selectionFilterSocialgroupFragment = (SelectionFilterSocialgroupFragment) getFragmentManager().findFragmentById(
-                R.id.selectionFilterSocialgroupFragment);
+        setSelectionFilterSocialgroupFragment((SelectionFilterSocialgroupFragment) getFragmentManager().findFragmentById(
+                R.id.selectionFilterSocialgroupFragment));
         valueFragment = (ValueFragment) getFragmentManager().findFragmentById(R.id.valueFragment);
 
         processExtras();
@@ -72,5 +72,38 @@ public class FilterSocialGroupActivity extends Activity implements ValueListener
     
     public void onSearch(String extId, String groupName) {
     	valueFragment.loadFilteredSocialGroups(extId, groupName);
-    }   
+    }
+
+	
+	public void onHierarchy5Selected(LocationHierarchy hierarchy5) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void onHierarchy6Selected(LocationHierarchy hierarchy6) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void onHierarchy7Selected(LocationHierarchy hierarchy7) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void onHierarchy8Selected(LocationHierarchy hierarchy8) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public SelectionFilterSocialgroupFragment getSelectionFilterSocialgroupFragment() {
+		return selectionFilterSocialgroupFragment;
+	}
+
+	public void setSelectionFilterSocialgroupFragment(
+			SelectionFilterSocialgroupFragment selectionFilterSocialgroupFragment) {
+		this.selectionFilterSocialgroupFragment = selectionFilterSocialgroupFragment;
+	}   
 }

@@ -72,7 +72,6 @@ public class HierarchySelectionFragment extends Fragment {
 	}
 
 	private class HierarchyButtonListener implements OnClickListener {
-		@Override
 		public void onClick(View v) {
 			navigator.jumpUp((String) v.getTag());
 		}

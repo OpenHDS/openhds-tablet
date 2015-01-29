@@ -32,6 +32,7 @@ import org.openhds.mobile.model.FormFiller;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
+import org.openhds.mobile.model.LocationHierarchyLevel;
 import org.openhds.mobile.model.LocationVisit;
 import org.openhds.mobile.model.PregnancyObservationUpdate;
 import org.openhds.mobile.model.PregnancyOutcome;
@@ -51,13 +52,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -87,7 +92,6 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     private static final int FILTER_FORM = 35;
     private static final int FILTER_INMIGRATION = 40;
     private static final int FILTER_BIRTH_FATHER = 45;
-    private static final int LOCATION_GEOPOINT = 50;
     protected static final int FILTER_INMIGRATION_MOTHER = 60;
     protected static final int FILTER_INMIGRATION_FATHER = 70;
     protected static final int FILTER_INDIV_VISIT = 75;
@@ -110,6 +114,8 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     private boolean showingProgress;
     private Updatable updatable;
     private boolean extInm;
+    private int levelNumbers;
+    private String parentExtId;
     private boolean hhCreation;
     private String jrFormId;
     
@@ -118,6 +124,10 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 	public static final String SELECT_HIERARCHY_2 = "Select Hierarchy 2";
 	public static final String SELECT_HIERARCHY_3 = "Select Hierarchy 3";
 	public static final String SELECT_HIERARCHY_4 = "Select Hierarchy 4";
+	public static final String SELECT_HIERARCHY_5 = "Select Hierarchy 5";
+	public static final String SELECT_HIERARCHY_6 = "Select Hierarchy 6";
+	public static final String SELECT_HIERARCHY_7 = "Select Hierarchy 7";
+	public static final String SELECT_HIERARCHY_8 = "Select Hierarchy 8";
 	public static final String SELECT_ROUND = "Select Round";
 	public static final String SELECT_LOCATION = "Select Location";
 	public static final String CREATE_VISIT = "Create Visit";
@@ -133,6 +143,10 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 		stateSequence.add(SELECT_HIERARCHY_2);
 		stateSequence.add(SELECT_HIERARCHY_3);
 		stateSequence.add(SELECT_HIERARCHY_4);
+		stateSequence.add(SELECT_HIERARCHY_5);
+		stateSequence.add(SELECT_HIERARCHY_6);
+		stateSequence.add(SELECT_HIERARCHY_7);
+		stateSequence.add(SELECT_HIERARCHY_8);
 		stateSequence.add(SELECT_ROUND);
 		stateSequence.add(SELECT_LOCATION);
 		stateSequence.add(CREATE_VISIT);
@@ -143,10 +157,17 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 
 
 	}    
+	
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+      	 Cursor curs = Queries.getAllHierarchyLevels(getContentResolver());
+         List<LocationHierarchyLevel> lhll = Converter.toLocationHierarchyLevelList(curs); 
+         curs.close();
+         
+         levelNumbers = lhll.size()-1;
         setContentView(R.layout.main);
         this.setTitle("Baseline");
         
@@ -226,31 +247,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             outState.putString("uri", contentUri.toString());
     }
 
-    /**
-     * This method is responsible for restoring the screen state.
-     */
-    /*   private void restoreState(Bundle savedState) {
-        if (savedState != null) {
-            locationVisit = (LocationVisit) savedState.getSerializable("locationvisit");
-
-            String uri = savedState.getString("uri");
-            if (uri != null)
-                contentUri = Uri.parse(uri);
-
-            if (savedState.getBoolean("xFormNotFound"))
-                createXFormNotFoundDialog();
-            if (savedState.getBoolean("unfinishedFormDialog"))
-                createUnfinishedFormDialog();
-
-            sf.setLocationVisit(locationVisit);
-            ef.setLocationVisit(locationVisit);
-            
-            //Restore last state
-            String state = (String)savedState.getSerializable("currentState");
-            stateMachine.transitionTo(state);
-        }
-    }     */
-    
+   
     @Override
     protected void onStart() {
     	// TODO Auto-generated method stub
@@ -293,9 +290,9 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 	@Override
 	public void onBackPressed() {
 	    new AlertDialog.Builder(this)
-	           .setMessage("Are you sure you want to exit?")
+	           .setMessage(getString(R.string.exiting_lbl))
 	           .setCancelable(false)
-	           .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	           .setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int id) {
 	            	   try{
 	                    BaselineActivity.this.finish();
@@ -303,7 +300,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 	            	   catch(Exception e){}
 	               }
 	           })
-	           .setNegativeButton("No", null)
+	           .setNegativeButton(getString(R.string.no_lbl), null)
 	           .show();
 	}
 
@@ -354,9 +351,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
                 return;
             }
         	SocialGroup socialGroup = (SocialGroup) data.getExtras().getSerializable("socialGroup");
-//        	locationVisit.setLocation(location1);
         	vf.onLoaderReset(null);
-//            transitionToCreateVisit();
             filledForm = formFiller.appendSocialGroup(socialGroup, filledForm);
             loadForm(SELECTED_XFORM);
             break;            
@@ -372,45 +367,6 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         case FILTER_INMIGRATION_FATHER:
             handleFilterFather(resultCode, data);
             break;
-        case LOCATION_GEOPOINT:
-            if (resultCode == RESULT_OK) {
-                String extId = data.getExtras().getString("extId");
-                // a few things need to happen here:
-                // * get the location by extId
-                cursor = Queries.getLocationByExtId(resolver, extId);
-                Location location = Converter.toLocation(cursor);
-               
-                // * figure out the parent location hierarchy
-                cursor = Queries.getHierarchyByExtId(resolver, location.getHierarchy());
-                LocationHierarchy subvVllage = Converter.toHierarhcy(cursor, true);
-                
-
-                cursor = Queries.getHierarchyByExtId(resolver, subvVllage.getParent());
-                LocationHierarchy village = Converter.toHierarhcy(cursor, true);
-                
-                cursor = Queries.getHierarchyByExtId(resolver, village.getParent());
-                LocationHierarchy district = Converter.toHierarhcy(cursor, true);
-                
-                cursor = Queries.getHierarchyByExtId(resolver, district.getParent());
-                LocationHierarchy region = Converter.toHierarhcy(cursor, true);
-                
-                cursor = Queries.allRounds(resolver);
-                Round round = Converter.convertToRound(cursor);
-                
-                locationVisit.setHierarchy1(region);
-                locationVisit.setHierarchy2(district);
-                locationVisit.setHierarchy3(village);
-                locationVisit.setHierarchy4(subvVllage);
-                locationVisit.setRound(round);
-                locationVisit.setLocation(location);
-                
-                
-                sf.setLocationVisit(locationVisit);
-                sf.setAll();
-            	vf.onLoaderReset(null);
-                transitionToCreateVisit();
-                cursor.close();
-            }
         }
     }
     
@@ -495,7 +451,6 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             		vf.loadFilteredLocationById(locationExtId);
             		vf.selectItemNoInList(0);
             	}
-//                transitionToCreateVisit();
             } else {
                 createUnfinishedFormDialog();
             }
@@ -610,7 +565,6 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         
         if(progressFragment != null){
         	txn.remove(progressFragment).commitAllowingStateLoss();
-//        	txn.commit();
         	progressFragment = null;
         }
         
@@ -743,6 +697,10 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         i.putExtra("hierarchy2", locationVisit.getHierarchy2());
         i.putExtra("hierarchy3", locationVisit.getHierarchy3());
         i.putExtra("hierarchy4", locationVisit.getHierarchy4());
+        i.putExtra("hierarchy5", locationVisit.getHierarchy5());
+        i.putExtra("hierarchy6", locationVisit.getHierarchy6());
+        i.putExtra("hierarchy7", locationVisit.getHierarchy7());
+        i.putExtra("hierarchy8", locationVisit.getHierarchy8());
         
 
         Location loc = locationVisit.getLocation();
@@ -777,6 +735,10 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         i.putExtra("hierarchy2", locationVisit.getHierarchy2());
         i.putExtra("hierarchy3", locationVisit.getHierarchy3());
         i.putExtra("hierarchy4", locationVisit.getHierarchy4());
+        i.putExtra("hierarchy5", locationVisit.getHierarchy5());
+        i.putExtra("hierarchy6", locationVisit.getHierarchy6());
+        i.putExtra("hierarchy7", locationVisit.getHierarchy7());
+        i.putExtra("hierarchy8", locationVisit.getHierarchy8());
 
         Location loc = locationVisit.getLocation();
         if (loc == null) {
@@ -808,8 +770,24 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         vf.loadHierarchy4(locationVisit.getHierarchy3().getExtId());
     }
 
+    private void loadHierarchy5ValueData() {
+        vf.loadHierarchy5(locationVisit.getHierarchy4().getExtId());
+    }
+    
+    private void loadHierarchy6ValueData() {
+        vf.loadHierarchy6(locationVisit.getHierarchy5().getExtId());
+    }
+    
+    private void loadHierarchy7ValueData() {
+        vf.loadHierarchy7(locationVisit.getHierarchy6().getExtId());
+    }
+    
+    private void loadHierarchy8ValueData() {
+        vf.loadHierarchy8(locationVisit.getHierarchy7().getExtId());
+    }
+    
     private void loadLocationValueData() {
-        vf.loadLocations(locationVisit.getHierarchy4().getExtId());
+        vf.loadLocations(parentExtId);
     }
 
 
@@ -857,11 +835,6 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-    }
-
-    public void onLocationGeoPoint() {
-        Intent intent = new Intent(getApplicationContext(), ShowMapActivity.class);
-        startActivityForResult(intent, LOCATION_GEOPOINT);
     }
 
     public void onCreateLocation() {
@@ -1367,14 +1340,124 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     		vf.onLoaderReset(null);
     	}          
     }
+    
+	
+	public void onHierarchy5() {
+		 locationVisit.clearLevelsBelow(4);
+	        stateMachine.transitionTo("Select Hierarchy 5");
+
+	    	ContentResolver resolver = getContentResolver();
+	    	Cursor cursor = null;
+	    	String parentExtId = locationVisit.getHierarchy4().getExtId();
+	    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+	    	
+	    	if(cursor.getCount() == 1){
+	    		cursor.moveToNext();
+	    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+	    		cursor.close();   
+	    		onHierarchy5Selected(currentLocationHierarchy);
+	    	}
+	    	else{
+	    		cursor.close();
+	    		loadHierarchy5ValueData();
+	    		vf.onLoaderReset(null);
+	    	}          
+		
+	}
+    
+	
+	public void onHierarchy6() {
+		 locationVisit.clearLevelsBelow(5);
+	        stateMachine.transitionTo("Select Hierarchy 6");
+
+	    	ContentResolver resolver = getContentResolver();
+	    	Cursor cursor = null;
+	    	String parentExtId = locationVisit.getHierarchy5().getExtId();
+	    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+	    	
+	    	if(cursor.getCount() == 1){
+	    		cursor.moveToNext();
+	    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+	    		cursor.close();   
+	    		onHierarchy6Selected(currentLocationHierarchy);
+	    	}
+	    	else{
+	    		cursor.close();
+	    		loadHierarchy6ValueData();
+	    		vf.onLoaderReset(null);
+	    	}          
+				
+	}
+
+	
+	public void onHierarchy7() {
+		 locationVisit.clearLevelsBelow(6);
+	        stateMachine.transitionTo("Select Hierarchy 7");
+
+	    	ContentResolver resolver = getContentResolver();
+	    	Cursor cursor = null;
+	    	String parentExtId = locationVisit.getHierarchy6().getExtId();
+	    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+	    	
+	    	if(cursor.getCount() == 1){
+	    		cursor.moveToNext();
+	    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+	    		cursor.close();   
+	    		onHierarchy7Selected(currentLocationHierarchy);
+	    	}
+	    	else{
+	    		cursor.close();
+	    		loadHierarchy7ValueData();
+	    		vf.onLoaderReset(null);
+	    	}          
+	}
+
+	public void onHierarchy8() {
+		 locationVisit.clearLevelsBelow(7);
+	        stateMachine.transitionTo("Select Hierarchy 8");
+
+	    	ContentResolver resolver = getContentResolver();
+	    	Cursor cursor = null;
+	    	String parentExtId = locationVisit.getHierarchy7().getExtId();
+	    	cursor = Queries.getHierarchysByParent(resolver, parentExtId);
+	    	
+	    	if(cursor.getCount() == 1){
+	    		cursor.moveToNext();
+	    		LocationHierarchy currentLocationHierarchy = Converter.convertToHierarchy(cursor);
+	    		cursor.close();   
+	    		onHierarchy8Selected(currentLocationHierarchy);
+	    	}
+	    	else{
+	    		cursor.close();
+	    		loadHierarchy8ValueData();
+	    		vf.onLoaderReset(null);
+	    	}          
+		
+	}
 
     public void onLocation() {
-        locationVisit.clearLevelsBelow(5);
+    	
+        locationVisit.clearLevelsBelow(9);
         stateMachine.transitionTo("Select Location");
         
+
     	ContentResolver resolver = getContentResolver();
     	Cursor cursor = null;
-    	String parentExtId = locationVisit.getHierarchy4().getExtId();
+    	if (levelNumbers==2) {
+    		parentExtId = locationVisit.getHierarchy2().getExtId();
+    	} else if (levelNumbers==3) {
+        	parentExtId = locationVisit.getHierarchy3().getExtId(); 
+    	} else if (levelNumbers==4) {
+    		parentExtId = locationVisit.getHierarchy4().getExtId();
+    	} else if (levelNumbers==5) {
+    		parentExtId = locationVisit.getHierarchy5().getExtId();
+    	} else if (levelNumbers==6) {
+    		parentExtId = locationVisit.getHierarchy6().getExtId();
+    	} else if (levelNumbers==7) {
+    		parentExtId = locationVisit.getHierarchy7().getExtId();
+    	} else if (levelNumbers==8) {
+    		parentExtId = locationVisit.getHierarchy8().getExtId();
+    	}
     	cursor = Queries.getLocationsByHierachy(resolver, parentExtId);
     	
     	if(cursor.getCount() == 1){
@@ -1389,7 +1472,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     }
 
     public void onRound() {
-        locationVisit.clearLevelsBelow(4);
+        locationVisit.clearLevelsBelow(8);
         stateMachine.transitionTo("Select Round");
         
     	ContentResolver resolver = getContentResolver();
@@ -1414,7 +1497,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             	}
             }
             else{
-            	Toast.makeText(this, "Could not find baseline. Please make sure there is a round with number 0. Continuing anyways.", Toast.LENGTH_LONG).show();
+            	Toast.makeText(this, getString(R.string.couldnt_find_baseline_lbl), Toast.LENGTH_LONG).show();
             	
             	cursor.moveToFirst();
             	round = Converter.convertToRound(cursor);
@@ -1422,7 +1505,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             }        	
         }
         else{
-        	Toast.makeText(this, "No round information found. Please sync with server!", Toast.LENGTH_LONG).show();
+        	Toast.makeText(this, getString(R.string.no_round_info_lbl), Toast.LENGTH_LONG).show();
         }
                 
         vf.onLoaderReset(null);
@@ -1431,14 +1514,14 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     }
 
     public void onIndividual() {
-        locationVisit.clearLevelsBelow(6);
+        locationVisit.clearLevelsBelow(10);
         loadIndividualValueData();
     }
 
     public void onHierarchy1Selected(LocationHierarchy hierarchy) {
         locationVisit.setHierarchy1(hierarchy);
         stateMachine.transitionTo("Select Hierarchy 2");
-        updateButtons(0);
+ //       updateButtons(0);
         onHierarchy2();
     }
 
@@ -1450,7 +1533,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     public void onHierarchy2Selected(LocationHierarchy subregion) {
         locationVisit.setHierarchy2(subregion);
         stateMachine.transitionTo("Select Hierarchy 3");
-        updateButtons(1);
+  //      updateButtons(1);
         onHierarchy3();
     }
     
@@ -1458,21 +1541,69 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     public void onHierarchy3Selected(LocationHierarchy hierarchy) {
         locationVisit.setHierarchy3(hierarchy);
         stateMachine.transitionTo("Select Hierarchy 4");
-        updateButtons(2);
-        onHierarchy4();
+   //     updateButtons(2);
+        if (levelNumbers==3) {
+        	onRound();	
+        } else {
+        	onHierarchy4();
+        }
     }
 
+    
     public void onHierarchy4Selected(LocationHierarchy village) {
         locationVisit.setHierarchy4(village);
         //stateMachine.transitionTo("Select Round");
-        updateButtons(3);
-        onRound();
+   //     updateButtons(3);
+        if (levelNumbers==4) {
+        	onRound();	
+        } else {
+        	onHierarchy5();
+        }
     }
     
-    private void updateButtons(int level){
-//    	sf.updateButtons(level);
-    }
+    
+	public void onHierarchy5Selected(LocationHierarchy hierarchy5) {
+        locationVisit.setHierarchy5(hierarchy5);
+ //       updateButtons(4);
+        if (levelNumbers==5) {
+        	onRound();	
+        } else {
+        	onHierarchy6();
+        }
+	}
 
+	
+	public void onHierarchy6Selected(LocationHierarchy hierarchy6) {
+        locationVisit.setHierarchy6(hierarchy6);
+  //      updateButtons(5);
+        if (levelNumbers==6) {
+        	onRound();	
+        } else {
+        	onHierarchy7();
+        }		
+	}
+
+	
+	public void onHierarchy7Selected(LocationHierarchy hierarchy7) {
+        locationVisit.setHierarchy7(hierarchy7);
+   //     updateButtons(6);
+        if (levelNumbers==7) {
+        	onRound();	
+        } else {
+        	onHierarchy8();
+        }		
+	}
+	
+
+	
+	public void onHierarchy8Selected(LocationHierarchy hierarchy8) {
+	     locationVisit.setHierarchy8(hierarchy8);
+	//        updateButtons(7);
+        	onRound();	
+	}
+
+
+    
     public void onRoundSelected(Round round) {
         locationVisit.setRound(round);
         stateMachine.transitionTo("Select Location");
@@ -1527,11 +1658,29 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	
     	if(cursor.getCount() > 0){
-    		builder.setTitle("Select Household");
+    		builder.setTitle(getString(R.string.select_household_lbl));
         	SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor,
         			new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
         			OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID }, new int[] { android.R.id.text1,
-        			android.R.id.text2 }, 0);
+        			android.R.id.text2 }, 0)
+			{
+			    @Override
+			    public View getView(int position, View convertView, ViewGroup parent)
+			    {
+			        final View row = super.getView(position, convertView, parent);
+			        TextView text1 = (TextView) row.findViewById(android.R.id.text1);
+      			    TextView text2 = (TextView) row.findViewById(android.R.id.text2);
+      			  
+      			    text1.setTextColor(Color.BLACK);
+      			    text2.setTextColor(Color.BLACK);
+			        if (position % 2 == 0)
+			            row.setBackgroundResource(android.R.color.darker_gray);
+			        else
+			            row.setBackgroundResource(android.R.color.background_light);
+			        return row;
+			    }
+			};
+			
         	builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
         			public void onClick(DialogInterface dialog, int which) {
         				Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
@@ -1540,8 +1689,8 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         	});     		
     	}
     	else{
-    		builder.setTitle("Select Household");
-    		builder.setMessage("Please search for an existing or create a new household.");
+    		builder.setTitle(getString(R.string.select_household_lbl));
+    		builder.setMessage(getString(R.string.search_for_household_lbl));
     	}
     	
     	builder.setNegativeButton(getString(R.string.cancel_lbl),new DialogInterface.OnClickListener() {
@@ -1551,12 +1700,12 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 				dialog.cancel();
 			}
 		});   	
-    	builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+    	builder.setPositiveButton(getString(R.string.create_lbl), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int id) {
 				onHousehold();
 			}
 		});           	
-		builder.setNeutralButton("Search", new DialogInterface.OnClickListener() {
+		builder.setNeutralButton(getString(R.string.search_lbl), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int id) {
 				searchSocialGroup();
 			}
@@ -1596,4 +1745,12 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 			vf.selectItemNoInList(0);
 		}
 	}
+
+	
+	public void onLocationGeoPoint() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

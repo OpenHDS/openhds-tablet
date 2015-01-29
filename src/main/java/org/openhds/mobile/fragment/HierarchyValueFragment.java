@@ -47,7 +47,6 @@ public class HierarchyValueFragment extends Fragment {
 
 	private class HierarchyValueListener implements OnItemClickListener {
 
-		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			QueryResult selected = queryResultAdapter.getItem(position);
 			navigator.stepDown(selected);

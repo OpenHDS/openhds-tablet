@@ -35,6 +35,12 @@ public class LocationVisit implements Serializable {
     private LocationHierarchy hierarchy2;
     private LocationHierarchy hierarchy3;
     private LocationHierarchy hierarchy4;
+    private LocationHierarchy hierarchy5;
+    private LocationHierarchy hierarchy6;
+    private LocationHierarchy hierarchy7;
+    private LocationHierarchy hierarchy8;
+   // private int levelNumbers;
+    private String lowestLevelExtId;
     private Round round;
 
     private Location location;
@@ -49,6 +55,10 @@ public class LocationVisit implements Serializable {
         visit.hierarchy2 = hierarchy2;
         visit.hierarchy3 = hierarchy3;
         visit.hierarchy4 = hierarchy4;
+        visit.hierarchy5 = hierarchy5;
+        visit.hierarchy6 = hierarchy6;
+        visit.hierarchy7 = hierarchy7;
+        visit.hierarchy8 = hierarchy8;
         visit.round = round;
 
         return visit;
@@ -78,7 +88,23 @@ public class LocationVisit implements Serializable {
         return hierarchy4;
     }
 
-    public Round getRound() {
+    public LocationHierarchy getHierarchy5() {
+		return hierarchy5;
+	}
+
+	public LocationHierarchy getHierarchy6() {
+		return hierarchy6;
+	}
+
+	public LocationHierarchy getHierarchy7() {
+		return hierarchy7;
+	}
+
+	public LocationHierarchy getHierarchy8() {
+		return hierarchy8;
+	}
+
+	public Round getRound() {
         return round;
     }
 
@@ -92,7 +118,50 @@ public class LocationVisit implements Serializable {
 
     public void setHierarchy1(LocationHierarchy region) {
         this.hierarchy1 = region;
+    	this.lowestLevelExtId = hierarchy1.getExtId();
         clearLevelsBelow(1);
+    }
+    
+    public void setHierarchy2(LocationHierarchy subRegion) {
+        this.hierarchy2 = subRegion;
+    	this.lowestLevelExtId = hierarchy2.getExtId();
+        clearLevelsBelow(2);
+    }
+    
+    public void setHierarchy3(LocationHierarchy hierarchy3) {
+        this.hierarchy3 = hierarchy3;
+    	this.lowestLevelExtId = hierarchy3.getExtId();
+        clearLevelsBelow(3);
+    }
+
+    public void setHierarchy4(LocationHierarchy village) {
+        this.hierarchy4 = village;
+    	this.lowestLevelExtId = hierarchy4.getExtId();
+        clearLevelsBelow(4);
+    }
+    
+    public void setHierarchy5(LocationHierarchy hierarchy5) {
+        this.hierarchy5 = hierarchy5;
+    	this.lowestLevelExtId = hierarchy5.getExtId();
+        clearLevelsBelow(5);
+    }
+    
+    public void setHierarchy6(LocationHierarchy hierarchy6) {
+        this.hierarchy6 = hierarchy6;
+    	this.lowestLevelExtId = hierarchy6.getExtId();
+        clearLevelsBelow(6);
+    }
+    
+    public void setHierarchy7(LocationHierarchy hierarchy7) {
+        this.hierarchy7 = hierarchy7;
+    	this.lowestLevelExtId = hierarchy7.getExtId();
+        clearLevelsBelow(7);
+    }
+
+    public void setHierarchy8(LocationHierarchy hierarchy8) {
+        this.hierarchy8 = hierarchy8;
+    	this.lowestLevelExtId = hierarchy8.getExtId();
+        clearLevelsBelow(8);
     }
     
     public void clearLevelsBelow(int i) {
@@ -106,37 +175,32 @@ public class LocationVisit implements Serializable {
         case 3:
             hierarchy4 = null;
         case 4:
-            round = null;
+        	hierarchy5 = null;
         case 5:
-            location = null;
+        	hierarchy6 = null;
         case 6:
-            selectedIndividual = null;
+        	hierarchy7 = null;
+        case 7:
+        	hierarchy8 = null;
+        case 8:
+        	round = null;
+        case 9:
+        	location = null;
+        case 10:
+        	selectedIndividual = null;
         }
     }
 
-    public void setHierarchy2(LocationHierarchy subRegion) {
-        this.hierarchy2 = subRegion;
-        clearLevelsBelow(2);
-    }
-    
-    public void setHierarchy3(LocationHierarchy hierarchy3) {
-        this.hierarchy3 = hierarchy3;
-        clearLevelsBelow(3);
-    }
-
-    public void setHierarchy4(LocationHierarchy village) {
-        this.hierarchy4 = village;
-        clearLevelsBelow(4);
-    }
+   
 
     public void setRound(Round round) {
         this.round = round;
-        clearLevelsBelow(5);
+        clearLevelsBelow(9);
     }
     
     public void setLocation(Location location) {
         this.location = location;
-        clearLevelsBelow(6);
+        clearLevelsBelow(10);
     }    
 
     public Location getLocation() {
@@ -160,52 +224,101 @@ public class LocationVisit implements Serializable {
             return 3;
         }
 
-        if (round == null) {
+        if (hierarchy5 == null) {
             return 4;
         }
 
-        return 5;
+        if (hierarchy6 == null) {
+            return 5;
+        }
+        
+        if (hierarchy7 == null) {
+            return 6;
+        }
+
+        if (hierarchy8 == null) {
+            return 7;
+        }
+        
+        if (round == null) {
+            return 8;
+        }
+
+        return 9;
     }
 
     public void createLocation(ContentResolver resolver) {
+    	if (lowestLevelExtId==null) {
+    		setLatestLevelExtId(resolver);
+    	}
         String locationId = generateLocationId(resolver);
 
         location = new Location();
         location.setExtId(locationId);
-        location.setHierarchy(hierarchy4.getExtId());
+        location.setHierarchy(lowestLevelExtId);
+      
     }
 
+    private void setLatestLevelExtId (ContentResolver resolver) {
+        Cursor curs = Queries.getAllHierarchyLevels(resolver);
+        List<LocationHierarchyLevel> lhll = Converter.toLocationHierarchyLevelList(curs); 
+        curs.close();
+        
+        int levelNumbers = lhll.size() -1;
+        
+        if (levelNumbers==1) {
+        	this.lowestLevelExtId = hierarchy1.getExtId();
+        }  else if (levelNumbers==2) {
+        	this.lowestLevelExtId = hierarchy2.getExtId();
+        }  else if (levelNumbers==3) {
+        	this.lowestLevelExtId = hierarchy3.getExtId();
+        }  else if (levelNumbers==4) {
+        	this.lowestLevelExtId = hierarchy4.getExtId();
+        }  else if (levelNumbers==5) {
+        	this.lowestLevelExtId = hierarchy5.getExtId();
+        }  else if (levelNumbers==6) {
+        	this.lowestLevelExtId = hierarchy6.getExtId();
+        }  else if (levelNumbers==8) {
+        	this.lowestLevelExtId = hierarchy7.getExtId();
+        }  else if (levelNumbers==9) {
+        	this.lowestLevelExtId = hierarchy8.getExtId();
+        }
+        location.setHierarchy(lowestLevelExtId);
+    }
+    
+    public String getLatestLevelExtId () {
+    	return lowestLevelExtId;
+    }
+   
+    
     private String generateLocationId(ContentResolver resolver) {
         Cursor cursor = resolver.query(OpenHDS.Locations.CONTENT_ID_URI_BASE,
                 new String[] { OpenHDS.Locations.COLUMN_LOCATION_EXTID }, OpenHDS.Locations.COLUMN_LOCATION_EXTID
-                        + " LIKE ?", new String[] { hierarchy4.getExtId() + "%" }, OpenHDS.Locations.COLUMN_LOCATION_EXTID
+                        + " LIKE ?", new String[] { getLatestLevelExtId() + "%" }, OpenHDS.Locations.COLUMN_LOCATION_EXTID
                         + " DESC");
 
         String generatedId = null;
         if (cursor.moveToFirst()) {
-            generatedId = generateLocationIdFrom(cursor.getString(0));
+            generatedId = generateLocationIdFrom(cursor.getString(0), resolver);
         } else {
-            generatedId = hierarchy4.getExtId() + "000001";
+            generatedId = getLatestLevelExtId() + "000001";
         }
 
         cursor.close();
         return generatedId;
     }
 
-    private String generateLocationIdFrom(String lastGeneratedId) {
+    private String generateLocationIdFrom(String lastGeneratedId, ContentResolver resolver) {
         try {
             int increment = Integer.parseInt(lastGeneratedId.substring(3, 9));
             int nextIncrement = increment + 1;
-            return String.format(hierarchy4.getExtId() + "%06d", nextIncrement);
+            return String.format(getLatestLevelExtId() + "%06d", nextIncrement);
         } catch (NumberFormatException e) {
-            return hierarchy4.getExtId() + "000001";
+            return getLatestLevelExtId() + "000001";
         }
     }
 
-    // this logic is specific for Cross River
     public void createVisit(ContentResolver resolver) {
-        //String visitPrefix = location.getExtId() + round.getRoundNumber();
-        
         String suffix= round.getRoundNumber();
     	while(suffix.length() < 3){
     		suffix="0"+suffix;
@@ -213,23 +326,6 @@ public class LocationVisit implements Serializable {
     	
         String generatedId = location.getExtId() + suffix ;
 
-        /*Cursor cursor = resolver.query(OpenHDS.Visits.CONTENT_ID_URI_BASE,
-                new String[] { OpenHDS.Visits.COLUMN_VISIT_EXTID }, OpenHDS.Visits.COLUMN_VISIT_EXTID + " LIKE ?",
-                new String[] { visitPrefix + "%" }, OpenHDS.Visits.COLUMN_VISIT_EXTID + " DESC");
-        String visitGeneratedId;
-        if (cursor.moveToFirst()) {
-            try {
-                int lastVisitCount = Integer.parseInt(cursor.getString(0).substring(10, 12));
-                int nextVisitCount = lastVisitCount + 1;
-                visitGeneratedId = visitPrefix + nextVisitCount;
-            } catch (NumberFormatException e) {
-                visitGeneratedId = visitPrefix + "1";
-            }
-        } else {
-            visitGeneratedId = visitPrefix + "1";
-        }
-
-        cursor.close();*/
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String date = df.format(new Date());
@@ -281,7 +377,7 @@ public class LocationVisit implements Serializable {
     public SocialGroup createSocialGroup(ContentResolver resolver) {
         SocialGroup sg = new SocialGroup();
 
-        String socialGroupPrefix = hierarchy4.getExtId() + location.getExtId().substring(3, 9);
+        String socialGroupPrefix = getLatestLevelExtId() + location.getExtId().substring(3, 9);
 
         Cursor cursor = resolver.query(OpenHDS.SocialGroups.CONTENT_ID_URI_BASE,
                 new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID },
@@ -289,9 +385,6 @@ public class LocationVisit implements Serializable {
                 OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " DESC");
 
         if (cursor.moveToNext()) {
- //           int lastIncrement = Integer.parseInt(cursor.getString(0).substring(9, 11));
-  //          int nextIncrement = lastIncrement + 1;
-    //        sg.setExtId(socialGroupPrefix + String.format("%02d", nextIncrement));
         	cursor.close();
         	return null;
         } else {

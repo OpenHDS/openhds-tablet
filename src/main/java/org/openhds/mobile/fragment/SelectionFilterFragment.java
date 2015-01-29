@@ -1,9 +1,16 @@
 package org.openhds.mobile.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openhds.mobile.R;
+import org.openhds.mobile.database.queries.Converter;
+import org.openhds.mobile.database.queries.Queries;
+import org.openhds.mobile.model.LocationHierarchyLevel;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,10 +46,12 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
 
     private Button hierarchy1Btn, hierarchy2Btn, hierarchy3Btn, hierarchy4Btn, locationBtn;
     private TextView hierarchy1Txt, hierarchy2Txt, hierarchy3Txt, hierarchy4Txt, locationTxt, firstNameTxt,
-            lastNameTxt;
+            lastNameTxt,hierarchy1Lbl,hierarchy2Lbl,hierarchy3Lbl,hierarchy4Lbl;
     private RadioButton maleBtn, femaleBtn;
     private Button clearBtn, searchBtn;
     private Listener listener;
+    private List<TextView> hierarchyLabelViews;
+    private List<TextView> hierarchyHintViews;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +83,10 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
         hierarchy2Txt = (TextView) view.findViewById(R.id.hierarchy2Txt);
         hierarchy3Txt = (TextView) view.findViewById(R.id.hierarchy3Txt);
         hierarchy4Txt = (TextView) view.findViewById(R.id.hierarchy4Txt);
+        hierarchy1Lbl = (TextView) view.findViewById(R.id.hierarchy1Lbl);
+        hierarchy2Lbl = (TextView) view.findViewById(R.id.hierarchy2Lbl);
+        hierarchy3Lbl = (TextView) view.findViewById(R.id.hierarchy3Lbl);
+        hierarchy4Lbl = (TextView) view.findViewById(R.id.hierarchy4Lbl);
         locationTxt = (TextView) view.findViewById(R.id.locationTxt);
         firstNameTxt = (TextView) view.findViewById(R.id.firstNameTxt);
         lastNameTxt = (TextView) view.findViewById(R.id.lastNameTxt);
@@ -81,6 +94,19 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
         maleBtn = (RadioButton) view.findViewById(R.id.maleBtn);
         femaleBtn = (RadioButton) view.findViewById(R.id.femaleBtn);
 
+        hierarchyLabelViews = new ArrayList<TextView>();
+        hierarchyLabelViews.add(hierarchy1Lbl);
+        hierarchyLabelViews.add(hierarchy2Lbl);
+        hierarchyLabelViews.add(hierarchy3Lbl);
+        hierarchyLabelViews.add(hierarchy4Lbl);
+        hierarchyHintViews = new ArrayList<TextView>();
+        hierarchyHintViews.add(hierarchy1Txt);
+        hierarchyHintViews.add(hierarchy2Txt);
+        hierarchyHintViews.add(hierarchy3Txt);
+        hierarchyHintViews.add(hierarchy4Txt);
+        
+        setHierarchyLabels();
+        
         return view;
     }
 
@@ -177,5 +203,19 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
 
     public void updateLocationText(String text) {
         locationTxt.setText(text);
+    }
+    
+    private void setHierarchyLabels(){
+        Cursor c = Queries.getAllHierarchyLevels(getActivity().getContentResolver());
+        List<LocationHierarchyLevel> lhll = Converter.toLocationHierarchyLevelList(c); 
+        c.close();
+        
+        //int levelNumbers = lhll.size()-1;
+        int startLevel = 1;
+        for(int i = 0; i < 4; i++){
+        	hierarchyLabelViews.get(i).setText(lhll.get(startLevel).getName());
+        	hierarchyHintViews.get(i).setHint(lhll.get(startLevel).getName());
+        	startLevel++;
+        }     	
     }
 }

@@ -13,8 +13,6 @@ import org.openhds.mobile.database.DatabaseAdapter;
 import org.openhds.mobile.model.Supervisor;
 import org.openhds.mobile.task.HttpTask;
 import org.openhds.mobile.task.HttpTask.RequestContext;
-import org.openhds.mobile.task.SupervisorLoginTask;
-
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -173,17 +171,6 @@ public class SupervisorLoginFragment extends Fragment implements
 
 		public void onNoContent() {
 			onNotConnected();
-		}
-	}
-
-	private class LoginListener implements SupervisorLoginTask.Listener {
-		public void onAuthenticated() {
-			launchSupervisorMainActivity();
-		}
-
-		public void onBadAuthentication() {
-			loginButton.setEnabled(true);	
-			showLongToast(getActivity(), R.string.supervisor_bad_credentials);
 		}
 	}
 }

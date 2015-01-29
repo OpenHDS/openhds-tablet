@@ -76,7 +76,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private OnlyOneEntryListener onlyOneEntryListener;
 
     private enum Displayed {
-        NONE, HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, ROUND, LOCATION, INDIVIDUAL, SOCIALGROUP;
+        NONE, HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, HIERARCHY_5, HIERARCHY_6, HIERARCHY_7, HIERARCHY_8, ROUND, LOCATION, INDIVIDUAL, SOCIALGROUP;
     }
 
     public interface ValueListener {
@@ -87,6 +87,14 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         void onHierarchy3Selected(LocationHierarchy hierarchy);
         
         void onHierarchy4Selected(LocationHierarchy village);
+        
+        void onHierarchy5Selected(LocationHierarchy hierarchy5);
+
+        void onHierarchy6Selected(LocationHierarchy hierarchy6);
+
+        void onHierarchy7Selected(LocationHierarchy hierarchy7);
+        
+        void onHierarchy8Selected(LocationHierarchy hierarchy8);
 
         void onRoundSelected(Round round);
 
@@ -104,15 +112,12 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     public void onActivityCreated(Bundle savedInstanceState) {
     	super.onActivityCreated(savedInstanceState);
     	
-//    	setEmptyText("No data to display");
-
         adapter = new SimpleCursorAdapter(getActivity(), R.layout.list_item, null, HIERARCHY_COLUMNS,
                 VIEW_BINDINGS, 0);
         
         setListAdapter(adapter);
         
         // Start out with a progress indicator.
-//        setListShown(false);
 
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
@@ -135,8 +140,6 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         
-       // START_HIERARCHY_LEVEL_NAME = getString(R.string.STARTHIERARCHYLEVELNAME);
-
         try {
             listener = (ValueListener) activity;
         } catch (ClassCastException e) {
@@ -168,6 +171,22 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         case HIERARCHY_4:
             LocationHierarchy village = Converter.convertToHierarchy(cursor);
             listener.onHierarchy4Selected(village);
+            break;
+        case HIERARCHY_5:
+            LocationHierarchy hierarchy5 = Converter.convertToHierarchy(cursor);
+            listener.onHierarchy5Selected(hierarchy5);
+            break;
+        case HIERARCHY_6:
+            LocationHierarchy hierarchy6 = Converter.convertToHierarchy(cursor);
+            listener.onHierarchy6Selected(hierarchy6);
+            break;
+        case HIERARCHY_7:
+            LocationHierarchy hierarchy7 = Converter.convertToHierarchy(cursor);
+            listener.onHierarchy7Selected(hierarchy7);
+            break;
+        case HIERARCHY_8:
+            LocationHierarchy hierarchy8 = Converter.convertToHierarchy(cursor);
+            listener.onHierarchy8Selected(hierarchy8);
             break;
         case ROUND:
             Round round = Converter.convertToRound(cursor);
@@ -231,6 +250,26 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         loadHierarchyItemsFromParent(parentExtId);
     }
 
+    public void loadHierarchy5(String parentExtId) {
+        listCurrentlyDisplayed = Displayed.HIERARCHY_5;
+        loadHierarchyItemsFromParent(parentExtId);
+    }
+    
+    public void loadHierarchy6(String parentExtId) {
+        listCurrentlyDisplayed = Displayed.HIERARCHY_6;
+        loadHierarchyItemsFromParent(parentExtId);
+    }
+    
+    public void loadHierarchy7(String parentExtId) {
+        listCurrentlyDisplayed = Displayed.HIERARCHY_7;
+        loadHierarchyItemsFromParent(parentExtId);
+    }
+    
+    public void loadHierarchy8(String parentExtId) {
+        listCurrentlyDisplayed = Displayed.HIERARCHY_8;
+        loadHierarchyItemsFromParent(parentExtId);
+    }
+    
     public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
     	
     	if(arg0 == -1) return null;

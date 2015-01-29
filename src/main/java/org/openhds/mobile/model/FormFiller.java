@@ -12,7 +12,7 @@ public class FormFiller {
         addFieldWorker(locationVisit, form);
 
         form.setLocationId(locationVisit.getLocation().getExtId());
-        form.setHierarchyId(locationVisit.getHierarchy4().getExtId());
+        form.setHierarchyId(locationVisit.getLatestLevelExtId());
         return form;
     }
 
@@ -254,7 +254,7 @@ public class FormFiller {
           form.setRoundNumber(locationVisit.getRound().getRoundNumber());
           form.setRoundNumber(locationVisit.getRound().getRoundNumber());
           form.setMotherExtId(locationVisit.getSelectedIndividual().getMother());
-          form.setHierarchyId(locationVisit.getHierarchy4().getExtId());
+          form.setHierarchyId(locationVisit.getLatestLevelExtId());
           if (sg !=null)
   			addHousehold(sg, form);
 

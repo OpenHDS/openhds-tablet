@@ -118,4 +118,28 @@ public class FilterActivity extends Activity implements ValueListener, Selection
     	}
     }
 
+	
+	public void onHierarchy5Selected(LocationHierarchy hierarchy5) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void onHierarchy6Selected(LocationHierarchy hierarchy6) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void onHierarchy7Selected(LocationHierarchy hierarchy7) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void onHierarchy8Selected(LocationHierarchy hierarchy8) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

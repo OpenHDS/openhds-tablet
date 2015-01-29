@@ -5,16 +5,12 @@ import java.net.URL;
 
 import org.openhds.mobile.R;
 import org.openhds.mobile.database.DatabaseAdapter;
-import org.openhds.mobile.listener.RetrieveFieldWorkersListener;
-import org.openhds.mobile.model.FieldWorker;
-import org.openhds.mobile.model.Result;
 import org.openhds.mobile.task.HttpTask;
 import org.openhds.mobile.task.HttpTask.RequestContext;
 import org.openhds.mobile.task.SupervisorLoginTask;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -26,8 +22,7 @@ public class DebuggingOpeningActivity extends Activity {
 	private static final String INTEROP_URL = "http://130.111.132.88:8080/openhds";
 	private static final String SUPERVISOR_USER = "admin";
 	private static final String SUPERVISOR_PASSWORD = "test";
-	private static final String FIELDWORKER_USER = "FWBH1";
-	private static final String FIELDWORKER_PASSWORD = "openhds";
+	
 
 	private SharedPreferences settings;
 	private DatabaseAdapter databaseAdapter;
@@ -108,41 +103,7 @@ public class DebuggingOpeningActivity extends Activity {
 		progressDialog.setMessage("Do not interrupt.");
 		progressDialog.show();
 
-/*		SyncEntitiesTask entitiesTask = new SyncEntitiesTask(OPENHDS_URL,
-				SUPERVISOR_USER, SUPERVISOR_PASSWORD, progressDialog,
-				getBaseContext(), new SyncDatabaseListener());
-		entitiesTask.execute();*/
-	}
 
-	// authenticate field worker with server
-	// log in as field worker on success
-	private void registerFieldWorker() {
-//		progressDialog.setTitle("Registering field worker with server.");
-//		progressDialog.setMessage("Do not interrupt.");
-//		progressDialog.show();
-//
-//		boolean isRegister = true;
-//		FieldWorkerLoginTask registerTask = new FieldWorkerLoginTask(this,
-//				settings, new RegisterFieldWorkerListener(), progressDialog,
-//				FIELDWORKER_USER, FIELDWORKER_PASSWORD, isRegister);
-//		registerTask.execute();
-	}
-
-	// log in as field worker locally
-	// start update activity on success
-	private void logInFieldWorker() {
-//		AuthenticateFieldWorker logInTask = new AuthenticateFieldWorker(
-//				getContentResolver(), FIELDWORKER_USER, FIELDWORKER_PASSWORD,
-//				new LogInFieldWorkerListener());
-//		logInTask.execute();
-	}
-
-	// finally, go to the fieldworker update UI
-	private void startUpdateActivity(FieldWorker fieldWorker) {
-		Intent intent = new Intent(getApplicationContext(),
-				UpdateActivity.class);
-		intent.putExtra("fieldWorker", fieldWorker);
-		startActivity(intent);
 	}
 
 	// async handler for authenticateSupervisor()
@@ -196,57 +157,6 @@ public class DebuggingOpeningActivity extends Activity {
 			Toast.makeText(getApplicationContext(),
 					"Supervisor not logged in with credentials.",
 					Toast.LENGTH_LONG).show();
-		}
-	}
-
-	// async handler for syncData()
-/*	private class SyncDatabaseListener implements SyncDatabaseListener {
-		public void collectionComplete(Boolean result) {
-			progressDialog.dismiss();
-			Toast.makeText(getApplicationContext(), "Synced database.",
-					Toast.LENGTH_LONG).show();
-			registerFieldWorker();
-		}
-	}
-*/
-	// async handler for registerFieldWorker()
-	private class RegisterFieldWorkerListener implements
-			RetrieveFieldWorkersListener {
-
-		public void retrieveFieldWorkersComplete(Result result) {
-
-			switch (result) {
-			case CREATED_FIELDWORKER_SUCCESS:
-				Toast.makeText(getApplicationContext(),
-						"Registered field worker.", Toast.LENGTH_LONG).show();
-				logInFieldWorker();
-				break;
-			case FIELDWORKER_ALREADY_EXISTS:
-				Toast.makeText(getApplicationContext(),
-						"Field Worker already exists.", Toast.LENGTH_LONG)
-						.show();
-				logInFieldWorker();
-				break;
-			case BAD_AUTHENTICATION:
-				Toast.makeText(getApplicationContext(),
-						"Field worker registration failed authentication.",
-						Toast.LENGTH_LONG).show();
-				break;
-			case BAD_XML:
-				Toast.makeText(getApplicationContext(),
-						"Field worker registration XML error",
-						Toast.LENGTH_LONG).show();
-				break;
-			case UNABLE_TO_CONNECT:
-				Toast.makeText(
-						getApplicationContext(),
-						"Field worker registration failed to connect to server.",
-						Toast.LENGTH_LONG).show();
-				break;
-			default:
-				break;
-			}
-			progressDialog.dismiss();
 		}
 	}
 

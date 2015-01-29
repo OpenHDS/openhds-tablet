@@ -93,10 +93,10 @@ public class SyncEntitiesTask extends
 		StringBuilder builder = new StringBuilder();
 		switch (state) {
 		case DOWNLOADING:
-			builder.append(mContext.getString(R.string.sync_task_downloading));
+			builder.append(mContext.getString(R.string.sync_task_downloading) + " ");
 			break;
 		case SAVING:
-			builder.append(mContext.getString(R.string.sync_task_saving));
+			builder.append(mContext.getString(R.string.sync_task_saving) + " ");
 			break;
 		}
 
@@ -128,7 +128,7 @@ public class SyncEntitiesTask extends
 		}
 
 		if (values.length > 0) {
-			builder.append(mContext.getString(R.string.sync_task_saved) + values[0] +  mContext.getString(R.string.sync_task_items));
+			builder.append(" " + mContext.getString(R.string.sync_task_saved)  + " " + values[0]  + " " +  mContext.getString(R.string.sync_task_items));
 		}
 
 		dialog.setMessage(builder.toString());
