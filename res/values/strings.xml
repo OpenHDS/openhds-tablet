@@ -283,6 +283,7 @@
     <string name="sync_task_saving">Saving </string>
     <string name="sync_task_individuals"> Individuals.</string>
     <string name="sync_task_locations"> Locations.</string>
+    <string name="sync_task_loc_hierarchy">Location Hierarchy.</string>
     <string name="sync_task_loc_hierarchy_levels"> Location Hierarchy Levels.</string>
     <string name="sync_task_relationships"> Relationships.</string>
     <string name="sync_task_rounds"> Rounds.</string>

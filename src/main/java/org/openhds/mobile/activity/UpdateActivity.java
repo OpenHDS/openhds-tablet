@@ -145,6 +145,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	public static final String SELECT_EVENT = "Select Event";
 	public static final String FINISH_VISIT = "Finish Visit";
 	public static final String INMIGRATION = "Inmigration";
+	private int CREATING_NEW_LOCATION = 0;
 	
 	private static final List<String> stateSequence = new ArrayList<String>();
 //	private static final Map<String, Integer> stateLabels = new HashMap<String, Integer>();
@@ -448,10 +449,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             }
 
             Individual individual = (Individual) data.getExtras().getSerializable("individual");
-            if (individual!=null) 
-            filledForm.setIntervieweeId(individual.getExtId());	
+            if (individual!=null){
+            	filledForm.setIntervieweeId(individual.getExtId());
+            }else{
+            	filledForm.setIntervieweeId("UNK");
+            }
             loadForm(SELECTED_XFORM);
-        
 	}
 
 	private void handleFatherBirthResult(int resultCode, Intent data) {
@@ -516,6 +519,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             	if(locationExtId.length() > 0){
             		vf.loadFilteredLocationById(locationExtId);
             		vf.selectItemNoInList(0);
+            		CREATING_NEW_LOCATION = 1;
+            		onCreateVisit();
             	}
             } else {
                 createUnfinishedFormDialog();
@@ -799,6 +804,11 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             i.putExtra("img", "IMG");
         }
 
+         if (CREATING_NEW_LOCATION == 1) {
+        	handleFilterIndivVisit(RESULT_OK, i);
+        	return;
+         }
+         
         startActivityForResult(i, requestCode);
     }
     
@@ -961,6 +971,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         protected void onPostExecute(Void result) {
         	super.onPostExecute(result);
             hideProgressFragment();
+            CREATING_NEW_LOCATION = 0;
         }
     }
 
