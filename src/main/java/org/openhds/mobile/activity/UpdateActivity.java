@@ -1949,13 +1949,20 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     	        AlertDialog dlg = builder.create();
     	        dlg.show();      
 	        }
-	        else{
-    	        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	        builder.setTitle(getString(R.string.no_indiv_found_onsg_lbl));
-    	        builder.setMessage(getString(R.string.no_individual_left));
-    	        builder.setNegativeButton(getString(R.string.cancel_lbl), null);
-    	        AlertDialog dlg = builder.create();
-    	        dlg.show();  
+	        else{    	        
+            	ContentResolver resolver = getContentResolver();
+            	Cursor c_cursor = Queries.getSocialGroupsByIndividualExtId(resolver,locationVisit.getSelectedIndividual().getExtId());
+            	SocialGroup socialGroup = null;
+            	if (c_cursor.moveToFirst()) {
+            		socialGroup = Converter.convertToSocialGroup(c_cursor);
+            		locationVisit.getLocation().setHead(socialGroup.getGroupHead());
+            	}
+            	
+                filledForm = formFiller.fillDeathForm(locationVisit, socialGroup);    
+                updatable = new DeathUpdate();
+                c_cursor.close();
+                
+                loadForm(SELECTED_XFORM);
 	        }
 	        
 	        getLoaderManager().destroyLoader(loader.getId());
@@ -1984,7 +1991,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
         if(newHoh != null)
-        	builder.setMessage(getString(R.string.selected_new_hoh_lbl)  + newHoh.getFirstName() + " " + newHoh.getLastName() +  getString(R.string.with_extid_lbl)  + newHoh.getExtId());
+        	builder.setMessage(getString(R.string.selected_new_hoh_lbl)  + " " + newHoh.getFirstName() + " " + newHoh.getLastName() +  " " + getString(R.string.with_extid_lbl)  + " " + newHoh.getExtId());
         builder.setNegativeButton(getString(R.string.cancel_lbl), new DialogInterface.OnClickListener() {
         	public void onClick(DialogInterface dialog, int id) {
         		deathCreation = false;
