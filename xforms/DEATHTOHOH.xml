@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Death to Head of household</h:title>
     <model>
@@ -33,9 +33,6 @@
             <value>Other viral/bacterial infection</value>
           </text>
           <text id="/DEATHTOHOH/date:label">
-            <value>-</value>
-          </text>
-          <text id="/DEATHTOHOH/processedByMirth:hint">
             <value>-</value>
           </text>
           <text id="/DEATHTOHOH/whom/4:label">
@@ -100,6 +97,9 @@
           </text>
           <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/3:label">
             <value>Mjukuu</value>
+          </text>
+          <text id="/DEATHTOHOH/causeOfDeath:label">
+            <value>-</value>
           </text>
           <text id="/DEATHTOHOH/individualId:label">
             <value>-</value>
@@ -187,9 +187,6 @@
           <text id="/DEATHTOHOH/date:label">
             <value>Date of Death</value>
           </text>
-          <text id="/DEATHTOHOH/processedByMirth:hint">
-            <value>pbm</value>
-          </text>
           <text id="/DEATHTOHOH/whom/4:label">
             <value>Traditional healer</value>
           </text>
@@ -209,7 +206,7 @@
             <value>Son/Daughter</value>
           </text>
           <text id="/DEATHTOHOH/processedByMirth:label">
-            <value>pbm</value>
+            <value>processedByMirth</value>
           </text>
           <text id="/DEATHTOHOH/diagnoseddeath/2:label">
             <value>No</value>
@@ -258,6 +255,9 @@
           </text>
           <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/3:label">
             <value>Grandchild</value>
+          </text>
+          <text id="/DEATHTOHOH/causeOfDeath:label">
+            <value>Cause of death</value>
           </text>
           <text id="/DEATHTOHOH/individualId:label">
             <value>Individual ID</value>
@@ -326,6 +326,7 @@
           <causofdeathnotdiagnosed/>
           <placeOfDeath/>
           <OtherplaceOfDeath/>
+          <causeOfDeath/>
           <hh_people_nb/>
           <membershiptonewhoh_count/>
           <membershiptonewhoh jr:template="">
@@ -355,13 +356,14 @@
       <bind nodeset="/DEATHTOHOH/causofdeathnotdiagnosed" relevant="selected( /DEATHTOHOH/diagnoseddeath , '2')" required="true()" type="select1"/>
       <bind nodeset="/DEATHTOHOH/placeOfDeath" required="true()" type="select1"/>
       <bind nodeset="/DEATHTOHOH/OtherplaceOfDeath" relevant="selected( /DEATHTOHOH/placeOfDeath , 'OTHER')" required="true()" type="string"/>
+      <bind calculate="concat( /DEATHTOHOH/causeofdeathdiagnosed , /DEATHTOHOH/causofdeathnotdiagnosed )" nodeset="/DEATHTOHOH/causeOfDeath" readonly="true()" type="string"/>
       <bind nodeset="/DEATHTOHOH/hh_people_nb" readonly="true()" relevant="false()" required="true()" type="int"/>
       <bind calculate=" /DEATHTOHOH/hh_people_nb " nodeset="/DEATHTOHOH/membershiptonewhoh_count" readonly="true()" type="string"/>
       <bind nodeset="/DEATHTOHOH/membershiptonewhoh/extId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/DEATHTOHOH/membershiptonewhoh/memberName" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/DEATHTOHOH/membershiptonewhoh/socialGroupId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead" required="true()" type="select1"/>
-      <bind nodeset="/DEATHTOHOH/processedByMirth" relevant="1=2" type="int"/>
+      <bind nodeset="/DEATHTOHOH/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/DEATHTOHOH/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
@@ -498,6 +500,9 @@
     <input ref="/DEATHTOHOH/OtherplaceOfDeath">
       <label ref="jr:itext('/DEATHTOHOH/OtherplaceOfDeath:label')"/>
     </input>
+    <input ref="/DEATHTOHOH/causeOfDeath">
+      <label ref="jr:itext('/DEATHTOHOH/causeOfDeath:label')"/>
+    </input>
     <input ref="/DEATHTOHOH/hh_people_nb">
       <label ref="jr:itext('/DEATHTOHOH/hh_people_nb:label')"/>
     </input>
@@ -544,7 +549,6 @@
     </group>
     <input ref="/DEATHTOHOH/processedByMirth">
       <label ref="jr:itext('/DEATHTOHOH/processedByMirth:label')"/>
-      <hint ref="jr:itext('/DEATHTOHOH/processedByMirth:hint')"/>
     </input>
   </h:body>
 </h:html>
