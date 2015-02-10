@@ -658,7 +658,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showingProgress = true;
         FragmentTransaction txn = getFragmentManager().beginTransaction();
-        //txn.remove(progressFragment);
+        txn.remove(progressFragment);
         txn.add(R.id.middle_col, progressFragment, "progressFragment").commit();
     }
 
