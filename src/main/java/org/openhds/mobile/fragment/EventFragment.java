@@ -131,7 +131,6 @@ public class EventFragment extends Fragment implements OnClickListener {
 
         clearIndividualBtn = (Button) view.findViewById(R.id.clearIndividualBtn);
         clearIndividualBtn.setOnClickListener(this);
-        
     }
     
     public void setBaseLine(){
@@ -159,6 +158,7 @@ public class EventFragment extends Fragment implements OnClickListener {
 
     public void onClick(View view) {
         int id = view.getId();
+        view.setEnabled(false);
 		if (id == R.id.findLocationGeoPointBtn) {
 			listener.onLocationGeoPoint();
 		} else if (id == R.id.createLocationBtn) {
@@ -203,37 +203,43 @@ public class EventFragment extends Fragment implements OnClickListener {
     private void registerEventListeners(StateMachine machine) {
         machine.registerListener("Select Event", new StateListener() {
             public void onEnterState() {
-                householdBtn.setEnabled(true);
-                finishVisitBtn.setEnabled(true);
-                //Check no of households and disable button if necessary
-                
-                membershipBtn.setEnabled(true);
-                relationshipBtn.setEnabled(true);
-                outMigrationBtn.setEnabled(true);
-                deathBtn.setEnabled(true);
-                clearIndividualBtn.setEnabled(true);
-
-                Individual indiv = locationVisit.getSelectedIndividual();
-                if (indiv != null && "f".equalsIgnoreCase(indiv.getGender()) && individualMeetsMinimumAge(indiv)) {
-                    pregRegBtn.setEnabled(true);
-                    birthRegBtn.setEnabled(true);
-                }
-                
-                
+            	enableButtons();
             }
 
             public void onExitState() {
-                membershipBtn.setEnabled(false);
-                relationshipBtn.setEnabled(false);
-                outMigrationBtn.setEnabled(false);
-                deathBtn.setEnabled(false);
-                clearIndividualBtn.setEnabled(false);
-                pregRegBtn.setEnabled(false);
-                birthRegBtn.setEnabled(false);
-                finishVisitBtn.setEnabled(false);
-                householdBtn.setEnabled(false);
+            	disableButtons();
             }
         });
+    }
+    
+    public void disableButtons(){
+        membershipBtn.setEnabled(false);
+        relationshipBtn.setEnabled(false);
+        outMigrationBtn.setEnabled(false);
+        deathBtn.setEnabled(false);
+        clearIndividualBtn.setEnabled(false);
+        pregRegBtn.setEnabled(false);
+        birthRegBtn.setEnabled(false);
+        finishVisitBtn.setEnabled(false);
+        householdBtn.setEnabled(false);    	
+    }
+    
+    public void enableButtons(){
+        householdBtn.setEnabled(true);
+        finishVisitBtn.setEnabled(true);
+        //Check no of households and disable button if necessary
+        
+        membershipBtn.setEnabled(true);
+        relationshipBtn.setEnabled(true);
+        outMigrationBtn.setEnabled(true);
+        deathBtn.setEnabled(true);
+        clearIndividualBtn.setEnabled(true);
+
+        Individual indiv = locationVisit.getSelectedIndividual();
+        if (indiv != null && "f".equalsIgnoreCase(indiv.getGender()) && individualMeetsMinimumAge(indiv)) {
+            pregRegBtn.setEnabled(true);
+            birthRegBtn.setEnabled(true);
+        }    	
     }
 
     private boolean individualMeetsMinimumAge(Individual indiv) {

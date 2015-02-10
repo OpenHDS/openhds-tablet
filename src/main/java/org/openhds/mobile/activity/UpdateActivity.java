@@ -46,8 +46,11 @@ import org.openhds.mobile.task.OdkGeneratedFormLoadTask;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -128,6 +131,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private boolean hhCreation;
     private boolean deathCreation;
     private String jrFormId;
+    
+	private ProgressDialog progress;
     
     //State machine stuff
 	public static final String SELECT_HIERARCHY_1 = "Select Hierarchy 1";
@@ -276,6 +281,14 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
     }    */
     
+    
+    private void restoreState(){
+	    if(stateMachine != null && stateMachine.getState() != ""){
+	    	String currentState = stateMachine.getState();
+	    	stateMachine.transitionTo(currentState);
+	    }
+    }
+    
     @Override
     protected void onStart() {
     	super.onStart();
@@ -299,6 +312,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	public void onResume()
 	{
 	    super.onResume();
+	    hideProgressFragment();
+	    dismissLoadingDialog();
+	    restoreState();
 	}    
 
     /**
@@ -442,6 +458,23 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             }
         }
     }
+    
+	public void showLoadingDialog() {
+
+	    if (progress == null) {
+	        progress = new ProgressDialog(this);
+	        progress.setTitle(getString(R.string.loading_lbl));
+	        progress.setMessage(getString(R.string.please_wait_lbl));
+	    }
+	    progress.show();
+	}
+
+	public void dismissLoadingDialog() {
+
+	    if (progress != null && progress.isShowing()) {
+	        progress.dismiss();
+	    }
+	}    
 
     private void handleFilterIndivVisit(int resultCode, Intent data) { 	
     		if (resultCode != RESULT_OK) {
@@ -625,8 +658,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showingProgress = true;
         FragmentTransaction txn = getFragmentManager().beginTransaction();
-        txn.remove(progressFragment);
-        txn.add(R.id.middle_col, progressFragment).commit();
+        //txn.remove(progressFragment);
+        txn.add(R.id.middle_col, progressFragment, "progressFragment").commit();
     }
 
     void hideProgressFragment() {
@@ -635,6 +668,15 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }
 
         showingProgress = false;
+        FragmentManager fm = getFragmentManager();
+        Fragment frag = fm.findFragmentByTag("progressFragment");
+        
+        if (frag!=null && frag instanceof ProgressFragment)
+        {
+        	FragmentTransaction tr = fm.beginTransaction();
+        	tr.remove(frag).commit();
+        }
+        
         FragmentTransaction txn = getFragmentManager().beginTransaction();
         if (!vf.isAdded()) {
         	txn.add(R.id.middle_col, vf).commitAllowingStateLoss();
@@ -1049,7 +1091,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onMembership() {
         filledForm = formFiller.fillMembershipForm(locationVisit);
         updatable = new MembershipUpdate();
-        showProgressFragment();
+//        showProgressFragment();
         getLoaderManager().restartLoader(SOCIAL_GROUP_AT_LOCATION, null, this);
     }
 
@@ -1345,9 +1387,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         new CreateDeathTask().execute();
     }
 
-    
-  
-    
     private class CreateDeathTask extends AsyncTask<Void, Void, Void> {
 
     	private SocialGroup sg;
@@ -1370,11 +1409,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         @Override
         protected void onPostExecute(Void result) {
+        	hideProgressFragment();
         	if(this.sg != null){
         		deathCreation = true;
         		if(locationVisit.getSelectedIndividual().getExtId().equalsIgnoreCase(locationVisit.getLocation().getHead())){
 	    			updatable = new DeathOfHoHUpdate();
-	    	        showProgressFragment();
+//	    	        showProgressFragment();
 	    	        Bundle bundle = new Bundle();
 	    	        bundle.putString("sg", sg.getExtId());
 	    	        bundle.putString("hohExtId", sg.getGroupHead());
@@ -1388,13 +1428,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	}
     		else{
     			Toast.makeText(UpdateActivity.this, getString(R.string.create_membership), Toast.LENGTH_LONG).show();
-    		}        	        
+    		}       
         }
     }
 
     private void loadSocialGroupsForIndividual() {
         showProgressFragment();
-        getLoaderManager().restartLoader(SOCIAL_GROUP_FOR_INDIVIDUAL, null, this);
+        //getLoaderManager().restartLoader(SOCIAL_GROUP_FOR_INDIVIDUAL, null, this);
     }
 
     public void onClearIndividual() {
@@ -1814,6 +1854,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {	
+    	
+    	showLoadingDialog();
+    	
         Uri uri = null;
         switch (id) {
 	        case SOCIAL_GROUP_AT_LOCATION:
@@ -1862,9 +1905,14 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         return new CursorLoader(this, uri, null, null, null, null);
     }
 
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        hideProgressFragment();
-        
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {      
+    	
+    	hideProgressFragment();
+    	
+    	restoreState();
+    	
+    	dismissLoadingDialog();
+    	    	
         if(loader.getId() == -1 ) return;
         
         if (cursor.getCount() == 1 && loader.getId() == SOCIAL_GROUP_FOR_INDIVIDUAL) {
