@@ -6,11 +6,15 @@ import static org.openhds.mobile.utilities.LayoutUtils.makeNewGenericButton;
 import static org.openhds.mobile.utilities.UrlUtils.buildServerUrl;
 
 import org.openhds.mobile.R;
+import org.openhds.mobile.database.queries.Converter;
+import org.openhds.mobile.database.queries.Queries;
 import org.openhds.mobile.fragment.LoginPreferenceFragment;
+import org.openhds.mobile.model.Settings;
 import org.openhds.mobile.task.HttpTask.RequestContext;
 import org.openhds.mobile.task.SyncEntitiesTask;
 import org.openhds.mobile.task.SyncFieldworkersTask;
 import org.openhds.mobile.task.SyncFormsTask;
+import org.openhds.mobile.task.SyncSettingsTask;
 import org.openhds.mobile.utilities.SyncDatabaseHelper;
 
 import android.app.Activity;
@@ -24,12 +28,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class SupervisorMainActivity extends Activity implements OnClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
 	private FrameLayout prefContainer;
 	private LinearLayout supervisorOptionsList;
 	private SyncDatabaseHelper syncDatabaseHelper;
+	private TextView lastUpdateText;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +46,7 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 		prefContainer = (FrameLayout) findViewById(R.id.login_pref_container);
 		supervisorOptionsList = (LinearLayout) findViewById(R.id.supervisor_activity_options);
 		syncDatabaseHelper = new SyncDatabaseHelper(this);
-
+		
 		makeNewGenericButton(this,
 				getResourceString(this, R.string.sync_database_description),
 				getResourceString(this, R.string.sync_database_name),
@@ -51,14 +58,25 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 				getResourceString(this, R.string.sync_field_worker_description),
 				getResourceString(this, R.string.sync_field_worker_name),
 				getResourceString(this, R.string.sync_field_worker_name), this,
-				supervisorOptionsList);
+				supervisorOptionsList);	
 		
 		makeNewGenericButton(
 				this,
 				getResourceString(this, R.string.download_extraform_button),
 				getResourceString(this, R.string.sync_extraforms),
 				getResourceString(this, R.string.sync_extraforms), this,
-				supervisorOptionsList);		
+				supervisorOptionsList);				
+		
+		makeNewGenericButton(
+				this,
+				getResourceString(this, R.string.download_settings_button),
+				getResourceString(this, R.string.sync_settings),
+				getResourceString(this, R.string.sync_settings), this,
+				supervisorOptionsList);	
+		
+        // add text view to display last settings sync time
+        lastUpdateText = new TextView(this);
+        supervisorOptionsList.addView(lastUpdateText);
 
 		if (null != savedInstanceState) {
 			return;
@@ -102,12 +120,17 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 		} else if (tag.equals(getResourceString(this,
 				R.string.sync_extraforms))) {
 			syncExtraForms();
+		} else if (tag.equals(getResourceString(this,
+				R.string.sync_settings))) {
+			syncSettings();
 		}
 	}
 	
 	@Override
 	protected void onResume() {
 		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+		
+		displayLastSyncDate();
 		super.onResume();
 	}
 	
@@ -136,7 +159,6 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 				username, password, syncDatabaseHelper.getProgressDialog(),
 				this, syncDatabaseHelper);
 		syncDatabaseHelper.setCurrentTask(currentTask);
-
 		syncDatabaseHelper.startSync();
 	}
 
@@ -156,6 +178,34 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 		syncDatabaseHelper.setCurrentTask(currentTask);
 
 		syncDatabaseHelper.startSync();
+	}
+	
+	private void syncSettings(){		
+		String username = (String) getIntent().getExtras().get(
+				OpeningActivity.USERNAME_KEY);
+		String password = (String) getIntent().getExtras().get(
+				OpeningActivity.PASSWORD_KEY);
+
+		String openHdsBaseUrl = getPreferenceString(this,
+				R.string.openhds_server_url_key, "");
+		SyncSettingsTask currentTask = new SyncSettingsTask(openHdsBaseUrl,
+				username, password, syncDatabaseHelper.getProgressDialog(),
+				this, syncDatabaseHelper);
+		
+		syncDatabaseHelper.setCurrentTask(currentTask);
+		syncDatabaseHelper.startSync();
+	}
+	
+	public void displayLastSyncDate(){
+		android.database.Cursor c = Queries.getAllSettings(getContentResolver());
+		Settings settings = Converter.convertToSettings(c); 
+		c.close();
+		
+		String lastSyncDate = settings.getDateOfLastSync();
+		lastSyncDate = ((lastSyncDate==null)||lastSyncDate.isEmpty())?"never":lastSyncDate;
+		if(lastUpdateText != null)
+			lastUpdateText.setText("Settings last updated on: " + lastSyncDate);
+		
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,

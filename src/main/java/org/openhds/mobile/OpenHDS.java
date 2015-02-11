@@ -274,5 +274,25 @@ public class OpenHDS {
         public static final String COLUMN_FORM_GENDER = "gender";
     }
     
+    public static final class Settings implements BaseColumns {
+        public static final String TABLE_NAME = "settings";
+        private static final String SCHEME = "content://";
+
+        private static final String PATH_NOTES = "/settings";
+        private static final String PATH_NOTE_ID = "/settings/";
+
+        public static final int ID_PATH_POSITION = 1;
+
+        public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_NOTES);
+        public static final Uri CONTENT_ID_URI_BASE = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID);
+        public static final Uri CONTENT_ID_URI_PATTERN = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID + "/#");
+
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.openhds.settings";
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.openhds.settings";
+
+        public static final String COLUMN_SETTINGS_NAME = "name";  
+        public static final String COLUMN_SETTINGS_VALUE = "value";
+    }    
+    
     
 }

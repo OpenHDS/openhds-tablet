@@ -1,7 +1,9 @@
 package org.openhds.mobile.database.queries;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openhds.mobile.model.Form;
 import org.openhds.mobile.OpenHDS;
@@ -12,6 +14,7 @@ import org.openhds.mobile.model.LocationHierarchy;
 import org.openhds.mobile.model.LocationHierarchyLevel;
 import org.openhds.mobile.model.Relationship;
 import org.openhds.mobile.model.Round;
+import org.openhds.mobile.model.Settings;
 import org.openhds.mobile.model.SocialGroup;
 
 import android.database.Cursor;
@@ -285,6 +288,20 @@ public class Converter {
         SocialGroup sg = new SocialGroup();
         populateSocialGroup(cursor, sg);
         return sg;
+    }
+    
+    
+    public static Settings convertToSettings(Cursor cursor) {
+    	Map<String, String> settingList = new HashMap<String, String>();
+    	
+    	while(cursor.moveToNext()){
+            String name = cursor.getString(cursor.getColumnIndex(OpenHDS.Settings.COLUMN_SETTINGS_NAME));
+            String value = cursor.getString(cursor.getColumnIndex(OpenHDS.Settings.COLUMN_SETTINGS_VALUE));
+            settingList.put(name, value);
+    	}
+    	
+    	Settings settings = new Settings(settingList);
+        return settings;
     }
     
     public static LocationHierarchyLevel toLocationHierarchyLevel(Cursor cursor){

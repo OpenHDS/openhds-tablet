@@ -62,6 +62,10 @@ public class Queries {
 		return getCursor(resolver, OpenHDS.Individuals.CONTENT_ID_URI_BASE,
 				OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE, extId);
 	}
+	
+	public static Cursor getAllSettings(ContentResolver resolver){
+		return getCursorForAll(resolver, OpenHDS.Settings.CONTENT_ID_URI_BASE);
+	}
 
 	private static boolean isFound(Cursor cursor) {
 		boolean found = false;
