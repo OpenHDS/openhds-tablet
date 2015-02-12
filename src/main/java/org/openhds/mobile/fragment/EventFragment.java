@@ -7,8 +7,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.openhds.mobile.R;
+import org.openhds.mobile.database.queries.Converter;
+import org.openhds.mobile.database.queries.Queries;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.LocationVisit;
+import org.openhds.mobile.model.Settings;
 import org.openhds.mobile.model.StateMachine;
 import org.openhds.mobile.model.StateMachine.StateListener;
 
@@ -29,7 +32,8 @@ import android.widget.LinearLayout;
  * events it publishes can be handled by implementing the listener interface.
  */
 public class EventFragment extends Fragment implements OnClickListener {
-    private static final int FEMALE_MINIMUM_PREGNANCY_AGE = 12;
+    private static int FEMALE_MINIMUM_PREGNANCY_AGE;
+    private static int DEFAULT_FEMALE_MINIMUM_PREGNANCY_AGE = 12;
 
     private Button findLocationGeoPointBtn, createLocationBtn, createVisitBtn, householdBtn, membershipBtn,
             relationshipBtn, inMigrationBtn, outMigrationBtn, pregRegBtn, birthRegBtn, deathBtn, finishVisitBtn,
@@ -75,6 +79,11 @@ public class EventFragment extends Fragment implements OnClickListener {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        
+		android.database.Cursor c = Queries.getAllSettings(activity.getContentResolver());
+		Settings settings = Converter.convertToSettings(c); 
+		c.close();
+		FEMALE_MINIMUM_PREGNANCY_AGE = settings.getMinimumAgeOfPregnancy() == 0 ? DEFAULT_FEMALE_MINIMUM_PREGNANCY_AGE : settings.getMinimumAgeOfPregnancy();		
 
         try {
             listener = (Listener) activity;
