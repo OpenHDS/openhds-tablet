@@ -14,7 +14,6 @@ import org.openhds.mobile.task.HttpTask.RequestContext;
 import org.openhds.mobile.task.SyncEntitiesTask;
 import org.openhds.mobile.task.SyncFieldworkersTask;
 import org.openhds.mobile.task.SyncFormsTask;
-import org.openhds.mobile.task.SyncSettingsTask;
 import org.openhds.mobile.utilities.SyncDatabaseHelper;
 
 import android.app.Activity;
@@ -52,6 +51,10 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 				getResourceString(this, R.string.sync_database_name),
 				getResourceString(this, R.string.sync_database_name), this,
 				supervisorOptionsList);
+		
+        // add text view to display last settings sync time
+        lastUpdateText = new TextView(this);
+        supervisorOptionsList.addView(lastUpdateText);		
 
 		makeNewGenericButton(
 				this,
@@ -66,17 +69,6 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 				getResourceString(this, R.string.sync_extraforms),
 				getResourceString(this, R.string.sync_extraforms), this,
 				supervisorOptionsList);				
-		
-		makeNewGenericButton(
-				this,
-				getResourceString(this, R.string.download_settings_button),
-				getResourceString(this, R.string.sync_settings),
-				getResourceString(this, R.string.sync_settings), this,
-				supervisorOptionsList);	
-		
-        // add text view to display last settings sync time
-        lastUpdateText = new TextView(this);
-        supervisorOptionsList.addView(lastUpdateText);
 
 		if (null != savedInstanceState) {
 			return;
@@ -120,9 +112,6 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 		} else if (tag.equals(getResourceString(this,
 				R.string.sync_extraforms))) {
 			syncExtraForms();
-		} else if (tag.equals(getResourceString(this,
-				R.string.sync_settings))) {
-			syncSettings();
 		}
 	}
 	
@@ -179,32 +168,16 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 
 		syncDatabaseHelper.startSync();
 	}
-	
-	private void syncSettings(){		
-		String username = (String) getIntent().getExtras().get(
-				OpeningActivity.USERNAME_KEY);
-		String password = (String) getIntent().getExtras().get(
-				OpeningActivity.PASSWORD_KEY);
-
-		String openHdsBaseUrl = getPreferenceString(this,
-				R.string.openhds_server_url_key, "");
-		SyncSettingsTask currentTask = new SyncSettingsTask(openHdsBaseUrl,
-				username, password, syncDatabaseHelper.getProgressDialog(),
-				this, syncDatabaseHelper);
 		
-		syncDatabaseHelper.setCurrentTask(currentTask);
-		syncDatabaseHelper.startSync();
-	}
-	
 	public void displayLastSyncDate(){
 		android.database.Cursor c = Queries.getAllSettings(getContentResolver());
 		Settings settings = Converter.convertToSettings(c); 
 		c.close();
 		
 		String lastSyncDate = settings.getDateOfLastSync();
-		lastSyncDate = ((lastSyncDate==null)||lastSyncDate.isEmpty())?"never":lastSyncDate;
+		lastSyncDate = ((lastSyncDate==null)||lastSyncDate.isEmpty())?"n/a":lastSyncDate;
 		if(lastUpdateText != null)
-			lastUpdateText.setText("Settings last updated on: " + lastSyncDate);
+			lastUpdateText.setText("Last synced on: " + lastSyncDate);
 		
 	}
 

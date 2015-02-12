@@ -3,11 +3,15 @@ package org.openhds.mobile.task;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.auth.AuthenticationException;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
@@ -21,6 +25,7 @@ import org.apache.http.params.HttpParams;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.R;
 import org.openhds.mobile.listener.SyncDatabaseListener;
+import org.openhds.mobile.model.Settings;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -71,7 +76,7 @@ public class SyncEntitiesTask extends
 	}
 
 	private enum Entity {
-		LOCATION_HIERARCHY, LOCATION, ROUND, VISIT, RELATIONSHIP, INDIVIDUAL, SOCIALGROUP, LOCATION_HIERARCHY_LEVELS
+		LOCATION_HIERARCHY, LOCATION, ROUND, VISIT, RELATIONSHIP, INDIVIDUAL, SOCIALGROUP, LOCATION_HIERARCHY_LEVELS, SETTINGS
 	}
 
 	private Context mContext;
@@ -125,6 +130,9 @@ public class SyncEntitiesTask extends
 		case VISIT:
 			builder.append(mContext.getString(R.string.sync_task_visits));
 			break;
+		case SETTINGS:
+			builder.append(mContext.getString(R.string.sync_task_settings));
+			break;			
 		}
 
 		if (values.length > 0) {
@@ -172,6 +180,9 @@ public class SyncEntitiesTask extends
 
 			entity = Entity.SOCIALGROUP;
 			processUrl(baseurl + API_PATH + "/socialgroups/cached");
+			
+			entity = Entity.SETTINGS;
+			processUrl(baseurl + API_PATH + "/settings");
 		} catch (Exception e) {
 			return HttpTask.EndResult.FAILURE;
 		}
@@ -192,6 +203,7 @@ public class SyncEntitiesTask extends
 		resolver.delete(OpenHDS.HierarchyLevels.CONTENT_ID_URI_BASE, null, null);
 		resolver.delete(OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, null);
 		resolver.delete(OpenHDS.Locations.CONTENT_ID_URI_BASE, null, null);
+		resolver.delete(OpenHDS.Settings.CONTENT_ID_URI_BASE, null, null);
 	}
 
 	private void processUrl(String url) throws Exception {
@@ -215,6 +227,11 @@ public class SyncEntitiesTask extends
 		httpGet.addHeader(new BasicScheme().authenticate(creds, httpGet));
 		httpGet.addHeader("content-type", "application/xml");
 		response = client.execute(httpGet);
+		
+		//Handle 404
+		if(response.getStatusLine().getStatusCode() == HttpStatus.SC_NOT_FOUND){
+			throw new RuntimeException("404 Not found.");
+		}		
 
 		HttpEntity entity = response.getEntity();
 		return entity.getContent();
@@ -257,6 +274,8 @@ public class SyncEntitiesTask extends
 					processSocialGroupParams(parser);
 				} else if (name.equalsIgnoreCase("relationships")) {
 					processRelationshipParams(parser);
+				} else if(name.equalsIgnoreCase("generalSettings")) {
+					processSettingsParams(parser);
 				}
 				break;
 			}
@@ -727,6 +746,53 @@ public class SyncEntitiesTask extends
 					values.toArray(emptyArray));
 		}
 	}
+	
+	private void processSettingsParams(XmlPullParser parser)
+			throws XmlPullParserException, IOException {
+		
+		values.clear();
+		ContentValues cv;
+		
+		parser.nextTag();
+		cv = new ContentValues();
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, parser.nextText()); //minMarriageAge
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.MINIMUM_AGE_OF_MARRIAGE); //minMarriageAge
+		values.add(cv);
+
+		parser.nextTag(); //
+		cv = new ContentValues();
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, parser.nextText()); //minAgeOfHouseholdHead
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.MINIMUM_AGE_OF_HOUSEHOLDHEAD); //minAgeOfHouseholdHead
+		values.add(cv);
+
+		parser.nextTag(); //
+		cv = new ContentValues();
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, parser.nextText()); //minAgeOfParents
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.MINIMUM_AGE_OF_PARENTS); //minAgeOfParents
+		values.add(cv);
+
+		parser.nextTag(); //
+		cv = new ContentValues();
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, parser.nextText()); //minAgeOfPregnancy
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.MINIMUM_AGE_OF_PREGNANCY); //minAgeOfPregnancy
+		values.add(cv);
+
+		parser.nextTag(); // </generalSettings>
+		
+		//Insert current date
+		cv = new ContentValues();
+		Calendar rightNow = Calendar.getInstance();
+		Date date = rightNow.getTime();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, dateFormat.format(date)); //DATE_OF_LAST_SYNC
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.DATE_OF_LAST_SYNC); //DATE_OF_LAST_SYNC		
+		values.add(cv);
+			
+		if (!values.isEmpty()) {			
+			resolver.bulkInsert(OpenHDS.Settings.CONTENT_ID_URI_BASE,
+			values.toArray(emptyArray));
+		}		
+	}		
 
 	protected void onPostExecute(HttpTask.EndResult result) {
 		listener.collectionComplete(result);

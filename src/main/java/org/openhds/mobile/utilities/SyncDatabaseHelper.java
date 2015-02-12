@@ -6,7 +6,7 @@ import org.openhds.mobile.R;
 import org.openhds.mobile.activity.SupervisorMainActivity;
 import org.openhds.mobile.listener.SyncDatabaseListener;
 import org.openhds.mobile.task.HttpTask;
-import org.openhds.mobile.task.SyncSettingsTask;
+import org.openhds.mobile.task.SyncEntitiesTask;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -63,7 +63,7 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 			showLongToast(callingContext, R.string.sync_entities_successful);
 			
 			//Somewhat hackish way to call the Update-Method that shows the last time the settings were synced
-			if(currentTask instanceof SyncSettingsTask && callingContext instanceof SupervisorMainActivity){				
+			if(currentTask instanceof SyncEntitiesTask && callingContext instanceof SupervisorMainActivity){				
 				((SupervisorMainActivity)callingContext).displayLastSyncDate();
 			}
 		} else {
