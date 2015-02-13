@@ -663,7 +663,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         if (frag!=null && frag instanceof ProgressFragment)
         {
         	FragmentTransaction tr = fm.beginTransaction();
-        	tr.remove(frag).commit();
+        	tr.remove(frag).commitAllowingStateLoss();
         }
         
         FragmentTransaction txn = getFragmentManager().beginTransaction();
@@ -1421,7 +1421,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     private void loadSocialGroupsForIndividual() {
         showProgressFragment();
-        //getLoaderManager().restartLoader(SOCIAL_GROUP_FOR_INDIVIDUAL, null, this);
+        getLoaderManager().restartLoader(SOCIAL_GROUP_FOR_INDIVIDUAL, null, this);
     }
 
     public void onClearIndividual() {
