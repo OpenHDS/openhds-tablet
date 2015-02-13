@@ -1,6 +1,11 @@
 package org.openhds.mobile.activity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -39,6 +44,7 @@ import org.openhds.mobile.model.LocationVisit;
 import org.openhds.mobile.model.PregnancyObservationUpdate;
 import org.openhds.mobile.model.PregnancyOutcome;
 import org.openhds.mobile.model.Round;
+import org.openhds.mobile.model.Settings;
 import org.openhds.mobile.model.SocialGroup;
 import org.openhds.mobile.model.StateMachine;
 import org.openhds.mobile.task.OdkGeneratedFormLoadTask;
@@ -107,6 +113,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     protected static final int FILTER_INMIGRATION_FATHER = 70;
     protected static final int FILTER_INDIV_VISIT = 75;
     protected static final int FILTER_SOCIALGROUP = 80;
+    
+    private static int MINIMUM_HOUSEHOLD_AGE;
+    private static final int DEFAULT_MINIMUM_HOUSEHOLD_AGE = 14;
 
     // the uri of the last viewed xform
     private Uri contentUri;
@@ -236,6 +245,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             //Restore last state
             stateMachine.transitionInSequence(state);        	
         }
+        
+        // SET MINIMUM HOH AGE
+		android.database.Cursor c = Queries.getAllSettings(getContentResolver());
+		Settings settings = Converter.convertToSettings(c); 
+		c.close();
+		MINIMUM_HOUSEHOLD_AGE = settings.getMinimumAgeOfHouseholdHead() == 0 ? DEFAULT_MINIMUM_HOUSEHOLD_AGE : settings.getMinimumAgeOfHouseholdHead();
         
     }
     
@@ -1881,11 +1896,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        {
 	        	//String sg = args.getString("sg");
 	        	//String hohExtId = args.getString("hohExtId");
-	            uri = OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE;
 	        	
 	        	Cursor cursor = Queries.getSocialGroupsByIndividualExtId(getContentResolver(), locationVisit.getSelectedIndividual().getExtId());
 	        	
-	        	if(cursor.moveToNext()){	        		
+	        	if(cursor.moveToNext()){	        	
 	        		int columnIndex = cursor.getColumnIndex("_id");
 	        		int extIdIndex = cursor.getColumnIndex("extId");
 	        		if(columnIndex > -1  && extIdIndex > -1) {
@@ -1937,7 +1951,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		        		Cursor individualCursor = Queries.getIndividualByExtId(this.getContentResolver(), individualExtId);
 		        		if(individualCursor.moveToNext()){
 	        				Individual individual = Converter.convertToIndividual(individualCursor);
-	        				if(individual != null){
+	        				if(individual != null && individualMeetsMinimumAge(individual)){
 	        					uniqueIndividuals.add(individual);
 	        				}
 		        		}
@@ -2034,6 +2048,23 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        householdDialog.show();
         }
     }
+    
+    private boolean individualMeetsMinimumAge(Individual indiv) {
+        try {
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date dob = formatter.parse(indiv.getDob());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dob);
+            if ((new GregorianCalendar().get(Calendar.YEAR) - cal.get(Calendar.YEAR)) > MINIMUM_HOUSEHOLD_AGE) {
+                return true;
+            }
+        } catch (Exception e) {
+            // no dob or malformed
+            return true;
+        }
+
+        return false;
+    }    
     
     private void selectedNewHoh(final Individual newHoh, final List<Individual> members){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
