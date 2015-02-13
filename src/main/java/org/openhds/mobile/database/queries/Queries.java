@@ -136,7 +136,6 @@ public class Queries {
 
 	/* Return cursor that contains all SocialGroups that the individual with external Id extId is part of */
 	public static Cursor getSocialGroupsByIndividualExtId(ContentResolver resolver, String extId) {
-//		Uri uri = OpenHDS.Individuals.CONTENT_SG_URI_BASE.buildUpon().appendPath(extId).build();
 		Uri uri = OpenHDS.SocialGroups.CONTENT_INDIVIDUAL_ID_URI_BASE.buildUpon()
                 .appendPath(extId).build();
 		return resolver.query(uri, null, "x." + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID + " = ?",

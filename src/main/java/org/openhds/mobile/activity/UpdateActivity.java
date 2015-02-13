@@ -270,32 +270,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         if (contentUri != null)
             outState.putString("uri", contentUri.toString());
     }
-
-    /**
-     * This method is responsible for restoring the screen state.
-     */
-    /*private void restoreState(Bundle savedState) {
-        if (savedState != null) {
-            locationVisit = (LocationVisit) savedState.getSerializable("locationvisit");
-
-            String uri = savedState.getString("uri");
-            if (uri != null)
-                contentUri = Uri.parse(uri);
-
-            if (savedState.getBoolean("xFormNotFound"))
-                createXFormNotFoundDialog();
-            if (savedState.getBoolean("unfinishedFormDialog"))
-                createUnfinishedFormDialog();
-
-            sf.setLocationVisit(locationVisit);
-            ef.setLocationVisit(locationVisit);
-            
-            //Restore last state
-            String state = (String)savedState.getSerializable("currentState");
-            stateMachine.transitionTo(state);
-        }
-    }    */
-    
     
     private void restoreState(){
 	    if(stateMachine != null && stateMachine.getState() != ""){
@@ -1429,7 +1403,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         		deathCreation = true;
         		if(locationVisit.getSelectedIndividual().getExtId().equalsIgnoreCase(locationVisit.getLocation().getHead())){
 	    			updatable = new DeathOfHoHUpdate();
-//	    	        showProgressFragment();
 	    	        Bundle bundle = new Bundle();
 	    	        bundle.putString("sg", sg.getExtId());
 	    	        bundle.putString("hohExtId", sg.getGroupHead());
@@ -1437,7 +1410,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	    	        filledForm = formFiller.fillDeathOfHouseholdForm(locationVisit, sg);
 	    		}
 	    		else{
-//	    			Toast.makeText(UpdateActivity.this, "Individual is not HoH of this SG!", Toast.LENGTH_LONG).show();
 	    			loadForm(SELECTED_XFORM);
 	    		}
         	}
@@ -1893,17 +1865,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	            return new CursorLoader(this, uri, null, where, criteria, null);
 	        }
 	        case INDIVIDUALS_IN_SOCIAL_GROUP_ACTIVE:
-	        {
-	        	//String sg = args.getString("sg");
-	        	//String hohExtId = args.getString("hohExtId");
-	        	
-	        	Cursor cursor = Queries.getSocialGroupsByIndividualExtId(getContentResolver(), locationVisit.getSelectedIndividual().getExtId());
-	        	
+	        {	        	
+	        	Cursor cursor = Queries.getSocialGroupsByIndividualExtId(getContentResolver(), locationVisit.getSelectedIndividual().getExtId());	        	
 	        	if(cursor.moveToNext()){	        	
 	        		int columnIndex = cursor.getColumnIndex("_id");
 	        		int extIdIndex = cursor.getColumnIndex("extId");
 	        		if(columnIndex > -1  && extIdIndex > -1) {
-	        			//int sg_uuid = cursor.getInt(columnIndex);
 	        			String extId = cursor.getString(extIdIndex);
 	        			cursor.close();
 	        			
@@ -1944,7 +1911,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		        
 	        	while(!cursor.isAfterLast()){
 	        		String individualExtId = cursor.getString(cursor.getColumnIndex(OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID));
-	        //		String sgExtId = cursor.getString(cursor.getColumnIndex(OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID));
 	        		
 					if(!uniqueExtIds.contains(individualExtId)){
 						uniqueExtIds.add(individualExtId);

@@ -450,30 +450,14 @@ public class OpenHDSProvider extends ContentProvider {
             qb.appendWhere(OpenHDS.Individuals._ID + "="
                     + uri.getPathSegments().get(OpenHDS.Individuals.NOTE_ID_PATH_POSITION));
             break;
-//        case INDIVIDUAL_SG:
-//        	String indExtId = uri.getPathSegments().get(2);
-//            qb.setTables(OpenHDS.SocialGroups.TABLE_NAME + " s inner join " + OpenHDS.IndividualGroups.TABLE_NAME
-//                    + " x on s." + OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " = x."
-//                    + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID);
-//            qb.setProjectionMap(socialgroupsJoinProjectionMap);
-//            
-//            System.out.println("In INDIVIDUAL_SG: " + " individual extId: " + indExtId);
-//            break;
-            //Get all active (not dead) individuals that live in a specific socialgroup
+        //Get all active (not dead) individuals that live in a specific socialgroup
         case INDIVIDUAL_SG_ACTIVE_ID:
         	String sg = uri.getPathSegments().get(2);
             qb.setTables(OpenHDS.Individuals.TABLE_NAME + " s INNER JOIN " + OpenHDS.IndividualGroups.TABLE_NAME + " x " 
-//            		+ " on s." + "_id" + " = x." + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID);
             		+ " on s." + OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " = x." + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID);
-            qb.appendWhere("s." + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE + " != 'DTH'");
-//            qb.appendWhere(" AND s." + OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + "="
-//                    + uri.getPathSegments().get(2));            
+            qb.appendWhere("s." + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE + " != 'DTH'");         
             qb.appendWhere(" AND (x." + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID + " = '"
                     + sg + "')");  
-//            qb.appendWhere(" x.socialgroup_extId like '" + uri.getPathSegments().get(2) + "'");
-//            qb.appendWhere("1=1");
-            
-            System.out.println("Pathsegment: " + sg);
             qb.setProjectionMap(individualsJoinProjectionMap);
             sortOrder = "s." + OpenHDS.Individuals._ID;
             break;            
