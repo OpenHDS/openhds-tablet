@@ -299,5 +299,6 @@
     <string name="failed_sync_fws_lbl">Failed to sync field workers.</string>
     <string name="hello_lbl">Hello</string>
     <string name="locale_lang">en</string>
+     <string name="parenthood_minimium_age">Minimum age for parenthood: </string>
 
 </resources>

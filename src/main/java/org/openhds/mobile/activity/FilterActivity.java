@@ -1,6 +1,12 @@
 package org.openhds.mobile.activity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import android.widget.Toast;
+
 import org.openhds.mobile.R;
 import org.openhds.mobile.fragment.SelectionFilterFragment;
 import org.openhds.mobile.fragment.ValueFragment;
@@ -22,6 +28,7 @@ public class FilterActivity extends Activity implements ValueListener, Selection
     private ValueFragment valueFragment;
     private String requireGender;
     private String img;
+    private int minimumAge;
 
 
     @Override
@@ -44,6 +51,7 @@ public class FilterActivity extends Activity implements ValueListener, Selection
         
         Location location = (Location) getIntent().getExtras().getSerializable("location");
         requireGender = getIntent().getExtras().getString("requireGender");
+        minimumAge = getIntent().getExtras().getInt("minimumAge");
         img = getIntent().getExtras().getString("img");
 
         selectionFilterFragment.setHierarchy1(hierarchy1.getExtId());
@@ -55,8 +63,16 @@ public class FilterActivity extends Activity implements ValueListener, Selection
 
     public void onIndividualSelected(Individual individual) {
         if (requireGender != null && !requireGender.equals(individual.getGender())) {
-            Toast.makeText(getApplicationContext(), getString(R.string.please_choose_lbl) + requireGender, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.please_choose_lbl) + " " + requireGender, Toast.LENGTH_LONG).show();
             return;
+        }
+        
+        if( minimumAge != 0){
+        	int ageInYears = calculateAgeInYears(individual.getDob());
+        	if(ageInYears < minimumAge){
+                Toast.makeText(getApplicationContext(), getString(R.string.parenthood_minimium_age) + minimumAge, Toast.LENGTH_LONG).show();
+                return;
+        	}
         }
 
         Intent i = new Intent();
@@ -64,6 +80,29 @@ public class FilterActivity extends Activity implements ValueListener, Selection
         i.putExtra("origin", individual.getCurrentResidence());
         setResult(Activity.RESULT_OK, i);
         finish();
+    }
+    
+    private int calculateAgeInYears(String dateString){
+    	int ageInYears = 0;
+    	Date dateOfBirth;
+		try {
+			dateOfBirth = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+	    	Calendar dob = Calendar.getInstance();  
+	    	dob.setTime(dateOfBirth);  
+	    	Calendar today = Calendar.getInstance();  
+	    	int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);  
+	    	if (today.get(Calendar.MONTH) < dob.get(Calendar.MONTH)) {
+	    	  age--;  
+	    	} else if (today.get(Calendar.MONTH) == dob.get(Calendar.MONTH)
+	    	    && today.get(Calendar.DAY_OF_MONTH) < dob.get(Calendar.DAY_OF_MONTH)) {
+	    	  age--;  
+	    	}
+	    	ageInYears = age;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return ageInYears;
     }
 
     public void onHierarchy1Selected(LocationHierarchy hierarchy) {

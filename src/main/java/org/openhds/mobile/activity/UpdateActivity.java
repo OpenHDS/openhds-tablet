@@ -116,6 +116,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     
     private static int MINIMUM_HOUSEHOLD_AGE;
     private static final int DEFAULT_MINIMUM_HOUSEHOLD_AGE = 14;
+    
+    private static int MINIMUM_PARENTHOOD_AGE;
+    private static final int DEFAULT_MINIMUM_PARENTHOOD_AGE = 12;
 
     // the uri of the last viewed xform
     private Uri contentUri;
@@ -251,7 +254,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		Settings settings = Converter.convertToSettings(c); 
 		c.close();
 		MINIMUM_HOUSEHOLD_AGE = settings.getMinimumAgeOfHouseholdHead() == 0 ? DEFAULT_MINIMUM_HOUSEHOLD_AGE : settings.getMinimumAgeOfHouseholdHead();
-        
+		MINIMUM_PARENTHOOD_AGE = settings.getMinimumAgeOfParents() == 0 ? DEFAULT_MINIMUM_PARENTHOOD_AGE : settings.getMinimumAgeOfParents();
     }
     
     /**
@@ -831,6 +834,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             break;
         case FILTER_BIRTH_FATHER:
             i.putExtra("requireGender", "M");
+            i.putExtra("minimumAge", MINIMUM_PARENTHOOD_AGE);
         case FILTER_INMIGRATION:
             i.putExtra("img", "IMG");
         }
