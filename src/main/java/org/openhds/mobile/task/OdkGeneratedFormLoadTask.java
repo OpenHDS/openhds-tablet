@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -154,11 +155,14 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                     } else if (name.equals(FilledParams.middleName)) {
                         sbuilder.append(filledForm.getIndividualMiddleName() == null ? "<middleName />" + "\r\n"
                                 : "<middleName>" + filledForm.getIndividualMiddleName()+ "</middleName>" + "\r\n");
-                    } else if (name.equals(FilledParams.start)) {
-                    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        df.setTimeZone(TimeZone.getDefault());
-                        String date = df.format(new Date());
-                        sbuilder.append("<start>" + date+ "</start>" + "\r\n"); 
+                    } else if (name.equals(FilledParams.start)) {                    	
+                    	TimeZone tz = TimeZone.getDefault();
+                    	Calendar cal = Calendar.getInstance(tz);
+                    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                    	sdf.setCalendar(cal);
+                    	cal.setTime(new Date());
+                    	String dateString = sdf.format(cal.getTime());
+                        sbuilder.append("<start>" + dateString+ "</start>" + "\r\n"); 
                     }   else if (name.equals(FilledParams.firstName)) {
                             sbuilder.append(filledForm.getIndividualFirstName() == null ? "<firstName />" + "\r\n"
                                     : "<firstName>" + filledForm.getIndividualFirstName() + "</firstName>" + "\r\n");
