@@ -355,6 +355,8 @@ public class OpenHDSProvider extends ContentProvider {
             db.execSQL("CREATE TABLE " + OpenHDS.IndividualGroups.TABLE_NAME + " (" + OpenHDS.IndividualGroups._ID
                     + " INTEGER PRIMARY KEY," + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID + " TEXT NOT NULL,"
                     + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID + " TEXT NOT NULL);"
+             + " CREATE INDEX SOCIALGROUPUUID ON " +  OpenHDS.IndividualGroups.TABLE_NAME
+            + "(" +  OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID + ");"
             + " CREATE INDEX IDX_INDIVIDUALUUID ON " +  OpenHDS.IndividualGroups.TABLE_NAME
             + "(" +  OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID + ")");
             
