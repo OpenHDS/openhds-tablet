@@ -398,7 +398,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         case FILTER_INMIGRATION:
             handleFilterInMigrationResult(resultCode, data);
             vf.onLoaderReset(null);
-            stateMachine.transitionTo(INMIGRATION);
             break;
         case FILTER_INMIGRATION_MOTHER:
             handleFilterMother(resultCode, data);
@@ -560,14 +559,11 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
         showProgressFragment();
         Individual individual = (Individual) data.getExtras().getSerializable("individual");
-    
-
 
         new CreateInternalInMigrationTask(individual).execute();
         locationVisit.setSelectedIndividual(individual);
 
         stateMachine.transitionTo("Inmigration");
-        
     }
 
     private class CreateInternalInMigrationTask extends AsyncTask<Void, Void, Void> {
@@ -757,6 +753,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             		stateMachine.transitionTo("Select Individual");
             	}
             } else {
+            	if (stateMachine.getState()=="Inmigration") {
+            		locationVisit.setSelectedIndividual(null);
+            		stateMachine.transitionTo("Select Individual");
+            	}
                 createUnfinishedFormDialog();
             }
             
@@ -1110,7 +1110,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton(getString(R.string.update_create_inmigration_pos_button), new DialogInterface.OnClickListener() {
         	 public void onClick(DialogInterface dialog, int which) {
-            	extInm= true;
+            	extInm= false;
             	startFilterActivity(FILTER_INMIGRATION);
      
             }
@@ -1744,7 +1744,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         }   
     }
     
-
     public void onHierarchy3Selected(LocationHierarchy hierarchy) {
         locationVisit.setHierarchy3(hierarchy);
         stateMachine.transitionTo("Select Hierarchy 4");
@@ -1757,10 +1756,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	onHierarchy4();
         }   
     }
-
-
-    
-    
     
     public void onHierarchy4Selected(LocationHierarchy village) {
         locationVisit.setHierarchy4(village);
@@ -1773,8 +1768,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	onHierarchy5();
         }
     }
-    
-    
+        
 	public void onHierarchy5Selected(LocationHierarchy hierarchy5) {
         locationVisit.setHierarchy5(hierarchy5);
         updateButtons(4);
@@ -1786,7 +1780,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	onHierarchy6();
         }
 	}
-
 	
 	public void onHierarchy6Selected(LocationHierarchy hierarchy6) {
         locationVisit.setHierarchy6(hierarchy6);
@@ -1799,7 +1792,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	onHierarchy7();
         }		
 	}
-
 	
 	public void onHierarchy7Selected(LocationHierarchy hierarchy7) {
         locationVisit.setHierarchy7(hierarchy7);
@@ -1812,16 +1804,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	onHierarchy8();
         }		
 	}
-	
-
-	
+		
 	public void onHierarchy8Selected(LocationHierarchy hierarchy8) {
 	     locationVisit.setHierarchy8(hierarchy8);
 	//        updateButtons(7);
         	onRound();	
 	}
-    
-    
+        
     private void updateButtons(int level){
     }
 
