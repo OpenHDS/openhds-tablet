@@ -1110,7 +1110,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton(getString(R.string.update_create_inmigration_pos_button), new DialogInterface.OnClickListener() {
         	 public void onClick(DialogInterface dialog, int which) {
-            	extInm= false;
+            	extInm= true;
             	startFilterActivity(FILTER_INMIGRATION);
      
             }
