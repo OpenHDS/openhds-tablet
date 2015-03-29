@@ -43,6 +43,7 @@ public class FilledParams {
 	public static final String childFatherId = "childFatherId";
 	public static final String childFatherFirstName = "childFatherFirstName";
 	public static final String childFatherLastName = "childFatherLastName";
+	public static final String nboutcomes = "nboutcomes";
 	
 	public static final String individualA = "individualA";
 	public static final String individualB = "individualB";
@@ -65,7 +66,7 @@ public class FilledParams {
 				lastName, gender, dob, locationId, houseName,socialGroupType, 
 				latlong, householdId, householdName, hierarchyId, 
 				fieldWorkerId, child1Id, child2Id, childFatherId,
-				childFatherFirstName, childFatherLastName,
+				childFatherFirstName, childFatherLastName,nboutcomes,
 				individualA, individualB, migrationType);
 	}
 }
