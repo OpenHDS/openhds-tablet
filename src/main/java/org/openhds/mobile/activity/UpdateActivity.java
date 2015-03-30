@@ -1897,10 +1897,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         	handleSocialGroup(loader, cursor);
         }
         
-        else if(loader.getId() == INDIVIDUALS_IN_SOCIAL_GROUP_ACTIVE){       
+        else if(loader.getId() == INDIVIDUALS_IN_SOCIAL_GROUP_ACTIVE){  
+        	List<Individual> uniqueIndividuals = new ArrayList<Individual>();
+        	
 	        if(cursor.moveToNext()){
 		        List<String> uniqueExtIds = new ArrayList<String>();     
-		        List<Individual> uniqueIndividuals = new ArrayList<Individual>();
+		        List<Individual> uniqueIndividualsOverMinimumAge = new ArrayList<Individual>();
+		        
 		        
 	        	while(!cursor.isAfterLast()){
 	        		String individualExtId = cursor.getString(cursor.getColumnIndex(OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID));
@@ -1911,6 +1914,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		        		if(individualCursor.moveToNext()){
 	        				Individual individual = Converter.convertToIndividual(individualCursor);
 	        				if(individual != null && individualMeetsMinimumAge(individual)){
+	        					uniqueIndividualsOverMinimumAge.add(individual);
+	        				}
+	        				if(individual != null){
 	        					uniqueIndividuals.add(individual);
 	        				}
 		        		}
@@ -1919,7 +1925,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        		cursor.moveToNext();
 	        	}
 	        	   	
-	        	final List<Individual> list = uniqueIndividuals; 
+	        	final List<Individual> list = uniqueIndividualsOverMinimumAge; 
+	        	final List<Individual> list2 = uniqueIndividuals;
         		@SuppressWarnings({ "unchecked", "rawtypes" })
 				ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, list) {
       			  @Override
@@ -1958,7 +1965,20 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     	            				members.add(member);
     	            			}
     	            		}
-    	            	}   	            	
+    	            	}   
+    	            	
+    	            	//Remove selected individual from list
+    	            	Individual selectedIndividual = null;
+    	            	for(Individual ind : list2){
+    	            		if(newHoh != null && newHoh.getExtId().equalsIgnoreCase(ind.getExtId())){
+    	            			selectedIndividual = ind;
+    	            		}
+    	            	}
+    	            	if(selectedIndividual != null){
+    	            		list2.remove(selectedIndividual);
+    	            		members = list2;
+    	            	}
+    	            	
 	            		selectedNewHoh(newHoh, members);
     	            }
     	        });

@@ -248,12 +248,13 @@ public class LocationVisit implements Serializable {
     }
 
     public void createLocation(ContentResolver resolver) {
+        location = new Location();
+        
     	if (lowestLevelExtId==null) {
     		setLatestLevelExtId(resolver);
     	}
         String locationId = generateLocationId(resolver);
 
-        location = new Location();
         location.setExtId(locationId);
         location.setHierarchy(lowestLevelExtId);
       
