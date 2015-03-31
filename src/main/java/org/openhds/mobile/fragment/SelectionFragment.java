@@ -514,6 +514,8 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     private void registerVisitListener(StateMachine stateMachine) {
         stateMachine.registerListener("Create Visit", new StateListener() {
             public void onEnterState() {
+            	locationBtn.setEnabled(true);
+            	locationBtn.setBackgroundColor(Color.LTGRAY);
             }
 
             public void onExitState() {
@@ -527,6 +529,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
                 hierarchy8Btn.setEnabled(false);
                 roundBtn.setEnabled(false);
                 locationBtn.setEnabled(false);
+                locationBtn.setBackgroundColor(Color.DKGRAY);
                 searchlBtn.setVisibility(8);
             }
         });
