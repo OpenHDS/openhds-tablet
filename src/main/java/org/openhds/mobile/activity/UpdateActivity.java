@@ -739,6 +739,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             		stateMachine.transitionTo("Select Event");
             		if (extInm)
                 		onFinishExternalInmigration();
+            		selectIndividual();
             	} else if (stateMachine.getState()=="Select Individual") {
             		if (extInm)
                 		onFinishExternalInmigration();
@@ -2005,7 +2006,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 
                 loadForm(SELECTED_XFORM);
 	        }
-	        
+	        cursor.close();
 	        getLoaderManager().destroyLoader(loader.getId());
         }
         else{
@@ -2073,8 +2074,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onLoaderReset(Loader<Cursor> arg0) {
-        householdDialog.dismiss();
-        householdDialog = null;
+    	if (householdDialog!=null){ 
+    		householdDialog.dismiss();
+    		householdDialog = null;
+    	}
     }
 
 	public void onFilterLocation() {
