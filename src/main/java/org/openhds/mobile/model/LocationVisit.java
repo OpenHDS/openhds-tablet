@@ -60,6 +60,7 @@ public class LocationVisit implements Serializable {
         visit.hierarchy7 = hierarchy7;
         visit.hierarchy8 = hierarchy8;
         visit.round = round;
+        visit.lowestLevelExtId = lowestLevelExtId;
 
         return visit;
     }
