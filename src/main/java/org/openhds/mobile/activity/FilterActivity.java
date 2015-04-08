@@ -151,8 +151,8 @@ public class FilterActivity extends Activity implements ValueListener, Selection
 
     public void onSearch(String location, String firstName, String lastName, String gender) {
     	if (img !=null) {
-            valueFragment.loadAllFilteredIndividuals(location, firstName, lastName, gender);
-    	} else {
+    		valueFragment.loadAllFilteredIndividuals(location, firstName, lastName, gender, img);
+    		} else {
             valueFragment.loadFilteredIndividuals(location, firstName, lastName, gender);
     	}
     }

@@ -219,6 +219,7 @@
 	<string name="update_create_inmigration_msg">¿Es este una Inmigración interna o externa?</string>
 	<string name="update_create_inmigration_pos_button">Interna</string>
 	<string name="update_create_inmigration_neg_button">Externa</string>
+	<string name="update_create_inmigration_neutral_button">Return to DSS</string>
 	<string name="update_finish_ext_inmigration_msg">Por favor, ahora crear una Membresía para el individuo</string>
 	<string name="finish_household_creation_msg">Por favor, ahora crear una Membresía para el individuo (HoH)</string>
 	<string name="mother_lbl">Madre</string>

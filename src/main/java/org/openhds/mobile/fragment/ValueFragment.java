@@ -323,7 +323,10 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	        {
 	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
 	
-	            String filter1 = buildFilter(arg1);
+	            String img = (String) arg1.get("img");
+	            arg1.remove("img");
+
+	            String filter1 = img.equals("IMG") ? buildFilter(arg1) : buildFilterOMG(arg1);
 	            String[] args1 = buildArguments(arg1);
 	
 	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter1, args1,
@@ -478,6 +481,42 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         return builder.toString();
     }
 
+    
+    /**
+     * Constructs the filtering SQL clause for getting a list of individuals out migrated
+     *
+     * @param arg1
+     * bundle which contains possible filtering options
+     * @return
+     */
+     private String buildFilterOMG(Bundle arg1) {
+     StringBuilder builder = new StringBuilder();
+
+     if (!TextUtils.isEmpty(arg1.getString("location"))) {
+     builder.append(OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " LIKE ?");
+     }
+     if (!TextUtils.isEmpty(arg1.getString("firstName"))) {
+     if (builder.length() > 0)
+     builder.append(" AND ");
+     builder.append(OpenHDS.Individuals.COLUMN_INDIVIDUAL_FIRSTNAME + " LIKE ?");
+     }
+     if (!TextUtils.isEmpty(arg1.getString("lastName"))) {
+     if (builder.length() > 0)
+     builder.append(" AND ");
+     builder.append(OpenHDS.Individuals.COLUMN_INDIVIDUAL_LASTNAME + " LIKE ?");
+     }
+     if (!TextUtils.isEmpty(arg1.getString("gender"))) {
+     if (builder.length() > 0)
+     builder.append(" AND ");
+     builder.append(OpenHDS.Individuals.COLUMN_INDIVIDUAL_GENDER + " = ?");
+     }
+     if (builder.length() > 0)
+     builder.append(" AND ");
+
+     builder.append(OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE).append("='OMG'");
+
+     return builder.toString();
+     }
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if(adapter != null && cursor != null){
         	
@@ -610,13 +649,14 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     }
 
 	public void loadAllFilteredIndividuals(String location, String firstName,
-			String lastName, String gender) {
+			String lastName, String gender, String img) {
 		  listCurrentlyDisplayed = Displayed.INDIVIDUAL;
 	        Bundle bundle = new Bundle();
 	        bundle.putString("location", location);
 	        bundle.putString("firstName", firstName);
 	        bundle.putString("lastName", lastName);
 	        bundle.putString("gender", gender);
+	        bundle.putString("img", img);
 	        getLoaderManager().restartLoader(INDIMG_FILTER_LOADER, bundle, this);	
 	}
 	
