@@ -209,7 +209,7 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                                 + filledForm.getMigrationType() + "</migrationType>" + "\r\n");
                     } else if (name.equals(FilledParams.socialGroupType)) {
                         sbuilder.append("<socialGroupType>FAM</socialGroupType>" + "\r\n");
-                    } else if (name.equals(FilledParams.deviceId)) {
+                    } else if (name.equalsIgnoreCase(FilledParams.deviceId)) {
                      mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
                      
                      String deviceId = mTelephonyManager.getDeviceId();
@@ -244,6 +244,8 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                                  Settings.Secure
                                          .getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
                              orDeviceId = Settings.Secure.ANDROID_ID + ":" + deviceId;
+                             sbuilder.append("<deviceId>"+ orDeviceId +"</deviceId>" + "\r\n");
+
                      }
                      sbuilder.append("<deviceId>"+ deviceId +"</deviceId>" + "\r\n");
                     } 
