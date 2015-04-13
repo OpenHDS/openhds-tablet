@@ -238,7 +238,7 @@ public class OpenHDS {
         private static final String PATH_NOTES = "/individualgroups";
         private static final String PATH_NOTE_ID = "/individualgroups/";
 
-        public static final int ID_PATH_POSITION = 2;
+        public static final int ID_PATH_POSITION = 1;
 
         public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_NOTES);
         public static final Uri CONTENT_ID_URI_BASE = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID);

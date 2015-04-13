@@ -9,7 +9,10 @@ import org.openhds.mobile.model.FormXmlReader;
 import org.openhds.mobile.model.Membership;
 
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
 import android.util.Log;
 
 public class MembershipUpdate implements Updatable {
@@ -26,11 +29,21 @@ public class MembershipUpdate implements Updatable {
              ContentValues cv = new ContentValues();
              cv.put(OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID, membership.getIndExtId());
              cv.put(OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID, membership.getGroupextId());
+             
+             Cursor cursor = resolver.query(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE,
+	                    new String[] { OpenHDS.IndividualGroups._ID }, OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID + " = ?",
+	                    new String[] { membership.getIndExtId() }, null);
+	            if (cursor.moveToNext()) {
+	                Uri uri = ContentUris.withAppendedId(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE, cursor.getLong(0));
+	                resolver.update(uri, cv, null, null);
+	            } else {
+	            	resolver.insert(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE, cv);
+	            }
+	            
+	            cursor.close();
 
-
-             resolver.insert(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE, cv);
          } catch (FileNotFoundException e) {
-             Log.e(VisitUpdate.class.getName(), "Could not read Membership XML file");
+             Log.e(MembershipUpdate.class.getName(), "Could not read Membership XML file");
          }
      }
     }
