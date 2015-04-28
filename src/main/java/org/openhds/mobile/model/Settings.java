@@ -10,12 +10,16 @@ public class Settings {
 	private int minMarriageAge;	
 	private int minimumAgeOfPregnancy;
 	private String dateOfLastSync;
+	private String dateOfLastFieldWorkerSync;
+	private String dateOfLastFormsSync;
 	
 	public final static String MINIMUM_AGE_OF_PARENTS = "minAgeOfParents";
 	public final static String MINIMUM_AGE_OF_HOUSEHOLDHEAD = "minAgeOfHouseholdHead";
 	public final static String MINIMUM_AGE_OF_MARRIAGE = "minMarriageAge";
 	public final static String MINIMUM_AGE_OF_PREGNANCY = "minAgeOfPregnancy";
 	public final static String DATE_OF_LAST_SYNC = "dateOfLastSync";
+	public final static String DATE_OF_LAST_FW_SYNC = "dateOfLastFieldWorkerSync";
+	public final static String DATE_OF_LAST_FORMS_SYNC = "dateOfLastFormsSync";
 	
 	private Map<String, String> _settingsList;
 	
@@ -96,6 +100,10 @@ public class Settings {
 				this.setMinimumAgeOfPregnancy(stringToInt(settingsList.get(key)));
 			}else if(key.equals(DATE_OF_LAST_SYNC)){
 				this.setDateOfLastSync(settingsList.get(key));
+			}else if(key.equals(DATE_OF_LAST_FW_SYNC)){
+				this.setDateOfLastFieldWorkerSync(settingsList.get(key));
+			}else if(key.equals(DATE_OF_LAST_FORMS_SYNC)){
+				this.setDateOfLastFormsSync(settingsList.get(key));
 			}
 		}
 	}
@@ -137,5 +145,34 @@ public class Settings {
     		sb.append(System.getProperty("line.separator"));
     	}
 		return sb.toString();
+	}
+
+	/**
+	 * @return the dateOfLastFieldWorkerSync
+	 */
+	public String getDateOfLastFieldWorkerSync() {
+		System.out.println("getDateOfLastFieldWorkerSync: " + dateOfLastFieldWorkerSync);
+		return dateOfLastFieldWorkerSync;
+	}
+
+	/**
+	 * @param dateOfLastFieldWorkerSync the dateOfLastFieldWorkerSync to set
+	 */
+	public void setDateOfLastFieldWorkerSync(String dateOfLastFieldWorkerSync) {
+		this.dateOfLastFieldWorkerSync = dateOfLastFieldWorkerSync;
+	}
+
+	/**
+	 * @return the dateOfLastFormsSync
+	 */
+	public String getDateOfLastFormsSync() {
+		return dateOfLastFormsSync;
+	}
+
+	/**
+	 * @param dateOfLastFormsSync the dateOfLastFormsSync to set
+	 */
+	public void setDateOfLastFormsSync(String dateOfLastFormsSync) {
+		this.dateOfLastFormsSync = dateOfLastFormsSync;
 	}	
 }

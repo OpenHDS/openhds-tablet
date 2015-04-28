@@ -3,7 +3,10 @@ package org.openhds.mobile.task;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +17,7 @@ import org.apache.http.HttpResponse;
 import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.listener.SyncDatabaseListener;
 import org.openhds.mobile.model.FieldWorker;
+import org.openhds.mobile.model.Settings;
 import org.openhds.mobile.R;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -83,6 +87,8 @@ public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 			eventType = parser.next();
 		}
 		replaceAllFieldWorkers(list);
+		
+		processLastSyncDate();
 	}
 
 	private FieldWorker processFieldWorkerParams(XmlPullParser parser)
@@ -146,6 +152,31 @@ public class SyncFieldworkersTask extends HttpTask<Void, Integer> {
 	public int deleteAllFieldWorkers() {
 		return contentResolver.delete(OpenHDS.FieldWorkers.CONTENT_URI, "1",
 				null);
+	}
+	
+	/* Insert Last sync date */
+	private void processLastSyncDate()
+			throws XmlPullParserException, IOException {
+		
+		final List<ContentValues> values = new ArrayList<ContentValues>();
+		final ContentValues[] emptyArray = new ContentValues[] {};
+		
+		values.clear();
+		ContentValues cv;		
+		
+		//Insert current date
+		cv = new ContentValues();
+		Calendar rightNow = Calendar.getInstance();
+		Date date = rightNow.getTime();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, dateFormat.format(date)); //DATE_OF_LAST_SYNC
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.DATE_OF_LAST_FW_SYNC); //DATE_OF_LAST_SYNC		
+		values.add(cv);
+			
+		if (!values.isEmpty()) {		
+			contentResolver.bulkInsert(OpenHDS.Settings.CONTENT_ID_URI_BASE,
+			values.toArray(emptyArray));
+		}
 	}
 
 	private void onSyncSuccess() {

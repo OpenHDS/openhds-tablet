@@ -34,7 +34,9 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 	private FrameLayout prefContainer;
 	private LinearLayout supervisorOptionsList;
 	private SyncDatabaseHelper syncDatabaseHelper;
-	private TextView lastUpdateText;
+	private TextView lastSyncedDatabase;
+	private TextView lastSyncedFieldWorkers;
+	private TextView lastSyncedExtraForms;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,8 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 				supervisorOptionsList);
 		
         // add text view to display last settings sync time
-        lastUpdateText = new TextView(this);
-        supervisorOptionsList.addView(lastUpdateText);		
+        lastSyncedDatabase = new TextView(this);
+        supervisorOptionsList.addView(lastSyncedDatabase);		
 
 		makeNewGenericButton(
 				this,
@@ -62,12 +64,20 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 				getResourceString(this, R.string.sync_field_worker_name), this,
 				supervisorOptionsList);	
 		
+        // add text view to display last settings sync time
+		lastSyncedFieldWorkers = new TextView(this);
+        supervisorOptionsList.addView(lastSyncedFieldWorkers);			
+		
 		makeNewGenericButton(
 				this,
 				getResourceString(this, R.string.download_extraform_button),
 				getResourceString(this, R.string.sync_extraforms),
 				getResourceString(this, R.string.sync_extraforms), this,
-				supervisorOptionsList);				
+				supervisorOptionsList);	
+		
+        // add text view to display last settings sync time
+		lastSyncedExtraForms = new TextView(this);
+        supervisorOptionsList.addView(lastSyncedExtraForms);			
 
 		if (null != savedInstanceState) {
 			return;
@@ -173,11 +183,20 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 		Settings settings = Converter.convertToSettings(c); 
 		c.close();
 		
-		String lastSyncDate = settings.getDateOfLastSync();
-		lastSyncDate = ((lastSyncDate==null)||lastSyncDate.isEmpty())?"n/a":lastSyncDate;
-		if(lastUpdateText != null)
-			lastUpdateText.setText("Last synced on: " + lastSyncDate);
+		String lastDatabaseSyncDate = settings.getDateOfLastSync();
+		lastDatabaseSyncDate = ((lastDatabaseSyncDate==null)||lastDatabaseSyncDate.isEmpty())?"n/a":lastDatabaseSyncDate;
+		if(lastSyncedDatabase != null)
+			lastSyncedDatabase.setText("Last synced on: " + lastDatabaseSyncDate);
 		
+		String lastFieldWorkerSyncDate = settings.getDateOfLastFieldWorkerSync();
+		lastFieldWorkerSyncDate = ((lastFieldWorkerSyncDate==null)||lastFieldWorkerSyncDate.isEmpty())?"n/a":lastFieldWorkerSyncDate;
+		if(lastSyncedFieldWorkers != null)
+			lastSyncedFieldWorkers.setText("Last synced on: " + lastFieldWorkerSyncDate);
+		
+		String lastExtraFormsSyncDate = settings.getDateOfLastFormsSync();
+		lastExtraFormsSyncDate = ((lastExtraFormsSyncDate==null)||lastExtraFormsSyncDate.isEmpty())?"n/a":lastExtraFormsSyncDate;
+		if(lastSyncedExtraForms != null)
+			lastSyncedExtraForms.setText("Last synced on: " + lastExtraFormsSyncDate);
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
