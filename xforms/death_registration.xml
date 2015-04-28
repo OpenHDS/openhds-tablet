@@ -9,7 +9,7 @@
             <value>Hospitali</value>
           </text>
           <text id="/death_registration/processedByMirth:label">
-            <value>Mirth</value>
+            <value>processed</value>
           </text>
           <text id="/death_registration/diagnoseddeath/1:label">
             <value>Ndiyo</value>
@@ -119,7 +119,7 @@
             <value>Hospital</value>
           </text>
           <text id="/death_registration/processedByMirth:label">
-            <value>Mirth</value>
+            <value>processed</value>
           </text>
           <text id="/death_registration/diagnoseddeath/1:label">
             <value>Yes</value>
@@ -194,7 +194,7 @@
             <value>HIV/AIDS</value>
           </text>
           <text id="/death_registration/whom:label">
-            <value>by whom?</value>
+            <value>Who diagnosed the cause of death?</value>
           </text>
           <text id="/death_registration/causofdeathnotdiagnosed/Unknown:label">
             <value>Unknown</value>
@@ -206,7 +206,7 @@
             <value>Home</value>
           </text>
           <text id="/death_registration/placeOfDeathOther:label">
-            <value>Place of Death Other</value>
+            <value>Place of Death (Other)</value>
           </text>
           <text id="/death_registration/individualId:label">
             <value>Individual Id</value>
@@ -253,7 +253,7 @@
       <bind nodeset="/death_registration/individualId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/death_registration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/death_registration/visitId" readonly="true()" required="true()" type="string"/>
-      <bind constraint=". &lt; today()" nodeset="/death_registration/dateOfDeath" required="true()" type="date"/>
+      <bind constraint=". &lt; today()" jr:constraintMsg="Date of death can not be in the future" nodeset="/death_registration/dateOfDeath" required="true()" type="date"/>
       <bind nodeset="/death_registration/diagnoseddeath" required="true()" type="select1"/>
       <bind nodeset="/death_registration/whom" relevant="selected( /death_registration/diagnoseddeath , '1')" required="true()" type="select1"/>
       <bind nodeset="/death_registration/causeofdeathdiagnosed" relevant="selected( /death_registration/diagnoseddeath , '1')" required="true()" type="select1"/>

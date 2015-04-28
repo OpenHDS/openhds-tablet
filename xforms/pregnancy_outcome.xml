@@ -278,10 +278,10 @@
           <start/>
           <end/>
           <deviceid/>
-          <motherId/>
-          <fatherId/>
           <visitId/>
           <fieldWorkerId/>
+          <motherId/>
+          <fatherId/>
           <nboutcomes/>
           <recordedDate/>
           <partialDate/>
@@ -310,10 +310,10 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/pregnancy_outcome/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/pregnancy_outcome/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/pregnancy_outcome/deviceid" type="string"/>
-      <bind nodeset="/pregnancy_outcome/motherId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_outcome/fatherId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/pregnancy_outcome/visitId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/pregnancy_outcome/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/motherId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/fatherId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/pregnancy_outcome/nboutcomes" readonly="true()" required="true()" type="int"/>
       <bind nodeset="/pregnancy_outcome/recordedDate" required="true()" type="date"/>
       <bind nodeset="/pregnancy_outcome/partialDate" required="true()" type="select1"/>
@@ -336,17 +336,17 @@
     </model>
   </h:head>
   <h:body>
-    <input ref="/pregnancy_outcome/motherId">
-      <label ref="jr:itext('/pregnancy_outcome/motherId:label')"/>
-    </input>
-    <input ref="/pregnancy_outcome/fatherId">
-      <label ref="jr:itext('/pregnancy_outcome/fatherId:label')"/>
-    </input>
     <input ref="/pregnancy_outcome/visitId">
       <label ref="jr:itext('/pregnancy_outcome/visitId:label')"/>
     </input>
     <input ref="/pregnancy_outcome/fieldWorkerId">
       <label ref="jr:itext('/pregnancy_outcome/fieldWorkerId:label')"/>
+    </input>
+    <input ref="/pregnancy_outcome/motherId">
+      <label ref="jr:itext('/pregnancy_outcome/motherId:label')"/>
+    </input>
+    <input ref="/pregnancy_outcome/fatherId">
+      <label ref="jr:itext('/pregnancy_outcome/fatherId:label')"/>
     </input>
     <input ref="/pregnancy_outcome/nboutcomes">
       <label ref="jr:itext('/pregnancy_outcome/nboutcomes:label')"/>

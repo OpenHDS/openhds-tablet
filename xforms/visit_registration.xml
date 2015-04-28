@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Visit Registration</h:title>
     <model>
@@ -110,7 +110,7 @@
             <value>Person Out Migrated</value>
           </text>
           <text id="/visit_registration/locationIdCheck:label">
-            <value>Location Id</value>
+            <value>Scan the barcode of the Location ID for this visit</value>
           </text>
           <text id="/visit_registration/reason/1:label">
             <value>New House</value>
@@ -209,7 +209,7 @@
       <bind nodeset="/visit_registration/reason" relevant="../correctInterviewee = '0'" required="true()" type="select1"/>
       <bind nodeset="/visit_registration/farmhouse" required="true()" type="select1"/>
       <bind nodeset="/visit_registration/coordinates" relevant="../farmhouse = '1' and ( /visit_registration/locationId  != /visit_registration/locationcalculated )" required="true()" type="geopoint"/>
-      <bind nodeset="/visit_registration/processedByMirth" relevant="1=2" type="int"/>
+      <bind nodeset="/visit_registration/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/visit_registration/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>

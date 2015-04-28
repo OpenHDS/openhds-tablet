@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>In migration registration</h:title>
     <model>
@@ -116,8 +116,8 @@
           <text id="/in_migration/reason/FARMING:label">
             <value>UFUGAJI</value>
           </text>
-          <text id="/in_migration/visitId:label">
-            <value>Nambari ya Hudhurio</value>
+          <text id="/in_migration/migrationType:label">
+            <value>migrationType_label</value>
           </text>
           <text id="/in_migration/individualInfo/gender:label">
             <value>Jinsia</value>
@@ -125,8 +125,8 @@
           <text id="/in_migration/movedfrom:label">
             <value>Place member Moved FROM:</value>
           </text>
-          <text id="/in_migration/migrationType:label">
-            <value>migrationType_label</value>
+          <text id="/in_migration/visitId:label">
+            <value>Nambari ya Hudhurio</value>
           </text>
           <text id="/in_migration/shortorlongstay/3:label">
             <value>Unknown</value>
@@ -262,8 +262,8 @@
           <text id="/in_migration/reason/FARMING:label">
             <value>FARMING</value>
           </text>
-          <text id="/in_migration/visitId:label">
-            <value>Visit Id</value>
+          <text id="/in_migration/migrationType:label">
+            <value>migrationType</value>
           </text>
           <text id="/in_migration/individualInfo/gender:label">
             <value>gender</value>
@@ -271,8 +271,8 @@
           <text id="/in_migration/movedfrom:label">
             <value>Place member Moved FROM:</value>
           </text>
-          <text id="/in_migration/migrationType:label">
-            <value>migrationType</value>
+          <text id="/in_migration/visitId:label">
+            <value>Visit Id</value>
           </text>
           <text id="/in_migration/shortorlongstay/3:label">
             <value>Unknown</value>
@@ -284,7 +284,7 @@
             <value>Male</value>
           </text>
           <text id="/in_migration/reasonOther:label">
-            <value>reason</value>
+            <value>reason (other)</value>
           </text>
           <text id="/in_migration/individualInfo/partialDate/2:label">
             <value>Approximate</value>
@@ -302,10 +302,10 @@
           <start/>
           <end/>
           <deviceid/>
-          <migrationType/>
-          <locationId/>
           <visitId/>
           <fieldWorkerId/>
+          <migrationType/>
+          <locationId/>
           <individualInfo>
             <individualId/>
             <motherId/>
@@ -334,10 +334,10 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/in_migration/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/in_migration/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/in_migration/deviceid" type="string"/>
-      <bind nodeset="/in_migration/migrationType" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/in_migration/locationId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/in_migration/visitId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/in_migration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/in_migration/migrationType" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/in_migration/locationId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/in_migration/individualInfo/individualId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/in_migration/individualInfo/motherId" readonly="true()" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
       <bind nodeset="/in_migration/individualInfo/fatherId" readonly="true()" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
@@ -347,7 +347,7 @@
       <bind nodeset="/in_migration/individualInfo/gender" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
       <bind constraint=". &lt; today()" nodeset="/in_migration/individualInfo/dateOfBirth" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="date"/>
       <bind nodeset="/in_migration/individualInfo/partialDate" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
-      <bind constraint=". &lt;= today()" jr:constraintMsg="the migration date can not be in the future" nodeset="/in_migration/dateOfMigration" required="true()" type="date"/>
+      <bind constraint=". &lt;= today()" jr:constraintMsg="Date of migration can not be in the future" nodeset="/in_migration/dateOfMigration" required="true()" type="date"/>
       <bind nodeset="/in_migration/warning" readonly="true()" relevant=" /in_migration/individualInfo/dateOfBirth &gt; /in_migration/dateOfMigration  and ../migrationType = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
       <bind nodeset="/in_migration/origin" relevant=" /in_migration/migrationType  = 'INTERNAL_INMIGRATION'" required="true()" type="string"/>
       <bind nodeset="/in_migration/reason" required="true()" type="select1"/>
@@ -355,22 +355,22 @@
       <bind nodeset="/in_migration/reasonOther" relevant="../reason = 'OTHER'" required="true()" type="string"/>
       <bind nodeset="/in_migration/movedfrom" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
       <bind nodeset="/in_migration/shortorlongstay" required="true()" type="select1"/>
-      <bind nodeset="/in_migration/processedByMirth" relevant="1=2" type="int"/>
+      <bind nodeset="/in_migration/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/in_migration/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
   <h:body>
-    <input ref="/in_migration/migrationType">
-      <label ref="jr:itext('/in_migration/migrationType:label')"/>
-    </input>
-    <input ref="/in_migration/locationId">
-      <label ref="jr:itext('/in_migration/locationId:label')"/>
-    </input>
     <input ref="/in_migration/visitId">
       <label ref="jr:itext('/in_migration/visitId:label')"/>
     </input>
     <input ref="/in_migration/fieldWorkerId">
       <label ref="jr:itext('/in_migration/fieldWorkerId:label')"/>
+    </input>
+    <input ref="/in_migration/migrationType">
+      <label ref="jr:itext('/in_migration/migrationType:label')"/>
+    </input>
+    <input ref="/in_migration/locationId">
+      <label ref="jr:itext('/in_migration/locationId:label')"/>
     </input>
     <group ref="/in_migration/individualInfo">
       <label ref="jr:itext('/in_migration/individualInfo:label')"/>

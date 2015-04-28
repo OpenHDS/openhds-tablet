@@ -161,7 +161,7 @@
             <value>Don't Know</value>
           </text>
           <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead:label">
-            <value>Relationship to Group Head</value>
+            <value>Relationship to NEW Social Group Head</value>
           </text>
           <text id="/DEATHTOHOH/membershiptonewhoh/relationshipToGroupHead/2:label">
             <value>Brother/Sister</value>
@@ -173,7 +173,7 @@
             <value>Age</value>
           </text>
           <text id="/DEATHTOHOH/householdId:label">
-            <value>HouseHoldId</value>
+            <value>Social Group ID</value>
           </text>
           <text id="/DEATHTOHOH/membershiptonewhoh/memberName:label">
             <value>Member Name</value>
@@ -206,7 +206,7 @@
             <value>Son/Daughter</value>
           </text>
           <text id="/DEATHTOHOH/processedByMirth:label">
-            <value>processedByMirth</value>
+            <value>processed</value>
           </text>
           <text id="/DEATHTOHOH/diagnoseddeath/2:label">
             <value>No</value>
@@ -215,13 +215,13 @@
             <value>Yes</value>
           </text>
           <text id="/DEATHTOHOH/membershiptonewhoh/socialGroupId:label">
-            <value>Social Group Id</value>
+            <value>Social Group ID</value>
           </text>
           <text id="/DEATHTOHOH/causofdeathnotdiagnosed/Crime:label">
             <value>Crime</value>
           </text>
           <text id="/DEATHTOHOH/new_hoh_id:label">
-            <value>New Hoh Id</value>
+            <value>Individual ID of the NEW Head of Household</value>
           </text>
           <text id="/DEATHTOHOH/causeofdeathdiagnosed:label">
             <value>Cause of death?</value>
@@ -260,16 +260,16 @@
             <value>Cause of death</value>
           </text>
           <text id="/DEATHTOHOH/individualId:label">
-            <value>Individual ID</value>
+            <value>Individual ID of deceased HOH</value>
           </text>
           <text id="/DEATHTOHOH/whom:label">
-            <value>by whom?</value>
+            <value>Who diagnosed the cause of death?</value>
           </text>
           <text id="/DEATHTOHOH/whom/2:label">
             <value>Nurse</value>
           </text>
           <text id="/DEATHTOHOH/membershiptonewhoh/extId:label">
-            <value>Member Id</value>
+            <value>Member ID</value>
           </text>
           <text id="/DEATHTOHOH/causeofdeathdiagnosed/Crime:label">
             <value>Crime</value>

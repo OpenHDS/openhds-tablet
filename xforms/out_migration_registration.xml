@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Out migration registration</h:title>
     <model>
@@ -25,6 +25,9 @@
           </text>
           <text id="/out_migration_registration/vilagezone/WANYAMA:label">
             <value>WANYAMA</value>
+          </text>
+          <text id="/out_migration_registration/maritalChange:hint">
+            <value>Mabadiliko ya ndoa ya aina gani?</value>
           </text>
           <text id="/out_migration_registration/reasonForOutMigration/OTHER:label">
             <value>NYINGINE</value>
@@ -140,7 +143,7 @@
             <value>Widowed</value>
           </text>
           <text id="/out_migration_registration/maritalChange:label">
-            <value>Mabadiliko ya ndoa ya aina gani?</value>
+            <value>Change in marital status</value>
           </text>
           <text id="/out_migration_registration/vilagezone/KAWAWASI:label">
             <value>KAWAWASI</value>
@@ -152,10 +155,13 @@
             <value>KIKO</value>
           </text>
           <text id="/out_migration_registration/vilagezone:label">
-            <value>what zone?</value>
+            <value>What zone?</value>
           </text>
           <text id="/out_migration_registration/vilagezone/WANYAMA:label">
             <value>WANYAMA</value>
+          </text>
+          <text id="/out_migration_registration/maritalChange:hint">
+            <value>-</value>
           </text>
           <text id="/out_migration_registration/reasonForOutMigration/OTHER:label">
             <value>OTHER</value>
@@ -257,7 +263,7 @@
             <value>MOVED TO NEW HOUSE</value>
           </text>
           <text id="/out_migration_registration/reasonForOutMigrationOther:label">
-            <value>Reason for Out Migration(Other)</value>
+            <value>Reason for Out Migration (Other)</value>
           </text>
           <text id="/out_migration_registration/maritalChange/SEP:label">
             <value>Separation</value>
@@ -296,7 +302,7 @@
       <bind nodeset="/out_migration_registration/individualId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/out_migration_registration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/out_migration_registration/visitId" readonly="true()" required="true()" type="string"/>
-      <bind constraint="(.&lt;=today() and . &gt;date(date('2012-06-01')))" jr:constraintMsg="Date of migration can not be in the future or before the start of the study" nodeset="/out_migration_registration/dateOfMigration" required="true()" type="date"/>
+      <bind constraint="(.&lt;=today())" jr:constraintMsg="Date of migration can not be in the future or before the start of the study" nodeset="/out_migration_registration/dateOfMigration" required="true()" type="date"/>
       <bind nodeset="/out_migration_registration/withinRusinga" required="true()" type="select1"/>
       <bind nodeset="/out_migration_registration/vilagezone" relevant="../withinRusinga='1'" required="true()" type="select1"/>
       <bind nodeset="/out_migration_registration/outofrusinga" relevant="../withinRusinga='2'" required="true()" type="select1"/>
@@ -305,7 +311,7 @@
       <bind nodeset="/out_migration_registration/maritalChange" relevant="../reasonForOutMigration = 'MARITAL_CHANGE'" required="true()" type="select1"/>
       <bind nodeset="/out_migration_registration/reasonForOutMigrationOther" relevant="../reasonForOutMigration = 'OTHER'" required="true()" type="string"/>
       <bind nodeset="/out_migration_registration/shortlongterm" required="true()" type="select1"/>
-      <bind nodeset="/out_migration_registration/processedByMirth" relevant="1=2" type="int"/>
+      <bind nodeset="/out_migration_registration/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/out_migration_registration/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
@@ -423,6 +429,7 @@
     </select1>
     <select1 ref="/out_migration_registration/maritalChange">
       <label ref="jr:itext('/out_migration_registration/maritalChange:label')"/>
+      <hint ref="jr:itext('/out_migration_registration/maritalChange:hint')"/>
       <item>
         <label ref="jr:itext('/out_migration_registration/maritalChange/MAR:label')"/>
         <value>MAR</value>
