@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Pregnancy Outcome</h:title>
     <model>
@@ -140,7 +140,7 @@
         </translation>
         <translation default="true()" lang="English">
           <text id="/pregnancy_outcome/processedByMirth:label">
-            <value>-</value>
+            <value>processed</value>
           </text>
           <text id="/pregnancy_outcome/partialDate/2:label">
             <value>Approximate</value>
@@ -310,19 +310,19 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/pregnancy_outcome/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/pregnancy_outcome/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/pregnancy_outcome/deviceid" type="string"/>
-      <bind nodeset="/pregnancy_outcome/motherId" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_outcome/fatherId" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_outcome/visitId" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_outcome/fieldWorkerId" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_outcome/nboutcomes" required="true()" type="int"/>
-      <bind nodeset="/pregnancy_outcome/recordedDate" type="date"/>
+      <bind nodeset="/pregnancy_outcome/motherId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/fatherId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/nboutcomes" readonly="true()" required="true()" type="int"/>
+      <bind nodeset="/pregnancy_outcome/recordedDate" required="true()" type="date"/>
       <bind nodeset="/pregnancy_outcome/partialDate" required="true()" type="select1"/>
       <bind calculate=" /pregnancy_outcome/nboutcomes " nodeset="/pregnancy_outcome/outcomes_count" readonly="true()" type="string"/>
       <bind nodeset="/pregnancy_outcome/outcomes/outcomeType" required="true()" type="select1"/>
       <bind nodeset="/pregnancy_outcome/outcomes/childId" readonly="true()" relevant="selected( /pregnancy_outcome/outcomes/outcomeType , 'LBR')" required="true()" type="string"/>
       <bind nodeset="/pregnancy_outcome/outcomes/socialGroupId" readonly="true()" relevant="selected( /pregnancy_outcome/outcomes/outcomeType , 'LBR')" required="true()" type="string"/>
       <bind nodeset="/pregnancy_outcome/outcomes/firstName" relevant="selected( /pregnancy_outcome/outcomes/outcomeType , 'LBR')" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_outcome/outcomes/middleName" relevant="selected( /pregnancy_outcome/outcomes/outcomeType , 'LBR')" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/outcomes/middleName" relevant="selected( /pregnancy_outcome/outcomes/outcomeType , 'LBR')" type="string"/>
       <bind nodeset="/pregnancy_outcome/outcomes/lastName" relevant="selected( /pregnancy_outcome/outcomes/outcomeType , 'LBR')" required="true()" type="string"/>
       <bind nodeset="/pregnancy_outcome/outcomes/gender" relevant="selected( /pregnancy_outcome/outcomes/outcomeType , 'LBR')" required="true()" type="select1"/>
       <bind nodeset="/pregnancy_outcome/outcomes/ordinalPosition" relevant="selected( /pregnancy_outcome/outcomes/outcomeType , 'LBR')" required="true()" type="int"/>
@@ -331,7 +331,7 @@
       <bind nodeset="/pregnancy_outcome/birthingPlaceOther" relevant="selected( /pregnancy_outcome/birthingPlace , 'OTHER')" required="true()" type="string"/>
       <bind nodeset="/pregnancy_outcome/totalNumberChildrenStillLiving" required="true()" type="int"/>
       <bind nodeset="/pregnancy_outcome/attendedANC" required="true()" type="select1"/>
-      <bind calculate="1=2" nodeset="/pregnancy_outcome/processedByMirth" relevant="processed" type="int"/>
+      <bind nodeset="/pregnancy_outcome/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/pregnancy_outcome/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Death registration</h:title>
     <model>
@@ -252,7 +252,7 @@
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/death_registration/deviceid" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/death_registration/individualId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/death_registration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/death_registration/visitId" required="true()" type="string"/>
+      <bind nodeset="/death_registration/visitId" readonly="true()" required="true()" type="string"/>
       <bind constraint=". &lt; today()" nodeset="/death_registration/dateOfDeath" required="true()" type="date"/>
       <bind nodeset="/death_registration/diagnoseddeath" required="true()" type="select1"/>
       <bind nodeset="/death_registration/whom" relevant="selected( /death_registration/diagnoseddeath , '1')" required="true()" type="select1"/>
@@ -261,7 +261,7 @@
       <bind nodeset="/death_registration/placeOfDeath" required="true()" type="select1"/>
       <bind nodeset="/death_registration/placeOfDeathOther" relevant="selected( /death_registration/placeOfDeath , 'OTHER')" required="true()" type="string"/>
       <bind calculate="concat( /death_registration/causeofdeathdiagnosed , /death_registration/causofdeathnotdiagnosed )" nodeset="/death_registration/causeOfDeath" readonly="true()" type="string"/>
-      <bind nodeset="/death_registration/processedByMirth" readonly="true()" relevant="1=2" type="int"/>
+      <bind nodeset="/death_registration/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/death_registration/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
