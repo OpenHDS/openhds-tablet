@@ -549,6 +549,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             	}
             } else {
                 createUnfinishedFormDialog();
+                
+                //Reset location and display text after cancellation
+                locationVisit.setLocation(null);
+                sf.setAll();
             }            
         }
     }

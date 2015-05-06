@@ -284,6 +284,21 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         return super.onOptionsItemSelected(item);
     }
     
+    @Override
+	public void onResume()
+	{
+	    super.onResume();
+	    hideProgressFragment();
+	    restoreState();
+	} 
+    
+    private void restoreState(){
+	    if(stateMachine != null && stateMachine.getState() != ""){
+	    	String currentState = stateMachine.getState();
+	    	stateMachine.transitionTo(currentState);
+	    }
+    }
+    
     /**
      * Display dialog when user clicks on back button
      */    
@@ -453,6 +468,10 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             	}
             } else {
                 createUnfinishedFormDialog();
+                
+                //Reset location and display text after cancellation
+                locationVisit.setLocation(null);
+                sf.setAll();
             }
         }
     }
