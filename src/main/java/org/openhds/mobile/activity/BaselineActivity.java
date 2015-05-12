@@ -1030,7 +1030,8 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         			        	onMembership();		        
         			        }				
         				}
-        			});        AlertDialog alertDialog = alertDialogBuilder.create();
+        			});        
+        AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();		
                 
         extInm = false;
