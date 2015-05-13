@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Baseline registration</h:title>
     <model>
@@ -7,9 +7,6 @@
         <translation lang="Chichewa">
           <text id="/baseline/individualInfo/gender/M:label">
             <value>Mamuna</value>
-          </text>
-          <text id="/baseline/migrationType:label">
-            <value>Registration Type</value>
           </text>
           <text id="/baseline/individualInfo/motherId:label">
             <value>Nambala ya Mayi</value>
@@ -23,14 +20,17 @@
           <text id="/baseline/individualInfo/individualId:label">
             <value>-</value>
           </text>
+          <text id="/baseline/openhds/locationId:label">
+            <value>Nambala ya Nyumba</value>
+          </text>
           <text id="/baseline/spelasni/yes:label">
             <value>Eya</value>
           </text>
-          <text id="/baseline/warning:label">
+          <text id="/baseline/openhds:label">
             <value>-</value>
           </text>
-          <text id="/baseline/locationId:label">
-            <value>Nambala ya Nyumba</value>
+          <text id="/baseline/warning:label">
+            <value>-</value>
           </text>
           <text id="/baseline/individualInfo/firstName:label">
             <value>Dzina Loyamba</value>
@@ -43,6 +43,9 @@
           </text>
           <text id="/baseline/dateOfMigration:label">
             <value>Munayamba kukhalamo liti mnyumbayi?</value>
+          </text>
+          <text id="/baseline/openhds/fieldWorkerId:label">
+            <value>Nambala ya Munthu wa Kafukufuku</value>
           </text>
           <text id="/baseline/majo4mo/yes:label">
             <value>Eya</value>
@@ -62,17 +65,20 @@
           <text id="/baseline/spelasni:label">
             <value>Usiku wathawu mwangona momwemu?</value>
           </text>
+          <text id="/baseline/openhds/migrationType:label">
+            <value>Registration Type</value>
+          </text>
           <text id="/baseline/spelasni/no:label">
             <value>Ayi</value>
-          </text>
-          <text id="/baseline/fieldWorkerId:label">
-            <value>Nambala ya Munthu wa Kafukufuku</value>
           </text>
           <text id="/baseline/majo4mo:label">
             <value>Pa miyezi 6 yapitayi mwakhala mukukhalabe mnyumbayi?</value>
           </text>
           <text id="/baseline/individualInfo:label">
             <value>individualIdInfoGRP</value>
+          </text>
+          <text id="/baseline/openhds/visitId:label">
+            <value>Kuyenderedwa</value>
           </text>
           <text id="/baseline/individualInfo/lastName:label">
             <value>Dzina Lomaliza</value>
@@ -86,16 +92,10 @@
           <text id="/baseline/processedByMirth:label">
             <value>processed</value>
           </text>
-          <text id="/baseline/visitId:label">
-            <value>Kuyenderedwa</value>
-          </text>
         </translation>
         <translation default="true()" lang="English">
           <text id="/baseline/individualInfo/gender/M:label">
             <value>Male</value>
-          </text>
-          <text id="/baseline/migrationType:label">
-            <value>Registration Type</value>
           </text>
           <text id="/baseline/individualInfo/motherId:label">
             <value>Mother Id</value>
@@ -109,14 +109,17 @@
           <text id="/baseline/individualInfo/individualId:label">
             <value>Individual Id</value>
           </text>
+          <text id="/baseline/openhds/locationId:label">
+            <value>Location Id</value>
+          </text>
           <text id="/baseline/spelasni/yes:label">
             <value>Yes</value>
           </text>
+          <text id="/baseline/openhds:label">
+            <value>OpenHDS preloaded info</value>
+          </text>
           <text id="/baseline/warning:label">
             <value>The residency date can not be prior or equal to the Birth date. Please go back and correct it.</value>
-          </text>
-          <text id="/baseline/locationId:label">
-            <value>Location Id</value>
           </text>
           <text id="/baseline/individualInfo/firstName:label">
             <value>First Name</value>
@@ -129,6 +132,9 @@
           </text>
           <text id="/baseline/dateOfMigration:label">
             <value>Date of residency start</value>
+          </text>
+          <text id="/baseline/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
           </text>
           <text id="/baseline/majo4mo/yes:label">
             <value>Yes</value>
@@ -148,17 +154,20 @@
           <text id="/baseline/spelasni:label">
             <value>Did he/she spend last night here?</value>
           </text>
+          <text id="/baseline/openhds/migrationType:label">
+            <value>Registration Type</value>
+          </text>
           <text id="/baseline/spelasni/no:label">
             <value>No</value>
-          </text>
-          <text id="/baseline/fieldWorkerId:label">
-            <value>Field Worker Id</value>
           </text>
           <text id="/baseline/majo4mo:label">
             <value>Has he/she spent the majority of the last 6 months residing here</value>
           </text>
           <text id="/baseline/individualInfo:label">
             <value>-</value>
+          </text>
+          <text id="/baseline/openhds/visitId:label">
+            <value>Visit Id</value>
           </text>
           <text id="/baseline/individualInfo/lastName:label">
             <value>Last Name</value>
@@ -172,9 +181,6 @@
           <text id="/baseline/processedByMirth:label">
             <value>processed</value>
           </text>
-          <text id="/baseline/visitId:label">
-            <value>Visit Id</value>
-          </text>
         </translation>
       </itext>
       <instance>
@@ -182,10 +188,12 @@
           <start/>
           <end/>
           <deviceId/>
-          <migrationType/>
-          <locationId/>
-          <visitId/>
-          <fieldWorkerId/>
+          <openhds>
+            <migrationType/>
+            <locationId/>
+            <visitId/>
+            <fieldWorkerId/>
+          </openhds>
           <individualInfo>
             <individualId/>
             <motherId/>
@@ -211,41 +219,44 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/baseline/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/baseline/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/baseline/deviceId" type="string"/>
-      <bind nodeset="/baseline/migrationType" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/baseline/locationId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/baseline/visitId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/baseline/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/baseline/openhds/migrationType" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/baseline/openhds/locationId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/baseline/openhds/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/baseline/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/baseline/individualInfo/individualId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/baseline/individualInfo/motherId" readonly="true()" relevant=" /baseline/migrationType  = 'BASELINE'" required="true()" type="string"/>
-      <bind nodeset="/baseline/individualInfo/fatherId" readonly="true()" relevant=" /baseline/migrationType  = 'BASELINE'" required="true()" type="string"/>
-      <bind nodeset="/baseline/individualInfo/firstName" relevant=" /baseline/migrationType  = 'BASELINE'" required="true()" type="string"/>
-      <bind nodeset="/baseline/individualInfo/middleName" relevant=" /baseline/migrationType  = 'BASELINE'" type="string"/>
-      <bind nodeset="/baseline/individualInfo/lastName" relevant=" /baseline/migrationType  = 'BASELINE'" required="true()" type="string"/>
-      <bind nodeset="/baseline/individualInfo/gender" relevant=" /baseline/migrationType  = 'BASELINE'" required="true()" type="select1"/>
-      <bind constraint=". &lt; today()" nodeset="/baseline/individualInfo/dateOfBirth" relevant=" /baseline/migrationType  = 'BASELINE'" required="true()" type="date"/>
-      <bind nodeset="/baseline/individualInfo/partialDate" relevant=" /baseline/migrationType  = 'BASELINE'" required="true()" type="select1"/>
+      <bind nodeset="/baseline/individualInfo/motherId" readonly="true()" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="string"/>
+      <bind nodeset="/baseline/individualInfo/fatherId" readonly="true()" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="string"/>
+      <bind nodeset="/baseline/individualInfo/firstName" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="string"/>
+      <bind nodeset="/baseline/individualInfo/middleName" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" type="string"/>
+      <bind nodeset="/baseline/individualInfo/lastName" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="string"/>
+      <bind nodeset="/baseline/individualInfo/gender" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="select1"/>
+      <bind constraint=". &lt; today()" nodeset="/baseline/individualInfo/dateOfBirth" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="date"/>
+      <bind nodeset="/baseline/individualInfo/partialDate" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="select1"/>
       <bind constraint=". &lt;= today()" jr:constraintMsg="the residency date can not be in the future" nodeset="/baseline/dateOfMigration" readonly="true()" required="true()" type="date"/>
       <bind nodeset="/baseline/warning" readonly="true()" relevant=" /baseline/individualInfo/dateOfBirth &gt; /baseline/dateOfMigration  and ../migrationType = 'BASELINE'" required="true()" type="string"/>
       <bind constraint=". &lt;= today()" jr:constraintMsg="the visit date can not be in the future" nodeset="/baseline/visitDate" readonly="true()" required="true()" type="date"/>
       <bind nodeset="/baseline/majo4mo" required="true()" type="select1"/>
       <bind nodeset="/baseline/spelasni" required="true()" type="select1"/>
-      <bind nodeset="/baseline/processedByMirth" relevant="1=2" type="int"/>
+      <bind nodeset="/baseline/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/baseline/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
   <h:body>
-    <input ref="/baseline/migrationType">
-      <label ref="jr:itext('/baseline/migrationType:label')"/>
-    </input>
-    <input ref="/baseline/locationId">
-      <label ref="jr:itext('/baseline/locationId:label')"/>
-    </input>
-    <input ref="/baseline/visitId">
-      <label ref="jr:itext('/baseline/visitId:label')"/>
-    </input>
-    <input ref="/baseline/fieldWorkerId">
-      <label ref="jr:itext('/baseline/fieldWorkerId:label')"/>
-    </input>
+    <group appearance="field-list" ref="/baseline/openhds">
+      <label ref="jr:itext('/baseline/openhds:label')"/>
+      <input ref="/baseline/openhds/migrationType">
+        <label ref="jr:itext('/baseline/openhds/migrationType:label')"/>
+      </input>
+      <input ref="/baseline/openhds/locationId">
+        <label ref="jr:itext('/baseline/openhds/locationId:label')"/>
+      </input>
+      <input ref="/baseline/openhds/visitId">
+        <label ref="jr:itext('/baseline/openhds/visitId:label')"/>
+      </input>
+      <input ref="/baseline/openhds/fieldWorkerId">
+        <label ref="jr:itext('/baseline/openhds/fieldWorkerId:label')"/>
+      </input>
+    </group>
     <group ref="/baseline/individualInfo">
       <label ref="jr:itext('/baseline/individualInfo:label')"/>
       <input ref="/baseline/individualInfo/individualId">

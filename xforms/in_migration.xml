@@ -20,9 +20,6 @@
           <text id="/in_migration/movedfrom/SubaDistrict:label">
             <value>Suba district</value>
           </text>
-          <text id="/in_migration/fieldWorkerId:label">
-            <value>Nambari ya Mhojaji</value>
-          </text>
           <text id="/in_migration/maritalChange:label">
             <value>Mabadiliko ya ndoa ya aina gani?</value>
           </text>
@@ -53,17 +50,23 @@
           <text id="/in_migration/maritalChange/888:label">
             <value>Haihusiki (888)</value>
           </text>
+          <text id="/in_migration/openhds/migrationType:label">
+            <value>migrationType_label</value>
+          </text>
           <text id="/in_migration/reason/OTHER:label">
             <value>NYINGINE</value>
+          </text>
+          <text id="/in_migration/individualInfo/gender:label">
+            <value>Jinsia</value>
           </text>
           <text id="/in_migration/reason:label">
             <value>Sababu</value>
           </text>
-          <text id="/in_migration/locationId:label">
-            <value>Nambari ya Eneo</value>
-          </text>
           <text id="/in_migration/individualInfo/individualId:label">
             <value>Nambari ya Mwanakaya</value>
+          </text>
+          <text id="/in_migration/openhds/locationId:label">
+            <value>Nambari ya Eneo</value>
           </text>
           <text id="/in_migration/individualInfo/partialDate:label">
             <value>Partial Date</value>
@@ -76,6 +79,9 @@
           </text>
           <text id="/in_migration/origin:label">
             <value>Aliko Tokea</value>
+          </text>
+          <text id="/in_migration/individualInfo/partialDate/1:label">
+            <value>Tarehe Kamili</value>
           </text>
           <text id="/in_migration/warning:label">
             <value>-</value>
@@ -107,8 +113,8 @@
           <text id="/in_migration/maritalChange/REC:label">
             <value>Kupatana</value>
           </text>
-          <text id="/in_migration/individualInfo/partialDate/1:label">
-            <value>Tarehe Kamili</value>
+          <text id="/in_migration/openhds/visitId:label">
+            <value>Nambari ya Hudhurio</value>
           </text>
           <text id="/in_migration/reason/MARITAL_CHANGE:label">
             <value>KUBADILIKA KWA HALI YA NDOA</value>
@@ -116,17 +122,14 @@
           <text id="/in_migration/reason/FARMING:label">
             <value>UFUGAJI</value>
           </text>
-          <text id="/in_migration/migrationType:label">
-            <value>migrationType_label</value>
-          </text>
-          <text id="/in_migration/individualInfo/gender:label">
-            <value>Jinsia</value>
+          <text id="/in_migration/openhds/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
           </text>
           <text id="/in_migration/movedfrom:label">
             <value>Place member Moved FROM:</value>
           </text>
-          <text id="/in_migration/visitId:label">
-            <value>Nambari ya Hudhurio</value>
+          <text id="/in_migration/openhds:label">
+            <value>-</value>
           </text>
           <text id="/in_migration/shortorlongstay/3:label">
             <value>Unknown</value>
@@ -166,14 +169,14 @@
           <text id="/in_migration/movedfrom/SubaDistrict:label">
             <value>Suba district</value>
           </text>
-          <text id="/in_migration/fieldWorkerId:label">
-            <value>Field Worker Id</value>
-          </text>
           <text id="/in_migration/maritalChange:label">
             <value>Change in marital status</value>
           </text>
           <text id="/in_migration/dateOfMigration:label">
             <value>Date of In Migration</value>
+          </text>
+          <text id="/in_migration/shortorlongstay/2:label">
+            <value>Short (up to a year)</value>
           </text>
           <text id="/in_migration/shortorlongstay/1:label">
             <value>Long (more than 1 year)</value>
@@ -190,14 +193,14 @@
           <text id="/in_migration/reason/OTHER:label">
             <value>OTHER</value>
           </text>
-          <text id="/in_migration/maritalChange/DIV:label">
-            <value>Divorce</value>
-          </text>
           <text id="/in_migration/individualInfo/fatherId:label">
             <value>Father Id</value>
           </text>
           <text id="/in_migration/maritalChange/888:label">
             <value>None of the above (888)</value>
+          </text>
+          <text id="/in_migration/openhds/migrationType:label">
+            <value>migrationType</value>
           </text>
           <text id="/in_migration/warning:label">
             <value>The migration date can not be prior or equal to the Birth date. Please go back and correct it.</value>
@@ -205,11 +208,11 @@
           <text id="/in_migration/reason:label">
             <value>reason</value>
           </text>
-          <text id="/in_migration/locationId:label">
-            <value>Location Id</value>
-          </text>
           <text id="/in_migration/individualInfo/individualId:label">
             <value>Individual Id</value>
+          </text>
+          <text id="/in_migration/openhds/locationId:label">
+            <value>Location Id</value>
           </text>
           <text id="/in_migration/individualInfo/partialDate:label">
             <value>Partial Date</value>
@@ -223,14 +226,17 @@
           <text id="/in_migration/origin:label">
             <value>origin</value>
           </text>
+          <text id="/in_migration/individualInfo/partialDate/1:label">
+            <value>Exact</value>
+          </text>
           <text id="/in_migration/individualInfo:label">
             <value>-</value>
           </text>
           <text id="/in_migration/movedfrom/Other:label">
             <value>Other</value>
           </text>
-          <text id="/in_migration/reason/CAME_WITH_RELATIVES:label">
-            <value>Came with relative(s)</value>
+          <text id="/in_migration/openhds:label">
+            <value>OpenHDS preloaded info</value>
           </text>
           <text id="/in_migration/reason/EDUCATION/SCHOOL:label">
             <value>EDUCATION/SCHOOL</value>
@@ -253,8 +259,8 @@
           <text id="/in_migration/maritalChange/REC:label">
             <value>Reconciliation</value>
           </text>
-          <text id="/in_migration/individualInfo/partialDate/1:label">
-            <value>Exact</value>
+          <text id="/in_migration/openhds/visitId:label">
+            <value>Visit Id</value>
           </text>
           <text id="/in_migration/reason/MARITAL_CHANGE:label">
             <value>MARITAL CHANGE</value>
@@ -262,23 +268,23 @@
           <text id="/in_migration/reason/FARMING:label">
             <value>FARMING</value>
           </text>
-          <text id="/in_migration/migrationType:label">
-            <value>migrationType</value>
-          </text>
-          <text id="/in_migration/individualInfo/gender:label">
-            <value>gender</value>
+          <text id="/in_migration/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
           </text>
           <text id="/in_migration/movedfrom:label">
             <value>Place member Moved FROM:</value>
           </text>
-          <text id="/in_migration/visitId:label">
-            <value>Visit Id</value>
+          <text id="/in_migration/maritalChange/DIV:label">
+            <value>Divorce</value>
+          </text>
+          <text id="/in_migration/reason/CAME_WITH_RELATIVES:label">
+            <value>Came with relative(s)</value>
           </text>
           <text id="/in_migration/shortorlongstay/3:label">
             <value>Unknown</value>
           </text>
-          <text id="/in_migration/shortorlongstay/2:label">
-            <value>Short (up to a year)</value>
+          <text id="/in_migration/individualInfo/gender:label">
+            <value>gender</value>
           </text>
           <text id="/in_migration/individualInfo/gender/M:label">
             <value>Male</value>
@@ -302,10 +308,12 @@
           <start/>
           <end/>
           <deviceid/>
-          <visitId/>
-          <fieldWorkerId/>
-          <migrationType/>
-          <locationId/>
+          <openhds>
+            <visitId/>
+            <fieldWorkerId/>
+            <migrationType/>
+            <locationId/>
+          </openhds>
           <individualInfo>
             <individualId/>
             <motherId/>
@@ -334,44 +342,47 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/in_migration/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/in_migration/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/in_migration/deviceid" type="string"/>
-      <bind nodeset="/in_migration/visitId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/in_migration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/in_migration/migrationType" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/in_migration/locationId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/in_migration/openhds/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/in_migration/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/in_migration/openhds/migrationType" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/in_migration/openhds/locationId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/in_migration/individualInfo/individualId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/in_migration/individualInfo/motherId" readonly="true()" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
-      <bind nodeset="/in_migration/individualInfo/fatherId" readonly="true()" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
-      <bind nodeset="/in_migration/individualInfo/firstName" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
-      <bind nodeset="/in_migration/individualInfo/middleName" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" type="string"/>
-      <bind nodeset="/in_migration/individualInfo/lastName" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
-      <bind nodeset="/in_migration/individualInfo/gender" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
-      <bind constraint=". &lt; today()" nodeset="/in_migration/individualInfo/dateOfBirth" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="date"/>
-      <bind nodeset="/in_migration/individualInfo/partialDate" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
+      <bind nodeset="/in_migration/individualInfo/motherId" readonly="true()" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
+      <bind nodeset="/in_migration/individualInfo/fatherId" readonly="true()" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
+      <bind nodeset="/in_migration/individualInfo/firstName" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
+      <bind nodeset="/in_migration/individualInfo/middleName" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" type="string"/>
+      <bind nodeset="/in_migration/individualInfo/lastName" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
+      <bind nodeset="/in_migration/individualInfo/gender" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
+      <bind constraint=". &lt; today()" nodeset="/in_migration/individualInfo/dateOfBirth" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="date"/>
+      <bind nodeset="/in_migration/individualInfo/partialDate" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
       <bind constraint=". &lt;= today()" jr:constraintMsg="Date of migration can not be in the future" nodeset="/in_migration/dateOfMigration" required="true()" type="date"/>
-      <bind nodeset="/in_migration/warning" readonly="true()" relevant=" /in_migration/individualInfo/dateOfBirth &gt; /in_migration/dateOfMigration  and ../migrationType = 'EXTERNAL_INMIGRATION'" required="true()" type="string"/>
-      <bind nodeset="/in_migration/origin" relevant=" /in_migration/migrationType  = 'INTERNAL_INMIGRATION'" required="true()" type="string"/>
+      <bind nodeset="/in_migration/warning" readonly="true()" relevant=" /in_migration/individualInfo/dateOfBirth &gt; /in_migration/dateOfMigration  and ( /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION')" required="true()" type="string"/>
+      <bind nodeset="/in_migration/origin" relevant=" /in_migration/openhds/migrationType  = 'INTERNAL_INMIGRATION'" required="true()" type="string"/>
       <bind nodeset="/in_migration/reason" required="true()" type="select1"/>
       <bind nodeset="/in_migration/maritalChange" relevant="../reason = 'MARITAL_CHANGE'" required="true()" type="select1"/>
       <bind nodeset="/in_migration/reasonOther" relevant="../reason = 'OTHER'" required="true()" type="string"/>
-      <bind nodeset="/in_migration/movedfrom" relevant=" /in_migration/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
+      <bind nodeset="/in_migration/movedfrom" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
       <bind nodeset="/in_migration/shortorlongstay" required="true()" type="select1"/>
       <bind nodeset="/in_migration/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/in_migration/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
   <h:body>
-    <input ref="/in_migration/visitId">
-      <label ref="jr:itext('/in_migration/visitId:label')"/>
-    </input>
-    <input ref="/in_migration/fieldWorkerId">
-      <label ref="jr:itext('/in_migration/fieldWorkerId:label')"/>
-    </input>
-    <input ref="/in_migration/migrationType">
-      <label ref="jr:itext('/in_migration/migrationType:label')"/>
-    </input>
-    <input ref="/in_migration/locationId">
-      <label ref="jr:itext('/in_migration/locationId:label')"/>
-    </input>
+    <group appearance="field-list" ref="/in_migration/openhds">
+      <label ref="jr:itext('/in_migration/openhds:label')"/>
+      <input ref="/in_migration/openhds/visitId">
+        <label ref="jr:itext('/in_migration/openhds/visitId:label')"/>
+      </input>
+      <input ref="/in_migration/openhds/fieldWorkerId">
+        <label ref="jr:itext('/in_migration/openhds/fieldWorkerId:label')"/>
+      </input>
+      <input ref="/in_migration/openhds/migrationType">
+        <label ref="jr:itext('/in_migration/openhds/migrationType:label')"/>
+      </input>
+      <input ref="/in_migration/openhds/locationId">
+        <label ref="jr:itext('/in_migration/openhds/locationId:label')"/>
+      </input>
+    </group>
     <group ref="/in_migration/individualInfo">
       <label ref="jr:itext('/in_migration/individualInfo:label')"/>
       <input ref="/in_migration/individualInfo/individualId">

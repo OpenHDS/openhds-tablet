@@ -1,30 +1,30 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Membership registration</h:title>
     <model>
       <itext>
         <translation lang="Swahili">
-          <text id="/membership/fieldWorkerId:label">
-            <value>Nambari ya Mhojaji</value>
-          </text>
           <text id="/membership/relationshipToGroupHead/9:label">
             <value>Sijui</value>
           </text>
-          <text id="/membership/householdId:label">
+          <text id="/membership/openhds/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
+          </text>
+          <text id="/membership/openhds/householdId:label">
             <value>Nambari ya Kikundi</value>
           </text>
           <text id="/membership/relationshipToGroupHead/2:label">
             <value>Mke/Mme</value>
           </text>
+          <text id="/membership/openhds/individualId:label">
+            <value>individualId</value>
+          </text>
           <text id="/membership/processedByMirth:label">
             <value>processed</value>
           </text>
-          <text id="/membership/individualId:label">
-            <value>individualId</value>
-          </text>
-          <text id="/membership/relationshipToGroupHead/7:label">
-            <value>Hakuna Mahusiano</value>
+          <text id="/membership/relationshipToGroupHead/6:label">
+            <value>Mjukuu</value>
           </text>
           <text id="/membership/startDate:label">
             <value>Start date of membership</value>
@@ -38,8 +38,8 @@
           <text id="/membership/relationshipToGroupHead/8:label">
             <value>Uhusiano Mwingine</value>
           </text>
-          <text id="/membership/relationshipToGroupHead/6:label">
-            <value>Mjukuu</value>
+          <text id="/membership/relationshipToGroupHead/7:label">
+            <value>Hakuna Mahusiano</value>
           </text>
           <text id="/membership/relationshipToGroupHead/1:label">
             <value>Mkuu wa Kaya</value>
@@ -47,31 +47,34 @@
           <text id="/membership/relationshipToGroupHead:label">
             <value>Uhusiano na Mkuu wa Kaya</value>
           </text>
+          <text id="/membership/openhds:label">
+            <value>-</value>
+          </text>
           <text id="/membership/relationshipToGroupHead/5:label">
             <value>Mzazi</value>
           </text>
         </translation>
         <translation default="true()" lang="English">
-          <text id="/membership/fieldWorkerId:label">
-            <value>Field Worker Id</value>
-          </text>
           <text id="/membership/relationshipToGroupHead/9:label">
             <value>Don't Know</value>
           </text>
-          <text id="/membership/householdId:label">
+          <text id="/membership/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
+          </text>
+          <text id="/membership/openhds/householdId:label">
             <value>Social Group Id</value>
           </text>
           <text id="/membership/relationshipToGroupHead/2:label">
             <value>Spouse</value>
           </text>
+          <text id="/membership/openhds/individualId:label">
+            <value>individualId</value>
+          </text>
           <text id="/membership/processedByMirth:label">
             <value>processed</value>
           </text>
-          <text id="/membership/individualId:label">
-            <value>individualId</value>
-          </text>
-          <text id="/membership/relationshipToGroupHead/7:label">
-            <value>Not Related</value>
+          <text id="/membership/relationshipToGroupHead/6:label">
+            <value>Grandchild</value>
           </text>
           <text id="/membership/startDate:label">
             <value>Start date of membership</value>
@@ -85,14 +88,17 @@
           <text id="/membership/relationshipToGroupHead/8:label">
             <value>Other Relative</value>
           </text>
-          <text id="/membership/relationshipToGroupHead/6:label">
-            <value>Grandchild</value>
+          <text id="/membership/relationshipToGroupHead/7:label">
+            <value>Not Related</value>
           </text>
           <text id="/membership/relationshipToGroupHead/1:label">
             <value>Head</value>
           </text>
           <text id="/membership/relationshipToGroupHead:label">
             <value>Relationship to Group Head</value>
+          </text>
+          <text id="/membership/openhds:label">
+            <value>OpenHDS preloaded info</value>
           </text>
           <text id="/membership/relationshipToGroupHead/5:label">
             <value>Parent</value>
@@ -104,9 +110,11 @@
           <start/>
           <end/>
           <deviceid/>
-          <individualId/>
-          <householdId/>
-          <fieldWorkerId/>
+          <openhds>
+            <fieldWorkerId/>
+            <householdId/>
+            <individualId/>
+          </openhds>
           <relationshipToGroupHead/>
           <startDate/>
           <processedByMirth/>
@@ -118,25 +126,28 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/membership/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/membership/end" readonly="true()" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/membership/deviceid" readonly="true()" type="string"/>
-      <bind nodeset="/membership/individualId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/membership/householdId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/membership/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/membership/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/membership/openhds/householdId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/membership/openhds/individualId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/membership/relationshipToGroupHead" required="true()" type="select1"/>
-      <bind constraint=". &lt; today()" nodeset="/membership/startDate" required="true()" type="date"/>
-      <bind nodeset="/membership/processedByMirth" relevant="1=2" type="int"/>
+      <bind constraint=". &lt;= today()" nodeset="/membership/startDate" required="true()" type="date"/>
+      <bind nodeset="/membership/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/membership/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
   <h:body>
-    <input ref="/membership/individualId">
-      <label ref="jr:itext('/membership/individualId:label')"/>
-    </input>
-    <input ref="/membership/householdId">
-      <label ref="jr:itext('/membership/householdId:label')"/>
-    </input>
-    <input ref="/membership/fieldWorkerId">
-      <label ref="jr:itext('/membership/fieldWorkerId:label')"/>
-    </input>
+    <group appearance="field-list" ref="/membership/openhds">
+      <label ref="jr:itext('/membership/openhds:label')"/>
+      <input ref="/membership/openhds/fieldWorkerId">
+        <label ref="jr:itext('/membership/openhds/fieldWorkerId:label')"/>
+      </input>
+      <input ref="/membership/openhds/householdId">
+        <label ref="jr:itext('/membership/openhds/householdId:label')"/>
+      </input>
+      <input ref="/membership/openhds/individualId">
+        <label ref="jr:itext('/membership/openhds/individualId:label')"/>
+      </input>
+    </group>
     <select1 ref="/membership/relationshipToGroupHead">
       <label ref="jr:itext('/membership/relationshipToGroupHead:label')"/>
       <item>

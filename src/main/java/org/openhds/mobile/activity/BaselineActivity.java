@@ -1663,14 +1663,17 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         hideProgressFragment();
-	        if (cursor.getCount() == 1 && loader.getId() == SOCIAL_GROUP_FOR_INDIVIDUAL) {
-	            cursor.moveToFirst();
-	            appendSocialGroupFromCursor(cursor);
-	            return;
-	        }
-	        if(loader.getId() == SOCIAL_GROUP_AT_LOCATION){
-	        	handleSocialGroup(loader, cursor);
-	        }
+        
+    	restoreState();
+    	
+        if (cursor.getCount() == 1 && loader.getId() == SOCIAL_GROUP_FOR_INDIVIDUAL) {
+            cursor.moveToFirst();
+            appendSocialGroupFromCursor(cursor);
+            return;
+        }
+        if(loader.getId() == SOCIAL_GROUP_AT_LOCATION){
+        	handleSocialGroup(loader, cursor);
+        }
     }
     
     private void handleSocialGroup(Loader<Cursor> loader, Cursor cursor){	

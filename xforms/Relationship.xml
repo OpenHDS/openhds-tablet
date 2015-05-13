@@ -1,10 +1,13 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Relationship registration</h:title>
     <model>
       <itext>
         <translation lang="Swahili">
+          <text id="/relationship/openhds:label">
+            <value>-</value>
+          </text>
           <text id="/relationship/relationshipType/4:label">
             <value>Mjane</value>
           </text>
@@ -14,29 +17,32 @@
           <text id="/relationship/relationshipType:label">
             <value>Aina ya Uhusiano</value>
           </text>
-          <text id="/relationship/relationshipType/5:label">
-            <value>Ishi Pamoja</value>
+          <text id="/relationship/openhds/individualA:label">
+            <value>Mwanakaya A</value>
+          </text>
+          <text id="/relationship/openhds/individualB:label">
+            <value>Mwanakaya B</value>
           </text>
           <text id="/relationship/relationshipType/2:label">
             <value>Wameoana</value>
           </text>
-          <text id="/relationship/individualA:label">
-            <value>Mwanakaya A</value>
+          <text id="/relationship/startDate:label">
+            <value>Tarehe ya kuanza</value>
           </text>
-          <text id="/relationship/fieldWorkerId:label">
-            <value>Nambari ya Mhojaji</value>
+          <text id="/relationship/relationshipType/5:label">
+            <value>Ishi Pamoja</value>
           </text>
           <text id="/relationship/processedByMirth:label">
             <value>processed</value>
           </text>
-          <text id="/relationship/individualB:label">
-            <value>Mwanakaya B</value>
-          </text>
-          <text id="/relationship/startDate:label">
-            <value>Tarehe ya kuanza</value>
+          <text id="/relationship/openhds/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
           </text>
         </translation>
         <translation default="true()" lang="English">
+          <text id="/relationship/openhds/individualB:label">
+            <value>Individual B</value>
+          </text>
           <text id="/relationship/relationshipType/4:label">
             <value>Widowed</value>
           </text>
@@ -46,26 +52,26 @@
           <text id="/relationship/relationshipType:label">
             <value>Relationship Type</value>
           </text>
-          <text id="/relationship/relationshipType/5:label">
-            <value>Living Together</value>
+          <text id="/relationship/openhds/individualA:label">
+            <value>Individual A</value>
+          </text>
+          <text id="/relationship/openhds:label">
+            <value>OpenHDS preloaded info</value>
           </text>
           <text id="/relationship/relationshipType/2:label">
             <value>Married</value>
           </text>
-          <text id="/relationship/individualA:label">
-            <value>Individual A</value>
+          <text id="/relationship/startDate:label">
+            <value>Start Date</value>
           </text>
-          <text id="/relationship/fieldWorkerId:label">
-            <value>Field Worker Id</value>
+          <text id="/relationship/relationshipType/5:label">
+            <value>Living Together</value>
           </text>
           <text id="/relationship/processedByMirth:label">
             <value>processed</value>
           </text>
-          <text id="/relationship/individualB:label">
-            <value>Individual B</value>
-          </text>
-          <text id="/relationship/startDate:label">
-            <value>Start Date</value>
+          <text id="/relationship/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
           </text>
         </translation>
       </itext>
@@ -74,9 +80,11 @@
           <start/>
           <end/>
           <deviceid/>
-          <individualA/>
-          <individualB/>
-          <fieldWorkerId/>
+          <openhds>
+            <fieldWorkerId/>
+            <individualA/>
+            <individualB/>
+          </openhds>
           <relationshipType/>
           <startDate/>
           <processedByMirth/>
@@ -88,25 +96,28 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/relationship/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/relationship/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/relationship/deviceid" type="string"/>
-      <bind nodeset="/relationship/individualA" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/relationship/individualB" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/relationship/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/relationship/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/relationship/openhds/individualA" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/relationship/openhds/individualB" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/relationship/relationshipType" required="true()" type="select1"/>
       <bind constraint=".&lt;= today()" jr:constraintMsg="The start date can not be in the future" nodeset="/relationship/startDate" required="true()" type="date"/>
-      <bind nodeset="/relationship/processedByMirth" relevant="1=2" type="int"/>
+      <bind nodeset="/relationship/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/relationship/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
   <h:body>
-    <input ref="/relationship/individualA">
-      <label ref="jr:itext('/relationship/individualA:label')"/>
-    </input>
-    <input ref="/relationship/individualB">
-      <label ref="jr:itext('/relationship/individualB:label')"/>
-    </input>
-    <input ref="/relationship/fieldWorkerId">
-      <label ref="jr:itext('/relationship/fieldWorkerId:label')"/>
-    </input>
+    <group appearance="field-list" ref="/relationship/openhds">
+      <label ref="jr:itext('/relationship/openhds:label')"/>
+      <input ref="/relationship/openhds/fieldWorkerId">
+        <label ref="jr:itext('/relationship/openhds/fieldWorkerId:label')"/>
+      </input>
+      <input ref="/relationship/openhds/individualA">
+        <label ref="jr:itext('/relationship/openhds/individualA:label')"/>
+      </input>
+      <input ref="/relationship/openhds/individualB">
+        <label ref="jr:itext('/relationship/openhds/individualB:label')"/>
+      </input>
+    </group>
     <select1 ref="/relationship/relationshipType">
       <label ref="jr:itext('/relationship/relationshipType:label')"/>
       <item>

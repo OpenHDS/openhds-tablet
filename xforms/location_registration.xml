@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Location registration</h:title>
     <model>
       <itext>
         <translation lang="Swahili">
-          <text id="/location_registration/hierarchyId:label">
-            <value>Kijiji</value>
+          <text id="/location_registration/locationType:label">
+            <value>Aina ya Kaya</value>
           </text>
           <text id="/location_registration/locationName:label">
             <value>Jina la Kaya</value>
@@ -14,25 +14,28 @@
           <text id="/location_registration/processedByMirth:label">
             <value>processed</value>
           </text>
+          <text id="/location_registration/openhds/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
+          </text>
           <text id="/location_registration/locationType/RUR:label">
             <value>Kijijini</value>
           </text>
-          <text id="/location_registration/locationId:label">
+          <text id="/location_registration/openhds:label">
+            <value>-</value>
+          </text>
+          <text id="/location_registration/openhds/locationId:label">
             <value>Nambari ya Kaya</value>
           </text>
           <text id="/location_registration/geopoint:label">
             <value>Geopoint</value>
           </text>
-          <text id="/location_registration/fieldWorkerId:label">
-            <value>Nambari ya Mhojaji</value>
-          </text>
-          <text id="/location_registration/locationType:label">
-            <value>Aina ya Kaya</value>
+          <text id="/location_registration/openhds/hierarchyId:label">
+            <value>Kijiji</value>
           </text>
         </translation>
         <translation default="true()" lang="English">
-          <text id="/location_registration/hierarchyId:label">
-            <value>Village</value>
+          <text id="/location_registration/locationType:label">
+            <value>Location Type</value>
           </text>
           <text id="/location_registration/locationName:label">
             <value>Location Name</value>
@@ -40,20 +43,23 @@
           <text id="/location_registration/processedByMirth:label">
             <value>processed</value>
           </text>
+          <text id="/location_registration/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
+          </text>
           <text id="/location_registration/locationType/RUR:label">
             <value>Rural</value>
           </text>
-          <text id="/location_registration/locationId:label">
+          <text id="/location_registration/openhds:label">
+            <value>OpenHDS preloaded info</value>
+          </text>
+          <text id="/location_registration/openhds/locationId:label">
             <value>Location Id</value>
           </text>
           <text id="/location_registration/geopoint:label">
             <value>Geopoint</value>
           </text>
-          <text id="/location_registration/fieldWorkerId:label">
-            <value>Field Worker Id</value>
-          </text>
-          <text id="/location_registration/locationType:label">
-            <value>Location Type</value>
+          <text id="/location_registration/openhds/hierarchyId:label">
+            <value>Village</value>
           </text>
         </translation>
       </itext>
@@ -62,9 +68,11 @@
           <start/>
           <end/>
           <deviceId/>
-          <hierarchyId/>
-          <fieldWorkerId/>
-          <locationId/>
+          <openhds>
+            <fieldWorkerId/>
+            <hierarchyId/>
+            <locationId/>
+          </openhds>
           <locationName/>
           <locationType/>
           <geopoint/>
@@ -77,26 +85,29 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/location_registration/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/location_registration/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/location_registration/deviceId" type="string"/>
-      <bind nodeset="/location_registration/hierarchyId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/location_registration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/location_registration/locationId" readonly="true()" required="true()" type="string"/>
-      <bind calculate=" /location_registration/locationId " nodeset="/location_registration/locationName" required="true()" type="string"/>
+      <bind nodeset="/location_registration/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/location_registration/openhds/hierarchyId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/location_registration/openhds/locationId" readonly="true()" required="true()" type="string"/>
+      <bind calculate=" /location_registration/openhds/locationId " nodeset="/location_registration/locationName" required="true()" type="string"/>
       <bind nodeset="/location_registration/locationType" required="true()" type="select1"/>
       <bind nodeset="/location_registration/geopoint" required="true()" type="geopoint"/>
-      <bind nodeset="/location_registration/processedByMirth" relevant="1=2" type="int"/>
+      <bind nodeset="/location_registration/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/location_registration/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
   <h:body>
-    <input ref="/location_registration/hierarchyId">
-      <label ref="jr:itext('/location_registration/hierarchyId:label')"/>
-    </input>
-    <input ref="/location_registration/fieldWorkerId">
-      <label ref="jr:itext('/location_registration/fieldWorkerId:label')"/>
-    </input>
-    <input ref="/location_registration/locationId">
-      <label ref="jr:itext('/location_registration/locationId:label')"/>
-    </input>
+    <group appearance="field-list" ref="/location_registration/openhds">
+      <label ref="jr:itext('/location_registration/openhds:label')"/>
+      <input ref="/location_registration/openhds/fieldWorkerId">
+        <label ref="jr:itext('/location_registration/openhds/fieldWorkerId:label')"/>
+      </input>
+      <input ref="/location_registration/openhds/hierarchyId">
+        <label ref="jr:itext('/location_registration/openhds/hierarchyId:label')"/>
+      </input>
+      <input ref="/location_registration/openhds/locationId">
+        <label ref="jr:itext('/location_registration/openhds/locationId:label')"/>
+      </input>
+    </group>
     <input ref="/location_registration/locationName">
       <label ref="jr:itext('/location_registration/locationName:label')"/>
     </input>

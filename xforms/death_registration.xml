@@ -8,6 +8,9 @@
           <text id="/death_registration/placeOfDeath/HOSPITAL:label">
             <value>Hospitali</value>
           </text>
+          <text id="/death_registration/openhds:label">
+            <value>-</value>
+          </text>
           <text id="/death_registration/processedByMirth:label">
             <value>processed</value>
           </text>
@@ -29,8 +32,14 @@
           <text id="/death_registration/whom/4:label">
             <value>Traditional healer</value>
           </text>
+          <text id="/death_registration/openhds/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
+          </text>
           <text id="/death_registration/causeofdeathdiagnosed/Other:label">
             <value>Other</value>
+          </text>
+          <text id="/death_registration/openhds/lastName:label">
+            <value>-</value>
           </text>
           <text id="/death_registration/placeOfDeath/HEALTH_CENTER:label">
             <value>Health Centre or Clinic</value>
@@ -44,14 +53,17 @@
           <text id="/death_registration/placeOfDeath:label">
             <value>Amefia wapi/Kifo kilitokea wapi?</value>
           </text>
-          <text id="/death_registration/whom/3:label">
-            <value>Community health worker</value>
+          <text id="/death_registration/placeOfDeathOther:label">
+            <value>Amefia wapi/Kifo kilitokea wapi kwingine taja?</value>
           </text>
           <text id="/death_registration/causeofdeathdiagnosed/TB:label">
             <value>TB</value>
           </text>
-          <text id="/death_registration/visitId:label">
-            <value>Nambari ya Hudhurio</value>
+          <text id="/death_registration/whom/3:label">
+            <value>Community health worker</value>
+          </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Malaria:label">
+            <value>Malaria</value>
           </text>
           <text id="/death_registration/causofdeathnotdiagnosed/Accident:label">
             <value>Accident</value>
@@ -64,6 +76,9 @@
           </text>
           <text id="/death_registration/causofdeathnotdiagnosed/Disease_Illness:label">
             <value>Disease, Illness</value>
+          </text>
+          <text id="/death_registration/openhds/firstName:label">
+            <value>-</value>
           </text>
           <text id="/death_registration/causeofdeathdiagnosed/Accident:label">
             <value>Accident</value>
@@ -89,20 +104,14 @@
           <text id="/death_registration/causofdeathnotdiagnosed/Unknown:label">
             <value>Unknown</value>
           </text>
-          <text id="/death_registration/fieldWorkerId:label">
-            <value>Nambari ya Mhojaji</value>
+          <text id="/death_registration/openhds/visitId:label">
+            <value>Nambari ya Hudhurio</value>
           </text>
           <text id="/death_registration/placeOfDeath/HOME:label">
             <value>Nyumbani</value>
           </text>
-          <text id="/death_registration/placeOfDeathOther:label">
-            <value>Amefia wapi/Kifo kilitokea wapi kwingine taja?</value>
-          </text>
-          <text id="/death_registration/individualId:label">
+          <text id="/death_registration/openhds/individualId:label">
             <value>Nambari ya Mwanakaya</value>
-          </text>
-          <text id="/death_registration/causeofdeathdiagnosed/Malaria:label">
-            <value>Malaria</value>
           </text>
           <text id="/death_registration/causofdeathnotdiagnosed:label">
             <value>Cause of death?</value>
@@ -117,6 +126,9 @@
         <translation default="true()" lang="English">
           <text id="/death_registration/placeOfDeath/HOSPITAL:label">
             <value>Hospital</value>
+          </text>
+          <text id="/death_registration/openhds:label">
+            <value>OpenHDS preloaded info</value>
           </text>
           <text id="/death_registration/processedByMirth:label">
             <value>processed</value>
@@ -139,8 +151,14 @@
           <text id="/death_registration/whom/4:label">
             <value>Traditional healer</value>
           </text>
+          <text id="/death_registration/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
+          </text>
           <text id="/death_registration/causeofdeathdiagnosed/Other:label">
             <value>Other</value>
+          </text>
+          <text id="/death_registration/openhds/lastName:label">
+            <value>Last Name</value>
           </text>
           <text id="/death_registration/placeOfDeath/HEALTH_CENTER:label">
             <value>Health Centre or Clinic</value>
@@ -154,14 +172,14 @@
           <text id="/death_registration/placeOfDeath:label">
             <value>Place of Death</value>
           </text>
+          <text id="/death_registration/placeOfDeathOther:label">
+            <value>Place of Death (Other)</value>
+          </text>
           <text id="/death_registration/whom/3:label">
             <value>Community health worker</value>
           </text>
-          <text id="/death_registration/causeofdeathdiagnosed/TB:label">
-            <value>TB</value>
-          </text>
-          <text id="/death_registration/visitId:label">
-            <value>Visit Id</value>
+          <text id="/death_registration/causeofdeathdiagnosed/Malaria:label">
+            <value>Malaria</value>
           </text>
           <text id="/death_registration/causofdeathnotdiagnosed/Accident:label">
             <value>Accident</value>
@@ -172,8 +190,14 @@
           <text id="/death_registration/causofdeathnotdiagnosed/Crime:label">
             <value>Crime</value>
           </text>
+          <text id="/death_registration/causeofdeathdiagnosed/Unknown:label">
+            <value>Unknown</value>
+          </text>
           <text id="/death_registration/causofdeathnotdiagnosed/Disease_Illness:label">
             <value>Disease, Illness</value>
+          </text>
+          <text id="/death_registration/openhds/firstName:label">
+            <value>First Name</value>
           </text>
           <text id="/death_registration/causeofdeathdiagnosed/Accident:label">
             <value>Accident</value>
@@ -181,8 +205,8 @@
           <text id="/death_registration/causeofdeathdiagnosed/Age:label">
             <value>Age</value>
           </text>
-          <text id="/death_registration/causeofdeathdiagnosed/Unknown:label">
-            <value>Unknown</value>
+          <text id="/death_registration/causeofdeathdiagnosed/TB:label">
+            <value>TB</value>
           </text>
           <text id="/death_registration/placeOfDeath/OTHER:label">
             <value>Other</value>
@@ -199,20 +223,14 @@
           <text id="/death_registration/causofdeathnotdiagnosed/Unknown:label">
             <value>Unknown</value>
           </text>
-          <text id="/death_registration/fieldWorkerId:label">
-            <value>Field Worker Id</value>
+          <text id="/death_registration/openhds/visitId:label">
+            <value>Visit Id</value>
           </text>
           <text id="/death_registration/placeOfDeath/HOME:label">
             <value>Home</value>
           </text>
-          <text id="/death_registration/placeOfDeathOther:label">
-            <value>Place of Death (Other)</value>
-          </text>
-          <text id="/death_registration/individualId:label">
+          <text id="/death_registration/openhds/individualId:label">
             <value>Individual Id</value>
-          </text>
-          <text id="/death_registration/causeofdeathdiagnosed/Malaria:label">
-            <value>Malaria</value>
           </text>
           <text id="/death_registration/causofdeathnotdiagnosed:label">
             <value>Cause of death?</value>
@@ -230,9 +248,13 @@
           <start/>
           <end/>
           <deviceid/>
-          <individualId/>
-          <fieldWorkerId/>
-          <visitId/>
+          <openhds>
+            <fieldWorkerId/>
+            <visitId/>
+            <individualId/>
+            <firstName/>
+            <lastName/>
+          </openhds>
           <dateOfDeath/>
           <diagnoseddeath/>
           <whom/>
@@ -250,9 +272,12 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/death_registration/start" readonly="true()" required="true()" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/death_registration/end" readonly="true()" required="true()" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/death_registration/deviceid" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/death_registration/individualId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/death_registration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/death_registration/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/death_registration/openhds" required="true()"/>
+      <bind nodeset="/death_registration/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/death_registration/openhds/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/death_registration/openhds/individualId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/death_registration/openhds/firstName" readonly="true()" type="string"/>
+      <bind nodeset="/death_registration/openhds/lastName" readonly="true()" type="string"/>
       <bind constraint=". &lt; today()" jr:constraintMsg="Date of death can not be in the future" nodeset="/death_registration/dateOfDeath" required="true()" type="date"/>
       <bind nodeset="/death_registration/diagnoseddeath" required="true()" type="select1"/>
       <bind nodeset="/death_registration/whom" relevant="selected( /death_registration/diagnoseddeath , '1')" required="true()" type="select1"/>
@@ -266,15 +291,24 @@
     </model>
   </h:head>
   <h:body>
-    <input ref="/death_registration/individualId">
-      <label ref="jr:itext('/death_registration/individualId:label')"/>
-    </input>
-    <input ref="/death_registration/fieldWorkerId">
-      <label ref="jr:itext('/death_registration/fieldWorkerId:label')"/>
-    </input>
-    <input ref="/death_registration/visitId">
-      <label ref="jr:itext('/death_registration/visitId:label')"/>
-    </input>
+    <group appearance="field-list" ref="/death_registration/openhds">
+      <label ref="jr:itext('/death_registration/openhds:label')"/>
+      <input ref="/death_registration/openhds/fieldWorkerId">
+        <label ref="jr:itext('/death_registration/openhds/fieldWorkerId:label')"/>
+      </input>
+      <input ref="/death_registration/openhds/visitId">
+        <label ref="jr:itext('/death_registration/openhds/visitId:label')"/>
+      </input>
+      <input ref="/death_registration/openhds/individualId">
+        <label ref="jr:itext('/death_registration/openhds/individualId:label')"/>
+      </input>
+      <input ref="/death_registration/openhds/firstName">
+        <label ref="jr:itext('/death_registration/openhds/firstName:label')"/>
+      </input>
+      <input ref="/death_registration/openhds/lastName">
+        <label ref="jr:itext('/death_registration/openhds/lastName:label')"/>
+      </input>
+    </group>
     <input ref="/death_registration/dateOfDeath">
       <label ref="jr:itext('/death_registration/dateOfDeath:label')"/>
     </input>

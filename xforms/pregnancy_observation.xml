@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Pregnancy observation  registration</h:title>
     <model>
@@ -14,11 +14,11 @@
           <text id="/pregnancy_observation/expectedDeliveryDate:label">
             <value>expectedDeliveryDate</value>
           </text>
+          <text id="/pregnancy_observation/openhds/individualId:label">
+            <value>PERM Id</value>
+          </text>
           <text id="/pregnancy_observation/ttinjection/NO:label">
             <value>Hapana</value>
-          </text>
-          <text id="/pregnancy_observation/recordedDate:label">
-            <value>Tarehe iliyo andikishwa</value>
           </text>
           <text id="/pregnancy_observation/estimatedAgeOfPreg:label">
             <value>Idadi ya miezi ya ujauzito</value>
@@ -35,6 +35,9 @@
           <text id="/pregnancy_observation/pregnancyNumber:label">
             <value>Ujauzito wa ngapi?</value>
           </text>
+          <text id="/pregnancy_observation/openhds:label">
+            <value>-</value>
+          </text>
           <text id="/pregnancy_observation/healthfacility/99:label">
             <value>Other</value>
           </text>
@@ -47,11 +50,11 @@
           <text id="/pregnancy_observation/medicineforpregnancy/YES:label">
             <value>Ndiyo</value>
           </text>
-          <text id="/pregnancy_observation/visitId:label">
-            <value>Nambari ya hudhurio</value>
-          </text>
           <text id="/pregnancy_observation/pregNotes:label">
             <value>Je, Mama mjamzito ana:</value>
+          </text>
+          <text id="/pregnancy_observation/openhds/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
           </text>
           <text id="/pregnancy_observation/healthfacility/1:label">
             <value>Hospital</value>
@@ -83,8 +86,8 @@
           <text id="/pregnancy_observation/pregNotes/2:label">
             <value>Daftari la uandikishaji ujauzito</value>
           </text>
-          <text id="/pregnancy_observation/individualId:label">
-            <value>PERM Id</value>
+          <text id="/pregnancy_observation/openhds/recordedDate:label">
+            <value>Tarehe iliyo andikishwa</value>
           </text>
           <text id="/pregnancy_observation/healthfacility/3:label">
             <value>TBA's Home</value>
@@ -92,8 +95,8 @@
           <text id="/pregnancy_observation/healthfacility/5:label">
             <value>None</value>
           </text>
-          <text id="/pregnancy_observation/fieldWorkerId:label">
-            <value>Nambari ya Mhojaji</value>
+          <text id="/pregnancy_observation/openhds/visitId:label">
+            <value>Nambari ya hudhurio</value>
           </text>
         </translation>
         <translation default="true()" lang="English">
@@ -106,11 +109,11 @@
           <text id="/pregnancy_observation/expectedDeliveryDate:label">
             <value>expectedDeliveryDate</value>
           </text>
+          <text id="/pregnancy_observation/openhds/individualId:label">
+            <value>PERM Id</value>
+          </text>
           <text id="/pregnancy_observation/ttinjection/NO:label">
             <value>No</value>
-          </text>
-          <text id="/pregnancy_observation/recordedDate:label">
-            <value>Recorded Date</value>
           </text>
           <text id="/pregnancy_observation/estimatedAgeOfPreg:label">
             <value>Number of months pregnant</value>
@@ -127,6 +130,9 @@
           <text id="/pregnancy_observation/pregnancyNumber:label">
             <value>Total number of pregnancies to date</value>
           </text>
+          <text id="/pregnancy_observation/openhds:label">
+            <value>OpenHDS preloaded info</value>
+          </text>
           <text id="/pregnancy_observation/healthfacility/99:label">
             <value>Other</value>
           </text>
@@ -139,11 +145,11 @@
           <text id="/pregnancy_observation/medicineforpregnancy/YES:label">
             <value>Yes</value>
           </text>
-          <text id="/pregnancy_observation/visitId:label">
-            <value>Visit Id</value>
-          </text>
           <text id="/pregnancy_observation/pregNotes:label">
             <value>Does the expectant mother have:</value>
+          </text>
+          <text id="/pregnancy_observation/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
           </text>
           <text id="/pregnancy_observation/healthfacility/1:label">
             <value>Hospital</value>
@@ -175,8 +181,8 @@
           <text id="/pregnancy_observation/pregNotes/2:label">
             <value>I have not attended ANC/Cannot find my card</value>
           </text>
-          <text id="/pregnancy_observation/individualId:label">
-            <value>PERM Id</value>
+          <text id="/pregnancy_observation/openhds/recordedDate:label">
+            <value>Recorded Date</value>
           </text>
           <text id="/pregnancy_observation/healthfacility/3:label">
             <value>TBA's Home</value>
@@ -184,8 +190,8 @@
           <text id="/pregnancy_observation/healthfacility/5:label">
             <value>None</value>
           </text>
-          <text id="/pregnancy_observation/fieldWorkerId:label">
-            <value>Field Worker Id</value>
+          <text id="/pregnancy_observation/openhds/visitId:label">
+            <value>Visit Id</value>
           </text>
         </translation>
       </itext>
@@ -194,6 +200,12 @@
           <start/>
           <end/>
           <deviceid/>
+          <openhds>
+            <fieldWorkerId/>
+            <visitId/>
+            <individualId/>
+            <recordedDate/>
+          </openhds>
           <estimatedAgeOfPreg/>
           <pregNotes/>
           <ageOfPregFromPregNotes/>
@@ -204,11 +216,7 @@
           <ttinjection/>
           <othermedicine/>
           <pregnancyNumber/>
-          <individualId/>
-          <fieldWorkerId/>
-          <visitId/>
           <expectedDeliveryDate/>
-          <recordedDate/>
           <processedByMirth/>
           <meta>
             <instanceID/>
@@ -218,6 +226,10 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/pregnancy_observation/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/pregnancy_observation/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/pregnancy_observation/deviceid" type="string"/>
+      <bind nodeset="/pregnancy_observation/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_observation/openhds/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_observation/openhds/individualId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_observation/openhds/recordedDate" readonly="true()" required="true()" type="date"/>
       <bind nodeset="/pregnancy_observation/estimatedAgeOfPreg" required="true()" type="int"/>
       <bind nodeset="/pregnancy_observation/pregNotes" required="true()" type="select1"/>
       <bind constraint=".&lt;52" nodeset="/pregnancy_observation/ageOfPregFromPregNotes" relevant="../pregNotes = 1" required="true()" type="int"/>
@@ -228,16 +240,27 @@
       <bind nodeset="/pregnancy_observation/ttinjection" required="true()" type="select1"/>
       <bind nodeset="/pregnancy_observation/othermedicine" type="string"/>
       <bind nodeset="/pregnancy_observation/pregnancyNumber" required="true()" type="int"/>
-      <bind nodeset="/pregnancy_observation/individualId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_observation/fieldWorkerId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_observation/visitId" readonly="true()" required="true()" type="string"/>
       <bind constraint=".&gt; today()" nodeset="/pregnancy_observation/expectedDeliveryDate" required="true()" type="date"/>
-      <bind nodeset="/pregnancy_observation/recordedDate" readonly="true()" required="true()" type="date"/>
-      <bind nodeset="/pregnancy_observation/processedByMirth" relevant="1=2" type="int"/>
+      <bind nodeset="/pregnancy_observation/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/pregnancy_observation/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
   <h:body>
+    <group appearance="field-list" ref="/pregnancy_observation/openhds">
+      <label ref="jr:itext('/pregnancy_observation/openhds:label')"/>
+      <input ref="/pregnancy_observation/openhds/fieldWorkerId">
+        <label ref="jr:itext('/pregnancy_observation/openhds/fieldWorkerId:label')"/>
+      </input>
+      <input ref="/pregnancy_observation/openhds/visitId">
+        <label ref="jr:itext('/pregnancy_observation/openhds/visitId:label')"/>
+      </input>
+      <input ref="/pregnancy_observation/openhds/individualId">
+        <label ref="jr:itext('/pregnancy_observation/openhds/individualId:label')"/>
+      </input>
+      <input ref="/pregnancy_observation/openhds/recordedDate">
+        <label ref="jr:itext('/pregnancy_observation/openhds/recordedDate:label')"/>
+      </input>
+    </group>
     <input ref="/pregnancy_observation/estimatedAgeOfPreg">
       <label ref="jr:itext('/pregnancy_observation/estimatedAgeOfPreg:label')"/>
     </input>
@@ -324,20 +347,8 @@
     <input ref="/pregnancy_observation/pregnancyNumber">
       <label ref="jr:itext('/pregnancy_observation/pregnancyNumber:label')"/>
     </input>
-    <input ref="/pregnancy_observation/individualId">
-      <label ref="jr:itext('/pregnancy_observation/individualId:label')"/>
-    </input>
-    <input ref="/pregnancy_observation/fieldWorkerId">
-      <label ref="jr:itext('/pregnancy_observation/fieldWorkerId:label')"/>
-    </input>
-    <input ref="/pregnancy_observation/visitId">
-      <label ref="jr:itext('/pregnancy_observation/visitId:label')"/>
-    </input>
     <input ref="/pregnancy_observation/expectedDeliveryDate">
       <label ref="jr:itext('/pregnancy_observation/expectedDeliveryDate:label')"/>
-    </input>
-    <input ref="/pregnancy_observation/recordedDate">
-      <label ref="jr:itext('/pregnancy_observation/recordedDate:label')"/>
     </input>
     <input ref="/pregnancy_observation/processedByMirth">
       <label ref="jr:itext('/pregnancy_observation/processedByMirth:label')"/>

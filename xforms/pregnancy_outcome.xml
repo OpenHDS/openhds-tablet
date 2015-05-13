@@ -14,8 +14,8 @@
           <text id="/pregnancy_outcome/partialDate/1:label">
             <value>Kamili</value>
           </text>
-          <text id="/pregnancy_outcome/outcomes/childId:label">
-            <value>Nambari ya Mtoto</value>
+          <text id="/pregnancy_outcome/openhds/fatherId:label">
+            <value>Namba ya Baba</value>
           </text>
           <text id="/pregnancy_outcome/outcomes/lastName:label">
             <value>Jina la Ukoo</value>
@@ -41,8 +41,8 @@
           <text id="/pregnancy_outcome/partialDate:label">
             <value>partialDate</value>
           </text>
-          <text id="/pregnancy_outcome/birthingPlace/OTHER:label">
-            <value>KWENGINEKO</value>
+          <text id="/pregnancy_outcome/openhds/motherId:label">
+            <value>Namba ya Mama</value>
           </text>
           <text id="/pregnancy_outcome/outcomes/socialGroupId:label">
             <value>Nambari ya Kikundi</value>
@@ -50,8 +50,11 @@
           <text id="/pregnancy_outcome/outcomes/ordinalPosition:label">
             <value>Huyu ni mtoto wa ngapi Kuzaliwa?</value>
           </text>
-          <text id="/pregnancy_outcome/fatherId:label">
-            <value>Namba ya Baba</value>
+          <text id="/pregnancy_outcome/attendedANC/YES:label">
+            <value>Ndiyo</value>
+          </text>
+          <text id="/pregnancy_outcome/outcomes/middleName:label">
+            <value>Jina la Kati</value>
           </text>
           <text id="/pregnancy_outcome/attendedANC/NO:label">
             <value>Hapana</value>
@@ -71,6 +74,9 @@
           <text id="/pregnancy_outcome/nboutcomes:label">
             <value>Matukio ya Mimba</value>
           </text>
+          <text id="/pregnancy_outcome/outcomes/childId:label">
+            <value>Nambari ya Mtoto</value>
+          </text>
           <text id="/pregnancy_outcome/outcomes/firstName:label">
             <value>Jina la Kwanza</value>
           </text>
@@ -89,14 +95,14 @@
           <text id="/pregnancy_outcome/outcomes/gender/M:label">
             <value>Mwanaume</value>
           </text>
+          <text id="/pregnancy_outcome/outcomes/relationshipToGroupHead/1:label">
+            <value>Mtoto wa Kike/Kiume</value>
+          </text>
           <text id="/pregnancy_outcome/outcomes/relationshipToGroupHead/5:label">
             <value>Uhusiano Mwingine</value>
           </text>
-          <text id="/pregnancy_outcome/fieldWorkerId:label">
-            <value>Namba ya Mhojaji</value>
-          </text>
-          <text id="/pregnancy_outcome/attendedANC/YES:label">
-            <value>Ndiyo</value>
+          <text id="/pregnancy_outcome/birthingPlace/OTHER:label">
+            <value>KWENGINEKO</value>
           </text>
           <text id="/pregnancy_outcome/outcomes/gender:label">
             <value>Jinsia</value>
@@ -110,16 +116,19 @@
           <text id="/pregnancy_outcome/outcomes/outcomeType/MIS:label">
             <value>Mimba Kuharibika</value>
           </text>
+          <text id="/pregnancy_outcome/openhds:label">
+            <value>-</value>
+          </text>
           <text id="/pregnancy_outcome/birthingPlace/HEALTHCENTERCLINIC:label">
             <value>HEALTH CENTER OR CLINIC</value>
           </text>
-          <text id="/pregnancy_outcome/outcomes/relationshipToGroupHead/1:label">
-            <value>Mtoto wa Kike/Kiume</value>
+          <text id="/pregnancy_outcome/openhds/fieldWorkerId:label">
+            <value>Namba ya Mhojaji</value>
           </text>
           <text id="/pregnancy_outcome/recordedDate:label">
             <value>Tarehe ya Tukio</value>
           </text>
-          <text id="/pregnancy_outcome/visitId:label">
+          <text id="/pregnancy_outcome/openhds/visitId:label">
             <value>Nambari ya Hudhurio</value>
           </text>
           <text id="/pregnancy_outcome/birthingPlace:label">
@@ -128,14 +137,8 @@
           <text id="/pregnancy_outcome/outcomes/gender/F:label">
             <value>Mwanamke</value>
           </text>
-          <text id="/pregnancy_outcome/outcomes/middleName:label">
-            <value>Jina la Kati</value>
-          </text>
           <text id="/pregnancy_outcome/outcomes/outcomeType/SBR:label">
             <value>Zaliwa Mfu</value>
-          </text>
-          <text id="/pregnancy_outcome/motherId:label">
-            <value>Namba ya Mama</value>
           </text>
         </translation>
         <translation default="true()" lang="English">
@@ -148,8 +151,8 @@
           <text id="/pregnancy_outcome/partialDate/1:label">
             <value>Exact</value>
           </text>
-          <text id="/pregnancy_outcome/outcomes/childId:label">
-            <value>Child Id</value>
+          <text id="/pregnancy_outcome/openhds/fatherId:label">
+            <value>Father Id</value>
           </text>
           <text id="/pregnancy_outcome/outcomes/lastName:label">
             <value>Last Name</value>
@@ -166,8 +169,8 @@
           <text id="/pregnancy_outcome/totalNumberChildrenStillLiving:label">
             <value>Of all the children you have had, how many are still living?</value>
           </text>
-          <text id="/pregnancy_outcome/outcomes/relationshipToGroupHead/4:label">
-            <value>Not Related</value>
+          <text id="/pregnancy_outcome/openhds:label">
+            <value>OpenHDS preloaded info</value>
           </text>
           <text id="/pregnancy_outcome/outcomes/outcomeType/ABT:label">
             <value>Abortion</value>
@@ -175,8 +178,8 @@
           <text id="/pregnancy_outcome/partialDate:label">
             <value>Partial Date</value>
           </text>
-          <text id="/pregnancy_outcome/birthingPlace/OTHER:label">
-            <value>OTHER</value>
+          <text id="/pregnancy_outcome/openhds/motherId:label">
+            <value>Mother Id</value>
           </text>
           <text id="/pregnancy_outcome/outcomes/socialGroupId:label">
             <value>Social Group Id</value>
@@ -184,8 +187,11 @@
           <text id="/pregnancy_outcome/outcomes/ordinalPosition:label">
             <value>What is the ordinal position of this child?</value>
           </text>
-          <text id="/pregnancy_outcome/fatherId:label">
-            <value>Father Id</value>
+          <text id="/pregnancy_outcome/attendedANC/YES:label">
+            <value>Yes</value>
+          </text>
+          <text id="/pregnancy_outcome/outcomes/middleName:label">
+            <value>Middle Name</value>
           </text>
           <text id="/pregnancy_outcome/attendedANC/NO:label">
             <value>No</value>
@@ -205,6 +211,9 @@
           <text id="/pregnancy_outcome/nboutcomes:label">
             <value>Outcomes</value>
           </text>
+          <text id="/pregnancy_outcome/outcomes/childId:label">
+            <value>Child Id</value>
+          </text>
           <text id="/pregnancy_outcome/outcomes/firstName:label">
             <value>First Name</value>
           </text>
@@ -223,14 +232,17 @@
           <text id="/pregnancy_outcome/outcomes/gender/M:label">
             <value>Male</value>
           </text>
+          <text id="/pregnancy_outcome/outcomes/relationshipToGroupHead/1:label">
+            <value>Son/Daughter</value>
+          </text>
+          <text id="/pregnancy_outcome/outcomes/relationshipToGroupHead/4:label">
+            <value>Not Related</value>
+          </text>
           <text id="/pregnancy_outcome/outcomes/relationshipToGroupHead/5:label">
             <value>Other Relative</value>
           </text>
-          <text id="/pregnancy_outcome/fieldWorkerId:label">
-            <value>Field Worker Id</value>
-          </text>
-          <text id="/pregnancy_outcome/attendedANC/YES:label">
-            <value>Yes</value>
+          <text id="/pregnancy_outcome/birthingPlace/OTHER:label">
+            <value>OTHER</value>
           </text>
           <text id="/pregnancy_outcome/outcomes/gender:label">
             <value>Gender</value>
@@ -247,13 +259,13 @@
           <text id="/pregnancy_outcome/birthingPlace/HEALTHCENTERCLINIC:label">
             <value>HEALTH CENTER OR CLINIC</value>
           </text>
-          <text id="/pregnancy_outcome/outcomes/relationshipToGroupHead/1:label">
-            <value>Son/Daughter</value>
+          <text id="/pregnancy_outcome/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
           </text>
           <text id="/pregnancy_outcome/recordedDate:label">
             <value>Outcome Date</value>
           </text>
-          <text id="/pregnancy_outcome/visitId:label">
+          <text id="/pregnancy_outcome/openhds/visitId:label">
             <value>Visit Id</value>
           </text>
           <text id="/pregnancy_outcome/birthingPlace:label">
@@ -262,14 +274,8 @@
           <text id="/pregnancy_outcome/outcomes/gender/F:label">
             <value>Female</value>
           </text>
-          <text id="/pregnancy_outcome/outcomes/middleName:label">
-            <value>Middle Name</value>
-          </text>
           <text id="/pregnancy_outcome/outcomes/outcomeType/SBR:label">
             <value>Still Birth</value>
-          </text>
-          <text id="/pregnancy_outcome/motherId:label">
-            <value>Mother Id</value>
           </text>
         </translation>
       </itext>
@@ -278,10 +284,12 @@
           <start/>
           <end/>
           <deviceid/>
-          <visitId/>
-          <fieldWorkerId/>
-          <motherId/>
-          <fatherId/>
+          <openhds>
+            <visitId/>
+            <fieldWorkerId/>
+            <motherId/>
+            <fatherId/>
+          </openhds>
           <nboutcomes/>
           <recordedDate/>
           <partialDate/>
@@ -310,10 +318,10 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/pregnancy_outcome/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/pregnancy_outcome/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/pregnancy_outcome/deviceid" type="string"/>
-      <bind nodeset="/pregnancy_outcome/visitId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_outcome/fieldWorkerId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_outcome/motherId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/pregnancy_outcome/fatherId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/openhds/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/openhds/motherId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/pregnancy_outcome/openhds/fatherId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/pregnancy_outcome/nboutcomes" readonly="true()" required="true()" type="int"/>
       <bind nodeset="/pregnancy_outcome/recordedDate" required="true()" type="date"/>
       <bind nodeset="/pregnancy_outcome/partialDate" required="true()" type="select1"/>
@@ -336,18 +344,21 @@
     </model>
   </h:head>
   <h:body>
-    <input ref="/pregnancy_outcome/visitId">
-      <label ref="jr:itext('/pregnancy_outcome/visitId:label')"/>
-    </input>
-    <input ref="/pregnancy_outcome/fieldWorkerId">
-      <label ref="jr:itext('/pregnancy_outcome/fieldWorkerId:label')"/>
-    </input>
-    <input ref="/pregnancy_outcome/motherId">
-      <label ref="jr:itext('/pregnancy_outcome/motherId:label')"/>
-    </input>
-    <input ref="/pregnancy_outcome/fatherId">
-      <label ref="jr:itext('/pregnancy_outcome/fatherId:label')"/>
-    </input>
+    <group appearance="field-list" ref="/pregnancy_outcome/openhds">
+      <label ref="jr:itext('/pregnancy_outcome/openhds:label')"/>
+      <input ref="/pregnancy_outcome/openhds/visitId">
+        <label ref="jr:itext('/pregnancy_outcome/openhds/visitId:label')"/>
+      </input>
+      <input ref="/pregnancy_outcome/openhds/fieldWorkerId">
+        <label ref="jr:itext('/pregnancy_outcome/openhds/fieldWorkerId:label')"/>
+      </input>
+      <input ref="/pregnancy_outcome/openhds/motherId">
+        <label ref="jr:itext('/pregnancy_outcome/openhds/motherId:label')"/>
+      </input>
+      <input ref="/pregnancy_outcome/openhds/fatherId">
+        <label ref="jr:itext('/pregnancy_outcome/openhds/fatherId:label')"/>
+      </input>
+    </group>
     <input ref="/pregnancy_outcome/nboutcomes">
       <label ref="jr:itext('/pregnancy_outcome/nboutcomes:label')"/>
     </input>

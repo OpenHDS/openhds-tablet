@@ -5,6 +5,9 @@
     <model>
       <itext>
         <translation lang="Swahili">
+          <text id="/visit_registration/openhds/visitId:label">
+            <value>Nambari ya Hudhurio</value>
+          </text>
           <text id="/visit_registration/correctInterviewee/0:label">
             <value>Hapana</value>
           </text>
@@ -23,6 +26,9 @@
           <text id="/visit_registration/intervieweeId:label">
             <value>Nambari ya Mhojaji</value>
           </text>
+          <text id="/visit_registration/openhds:label">
+            <value>-</value>
+          </text>
           <text id="/visit_registration/whynotrightcode/0:label">
             <value>Hapana Barcode</value>
           </text>
@@ -38,11 +44,11 @@
           <text id="/visit_registration/reason:label">
             <value>Sababu ya kuhojiwa</value>
           </text>
+          <text id="/visit_registration/openhds/locationId:label">
+            <value>Nambari ya Kaya</value>
+          </text>
           <text id="/visit_registration/farmhouse:label">
             <value>Uhojaji Umefanyikia Wapi?</value>
-          </text>
-          <text id="/visit_registration/visitId:label">
-            <value>Nambari ya Hudhurio</value>
           </text>
           <text id="/visit_registration/correctInterviewee/1:label">
             <value>Ndiyo</value>
@@ -59,9 +65,6 @@
           <text id="/visit_registration/correctInterviewee:label">
             <value>Je, Mwanakaya uliye mchagua ndiye unaye muhoji?</value>
           </text>
-          <text id="/visit_registration/fieldWorkerId:label">
-            <value>Nambari ya Mhojaji</value>
-          </text>
           <text id="/visit_registration/coordinates:label">
             <value>Nukuhu Takwimu za GPS:</value>
           </text>
@@ -71,20 +74,23 @@
           <text id="/visit_registration/farmhouse/1:label">
             <value>Nyumbani</value>
           </text>
-          <text id="/visit_registration/locationId:label">
-            <value>Nambari ya Kaya</value>
-          </text>
           <text id="/visit_registration/processedByMirth:label">
             <value>processed</value>
           </text>
-          <text id="/visit_registration/roundNumber:label">
+          <text id="/visit_registration/openhds/roundNumber:label">
             <value>Round number</value>
           </text>
           <text id="/visit_registration/locationcalculated:label">
             <value>check</value>
           </text>
+          <text id="/visit_registration/openhds/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
+          </text>
         </translation>
         <translation default="true()" lang="English">
+          <text id="/visit_registration/openhds/visitId:label">
+            <value>Visit Id</value>
+          </text>
           <text id="/visit_registration/correctInterviewee/0:label">
             <value>No</value>
           </text>
@@ -102,6 +108,9 @@
           </text>
           <text id="/visit_registration/intervieweeId:label">
             <value>Interviewee ID</value>
+          </text>
+          <text id="/visit_registration/openhds:label">
+            <value>OpenHDS preloaded info</value>
           </text>
           <text id="/visit_registration/whynotrightcode/0:label">
             <value>No Barcode in the house</value>
@@ -121,17 +130,14 @@
           <text id="/visit_registration/farmhouse:label">
             <value>Where is the visit taking place?</value>
           </text>
-          <text id="/visit_registration/visitId:label">
-            <value>Visit Id</value>
-          </text>
           <text id="/visit_registration/correctInterviewee/1:label">
             <value>Yes</value>
           </text>
           <text id="/visit_registration/checkRightId:label">
             <value>The barcode doesn't match the Location ID are you sure you want to proceed?</value>
           </text>
-          <text id="/visit_registration/farmhouse/0:label">
-            <value>Not at home</value>
+          <text id="/visit_registration/openhds/locationId:label">
+            <value>Location Id</value>
           </text>
           <text id="/visit_registration/visitDate:label">
             <value>Visit Date</value>
@@ -139,8 +145,8 @@
           <text id="/visit_registration/correctInterviewee:label">
             <value>Is the person selected the one you are actually interviewing?</value>
           </text>
-          <text id="/visit_registration/fieldWorkerId:label">
-            <value>Field Worker Id</value>
+          <text id="/visit_registration/farmhouse/0:label">
+            <value>Not at home</value>
           </text>
           <text id="/visit_registration/coordinates:label">
             <value>Record the GPS coordinates:</value>
@@ -151,17 +157,17 @@
           <text id="/visit_registration/farmhouse/1:label">
             <value>House</value>
           </text>
-          <text id="/visit_registration/locationId:label">
-            <value>Location Id</value>
-          </text>
           <text id="/visit_registration/processedByMirth:label">
             <value>processed</value>
           </text>
-          <text id="/visit_registration/roundNumber:label">
+          <text id="/visit_registration/openhds/roundNumber:label">
             <value>Round number</value>
           </text>
           <text id="/visit_registration/locationcalculated:label">
             <value>check</value>
+          </text>
+          <text id="/visit_registration/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
           </text>
         </translation>
       </itext>
@@ -170,10 +176,12 @@
           <start/>
           <end/>
           <deviceid/>
-          <visitId/>
-          <fieldWorkerId/>
-          <locationId/>
-          <roundNumber/>
+          <openhds>
+            <visitId/>
+            <fieldWorkerId/>
+            <locationId/>
+            <roundNumber/>
+          </openhds>
           <locationIdCheck/>
           <locationcalculated/>
           <checkRightId/>
@@ -194,38 +202,42 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/visit_registration/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/visit_registration/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/visit_registration/deviceid" type="string"/>
-      <bind nodeset="/visit_registration/visitId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/visit_registration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/visit_registration/locationId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/visit_registration/roundNumber" readonly="true()" required="true()" type="int"/>
+      <bind nodeset="/visit_registration/openhds" required="true()"/>
+      <bind nodeset="/visit_registration/openhds/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/visit_registration/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/visit_registration/openhds/locationId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/visit_registration/openhds/roundNumber" readonly="true()" required="true()" type="int"/>
       <bind nodeset="/visit_registration/locationIdCheck" type="barcode"/>
       <bind calculate="concat(substr( /visit_registration/locationIdCheck ,0,3),'0000',substr( /visit_registration/locationIdCheck ,3,5))" nodeset="/visit_registration/locationcalculated" readonly="true()" type="string"/>
-      <bind nodeset="/visit_registration/checkRightId" relevant=" /visit_registration/locationId  != /visit_registration/locationcalculated  and  /visit_registration/locationId  != /visit_registration/locationIdCheck " required="true()" type="string"/>
-      <bind nodeset="/visit_registration/whynotrightcode" relevant=" /visit_registration/locationId  != /visit_registration/locationcalculated  and  /visit_registration/locationId  != /visit_registration/locationIdCheck " required="true()" type="select1"/>
+      <bind nodeset="/visit_registration/checkRightId" relevant=" /visit_registration/openhds/locationId  != /visit_registration/locationcalculated  and  /visit_registration/openhds/locationId  != /visit_registration/locationIdCheck " required="true()" type="string"/>
+      <bind nodeset="/visit_registration/whynotrightcode" relevant=" /visit_registration/openhds/locationId  != /visit_registration/locationcalculated  and  /visit_registration/openhds/locationId  != /visit_registration/locationIdCheck " required="true()" type="select1"/>
       <bind nodeset="/visit_registration/visitDate" readonly="true()" required="true()" type="date"/>
       <bind nodeset="/visit_registration/intervieweeId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/visit_registration/correctInterviewee" required="true()" type="select1"/>
       <bind nodeset="/visit_registration/intervieweeName" relevant="../correctInterviewee = '0'" required="true()" type="string"/>
       <bind nodeset="/visit_registration/reason" relevant="../correctInterviewee = '0'" required="true()" type="select1"/>
       <bind nodeset="/visit_registration/farmhouse" required="true()" type="select1"/>
-      <bind nodeset="/visit_registration/coordinates" relevant="../farmhouse = '1' and ( /visit_registration/locationId  != /visit_registration/locationcalculated )" required="true()" type="geopoint"/>
+      <bind nodeset="/visit_registration/coordinates" relevant="../farmhouse = '1' and ( /visit_registration/openhds/locationId  != /visit_registration/locationcalculated )" required="true()" type="geopoint"/>
       <bind nodeset="/visit_registration/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/visit_registration/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
   <h:body>
-    <input ref="/visit_registration/visitId">
-      <label ref="jr:itext('/visit_registration/visitId:label')"/>
-    </input>
-    <input ref="/visit_registration/fieldWorkerId">
-      <label ref="jr:itext('/visit_registration/fieldWorkerId:label')"/>
-    </input>
-    <input ref="/visit_registration/locationId">
-      <label ref="jr:itext('/visit_registration/locationId:label')"/>
-    </input>
-    <input ref="/visit_registration/roundNumber">
-      <label ref="jr:itext('/visit_registration/roundNumber:label')"/>
-    </input>
+    <group appearance="field-list" ref="/visit_registration/openhds">
+      <label ref="jr:itext('/visit_registration/openhds:label')"/>
+      <input ref="/visit_registration/openhds/visitId">
+        <label ref="jr:itext('/visit_registration/openhds/visitId:label')"/>
+      </input>
+      <input ref="/visit_registration/openhds/fieldWorkerId">
+        <label ref="jr:itext('/visit_registration/openhds/fieldWorkerId:label')"/>
+      </input>
+      <input ref="/visit_registration/openhds/locationId">
+        <label ref="jr:itext('/visit_registration/openhds/locationId:label')"/>
+      </input>
+      <input ref="/visit_registration/openhds/roundNumber">
+        <label ref="jr:itext('/visit_registration/openhds/roundNumber:label')"/>
+      </input>
+    </group>
     <input ref="/visit_registration/locationIdCheck">
       <label ref="jr:itext('/visit_registration/locationIdCheck:label')"/>
     </input>

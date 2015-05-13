@@ -1,12 +1,21 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
     <h:title>Social Group Registration</h:title>
     <model>
       <itext>
         <translation lang="Swahili">
+          <text id="/social_group_registration/openhds/householdId:label">
+            <value>Namba Ya Kaya</value>
+          </text>
           <text id="/social_group_registration/processedByMirth:label">
             <value>processed</value>
+          </text>
+          <text id="/social_group_registration/openhds:label">
+            <value>-</value>
+          </text>
+          <text id="/social_group_registration/openhds/fieldWorkerId:label">
+            <value>Namba ya Mhojaji</value>
           </text>
           <text id="/social_group_registration/socialGroupType/FAM:label">
             <value>Familia</value>
@@ -17,22 +26,25 @@
           <text id="/social_group_registration/groupName:label">
             <value>Jina la Kikundi</value>
           </text>
-          <text id="/social_group_registration/fieldWorkerId:label">
-            <value>Namba ya Mhojaji</value>
-          </text>
-          <text id="/social_group_registration/individualId:label">
-            <value>Mkuu wa Kikundi</value>
-          </text>
           <text id="/social_group_registration/socialGroupType/COH:label">
             <value>Cohort</value>
           </text>
-          <text id="/social_group_registration/householdId:label">
-            <value>Namba Ya Kaya</value>
+          <text id="/social_group_registration/openhds/individualId:label">
+            <value>Mkuu wa Kikundi</value>
           </text>
         </translation>
         <translation default="true()" lang="English">
+          <text id="/social_group_registration/openhds/householdId:label">
+            <value>Household Id</value>
+          </text>
           <text id="/social_group_registration/processedByMirth:label">
             <value>processed</value>
+          </text>
+          <text id="/social_group_registration/openhds/individualId:label">
+            <value>Social Group Head</value>
+          </text>
+          <text id="/social_group_registration/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
           </text>
           <text id="/social_group_registration/socialGroupType/FAM:label">
             <value>Family</value>
@@ -43,17 +55,11 @@
           <text id="/social_group_registration/groupName:label">
             <value>Social Group Name</value>
           </text>
-          <text id="/social_group_registration/fieldWorkerId:label">
-            <value>Field Worker Id</value>
-          </text>
-          <text id="/social_group_registration/individualId:label">
-            <value>Social Group Head</value>
-          </text>
           <text id="/social_group_registration/socialGroupType/COH:label">
             <value>Cohort</value>
           </text>
-          <text id="/social_group_registration/householdId:label">
-            <value>Household Id</value>
+          <text id="/social_group_registration/openhds:label">
+            <value>OpenHDS preloaded info</value>
           </text>
         </translation>
       </itext>
@@ -62,9 +68,11 @@
           <start/>
           <end/>
           <deviceid/>
-          <householdId/>
-          <individualId/>
-          <fieldWorkerId/>
+          <openhds>
+            <fieldWorkerId/>
+            <householdId/>
+            <individualId/>
+          </openhds>
           <groupName/>
           <socialGroupType/>
           <processedByMirth/>
@@ -76,25 +84,28 @@
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/social_group_registration/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/social_group_registration/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/social_group_registration/deviceid" type="string"/>
-      <bind nodeset="/social_group_registration/householdId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/social_group_registration/individualId" readonly="true()" required="true()" type="string"/>
-      <bind nodeset="/social_group_registration/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/social_group_registration/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/social_group_registration/openhds/householdId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/social_group_registration/openhds/individualId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/social_group_registration/groupName" required="true()" type="string"/>
       <bind nodeset="/social_group_registration/socialGroupType" required="true()" type="select1"/>
-      <bind nodeset="/social_group_registration/processedByMirth" relevant="1=2" type="int"/>
+      <bind nodeset="/social_group_registration/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/social_group_registration/meta/instanceID" readonly="true()" type="string"/>
     </model>
   </h:head>
   <h:body>
-    <input ref="/social_group_registration/householdId">
-      <label ref="jr:itext('/social_group_registration/householdId:label')"/>
-    </input>
-    <input ref="/social_group_registration/individualId">
-      <label ref="jr:itext('/social_group_registration/individualId:label')"/>
-    </input>
-    <input ref="/social_group_registration/fieldWorkerId">
-      <label ref="jr:itext('/social_group_registration/fieldWorkerId:label')"/>
-    </input>
+    <group appearance="field-list" ref="/social_group_registration/openhds">
+      <label ref="jr:itext('/social_group_registration/openhds:label')"/>
+      <input ref="/social_group_registration/openhds/fieldWorkerId">
+        <label ref="jr:itext('/social_group_registration/openhds/fieldWorkerId:label')"/>
+      </input>
+      <input ref="/social_group_registration/openhds/householdId">
+        <label ref="jr:itext('/social_group_registration/openhds/householdId:label')"/>
+      </input>
+      <input ref="/social_group_registration/openhds/individualId">
+        <label ref="jr:itext('/social_group_registration/openhds/individualId:label')"/>
+      </input>
+    </group>
     <input ref="/social_group_registration/groupName">
       <label ref="jr:itext('/social_group_registration/groupName:label')"/>
     </input>
