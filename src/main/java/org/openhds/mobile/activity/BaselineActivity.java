@@ -118,6 +118,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     private String parentExtId;
     private boolean hhCreation;
     private String jrFormId;
+    private boolean newIndividual;
     
     //State machine states  
 	public static final String SELECT_HIERARCHY_1 = "Select Hierarchy 1";
@@ -672,8 +673,14 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         alertDialogBuilder.setTitle(getString(R.string.baseline_lbl));
         alertDialogBuilder.setMessage(getString(R.string.finish_household_creation_msg));
         alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setPositiveButton("Ok", null);
-        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {			
+        				public void onClick(DialogInterface dialog, int which) {
+        					if(newIndividual){
+        			        	onMembership();
+        			        	newIndividual = false;
+        			        }	
+        				}
+        			});        AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();		
                 
         hhCreation = false;
@@ -980,6 +987,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     private void createBaselineFormDialog() {
     	showProgressFragment();
     	extInm= true;
+    	newIndividual = true;
     	new CreateBaselineTask().execute();
     }
 
@@ -1016,7 +1024,13 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         alertDialogBuilder.setTitle(getString(R.string.baseline_lbl));
         alertDialogBuilder.setMessage(getString(R.string.update_finish_ext_inmigration_msg));
         alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setPositiveButton("Ok", null);
+        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {			
+        				public void onClick(DialogInterface dialog, int which) {
+        					if(newIndividual){
+        			        	onMembership();		        
+        			        }				
+        				}
+        			});        
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();		
                 
