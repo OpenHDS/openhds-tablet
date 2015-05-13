@@ -10,9 +10,11 @@ public class FormXmlReaderTest extends TestCase {
 
     String locationXml = 
             "<data id=\"location_registration_v1\">" +
+            " <openhds>" +    
     		"  <fieldWorkerId>FWEK1</fieldWorkerId>" +
     		"  <hierarchyId>IDD</hierarchyId>" +
     		"  <locationId>AKPIDUIDD001</locationId>" +
+    		" </openhds>" +
     		"  <locationName>Test House Name</locationName>" +
     		"  <locationType>RUR</locationType>" +
     		"  <latlong></latlong>" +
@@ -32,10 +34,12 @@ public class FormXmlReaderTest extends TestCase {
 
     String visitXml = 
             "<data id=\"visit_registration_v3\">" +
+            " <openhds>" + 
             "  <visitId>VAKPIDUIDD11001</visitId>" +
             "  <locationId>AKPIDUIDD001</locationId>" +
+            "  <roundNumber>1</roundNumber>" +            
+            " </openhds>" +            
             "  <visitDate>2008-12-15</visitDate>" +
-            "  <roundNumber>1</roundNumber>" +
             "</data>";
 
   /*  public void testShouldReadVisitXml() {

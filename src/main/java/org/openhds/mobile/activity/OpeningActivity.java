@@ -7,6 +7,7 @@ import org.openhds.mobile.fragment.SupervisorLoginFragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -41,6 +42,15 @@ public class OpeningActivity extends Activity implements SharedPreferences.OnSha
 						new FieldWorkerLoginFragment())
 				.add(R.id.supervisor_login_container,
 						new SupervisorLoginFragment()).commit();
+		
+		
+		try {
+			String version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+			CharSequence title = getTitle();
+			setTitle(title.toString() + " (v" + version + ")");
+		} catch (NameNotFoundException e) {
+		}
+
 	}
 
 	@Override
