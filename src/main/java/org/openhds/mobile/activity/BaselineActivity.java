@@ -37,6 +37,7 @@ import org.openhds.mobile.model.LocationVisit;
 import org.openhds.mobile.model.PregnancyObservationUpdate;
 import org.openhds.mobile.model.PregnancyOutcome;
 import org.openhds.mobile.model.Round;
+import org.openhds.mobile.model.Settings;
 import org.openhds.mobile.model.SocialGroup;
 import org.openhds.mobile.model.StateMachine;
 import org.openhds.mobile.task.OdkGeneratedFormLoadTask;
@@ -96,6 +97,10 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     protected static final int FILTER_INMIGRATION_FATHER = 70;
     protected static final int FILTER_INDIV_VISIT = 75;
     protected static final int FILTER_SOCIALGROUP = 80;
+    
+    private static String VISIT_LEVEL;
+    private static final String DEFAULT_VISIT_LEVEL = "location";
+    
     // the uri of the last viewed xform
     private Uri contentUri;
 
@@ -228,6 +233,11 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             stateMachine.transitionInSequence(state);
         	
         }
+
+            Cursor c = Queries.getAllSettings(getContentResolver());
+     		Settings settings = Converter.convertToSettings(c); 
+     		c.close();
+     		VISIT_LEVEL = settings.getVisitLevel()==null ? DEFAULT_VISIT_LEVEL : settings.getVisitLevel();
         
     }
     
@@ -818,7 +828,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 
 
     private void loadIndividualValueData() {
-        vf.loadIndividuals(locationVisit.getLocation().getExtId());
+        vf.loadIndividuals(locationVisit,VISIT_LEVEL);
     }
 
     private void createUnfinishedFormDialog() {

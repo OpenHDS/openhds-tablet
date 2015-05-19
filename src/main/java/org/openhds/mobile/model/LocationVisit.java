@@ -39,8 +39,11 @@ public class LocationVisit implements Serializable {
     private LocationHierarchy hierarchy6;
     private LocationHierarchy hierarchy7;
     private LocationHierarchy hierarchy8;
-   // private int levelNumbers;
+    
+    private SocialGroup socialgroup;
+
     private String lowestLevelExtId;
+    private String visitLevel;
     private Round round;
 
     private Location location;
@@ -325,8 +328,16 @@ public class LocationVisit implements Serializable {
     	while(suffix.length() < 3){
     		suffix="0"+suffix;
     	}
-    	
-        String generatedId = location.getExtId() + suffix ;
+    	String generatedId;
+    	if (visitLevel.equalsIgnoreCase("location")) {
+    		generatedId = location.getExtId() + suffix ;
+    	} else {
+    		if (socialgroup!=null) {
+    			generatedId = socialgroup.getExtId() + suffix ;
+    		} else {
+    			generatedId = location.getExtId() +"00" + suffix ;
+    		}
+    	}
 
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -470,4 +481,20 @@ public class LocationVisit implements Serializable {
 
         return id;
     }
+
+	public SocialGroup getSocialgroup() {
+		return socialgroup;
+	}
+
+	public void setSocialgroup(SocialGroup socialgroup) {
+		this.socialgroup = socialgroup;
+	}
+
+	public String getVisitLevel() {
+		return visitLevel;
+	}
+
+	public void setVisitLevel(String visitLevel) {
+		this.visitLevel = visitLevel;
+	}
 }

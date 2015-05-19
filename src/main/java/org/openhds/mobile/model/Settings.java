@@ -12,6 +12,7 @@ public class Settings {
 	private String dateOfLastSync;
 	private String dateOfLastFieldWorkerSync;
 	private String dateOfLastFormsSync;
+	private String visitLevel;
 	
 	public final static String MINIMUM_AGE_OF_PARENTS = "minAgeOfParents";
 	public final static String MINIMUM_AGE_OF_HOUSEHOLDHEAD = "minAgeOfHouseholdHead";
@@ -20,6 +21,7 @@ public class Settings {
 	public final static String DATE_OF_LAST_SYNC = "dateOfLastSync";
 	public final static String DATE_OF_LAST_FW_SYNC = "dateOfLastFieldWorkerSync";
 	public final static String DATE_OF_LAST_FORMS_SYNC = "dateOfLastFormsSync";
+	public final static String VISIT_LEVEL = "visitLevel";
 	
 	private Map<String, String> _settingsList;
 	
@@ -104,6 +106,8 @@ public class Settings {
 				this.setDateOfLastFieldWorkerSync(settingsList.get(key));
 			}else if(key.equals(DATE_OF_LAST_FORMS_SYNC)){
 				this.setDateOfLastFormsSync(settingsList.get(key));
+			}else if(key.equals(VISIT_LEVEL)){
+				this.setVisitLevel(settingsList.get(key));
 			}
 		}
 	}
@@ -174,5 +178,13 @@ public class Settings {
 	 */
 	public void setDateOfLastFormsSync(String dateOfLastFormsSync) {
 		this.dateOfLastFormsSync = dateOfLastFormsSync;
+	}
+
+	public String getVisitLevel() {
+		return visitLevel;
+	}
+
+	public void setVisitLevel(String visitLevel) {
+		this.visitLevel = visitLevel;
 	}	
 }

@@ -57,6 +57,7 @@ public class OpenHDSProvider extends ContentProvider {
     private static final int INDIVIDUAL_ID = 2;
     private static final int INDIVIDUAL_SG = 19;
     private static final int INDIVIDUAL_SG_ACTIVE_ID = 23;
+    private static final int INDIVIDUAL_SG_ACTIVE = 26;
     private static final int LOCATIONS = 3;
     private static final int LOCATION_ID = 4;
     private static final int HIERARCHYITEMS = 5;
@@ -90,6 +91,8 @@ public class OpenHDSProvider extends ContentProvider {
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "individuals", INDIVIDUALS);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "individuals/sg/*", INDIVIDUAL_SG);
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "individuals/sga/*", INDIVIDUAL_SG_ACTIVE_ID);
+        sUriMatcher.addURI(OpenHDS.AUTHORITY, "individuals/sga", INDIVIDUAL_SG_ACTIVE);
+
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "individuals/#", INDIVIDUAL_ID);
 
         sUriMatcher.addURI(OpenHDS.AUTHORITY, "locations", LOCATIONS);
@@ -253,6 +256,23 @@ public class OpenHDSProvider extends ContentProvider {
                 + OpenHDS.Individuals.COLUMN_INDIVIDUAL_FIRSTNAME);    
         individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_LASTNAME, "s."
                 + OpenHDS.Individuals.COLUMN_INDIVIDUAL_LASTNAME);         
+        // special case to display individuals first name and last name on the
+        // value fragment
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_FULLNAME,
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_FIRSTNAME + " || ' ' || "
+                        + OpenHDS.Individuals.COLUMN_INDIVIDUAL_LASTNAME + " as "
+                        + OpenHDS.Individuals.COLUMN_INDIVIDUAL_FULLNAME);
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_DOB,
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_DOB);
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_MOTHER,
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_MOTHER);
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_FATHER,
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_FATHER);
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_GENDER,
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_GENDER);
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE,
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE);
+        
         individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE, "s."
                 + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE);
         individualsJoinProjectionMap.put(OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID, "x."
@@ -462,7 +482,15 @@ public class OpenHDSProvider extends ContentProvider {
                     + sg + "')");  
             qb.setProjectionMap(individualsJoinProjectionMap);
             sortOrder = "s." + OpenHDS.Individuals._ID;
-            break;            
+            break;       
+        case INDIVIDUAL_SG_ACTIVE:
+            qb.setTables(OpenHDS.Individuals.TABLE_NAME + " s LEFT JOIN " + OpenHDS.IndividualGroups.TABLE_NAME + " x " 
+            		+ " on s." + OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " = x." + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID);
+            qb.appendWhere("s." + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE + " != 'DTH'");         
+           
+            qb.setProjectionMap(individualsJoinProjectionMap);
+            sortOrder = "x." + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID +", s." + OpenHDS.Individuals._ID;
+            break; 
         case LOCATIONS:
             qb.setTables(OpenHDS.Locations.TABLE_NAME);
             qb.setProjectionMap(locationsProjectionMap);

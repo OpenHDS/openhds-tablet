@@ -10,6 +10,7 @@ import org.openhds.mobile.database.queries.Converter;
 import org.openhds.mobile.model.Individual;
 import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
+import org.openhds.mobile.model.LocationVisit;
 import org.openhds.mobile.model.Round;
 import org.openhds.mobile.model.SocialGroup;
 
@@ -49,6 +50,8 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private static final int INDIVIDUAL_FILTER_ID_LOADER = 9998; 
     private static final int LOCATION_FILTER_ID_LOADER = 9999;
     private static final int SOCIALGROUP_FILTER_LOADER = 99910;
+	private static final int INDIVIDUAL_LOADER2 = 99911;
+
 
     // create the column mappings so they don't need to be recreated on every load
     private static final String[] HIERARCHY_COLUMNS = new String[] { OpenHDS.HierarchyItems.COLUMN_HIERARCHY_NAME,
@@ -58,12 +61,14 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     private static final String[] LOCATION_COLUMNS = new String[] { OpenHDS.Locations.COLUMN_LOCATION_NAME,
             OpenHDS.Locations.COLUMN_LOCATION_EXTID};
     private static final String[] INDIVIDUAL_COLUMNS = new String[] { OpenHDS.Individuals.COLUMN_INDIVIDUAL_FULLNAME,
-            OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID, OpenHDS.Individuals.COLUMN_INDIVIDUAL_DOB };
+            OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID, OpenHDS.Individuals.COLUMN_INDIVIDUAL_DOB, OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID};
     private static final String[] SOCIALGROUP_COLUMNS = new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME,
         OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID};    
 
     private static final int[] VIEW_BINDINGS = new int[] { android.R.id.text1, android.R.id.text2 };
-    private static final int[] VIEW_BINDINGSI = new int[] { android.R.id.text1, android.R.id.text2,R.id.text3 };
+    private static final int[] VIEW_BINDINGSI = new int[] { android.R.id.text1, android.R.id.text2,R.id.text3,R.id.text4};
+
+
 
     private SimpleCursorAdapter adapter;
 
@@ -292,9 +297,14 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	            return buildLocationCursorLoader(arg1);
 	        case INDIVIDUAL_LOADER:
 	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
-	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null,
+	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE, null,
 	                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ? AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"='NA'",
-	                    new String[] { arg1.getString("locationExtId") }, null);
+	                    new String[] { arg1.getString("locationExtId")}, null);
+	        case INDIVIDUAL_LOADER2:
+	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
+	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE, null,
+	                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ? AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"='NA' AND (" + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID +"= ? OR " + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID +" is NULL)",
+	                    new String[] { arg1.getString("locationExtId") , arg1.getString("socialGroupExtId")}, null);
 	        case INDIVIDUAL_FILTER_LOADER:
 	        {
 	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
@@ -302,7 +312,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	            String filter = buildFilter(arg1);
 	            String[] args = buildArguments(arg1);
 	
-	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter, args,
+	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE, null, filter, args,
 	                    OpenHDS.Individuals._ID + " ASC");
 	        }
 	        case INDIVIDUAL18_FILTER_LOADER:
@@ -316,7 +326,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	            }   
 	            //filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13";
 	            filter2 = filter2 + "(strftime('%Y', date('now')) - substr(dob,7))>13 AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"!='OMG'";
-	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter2, args2,
+	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE, null, filter2, args2,
 	                    OpenHDS.Individuals._ID + " ASC");
 	        }
 	        case INDIMG_FILTER_LOADER:
@@ -329,7 +339,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	            String filter1 = img.equals("IMG") ? buildFilter(arg1) : buildFilterOMG(arg1);
 	            String[] args1 = buildArguments(arg1);
 	
-	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter1, args1,
+	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE, null, filter1, args1,
 	                    OpenHDS.Individuals._ID + " ASC");
 	        }
 	        case INDIVIDUAL_FILTER_ID_LOADER:
@@ -339,7 +349,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	            String filter3 = OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " = ?";
 	            String[] args3 = new String[] { arg1.getString("extId") };
 	            
-	            CursorLoader cl = new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_ID_URI_BASE, null, filter3, args3,
+	            CursorLoader cl = new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE, null, filter3, args3,
 	                    OpenHDS.Individuals._ID + " ASC");
 	
 	            return cl;   
@@ -602,15 +612,21 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     /**
      * Load a list of individuals based on their current residency
      * 
-     * @param extId
+     * @param locationVisit
      *            filter by the location ext id (current residency) of the
      *            individual
+     * @param vISIT_LEVEL 
      */
-    public void loadIndividuals(String extId) {
+    public void loadIndividuals(LocationVisit locationVisit, String visitLevel) {
         listCurrentlyDisplayed = Displayed.INDIVIDUAL;
         Bundle bundle = new Bundle();
-        bundle.putString("locationExtId", extId);
-        getLoaderManager().restartLoader(INDIVIDUAL_LOADER, bundle, this);
+        bundle.putString("locationExtId", locationVisit.getLocation().getExtId());
+        bundle.putString("socialGroupExtId", locationVisit.getSocialgroup().getExtId());
+        if (visitLevel.equalsIgnoreCase("location")) {
+        	getLoaderManager().restartLoader(INDIVIDUAL_LOADER, bundle, this);
+        } else {
+        	getLoaderManager().restartLoader(INDIVIDUAL_LOADER2, bundle, this);
+        }
     }
 
     /**

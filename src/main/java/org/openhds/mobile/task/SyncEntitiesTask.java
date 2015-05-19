@@ -777,6 +777,12 @@ public class SyncEntitiesTask extends
 		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.MINIMUM_AGE_OF_PREGNANCY); //minAgeOfPregnancy
 		values.add(cv);
 
+		parser.nextTag(); //
+		cv = new ContentValues();
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, parser.nextText()); //visitLevel
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.VISIT_LEVEL); //visitLevel
+		values.add(cv);
+		
 		parser.nextTag(); // </generalSettings>
 		
 		//Insert current date

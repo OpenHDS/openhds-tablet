@@ -119,6 +119,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     
     private static int MINIMUM_PARENTHOOD_AGE;
     private static final int DEFAULT_MINIMUM_PARENTHOOD_AGE = 12;
+    
+    private static String VISIT_LEVEL;
+    private static final String DEFAULT_VISIT_LEVEL = "location";
 
     // the uri of the last viewed xform
     private Uri contentUri;
@@ -256,6 +259,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		c.close();
 		MINIMUM_HOUSEHOLD_AGE = settings.getMinimumAgeOfHouseholdHead() == 0 ? DEFAULT_MINIMUM_HOUSEHOLD_AGE : settings.getMinimumAgeOfHouseholdHead();
 		MINIMUM_PARENTHOOD_AGE = settings.getMinimumAgeOfParents() == 0 ? DEFAULT_MINIMUM_PARENTHOOD_AGE : settings.getMinimumAgeOfParents();
+		VISIT_LEVEL = settings.getVisitLevel()==null ? DEFAULT_VISIT_LEVEL : settings.getVisitLevel();
+		locationVisit.setVisitLevel(VISIT_LEVEL);
     }
     
     /**
@@ -469,16 +474,32 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	}    
 
     private void handleFilterIndivVisit(int resultCode, Intent data) { 	
+    		SocialGroup sg;
     		if (resultCode != RESULT_OK) {
                 return;
             }
 
             Individual individual = (Individual) data.getExtras().getSerializable("individual");
+            if(individual != null){
+            	ContentResolver resolver = getContentResolver();
+            	Cursor cursor = Queries.getSocialGroupsByIndividualExtId(resolver,individual.getExtId());
+            	if (cursor.moveToFirst()) {
+            		SocialGroup socialGroup = Converter.convertToSocialGroup(cursor);
+            		sg = socialGroup;
+            		locationVisit.setSocialgroup(sg);
+            	}
+            	cursor.close();
+            }
+          
+            locationVisit.createVisit(getContentResolver());
+            filledForm = formFiller.fillVisitForm(locationVisit);
+
             if (individual!=null){
             	filledForm.setIntervieweeId(individual.getExtId());
             }else{
             	filledForm.setIntervieweeId("UNK");
             }
+
             loadForm(SELECTED_XFORM);
 	}
 
@@ -544,8 +565,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             	if(locationExtId.length() > 0){
             		vf.loadFilteredLocationById(locationExtId);
             		vf.selectItemNoInList(0);
-            		CREATING_NEW_LOCATION = 1;
-            		onCreateVisit();
+            		buildNewLocDialog();
             	}
             } else {
                 createUnfinishedFormDialog();
@@ -555,8 +575,30 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 sf.setAll();
             }            
         }
-    }
 
+
+    }
+	private void buildNewLocDialog() {
+		// check if new location and new people
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("New Location with externals coming to DSS ");
+        alertDialogBuilder.setMessage("Is there anyone in this house already part of the Household and registedred to the HDSS?");
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            	CREATING_NEW_LOCATION = 0;
+        		onCreateVisit();	
+            }
+        });
+        alertDialogBuilder.setNegativeButton(getString(R.string.no_lbl), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            	CREATING_NEW_LOCATION = 1;
+        		onCreateVisit();	
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();			
+	}
     private void handleFilterInMigrationResult(int resultCode, Intent data) {
         if (resultCode != RESULT_OK) {
             return;
@@ -929,7 +971,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }*/
 
     private void loadIndividualValueData() {
-        vf.loadIndividuals(locationVisit.getLocation().getExtId());
+        vf.loadIndividuals(locationVisit, VISIT_LEVEL);
     }
 
     private void createUnfinishedFormDialog() {
@@ -1016,8 +1058,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     	
         @Override
         protected Void doInBackground(Void... params) {
-            locationVisit.createVisit(getContentResolver());
-            filledForm = formFiller.fillVisitForm(locationVisit);
+           // locationVisit.createVisit(getContentResolver());
+            //filledForm = formFiller.fillVisitForm(locationVisit);
             updatable = new VisitUpdate();
         	startFilterActivity(FILTER_INDIV_VISIT);
             return null;
