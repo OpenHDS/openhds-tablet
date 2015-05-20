@@ -582,7 +582,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		// check if new location and new people
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("New Location with externals coming to DSS ");
-        alertDialogBuilder.setMessage("Is there anyone in this house already part of the Household and registedred to the HDSS?");
+        alertDialogBuilder.setMessage("Is anyone in this house a member of this social group, and registedred with the HDSS?");
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
