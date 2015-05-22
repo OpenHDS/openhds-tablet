@@ -720,18 +720,8 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	
 	public void selectItemNoInList(int position){
 		
-//		ListView mList = getListView();
 		final int mActivePosition = position;
-//		mList.setSelection(0);
-//		
-//		//Cursor cursor = (Cursor) adapter.getItem(position);
-//		Cursor c = adapter.getCursor();
-//		System.out.println("Nr of current rows in cursor : " + c.getCount());
-//		
-//		mList.performItemClick(adapter.getView(mActivePosition, null, null), mActivePosition, adapter.getItemId(mActivePosition));
-		
-		
-		//w.performItemClick(w, position, 234525);
+
 		
 		    getListView().postDelayed(new Runnable() {
 		        public void run() {

@@ -102,6 +102,8 @@
 
 <string name="cant_create_relationship_lbl">Cannot create relationship, individual A is the same as individual B</string>
 <string name="cant_create_relsamesex_lbl">Cannot create relationship between individual of the same sex</string>
+<string name="select_any_sg_hdss">Is anyone in this house a member of this social group, and registedred with the HDSS?</string>
+<string name="dialog_new_loc">New Location with externals coming to DSS</string>
 
     <!-- adding new strings from hardcoded thanks to Paul Philimone -->
 
