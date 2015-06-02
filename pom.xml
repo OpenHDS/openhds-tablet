@@ -5,7 +5,7 @@
 
     <groupId>org.openhds</groupId>
     <artifactId>openhds-tablet</artifactId>
-    <version>1.3.1</version>
+    <version>1.3.3</version>
     <packaging>apk</packaging>
     <name>OpenHDS</name>
 
@@ -65,11 +65,11 @@
             <version>19_r4</version>
             <scope>provided</scope>
         </dependency>
-     <!--  <dependency> 
+     	<dependency> 
 			  <groupId>com.google.android.gms</groupId>
  			  <artifactId>google-play-services</artifactId> 
 			  <version>17.0.0</version> 
-	</dependency> -->
+		</dependency>
         <dependency>
             <groupId>net.sqlcipher</groupId>
             <artifactId>sqlcipher</artifactId>
