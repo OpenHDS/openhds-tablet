@@ -396,10 +396,18 @@ public class LocationVisit implements Serializable {
                 new String[] { OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID },
                 OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " LIKE ?", new String[] { socialGroupPrefix + "%" },
                 OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + " DESC");
-
+   	 	String generatedId = null;
+	
         if (cursor.moveToNext()) {
-        	cursor.close();
-        	return null;
+            if (visitLevel.equalsIgnoreCase("location")) {
+            	cursor.close();
+            	return null;
+            } else {
+              generatedId = generateSocialGroupIdFrom(cursor.getString(0), resolver);
+              cursor.close();
+              sg.setExtId(generatedId);
+              return sg;
+            }
         } else {
             sg.setExtId(socialGroupPrefix + "00");
         }
@@ -409,6 +417,18 @@ public class LocationVisit implements Serializable {
         return sg;
     }
 
+    private String generateSocialGroupIdFrom(String lastGeneratedId, ContentResolver resolver) {
+    	String socialGroupPrefix = getLatestLevelExtId() + location.getExtId().substring(3, 9);
+
+        try {
+            int increment = Integer.parseInt(lastGeneratedId.substring(9, 11));
+            int nextIncrement = increment + 1;
+            return String.format(socialGroupPrefix + "%02d", nextIncrement);
+        } catch (NumberFormatException e) {
+           return socialGroupPrefix + "01";
+        }
+    }
+    
     public Individual determinePregnancyOutcomeFather(ContentResolver resolver) {
         Cursor cursor = Queries.getRelationshipByIndividualA(resolver, selectedIndividual.getExtId());
         List<Relationship> rels = Converter.toRelationshipList(cursor);
