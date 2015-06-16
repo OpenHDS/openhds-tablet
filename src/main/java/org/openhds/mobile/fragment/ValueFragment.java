@@ -621,7 +621,9 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         listCurrentlyDisplayed = Displayed.INDIVIDUAL;
         Bundle bundle = new Bundle();
         bundle.putString("locationExtId", locationVisit.getLocation().getExtId());
-        bundle.putString("socialGroupExtId", locationVisit.getSocialgroup().getExtId());
+        if (locationVisit.getSocialgroup()!=null) {
+        	bundle.putString("socialGroupExtId", locationVisit.getSocialgroup().getExtId());
+        }
         if (visitLevel.equalsIgnoreCase("location")) {
         	getLoaderManager().restartLoader(INDIVIDUAL_LOADER, bundle, this);
         } else {
