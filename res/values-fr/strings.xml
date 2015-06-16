@@ -23,11 +23,11 @@
 	<string name="openhds_server_url_key">openhds_server_url</string>
 	<string name="openhds_server_url_title">OpenHDS Server URL</string>
 	<string name="supervisor_login_url">/api/rest/socialgroups</string>	
-	<string name="supervisor_login">Connection Superviseur</string>	
+	<string name="supervisor_login">Connexion Superviseur</string>	
     <string name="default_openhdsserver">http://data-management.local:8080/openhds</string>
     <string name="delete_form_btn">Supprimer Formulaire</string>
     <string name="download_form_button">Télécharger Formulaires</string>
-    <string name="download_extraform_button">Télécharger Formulaires Extra</string>
+    <string name="download_extraform_button">Télécharger Extra Formulaires</string>
     <string name="failure_reasons_txt">Messages d\'échec:</string>
     <string name="fatherNotFound">Un père n\'a pas pu être trouvé</string>
     <string name="field_worker_already_exists">L\'agent de terrain existe déjà</string>
@@ -39,8 +39,8 @@
     <string name="idGenerationFailure">Une erreur s\'est produite tout en générant un id</string>
     <string name="location_lbl">Concession:</string>
     <string name="form_lbl">Formulaire::</string>
-    <string name="login_btn">Connection</string>
-    <string name="logout_btn">Déconnection</string>
+    <string name="login_btn">Connexion</string>
+    <string name="logout_btn">Déconnexion</string>
     <string name="main_txt">Gestion Formulaire</string>
     <string name="openhdswebservice">OpenHDS Web Service</string>
     <string name="owner_txt">ID Propriétaire du Formulaire:</string>
@@ -51,19 +51,19 @@
     <string name="shared_pref_server_url_key">server_url</string>
 	<string name="syncDatabase">Synchroniser Base de données</string>
 	<string name="syncDatabaseMessage">Cette procédure va tenter de télécharger les entités d\'OpenHDS sur l\'appareil. S\'il vous plaît veuillez être patient pendant que le téléchargement est en cours.</string>
-	<string name="sync_database_description">Synchronisation des données du recensement avec le serveur..</string>	
-	<string name="sync_field_worker_description">Synchronisation des agents de terrain avec le serveur.</string>
-	<string name="sync_entities_failure">Failed to Collect OpenHDS Entities</string>
-	<string name="sync_forms_successful">Forms Collected Successfully</string>
-	<string name="sync_forms_failure">Failed to Collect the forms</string>
-	<string name="sync_entities_successful">OpenHDS Entities Collected Successfully</string>
-    <string name="sync_interrupted">Collecting OpenHDS Entities has been interrupted</string>
-    <string name="sync_restarting">Redémarrage Synchronisation</string>
+	<string name="sync_database_description">Synchronisation des données du recensement avec le serveur...</string>	
+	<string name="sync_field_worker_description">Synchronisation des agents de terrain avec le serveur...</string>
+	<string name="sync_entities_failure">Echec de synchronisation des entités de OpenHDS</string>
+	<string name="sync_forms_successful">Formulaires synchronisés avec succès</string>
+	<string name="sync_forms_failure">Echec de synchronisation des formulaires</string>
+	<string name="sync_entities_successful">Entités de OpenHDS synchronisées avec succès</string>
+    <string name="sync_interrupted">La synchronisation des entités de OpenHDS a été interrompu</string>
+    <string name="sync_restarting">Redémarrage de la synchronisation</string>
     <string name="unable_to_connect">Impossible de se connecter</string>
-    <string name="url_error">Désolé, invalid URL!</string>
+    <string name="url_error">Désolé, URL invalide!</string>
     <string name="update">Mise à jour</string>
     <string name="username">OpenHDS Nom d\'utilisateur</string>
-    <string name="view_forms_btn">Voir Mes formulaires</string>
+    <string name="view_forms_btn">Voir mes formulaires</string>
 	<string name="see_list">Voir la liste</string>
 
     <string name="location_hint_lbl">Lieu Id externe</string>
@@ -135,7 +135,7 @@
 	<string name="clearIndividualBtn_lbl">Effacer Individu</string>
 	<string name="householdBtn_lbl">Ménage</string>
 	<string name="membershipBtn_lbl">Membership</string>
-	<string name="relationshipBtn_lbl">relations</string>
+	<string name="relationshipBtn_lbl">Relations</string>
 	<string name="inMigrationBtn_lbl">Immigrations</string>
 	<string name="outMigrationBtn_lbl">Emigration</string>
 	<string name="pregRegBtn_lbl">Observation Grossesse </string>
@@ -170,8 +170,8 @@
 	
 	<string name="loginmenu_configure">Configurer le serveur</string>
 	
-	<string name="no_server_url">Aucu URL du serveur a été défini. Réglez URL du serveur dans Préférences</string>
-	<string name="bad_server_url">Mauvais URL du serveur</string>
+	<string name="no_server_url">Aucune URL du serveur a été défini. Réglez URL du serveur dans Préférences</string>
+	<string name="bad_server_url">Mauvaise URL du serveur</string>
 		
 	<string name="fwlogin_registerlbl">S’enregistrer</string>
 	<string name="fwlogin_loginlbl">S\'identifier</string>
@@ -251,9 +251,9 @@
 	<string name="update_build_father_msg">Est-ce que le père est connu et enregistré dans le système?</string>
 	<string name="update_build_pregnancy_lbr_count_msg">Nombre d’issus</string>
 	<string name="update_pregoutcome_choose_father">Choisir Père</string>
-	<string name="update_pregoutcome_search_hdss">Recherche HDSS</string>
-	<string name="update_pregoutcome_father_not_found">Père pas dans HDSS</string>
-	<string name="update_pregoutcome_not_within_hdss">Pas dans HDSS</string>
+	<string name="update_pregoutcome_search_hdss">Recherche SSDS</string>
+	<string name="update_pregoutcome_father_not_found">Père pas dans SSDS</string>
+	<string name="update_pregoutcome_not_within_hdss">Pas dans SSDS</string>
 	<string name="update_load_finished_select_hh_msg">Sélectionnez un ménage pour l\'individu</string>
     
     
@@ -263,7 +263,7 @@
     <string name="hierarchy5_select_lbl">Sélectionnez étage</string>
     <string name="login_username">Nom d\'utilisateur</string>
     <string name="login_password">Mot de passe</string>
-    <string name="fieldworker_login">connexion Agent de terrain</string>
+    <string name="fieldworker_login">Connexion Agent de terrain</string>
     
     <string name="field_workers_sync_url">/api/rest/fieldworkers</string>
     <string name="landscape_layout_tag">paysage</string>
@@ -280,7 +280,7 @@
     <string name="individual_label">Individu</string>
     <string name="bottom_label">Bas</string>
     <string name="create_membership">SVP créér d\'abord une appartenance pour cet individu!</string>
-    <string name="no_individual_left">Il n\'y a personne active resté dans la ménage qui pourrait remplacer le chef</string>
+    <string name="no_individual_left">Il n\'y aucune personne active resté dans le ménage qui pourrait remplacer le chef</string>
     
     
     <string name="hello_lbl">Bonjour</string>
