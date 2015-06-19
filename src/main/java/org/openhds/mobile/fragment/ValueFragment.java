@@ -20,12 +20,14 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -80,7 +82,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     
     private OnlyOneEntryListener onlyOneEntryListener;
 
-    private enum Displayed {
+    public enum Displayed {
         NONE, HIERARCHY_1, HIERARCHY_2, HIERARCHY_3, HIERARCHY_4, HIERARCHY_5, HIERARCHY_6, HIERARCHY_7, HIERARCHY_8, ROUND, LOCATION, INDIVIDUAL, SOCIALGROUP;
     }
 
@@ -302,9 +304,15 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	                    new String[] { arg1.getString("locationExtId")}, null);
 	        case INDIVIDUAL_LOADER2:
 	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
-	            return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE, null,
+	            if (arg1.getString("socialGroupExtId")!=null) {
+	            	return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE, null,
 	                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ? AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"='NA' AND (" + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID +"= ? OR " + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID +" is NULL)",
 	                    new String[] { arg1.getString("locationExtId") , arg1.getString("socialGroupExtId")}, null);
+	            } else {
+	            	return new CursorLoader(getActivity(), OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE, null,
+		                    OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " = ? AND " + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"='NA'",
+		                    new String[] { arg1.getString("locationExtId")}, null);
+	            }
 	        case INDIVIDUAL_FILTER_LOADER:
 	        {
 	            adapter.changeCursorAndColumns(null, INDIVIDUAL_COLUMNS, VIEW_BINDINGSI);
@@ -540,22 +548,44 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         	
             if(listCurrentlyDisplayed != null){
     	        //Show different messages depending on currently displayed list
-    	        switch(listCurrentlyDisplayed){
-    	        	case INDIVIDUAL:
-    	        	{
-    	        		if(cursor.getCount() == 0){
+    	        if (listCurrentlyDisplayed.equals(Displayed.INDIVIDUAL)) {
+    	        	if(cursor.getCount() == 0){
     	        			Toast.makeText(getActivity(), "No Individuals found!", Toast.LENGTH_LONG).show();
     	        		}
     	        		else if(cursor.getCount() == 1){
     	        			if(onlyOneEntryListener != null)
     	        				onlyOneEntryListener.handleResult(OnlyOneEntryListener.Entity.INDIVIDUAL);
     	        		}
-    	        	}
-    	        	default:
-    	        	{
     	        		
+    	        		 adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+     	        	        public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+     	        	          if (view.getId() == android.R.id.text2)
+     	        	            { 
+     	        	        	  int visitedIndex = cursor.getColumnIndex("visited");
+     	        	              if (visitedIndex>-1) {
+	     	        	        	  String visited = cursor.getString(visitedIndex);
+	     	        	              int extIdIndex = cursor.getColumnIndex("extId");
+	    	        	              String extId = cursor.getString(extIdIndex);
+	     	        	              if (visited!=null) {
+	     	        	              TextView indiv = (TextView)view;
+	     	        	              indiv.setTextColor(Color.GREEN);
+	     	        	              indiv.setText(extId);
+     	        	              
+	     	        	              }
+	     	        	              else {
+	     	        	                  TextView extIdView = (TextView)view.findViewById(android.R.id.text2);
+	     	        	                  extIdView.setText(extId);
+	     	        	              }
+     	        	              }
+     	        	             return true;
+
+     	        	        }
+     	        	          return false;}
+
+     	        	    });
     	        	}
-    	        } 
+    	        	
+    	         
             }        	
         }
         
@@ -569,10 +599,19 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     }
 
     public void onLoaderReset(Loader<Cursor> arg0) {
+    	adapter.setViewBinder(null);
         adapter.swapCursor(null);
     }
 
-    /**
+    public Displayed getListCurrentlyDisplayed() {
+		return listCurrentlyDisplayed;
+	}
+
+	public void setListCurrentlyDisplayed(Displayed listCurrentlyDisplayed) {
+		this.listCurrentlyDisplayed = Displayed.LOCATION;
+	}
+
+	/**
      * Loads all rounds
      */
     public void loadRounds() {

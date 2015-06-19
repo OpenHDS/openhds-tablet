@@ -12,8 +12,10 @@ import org.openhds.mobile.model.PregnancyOutcome;
 import org.openhds.mobile.model.SocialGroup;
 
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.net.Uri;
 import android.util.Log;
 
 public class PregnancyOutcomeUpdate implements Updatable {
@@ -54,7 +56,7 @@ public class PregnancyOutcomeUpdate implements Updatable {
                 cv.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_MOTHER, child.getMother());
                 cv.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE, residency);
                 cv.put(OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE, "NA");
-
+                cv.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_VISITED, "Yes");
                 
                 resolver.insert(OpenHDS.Individuals.CONTENT_ID_URI_BASE, cv);
                 
@@ -71,6 +73,18 @@ public class PregnancyOutcomeUpdate implements Updatable {
                 resolver.insert(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE, cv);
             }
 
+            ContentValues cv1 = new ContentValues();
+
+            cv1.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_VISITED, "Yes");
+            Cursor cursor = resolver.query(OpenHDS.Individuals.CONTENT_ID_URI_BASE,
+                    new String[] { OpenHDS.Individuals._ID }, OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " = ?",
+                    new String[] { pregOut.getMother().getExtId() }, null);
+            if (cursor.moveToNext()) {
+                Uri uri = ContentUris.withAppendedId(OpenHDS.Individuals.CONTENT_ID_URI_BASE, cursor.getLong(0));
+                resolver.update(uri, cv1, null, null);
+            }
+            cursor.close();
+            
         } catch (FileNotFoundException e) {
             Log.e(VisitUpdate.class.getName(), "Could not read Visit XML file");
         }

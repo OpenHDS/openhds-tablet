@@ -46,6 +46,7 @@ public class OpenHDS {
         public static final String COLUMN_INDIVIDUAL_FATHER = "father";
         public static final String COLUMN_INDIVIDUAL_RESIDENCE = "currentResidence";
         public static final String COLUMN_RESIDENCE_END_TYPE = "endType";
+        public static final String COLUMN_INDIVIDUAL_VISITED = "visited";
 
     }
 

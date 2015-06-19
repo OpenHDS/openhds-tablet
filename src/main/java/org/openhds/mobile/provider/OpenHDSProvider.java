@@ -134,6 +134,8 @@ public class OpenHDSProvider extends ContentProvider {
                 OpenHDS.Individuals.COLUMN_INDIVIDUAL_LASTNAME);
         individualsProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_MOTHER,
                 OpenHDS.Individuals.COLUMN_INDIVIDUAL_MOTHER);
+        individualsProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_VISITED,
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_VISITED);
         individualsProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE,
                 OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE);
         // special case to display individuals first name and last name on the
@@ -278,7 +280,9 @@ public class OpenHDSProvider extends ContentProvider {
         individualsJoinProjectionMap.put(OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID, "x."
                 + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID);        
         individualsJoinProjectionMap.put(OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID, "x."
-                + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID);      
+                + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID); 
+        individualsJoinProjectionMap.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_VISITED,
+                OpenHDS.Individuals.COLUMN_INDIVIDUAL_VISITED);
         
         settingsProjectionMap = new HashMap<String, String>();
         settingsProjectionMap.put(OpenHDS.Settings._ID, OpenHDS.Settings._ID);
@@ -306,7 +310,8 @@ public class OpenHDSProvider extends ContentProvider {
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_FULLNAME + " TEXT, "
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_MOTHER + " TEXT,"
                     + OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + " TEXT,"
-                    + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE + " TEXT);" 
+                    + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE + " TEXT,"
+                    + OpenHDS.Individuals.COLUMN_INDIVIDUAL_VISITED + " TEXT);" 
                     
                     + " CREATE UNIQUE INDEX IDX_INDIVIDUAL_EXTID ON " +  OpenHDS.Individuals.TABLE_NAME
                     + "(" +  OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + ");"
@@ -478,8 +483,10 @@ public class OpenHDSProvider extends ContentProvider {
             qb.setTables(OpenHDS.Individuals.TABLE_NAME + " s INNER JOIN " + OpenHDS.IndividualGroups.TABLE_NAME + " x " 
             		+ " on s." + OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " = x." + OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID);
             qb.appendWhere("s." + OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE + " != 'DTH'");         
+           if (sg!=null) {
             qb.appendWhere(" AND (x." + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID + " = '"
-                    + sg + "')");  
+                    + sg + "')");
+           }
             qb.setProjectionMap(individualsJoinProjectionMap);
             sortOrder = "s." + OpenHDS.Individuals._ID;
             break;       

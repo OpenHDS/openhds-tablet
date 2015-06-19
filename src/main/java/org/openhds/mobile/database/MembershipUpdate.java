@@ -41,7 +41,17 @@ public class MembershipUpdate implements Updatable {
 	            }
 	            
 	            cursor.close();
-
+	            
+	            cv.clear();
+	            cv.put(OpenHDS.Individuals.COLUMN_INDIVIDUAL_VISITED, "Yes");
+	            cursor = resolver.query(OpenHDS.Individuals.CONTENT_ID_URI_BASE,
+	                    new String[] { OpenHDS.Individuals._ID }, OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + " = ?",
+	                    new String[] { membership.getIndExtId() }, null);
+	            if (cursor.moveToNext()) {
+	                Uri uri = ContentUris.withAppendedId(OpenHDS.Individuals.CONTENT_ID_URI_BASE, cursor.getLong(0));
+	                resolver.update(uri, cv, null, null);
+	            }
+	            cursor.close();
          } catch (FileNotFoundException e) {
              Log.e(MembershipUpdate.class.getName(), "Could not read Membership XML file");
          }

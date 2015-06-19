@@ -21,6 +21,7 @@ import org.openhds.mobile.database.InternalInMigrationUpdate;
 import org.openhds.mobile.database.LocationUpdate;
 import org.openhds.mobile.database.MembershipUpdate;
 import org.openhds.mobile.database.OutMigrationUpdate;
+import org.openhds.mobile.database.PregnancyObservationUpdate;
 import org.openhds.mobile.database.PregnancyOutcomeUpdate;
 import org.openhds.mobile.database.RelationshipUpdate;
 import org.openhds.mobile.database.Updatable;
@@ -31,6 +32,7 @@ import org.openhds.mobile.fragment.EventFragment;
 import org.openhds.mobile.fragment.ProgressFragment;
 import org.openhds.mobile.fragment.SelectionFragment;
 import org.openhds.mobile.fragment.ValueFragment;
+import org.openhds.mobile.fragment.ValueFragment.Displayed;
 import org.openhds.mobile.listener.OdkFormLoadListener;
 import org.openhds.mobile.model.FieldWorker;
 import org.openhds.mobile.model.FilledForm;
@@ -41,7 +43,6 @@ import org.openhds.mobile.model.Location;
 import org.openhds.mobile.model.LocationHierarchy;
 import org.openhds.mobile.model.LocationHierarchyLevel;
 import org.openhds.mobile.model.LocationVisit;
-import org.openhds.mobile.model.PregnancyObservationUpdate;
 import org.openhds.mobile.model.PregnancyOutcome;
 import org.openhds.mobile.model.Round;
 import org.openhds.mobile.model.Settings;
@@ -168,6 +169,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	private int CREATING_NEW_LOCATION = 0;
 	private int RETURNING_TO_DSS = 0;
 	
+
 	private static final List<String> stateSequence = new ArrayList<String>();
 //	private static final Map<String, Integer> stateLabels = new HashMap<String, Integer>();
 	static {
@@ -490,7 +492,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             	}
             	cursor.close();
             }
-          
+
+            if (locationVisit.getVisitLevel()==null) {
+            	locationVisit.setVisitLevel(VISIT_LEVEL);
+            }
             locationVisit.createVisit(getContentResolver());
             filledForm = formFiller.fillVisitForm(locationVisit);
 
@@ -1089,6 +1094,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 stateMachine.transitionTo("Finish Visit");
                 stateMachine.transitionTo("Select Location");
                 vf.onLoaderReset(null);
+                vf.setListCurrentlyDisplayed(Displayed.LOCATION);
                 }
         });
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_lbl), null);

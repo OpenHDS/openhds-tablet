@@ -191,7 +191,8 @@ public class FormFiller {
         addVisit(locationVisit, form);
         form.setLocationId(locationVisit.getLocation().getExtId());
         form.setMotherExtId(locationVisit.getSelectedIndividual().getExtId());
-        
+        form.setIndividualExtId(locationVisit.getSelectedIndividual().getExtId());
+
         for(String childId : po.getChildIds()) {
             Child child = new Child();
             child.setId(childId);
