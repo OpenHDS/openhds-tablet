@@ -9,6 +9,8 @@ public class Form implements Serializable {
     private String name;
     
     private String gender;
+    
+    private String indExtId;
   
 
 
@@ -29,6 +31,14 @@ public class Form implements Serializable {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getIndExtId() {
+		return indExtId;
+	}
+
+	public void setIndExtId(String indExtId) {
+		this.indExtId = indExtId;
 	}
 
  }

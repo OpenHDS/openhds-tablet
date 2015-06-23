@@ -354,5 +354,27 @@ public class FormXmlReader {
         }
         return null;
     }
+    
+    
+    public Form readForm(FileInputStream fileInputStream, String jrFormId)  {
+        try {
+            Document doc = buildDocument(fileInputStream);
+            
+            Form form = new Form();
+            if(xpath.evaluate("/"+jrFormId+"/openhds/individualId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
+            form.setIndExtId(xpath.evaluate("/"+jrFormId+"/openhds/individualId/text()", doc));
+            
+            return form;
+        } catch (ParserConfigurationException e) {
+        } catch (SAXException e) {
+        } catch (IOException e) {
+        } catch (XPathExpressionException e) {
+        }
+        return null;
+    }
+
+
 	
 }

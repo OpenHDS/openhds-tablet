@@ -165,7 +165,7 @@
     <string name="dialog_working_lbl">En cours .</string>
 	<string name="dialog_dont_interrupt_lbl">Ne pas interrompre</string>
 	
-	<string name="formmenu_extraforms">Formulaires Extra</string>
+	<string name="formmenu_extraforms">Autre Formulaires</string>
 	<string name="sync_extraforms">Synchronisez les formulaires Extra</string>
 	
 	<string name="loginmenu_configure">Configurer le serveur</string>
@@ -233,7 +233,7 @@
 	<string name="update_unfinish_neg_button">Modifier le formulaire</string>
 	<string name="update_xform_not_found_msg">Le XForm ne peut pas être trouvée dans ODK Collect. SVP assurez-vous qu\'il existe et il est correctement nommé</string>
 	<string name="visit_lbl">Visite</string>
-	<string name="update_finish_visit_msg">Avez-vous de saisi tous les événements et voulez-vous terminer la visite?</string>
+	<string name="update_finish_visit_msg">Avez-vous saisi tous les événements et voulez-vous terminer la visite?</string>
 	<string name="cancel_lbl">Annuler</string>
 	<string name="socialgroup_lbl">Ménage</string>
 	<string name="update_on_sgexists_msg">Le ménage de la concession sélectionnée existe déjà.</string>
@@ -242,12 +242,12 @@
 	<string name="update_create_inmigration_msg">Est-ce un une immigration interne ou externe?</string>
 	<string name="update_create_inmigration_pos_button">Interne</string>
 	<string name="update_create_inmigration_neg_button">Externe</string>
-	<string name="update_create_inmigration_neutral_button">Return to DSS</string>
-	<string name="update_finish_ext_inmigration_msg">SVP, maintenant créer une appartenance pour l\'individu</string>
-	<string name="finish_household_creation_msg">SVP, maintenant créer une appartenance pour la CdM</string>
+	<string name="update_create_inmigration_neutral_button">Retour dans le SSDS</string>
+	<string name="update_finish_ext_inmigration_msg">SVP, maintenant créer un lien de parenté pour l\'individu avec le CM</string>
+	<string name="finish_household_creation_msg">SVP, maintenant créer un lien de parenté pour le CM</string>
 	<string name="mother_lbl">Mère</string>
 	<string name="update_build_mother_msg">Est-ce que la mère est connue et enregistrée dans le système?</string>
-	<string name="father_lbl">père</string>
+	<string name="father_lbl">Père</string>
 	<string name="update_build_father_msg">Est-ce que le père est connu et enregistré dans le système?</string>
 	<string name="update_build_pregnancy_lbr_count_msg">Nombre d’issus</string>
 	<string name="update_pregoutcome_choose_father">Choisir Père</string>
@@ -263,7 +263,7 @@
     <string name="hierarchy5_select_lbl">Sélectionnez étage</string>
     <string name="login_username">Nom d\'utilisateur</string>
     <string name="login_password">Mot de passe</string>
-    <string name="fieldworker_login">Connexion Agent de terrain</string>
+    <string name="fieldworker_login">Con. Agent de terrain</string>
     
     <string name="field_workers_sync_url">/api/rest/fieldworkers</string>
     <string name="landscape_layout_tag">paysage</string>
@@ -285,5 +285,17 @@
     
     <string name="hello_lbl">Bonjour</string>
     <string name="STARTHIERARCHYLEVELNAME">District</string>
+    <string name="exiting_lbl">Etes-vous sur de quitter?</string>
+    <string name="is_migrating_hoh_warning_lbl">vous etes sur le point d\'emigrer un Chef de menage!</string>
+    <string name="cant_create_relationship_lbl">Un individu ne peut se marier a lui meme</string>
+	<string name="cant_create_relsamesex_lbl">Ne peut pas marier deux individus de meme sexe</string>
+	<string name="select_any_sg_hdss">Y a t-il un membre de ce menage qui est deja enregistre dans le SSDS?</string>
+	<string name="dialog_new_loc">Nouvelle concession avec des immigrants externes au SSDS</string>
+    
+    <string name="select_household_lbl">Sélectionnez Menage</string>
+    <string name="search_for_household_lbl">Svp chercher un existant ou créer un nouveau ménage.</string>
+    <string name="create_lbl">Créer</string>
 
+    
+    
 </resources>

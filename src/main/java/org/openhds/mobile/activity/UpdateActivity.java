@@ -16,6 +16,7 @@ import org.openhds.mobile.R;
 import org.openhds.mobile.database.DeathOfHoHUpdate;
 import org.openhds.mobile.database.DeathUpdate;
 import org.openhds.mobile.database.ExternalInMigrationUpdate;
+import org.openhds.mobile.database.ExtraFormUpdate;
 import org.openhds.mobile.database.HouseholdUpdate;
 import org.openhds.mobile.database.InternalInMigrationUpdate;
 import org.openhds.mobile.database.LocationUpdate;
@@ -373,6 +374,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         		locationVisit.getLocation().setHead(sg.getGroupHead());
         	}
         	filledForm = formFiller.fillExtraForm(locationVisit, form.getName(), sg);
+            updatable = new ExtraFormUpdate();
         	cursor.close();
         	loadForm(SELECTED_XFORM);
         	break;
@@ -1151,6 +1153,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onMembership() {
+    	hhCreation=false;
         filledForm = formFiller.fillMembershipForm(locationVisit);
         updatable = new MembershipUpdate();
 //        showProgressFragment();

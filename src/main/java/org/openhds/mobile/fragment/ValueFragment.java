@@ -566,7 +566,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	     	        	        	  String visited = cursor.getString(visitedIndex);
 	     	        	              int extIdIndex = cursor.getColumnIndex("extId");
 	    	        	              String extId = cursor.getString(extIdIndex);
-	     	        	              if (visited!=null) {
+	     	        	              if (visited!=null && visited.equalsIgnoreCase("Yes")) {
 	     	        	              TextView indiv = (TextView)view;
 	     	        	              indiv.setTextColor(Color.GREEN);
 	     	        	              indiv.setText(extId);

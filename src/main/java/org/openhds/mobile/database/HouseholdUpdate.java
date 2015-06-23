@@ -9,7 +9,10 @@ import org.openhds.mobile.model.FormXmlReader;
 import org.openhds.mobile.model.SocialGroup;
 
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
 import android.util.Log;
 
 public class HouseholdUpdate implements Updatable {
@@ -34,7 +37,18 @@ public class HouseholdUpdate implements Updatable {
             cv.put(OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID, sg.getGroupHead());
             cv.put(OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID, sg.getExtId());
             
-            resolver.insert(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE, cv);
+            //resolver.insert(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE, cv);
+            Cursor cursor = resolver.query(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE,
+                    new String[] { OpenHDS.IndividualGroups._ID }, OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID + " = ?",
+                    new String[] {sg.getExtId()}, null);
+            if (cursor.moveToNext()) {
+                Uri uri = ContentUris.withAppendedId(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE, cursor.getLong(0));
+                resolver.update(uri, cv, null, null);
+            } else {
+            	resolver.insert(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE, cv);
+            }
+            
+            
         } catch (FileNotFoundException e) {
             Log.e(HouseholdUpdate.class.getName(), "Could not find Household XML file");
         }
