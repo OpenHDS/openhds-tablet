@@ -296,6 +296,7 @@
     <string name="search_for_household_lbl">Svp chercher un existant ou créer un nouveau ménage.</string>
     <string name="create_lbl">Créer</string>
 
+    <string name="younger_than_required_age_for_hoh">L\'individu selectionné est moins agé qu\'il en faut!</string>
     
     
 </resources>
