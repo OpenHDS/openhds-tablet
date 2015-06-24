@@ -1,6 +1,11 @@
 package org.openhds.mobile.activity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -97,6 +102,9 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     protected static final int FILTER_INMIGRATION_FATHER = 70;
     protected static final int FILTER_INDIV_VISIT = 75;
     protected static final int FILTER_SOCIALGROUP = 80;
+    
+    private static int MINIMUM_HOUSEHOLD_AGE;
+    private static final int DEFAULT_MINIMUM_HOUSEHOLD_AGE = 14;
     
     private static String VISIT_LEVEL;
     private static final String DEFAULT_VISIT_LEVEL = "location";
@@ -237,6 +245,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             Cursor c = Queries.getAllSettings(getContentResolver());
      		Settings settings = Converter.convertToSettings(c); 
      		c.close();
+     		MINIMUM_HOUSEHOLD_AGE = settings.getMinimumAgeOfHouseholdHead() == 0 ? DEFAULT_MINIMUM_HOUSEHOLD_AGE : settings.getMinimumAgeOfHouseholdHead();
      		VISIT_LEVEL = settings.getVisitLevel()==null ? DEFAULT_VISIT_LEVEL : settings.getVisitLevel();
         
     }
@@ -957,8 +966,16 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             	onSGexists();
             	this.cancel(true);  	
              } else {
-            	hhCreation = true;
-            	loadForm(SELECTED_XFORM);
+                 //Check if selected individual meets required age to be the Head of a SG. If not, display a msg and don't proceed.
+                 Individual individual = locationVisit.getSelectedIndividual();
+                 boolean meetsMinimumAge = individualMeetsMinimumAge(individual);
+                 if(meetsMinimumAge){
+                 	hhCreation = true;
+                 	loadForm(SELECTED_XFORM);
+                 }
+                 else{
+                 	Toast.makeText(BaselineActivity.this, getString(R.string.younger_than_required_age_for_hoh), Toast.LENGTH_LONG).show();
+                 }
              }
         }
     }
@@ -1797,6 +1814,23 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 		// TODO Auto-generated method stub
 		
 	}
+	
+    private boolean individualMeetsMinimumAge(Individual indiv) {
+        try {
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date dob = formatter.parse(indiv.getDob());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dob);
+            if ((new GregorianCalendar().get(Calendar.YEAR) - cal.get(Calendar.YEAR)) > MINIMUM_HOUSEHOLD_AGE) {
+                return true;
+            }
+        } catch (Exception e) {
+            // no dob or malformed
+            return true;
+        }
+
+        return false;
+    }   
 
 	
 }

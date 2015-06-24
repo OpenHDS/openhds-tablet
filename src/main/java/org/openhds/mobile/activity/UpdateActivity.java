@@ -1136,8 +1136,17 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
              	
              } else {
             	hideProgressFragment();
-            	hhCreation = true;
-            	loadForm(SELECTED_XFORM);
+            	
+                //Check if selected individual meets required age to be the Head of a SG. If not, display a msg and don't proceed.
+                Individual individual = locationVisit.getSelectedIndividual();
+                boolean meetsMinimumAge = individualMeetsMinimumAge(individual);
+                if(meetsMinimumAge){
+                	hhCreation = true;
+                	loadForm(SELECTED_XFORM);
+                }
+                else{
+                	Toast.makeText(UpdateActivity.this, getString(R.string.younger_than_required_age_for_hoh), Toast.LENGTH_LONG).show();
+                }
              }
         }
     }
