@@ -257,13 +257,16 @@ public class FormFiller {
           addVisit(locationVisit, form);
           addIndividual(locationVisit.getSelectedIndividual(), form);
           form.setLocationId(locationVisit.getLocation().getExtId());
+          form.setFatherExtId(locationVisit.getSelectedIndividual().getFather());
+          form.setHouseName(locationVisit.getLocation().getName());
           form.setRoundNumber(locationVisit.getRound().getRoundNumber());
           form.setRoundNumber(locationVisit.getRound().getRoundNumber());
           form.setMotherExtId(locationVisit.getSelectedIndividual().getMother());
           form.setHierarchyId(locationVisit.getLatestLevelExtId());
-          if (sg !=null)
+          if (sg !=null){
   			addHousehold(sg, form);
-
+          	form.setHouseholdName(sg.getGroupName());
+          }
           return form;
     }
     

@@ -40,7 +40,7 @@ public class HouseholdUpdate implements Updatable {
             //resolver.insert(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE, cv);
             Cursor cursor = resolver.query(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE,
                     new String[] { OpenHDS.IndividualGroups._ID }, OpenHDS.IndividualGroups.COLUMN_INDIVIDUALUUID + " = ?",
-                    new String[] {sg.getExtId()}, null);
+                    new String[] {sg.getGroupHead()}, null);
             if (cursor.moveToNext()) {
                 Uri uri = ContentUris.withAppendedId(OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE, cursor.getLong(0));
                 resolver.update(uri, cv, null, null);
