@@ -13,6 +13,7 @@ public class Settings {
 	private String dateOfLastFieldWorkerSync;
 	private String dateOfLastFormsSync;
 	private String visitLevel;
+	private String earliestEventDate;
 	
 	public final static String MINIMUM_AGE_OF_PARENTS = "minAgeOfParents";
 	public final static String MINIMUM_AGE_OF_HOUSEHOLDHEAD = "minAgeOfHouseholdHead";
@@ -22,6 +23,7 @@ public class Settings {
 	public final static String DATE_OF_LAST_FW_SYNC = "dateOfLastFieldWorkerSync";
 	public final static String DATE_OF_LAST_FORMS_SYNC = "dateOfLastFormsSync";
 	public final static String VISIT_LEVEL = "visitLevel";
+	public final static String DATE_OF_EARLIEST_EVENT = "earliestEventDate";
 	
 	private Map<String, String> _settingsList;
 	
@@ -186,5 +188,14 @@ public class Settings {
 
 	public void setVisitLevel(String visitLevel) {
 		this.visitLevel = visitLevel;
+	}
+
+
+	public String getEarliestEventDate() {
+		return earliestEventDate;
+	}
+
+	public void setEarliestEventDate(String earliestEventDate) {
+		this.earliestEventDate = earliestEventDate;
 	}	
 }

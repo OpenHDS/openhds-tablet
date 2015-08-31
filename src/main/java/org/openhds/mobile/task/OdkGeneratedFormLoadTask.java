@@ -17,6 +17,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
+import org.openhds.mobile.database.queries.Converter;
+import org.openhds.mobile.database.queries.Queries;
 import org.openhds.mobile.listener.OdkFormLoadListener;
 import org.openhds.mobile.model.Child;
 import org.openhds.mobile.model.FilledForm;
@@ -48,6 +50,9 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
     private TelephonyManager mTelephonyManager;
     private Context mContext;
 
+    private static String EARLIEST_DATE;
+    private static final String DEFAULT_EARLIEST_DATE = "1900-01-01";
+    
     public OdkGeneratedFormLoadTask(Context context, FilledForm filledForm, OdkFormLoadListener listener) {
         this.listener = listener;
         this.resolver = context.getContentResolver();
@@ -127,6 +132,15 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                     if (name.equals(FilledParams.visitId)) {
                         sbuilder.append(filledForm.getVisitExtId() == null ? "<visitId />" + "\r\n" : "<visitId>"
                                 + filledForm.getVisitExtId() + "</visitId>" + "\r\n");
+                    } else if (name.equals(FilledParams.earliestDate)) {
+                        
+                       	android.database.Cursor c = Queries.getAllSettings(mContext.getContentResolver());
+                       	org.openhds.mobile.model.Settings settings = Converter.convertToSettings(c); 
+                       	EARLIEST_DATE= settings.getEarliestEventDate()==null ? DEFAULT_EARLIEST_DATE : settings.getEarliestEventDate();
+                       	c.close();
+                        if (name.equals(FilledParams.earliestDate)) {
+                            sbuilder.append("<earliestDate>" + EARLIEST_DATE + "</earliestDate>" + "\r\n");
+                		}
                     } else if (name.equals(FilledParams.roundNumber)) {
                         sbuilder.append(filledForm.getRoundNumber() == null ? "<roundNumber />" + "\r\n"
                                 : "<roundNumber>" + filledForm.getRoundNumber() + "</roundNumber>" + "\r\n");

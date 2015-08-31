@@ -753,6 +753,12 @@ public class SyncEntitiesTask extends
 		values.clear();
 		ContentValues cv;
 		
+		parser.nextTag(); //
+		cv = new ContentValues();
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, parser.nextText()); //earliestEventDate
+		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.DATE_OF_EARLIEST_EVENT); //earliestEventDate
+		values.add(cv);
+		
 		parser.nextTag();
 		cv = new ContentValues();
 		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, parser.nextText()); //minMarriageAge
@@ -782,6 +788,7 @@ public class SyncEntitiesTask extends
 		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, parser.nextText()); //visitLevel
 		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.VISIT_LEVEL); //visitLevel
 		values.add(cv);
+		
 		
 		parser.nextTag(); // </generalSettings>
 		

@@ -12,6 +12,7 @@ public class FilledParams {
 	public static final String visitId = "visitId";
 	public static final String roundNumber = "roundNumber";
 	public static final String visitDate = "visitDate";
+	public static final String earliestDate = "earliestDate";
 	public static final String locationId = "locationId";
 	public static final String interviewee = "intervieweeId";
 	public static final String farmhouse = "farmhouse";
@@ -61,7 +62,7 @@ public class FilledParams {
 			
 	public static List<String> getParamsArray() {
 
-		return Arrays.asList(visitId, roundNumber, visitDate,interviewee,farmhouse, 
+		return Arrays.asList(visitId, roundNumber, visitDate,earliestDate, interviewee,farmhouse, 
 				individualId, motherId, fatherId, firstName, middleName,origin,start,deviceId, causeOfDeath,
 				lastName, gender, dob, locationId, houseName,socialGroupType, 
 				latlong, householdId, householdName, hierarchyId, 
