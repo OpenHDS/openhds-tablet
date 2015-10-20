@@ -5,7 +5,7 @@
 
     <groupId>org.openhds</groupId>
     <artifactId>openhds-tablet</artifactId>
-    <version>1.3.3</version>
+    <version>1.4</version>
     <packaging>apk</packaging>
     <name>OpenHDS</name>
 
@@ -33,9 +33,9 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:https://code.google.com/p/ihi-openhds.tablet/</connection>
-        <developerConnection>scm:git:https://code.google.com/p/ihi-openhds.tablet/</developerConnection>
-        <url>https://code.google.com/p/ihi-openhds/source/checkout?repo=tablet</url>
+        <connection>scm:git:https://github.com/SwissTPH/openhds-tablet.git</connection>
+        <developerConnection>scm:https://github.com/SwissTPH/openhds-tablet.git/</developerConnection>
+        <url>https://github.com/SwissTPH/openhds-tablet.git</url>
         <tag>HEAD</tag>
     </scm>
 
