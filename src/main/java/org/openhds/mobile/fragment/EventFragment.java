@@ -239,7 +239,7 @@ public class EventFragment extends Fragment implements OnClickListener {
         //Check no of households and disable button if necessary
         
         membershipBtn.setEnabled(true);
-        relationshipBtn.setEnabled(true);
+       // relationshipBtn.setEnabled(true);
         outMigrationBtn.setEnabled(true);
         deathBtn.setEnabled(true);
         clearIndividualBtn.setEnabled(true);
@@ -248,6 +248,7 @@ public class EventFragment extends Fragment implements OnClickListener {
         if (indiv != null && "f".equalsIgnoreCase(indiv.getGender()) && individualMeetsMinimumAge(indiv)) {
             pregRegBtn.setEnabled(true);
             birthRegBtn.setEnabled(true);
+            relationshipBtn.setEnabled(true);
         }    	
     }
 
