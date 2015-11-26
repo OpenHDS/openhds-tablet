@@ -63,6 +63,16 @@ public class Queries {
 				OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE, extId);
 	}
 	
+	public static Cursor getActiveIndividualsByResidency(ContentResolver resolver, String extId) {
+		return getCursor(resolver, OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE,
+				OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"='NA' AND " + OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE , extId);
+	}
+	
+	public static Cursor getActiveIndividualsByResidencySG(ContentResolver resolver, String locationExtId, String sgExtId) {
+		return resolver.query(OpenHDS.Individuals.CONTENT_SG_ACTIVE_URI_BASE, null, OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + "=? AND " + 
+				OpenHDS.Individuals.COLUMN_RESIDENCE_END_TYPE +"='NA' AND (" + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID +"= ? OR " + OpenHDS.IndividualGroups.COLUMN_SOCIALGROUPUUID +" is NULL)", new String[] { locationExtId, sgExtId }, null);
+	}
+	
 	public static Cursor getAllSettings(ContentResolver resolver){
 		return getCursorForAll(resolver, OpenHDS.Settings.CONTENT_ID_URI_BASE);
 	}

@@ -20,6 +20,7 @@ public class Individual implements Serializable {
     private String father;
     private String currentResidence;
     private String endType;
+    private String visited;
 
     private List<SocialGroup> socialGroups;
 
@@ -169,5 +170,13 @@ public class Individual implements Serializable {
 
 	public void setEndType(String endType) {
 		this.endType = endType;
+	}
+	
+	public String getVisited() {
+		return this.visited;
+	}
+
+	public void setVisited(String visited) {
+		this.visited = visited==null?"False":visited;
 	}
 }

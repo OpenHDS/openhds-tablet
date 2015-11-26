@@ -204,6 +204,7 @@
     <string name="update_unfinish_neg_button">Edit form</string>
     <string name="update_xform_not_found_msg">The XForm could not be found within ODK Collect. Please make sure that it exists and it\'s named correctly.</string>
     <string name="visit_lbl">Visit</string>
+    <string name="update_finish_not_all_visited_msg">Not all individuals have an event. Do do still want to finish the visit? This will set the visited flag for all individuals in this location.</string>
     <string name="update_finish_visit_msg">Did you capture all events and want to finish the visit?</string>
     <string name="cancel_lbl">Cancel</string>
     <string name="socialgroup_lbl">Socialgroup</string>
