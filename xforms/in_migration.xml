@@ -11,6 +11,9 @@
           <text id="/in_migration/reason/NEW_HOUSE:label">
             <value>Moved to new house</value>
           </text>
+          <text id="/in_migration/reason/EDUCATION/SCHOOL:label">
+            <value>ELIMU/SHULE</value>
+          </text>
           <text id="/in_migration/reason/WORK:label">
             <value>KAZI</value>
           </text>
@@ -41,8 +44,8 @@
           <text id="/in_migration/maritalChange/SEP:label">
             <value>Kutengana</value>
           </text>
-          <text id="/in_migration/maritalChange/DIV:label">
-            <value>Talaka</value>
+          <text id="/in_migration/individualInfo:label">
+            <value>individualIdInfoGRP</value>
           </text>
           <text id="/in_migration/individualInfo/fatherId:label">
             <value>Nambari ya Baba</value>
@@ -50,20 +53,29 @@
           <text id="/in_migration/maritalChange/888:label">
             <value>Haihusiki (888)</value>
           </text>
-          <text id="/in_migration/openhds/migrationType:label">
-            <value>migrationType_label</value>
+          <text id="/in_migration/individualInfo/religion/2:label">
+            <value>Christian Catholic</value>
           </text>
           <text id="/in_migration/reason/OTHER:label">
             <value>NYINGINE</value>
           </text>
+          <text id="/in_migration/warning:label">
+            <value>-</value>
+          </text>
           <text id="/in_migration/individualInfo/gender:label">
             <value>Jinsia</value>
+          </text>
+          <text id="/in_migration/reason/HEALTH_REASON:label">
+            <value>Health Reasons</value>
           </text>
           <text id="/in_migration/reason:label">
             <value>Sababu</value>
           </text>
           <text id="/in_migration/individualInfo/individualId:label">
             <value>Nambari ya Mwanakaya</value>
+          </text>
+          <text id="/in_migration/individualInfo/religion/5:label">
+            <value>Traditional faith</value>
           </text>
           <text id="/in_migration/openhds/locationId:label">
             <value>Nambari ya Eneo</value>
@@ -83,17 +95,23 @@
           <text id="/in_migration/individualInfo/partialDate/1:label">
             <value>Tarehe Kamili</value>
           </text>
-          <text id="/in_migration/warning:label">
+          <text id="/in_migration/earliestDate:label">
+            <value>-</value>
+          </text>
+          <text id="/in_migration/openhds/migrationType:label">
+            <value>migrationType_label</value>
+          </text>
+          <text id="/in_migration/openhds:label">
             <value>-</value>
           </text>
           <text id="/in_migration/movedfrom/Other:label">
             <value>Other</value>
           </text>
-          <text id="/in_migration/reason/CAME_WITH_RELATIVES:label">
-            <value>Came with relative(s)</value>
+          <text id="/in_migration/individualInfo/religion/1:label">
+            <value>Christian Orthodox</value>
           </text>
-          <text id="/in_migration/reason/EDUCATION/SCHOOL:label">
-            <value>ELIMU/SHULE</value>
+          <text id="/in_migration/reason/MARITAL_CHANGE:label">
+            <value>KUBADILIKA KWA HALI YA NDOA</value>
           </text>
           <text id="/in_migration/movedfrom/ElsewhereNyanzaProvince:label">
             <value>Elsewhere Nyanza province</value>
@@ -107,6 +125,9 @@
           <text id="/in_migration/movedfrom/OutsideKenya:label">
             <value>Outside Kenya</value>
           </text>
+          <text id="/in_migration/individualInfo/religion:label">
+            <value>Religion</value>
+          </text>
           <text id="/in_migration/individualInfo/firstName:label">
             <value>Jina la Kwanza</value>
           </text>
@@ -116,26 +137,29 @@
           <text id="/in_migration/openhds/visitId:label">
             <value>Nambari ya Hudhurio</value>
           </text>
-          <text id="/in_migration/reason/MARITAL_CHANGE:label">
-            <value>KUBADILIKA KWA HALI YA NDOA</value>
+          <text id="/in_migration/individualInfo/religion/4:label">
+            <value>Judaism</value>
           </text>
           <text id="/in_migration/reason/FARMING:label">
             <value>UFUGAJI</value>
           </text>
-          <text id="/in_migration/openhds/fieldWorkerId:label">
-            <value>Nambari ya Mhojaji</value>
+          <text id="/in_migration/individualInfo/religion/3:label">
+            <value>Muslim</value>
           </text>
           <text id="/in_migration/movedfrom:label">
             <value>Place member Moved FROM:</value>
           </text>
-          <text id="/in_migration/openhds:label">
-            <value>-</value>
+          <text id="/in_migration/maritalChange/DIV:label">
+            <value>Talaka</value>
+          </text>
+          <text id="/in_migration/reason/CAME_WITH_RELATIVES:label">
+            <value>Came with relative(s)</value>
           </text>
           <text id="/in_migration/shortorlongstay/3:label">
             <value>Unknown</value>
           </text>
-          <text id="/in_migration/individualInfo:label">
-            <value>individualIdInfoGRP</value>
+          <text id="/in_migration/openhds/fieldWorkerId:label">
+            <value>Nambari ya Mhojaji</value>
           </text>
           <text id="/in_migration/individualInfo/gender/M:label">
             <value>Mwanaume</value>
@@ -159,6 +183,9 @@
           </text>
           <text id="/in_migration/reason/NEW_HOUSE:label">
             <value>Moved to new house</value>
+          </text>
+          <text id="/in_migration/reason/EDUCATION/SCHOOL:label">
+            <value>EDUCATION/SCHOOL</value>
           </text>
           <text id="/in_migration/reason/WORK:label">
             <value>WORK</value>
@@ -199,17 +226,23 @@
           <text id="/in_migration/maritalChange/888:label">
             <value>None of the above (888)</value>
           </text>
-          <text id="/in_migration/openhds/migrationType:label">
-            <value>migrationType</value>
+          <text id="/in_migration/individualInfo/religion/2:label">
+            <value>Christian Catholic</value>
           </text>
           <text id="/in_migration/warning:label">
             <value>The migration date can not be prior or equal to the Birth date. Please go back and correct it.</value>
+          </text>
+          <text id="/in_migration/reason/HEALTH_REASON:label">
+            <value>Health Reasons</value>
           </text>
           <text id="/in_migration/reason:label">
             <value>reason</value>
           </text>
           <text id="/in_migration/individualInfo/individualId:label">
             <value>Individual Id</value>
+          </text>
+          <text id="/in_migration/individualInfo/religion/5:label">
+            <value>Traditional faith</value>
           </text>
           <text id="/in_migration/openhds/locationId:label">
             <value>Location Id</value>
@@ -229,6 +262,12 @@
           <text id="/in_migration/individualInfo/partialDate/1:label">
             <value>Exact</value>
           </text>
+          <text id="/in_migration/earliestDate:label">
+            <value>Earliest migration date</value>
+          </text>
+          <text id="/in_migration/openhds/migrationType:label">
+            <value>migrationType</value>
+          </text>
           <text id="/in_migration/individualInfo:label">
             <value>-</value>
           </text>
@@ -238,8 +277,8 @@
           <text id="/in_migration/openhds:label">
             <value>OpenHDS preloaded info</value>
           </text>
-          <text id="/in_migration/reason/EDUCATION/SCHOOL:label">
-            <value>EDUCATION/SCHOOL</value>
+          <text id="/in_migration/reason/MARITAL_CHANGE:label">
+            <value>MARITAL CHANGE</value>
           </text>
           <text id="/in_migration/movedfrom/ElsewhereNyanzaProvince:label">
             <value>Elsewhere Nyanza province</value>
@@ -253,6 +292,9 @@
           <text id="/in_migration/movedfrom/OutsideKenya:label">
             <value>Outside Kenya</value>
           </text>
+          <text id="/in_migration/individualInfo/religion:label">
+            <value>Religion</value>
+          </text>
           <text id="/in_migration/individualInfo/firstName:label">
             <value>First Name</value>
           </text>
@@ -262,11 +304,14 @@
           <text id="/in_migration/openhds/visitId:label">
             <value>Visit Id</value>
           </text>
-          <text id="/in_migration/reason/MARITAL_CHANGE:label">
-            <value>MARITAL CHANGE</value>
+          <text id="/in_migration/individualInfo/religion/4:label">
+            <value>Judaism</value>
           </text>
           <text id="/in_migration/reason/FARMING:label">
             <value>FARMING</value>
+          </text>
+          <text id="/in_migration/individualInfo/religion/3:label">
+            <value>Muslim</value>
           </text>
           <text id="/in_migration/openhds/fieldWorkerId:label">
             <value>Field Worker Id</value>
@@ -279,6 +324,9 @@
           </text>
           <text id="/in_migration/reason/CAME_WITH_RELATIVES:label">
             <value>Came with relative(s)</value>
+          </text>
+          <text id="/in_migration/individualInfo/religion/1:label">
+            <value>Christian Orthodox</value>
           </text>
           <text id="/in_migration/shortorlongstay/3:label">
             <value>Unknown</value>
@@ -308,6 +356,7 @@
           <start/>
           <end/>
           <deviceid/>
+          <earliestDate/>
           <openhds>
             <visitId/>
             <fieldWorkerId/>
@@ -324,6 +373,7 @@
             <gender/>
             <dateOfBirth/>
             <partialDate/>
+            <religion/>
           </individualInfo>
           <dateOfMigration/>
           <warning/>
@@ -336,12 +386,14 @@
           <processedByMirth/>
           <meta>
             <instanceID/>
+            <instanceName/>
           </meta>
         </in_migration>
       </instance>
       <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/in_migration/start" type="dateTime"/>
       <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/in_migration/end" type="dateTime"/>
       <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/in_migration/deviceid" type="string"/>
+      <bind nodeset="/in_migration/earliestDate" readonly="true()" type="date"/>
       <bind nodeset="/in_migration/openhds/visitId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/in_migration/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/in_migration/openhds/migrationType" readonly="true()" required="true()" type="string"/>
@@ -355,8 +407,9 @@
       <bind nodeset="/in_migration/individualInfo/gender" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
       <bind constraint=". &lt; today()" nodeset="/in_migration/individualInfo/dateOfBirth" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="date"/>
       <bind nodeset="/in_migration/individualInfo/partialDate" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
-      <bind constraint=". &lt;= today()" jr:constraintMsg="Date of migration can not be in the future" nodeset="/in_migration/dateOfMigration" required="true()" type="date"/>
-      <bind nodeset="/in_migration/warning" readonly="true()" relevant=" /in_migration/individualInfo/dateOfBirth &gt; /in_migration/dateOfMigration  and ( /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION')" required="true()" type="string"/>
+      <bind nodeset="/in_migration/individualInfo/religion" relevant=" /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION'" required="true()" type="select1"/>
+      <bind constraint=". &lt;= today() and . &gt;  /in_migration/earliestDate " jr:constraintMsg="Date of migration can not be in the future" nodeset="/in_migration/dateOfMigration" required="true()" type="date"/>
+      <bind nodeset="/in_migration/warning" readonly="true()" relevant=" /in_migration/individualInfo/dateOfBirth &gt;= /in_migration/dateOfMigration  and ( /in_migration/openhds/migrationType  = 'EXTERNAL_INMIGRATION')" required="true()" type="string"/>
       <bind nodeset="/in_migration/origin" relevant=" /in_migration/openhds/migrationType  = 'INTERNAL_INMIGRATION'" required="true()" type="string"/>
       <bind nodeset="/in_migration/reason" required="true()" type="select1"/>
       <bind nodeset="/in_migration/maritalChange" relevant="../reason = 'MARITAL_CHANGE'" required="true()" type="select1"/>
@@ -365,9 +418,13 @@
       <bind nodeset="/in_migration/shortorlongstay" required="true()" type="select1"/>
       <bind nodeset="/in_migration/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/in_migration/meta/instanceID" readonly="true()" type="string"/>
+      <bind calculate="concat( /in_migration/individualInfo/individualId ,'_', /in_migration/openhds/migrationType ,'_', /in_migration/openhds/visitId ,'_', /in_migration/openhds/fieldWorkerId )" nodeset="/in_migration/meta/instanceName" type="string"/>
     </model>
   </h:head>
   <h:body>
+    <input ref="/in_migration/earliestDate">
+      <label ref="jr:itext('/in_migration/earliestDate:label')"/>
+    </input>
     <group appearance="field-list" ref="/in_migration/openhds">
       <label ref="jr:itext('/in_migration/openhds:label')"/>
       <input ref="/in_migration/openhds/visitId">
@@ -428,6 +485,29 @@
           <value>2</value>
         </item>
       </select1>
+      <select1 ref="/in_migration/individualInfo/religion">
+        <label ref="jr:itext('/in_migration/individualInfo/religion:label')"/>
+        <item>
+          <label ref="jr:itext('/in_migration/individualInfo/religion/1:label')"/>
+          <value>1</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/in_migration/individualInfo/religion/2:label')"/>
+          <value>2</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/in_migration/individualInfo/religion/3:label')"/>
+          <value>3</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/in_migration/individualInfo/religion/4:label')"/>
+          <value>4</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/in_migration/individualInfo/religion/5:label')"/>
+          <value>5</value>
+        </item>
+      </select1>
     </group>
     <input ref="/in_migration/dateOfMigration">
       <label ref="jr:itext('/in_migration/dateOfMigration:label')"/>
@@ -459,6 +539,10 @@
       <item>
         <label ref="jr:itext('/in_migration/reason/EDUCATION/SCHOOL:label')"/>
         <value>EDUCATION/SCHOOL</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/in_migration/reason/HEALTH_REASON:label')"/>
+        <value>HEALTH_REASON</value>
       </item>
       <item>
         <label ref="jr:itext('/in_migration/reason/WORK:label')"/>

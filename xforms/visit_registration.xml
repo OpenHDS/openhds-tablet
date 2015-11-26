@@ -11,6 +11,9 @@
           <text id="/visit_registration/correctInterviewee/0:label">
             <value>Hapana</value>
           </text>
+          <text id="/visit_registration/reason/88:label">
+            <value>Nobody to interview</value>
+          </text>
           <text id="/visit_registration/whynotrightcode:label">
             <value>-</value>
           </text>
@@ -38,14 +41,14 @@
           <text id="/visit_registration/locationIdCheck:label">
             <value>Nambari ya Kaya</value>
           </text>
-          <text id="/visit_registration/farmhouse/0:label">
-            <value>Shambani</value>
+          <text id="/visit_registration/reason/1:label">
+            <value>New House</value>
           </text>
           <text id="/visit_registration/reason:label">
             <value>Sababu ya kuhojiwa</value>
           </text>
-          <text id="/visit_registration/openhds/locationId:label">
-            <value>Nambari ya Kaya</value>
+          <text id="/visit_registration/realVisit:label">
+            <value>Real Visit</value>
           </text>
           <text id="/visit_registration/farmhouse:label">
             <value>Uhojaji Umefanyikia Wapi?</value>
@@ -56,14 +59,17 @@
           <text id="/visit_registration/checkRightId:label">
             <value>-</value>
           </text>
-          <text id="/visit_registration/reason/1:label">
-            <value>New House</value>
+          <text id="/visit_registration/openhds/locationId:label">
+            <value>Nambari ya Kaya</value>
           </text>
           <text id="/visit_registration/visitDate:label">
             <value>Tarehe ya Hudhurio</value>
           </text>
           <text id="/visit_registration/correctInterviewee:label">
             <value>Je, Mwanakaya uliye mchagua ndiye unaye muhoji?</value>
+          </text>
+          <text id="/visit_registration/farmhouse/0:label">
+            <value>Shambani</value>
           </text>
           <text id="/visit_registration/coordinates:label">
             <value>Nukuhu Takwimu za GPS:</value>
@@ -93,6 +99,9 @@
           </text>
           <text id="/visit_registration/correctInterviewee/0:label">
             <value>No</value>
+          </text>
+          <text id="/visit_registration/reason/88:label">
+            <value>Nobody to interview</value>
           </text>
           <text id="/visit_registration/whynotrightcode:label">
             <value>Why the barcode doesn't correspond?</value>
@@ -126,6 +135,9 @@
           </text>
           <text id="/visit_registration/reason:label">
             <value>Reason for being interviewed</value>
+          </text>
+          <text id="/visit_registration/realVisit:label">
+            <value>Real Visit</value>
           </text>
           <text id="/visit_registration/farmhouse:label">
             <value>Where is the visit taking place?</value>
@@ -191,11 +203,13 @@
           <correctInterviewee/>
           <intervieweeName/>
           <reason/>
+          <realVisit/>
           <farmhouse/>
           <coordinates/>
           <processedByMirth/>
           <meta>
             <instanceID/>
+            <instanceName/>
           </meta>
         </visit_registration>
       </instance>
@@ -216,10 +230,12 @@
       <bind nodeset="/visit_registration/correctInterviewee" required="true()" type="select1"/>
       <bind nodeset="/visit_registration/intervieweeName" relevant="../correctInterviewee = '0'" required="true()" type="string"/>
       <bind nodeset="/visit_registration/reason" relevant="../correctInterviewee = '0'" required="true()" type="select1"/>
+      <bind calculate="if(../correctInterviewee='1',0,if(../reason='88',1,0))" nodeset="/visit_registration/realVisit" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/visit_registration/farmhouse" required="true()" type="select1"/>
       <bind nodeset="/visit_registration/coordinates" relevant="../farmhouse = '1' and ( /visit_registration/openhds/locationId  != /visit_registration/locationcalculated )" required="true()" type="geopoint"/>
       <bind nodeset="/visit_registration/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/visit_registration/meta/instanceID" readonly="true()" type="string"/>
+      <bind calculate="concat( /visit_registration/openhds/locationId ,'_VISIT_', /visit_registration/openhds/visitId ,'_', /visit_registration/openhds/fieldWorkerId )" nodeset="/visit_registration/meta/instanceName" type="string"/>
     </model>
   </h:head>
   <h:body>
@@ -293,10 +309,17 @@
         <value>3</value>
       </item>
       <item>
+        <label ref="jr:itext('/visit_registration/reason/88:label')"/>
+        <value>88</value>
+      </item>
+      <item>
         <label ref="jr:itext('/visit_registration/reason/99:label')"/>
         <value>99</value>
       </item>
     </select1>
+    <input ref="/visit_registration/realVisit">
+      <label ref="jr:itext('/visit_registration/realVisit:label')"/>
+    </input>
     <select1 ref="/visit_registration/farmhouse">
       <label ref="jr:itext('/visit_registration/farmhouse:label')"/>
       <item>
