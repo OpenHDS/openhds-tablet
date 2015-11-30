@@ -10,6 +10,7 @@ public class Visit implements Serializable {
 	private String date;
 	private String round;
 	private String intervieweeId;
+	private boolean realVisit;
 	
 	public String getIntervieweeId() {
 		return intervieweeId;
@@ -49,5 +50,13 @@ public class Visit implements Serializable {
 	
 	public void setRound(String round) {
 		this.round = round;
+	}
+	
+	public boolean getRealVisit(){
+		return this.realVisit;
+	}
+	
+	public void setRealVisit(boolean realVisit){
+		this.realVisit = realVisit;
 	}
 }

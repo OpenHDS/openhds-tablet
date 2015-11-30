@@ -132,6 +132,8 @@
     <string name="birthRegBtn_lbl">Pregnancy Outcome</string>
     <string name="deathBtn_lbl">Death</string>
     <string name="finishVisitBtn_lbl">Finish Visit</string>
+    <string name="finishVisit_title">Visit Finished</string>
+    <string name="visitFinished_lbl">Visit finished automatically, since nobody\'s living at this location!</string>
     <string name="fworkerExtId_lbl">Field Worker ExtId</string>
     <string name="registerChkBox_lbl">Register Field Worker on Device</string>
     <string name="fieldWorkerLoginBtn_lbl">Log in as Field Worker</string>
@@ -183,6 +185,7 @@
     <string name="sprvlogin_authenticate_with_server">Do you want to authenticate with the server?</string>
     <string name="yes_lbl">Yes</string>
     <string name="no_lbl">No</string>
+    <string name="ok_lbl">OK</string>
     <string name="error_lbl">Error</string>
     <string name="success_lbl">Success</string>
     <string name="trying_to_authenticate_lbl">Trying to authenticate...</string>

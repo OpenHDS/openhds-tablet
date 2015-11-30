@@ -50,6 +50,7 @@ import org.openhds.mobile.model.Round;
 import org.openhds.mobile.model.Settings;
 import org.openhds.mobile.model.SocialGroup;
 import org.openhds.mobile.model.StateMachine;
+import org.openhds.mobile.model.Visit;
 import org.openhds.mobile.task.OdkGeneratedFormLoadTask;
 
 import android.app.ActionBar;
@@ -774,13 +775,18 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                 try{
 	                if(updatable != null){
 	                	updatable.updateDatabase(getContentResolver(), filepath, jrFormId);
+	                	
+	                	/*Set value of real visit read out from from*/
+	                	if(updatable instanceof VisitUpdate){
+	                		Visit visit = ((VisitUpdate)updatable).getVisit();
+	                		locationVisit.getVisit().setRealVisit(visit.getRealVisit());
+	                	}
 	                	updatable = null;
 	                }
                 }finally{
                 	try{
                 		cursor.close();
                 	}catch(Exception e){
-                		System.err.println("Exception while trying to close cursor !");
                 		e.printStackTrace();
                 	}
                 }
@@ -789,7 +795,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             	try{
             		cursor.close();
             	}catch(Exception e){
-            		System.err.println("Exception while trying to close cursor !");
             		e.printStackTrace();
             	}            	
                 return false;
@@ -816,7 +821,17 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             		else if(deathCreation){            			
             			onClearIndividual();
             		}
-            	}else {
+            	}
+            	else if(stateMachine.getState() == CREATE_VISIT){
+            		Visit visit = locationVisit.getVisit();
+            		if(visit != null && visit.getRealVisit()){
+            			stateMachine.transitionTo(SELECT_INDIVIDUAL);
+            		}
+            		else{
+            			onFinishVisit();
+            		}
+            	}
+            	else {
             		stateMachine.transitionTo("Select Individual");
             	}
             } else {
@@ -1082,7 +1097,25 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     }
 
     public void onFinishVisit() {
-    	validateVisit();
+        /* If real visit, run validation*/
+    	if(locationVisit.getVisit().getRealVisit()){
+    		validateVisit();
+    	}
+    	/* Else just finish visit since nobody's there to interview*/
+    	else{
+    		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+    		alertDialogBuilder.setTitle(getString(R.string.finishVisit_title));
+    		alertDialogBuilder.setMessage(getString(R.string.visitFinished_lbl));
+    		alertDialogBuilder.setCancelable(false);
+    		alertDialogBuilder.setPositiveButton(getString(R.string.ok_lbl),
+    				new DialogInterface.OnClickListener() {
+    					public void onClick(DialogInterface dialog, int which) {
+    						finishVisit();
+    					}
+    				});
+    		AlertDialog alertDialog = alertDialogBuilder.create();
+    		alertDialog.show();
+    	}
     }
     
     private void validateVisit(){

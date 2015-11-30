@@ -14,10 +14,12 @@ import android.util.Log;
 
 public class VisitUpdate implements Updatable {
 
+	Visit visit; 
+	
     public void updateDatabase(ContentResolver resolver, String filepath, String jrFormId) {
         FormXmlReader xmlReader = new FormXmlReader();
         try {
-            Visit visit = xmlReader.readVisit(new FileInputStream(new File(filepath)), jrFormId);
+            visit = xmlReader.readVisit(new FileInputStream(new File(filepath)), jrFormId);
             
             if (visit == null) {
                 return;
@@ -33,5 +35,9 @@ public class VisitUpdate implements Updatable {
         } catch (FileNotFoundException e) {
             Log.e(VisitUpdate.class.getName(), "Could not read Visit XML file");
         }
+    }
+    
+    public Visit getVisit(){
+    	return this.visit;
     }
 }
