@@ -115,8 +115,8 @@
           <text id="/visit_registration/reason/3:label">
             <value>Neighbor interviewed</value>
           </text>
-          <text id="/visit_registration/intervieweeId:label">
-            <value>Interviewee ID</value>
+          <text id="/visit_registration/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
           </text>
           <text id="/visit_registration/openhds:label">
             <value>OpenHDS preloaded info</value>
@@ -132,6 +132,9 @@
           </text>
           <text id="/visit_registration/reason/1:label">
             <value>New House</value>
+          </text>
+          <text id="/visit_registration/intervieweeName:label">
+            <value>Name of interviewee</value>
           </text>
           <text id="/visit_registration/reason:label">
             <value>Reason for being interviewed</value>
@@ -163,8 +166,8 @@
           <text id="/visit_registration/coordinates:label">
             <value>Record the GPS coordinates:</value>
           </text>
-          <text id="/visit_registration/intervieweeName:label">
-            <value>Name of interviewee</value>
+          <text id="/visit_registration/intervieweeId:label">
+            <value>Interviewee ID</value>
           </text>
           <text id="/visit_registration/farmhouse/1:label">
             <value>House</value>
@@ -177,9 +180,6 @@
           </text>
           <text id="/visit_registration/locationcalculated:label">
             <value>check</value>
-          </text>
-          <text id="/visit_registration/openhds/fieldWorkerId:label">
-            <value>Field Worker Id</value>
           </text>
         </translation>
       </itext>
@@ -201,8 +201,8 @@
           <visitDate/>
           <intervieweeId/>
           <correctInterviewee/>
-          <intervieweeName/>
           <reason/>
+          <intervieweeName/>
           <realVisit/>
           <farmhouse/>
           <coordinates/>
@@ -228,8 +228,8 @@
       <bind nodeset="/visit_registration/visitDate" readonly="true()" required="true()" type="date"/>
       <bind nodeset="/visit_registration/intervieweeId" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/visit_registration/correctInterviewee" required="true()" type="select1"/>
-      <bind nodeset="/visit_registration/intervieweeName" relevant="../correctInterviewee = '0'" required="true()" type="string"/>
       <bind nodeset="/visit_registration/reason" relevant="../correctInterviewee = '0'" required="true()" type="select1"/>
+      <bind nodeset="/visit_registration/intervieweeName" relevant="../correctInterviewee = '0' and not(selected( /visit_registration/reason , '88'))" required="true()" type="string"/>
       <bind calculate="if(../correctInterviewee='1',0,if(../reason='88',1,0))" nodeset="/visit_registration/realVisit" readonly="true()" required="true()" type="string"/>
       <bind nodeset="/visit_registration/farmhouse" required="true()" type="select1"/>
       <bind nodeset="/visit_registration/coordinates" relevant="../farmhouse = '1' and ( /visit_registration/openhds/locationId  != /visit_registration/locationcalculated )" required="true()" type="geopoint"/>
@@ -291,9 +291,6 @@
         <value>1</value>
       </item>
     </select1>
-    <input ref="/visit_registration/intervieweeName">
-      <label ref="jr:itext('/visit_registration/intervieweeName:label')"/>
-    </input>
     <select1 ref="/visit_registration/reason">
       <label ref="jr:itext('/visit_registration/reason:label')"/>
       <item>
@@ -317,6 +314,9 @@
         <value>99</value>
       </item>
     </select1>
+    <input ref="/visit_registration/intervieweeName">
+      <label ref="jr:itext('/visit_registration/intervieweeName:label')"/>
+    </input>
     <input ref="/visit_registration/realVisit">
       <label ref="jr:itext('/visit_registration/realVisit:label')"/>
     </input>
