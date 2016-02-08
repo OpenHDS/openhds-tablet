@@ -405,6 +405,7 @@ public class SyncEntitiesTask extends
 
 	private void processIndividualParams(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
+		
 		int individualsParsed = 0;
 		parser.nextTag();
 
@@ -413,7 +414,6 @@ public class SyncEntitiesTask extends
 		while (notEndOfXmlDoc("individuals", parser)) {
 			try {
 				ContentValues cv = new ContentValues();
-
 				// memberships
 				parser.nextTag();
 				parser.nextTag();
@@ -506,7 +506,12 @@ public class SyncEntitiesTask extends
 
 				individualsParsed += 1;
 
-				parser.nextTag(); // </individual>
+				parser.nextTag(); // </individual> / or <religion>
+				if(parser.getName().equalsIgnoreCase("religion")){
+					//skip again to next element
+					parser.nextText();
+					parser.nextTag(); // </individual>
+				}
 				parser.nextTag(); // </individuals> or <individual>
 
 				if (individualsParsed % 100 == 0) {
@@ -519,12 +524,11 @@ public class SyncEntitiesTask extends
 				Log.e(getClass().getName(), e.getMessage());
 			}
 		}
-
 		persistParsedIndividuals(individualSocialGroups);
 	}
 
 	private void persistParsedIndividuals(
-			List<ContentValues> individualSocialGroups) {
+			List<ContentValues> individualSocialGroups) {		
 		if (!values.isEmpty()) {
 			resolver.bulkInsert(OpenHDS.Individuals.CONTENT_ID_URI_BASE,
 					values.toArray(emptyArray));

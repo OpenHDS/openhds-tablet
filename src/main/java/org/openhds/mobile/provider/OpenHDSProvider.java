@@ -1,10 +1,15 @@
 package org.openhds.mobile.provider;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import net.sqlcipher.DatabaseUtils;
 import net.sqlcipher.SQLException;
 import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteOpenHelper;
@@ -984,5 +989,29 @@ public class OpenHDSProvider extends ContentProvider {
         getContext().getContentResolver().notifyChange(uri, null);
 
         return count;
+    }
+    
+    public Map<String, Integer> getRowCount(Uri uri){
+    	Map<String, Integer> rowCount = new HashMap<String, Integer>();
+    	List<String> tablesToConsider = Arrays.asList(OpenHDS.Individuals.TABLE_NAME, OpenHDS.Locations.TABLE_NAME, OpenHDS.Visits.TABLE_NAME,
+    			OpenHDS.Relationships.TABLE_NAME, OpenHDS.SocialGroups.TABLE_NAME);
+    	SQLiteDatabase db = mOpenHelper.getReadableDatabase(password);
+    	List<String> tableNames = new ArrayList<String>();
+        Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+        if (c.moveToFirst()) {
+        	while ( !c.isAfterLast() ) {
+        		String tableName = c.getString(0);
+        		tableNames.add(tableName);
+        		c.moveToNext();
+        	}
+        }
+        c.close();
+        for(String tableName: tableNames) {      
+            if(tablesToConsider.contains(tableName)){
+                long count = DatabaseUtils.queryNumEntries(db, tableName);
+                rowCount.put(tableName, new Integer((int)count));
+            }
+        }
+        return rowCount;
     }
 }

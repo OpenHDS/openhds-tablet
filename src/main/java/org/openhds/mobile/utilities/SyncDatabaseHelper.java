@@ -68,6 +68,7 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 			if((currentTask instanceof SyncEntitiesTask || currentTask instanceof SyncFieldworkersTask || currentTask instanceof SyncFormsTask) 
 					&& callingContext instanceof SupervisorMainActivity){				
 				((SupervisorMainActivity)callingContext).displayLastSyncDate();
+				((SupervisorMainActivity)callingContext).showStats();
 			}
 		} else {
 			displayEntityFetchFailedDialog();

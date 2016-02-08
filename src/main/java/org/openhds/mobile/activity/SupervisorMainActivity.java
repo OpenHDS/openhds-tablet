@@ -5,11 +5,15 @@ import static org.openhds.mobile.utilities.ConfigUtils.getResourceString;
 import static org.openhds.mobile.utilities.LayoutUtils.makeNewGenericButton;
 import static org.openhds.mobile.utilities.UrlUtils.buildServerUrl;
 
+import java.util.Map;
+
+import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.R;
 import org.openhds.mobile.database.queries.Converter;
 import org.openhds.mobile.database.queries.Queries;
 import org.openhds.mobile.fragment.LoginPreferenceFragment;
 import org.openhds.mobile.model.Settings;
+import org.openhds.mobile.provider.OpenHDSProvider;
 import org.openhds.mobile.task.HttpTask.RequestContext;
 import org.openhds.mobile.task.SyncEntitiesTask;
 import org.openhds.mobile.task.SyncFieldworkersTask;
@@ -17,9 +21,13 @@ import org.openhds.mobile.task.SyncFormsTask;
 import org.openhds.mobile.utilities.SyncDatabaseHelper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ContentProvider;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -77,7 +85,15 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 		
         // add text view to display last settings sync time
 		lastSyncedExtraForms = new TextView(this);
-        supervisorOptionsList.addView(lastSyncedExtraForms);			
+        supervisorOptionsList.addView(lastSyncedExtraForms);		
+        
+        //Button to open statistics view        
+        makeNewGenericButton(
+				this,
+				getResourceString(this, R.string.sync_stats_button),
+				getResourceString(this, R.string.sync_stats),
+				"btnStats", this,
+				supervisorOptionsList);	
 
 		if (null != savedInstanceState) {
 			return;
@@ -121,6 +137,9 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 		} else if (tag.equals(getResourceString(this,
 				R.string.sync_extraforms))) {
 			syncExtraForms();
+		}
+		else if (tag.equals("btnStats")) {
+			showStats();
 		}
 	}
 	
@@ -197,6 +216,25 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 		lastExtraFormsSyncDate = ((lastExtraFormsSyncDate==null)||lastExtraFormsSyncDate.isEmpty())?"n/a":lastExtraFormsSyncDate;
 		if(lastSyncedExtraForms != null)
 			lastSyncedExtraForms.setText("Last synced on: " + lastExtraFormsSyncDate);
+	}
+	
+	public void showStats(){
+		ContentProvider contentProvider = getContentResolver().acquireContentProviderClient(OpenHDS.AUTHORITY).getLocalContentProvider();
+		OpenHDSProvider provider = ((OpenHDSProvider)contentProvider);
+		Map<String, Integer> rowCount = provider.getRowCount(Uri.parse(OpenHDS.AUTHORITY));
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setPositiveButton(getString(R.string.ok_lbl), null);
+		StringBuilder sb = new StringBuilder();
+		sb.append("<b>No. of synced items on this device:</b><br/><br/>");
+		for(String key: rowCount.keySet()){
+			sb.append(key + ": " + rowCount.get(key) + "<br/>");
+		}
+		builder.setTitle("Sync statistics");
+		builder.setMessage(Html.fromHtml(sb.toString()));
+		builder.setCancelable(false);
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,

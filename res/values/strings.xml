@@ -28,6 +28,7 @@
     <string name="download_form_button">Download Forms</string>
     <string name="download_extraform_button">Download Extra Forms</string>
     <string name="download_settings_button">Sync settings</string>
+    <string name="sync_stats_button">Sync statistics</string>
     <string name="failure_reasons_txt">Failure messages:</string>
     <string name="fatherNotFound">A father could not be found</string>
     <string name="field_worker_already_exists">Field Worker already exists</string>
@@ -152,6 +153,7 @@
     <string name="formmenu_extraforms">Extra Forms</string>
     <string name="sync_extraforms">Sync Extra Forms</string>
     <string name="sync_settings">Sync Settings</string>
+    <string name="sync_stats">Show Stats</string>
     <string name="loginmenu_configure">Configure Server</string>
     <string name="no_server_url">No server URL has been set. Set server URL from preferences</string>
     <string name="bad_server_url">Bad Server URL</string>
