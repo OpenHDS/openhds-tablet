@@ -45,6 +45,8 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 	private TextView lastSyncedDatabase;
 	private TextView lastSyncedFieldWorkers;
 	private TextView lastSyncedExtraForms;
+	private static final String completeColor = "#9ACD32";
+	private static final String incompleteColor = "#FF4500";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -139,7 +141,7 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 			syncExtraForms();
 		}
 		else if (tag.equals("btnStats")) {
-			showStats();
+			displaySyncStats();
 		}
 	}
 	
@@ -203,38 +205,93 @@ public class SupervisorMainActivity extends Activity implements OnClickListener,
 		c.close();
 		
 		String lastDatabaseSyncDate = settings.getDateOfLastSync();
-		lastDatabaseSyncDate = ((lastDatabaseSyncDate==null)||lastDatabaseSyncDate.isEmpty())?"n/a":lastDatabaseSyncDate;
+		String lastSyncDesc = getResourceString(this,R.string.sync_last_sync);
+		String lastSyncUnavailable = getResourceString(this,R.string.sync_last_sync_unavailable);		
+		lastDatabaseSyncDate = ((lastDatabaseSyncDate==null)||lastDatabaseSyncDate.isEmpty())?lastSyncUnavailable:lastDatabaseSyncDate;
 		if(lastSyncedDatabase != null)
-			lastSyncedDatabase.setText("Last synced on: " + lastDatabaseSyncDate);
+			lastSyncedDatabase.setText(lastSyncDesc + " " + lastDatabaseSyncDate);
 		
 		String lastFieldWorkerSyncDate = settings.getDateOfLastFieldWorkerSync();
-		lastFieldWorkerSyncDate = ((lastFieldWorkerSyncDate==null)||lastFieldWorkerSyncDate.isEmpty())?"n/a":lastFieldWorkerSyncDate;
+		lastFieldWorkerSyncDate = ((lastFieldWorkerSyncDate==null)||lastFieldWorkerSyncDate.isEmpty())?lastSyncUnavailable:lastFieldWorkerSyncDate;
 		if(lastSyncedFieldWorkers != null)
-			lastSyncedFieldWorkers.setText("Last synced on: " + lastFieldWorkerSyncDate);
+			lastSyncedFieldWorkers.setText(lastSyncDesc + " " + lastFieldWorkerSyncDate);
 		
 		String lastExtraFormsSyncDate = settings.getDateOfLastFormsSync();
-		lastExtraFormsSyncDate = ((lastExtraFormsSyncDate==null)||lastExtraFormsSyncDate.isEmpty())?"n/a":lastExtraFormsSyncDate;
+		lastExtraFormsSyncDate = ((lastExtraFormsSyncDate==null)||lastExtraFormsSyncDate.isEmpty())?lastSyncUnavailable:lastExtraFormsSyncDate;
 		if(lastSyncedExtraForms != null)
-			lastSyncedExtraForms.setText("Last synced on: " + lastExtraFormsSyncDate);
+			lastSyncedExtraForms.setText(lastSyncDesc + " " + lastExtraFormsSyncDate);
 	}
 	
-	public void showStats(){
+	public void displaySyncStats(){
 		ContentProvider contentProvider = getContentResolver().acquireContentProviderClient(OpenHDS.AUTHORITY).getLocalContentProvider();
 		OpenHDSProvider provider = ((OpenHDSProvider)contentProvider);
 		Map<String, Integer> rowCount = provider.getRowCount(Uri.parse(OpenHDS.AUTHORITY));
+
+		android.database.Cursor c = Queries.getAllSettings(getContentResolver());
+		Settings settings = Converter.convertToSettings(c); 
+		c.close();
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setPositiveButton(getString(R.string.ok_lbl), null);
+		builder.setPositiveButton(getResourceString(this,R.string.ok_lbl), null);
 		StringBuilder sb = new StringBuilder();
-		sb.append("<b>No. of synced items on this device:</b><br/><br/>");
+		sb.append("<b>"+ getResourceString(this,R.string.sync_stats_info) +"</b><br/><br/>");
+		boolean incompleteEntries = false;
 		for(String key: rowCount.keySet()){
-			sb.append(key + ": " + rowCount.get(key) + "<br/>");
+			int serverCount = getServerCountForEntity(key, settings);
+			int localCount = rowCount.get(key);
+			double completeness = calculateEntityCompleteness(key, localCount, serverCount);
+			sb.append(getHtmlForEntry(key.trim(), localCount, serverCount, completeness, settings));
+			if(completeness != -1 && completeness != 1) incompleteEntries = true;
 		}
-		builder.setTitle("Sync statistics");
+		sb.append("<br/>Legend: <font color='" + completeColor + "'>--</font>= Complete, " + "<font color='" + incompleteColor + "'>--</font>= Incomplete<br/>");
+		builder.setTitle(getResourceString(this,R.string.sync_stats_title));
 		builder.setMessage(Html.fromHtml(sb.toString()));
 		builder.setCancelable(false);
 		AlertDialog dialog = builder.create();
 		dialog.show();
+	}
+	
+	private String getHtmlForEntry(String key, Integer localCount, int serverCount, double completeness, Settings settings){		
+		StringBuffer sb = new StringBuffer();
+		if(serverCount != -1){
+			String myDouble = String.format("%1$,.2f", completeness*100.0);
+			String upperCaseEntity = key.substring(0, 1).toUpperCase() + key.substring(1);
+			sb.append("<font color='" + (completeness==1?completeColor:incompleteColor) + "'><b>" + upperCaseEntity + "</b>: " + localCount + "/" + (completeness>=0?serverCount:"?") + " (" + (completeness>=0?myDouble:"?") + "%)</font><br/>");
+		}
+		return sb.toString();
+	}
+	
+	private int getServerCountForEntity(String entity, Settings settings){
+		int serverCount = -1;
+		if(OpenHDS.Locations.TABLE_NAME.equalsIgnoreCase(entity)){
+			serverCount = settings.getNumberOfLocations();
+		}
+		else if(OpenHDS.Individuals.TABLE_NAME.equalsIgnoreCase(entity)){
+			serverCount = settings.getNumberOfIndividuals();
+		}	
+		else if(OpenHDS.Relationships.TABLE_NAME.equalsIgnoreCase(entity)){
+			serverCount = settings.getNumberOfRelationships();
+		}		
+		else if(OpenHDS.SocialGroups.TABLE_NAME.equalsIgnoreCase(entity)){
+			serverCount = settings.getNumberOfHouseHolds();
+		}	
+		else if(OpenHDS.Forms.TABLE_NAME.equalsIgnoreCase(entity)){
+			serverCount = settings.getNumberOfExtraForms();
+		}	
+		else if(OpenHDS.FieldWorkers.TABLE_NAME.equalsIgnoreCase(entity)){
+			serverCount = settings.getNumberOfFieldWorkers();
+		}		
+		else if(OpenHDS.Visits.TABLE_NAME.equalsIgnoreCase(entity)){}
+		
+		return serverCount;
+	}
+		
+	private double calculateEntityCompleteness(String key, int localCount, int serverCount){
+		double ratio = -1;
+		if(serverCount > 0){
+			ratio = (double)localCount/serverCount;
+		}
+		return ratio;
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,

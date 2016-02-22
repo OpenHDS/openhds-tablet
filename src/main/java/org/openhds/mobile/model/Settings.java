@@ -14,6 +14,13 @@ public class Settings {
 	private String dateOfLastFormsSync;
 	private String visitLevel;
 	private String earliestEventDate;
+	private int numberOfVisits;
+	private int numberOfIndividuals;
+	private int numberOfLocations;
+	private int numberOfRelationships;
+	private int numberOfHouseHolds;
+	private int numberOfExtraForms;
+	private int numberOfFieldWorkers;
 	
 	public final static String MINIMUM_AGE_OF_PARENTS = "minAgeOfParents";
 	public final static String MINIMUM_AGE_OF_HOUSEHOLDHEAD = "minAgeOfHouseholdHead";
@@ -24,6 +31,16 @@ public class Settings {
 	public final static String DATE_OF_LAST_FORMS_SYNC = "dateOfLastFormsSync";
 	public final static String VISIT_LEVEL = "visitLevel";
 	public final static String DATE_OF_EARLIEST_EVENT = "earliestEventDate";
+	
+	public final static String NUMBER_OF_VISITS = "nbOfVisits";
+	public final static String NUMBER_OF_INDIVIDUALS = "nbOfIndividuals";
+	public final static String NUMBER_OF_LOCATIONS = "nbOfLocations";
+	public final static String NUMBER_OF_RELATIONSHIPS = "nbOfRelationships";
+	public final static String NUMBER_OF_SOCIALGROUPS = "nbOfSocialGroups";
+	public final static String NUMBER_OF_EXTRAFORMS = "nbOfExtraForms";
+	public final static String NUMBER_OF_FIELDWORKERS = "nbOfFieldWorkers";
+	
+	private Map<String, Integer> _nbOfEntities;
 	
 	private Map<String, String> _settingsList;
 	
@@ -111,6 +128,28 @@ public class Settings {
 			}else if(key.equals(VISIT_LEVEL)){
 				this.setVisitLevel(settingsList.get(key));
 			}
+			
+			else if(key.equals(NUMBER_OF_VISITS)){
+				this.setNumberOfVisits(Integer.parseInt(settingsList.get(key)));
+			}
+			else if(key.equals(NUMBER_OF_INDIVIDUALS)){
+				this.setNumberOfIndividuals(Integer.parseInt(settingsList.get(key)));
+			}
+			else if(key.equals(NUMBER_OF_LOCATIONS)){
+				this.setNumberOfLocations(Integer.parseInt(settingsList.get(key)));
+			}
+			else if(key.equals(NUMBER_OF_RELATIONSHIPS)){
+				this.setNumberOfRelationships(Integer.parseInt(settingsList.get(key)));
+			}
+			else if(key.equals(NUMBER_OF_SOCIALGROUPS)){
+				this.setNumberOfHouseHolds(Integer.parseInt(settingsList.get(key)));
+			}		
+			else if(key.equals(NUMBER_OF_EXTRAFORMS)){
+				this.setNumberOfExtraForms(Integer.parseInt(settingsList.get(key)));
+			}	
+			else if(key.equals(NUMBER_OF_FIELDWORKERS)){
+				this.setNumberOfFieldWorkers(Integer.parseInt(settingsList.get(key)));
+			}				
 		}
 	}
 	
@@ -157,7 +196,6 @@ public class Settings {
 	 * @return the dateOfLastFieldWorkerSync
 	 */
 	public String getDateOfLastFieldWorkerSync() {
-		System.out.println("getDateOfLastFieldWorkerSync: " + dateOfLastFieldWorkerSync);
 		return dateOfLastFieldWorkerSync;
 	}
 
@@ -198,4 +236,116 @@ public class Settings {
 	public void setEarliestEventDate(String earliestEventDate) {
 		this.earliestEventDate = earliestEventDate;
 	}	
+	
+	public void setNbOfEntities(Map<String, Integer> nbOfEntities){
+		for(String key: nbOfEntities.keySet()){
+//			if(key.equals(MINIMUM_AGE_OF_MARRIAGE)){
+//				this.setMinMarriageAge(stringToInt(settingsList.get(key)));
+//			}else if(key.equals(MINIMUM_AGE_OF_HOUSEHOLDHEAD)){
+//				this.setMinimumAgeOfHouseholdHead(stringToInt(settingsList.get(key)));
+//			}
+		}
+	}
+	
+	public Map<String, Integer> getNbOfEntities(){
+		return this._nbOfEntities;
+	}
+
+	/**
+	 * @return the numberOfVisits
+	 */
+	public int getNumberOfVisits() {
+		return numberOfVisits;
+	}
+
+	/**
+	 * @param numberOfVisits the numberOfVisits to set
+	 */
+	public void setNumberOfVisits(int numberOfVisits) {
+		this.numberOfVisits = numberOfVisits;
+	}
+
+	/**
+	 * @return the numbeOfIndividuals
+	 */
+	public int getNumberOfIndividuals() {
+		return numberOfIndividuals;
+	}
+
+	/**
+	 * @param numbeOfIndividuals the numbeOfIndividuals to set
+	 */
+	public void setNumberOfIndividuals(int numbeOfIndividuals) {
+		this.numberOfIndividuals = numbeOfIndividuals;
+	}
+
+	/**
+	 * @return the numberOfLocations
+	 */
+	public int getNumberOfLocations() {
+		return numberOfLocations;
+	}
+
+	/**
+	 * @param numberOfLocations the numberOfLocations to set
+	 */
+	public void setNumberOfLocations(int numberOfLocations) {
+		this.numberOfLocations = numberOfLocations;
+	}
+
+	/**
+	 * @return the numberOfRelationships
+	 */
+	public int getNumberOfRelationships() {
+		return numberOfRelationships;
+	}
+
+	/**
+	 * @param numberOfRelationships the numberOfRelationships to set
+	 */
+	public void setNumberOfRelationships(int numberOfRelationships) {
+		this.numberOfRelationships = numberOfRelationships;
+	}
+
+	/**
+	 * @return the numberOfHouseHolds
+	 */
+	public int getNumberOfHouseHolds() {
+		return numberOfHouseHolds;
+	}
+
+	/**
+	 * @param numberOfHouseHolds the numberOfHouseHolds to set
+	 */
+	public void setNumberOfHouseHolds(int numberOfHouseHolds) {
+		this.numberOfHouseHolds = numberOfHouseHolds;
+	}
+
+	/**
+	 * @return the numberOfExtraForms
+	 */
+	public int getNumberOfExtraForms() {
+		return numberOfExtraForms;
+	}
+
+	/**
+	 * @param numberOfExtraForms the numberOfExtraForms to set
+	 */
+	public void setNumberOfExtraForms(int numberOfExtraForms) {
+		this.numberOfExtraForms = numberOfExtraForms;
+	}
+
+	/**
+	 * @return the numberOfFieldWorkers
+	 */
+	public int getNumberOfFieldWorkers() {
+		return numberOfFieldWorkers;
+	}
+
+	/**
+	 * @param numberOfFieldWorkers the numberOfFieldWorkers to set
+	 */
+	public void setNumberOfFieldWorkers(int numberOfFieldWorkers) {
+		this.numberOfFieldWorkers = numberOfFieldWorkers;
+	}
 }

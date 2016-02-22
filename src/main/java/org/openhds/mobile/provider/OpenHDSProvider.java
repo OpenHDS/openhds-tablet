@@ -16,6 +16,7 @@ import net.sqlcipher.database.SQLiteOpenHelper;
 import net.sqlcipher.database.SQLiteQueryBuilder;
 
 import org.openhds.mobile.OpenHDS;
+import org.openhds.mobile.model.Settings;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -993,8 +994,8 @@ public class OpenHDSProvider extends ContentProvider {
     
     public Map<String, Integer> getRowCount(Uri uri){
     	Map<String, Integer> rowCount = new HashMap<String, Integer>();
-    	List<String> tablesToConsider = Arrays.asList(OpenHDS.Individuals.TABLE_NAME, OpenHDS.Locations.TABLE_NAME, OpenHDS.Visits.TABLE_NAME,
-    			OpenHDS.Relationships.TABLE_NAME, OpenHDS.SocialGroups.TABLE_NAME);
+    	List<String> tablesToConsider = Arrays.asList(OpenHDS.Individuals.TABLE_NAME, OpenHDS.Locations.TABLE_NAME, //, OpenHDS.Visits.TABLE_NAME,
+    			OpenHDS.Relationships.TABLE_NAME, OpenHDS.SocialGroups.TABLE_NAME, OpenHDS.FieldWorkers.TABLE_NAME, OpenHDS.Forms.TABLE_NAME);
     	SQLiteDatabase db = mOpenHelper.getReadableDatabase(password);
     	List<String> tableNames = new ArrayList<String>();
         Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);

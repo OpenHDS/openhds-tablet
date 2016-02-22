@@ -68,18 +68,35 @@ public class SyncDatabaseHelper implements SyncDatabaseListener {
 			if((currentTask instanceof SyncEntitiesTask || currentTask instanceof SyncFieldworkersTask || currentTask instanceof SyncFormsTask) 
 					&& callingContext instanceof SupervisorMainActivity){				
 				((SupervisorMainActivity)callingContext).displayLastSyncDate();
-				((SupervisorMainActivity)callingContext).showStats();
+				((SupervisorMainActivity)callingContext).displaySyncStats();
 			}
-		} else {
+		} 
+		else if(result.equals(HttpTask.EndResult.NO_CONTENT)){
+			displayEmptyContentFailedDialog();
+		}
+		else {
 			displayEntityFetchFailedDialog();
 		}
 		progressDialog.dismiss();
 		initializeProgressDialog();
 	}
 	
+	private void displayEmptyContentFailedDialog(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(
+				callingContext);
+		builder.setIcon(android.R.drawable.ic_dialog_alert);
+		builder.setTitle(R.string.sync_entities_failure_no_content_title);
+		builder.setMessage(R.string.sync_entities_failure);
+		builder.setCancelable(false);
+		builder.setPositiveButton("Ok", null);
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+	
 	private void displayEntityFetchFailedDialog(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(
 				callingContext);
+		builder.setIcon(android.R.drawable.ic_dialog_alert);
 		builder.setMessage(R.string.sync_entities_failure);
 		builder.setCancelable(false);
 		builder.setPositiveButton("Ok", null);

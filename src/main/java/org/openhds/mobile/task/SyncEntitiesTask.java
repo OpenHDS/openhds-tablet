@@ -3,6 +3,7 @@ package org.openhds.mobile.task;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PushbackInputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.auth.AuthenticationException;
@@ -157,6 +159,9 @@ public class SyncEntitiesTask extends
 		deleteAllTables();
 
 		try {
+			entity = Entity.SETTINGS;
+			processUrl(baseurl + API_PATH + "/settings");
+			
 			entity = Entity.LOCATION_HIERARCHY;
 			processUrl(baseurl + API_PATH + "/locationhierarchies");
 
@@ -179,11 +184,13 @@ public class SyncEntitiesTask extends
 			processUrl(baseurl + API_PATH + "/individuals/cached");
 
 			entity = Entity.SOCIALGROUP;
-			processUrl(baseurl + API_PATH + "/socialgroups/cached");
-			
-			entity = Entity.SETTINGS;
-			processUrl(baseurl + API_PATH + "/settings");
+			processUrl(baseurl + API_PATH + "/socialgroups/cached");	
 		} catch (Exception e) {
+			if(e instanceof HttpException && e.getMessage() != null){
+				if(e.getMessage().equalsIgnoreCase(HttpTask.EndResult.NO_CONTENT.name())){
+					return HttpTask.EndResult.NO_CONTENT;
+				}
+			}
 			return HttpTask.EndResult.FAILURE;
 		}
 
@@ -216,12 +223,13 @@ public class SyncEntitiesTask extends
 
 	private void processResponse() throws Exception {
 		InputStream inputStream = getResponse();
+				
 		if (inputStream != null)
 			processXMLDocument(inputStream);
 	}
 
 	private InputStream getResponse() throws AuthenticationException,
-			ClientProtocolException, IOException {
+			ClientProtocolException, IOException, HttpException, Exception {
 		HttpResponse response = null;
 
 		httpGet.addHeader(new BasicScheme().authenticate(creds, httpGet));
@@ -234,7 +242,38 @@ public class SyncEntitiesTask extends
 		}		
 
 		HttpEntity entity = response.getEntity();
-		return entity.getContent();
+		
+		PushbackInputStream in = null;
+		boolean empty = false;
+		if(entity != null) {
+			in = new PushbackInputStream(entity.getContent());
+		    try {
+		        int firstByte=in.read();
+		        if(firstByte != -1) {
+		            in.unread(firstByte);
+		        }
+		        else {
+		            // empty
+		        	empty = true;
+		        	throw new HttpException(HttpTask.EndResult.NO_CONTENT.name());
+		        }
+		    }
+		    catch(Exception e){
+		    	throw e;
+		    }
+		    finally {
+		        // Don't close so we can reuse the connection
+//		        EntityUtils.consumeQuietly(entity);
+		    	
+		        // Or, if you're sure you won't re-use the connection
+		    	if(empty){
+		    		in.close();
+		    		in = null;
+		    	}
+		    }
+		}
+		
+		return in;
 	}
 
 	private void processXMLDocument(InputStream content) throws Exception {
@@ -247,9 +286,9 @@ public class SyncEntitiesTask extends
 		parser.setInput(new InputStreamReader(content));
 
 		int eventType = parser.getEventType();
+				
 		while (eventType != XmlPullParser.END_DOCUMENT && !isCancelled()) {
 			String name = null;
-
 			switch (eventType) {
 			case XmlPullParser.START_TAG:
 				name = parser.getName();
@@ -278,7 +317,7 @@ public class SyncEntitiesTask extends
 					processSettingsParams(parser);
 				}
 				break;
-			}
+			}		
 			eventType = parser.next();
 		}
 	}
@@ -786,13 +825,18 @@ public class SyncEntitiesTask extends
 		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, parser.nextText()); //minAgeOfPregnancy
 		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.MINIMUM_AGE_OF_PREGNANCY); //minAgeOfPregnancy
 		values.add(cv);
-
-		parser.nextTag(); //
+				
+		parser.nextTag(); // <visitLevel> or <entities>
+		
+		if(parser.getName().equalsIgnoreCase("entities")){
+			parseEntities(parser);
+			parser.nextTag();	// <visitLevel>
+		}
+		
 		cv = new ContentValues();
 		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, parser.nextText()); //visitLevel
 		cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.VISIT_LEVEL); //visitLevel
 		values.add(cv);
-		
 		
 		parser.nextTag(); // </generalSettings>
 		
@@ -808,8 +852,67 @@ public class SyncEntitiesTask extends
 		if (!values.isEmpty()) {			
 			resolver.bulkInsert(OpenHDS.Settings.CONTENT_ID_URI_BASE,
 			values.toArray(emptyArray));
-		}		
-	}		
+		}	
+	}	
+	
+	private void parseEntities(XmlPullParser parser)
+			throws XmlPullParserException, IOException{
+		ContentValues cv;
+		do{
+			parser.nextTag();
+			if(parser.getEventType() == XmlPullParser.START_TAG){
+				if(parser.getAttributeCount() == 2){
+					String attEntityName = parser.getAttributeValue(null, "name");
+					String attEntityCount = parser.getAttributeValue(null, "count");
+					if(attEntityName != null && attEntityCount != null){
+						if(attEntityName.equalsIgnoreCase("visit")){
+							cv = new ContentValues();
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, attEntityCount); 
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.NUMBER_OF_VISITS); 
+							values.add(cv);
+						}
+						else if(attEntityName.equalsIgnoreCase("individual")){
+							cv = new ContentValues();
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, attEntityCount);
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.NUMBER_OF_INDIVIDUALS);
+							values.add(cv);
+						}
+						else if(attEntityName.equalsIgnoreCase("location")){
+							cv = new ContentValues();
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, attEntityCount); 
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.NUMBER_OF_LOCATIONS);
+							values.add(cv);
+						}	
+						else if(attEntityName.equalsIgnoreCase("relationship")){
+							cv = new ContentValues();
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, attEntityCount);
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.NUMBER_OF_RELATIONSHIPS);
+							values.add(cv);
+						}
+						else if(attEntityName.equalsIgnoreCase("socialgroup")){
+							cv = new ContentValues();
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, attEntityCount);
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.NUMBER_OF_SOCIALGROUPS);
+							values.add(cv);
+						}
+						else if(attEntityName.equalsIgnoreCase("Form")){
+							cv = new ContentValues();
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, attEntityCount);
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.NUMBER_OF_EXTRAFORMS);
+							values.add(cv);
+						}
+						else if(attEntityName.equalsIgnoreCase("Fieldworker")){
+							cv = new ContentValues();
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_VALUE, attEntityCount);
+							cv.put(OpenHDS.Settings.COLUMN_SETTINGS_NAME, Settings.NUMBER_OF_FIELDWORKERS);
+							values.add(cv);
+						}						
+					}
+				}
+			}
+		}
+		while(parser.getName().equalsIgnoreCase("entity"));		
+	}
 
 	protected void onPostExecute(HttpTask.EndResult result) {
 		listener.collectionComplete(result);
