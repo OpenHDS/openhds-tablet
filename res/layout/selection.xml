@@ -430,6 +430,24 @@
 			        android:inputType="text"
 			        android:textAppearance="?android:attr/textAppearanceSmall"  />
 	    	</TableRow> 
+	    	<TableRow>
+	            <TextView
+			        android:id="@+id/individualHHid"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="5dp"
+			        android:text="HHid"
+			        android:textAppearance="?android:attr/textAppearanceSmall"  />
+		    
+		     	<TextView
+			        android:id="@+id/individualHHidText"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="5dp"
+			        android:paddingBottom="5dp"
+			        android:inputType="text"
+			        android:textAppearance="?android:attr/textAppearanceSmall"  />
+	    	</TableRow> 	    	
 		</TableLayout>
 			 
 	    

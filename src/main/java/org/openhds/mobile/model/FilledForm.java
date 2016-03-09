@@ -21,6 +21,7 @@ public class FilledForm {
     private String householdId;
     private String householdName;
     private String socialGroupType;
+    private String groupHeadId;
 
     private String individualExtId;
     private String motherExtId;
@@ -271,5 +272,11 @@ public class FilledForm {
 		this.socialGroupType = socialGroupType;
 	}
 
-	
+	public String getGroupHeadId() {
+		return groupHeadId;
+	}
+
+	public void setGroupHeadId(String groupHeadId) {
+		this.groupHeadId = groupHeadId;
+	}
 }

@@ -331,6 +331,48 @@ public class FormXmlReader {
         }
         return null;
     }
+    
+    public ChangeHeadOfHousehold readChangeHeadOfHousehold(FileInputStream fileInputStream, String jrFormId) {
+        try {
+            Document doc = buildDocument(fileInputStream);
+            
+            ChangeHeadOfHousehold cHoh = new ChangeHeadOfHousehold();
+            
+            Individual oldHoh = new Individual();
+            if(xpath.evaluate("/"+jrFormId+"/openhds/individualId/text()", doc).length()==0) {
+            	jrFormId ="data";
+            }
+            oldHoh.setExtId(xpath.evaluate("/"+jrFormId+"/openhds/individualId/text()", doc));
+            cHoh.setOldHoh(oldHoh);
+            
+            Individual newHoh = new Individual();
+            newHoh.setExtId(xpath.evaluate("/"+jrFormId+"/openhds/new_hoh_id/text()", doc));
+            cHoh.setNewHoh(newHoh);
+            
+            cHoh.setDate(xpath.evaluate("/"+jrFormId+"/date/text()", doc));
+            cHoh.setHouseHoldExtId(xpath.evaluate("/"+jrFormId+"/openhds/householdId/text()", doc));         
+            
+            // read the relationships
+            NodeList nodeList = (NodeList) xpath.evaluate("//membershiptonewhoh", doc, XPathConstants.NODESET);
+            for(int i = 0; i < nodeList.getLength(); i++) {
+            	Node node = nodeList.item(i);
+            	
+                Relationship relationship = new Relationship();
+                relationship.setIndividualA(newHoh.getExtId());
+                relationship.setIndividualB(xpath.evaluate("./extId/text()", node));
+                relationship.setStartDate(cHoh.getDate());
+                
+                cHoh.addRelationship(relationship);
+            }
+            
+            return cHoh;
+        } catch (ParserConfigurationException e) {
+        } catch (SAXException e) {
+        } catch (IOException e) {
+        } catch (XPathExpressionException e) {
+        }
+        return null;
+    }    
 
     public PregnancyObservation readPregnancyObservation(FileInputStream fileInputStream, String jrFormId)  {
         try {

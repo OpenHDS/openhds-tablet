@@ -308,9 +308,13 @@
 	
 	<string name="synced_fws_lbl">Trabalhadores de campo sincronizados.</string>
 	<string name="failed_sync_fws_lbl">Não foi possível sincronizar os trabalhadores de campo.</string>
-    
-    
-    
+      
+    <string name="changeHouseholdHeadBtn_lbl">Mudar Chefe de Agregado</string>
+	<string name="change_household_head_lbl">Novo Chefe de Agregado</string>
+	<string name="change_household_head_exists_lbl">O novo chefe selecionado já é chefe dum outro agregado!</string>
+	<string name="change_household_head_select_lbl">Por favor selecione o novo chefe do agregado</string>
+	<string name="change_household_head_selected_lbl">Selecionou o novo chefe</string>   
+	
     <string name="hello_lbl">Olá</string>
     <string name="locale_lang">pt</string>
 

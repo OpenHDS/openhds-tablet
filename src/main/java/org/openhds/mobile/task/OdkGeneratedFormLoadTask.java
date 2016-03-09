@@ -224,47 +224,44 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                     } else if (name.equals(FilledParams.socialGroupType)) {
                         sbuilder.append("<socialGroupType>FAM</socialGroupType>" + "\r\n");
                     } else if (name.equalsIgnoreCase(FilledParams.deviceId)) {
-                     mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+                    	mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
                      
-                     String deviceId = mTelephonyManager.getDeviceId();
-                     String orDeviceId;
-					if (deviceId != null ) {
+                    	String deviceId = mTelephonyManager.getDeviceId();
+                    	String orDeviceId;
+                    	if (deviceId != null ) {
                              if ((deviceId.contains("*") || deviceId.contains("000000000000000"))) {
-                                     deviceId =
-                                                     Settings.Secure
-                                             .getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
-                                     orDeviceId = Settings.Secure.ANDROID_ID + ":" + deviceId;
+                            	 deviceId = Settings.Secure.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+                                 orDeviceId = Settings.Secure.ANDROID_ID + ":" + deviceId;
                              } else {
-                                     orDeviceId = "imei:" + deviceId;
+                            	 orDeviceId = "imei:" + deviceId;
                              }
-                     }
-
-                     if ( deviceId == null ) {
-                             // no SIM -- WiFi only
-                             // Retrieve WiFiManager
-                             WifiManager wifi = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
-
-                             // Get WiFi status
-                             WifiInfo info = wifi.getConnectionInfo();
-                             if ( info != null ) {
-                                     deviceId = info.getMacAddress();
-                                     orDeviceId = "mac:" + deviceId;
-                             }
-                     }
-
-                     // if it is still null, use ANDROID_ID
-                     if ( deviceId == null ) {
-                         deviceId =
-                                 Settings.Secure
-                                         .getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
-                             orDeviceId = Settings.Secure.ANDROID_ID + ":" + deviceId;
-                             sbuilder.append("<deviceId>"+ orDeviceId +"</deviceId>" + "\r\n");
-
-                     }
-                     sbuilder.append("<deviceId>"+ deviceId +"</deviceId>" + "\r\n");
+                    	}
+	                    if ( deviceId == null ) {
+	                             // no SIM -- WiFi only
+	                             // Retrieve WiFiManager
+	                             WifiManager wifi = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+	
+	                             // Get WiFi status
+	                             WifiInfo info = wifi.getConnectionInfo();
+	                             if ( info != null ) {
+	                                     deviceId = info.getMacAddress();
+	                                     orDeviceId = "mac:" + deviceId;
+	                             }
+	                     }
+	                     // if it is still null, use ANDROID_ID
+	                     if ( deviceId == null ) {
+	                         deviceId =
+	                                 Settings.Secure
+	                                         .getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+	                             orDeviceId = Settings.Secure.ANDROID_ID + ":" + deviceId;
+	                             sbuilder.append("<deviceId>"+ orDeviceId +"</deviceId>" + "\r\n");
+	
+	                     }
+	                     sbuilder.append("<deviceId>"+ deviceId +"</deviceId>" + "\r\n");
                     } 
                     
-                } else if (name.equalsIgnoreCase("outcomes")) {
+                } // End if param list contains name entry 
+                else if (name.equalsIgnoreCase("outcomes")) {
                     // special case handling for pregnancy outcomes
                     for(Child child : filledForm.getPregOutcomeChildren()) {
                         sbuilder.append("<outcomes>\r\n");
@@ -285,10 +282,11 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                     sbuilder.append("<locationType>RUR</locationType>" + "\r\n"); 
                 } 
                 // special case for new hoh
-                else if(name.equalsIgnoreCase("membershiptonewhoh") 
-                		|| name.equalsIgnoreCase("hh_people_nb") 
-                			|| name.equalsIgnoreCase("new_hoh_id")){
-                	if(name.equalsIgnoreCase("membershiptonewhoh")){
+                else if(name.equalsIgnoreCase(FilledParams.membershiptonewhoh) 
+                		|| name.equalsIgnoreCase(FilledParams.hh_people_nb) 
+                			|| name.equalsIgnoreCase(FilledParams.new_hoh_id)
+                			|| name.equalsIgnoreCase(FilledParams.new_hoh_name)){
+                	if(name.equalsIgnoreCase(FilledParams.membershiptonewhoh)){
 	                	for(Individual hhMember : filledForm.getHouseHoldMembers()) {
 		                	sbuilder.append("<membershiptonewhoh>\r\n");
 		                	sbuilder.append("<extId>" + hhMember.getExtId() + "</extId>\r\n");
@@ -298,10 +296,14 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
 		                	sbuilder.append("</membershiptonewhoh>\r\n");
 	                	}
                 	}
-                	else if (name.equalsIgnoreCase("hh_people_nb")){
+                	else if (name.equalsIgnoreCase(FilledParams.hh_people_nb)){
                 		sbuilder.append("<hh_people_nb>" + filledForm.getHouseHoldMembers().size() + "</hh_people_nb>\r\n");
-                	}
-                	else{
+                	} 
+                	else if (name.equalsIgnoreCase(FilledParams.new_hoh_name)) {
+                		sbuilder.append(filledForm.getIndividualFirstName() == null ? "<new_hoh_name />" + "\r\n"
+                				: "<new_hoh_name>" + filledForm.getIndividualFirstName() + "</new_hoh_name>" + "\r\n");                         
+                	} 
+                	else {
                 		sbuilder.append("<new_hoh_id>" + filledForm.getIndividualA() + "</new_hoh_id>\r\n");
                 	}
                 }

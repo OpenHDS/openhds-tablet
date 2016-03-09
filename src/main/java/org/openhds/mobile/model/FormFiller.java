@@ -136,6 +136,17 @@ public class FormFiller {
         return form;
     }
     
+    public FilledForm fillChangeHoHForm(LocationVisit locationVisit, SocialGroup sg){
+    	FilledForm form = null;
+    	if(locationVisit != null && sg != null){
+    		form = new FilledForm(UpdateEvent.CHANGEHOH);
+    		addHousehold(sg, form);
+            addFieldWorker(locationVisit, form);
+            addVisit(locationVisit, form);
+    	}
+    	return form;
+    }
+    
     public FilledForm fillDeathOfHouseholdForm(LocationVisit locationVisit, SocialGroup sg){
     	FilledForm form = null;
     	form = new FilledForm(UpdateEvent.DEATHTOHOH);
@@ -146,29 +157,7 @@ public class FormFiller {
     	addFieldWorker(locationVisit, form);
         addVisit(locationVisit, form);
         addIndividual(locationVisit.getSelectedIndividual(), form);
-        
-//        List<Individual> people = new ArrayList<Individual>();
-//        Individual p1 = new Individual();
-//        p1.setExtId("id1");
-//        p1.setFirstName("fn1");
-//        p1.setLastName("ln1");
-//        
-//        Individual p2 = new Individual();
-//        p2.setExtId("id2"); 
-//        p2.setFirstName("fn2");
-//        p2.setLastName("ln2");        
-//        
-//        people.add(p1);
-//        people.add(p2);
-//        
-//        form.setHouseHoldMembers(people);
-//        for(Individual p : people)
-//        	form.addHouseHoldMember(p);
-        
-//        form.setNboutcomes(people.size());
-        
-//        form.setIndividualA("NEWHOHID");
-        
+                
     	return form;
     }
 
@@ -243,7 +232,6 @@ public class FormFiller {
         addVisit(locationVisit, form);
 
         form.setIndividualExtId(id);
-//        form.setMigrationType("INTERNAL_INMIGRATION");
         form.setLocationId(locationVisit.getLocation().getExtId());
         form.setMigrationType("BASELINE");
         

@@ -17,6 +17,7 @@ import org.openhds.mobile.database.DeathOfHoHUpdate;
 import org.openhds.mobile.database.DeathUpdate;
 import org.openhds.mobile.database.ExternalInMigrationUpdate;
 import org.openhds.mobile.database.ExtraFormUpdate;
+import org.openhds.mobile.database.HeadOfHouseholdUpdate;
 import org.openhds.mobile.database.HouseholdUpdate;
 import org.openhds.mobile.database.IndividualVisitedUpdate;
 import org.openhds.mobile.database.InternalInMigrationUpdate;
@@ -77,7 +78,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -95,7 +95,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private ValueFragment vf;
     private EventFragment ef;
     private ProgressFragment progressFragment;
-    private MenuItem  menuItemForm;
+    private MenuItem menuItemForm;
 
     // loader ids
     private static final int SOCIAL_GROUP_AT_LOCATION = 5;
@@ -149,6 +149,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private String parentExtId;
     private boolean hhCreation;
     private boolean deathCreation;
+    private boolean inChangeHoH;
     private String jrFormId;
     
 	private ProgressDialog progress;
@@ -172,9 +173,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	private int CREATING_NEW_LOCATION = 0;
 	private int RETURNING_TO_DSS = 0;
 	
-
 	private static final List<String> stateSequence = new ArrayList<String>();
-//	private static final Map<String, Integer> stateLabels = new HashMap<String, Integer>();
+
 	static {
 		stateSequence.add(SELECT_HIERARCHY_1);
 		stateSequence.add(SELECT_HIERARCHY_2);
@@ -811,6 +811,8 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             		if (extInm)
                 		onFinishExternalInmigration();
             		selectIndividual();
+            	} else if (stateMachine.getState() == UpdateActivity.SELECT_INDIVIDUAL && inChangeHoH) {
+            		//Stay in same state
             	} else if (stateMachine.getState()=="Select Individual") {
             		if (extInm)
                 		onFinishExternalInmigration();
@@ -840,10 +842,10 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             		stateMachine.transitionTo("Select Individual");
             	}
                 createUnfinishedFormDialog();
-            }
-            
+            }  
     		deathCreation = false;
     		extInm = false;
+    		inChangeHoH = false;
         }
     }
     
@@ -872,8 +874,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
      * Creates the 'Sync Database' option in the action menu.
      */
     private void createSyncDatabaseMenu() {
-        //Intent i = new Intent(this, SyncDatabaseActivity.class);
-        //startActivity(i);
     }
 
     /**
@@ -989,10 +989,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         vf.loadLocations(parentExtId);
     }
 
-  /*  private void loadRoundValueData() {
-        vf.loadRounds();
-    }*/
-
     private void loadIndividualValueData() {
         vf.loadIndividuals(locationVisit, VISIT_LEVEL);
     }
@@ -1081,8 +1077,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     	
         @Override
         protected Void doInBackground(Void... params) {
-           // locationVisit.createVisit(getContentResolver());
-            //filledForm = formFiller.fillVisitForm(locationVisit);
             updatable = new VisitUpdate();
         	startFilterActivity(FILTER_INDIV_VISIT);
             return null;
@@ -1203,9 +1197,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         protected Void doInBackground(Void... params) {
             SocialGroup sg = locationVisit.createSocialGroup(getContentResolver());
             if (sg==null){
-            	//this.cancel(true);
-            	//hideProgressFragment();
-            	//onSGexists();
             } else {
             	filledForm = formFiller.fillSocialGroupForm(locationVisit, sg);
             	updatable = new HouseholdUpdate();
@@ -1253,7 +1244,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     	hhCreation=false;
         filledForm = formFiller.fillMembershipForm(locationVisit);
         updatable = new MembershipUpdate();
-//        showProgressFragment();
         getLoaderManager().restartLoader(SOCIAL_GROUP_AT_LOCATION, null, this);
     }
 
@@ -1324,7 +1314,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     private void selectIndividual(){
         String indExtId = filledForm.getIndividualExtId();
-        if(indExtId.length() > 0){
+        if(indExtId != null && indExtId.length() > 0){
         	vf.onLoaderReset(null);
         	vf.loadFilteredIndividualById(indExtId);
         	vf.selectItemNoInList(0);
@@ -1740,7 +1730,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	    		loadHierarchy5ValueData();
 	    		vf.onLoaderReset(null);
 	    	}          
-		
 	}
     
 	
@@ -1763,8 +1752,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	    		cursor.close();
 	    		loadHierarchy6ValueData();
 	    		vf.onLoaderReset(null);
-	    	}          
-				
+	    	}          		
 	}
 
 	
@@ -1810,8 +1798,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	    		cursor.close();
 	    		loadHierarchy8ValueData();
 	    		vf.onLoaderReset(null);
-	    	}          
-		
+	    	}          	
 	}
 
 
@@ -1851,9 +1838,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 
     public void onRound() {
         locationVisit.clearLevelsBelow(8);
-        stateMachine.transitionTo("Select Round");
-//        loadRoundValueData();
-        
+        stateMachine.transitionTo("Select Round");        
     	ContentResolver resolver = getContentResolver();
     	Cursor cursor = null;
         cursor = Queries.allRounds(resolver);
@@ -1985,7 +1970,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		
 	public void onHierarchy8Selected(LocationHierarchy hierarchy8) {
 	     locationVisit.setHierarchy8(hierarchy8);
-	//        updateButtons(7);
         	onRound();	
 	}
         
@@ -2107,22 +2091,21 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        	final List<Individual> list2 = uniqueIndividuals;
         		@SuppressWarnings({ "unchecked", "rawtypes" })
 				ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, list) {
-      			  @Override
-      			  public View getView(int position, View convertView, android.view.ViewGroup parent) {
-      			    View view = super.getView(position, convertView, parent);
-      			    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-      			    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+        			@Override
+      			  	public View getView(int position, View convertView, android.view.ViewGroup parent) {
+        				View view = super.getView(position, convertView, parent);
+        				TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+        				TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-      			    text1.setTextColor(Color.BLACK);
-      			    text1.setText(list.get(position).getFirstName() + " " +list.get(position).getLastName());
-      			    text2.setText("(" + list.get(position).getExtId() + ")");
-      			    return view;
-      			  }
+        				text1.setTextColor(Color.BLACK);
+        				text1.setText(list.get(position).getFirstName() + " " +list.get(position).getLastName());
+        				text2.setText("(" + list.get(position).getExtId() + ")");
+        				return view;
+      			  	}
       			};
     	        AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	        builder.setTitle(getString(R.string.pls_select_new_hoh_lbl));
     	        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-    	
     	            public void onClick(DialogInterface dialog, int which) {
     	            	ListView lw = ((AlertDialog)dialog).getListView();    	            	
     	            	Object checkedItem = lw.getItemAtPosition(which);
@@ -2133,17 +2116,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     	            	if(checkedItem instanceof Individual){
     	            		newHoh = (Individual)checkedItem;
     	            	}
-    	            	
-    	            	ListAdapter listAdapter = lw.getAdapter();
-    	            	for(int i = 0; i < listAdapter.getCount();i++){
-    	            		Object obj = listAdapter.getItem(i);
-    	            		if(obj instanceof Individual){
-    	            			Individual member = (Individual)obj;
-    	            			if(newHoh != null && !newHoh.getExtId().equalsIgnoreCase(member.getExtId())){
-    	            				members.add(member);
-    	            			}
-    	            		}
-    	            	}   
     	            	
     	            	//Remove selected individual from list
     	            	Individual selectedIndividual = null;
@@ -2226,17 +2198,26 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private void selectedNewHoh(final Individual newHoh, final List<Individual> members){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.update_load_finished_select_hh_msg));
-        if(newHoh != null)
-        	builder.setMessage(getString(R.string.selected_new_hoh_lbl)  + " " + newHoh.getFirstName() + " " + newHoh.getLastName() +  " " + getString(R.string.with_extid_lbl)  + " " + newHoh.getExtId());
+        if(newHoh != null){
+        	builder.setMessage(getString(R.string.selected_new_hoh_lbl)  + " " + newHoh.getFirstName() + " " + newHoh.getLastName() +  " (" + getString(R.string.with_extid_lbl)  + " " + newHoh.getExtId() + ")");
+        }
         builder.setNegativeButton(getString(R.string.cancel_lbl), new DialogInterface.OnClickListener() {
         	public void onClick(DialogInterface dialog, int id) {
-        		deathCreation = false;
+        		if(deathCreation){ //We are in Death of HoH mode
+        			deathCreation = false;
+        		}
+        		else{ //We are in Change HoH mode
+        			stateMachine.transitionTo(UpdateActivity.SELECT_INDIVIDUAL);
+        		}
         	}
         });
         builder.setPositiveButton(R.string.continue_lbl, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
             	filledForm.setIndividualA(newHoh.getExtId());
             	filledForm.setHouseHoldMembers(members);
+            	if(!deathCreation){ //We are in Change HoH mode
+            		inChangeHoH = true;
+            	}
             	loadForm(SELECTED_XFORM);
             }
         });
@@ -2300,9 +2281,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        			        return row;
 	        			    }
 	        			};
-	        	
-	      
-	        	
+	        		
 	        	builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
 	        			public void onClick(DialogInterface dialog, int which) {
 	        				Cursor cursor = (Cursor) householdDialog.getListView().getItemAtPosition(which);
@@ -2338,5 +2317,119 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	 
 	    private void searchSocialGroup(){ 	
 	    	startFilterActivity(FILTER_SOCIALGROUP);
+	    }
+	    
+		public void onChangeHouseholdHead() {
+			showProgressFragment();
+			new CreateChangeHoHTask().execute();
+		}
+		
+		private class CreateChangeHoHTask extends AsyncTask<Void, Void, Boolean> {
+	    	private SocialGroup sg;
+	    	
+			@Override
+			protected Boolean doInBackground(Void... arg0) {				
+	        	Cursor cursor = Queries.getSocialGroupByName(getContentResolver(), locationVisit.getSocialgroup().getGroupName());
+	        	if (cursor.moveToFirst()) {
+	        		SocialGroup socialGroup = Converter.convertToSocialGroup(cursor);
+	        		this.sg = socialGroup;
+	        		if(sg != null && sg.getGroupHead().trim().length() > 0 && locationVisit.getLocation() != null){
+	        			String hohextId = sg.getGroupHead();
+	        			locationVisit.getLocation().setHead(hohextId);
+	    	            filledForm = formFiller.fillChangeHoHForm(locationVisit, sg);
+	    	            filledForm.setIndividualExtId(hohextId);
+	    	            updatable = new HeadOfHouseholdUpdate();
+	        		}
+	        		else{
+	        			return false;
+	        		}
+	        	}   
+	            cursor.close();
+				return true;
+			}
+			
+			@Override
+			protected void onPostExecute(Boolean result) {
+				hideProgressFragment();				
+				if(result){
+	    			changeHoH(sg);
+				}
+				else{
+					Toast.makeText(UpdateActivity.this, getString(R.string.no_hoh_found), Toast.LENGTH_LONG).show();
+				}
+			}
+		}
+		
+		private void changeHoH(SocialGroup sg){  
+        	Cursor cursor = Queries.getActiveIndividualsByResidency(getContentResolver(), locationVisit.getLocation().getExtId());
+        	List<Individual> allIndividuals = Converter.toIndividualList(cursor);
+	        List<Individual> individualsEligible = new ArrayList<Individual>();
+	        List<Individual> individualsActive = new ArrayList<Individual>();
+	        
+        	for(Individual individual : allIndividuals){
+        		if(individual != null){      					
+        			//Dont add the current head of household
+        			if(individual.getExtId().equalsIgnoreCase(sg.getGroupHead())){
+        				individualsActive.add(individual); // Active
+        				String info = individual.getFirstName() + " " + individual.getLastName() + " (" + individual.getExtId() + ")";
+                    	Toast.makeText(UpdateActivity.this, "Current HoH: " + info, Toast.LENGTH_LONG).show();
+        				continue;
+        			}
+        			        			
+        			System.out.println(individual.getFirstName() + "::" + individual.getEndType());
+        			if(!"DTH".equals(individual.getEndType()) || !"OMG".equals(individual.getEndType())){ //These should never be the case, since we load only Active individuals
+        				individualsActive.add(individual);
+        				if(individualMeetsMinimumAge(individual)){
+        					individualsEligible.add(individual);
+        				}
+        			}
+        		}	
+        		cursor.moveToNext();
+        	}     	   	
+        	cursor.close();
+        	       	
+        	final List<Individual> list = individualsEligible; 
+        	final List<Individual> list2 = individualsActive; 
+    		@SuppressWarnings({ "unchecked", "rawtypes" })
+			ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, list) {
+    			@Override
+  			  	public View getView(int position, View convertView, android.view.ViewGroup parent) {
+    				View view = super.getView(position, convertView, parent);
+    				TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+    				TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+    				Individual ind = list.get(position);
+    				text1.setTextColor(Color.BLACK);
+    				text1.setText(ind.getFirstName() + " " + ind.getLastName());
+    				text2.setText("(" + ind.getExtId() + ")");
+    				return view;
+  			  	}
+  			};
+  			  		    
+	        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        builder.setTitle(getString(R.string.change_household_head_select_lbl) + " (" + sg.getGroupHead() + ")");
+	        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	        		ListView lw = ((AlertDialog)dialog).getListView();    	            	
+	            	Object checkedItem = lw.getItemAtPosition(which);
+	            	       		            	
+	            	if(checkedItem instanceof Individual){
+	            		//Remove selected new HoH from members list
+	            		Individual newHoH = (Individual)checkedItem;
+		            	list2.remove(newHoH); 	
+		                //Set new HoH in form
+		                filledForm.setIndividualA(newHoH.getExtId());
+		                filledForm.setIndividualFirstName(newHoH.getFirstName() + " " + newHoH.getLastName());                
+		            	selectedNewHoh(newHoH, list2);
+	            	}	            	
+	            }
+	        });
+	        builder.setNegativeButton(getString(R.string.cancel_lbl), new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	        		stateMachine.transitionTo(UpdateActivity.SELECT_INDIVIDUAL);
+	        	}
+	        });
+	        AlertDialog dlg = builder.create();
+	        dlg.show();  
 	    }
 }

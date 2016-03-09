@@ -261,6 +261,8 @@
     <string name="bottom_label">Bottom</string>
     <string name="create_membership">Please first create a membership for this individual!</string>
     <string name="no_individual_left">There is no active individual left in the Socialgroup that could replace the Head.</string>
+    <string name="no_individuals_found">No Individuals found!</string>   
+    <string name="no_hoh_found">Could not find HoH!</string> 
     <string name="exiting_lbl">Are you sure you want to exit?</string>
     <string name="couldnt_find_baseline_lbl">Could not find baseline. Please make sure there is a round with number 0. Continuing anyways.</string>
     <string name="no_round_info_lbl">No round information found. Please sync with server!</string>
@@ -274,7 +276,7 @@
     <string name="no_round_info_found_lbl">No round information found. Please sync with server and make sure tasks were created!</string>
     <string name="pls_select_new_hoh_lbl">Please select new HoH</string>
     <string name="no_indiv_found_onsg_lbl">No individual found in SG</string>
-    <string name="selected_new_hoh_lbl">Selected new HoH</string>
+    <string name="selected_new_hoh_lbl">Selected new Head of Household</string>
     <string name="with_extid_lbl"> with extId </string>
     <string name="continue_lbl">Continue</string>
     <string name="fwlogin_task_retrieving_fws">Downloading Field Workers</string>
@@ -298,4 +300,9 @@
     <string name="locale_lang">en</string>
     <string name="parenthood_minimium_age">Minimum age for parenthood: </string>
 	<string name="younger_than_required_age_for_hoh">Selected individual is younger than required age!</string>
+	<string name="changeHouseholdHeadBtn_lbl">Change HoH</string>
+	<string name="change_household_head_lbl">New Head of Household</string>
+	<string name="change_household_head_exists_lbl">The new Head of Household is already the head of another Household!</string>
+	<string name="change_household_head_select_lbl">Please select a new Head of Household</string>
+	<string name="change_household_head_selected_lbl">Select the new Head of Household</string>	
 </resources>

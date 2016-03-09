@@ -37,7 +37,17 @@
 	        android:layout_gravity="center"
 	        android:text="@string/createVisitBtn_lbl"
 	        android:enabled="false" />
-	    
+
+	     <Button
+	        android:id="@+id/changeHouseholdHeadBtn"
+	        android:layout_width="150dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="22dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_gravity="center"
+	        android:text="@string/changeHouseholdHeadBtn_lbl"
+	        android:enabled="false"  />
+	        	    
 	     <Button
 	        android:id="@+id/householdBtn"
 	        android:layout_width="150dp"

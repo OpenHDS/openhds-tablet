@@ -550,7 +550,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
     	        //Show different messages depending on currently displayed list
     	        if (listCurrentlyDisplayed.equals(Displayed.INDIVIDUAL)) {
     	        	if(cursor.getCount() == 0){
-    	        			Toast.makeText(getActivity(), "No Individuals found!", Toast.LENGTH_LONG).show();
+    	        			Toast.makeText(getActivity(), getString(R.string.no_individuals_found), Toast.LENGTH_LONG).show();
     	        		}
     	        		else if(cursor.getCount() == 1){
     	        			if(onlyOneEntryListener != null)

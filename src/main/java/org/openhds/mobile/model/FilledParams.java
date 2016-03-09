@@ -59,6 +59,10 @@ public class FilledParams {
 			
 	public static final String causeOfDeath = "causeOfDeath";
 
+	public static final String membershiptonewhoh = "membershiptonewhoh";
+	public static final String hh_people_nb = "hh_people_nb";
+	public static final String new_hoh_name = "new_hoh_name";
+	public static final String new_hoh_id = "new_hoh_id";
 			
 	public static List<String> getParamsArray() {
 

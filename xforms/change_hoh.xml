@@ -1,0 +1,380 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Change of Head of Household</h:title>
+    <model>
+      <itext>
+        <translation lang="Swahili">
+          <text id="/change_hoh/openhds:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/openhds/new_hoh_name:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/6:label">
+            <value>Mjukuu</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/2:label">
+            <value>Mke/Mme</value>
+          </text>
+          <text id="/change_hoh/openhds/visitId:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/openhds/fieldWorkerId:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/socialGroupId:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/openhds/householdId:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/memberName:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/hh_people_nb:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/4:label">
+            <value>Kaka/Dada</value>
+          </text>
+          <text id="/change_hoh/date:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/3:label">
+            <value>Mtoto Kiume/Kike</value>
+          </text>
+          <text id="/change_hoh/openhds/individualId:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/7:label">
+            <value>Hakuna Mahusiano</value>
+          </text>
+          <text id="/change_hoh/openhds/householdName:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/8:label">
+            <value>Uhusiano Mwingine</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/extId:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/processedByMirth:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/9:label">
+            <value>Sijui</value>
+          </text>
+          <text id="/change_hoh/openhds/visitDate:label">
+            <value>-</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/5:label">
+            <value>Mzazi</value>
+          </text>
+          <text id="/change_hoh/openhds/new_hoh_id:label">
+            <value>-</value>
+          </text>
+        </translation>
+        <translation lang="Portuguese">
+          <text id="/change_hoh/openhds:label">
+            <value>OpenHDS preloaded info</value>
+          </text>
+          <text id="/change_hoh/openhds/new_hoh_name:label">
+            <value>Nome do novo Chefe de Agregado</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/6:label">
+            <value>Neto/a</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead:label">
+            <value>Relação com o chefe de agregado</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/2:label">
+            <value>Esposo/a</value>
+          </text>
+          <text id="/change_hoh/openhds/visitId:label">
+            <value>Id da visita</value>
+          </text>
+          <text id="/change_hoh/openhds/fieldWorkerId:label">
+            <value>Código do Inquiridor</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/socialGroupId:label">
+            <value>Id do Agregado</value>
+          </text>
+          <text id="/change_hoh/openhds/householdId:label">
+            <value>Id do Agregado</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/memberName:label">
+            <value>Nome do membro</value>
+          </text>
+          <text id="/change_hoh/hh_people_nb:label">
+            <value>Membros do Agregado</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/4:label">
+            <value>Irmão/Irmã</value>
+          </text>
+          <text id="/change_hoh/date:label">
+            <value>Data da mudança</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/3:label">
+            <value>Filho/Filha</value>
+          </text>
+          <text id="/change_hoh/openhds/individualId:label">
+            <value>Old HoH Id</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh:label">
+            <value>Alterar Filiação dos Membros</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/7:label">
+            <value>Sem relação</value>
+          </text>
+          <text id="/change_hoh/openhds/householdName:label">
+            <value>Número do Agregado</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/8:label">
+            <value>Outro parente</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/extId:label">
+            <value>ExtId do Membro</value>
+          </text>
+          <text id="/change_hoh/processedByMirth:label">
+            <value>processedByMirth</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/9:label">
+            <value>Não sabe</value>
+          </text>
+          <text id="/change_hoh/openhds/visitDate:label">
+            <value>Data da visita</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/5:label">
+            <value>Pai/Mãe</value>
+          </text>
+          <text id="/change_hoh/openhds/new_hoh_id:label">
+            <value>Novo ID do Chefe de agregado</value>
+          </text>
+        </translation>
+        <translation default="true()" lang="English">
+          <text id="/change_hoh/openhds:label">
+            <value>OpenHDS preloaded info</value>
+          </text>
+          <text id="/change_hoh/openhds/new_hoh_name:label">
+            <value>Name of the NEW HOH</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/6:label">
+            <value>Grandchild</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead:label">
+            <value>Relationship to Group Head</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/2:label">
+            <value>Spouse</value>
+          </text>
+          <text id="/change_hoh/openhds/visitId:label">
+            <value>Visit Id</value>
+          </text>
+          <text id="/change_hoh/openhds/fieldWorkerId:label">
+            <value>Field Worker Id</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/socialGroupId:label">
+            <value>Social Group Id</value>
+          </text>
+          <text id="/change_hoh/openhds/householdId:label">
+            <value>HouseHold Id</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/memberName:label">
+            <value>Member Name</value>
+          </text>
+          <text id="/change_hoh/hh_people_nb:label">
+            <value>Members</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/4:label">
+            <value>Brother/Sister</value>
+          </text>
+          <text id="/change_hoh/date:label">
+            <value>Date of change</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/3:label">
+            <value>Son/Daughter</value>
+          </text>
+          <text id="/change_hoh/openhds/individualId:label">
+            <value>Individual Id of the OLD HOH</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh:label">
+            <value>Membership</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/7:label">
+            <value>Not Related</value>
+          </text>
+          <text id="/change_hoh/openhds/householdName:label">
+            <value>Household Name</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/8:label">
+            <value>Other Relative</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/extId:label">
+            <value>Member Id</value>
+          </text>
+          <text id="/change_hoh/processedByMirth:label">
+            <value>processedByMirth</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/9:label">
+            <value>Don't Know</value>
+          </text>
+          <text id="/change_hoh/openhds/visitDate:label">
+            <value>Visit Date</value>
+          </text>
+          <text id="/change_hoh/membershiptonewhoh/relationshipToGroupHead/5:label">
+            <value>Parent</value>
+          </text>
+          <text id="/change_hoh/openhds/new_hoh_id:label">
+            <value>Individual Id of the NEW HOH</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <change_hoh id="change_hoh">
+          <start/>
+          <end/>
+          <deviceid/>
+          <openhds>
+            <visitId/>
+            <visitDate/>
+            <fieldWorkerId/>
+            <householdId/>
+            <householdName/>
+            <individualId/>
+            <new_hoh_id/>
+            <new_hoh_name/>
+          </openhds>
+          <date/>
+          <hh_people_nb/>
+          <membershiptonewhoh_count/>
+          <membershiptonewhoh jr:template="">
+            <extId/>
+            <memberName/>
+            <socialGroupId/>
+            <relationshipToGroupHead/>
+          </membershiptonewhoh>
+          <processedByMirth/>
+          <meta>
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </change_hoh>
+      </instance>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/change_hoh/start" readonly="true()" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/change_hoh/end" readonly="true()" type="dateTime"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/change_hoh/deviceid" readonly="true()" type="string"/>
+      <bind nodeset="/change_hoh/openhds/visitId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/change_hoh/openhds/visitDate" readonly="true()" required="true()" type="date"/>
+      <bind nodeset="/change_hoh/openhds/fieldWorkerId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/change_hoh/openhds/householdId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/change_hoh/openhds/householdName" readonly="true()" type="string"/>
+      <bind nodeset="/change_hoh/openhds/individualId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/change_hoh/openhds/new_hoh_id" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/change_hoh/openhds/new_hoh_name" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/change_hoh/date" required="true()" type="date"/>
+      <bind nodeset="/change_hoh/hh_people_nb" readonly="true()" relevant="false()" required="true()" type="int"/>
+      <bind calculate=" /change_hoh/hh_people_nb " nodeset="/change_hoh/membershiptonewhoh_count" readonly="true()" type="string"/>
+      <bind nodeset="/change_hoh/membershiptonewhoh/extId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/change_hoh/membershiptonewhoh/memberName" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/change_hoh/membershiptonewhoh/socialGroupId" readonly="true()" required="true()" type="string"/>
+      <bind nodeset="/change_hoh/membershiptonewhoh/relationshipToGroupHead" required="true()" type="select1"/>
+      <bind nodeset="/change_hoh/processedByMirth" readonly="true()" type="int"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/change_hoh/meta/instanceID" readonly="true()" type="string"/>
+      <bind calculate="concat(&quot;CHANGE_HOH-&quot;, /change_hoh/openhds/householdName )" nodeset="/change_hoh/meta/instanceName" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group appearance="field-list" ref="/change_hoh/openhds">
+      <label ref="jr:itext('/change_hoh/openhds:label')"/>
+      <input ref="/change_hoh/openhds/visitId">
+        <label ref="jr:itext('/change_hoh/openhds/visitId:label')"/>
+      </input>
+      <input appearance="no-calendar" ref="/change_hoh/openhds/visitDate">
+        <label ref="jr:itext('/change_hoh/openhds/visitDate:label')"/>
+      </input>
+      <input ref="/change_hoh/openhds/fieldWorkerId">
+        <label ref="jr:itext('/change_hoh/openhds/fieldWorkerId:label')"/>
+      </input>
+      <input ref="/change_hoh/openhds/householdId">
+        <label ref="jr:itext('/change_hoh/openhds/householdId:label')"/>
+      </input>
+      <input ref="/change_hoh/openhds/householdName">
+        <label ref="jr:itext('/change_hoh/openhds/householdName:label')"/>
+      </input>
+      <input ref="/change_hoh/openhds/individualId">
+        <label ref="jr:itext('/change_hoh/openhds/individualId:label')"/>
+      </input>
+      <input ref="/change_hoh/openhds/new_hoh_id">
+        <label ref="jr:itext('/change_hoh/openhds/new_hoh_id:label')"/>
+      </input>
+      <input ref="/change_hoh/openhds/new_hoh_name">
+        <label ref="jr:itext('/change_hoh/openhds/new_hoh_name:label')"/>
+      </input>
+    </group>
+    <input ref="/change_hoh/date">
+      <label ref="jr:itext('/change_hoh/date:label')"/>
+    </input>
+    <input ref="/change_hoh/hh_people_nb">
+      <label ref="jr:itext('/change_hoh/hh_people_nb:label')"/>
+    </input>
+    <group ref="/change_hoh/membershiptonewhoh">
+      <label ref="jr:itext('/change_hoh/membershiptonewhoh:label')"/>
+      <repeat jr:count=" /change_hoh/membershiptonewhoh_count " nodeset="/change_hoh/membershiptonewhoh">
+        <input ref="/change_hoh/membershiptonewhoh/extId">
+          <label ref="jr:itext('/change_hoh/membershiptonewhoh/extId:label')"/>
+        </input>
+        <input ref="/change_hoh/membershiptonewhoh/memberName">
+          <label ref="jr:itext('/change_hoh/membershiptonewhoh/memberName:label')"/>
+        </input>
+        <input ref="/change_hoh/membershiptonewhoh/socialGroupId">
+          <label ref="jr:itext('/change_hoh/membershiptonewhoh/socialGroupId:label')"/>
+        </input>
+        <select1 ref="/change_hoh/membershiptonewhoh/relationshipToGroupHead">
+          <label ref="jr:itext('/change_hoh/membershiptonewhoh/relationshipToGroupHead:label')"/>
+          <item>
+            <label ref="jr:itext('/change_hoh/membershiptonewhoh/relationshipToGroupHead/2:label')"/>
+            <value>2</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/change_hoh/membershiptonewhoh/relationshipToGroupHead/3:label')"/>
+            <value>3</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/change_hoh/membershiptonewhoh/relationshipToGroupHead/4:label')"/>
+            <value>4</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/change_hoh/membershiptonewhoh/relationshipToGroupHead/5:label')"/>
+            <value>5</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/change_hoh/membershiptonewhoh/relationshipToGroupHead/6:label')"/>
+            <value>6</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/change_hoh/membershiptonewhoh/relationshipToGroupHead/7:label')"/>
+            <value>7</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/change_hoh/membershiptonewhoh/relationshipToGroupHead/8:label')"/>
+            <value>8</value>
+          </item>
+          <item>
+            <label ref="jr:itext('/change_hoh/membershiptonewhoh/relationshipToGroupHead/9:label')"/>
+            <value>9</value>
+          </item>
+        </select1>
+      </repeat>
+    </group>
+    <input ref="/change_hoh/processedByMirth">
+      <label ref="jr:itext('/change_hoh/processedByMirth:label')"/>
+    </input>
+  </h:body>
+</h:html>

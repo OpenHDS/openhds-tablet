@@ -271,9 +271,7 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         hierarchyExtIdViews.add(hierarchy7ExtIdText);
         hierarchyExtIdViews.add(hierarchy8ExtIdText);
         
-        hierarchy1Btn.getBackground();
-       // roundBtn.setVisibility(View.GONE);
-        
+        hierarchy1Btn.getBackground();        
         setHierarchyButtonLabels();
     }
     
@@ -296,15 +294,6 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         }     	
     }
     
-    /*   private Button getButtonForState(String state){
-    	for(Button button : hierarchyButtons){
-    		if(button.getText().toString().equals(state)){
-    			return button;
-    		}
-    	}
-    	return null;
-    }*/
-
     private void setHierarchy1() {
         LocationHierarchy region = locationVisit.getHierarchy1();
         if (region == null) {
@@ -427,31 +416,6 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     }
     
     public void updateButtons(int level){
-//    	int selectedLevel = level;
-//    	if(selectedLevel >= 0 && selectedLevel < hierarchyButtons.size()){
-//    		for(int i = 0 ; i < hierarchyButtons.size(); i++){
-//    			
-//    			Button btn = hierarchyButtons.get(i);
-//    			
-//    			if(btn.isEnabled()){
-////	    			if(i < selectedLevel){
-////	    				btn.setBackgroundColor(Color.GREEN);
-////	    			}
-////	    			else{
-////	    				btn.setBackgroundColor(Color.RED);
-////	    			}
-//    				btn.setBackgroundColor(Color.LTGRAY);
-//    			}
-//    			else
-//    			{
-//    				btn.setBackgroundColor(Color.DKGRAY);
-//    			}
-//    		}
-//    	}
-//    	if(selectedLevel+1 < hierarchyButtons.size()){
-//    		Button btn = hierarchyButtons.get(selectedLevel+1);
-//    		btn.setBackgroundColor(Color.GREEN);
-//    	}
     }
 
     public void setLocationVisit(LocationVisit locationVisit) {

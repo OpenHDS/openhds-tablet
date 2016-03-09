@@ -1830,7 +1830,12 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         }
 
         return false;
-    }   
+    }
+
+	public void onChangeHouseholdHead() {
+		// TODO Auto-generated method stub
+		
+	}   
 
 	
 }
