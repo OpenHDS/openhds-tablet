@@ -76,7 +76,8 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             hierarchy5LabelExtIdText, hierarchy6LabelExtIdText, hierarchy7LabelExtIdText, hierarchy8LabelExtIdText,
             roundNumberText, roundStartDateText, roundEndDateText, locationNameText, locationExtIdText,
             locationLatitudeText, locationLongitudeText, individualFirstNameText, individualLastNameText,
-            individualExtIdText, individualDobText;
+            individualExtIdText, individualDobText,
+            individualExtId, individualFirstName, individualLastName, individualDob;
 
     @Override
     public void onAttach(Activity activity) {
@@ -219,6 +220,11 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         individualLastNameText = (TextView) view.findViewById(R.id.individualLastNameText);
         individualDobText = (TextView) view.findViewById(R.id.individualDobText);
         
+        individualExtId = (TextView) view.findViewById(R.id.individualExtId);
+        individualFirstName = (TextView) view.findViewById(R.id.individualFirstName);
+        individualLastName = (TextView) view.findViewById(R.id.individualLastName);
+        individualDob = (TextView) view.findViewById(R.id.individualDob);
+        
         hierarchyButtons = new ArrayList<Button>();
         hierarchyButtons.add(hierarchy1Btn);
         hierarchyButtons.add(hierarchy2Btn);
@@ -273,6 +279,8 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         
         hierarchy1Btn.getBackground();        
         setHierarchyButtonLabels();
+        
+        hideIndividualInfo();
     }
     
     private void setHierarchyButtonLabels(){
@@ -468,9 +476,11 @@ public class SelectionFragment extends Fragment implements OnClickListener {
         stateMachine.registerListener("Select Event", new StateListener() {
             public void onEnterState() {
                 setIndividual();
+                unhideIndividualInfo();
             }
 
             public void onExitState() {
+            	hideIndividualInfo();
             }
         });
     }
@@ -498,18 +508,53 @@ public class SelectionFragment extends Fragment implements OnClickListener {
             }
         });
     }
+    
+    private void hideIndividualInfo(){
+    	System.out.println("hideIndividualInfo");
+        individualBtn.setVisibility(View.GONE);
+        individualBtn.setEnabled(false);
+        individualBtn.setBackgroundColor(Color.DKGRAY);
+        
+        individualExtIdText.setVisibility(View.GONE);
+        individualFirstNameText.setVisibility(View.GONE);
+        individualLastNameText.setVisibility(View.GONE);
+        individualDobText.setVisibility(View.GONE);
+        
+        individualExtId.setVisibility(View.GONE);
+        individualFirstName.setVisibility(View.GONE);
+        individualLastName.setVisibility(View.GONE);
+        individualDob.setVisibility(View.GONE);
+    }
+    
+    private void unhideIndividualInfo(){
+        individualBtn.setVisibility(View.VISIBLE);
+        individualBtn.setEnabled(true);
+        individualBtn.setBackgroundColor(Color.LTGRAY);
+        
+        individualExtIdText.setVisibility(View.VISIBLE);
+        individualFirstNameText.setVisibility(View.VISIBLE);
+        individualLastNameText.setVisibility(View.VISIBLE);
+        individualDobText.setVisibility(View.VISIBLE);
+        
+        individualExtId.setVisibility(View.VISIBLE);
+        individualFirstName.setVisibility(View.VISIBLE);
+        individualLastName.setVisibility(View.VISIBLE);
+        individualDob.setVisibility(View.VISIBLE);
+    }    
 
     private void registerIndividualListener(StateMachine stateMachine) {
         stateMachine.registerListener("Select Individual", new StateListener() {
             public void onEnterState() {
                 setIndividual();
-                individualBtn.setEnabled(true);
-                individualBtn.setBackgroundColor(Color.LTGRAY);
+//                individualBtn.setEnabled(true);
+//                individualBtn.setBackgroundColor(Color.LTGRAY);
+                unhideIndividualInfo();
             }
 
             public void onExitState() {
-                individualBtn.setEnabled(false);
-                individualBtn.setBackgroundColor(Color.DKGRAY);
+//                individualBtn.setEnabled(false);
+//                individualBtn.setBackgroundColor(Color.DKGRAY);
+            	hideIndividualInfo();
             }
         });
     }

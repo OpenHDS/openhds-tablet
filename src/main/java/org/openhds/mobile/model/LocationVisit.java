@@ -329,7 +329,8 @@ public class LocationVisit implements Serializable {
     		suffix="0"+suffix;
     	}
     	String generatedId;
-    	if (visitLevel.equalsIgnoreCase("location")) {
+    	System.out.println("Visitlevel: " + visitLevel);
+    	if ("location".equalsIgnoreCase(visitLevel)) {
     		generatedId = location.getExtId() + suffix ;
     	} else {
     		if (socialgroup!=null) {

@@ -77,7 +77,7 @@ import android.widget.Toast;
  * interacts with the application.
  */
 public class BaselineActivity extends Activity implements ValueFragment.ValueListener, LoaderCallbacks<Cursor>,
-EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryListener {
+EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryListener, DialogInterface.OnCancelListener {
 
     private SelectionFragment sf;
     private ValueFragment vf;
@@ -247,7 +247,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
      		c.close();
      		MINIMUM_HOUSEHOLD_AGE = settings.getMinimumAgeOfHouseholdHead() == 0 ? DEFAULT_MINIMUM_HOUSEHOLD_AGE : settings.getMinimumAgeOfHouseholdHead();
      		VISIT_LEVEL = settings.getVisitLevel()==null ? DEFAULT_VISIT_LEVEL : settings.getVisitLevel();
-        
+     		locationVisit.setVisitLevel(VISIT_LEVEL);
     }
     
     /**
@@ -325,6 +325,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 	@Override
 	public void onBackPressed() {
 	    new AlertDialog.Builder(this)
+	    		.setTitle(getString(R.string.exit_confirmation_title))
 	           .setMessage(getString(R.string.exiting_lbl))
 	           .setCancelable(false)
 	           .setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
@@ -415,11 +416,14 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
                 return;
             }
 
+            if (locationVisit.getVisitLevel()==null) {
+            	locationVisit.setVisitLevel(VISIT_LEVEL);
+            }
+            
             Individual individual = (Individual) data.getExtras().getSerializable("individual");
             if (individual!=null) 
             filledForm.setIntervieweeId(individual.getExtId());	
             loadForm(SELECTED_XFORM);
-        
 	}
 
 	private void handleFatherBirthResult(int resultCode, Intent data) {
@@ -690,6 +694,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 	private void onFinishedHouseHoldCreation() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle(getString(R.string.baseline_lbl));
+        alertDialogBuilder.setOnCancelListener(this);
         alertDialogBuilder.setMessage(getString(R.string.finish_household_creation_msg));
         alertDialogBuilder.setCancelable(true);
         alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {			
@@ -847,6 +852,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             alertDialogBuilder.setTitle(getString(R.string.warning_lbl));
             alertDialogBuilder.setMessage(getString(R.string.update_unfinish_msg1));
             alertDialogBuilder.setCancelable(true);
+            alertDialogBuilder.setOnCancelListener(this);
             alertDialogBuilder.setPositiveButton(getString(R.string.update_unfinish_pos_button), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     formUnFinished = false;
@@ -872,6 +878,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         xFormNotFound = true;
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
           alertDialogBuilder.setTitle(getString(R.string.warning_lbl));
+          alertDialogBuilder.setOnCancelListener(this);
           alertDialogBuilder.setMessage(getString(R.string.update_xform_not_found_msg));
           alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -918,6 +925,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         alertDialogBuilder.setTitle(getString(R.string.visit_lbl));
         alertDialogBuilder.setMessage(getString(R.string.update_finish_visit_msg));
         alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setOnCancelListener(this);
         alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             	if(menuItemForm != null) {
@@ -931,7 +939,11 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
                 vf.onLoaderReset(null);
                 }
         });
-        alertDialogBuilder.setNegativeButton(getString(R.string.cancel_lbl), null);
+        alertDialogBuilder.setNegativeButton(getString(R.string.cancel_lbl), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				reloadState();
+			}
+		});
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
@@ -985,8 +997,14 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
          alertDialogBuilder.setTitle(getString(R.string.socialgroup_lbl));
          alertDialogBuilder.setMessage(getString(R.string.update_on_sgexists_msg));
          alertDialogBuilder.setCancelable(true);
-         alertDialogBuilder.setPositiveButton("Ok", null);
+         alertDialogBuilder.setOnCancelListener(this);
+         alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	        		reloadState();
+	        	}
+	        });
          AlertDialog alertDialog = alertDialogBuilder.create();
+         
          alertDialog.show();         
     }
 
@@ -1051,6 +1069,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         alertDialogBuilder.setTitle(getString(R.string.baseline_lbl));
         alertDialogBuilder.setMessage(getString(R.string.update_finish_ext_inmigration_msg));
         alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setOnCancelListener(this);
         alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {			
         				public void onClick(DialogInterface dialog, int which) {
         					if(newIndividual){
@@ -1069,6 +1088,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         alertDialogBuilder.setTitle(getString(R.string.mother_lbl));
         alertDialogBuilder.setMessage(getString(R.string.update_build_mother_msg));
         alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setOnCancelListener(this);
         alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 startFilterActivity(FILTER_INMIGRATION_MOTHER);
@@ -1089,6 +1109,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
        alertDialogBuilder.setTitle(getString(R.string.father_lbl));
         alertDialogBuilder.setMessage(getString(R.string.update_build_father_msg));
         alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setOnCancelListener(this);
         alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
         	  public void onClick(DialogInterface dialog, int which) {
                 startFilterActivity(FILTER_INMIGRATION_FATHER);
@@ -1162,6 +1183,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 
     private void buildPregnancyLiveBirthCountDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setOnCancelListener(this);
         builder.setTitle(getString(R.string.update_build_pregnancy_lbr_count_msg)).setCancelable(true)
                 .setItems(new String[] {"1", "2", "3", "4" }, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -1772,7 +1794,8 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 			public void onClick(DialogInterface dialog,int id) {
 				searchSocialGroup();
 			}
-		});           	
+		});     
+		builder.setOnCancelListener(this);
         householdDialog = builder.create();
         householdDialog.show();    	
     }
@@ -1837,5 +1860,12 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
 		
 	}   
 
+	//Dialog cancelled by pressing the back button, refresh state
+	public void onCancel(DialogInterface arg0) {
+		reloadState();
+	}
 	
+	private void reloadState(){
+		stateMachine.transitionTo(stateMachine.getState());
+	}
 }

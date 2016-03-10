@@ -89,7 +89,7 @@ import android.widget.Toast;
  * interacts with the application.
  */
 public class UpdateActivity extends Activity implements ValueFragment.ValueListener, LoaderCallbacks<Cursor>,
-        EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryListener {
+        EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryListener, DialogInterface.OnCancelListener {
 
     private SelectionFragment sf;
     private ValueFragment vf;
@@ -342,6 +342,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	@Override
 	public void onBackPressed() {
 	    new AlertDialog.Builder(this)
+	    		.setTitle(getString(R.string.exit_confirmation_title))
 	           .setMessage(getString(R.string.exiting_lbl))
 	           .setCancelable(false)
 	           .setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
@@ -590,6 +591,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	private void buildNewLocDialog() {
 		// check if new location and new people
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setOnCancelListener(this);
         alertDialogBuilder.setTitle(getString(R.string.dialog_new_loc));
         alertDialogBuilder.setMessage(getString(R.string.select_any_sg_hdss));
         alertDialogBuilder.setCancelable(true);
@@ -1149,6 +1151,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder.setTitle(getString(R.string.visit_lbl));
 		alertDialogBuilder.setMessage(message);
+		alertDialogBuilder.setOnCancelListener(this);
 		alertDialogBuilder.setCancelable(true);
 		alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl),
 				new DialogInterface.OnClickListener() {
@@ -1163,7 +1166,11 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 					}
 				});
 		alertDialogBuilder.setNegativeButton(getString(R.string.cancel_lbl),
-				null);
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				reloadState();
+			}
+		});
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.show();
     }
@@ -1233,9 +1240,19 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     public void onSGexists() {
     	 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
          alertDialogBuilder.setTitle(getString(R.string.socialgroup_lbl));
+         alertDialogBuilder.setOnCancelListener(this);
          alertDialogBuilder.setMessage(getString(R.string.update_on_sgexists_msg));
          alertDialogBuilder.setCancelable(true);
-         alertDialogBuilder.setPositiveButton("Ok", null);
+         alertDialogBuilder.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	        		reloadState();
+	        	}
+	        });
+         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_lbl), new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	        		reloadState();
+	        	}
+	        });
          AlertDialog alertDialog = alertDialogBuilder.create();
          alertDialog.show();         
     }
@@ -1268,6 +1285,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialogBuilder.setTitle(getString(R.string.in_migration_lbl));
         alertDialogBuilder.setMessage(getString(R.string.update_create_inmigration_msg));
         alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setOnCancelListener(this);
         alertDialogBuilder.setPositiveButton(getString(R.string.update_create_inmigration_pos_button), new DialogInterface.OnClickListener() {
         	 public void onClick(DialogInterface dialog, int which) {
             	extInm= true;
@@ -1337,6 +1355,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         alertDialogBuilder.setTitle(getString(R.string.mother_lbl));
         alertDialogBuilder.setMessage(getString(R.string.update_build_mother_msg));
         alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setOnCancelListener(this);
         alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 startFilterActivity(FILTER_INMIGRATION_MOTHER);
@@ -1357,6 +1376,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
        alertDialogBuilder.setTitle(getString(R.string.father_lbl));
         alertDialogBuilder.setMessage(getString(R.string.update_build_father_msg));
         alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setOnCancelListener(this);
         alertDialogBuilder.setPositiveButton(getString(R.string.yes_lbl), new DialogInterface.OnClickListener() {
         	  public void onClick(DialogInterface dialog, int which) {
                 startFilterActivity(FILTER_INMIGRATION_FATHER);
@@ -1459,6 +1479,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
                         new PregnancyOutcomeFatherSelectionTask(which+1).execute();
                     }
                 });
+        builder.setOnCancelListener(this);
         builder.show();
     }
 
@@ -2320,8 +2341,14 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	    }
 	    
 		public void onChangeHouseholdHead() {
-			showProgressFragment();
-			new CreateChangeHoHTask().execute();
+			if(locationVisit.getSocialgroup() != null){
+				showProgressFragment();
+				new CreateChangeHoHTask().execute();
+			}
+			else{
+				Toast.makeText(this, "No Household defined", Toast.LENGTH_LONG).show();
+				reloadState();
+			}
 		}
 		
 		private class CreateChangeHoHTask extends AsyncTask<Void, Void, Boolean> {
@@ -2329,6 +2356,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	    	
 			@Override
 			protected Boolean doInBackground(Void... arg0) {				
+				boolean foundHoH = false;
 	        	Cursor cursor = Queries.getSocialGroupByName(getContentResolver(), locationVisit.getSocialgroup().getGroupName());
 	        	if (cursor.moveToFirst()) {
 	        		SocialGroup socialGroup = Converter.convertToSocialGroup(cursor);
@@ -2339,13 +2367,11 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	    	            filledForm = formFiller.fillChangeHoHForm(locationVisit, sg);
 	    	            filledForm.setIndividualExtId(hohextId);
 	    	            updatable = new HeadOfHouseholdUpdate();
-	        		}
-	        		else{
-	        			return false;
+	    	            foundHoH = true;
 	        		}
 	        	}   
 	            cursor.close();
-				return true;
+				return foundHoH;
 			}
 			
 			@Override
@@ -2376,7 +2402,6 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         				continue;
         			}
         			        			
-        			System.out.println(individual.getFirstName() + "::" + individual.getEndType());
         			if(!"DTH".equals(individual.getEndType()) || !"OMG".equals(individual.getEndType())){ //These should never be the case, since we load only Active individuals
         				individualsActive.add(individual);
         				if(individualMeetsMinimumAge(individual)){
@@ -2387,6 +2412,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         		cursor.moveToNext();
         	}     	   	
         	cursor.close();
+        	
+        	if(individualsEligible.size() == 0){
+        		Toast.makeText(this, "No valid successor found!", Toast.LENGTH_LONG).show();
+        		reloadState();
+        		return;
+        	}
         	       	
         	final List<Individual> list = individualsEligible; 
         	final List<Individual> list2 = individualsActive; 
@@ -2407,6 +2438,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
   			};
   			  		    
 	        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        builder.setOnCancelListener(this);
 	        builder.setTitle(getString(R.string.change_household_head_select_lbl) + " (" + sg.getGroupHead() + ")");
 	        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
 	        	public void onClick(DialogInterface dialog, int which) {
@@ -2432,4 +2464,13 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
 	        AlertDialog dlg = builder.create();
 	        dlg.show();  
 	    }
+
+		//Dialog cancelled by pressing the back button, refresh state
+		public void onCancel(DialogInterface arg0) {
+			reloadState();
+		}
+		
+		private void reloadState(){
+			stateMachine.transitionTo(stateMachine.getState());
+		}
 }

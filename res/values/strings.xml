@@ -263,6 +263,7 @@
     <string name="no_individual_left">There is no active individual left in the Socialgroup that could replace the Head.</string>
     <string name="no_individuals_found">No Individuals found!</string>   
     <string name="no_hoh_found">Could not find HoH!</string> 
+    <string name="exit_confirmation_title">Exit?</string>
     <string name="exiting_lbl">Are you sure you want to exit?</string>
     <string name="couldnt_find_baseline_lbl">Could not find baseline. Please make sure there is a round with number 0. Continuing anyways.</string>
     <string name="no_round_info_lbl">No round information found. Please sync with server!</string>
