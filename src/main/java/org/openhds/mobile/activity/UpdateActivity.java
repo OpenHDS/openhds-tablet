@@ -150,6 +150,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     private boolean hhCreation;
     private boolean deathCreation;
     private boolean inChangeHoH;
+    private boolean outMigration;
     private String jrFormId;
     
 	private ProgressDialog progress;
@@ -825,6 +826,9 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             		else if(deathCreation){            			
             			onClearIndividual();
             		}
+            		else if(outMigration){
+            			onClearIndividual();
+            		}
             	}
             	else if(stateMachine.getState() == CREATE_VISIT){
             		Visit visit = locationVisit.getVisit();
@@ -848,6 +852,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
     		deathCreation = false;
     		extInm = false;
     		inChangeHoH = false;
+    		outMigration = false;
         }
     }
     
@@ -1431,6 +1436,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             		//Toast.makeText(UpdateActivity.this, getString(R.string.is_not_migrating_hoh_warning_lbl), Toast.LENGTH_LONG).show();
             	}
             }
+    		outMigration = true;
             loadForm(SELECTED_XFORM);
         }
     }
@@ -1507,6 +1513,12 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(UpdateActivity.this);
             alertDialogBuilder.setTitle(getString(R.string.update_pregoutcome_choose_father));
             alertDialogBuilder.setCancelable(true);
+            alertDialogBuilder.setCancelable(true);
+            alertDialogBuilder.setNegativeButton(getString(R.string.cancel_lbl), new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	        		reloadState();
+	        	}
+	        });
 
             if (father != null) {
                 String fatherName = father.getFullName() + " (" + father.getExtId() + ")";

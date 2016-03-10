@@ -132,6 +132,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     private boolean hhCreation;
     private String jrFormId;
     private boolean newIndividual;
+    private boolean outMigration;
     
     //State machine states  
 	public static final String SELECT_HIERARCHY_1 = "Select Hierarchy 1";
@@ -681,6 +682,9 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             		if(hhCreation){
             			onFinishedHouseHoldCreation();
             		}
+            		else if(outMigration){
+            			onClearIndividual();
+            		}
             	}
             	else {
             		stateMachine.transitionTo("Select Individual");
@@ -1061,7 +1065,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         	vf.onLoaderReset(null);
         	vf.loadFilteredIndividualById(indExtId);
         	vf.selectItemNoInList(0);
-        }    	
+        }  
     }
     
 	private void onFinishExternalInmigration() {
@@ -1142,6 +1146,7 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         @Override
         protected void onPostExecute(Void result) {
             hideProgressFragment();
+    		outMigration = true;
             loadForm(SELECTED_XFORM);
         }
     }
@@ -1218,6 +1223,12 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BaselineActivity.this);
             alertDialogBuilder.setTitle(getString(R.string.update_pregoutcome_choose_father));
             alertDialogBuilder.setCancelable(true);
+            alertDialogBuilder.setOnCancelListener(BaselineActivity.this);
+            alertDialogBuilder.setNegativeButton(getString(R.string.cancel_lbl), new DialogInterface.OnClickListener() {
+	        	public void onClick(DialogInterface dialog, int which) {
+	        		reloadState();
+	        	}
+	        });
 
             if (father != null) {
                 String fatherName = father.getFullName() + " (" + father.getExtId() + ")";
@@ -1811,8 +1822,10 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
     }
 
     public void onLoaderReset(Loader<Cursor> arg0) {
-        householdDialog.dismiss();
-        householdDialog = null;
+    	if (householdDialog!=null){ 
+    		householdDialog.dismiss();
+    		householdDialog = null;
+    	}
     }
 
 	public void onFilterLocation() {

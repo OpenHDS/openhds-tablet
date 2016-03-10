@@ -132,6 +132,7 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
         
         listCurrentlyDisplayed = Displayed.NONE;
     }
+
     
     public void setSTART_HIERARCHY_LEVEL_NAME(
 			String sTART_HIERARCHY_LEVEL_NAME) {
@@ -584,8 +585,6 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 
      	        	    });
     	        	}
-    	        	
-    	         
             }        	
         }
         
@@ -760,13 +759,11 @@ public class ValueFragment extends ListFragment implements LoaderCallbacks<Curso
 	}	
 	
 	public void selectItemNoInList(int position){
-		
 		final int mActivePosition = position;
-
-		
+    	
 		    getListView().postDelayed(new Runnable() {
 		        public void run() {
-		            ListView listView = getListView(); // Save a local reference rather than calling `getListView()` three times
+		        	ListView listView = getListView(); // Save a local reference rather than calling `getListView()` three times
 		            if(listView.getCount() > 0){
 		            	listView.setSelection(mActivePosition);
 		            	listView.performItemClick(listView.getChildAt(0), mActivePosition, mActivePosition);

@@ -510,7 +510,6 @@ public class SelectionFragment extends Fragment implements OnClickListener {
     }
     
     private void hideIndividualInfo(){
-    	System.out.println("hideIndividualInfo");
         individualBtn.setVisibility(View.GONE);
         individualBtn.setEnabled(false);
         individualBtn.setBackgroundColor(Color.DKGRAY);
