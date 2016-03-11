@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="am">
 
     <string name="amendments">ማሻሻያዎች</string>
     <string name="app_name">ኦፕንኤችዲኤስ ሞባይል</string>
@@ -274,7 +274,7 @@
     <string name="synced_fws_lbl">የመረጃ ሰብሳቢዎቹ መረጃ  ተዛምዷል.</string>
     <string name="failed_sync_fws_lbl">የመረጃ ሰብሳቢዎቹን ማዛመድ አልተሳካም.</string>
     <string name="hello_lbl">ስላም</string>
-    <string name="locale_lang">እንግሊዝኛ</string>
+    <string name="locale_lang">am</string>
     <string name="parenthood_minimium_age">ወላጅ ለመሆን የሚያስፈልገው ትንሹ እድሜ: </string>
 	<string name="younger_than_required_age_for_hoh">የተመረጠው ግለሰብ እድሜ ከሚፈለገው ያንሳል!</string>
 </resources>

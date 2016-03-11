@@ -1,8 +1,8 @@
 <resources>
 <string-array name="listArray">
     <item>English</item>
-	<item>Amharic</item>	
-	<item>French</item>
+    <item>Amharic</item>
+   	<item>French</item>
 	<item>Portuguese</item>
 	<item>Spanish</item>
 	<item>Swahili</item>

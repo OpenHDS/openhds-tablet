@@ -44,12 +44,12 @@ public class OpeningActivity extends Activity implements SharedPreferences.OnSha
 						new SupervisorLoginFragment()).commit();
 		
 		
-		try {
+	/*	try {
 			String version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 			CharSequence title = getTitle();
 			setTitle(title.toString() + " (v" + version + ")");
 		} catch (NameNotFoundException e) {
-		}
+		}*/
 
 	}
 
@@ -82,7 +82,12 @@ public class OpeningActivity extends Activity implements SharedPreferences.OnSha
 		.replace(R.id.login_pref_container, new LoginPreferenceFragment()).commit();
 		
 		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
-		
+		try {
+			String version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+			CharSequence title = getString(R.string.app_name);
+			setTitle(title.toString() + " (v" + version + ")");
+		} catch (NameNotFoundException e) {
+		}
 		super.onResume();
 	}
 

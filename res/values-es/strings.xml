@@ -260,5 +260,6 @@
     
     
     <string name="hello_lbl">Hola</string>
+    <string name="locale_lang">es</string>
 
 </resources>

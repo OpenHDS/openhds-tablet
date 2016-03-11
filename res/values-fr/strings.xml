@@ -226,7 +226,7 @@
 	<string name="sprvmain_downl_extraforms">Téléchargement de formulaires Extra ...</string>
 		
 	<string name="sync_db_stop_sync">Etes-vous sûr que vous voulez arrêter de synchronisation?</string>
-		
+	<string name="locale_lang">fr</string>
 	<string name="odk_problem_lbl">Il y avait un problème avec ODK</string>
 	<string name="update_unfinish_msg1">Formulaire débuté mais pas enregistré. Cette instance de formulaire sera supprimée. Qu\'est-ce que vous voulez faire?</string>
 	<string name="update_unfinish_pos_button">Effacer le formulaire</string>

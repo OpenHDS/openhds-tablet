@@ -16,8 +16,6 @@ import net.sqlcipher.database.SQLiteOpenHelper;
 import net.sqlcipher.database.SQLiteQueryBuilder;
 
 import org.openhds.mobile.OpenHDS;
-import org.openhds.mobile.model.Settings;
-
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
