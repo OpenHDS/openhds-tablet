@@ -57,7 +57,7 @@ public class LoginPreferenceFragment extends PreferenceFragment implements
 			String key) {
 			
 		if(key.equals("displayLanguage")){
-			String language = sharedPreferences.getString("displayLanguage","en");
+			String language = sharedPreferences.getString("displayLanguage",getString(R.string.locale_lang));
 			
 			((OpenHDSApplication)getActivity().getApplicationContext()).changeLang(language);
 		}

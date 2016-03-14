@@ -39,6 +39,7 @@ public class OpenHDSApplication extends Application {
         Configuration config = getBaseContext().getResources().getConfiguration();
         if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
             Editor ed = PreferenceManager.getDefaultSharedPreferences(this).edit();
+            ed.clear();
             ed.putString(getString(R.string.locale_lang), lang);
             ed.commit();
 
