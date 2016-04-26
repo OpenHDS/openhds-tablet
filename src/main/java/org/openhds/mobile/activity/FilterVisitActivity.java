@@ -39,14 +39,23 @@ public class FilterVisitActivity extends Activity implements ValueListener, Sele
         LocationHierarchy hierarchy2 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy2");
         LocationHierarchy hierarchy3 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy3");
         LocationHierarchy hierarchy4 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy4");
+        LocationHierarchy hierarchy5 = (LocationHierarchy) getIntent().getExtras().getSerializable("hierarchy5");
         
         Location location = (Location) getIntent().getExtras().getSerializable("location");
         requireGender = getIntent().getExtras().getString("requireGender");
 
         selectionFilterFragment.setHierarchy1(hierarchy1.getExtId());
         selectionFilterFragment.setHierarchy2(hierarchy2.getExtId());
-        selectionFilterFragment.setHierarchy3(hierarchy3.getExtId());
-        selectionFilterFragment.setHierarchy4(hierarchy4.getExtId());
+        if (hierarchy3!=null) {
+        	selectionFilterFragment.setHierarchy3(hierarchy3.getExtId());
+        		if (hierarchy4!=null) {
+        			selectionFilterFragment.setHierarchy4(hierarchy4.getExtId());
+        				if (hierarchy5!=null) {
+                			selectionFilterFragment.setHierarchy4(hierarchy4.getExtId());
+        				}
+        		}
+        }
+        
         selectionFilterFragment.setLocation(location.getExtId());
     }
 

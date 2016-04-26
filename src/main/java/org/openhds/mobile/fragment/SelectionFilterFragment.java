@@ -44,14 +44,17 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
     private String hierarchy4 = "";
     private String location = "";
 
-    private Button hierarchy1Btn, hierarchy2Btn, hierarchy3Btn, hierarchy4Btn, locationBtn;
+    private Button hierarchy1Btn, hierarchy2Btn, hierarchy3Btn, hierarchy4Btn,hierarchy5Btn, hierarchy6Btn, hierarchy7Btn, hierarchy8Btn, locationBtn;
     private TextView hierarchy1Txt, hierarchy2Txt, hierarchy3Txt, hierarchy4Txt, locationTxt, firstNameTxt,
-            lastNameTxt,hierarchy1Lbl,hierarchy2Lbl,hierarchy3Lbl,hierarchy4Lbl;
+            lastNameTxt,hierarchy1Lbl,hierarchy2Lbl,hierarchy3Lbl,hierarchy4Lbl,hierarchy5Txt,  hierarchy6Txt,
+            hierarchy7Txt, hierarchy8Txt,hierarchy5Lbl, hierarchy6Lbl, hierarchy7Lbl, hierarchy8Lbl;
     private RadioButton maleBtn, femaleBtn;
     private Button clearBtn, searchBtn;
     private Listener listener;
+    private List<Button> hierarchyButtons;
     private List<TextView> hierarchyLabelViews;
     private List<TextView> hierarchyHintViews;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +62,8 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
 
         hierarchy1Btn = (Button) view.findViewById(R.id.hierarchy1_see_list);
         hierarchy1Btn.setOnClickListener(this);
+
+
 
         hierarchy2Btn = (Button) view.findViewById(R.id.hierarchy2_see_list);
         hierarchy2Btn.setOnClickListener(this);
@@ -87,6 +92,60 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
         hierarchy2Lbl = (TextView) view.findViewById(R.id.hierarchy2Lbl);
         hierarchy3Lbl = (TextView) view.findViewById(R.id.hierarchy3Lbl);
         hierarchy4Lbl = (TextView) view.findViewById(R.id.hierarchy4Lbl);
+        
+        hierarchy1Txt.setVisibility(View.GONE);
+        hierarchy1Btn.setVisibility(View.GONE);
+        hierarchy1Lbl.setVisibility(View.GONE);
+        
+        hierarchy2Txt.setVisibility(View.GONE);
+        hierarchy2Btn.setVisibility(View.GONE);
+        hierarchy2Lbl.setVisibility(View.GONE);
+        
+        hierarchy3Txt.setVisibility(View.GONE);
+        hierarchy3Btn.setVisibility(View.GONE);
+        hierarchy3Lbl.setVisibility(View.GONE);
+        
+        hierarchy4Txt.setVisibility(View.GONE);
+        hierarchy4Btn.setVisibility(View.GONE);
+        hierarchy4Lbl.setVisibility(View.GONE);
+        
+        hierarchy5Btn = (Button) view.findViewById(R.id.hierarchy5_see_list);
+        hierarchy5Btn.setOnClickListener(this);
+        hierarchy5Txt = (TextView) view.findViewById(R.id.hierarchy5Txt);
+        hierarchy5Lbl = (TextView) view.findViewById(R.id.hierarchy5Lbl);
+        hierarchy5Btn.setVisibility(View.GONE);
+        hierarchy5Txt.setVisibility(View.GONE);
+        hierarchy5Lbl.setVisibility(View.GONE);
+        
+/*        hierarchy6Btn = (Button) view.findViewById(R.id.hierarchy6_see_list);
+        hierarchy6Btn.setOnClickListener(this);
+        hierarchy6Text = (TextView) view.findViewById(R.id.hierarchy6Txt);
+        hierarchy6Lbl = (TextView) view.findViewById(R.id.hierarchy6Lbl);
+        hierarchy6Btn.setVisibility(View.GONE);
+        hierarchy6Text.setVisibility(View.GONE);
+        hierarchy6Lbl.setVisibility(View.GONE);
+        
+        hierarchy7Btn = (Button) view.findViewById(R.id.hierarchy7_see_list);
+        hierarchy7Btn.setOnClickListener(this);
+        hierarchy7Text = (TextView) view.findViewById(R.id.hierarchy7Txt);
+        hierarchy7Lbl = (TextView) view.findViewById(R.id.hierarchy7Lbl);
+        hierarchy7Btn.setVisibility(View.GONE);
+        hierarchy7Text.setVisibility(View.GONE);
+        hierarchy7Lbl.setVisibility(View.GONE);
+
+        hierarchy8Btn = (Button) view.findViewById(R.id.hierarchy8_see_list);
+        hierarchy8Btn.setOnClickListener(this);
+        hierarchy8Text = (TextView) view.findViewById(R.id.hierarchy7Txt);
+        hierarchy8Lbl = (TextView) view.findViewById(R.id.hierarchy8Lbl);
+        hierarchy8Btn.setVisibility(View.GONE);
+        hierarchy8Text.setVisibility(View.GONE);
+        hierarchy8Lbl.setVisibility(View.GONE);*/
+
+
+        
+        
+        
+        
         locationTxt = (TextView) view.findViewById(R.id.locationTxt);
         firstNameTxt = (TextView) view.findViewById(R.id.firstNameTxt);
         lastNameTxt = (TextView) view.findViewById(R.id.lastNameTxt);
@@ -94,16 +153,38 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
         maleBtn = (RadioButton) view.findViewById(R.id.maleBtn);
         femaleBtn = (RadioButton) view.findViewById(R.id.femaleBtn);
 
-        hierarchyLabelViews = new ArrayList<TextView>();
+        
+        hierarchyLabelViews= new ArrayList<TextView>();
         hierarchyLabelViews.add(hierarchy1Lbl);
         hierarchyLabelViews.add(hierarchy2Lbl);
         hierarchyLabelViews.add(hierarchy3Lbl);
         hierarchyLabelViews.add(hierarchy4Lbl);
+        hierarchyLabelViews.add(hierarchy5Lbl);
+       /* hierarchyLabelViews.add(hierarchy6Lbl);
+        hierarchyLabelViews.add(hierarchy7Lbl);
+        hierarchyLabelViews.add(hierarchy8Lbl);*/
         hierarchyHintViews = new ArrayList<TextView>();
         hierarchyHintViews.add(hierarchy1Txt);
         hierarchyHintViews.add(hierarchy2Txt);
         hierarchyHintViews.add(hierarchy3Txt);
         hierarchyHintViews.add(hierarchy4Txt);
+        hierarchyHintViews.add(hierarchy5Txt);
+       /* hierarchyHintViews.add(hierarchy6Txt);
+        hierarchyHintViews.add(hierarchy7Txt);
+        hierarchyHintViews.add(hierarchy8Txt);*/
+        
+        
+        hierarchyButtons = new ArrayList<Button>();
+        hierarchyButtons.add(hierarchy1Btn);
+        hierarchyButtons.add(hierarchy2Btn);
+        hierarchyButtons.add(hierarchy3Btn);
+        hierarchyButtons.add(hierarchy4Btn);
+        hierarchyButtons.add(hierarchy5Btn);
+       /* hierarchyButtons.add(hierarchy6Btn);
+        hierarchyButtons.add(hierarchy7Btn);
+        hierarchyButtons.add(hierarchy8Btn);*/
+        
+      
         
         setHierarchyLabels();
         
@@ -205,17 +286,38 @@ public class SelectionFilterFragment extends Fragment implements OnClickListener
         locationTxt.setText(text);
     }
     
+    /*private void setHierarchyLabels(){
+        Cursor c = Queries.getAllHierarchyLevels(getActivity().getContentResolver());
+        List<LocationHierarchyLevel> lhll = Converter.toLocationHierarchyLevelList(c); 
+        c.close();
+        
+        int levelNumbers = lhll.size()-1;
+        int startLevel = 1;
+        for(int i = 0; i < levelNumbers; i++){
+        	hierarchyLabelViews.get(i).setText(lhll.get(startLevel).getName());
+        	hierarchyHintViews.get(i).setHint(lhll.get(startLevel).getName());
+        	startLevel++;
+        }     	
+    }*/
+    
+    
     private void setHierarchyLabels(){
         Cursor c = Queries.getAllHierarchyLevels(getActivity().getContentResolver());
         List<LocationHierarchyLevel> lhll = Converter.toLocationHierarchyLevelList(c); 
         c.close();
         
-        //int levelNumbers = lhll.size()-1;
+        int levelNumbers = lhll.size()-1;
         int startLevel = 1;
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < levelNumbers; i++){
+        	hierarchyButtons.get(i).setText(lhll.get(startLevel).getName());
         	hierarchyLabelViews.get(i).setText(lhll.get(startLevel).getName());
         	hierarchyHintViews.get(i).setHint(lhll.get(startLevel).getName());
+        	hierarchyButtons.get(i).setVisibility(View.VISIBLE);
+        	hierarchyHintViews.get(i).setVisibility(View.VISIBLE);
+        	hierarchyLabelViews.get(i).setVisibility(View.VISIBLE);
         	startLevel++;
         }     	
     }
+    
+    
 }

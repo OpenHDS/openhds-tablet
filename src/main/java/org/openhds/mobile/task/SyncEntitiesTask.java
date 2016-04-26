@@ -681,7 +681,8 @@ public class SyncEntitiesTask extends
 
 			parser.nextTag();
 			cv.put(OpenHDS.Visits.COLUMN_VISIT_EXTID, parser.nextText());
-
+			parser.nextTag(); // <realVisit>
+			parser.nextText();
 			parser.nextTag();
 			cv.put(OpenHDS.Visits.COLUMN_VISIT_ROUND, parser.nextText());
 

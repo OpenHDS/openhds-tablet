@@ -144,7 +144,37 @@
                 android:paddingRight="50dp"
                 android:text="@string/see_list" />
         </LinearLayout>
+		<TextView
+            android:id="@+id/hierarchy5Lbl"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/hierarchy5_lbl"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/hierarchy5Txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/hierarchy5_hint_lbl" />
+
+            <Button
+                android:id="@+id/hierarchy5_see_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:text="@string/see_list" />
+        </LinearLayout>  
         <TextView
             android:id="@+id/locationLbl"
             android:layout_width="150dp"
