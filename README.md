@@ -26,7 +26,8 @@ Prerequisite Software
 C:\Documents and Settings\Dave>echo %JAVA_HOME% C:\Program Files\Java\jdk1.7.0_01 ```
 
     Install Maven (Last tested version was Maven 3.3.9)
-        Follow the installation instructions http://maven.apache.org/download.cgi#Installation
+        Follow the installation instructions 
+http://maven.apache.org/download.cgi#Installation
         Requires JAVA_HOME environment variable to be set
 
 
