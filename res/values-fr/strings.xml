@@ -298,5 +298,13 @@
 
     <string name="younger_than_required_age_for_hoh">L\'individu selectionné est moins agé qu\'il en faut!</string>
     
-    
+    <string name="parenthood_minimium_age">L\'individu selectionné est moins agé qu\'il en faut:</string>
+	<string name="changeHouseholdHeadBtn_lbl">Changer Chef de menage</string>
+	<string name="current_hoh">Actuel Chef de menage: </string>
+	<string name="change_household_head_lbl">Nouvel Chef de menage</string>
+	<string name="change_household_head_exists_lbl">le nouvel Chef de menage is already the Chef of another menage!</string>
+	<string name="change_household_head_select_lbl">Sélectionnez le nouvel Chef de menage</string>
+	<string name="change_household_head_selected_lbl">Sélectionnez le nouvel Chef de menage</string>	
+    <string name="update_finish_not_all_visited_msg">Pas tous les individus ne disposent d\'un événement. Voulez-vous terminer la visite? Cela va régler l\'indicateur visité pour tous les individus dans ce menage.</string>
+	
 </resources>

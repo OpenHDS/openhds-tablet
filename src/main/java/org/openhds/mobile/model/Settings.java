@@ -121,6 +121,8 @@ public class Settings {
 				this.setMinimumAgeOfPregnancy(stringToInt(settingsList.get(key)));
 			}else if(key.equals(DATE_OF_LAST_SYNC)){
 				this.setDateOfLastSync(settingsList.get(key));
+			}else if(key.equals(DATE_OF_EARLIEST_EVENT)){
+				this.setEarliestEventDate(settingsList.get(key));
 			}else if(key.equals(DATE_OF_LAST_FW_SYNC)){
 				this.setDateOfLastFieldWorkerSync(settingsList.get(key));
 			}else if(key.equals(DATE_OF_LAST_FORMS_SYNC)){
@@ -237,7 +239,7 @@ public class Settings {
 		this.earliestEventDate = earliestEventDate;
 	}	
 	
-	public void setNbOfEntities(Map<String, Integer> nbOfEntities){
+/*	public void setNbOfEntities(Map<String, Integer> nbOfEntities){
 		for(String key: nbOfEntities.keySet()){
 //			if(key.equals(MINIMUM_AGE_OF_MARRIAGE)){
 //				this.setMinMarriageAge(stringToInt(settingsList.get(key)));
@@ -245,7 +247,7 @@ public class Settings {
 //				this.setMinimumAgeOfHouseholdHead(stringToInt(settingsList.get(key)));
 //			}
 		}
-	}
+	}*/
 	
 	public Map<String, Integer> getNbOfEntities(){
 		return this._nbOfEntities;

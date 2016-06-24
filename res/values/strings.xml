@@ -302,6 +302,7 @@
     <string name="parenthood_minimium_age">Minimum age for parenthood: </string>
 	<string name="younger_than_required_age_for_hoh">Selected individual is younger than required age!</string>
 	<string name="changeHouseholdHeadBtn_lbl">Change HoH</string>
+	<string name="current_hoh">Current HoH: </string>
 	<string name="change_household_head_lbl">New Head of Household</string>
 	<string name="change_household_head_exists_lbl">The new Head of Household is already the head of another Household!</string>
 	<string name="change_household_head_select_lbl">Please select a new Head of Household</string>

@@ -44,12 +44,12 @@ public class OpeningActivity extends Activity implements SharedPreferences.OnSha
 						new SupervisorLoginFragment()).commit();
 		
 		
-	/*	try {
+		try {
 			String version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 			CharSequence title = getTitle();
 			setTitle(title.toString() + " (v" + version + ")");
 		} catch (NameNotFoundException e) {
-		}*/
+		}
 
 	}
 

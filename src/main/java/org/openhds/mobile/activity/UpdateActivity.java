@@ -2410,7 +2410,7 @@ public class UpdateActivity extends Activity implements ValueFragment.ValueListe
         			if(individual.getExtId().equalsIgnoreCase(sg.getGroupHead())){
         				individualsActive.add(individual); // Active
         				String info = individual.getFirstName() + " " + individual.getLastName() + " (" + individual.getExtId() + ")";
-                    	Toast.makeText(UpdateActivity.this, "Current HoH: " + info, Toast.LENGTH_LONG).show();
+                    	Toast.makeText(UpdateActivity.this, getString(R.string.current_hoh)+ info, Toast.LENGTH_LONG).show();
         				continue;
         			}
         			        			

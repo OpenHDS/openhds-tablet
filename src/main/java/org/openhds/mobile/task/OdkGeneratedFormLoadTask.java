@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,6 +18,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.openhds.mobile.FormsProviderAPI;
 import org.openhds.mobile.InstanceProviderAPI;
+import org.openhds.mobile.OpenHDS;
 import org.openhds.mobile.database.queries.Converter;
 import org.openhds.mobile.database.queries.Queries;
 import org.openhds.mobile.listener.OdkFormLoadListener;
@@ -137,6 +139,15 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
                        	android.database.Cursor c = Queries.getAllSettings(mContext.getContentResolver());
                        	org.openhds.mobile.model.Settings settings = Converter.convertToSettings(c); 
                        	EARLIEST_DATE= settings.getEarliestEventDate()==null ? DEFAULT_EARLIEST_DATE : settings.getEarliestEventDate();
+                		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); 
+                		SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd"); 
+
+                		try {
+							EARLIEST_DATE=dateFormat1.format(dateFormat.parse(EARLIEST_DATE));
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
                        	c.close();
                         if (name.equals(FilledParams.earliestDate)) {
                             sbuilder.append("<earliestDate>" + EARLIEST_DATE + "</earliestDate>" + "\r\n");
