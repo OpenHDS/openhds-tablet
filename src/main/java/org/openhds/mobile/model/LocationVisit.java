@@ -409,7 +409,11 @@ public class LocationVisit implements Serializable {
               return sg;
             }
         } else {
-            sg.setExtId(socialGroupPrefix + "00");
+        	  if (visitLevel.equalsIgnoreCase("location")) {
+        		  sg.setExtId(socialGroupPrefix + "00");
+        	  } else {
+        		  sg.setExtId(socialGroupPrefix + "01");
+        	  }
         }
 
         cursor.close();
