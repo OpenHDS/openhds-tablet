@@ -443,6 +443,10 @@ EventFragment.Listener, SelectionFragment.Listener, ValueFragment.OnlyOneEntryLi
         } else {
             Toast.makeText(this, getString(R.string.odk_problem_lbl), Toast.LENGTH_LONG).show();
         }
+        
+        if (locationVisit.getVisitLevel()==null) {
+        	locationVisit.setVisitLevel(VISIT_LEVEL);
+        }
     }
 
     /**
