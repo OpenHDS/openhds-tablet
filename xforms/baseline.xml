@@ -5,8 +5,14 @@
     <model>
       <itext>
         <translation lang="Chichewa">
+          <text id="/baseline/individualInfo/religion/1:label">
+            <value>Christian Orthodox</value>
+          </text>
           <text id="/baseline/individualInfo/gender/M:label">
             <value>Mamuna</value>
+          </text>
+          <text id="/baseline/individualInfo/religion/2:label">
+            <value>Christian Catholic</value>
           </text>
           <text id="/baseline/individualInfo/motherId:label">
             <value>Nambala ya Mayi</value>
@@ -26,8 +32,8 @@
           <text id="/baseline/spelasni/yes:label">
             <value>Eya</value>
           </text>
-          <text id="/baseline/openhds:label">
-            <value>-</value>
+          <text id="/baseline/individualInfo/religion/5:label">
+            <value>Traditional faith</value>
           </text>
           <text id="/baseline/warning:label">
             <value>-</value>
@@ -35,8 +41,8 @@
           <text id="/baseline/individualInfo/firstName:label">
             <value>Dzina Loyamba</value>
           </text>
-          <text id="/baseline/individualInfo/fatherId:label">
-            <value>Nambala ya Bambo</value>
+          <text id="/baseline/majo4mo:label">
+            <value>Pa miyezi 6 yapitayi mwakhala mukukhalabe mnyumbayi?</value>
           </text>
           <text id="/baseline/individualInfo/partialDate:label">
             <value>Partial Date</value>
@@ -71,8 +77,11 @@
           <text id="/baseline/spelasni/no:label">
             <value>Ayi</value>
           </text>
-          <text id="/baseline/majo4mo:label">
-            <value>Pa miyezi 6 yapitayi mwakhala mukukhalabe mnyumbayi?</value>
+          <text id="/baseline/individualInfo/religion/4:label">
+            <value>Judaism</value>
+          </text>
+          <text id="/baseline/individualInfo/fatherId:label">
+            <value>Nambala ya Bambo</value>
           </text>
           <text id="/baseline/individualInfo:label">
             <value>individualIdInfoGRP</value>
@@ -83,6 +92,9 @@
           <text id="/baseline/individualInfo/lastName:label">
             <value>Dzina Lomaliza</value>
           </text>
+          <text id="/baseline/openhds:label">
+            <value>-</value>
+          </text>
           <text id="/baseline/visitDate:label">
             <value>Tsiku loyendeledwa</value>
           </text>
@@ -92,10 +104,25 @@
           <text id="/baseline/processedByMirth:label">
             <value>processed</value>
           </text>
+          <text id="/baseline/individualInfo/religion/3:label">
+            <value>Muslim</value>
+          </text>
+          <text id="/baseline/individualInfo/religion:label">
+            <value>Religion</value>
+          </text>
         </translation>
         <translation default="true()" lang="English">
+          <text id="/baseline/individualInfo/religion/1:label">
+            <value>Christian Orthodox</value>
+          </text>
           <text id="/baseline/individualInfo/gender/M:label">
             <value>Male</value>
+          </text>
+          <text id="/baseline/individualInfo/religion/2:label">
+            <value>Christian Catholic</value>
+          </text>
+          <text id="/baseline/individualInfo/religion/5:label">
+            <value>Traditional faith</value>
           </text>
           <text id="/baseline/individualInfo/motherId:label">
             <value>Mother Id</value>
@@ -124,8 +151,8 @@
           <text id="/baseline/individualInfo/firstName:label">
             <value>First Name</value>
           </text>
-          <text id="/baseline/individualInfo/fatherId:label">
-            <value>Father Id</value>
+          <text id="/baseline/majo4mo:label">
+            <value>Has he/she spent the majority of the last 6 months residing here</value>
           </text>
           <text id="/baseline/individualInfo/partialDate:label">
             <value>Partial Date</value>
@@ -160,8 +187,11 @@
           <text id="/baseline/spelasni/no:label">
             <value>No</value>
           </text>
-          <text id="/baseline/majo4mo:label">
-            <value>Has he/she spent the majority of the last 6 months residing here</value>
+          <text id="/baseline/individualInfo/religion/4:label">
+            <value>Judaism</value>
+          </text>
+          <text id="/baseline/individualInfo/fatherId:label">
+            <value>Father Id</value>
           </text>
           <text id="/baseline/individualInfo:label">
             <value>-</value>
@@ -180,6 +210,12 @@
           </text>
           <text id="/baseline/processedByMirth:label">
             <value>processed</value>
+          </text>
+          <text id="/baseline/individualInfo/religion/3:label">
+            <value>Muslim</value>
+          </text>
+          <text id="/baseline/individualInfo/religion:label">
+            <value>Religion</value>
           </text>
         </translation>
       </itext>
@@ -204,6 +240,7 @@
             <gender/>
             <dateOfBirth/>
             <partialDate/>
+            <religion/>
           </individualInfo>
           <dateOfMigration/>
           <warning/>
@@ -213,6 +250,7 @@
           <processedByMirth/>
           <meta>
             <instanceID/>
+            <instanceName/>
           </meta>
         </baseline>
       </instance>
@@ -232,6 +270,7 @@
       <bind nodeset="/baseline/individualInfo/gender" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="select1"/>
       <bind constraint=". &lt; today()" nodeset="/baseline/individualInfo/dateOfBirth" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="date"/>
       <bind nodeset="/baseline/individualInfo/partialDate" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="select1"/>
+      <bind nodeset="/baseline/individualInfo/religion" relevant=" /baseline/openhds/migrationType  = 'BASELINE'" required="true()" type="select1"/>
       <bind constraint=". &lt;= today()" jr:constraintMsg="the residency date can not be in the future" nodeset="/baseline/dateOfMigration" readonly="true()" required="true()" type="date"/>
       <bind nodeset="/baseline/warning" readonly="true()" relevant=" /baseline/individualInfo/dateOfBirth &gt; /baseline/dateOfMigration  and ../migrationType = 'BASELINE'" required="true()" type="string"/>
       <bind constraint=". &lt;= today()" jr:constraintMsg="the visit date can not be in the future" nodeset="/baseline/visitDate" readonly="true()" required="true()" type="date"/>
@@ -239,6 +278,7 @@
       <bind nodeset="/baseline/spelasni" required="true()" type="select1"/>
       <bind nodeset="/baseline/processedByMirth" readonly="true()" type="int"/>
       <bind calculate="concat('uuid:', uuid())" nodeset="/baseline/meta/instanceID" readonly="true()" type="string"/>
+      <bind calculate="concat( /baseline/individualInfo/individualId ,'_BASELINE_', /baseline/openhds/visitId ,'_', /baseline/openhds/fieldWorkerId )" nodeset="/baseline/meta/instanceName" type="string"/>
     </model>
   </h:head>
   <h:body>
@@ -300,6 +340,29 @@
         <item>
           <label ref="jr:itext('/baseline/individualInfo/partialDate/2:label')"/>
           <value>2</value>
+        </item>
+      </select1>
+      <select1 ref="/baseline/individualInfo/religion">
+        <label ref="jr:itext('/baseline/individualInfo/religion:label')"/>
+        <item>
+          <label ref="jr:itext('/baseline/individualInfo/religion/1:label')"/>
+          <value>1</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/baseline/individualInfo/religion/2:label')"/>
+          <value>2</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/baseline/individualInfo/religion/3:label')"/>
+          <value>3</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/baseline/individualInfo/religion/4:label')"/>
+          <value>4</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/baseline/individualInfo/religion/5:label')"/>
+          <value>5</value>
         </item>
       </select1>
     </group>
