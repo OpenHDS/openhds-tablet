@@ -89,6 +89,8 @@ public class OpenHDSProvider extends ContentProvider {
     private DatabaseHelper mOpenHelper;
 
     private String password;
+    
+    public static OpenHDSProvider CURRENT_PROVIDER;
 
     static {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -320,6 +322,12 @@ public class OpenHDSProvider extends ContentProvider {
                     + " CREATE UNIQUE INDEX IDX_INDIVIDUAL_EXTID ON " +  OpenHDS.Individuals.TABLE_NAME
                     + "(" +  OpenHDS.Individuals.COLUMN_INDIVIDUAL_EXTID + ");"
                     
+                     + " CREATE INDEX IDX_INDIVIDUAL_FATHER ON " +  OpenHDS.Individuals.TABLE_NAME
+                     + "(" +  OpenHDS.Individuals.COLUMN_INDIVIDUAL_FATHER + ");"
+ 
+ 					 + " CREATE INDEX IDX_INDIVIDUAL_MOTHER ON " +  OpenHDS.Individuals.TABLE_NAME
+ 					 + "(" +  OpenHDS.Individuals.COLUMN_INDIVIDUAL_MOTHER + ");"
+                    
                     + " CREATE INDEX IDX_RESIDENCY ON " +  OpenHDS.Individuals.TABLE_NAME
                     + "(" +  OpenHDS.Individuals.COLUMN_INDIVIDUAL_RESIDENCE + ")");
 
@@ -378,7 +386,10 @@ public class OpenHDSProvider extends ContentProvider {
                     + OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPHEAD + " TEXT NOT NULL,"
                     + OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPNAME + " TEXT NOT NULL);"
                     + " CREATE UNIQUE INDEX SOCIALGROUP_EXTID ON " +  OpenHDS.SocialGroups.TABLE_NAME
-                    + "(" +  OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + ")");
+                    + "(" +  OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_EXTID + ")"
+               		+ " CREATE UNIQUE INDEX SOCIALGROUP_HEAD ON " +  OpenHDS.SocialGroups.TABLE_NAME
+               		+ "(" +  OpenHDS.SocialGroups.COLUMN_SOCIALGROUP_GROUPHEAD + ")");
+     
                     
 
             db.execSQL("CREATE TABLE " + OpenHDS.IndividualGroups.TABLE_NAME + " (" + OpenHDS.IndividualGroups._ID
@@ -445,7 +456,7 @@ public class OpenHDSProvider extends ContentProvider {
             editor.putString(DATABASE_PASSWORD_KEY, password);
             editor.commit();
         }
-
+        CURRENT_PROVIDER = this; //Hacking to get current provider
         // Assumes that any failures will be reported by a thrown exception.
         return true;
     }
@@ -988,6 +999,79 @@ public class OpenHDSProvider extends ContentProvider {
         getContext().getContentResolver().notifyChange(uri, null);
 
         return count;
+    }
+    
+    /*access to sqlDatabase*/
+    public SQLiteDatabase openDatabaseForFastInsert(){
+    	SQLiteDatabase db = mOpenHelper.getWritableDatabase(password);
+    	db.beginTransaction();
+    	return db;
+    }
+    
+    public void insert(SQLiteDatabase db, Uri uri, ContentValues values){
+    	String table;
+        Uri contentUriBase;
+
+        switch (sUriMatcher.match(uri)) {
+        case INDIVIDUALS:
+            table = OpenHDS.Individuals.TABLE_NAME;
+            contentUriBase = OpenHDS.Individuals.CONTENT_ID_URI_BASE;
+            break;
+        case LOCATIONS:
+            table = OpenHDS.Locations.TABLE_NAME;
+            contentUriBase = OpenHDS.Locations.CONTENT_ID_URI_BASE;
+            break;
+        case HIERARCHYLEVELS:
+            table = OpenHDS.HierarchyLevels.TABLE_NAME;
+            contentUriBase = OpenHDS.HierarchyLevels.CONTENT_ID_URI_BASE;
+            break;
+        case HIERARCHYITEMS:
+            table = OpenHDS.HierarchyItems.TABLE_NAME;
+            contentUriBase = OpenHDS.HierarchyItems.CONTENT_ID_URI_BASE;
+            break;
+        case ROUNDS:
+            table = OpenHDS.Rounds.TABLE_NAME;
+            contentUriBase = OpenHDS.Rounds.CONTENT_ID_URI_BASE;
+            break;
+        case VISITS:
+            table = OpenHDS.Visits.TABLE_NAME;
+            contentUriBase = OpenHDS.Visits.CONTENT_ID_URI_BASE;
+            break;
+        case RELATIONSHIPS:
+            table = OpenHDS.Relationships.TABLE_NAME;
+            contentUriBase = OpenHDS.Relationships.CONTENT_ID_URI_BASE;
+            break;
+        case FIELDWORKERS:
+            table = OpenHDS.FieldWorkers.TABLE_NAME;
+            contentUriBase = OpenHDS.FieldWorkers.CONTENT_ID_URI_BASE;
+            break;
+        case SOCIALGROUPS:
+            table = OpenHDS.SocialGroups.TABLE_NAME;
+            contentUriBase = OpenHDS.SocialGroups.CONTENT_ID_URI_BASE;
+            break;
+        case INDIVIDUALGROUPS:
+            table = OpenHDS.IndividualGroups.TABLE_NAME;
+            contentUriBase = OpenHDS.IndividualGroups.CONTENT_ID_URI_BASE;
+            break;
+        case FORMS:
+            table = OpenHDS.Forms.TABLE_NAME;
+            contentUriBase = OpenHDS.Forms.CONTENT_ID_URI_BASE;
+            break;
+        case SETTINGS:
+            table = OpenHDS.Settings.TABLE_NAME;
+            contentUriBase = OpenHDS.Settings.CONTENT_ID_URI_BASE;
+            break;            
+        default:
+            throw new IllegalArgumentException("Unknown URI " + uri);
+        }
+        
+        db.insert(table, null, values);
+    }
+    
+    public void finishDatabaseFastInsert(SQLiteDatabase db){
+    	db.setTransactionSuccessful();
+    	db.endTransaction();
+    	db.close();
     }
     
     public Map<String, Integer> getRowCount(Uri uri){

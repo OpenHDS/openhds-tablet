@@ -297,4 +297,16 @@ public class DatabaseAdapter {
 			onCreate(db);
 		}
 	}
+	
+	    public void beginTransaction(){
+				database.beginTransaction();
+			}
+		
+		public void endTransaction(){
+				database.endTransaction();
+			}
+		
+		public void setTransactionSuccessful(){
+				database.setTransactionSuccessful();
+		}
 }
