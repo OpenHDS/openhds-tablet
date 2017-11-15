@@ -332,14 +332,16 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
     }
 
     private File saveFile(String xml, String jrFormId) {
-    	 DateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
+    	 DateFormat df = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss");
          df.setTimeZone(TimeZone.getDefault());
          String date = df.format(new Date());
 
         File root = Environment.getExternalStorageDirectory();
-        String destinationPath = root.getAbsolutePath() + File.separator + "Android" + File.separator + "data"
-                + File.separator + "org.openhds.mobile" + File.separator + "files"+ File.separator + jrFormId + date;
-
+/*        String destinationPath = root.getAbsolutePath() + File.separator + "Android" + File.separator + "data"
+                + File.separator + "org.openhds.mobile" + File.separator + "files"+ File.separator + jrFormId + date;*/
+        String destinationPath = root.getAbsolutePath() + File.separator + "odk" + File.separator + "instances"
+                + File.separator +jrFormId + "_" + date;
+        
         File baseDir = new File(destinationPath);
         /*File baseDir = null;
         
@@ -368,7 +370,7 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
         }
 
        
-        destinationPath += File.separator + date + ".xml";
+        destinationPath += File.separator +jrFormId + "_"+ date + ".xml";
         File targetFile = new File(destinationPath);
         if (!targetFile.exists()) {
             try {
@@ -388,6 +390,7 @@ public class OdkGeneratedFormLoadTask extends AsyncTask<Void, Void, Boolean> {
         values.put(InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH, targetFile.getAbsolutePath());
         values.put(InstanceProviderAPI.InstanceColumns.DISPLAY_NAME, displayName);
         values.put(InstanceProviderAPI.InstanceColumns.JR_FORM_ID, formId);
+       // values.put(InstanceProviderAPI.InstanceColumns.STATUS, InstanceProviderAPI.STATUS_COMPLETE);
         odkUri = resolver.insert(InstanceProviderAPI.InstanceColumns.CONTENT_URI, values);
         if (odkUri == null) {
             return false;

@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.6" >
 
-    <uses-sdk android:minSdkVersion="13" android:targetSdkVersion="19" />
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="22" />
     
     <permission
             android:name="com.mine.signedgooglemap.permission.MAPS_RECEIVE"
